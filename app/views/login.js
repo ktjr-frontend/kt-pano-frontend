@@ -1,0 +1,184 @@
+;
+(function() {
+    'use strict';
+    angular.module('kt.pano')
+        .controller('ktLoginCtrl', function($scope, $rootScope, $window, $timeout, $uibModal, ktSweetAlert, ktLoginService, ktLoginCommon) {
+            $scope.captchaSettings = {
+                randomColours: false,
+                colour1: '#d4e8ea',
+                colour2: '#d4e8ea'
+            }
+            $scope.user = $rootScope.user = JSON.parse($window.localStorage.user || '{}')
+
+            $scope.submitForm = function() {
+                var CAPTCHA = $scope.captchaSettings.CAPTCHA
+                if (!CAPTCHA) return
+
+                CAPTCHA.validate($scope.user.img_captcha, function(isValid) {
+
+                        if (isValid) {
+                            $window.localStorage.user = JSON.stringify({
+                                mobile: $scope.user.remember ? $scope.user.mobile : '',
+                                remember: $scope.user.remember
+                            })
+
+                            ktLoginCommon(ktLoginService, $scope)
+
+                        } else {
+                            $timeout(function() {
+                                ktSweetAlert.swal({
+                                    title: '图形验证码不正确！',
+                                    text: '',
+                                    type: 'error',
+                                }, function() {
+                                    var form = CAPTCHA._container.closest('form')
+                                    form.trigger('accessible.' + form.attr('id'), {
+                                        field: 'img_captcha'
+                                    })
+                                    $scope.user.img_captcha = '';
+                                });
+                            }, 100)
+                        }
+                    })
+                    // return false
+            }
+
+            // 忘记密码
+            $scope.resetPassword = function() {
+                var modalStepOne, modalStepTwo, modalStepThree
+
+                // modalStepOne = $uibModal.open({
+                //     size: 'md',
+                //     backdrop: 'static',
+                //     templateUrl: 'views/modals/input_img_captcha.html',
+                //     controller: 'resetPasswordOneCtrl'
+                // })
+
+                // modalStepOne.result.then(function() {
+
+                modalStepTwo = $uibModal.open({
+                    size: 'md',
+                    backdrop: 'static',
+                    // animation: false,
+                    templateUrl: 'views/modals/input_phone_captcha.html',
+                    controller: 'resetPasswordTwoCtrl'
+                })
+
+                modalStepTwo.result.then(function(mobile) {
+                    modalStepThree = $uibModal.open({
+                        size: 'md',
+                        // animation: false,
+                        backdrop: 'static',
+                        templateUrl: 'views/modals/reset_password.html',
+                        controller: 'resetPasswordThreeCtrl'
+                    })
+
+                    modalStepThree.result.then(function() {
+                        ktSweetAlert.success('密码修改成功！')
+                    })
+
+                })
+
+                // }, function() {
+                //     console.log('cancel step 1')
+                // })
+
+                /*var modal = $uibModal.open({
+                    size: 'md',
+                    backdrop: 'static',
+                    animation: false,
+                    templateUrl: 'views/modals/reset_password_merge.html',
+                    controller: 'resetPasswordCtrl'
+                })
+                modal.result.then(function() {
+
+
+                }, function() {
+                    console.log('cancel reset_password')
+                })*/
+
+
+            }
+
+        })
+        /*.controller('resetPasswordCtrl', function($scope, $uibModalInstance, ktRecoverService, ktGetCaptcha, ktSweetAlert) {
+            $scope.title = '忘记密码'
+            $scope.user = {}
+            var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktRecoverService, {content: 'captcha'}, $scope.user)
+            $scope.getCaptcha = function($event, channel) {
+                $event.preventDefault()
+                $event.stopPropagation()
+
+                if (channel === 'sms' && $scope.waitCaptchaMessage) return
+                if (channel === 'tel' && $scope.waitCaptchaTel) return
+                getCaptcha($scope.user.mobile, channel)
+            }
+
+            $scope.ok = function() {
+                ktRecoverService.update($scope.user, function (res) {
+                    $uibModalInstance.close()
+                }, function (res) {
+                    $scope.error = res.error || '保存失败！'
+                })
+                    
+            }
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            }
+        })*/
+        /*.controller('resetPasswordOneCtrl', function($scope, $uibModalInstance) {
+            $scope.title = '重置密码'
+            $scope.ok = function() {
+                $uibModalInstance.close()
+            }
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            }
+        })*/
+        .controller('resetPasswordTwoCtrl', function($scope, $uibModalInstance, ktRecoverService, ktGetCaptcha, ktSweetAlert) {
+            $scope.title = '验证码'
+                // $scope.user = {}
+            $scope.user.content = 'validate_captcha'
+            $scope.user.captcha = ''
+            $scope.notLastStep = true
+
+            var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktRecoverService, { content: 'captcha' }, $scope.user)
+            $scope.getCaptcha = function($event, channel) {
+                $event.preventDefault()
+                $event.stopPropagation()
+
+                if (channel === 'sms' && $scope.waitCaptchaMessage) return
+                if (channel === 'tel' && $scope.waitCaptchaTel) return
+                getCaptcha($scope.user.mobile, channel)
+            }
+
+            $scope.submitForm = function() {
+                ktRecoverService.update($scope.user, function(res) {
+                    $uibModalInstance.close()
+                }, function(res) {
+                    $scope.error = res.error || '更新出错！'
+                })
+            }
+
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            }
+        })
+        .controller('resetPasswordThreeCtrl', function($scope, $uibModalInstance, ktSweetAlert, ktRecoverService) {
+            $scope.title = '设置新密码'
+                // $scope.user = {}
+            $scope.user.content = ''
+
+            $scope.submitForm = function() {
+                ktRecoverService.update($scope.user, function(res) {
+                    $uibModalInstance.close()
+                }, function(res) {
+                    $scope.error = res.error || '更新出错！'
+                })
+            }
+
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            }
+        })
+})();

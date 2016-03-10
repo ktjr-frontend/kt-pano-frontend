@@ -1,0 +1,291 @@
+/* Panels */
+
+.hpanel > .panel-heading {
+    color: inherit;
+    font-weight: 600;
+    padding: 0;
+    h5 {
+        font-size: 1.5rem;
+        float: left;
+        color: @color-1;
+        margin-top: 8px;
+    }
+    .dropdown {
+        border: 1px solid @color-9;
+        border-radius: 3px;
+        color: @color-3;
+        font-size: 1.3rem;
+    }
+    // transition: all .3s;
+    // border: 1px solid transparent;
+}
+
+.hpanel .hbuilt.panel-heading {
+    border-bottom: none;
+}
+
+.hpanel > .panel-footer {
+    color: inherit;
+    border: 1px solid @border-color;
+    border-top: none;
+    font-size: 90%;
+    background: @color-bright;
+}
+
+.hpanel.panel-collapse > .panel-heading,
+.hpanel .hbuilt {
+    background: #fff;
+    border-color: @border-color;
+    border: 1px solid @border-color;
+    padding: 10px 10px;
+    border-radius: 2px;
+}
+
+.hpanel {
+    margin: 10px 14px;
+    // background-color: @color-5;
+    // border-radius: 3px;
+    // padding: 10px;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 25px;
+    .panel-body {
+        padding: 0;
+        background: @color-3;
+        padding: 30px;
+        // border: 1px solid @border-color;
+        position: relative;
+    }
+    &.td-hpanel {
+        margin-bottom: 0;
+        .panel-body {
+            border: 0;
+            padding: 0;
+            background: none;
+        }
+    }
+    .alert {
+        margin-bottom: 0;
+        border-radius: 0;
+        border: 1px solid @border-color;
+        border-bottom: none;
+    }
+}
+
+.page-small {
+    .hpanel {
+        margin: 10px 0;
+    }
+}
+
+.panel-collapse .panel-body {
+    border: none;
+}
+
+.panel-tools {
+    display: inline-block;
+    float: right;
+    margin-top: 0;
+    padding: 0;
+    position: relative;
+}
+
+.panel-tools a {
+    margin-left: 5px;
+    color: lighten(@color-text, 20%);
+    cursor: pointer;
+}
+
+.hpanel.hgreen .panel-body {
+    border-top: 2px solid @color-green;
+}
+
+.hpanel.hblue .panel-body {
+    border-top: 2px solid @color-blue;
+}
+
+.hpanel.hyellow .panel-body {
+    border-top: 2px solid @color-yellow;
+}
+
+.hpanel.hviolet .panel-body {
+    border-top: 2px solid @color-violet;
+}
+
+.hpanel.horange .panel-body {
+    border-top: 2px solid @color-orange;
+}
+
+.hpanel.hred .panel-body {
+    border-top: 2px solid @color-red;
+}
+
+.hpanel.hreddeep .panel-body {
+    border-top: 2px solid @color-red-deep;
+}
+
+.hpanel.hnavyblue .panel-body {
+    border-top: 2px solid @color-navy-blue;
+}
+
+.hpanel.hbggreen .panel-body {
+    background: @color-green;
+    color: #fff;
+    border: none;
+}
+
+.hpanel.hbgblue .panel-body {
+    background: @color-blue;
+    color: #fff;
+    border: none;
+}
+
+.hpanel.hbgyellow .panel-body {
+    background: @color-yellow;
+    color: #fff;
+    border: none;
+}
+
+.hpanel.hbgviolet .panel-body {
+    background: @color-violet;
+    color: #fff;
+    border: none;
+}
+
+.hpanel.hbgorange .panel-body {
+    background: @color-orange;
+    color: #fff;
+    border: none;
+}
+
+.hpanel.hbgred .panel-body {
+    background: @color-red;
+    color: #fff;
+    border: none;
+}
+
+.hpanel.hbgreddeep .panel-body {
+    background: @color-red-deep;
+    color: #fff;
+    border: none;
+}
+
+.hpanel.hbgnavyblue .panel-body {
+    background: @color-navy-blue;
+    color: #fff;
+    border: none;
+}
+
+.panel-group .panel-heading {
+    background-color: @color-bright;
+    border-radius: 4px;
+}
+
+.small-header .hpanel {
+    margin-bottom: 0;
+}
+
+.small-header {
+    padding: 0 !important;
+}
+
+.small-header .panel-body {
+    padding: 15px 25px;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0;
+    //  background: @color-bright;
+}
+
+.panel-body h5,
+.panel-body h4 {
+    font-weight: normal;
+}
+
+.small-header .panel-body h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 0 0;
+}
+
+.small-header .panel-body small {
+    color: lighten(@color-text, 10%);
+}
+
+.hbreadcrumb {
+    padding: 2px 0px;
+    margin-top: 6px;
+    margin-bottom: 0px;
+    list-style: none;
+    background-color: #fff;
+    border-radius: #fff;
+    font-size: 11px;
+    > li {
+        display: inline-block;
+        + li:before {
+            padding: 0 5px;
+            // color: @color-navy-blue;
+        }
+    }
+    > .active {
+        color: lighten(@color-text, 20%);
+    }
+}
+
+.wrapper {
+    padding: 10px 20px;
+}
+
+.simple-container {
+    margin-bottom: 30px;
+    color: @color-bright;
+    .hpanel {
+        padding: 0 50px;
+        margin: 0;
+        .panel-body {
+            background: white;
+            border-radius: 5px;
+            padding: 20px 30px;
+        }
+        .setting-list {
+            .line {
+                position: relative;
+                padding: 20px 120px 20px 25px;
+                border-bottom: 1px solid @border-color;
+                &:last-of-type{
+                    border-bottom: 0;
+                }
+            }
+            .title{
+                font-size: 1.5rem;
+            }
+            .key{
+                color: #3d4351;
+            }
+            .value{
+                color: @color-navy-blue;
+            }
+            .content{
+                color: @color-bright;
+                margin-top: 10px;
+            }
+            .action{
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+    .simple-title {
+        font-size: 2rem;
+        margin-left: 55px;
+        margin-top: 25px;
+        font-weight: normal;
+        color: white;
+        padding: 8px 5px 12px;
+        border-bottom: 3px solid @color-navy-blue;
+    }
+}

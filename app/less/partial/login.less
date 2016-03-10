@@ -1,0 +1,211 @@
+body.blank {
+    background-color: @color-background;
+}
+
+body.account-page {
+    background: url(/images/login-bg.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.login-container {
+    max-width: 490px;
+    margin: 70px auto 100px;
+    // padding-top: 6%;
+    .title {
+        font-weight: normal;
+        border-bottom: 3px solid @color-navy-blue;
+    }
+}
+
+.login-container,
+.register-container {
+    font-size: 1.3rem;
+    .has-error {
+        .form-control {
+            box-shadow: none;
+        }
+    }
+    .btn-lg{
+        border-radius: 5px;
+    }
+    /*.checkbox label {
+        &:after,
+        &:before {
+            top: 3px;
+        }
+    }*/
+    .btn-navy-blue {
+        .btn-blue-func();
+    }
+    .no-notely {
+        color: @color-bright;
+    }
+    a.no-notely:hover {
+        color: @color-navy-blue;
+    }
+    .title {
+        font-size: 2.3rem;
+        color: white;
+        padding: 8px 5px 10px;
+    }
+    .sub-title {
+        font-size: 1.3rem;
+        color: @border-color;
+        padding-left: 5px;
+        margin-bottom: 20px;
+        float: left;
+    }
+    .btn-first {
+        margin-top: 4rem;
+    }
+    .head {
+        color: white;
+        h3 {
+            font-size: 2rem;
+        }
+    }
+    .hpanel {
+        padding: 0;
+        margin: 0;
+        background: rgba(255, 255, 255, .8);
+        border-radius: 10px;
+        .panel-body {
+            border-radius: 10px;
+            padding: 50px 50px 30px;
+        }
+    }
+    @media (min-width: 768px) {
+        .control-label {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
+.account-page #footer-analytics {
+    position: fixed;
+}
+
+.register-container {
+    max-width: 490px;
+    margin: 50px auto;
+    .checkbox-label {
+        float: left;
+        color: white;
+        font-size: 1.3rem;
+        position: relative;
+        [type=checkbox] {
+            display: none;
+            &:checked ~ label {
+                border-color: @color-orange;
+                outline: 1px solid @color-orange;
+                &:before {
+                    content: '\e013';
+                    position: absolute;
+                    top: 12px;
+                    left: 4px;
+                    font-size: 1rem;
+                    color: @color-orange;
+                    display: inline-block;
+                    font-family: 'Glyphicons Halflings';
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+            }
+        }
+        label {
+            cursor: pointer;
+            padding: 8px 20px;
+            border: 1px solid #b7bac0;
+            margin-right: 5px;
+            &:hover {
+                border-color: @color-orange;
+                outline: 1px solid @color-orange;
+            }
+        }
+    }
+    .hpanel {
+        background: none;
+        @media (min-width: 768px) {
+            margin: 0 59px 0 -59px;
+        }
+        .panel-body {
+            background: none;
+            padding: 20px 10px 10px;
+        }
+    }
+    .control-label {
+        &.text-left {
+            text-align: left;
+        }
+        color: white;
+    }
+    .form-control {
+        border: 0;
+    }
+    .title {
+        font-size: 2.3rem;
+    }
+    .form-group-img-captcha {
+        .form-control {
+            width: 36%;
+            float: left;
+        }
+        .captcha-canvas {
+            float: left;
+            margin-left: 2%;
+        }
+    }
+    .form-group-phone-captcha {
+        .form-control {
+            box-sizing: border-box;
+            float: left;
+        }
+        input {
+            width: 36%;
+        }
+        .by-message {
+            width: 30%;
+            margin-left: 2%;
+        }
+        .by-call {
+            width: 30%;
+            margin-left: 2%;
+        }
+    }
+    .contact-us {
+        color: #d2d2d2;
+    }
+    // padding-top: 6%;
+}
+
+
+/*.confirm-container {
+    max-width: 760px;
+    margin: auto;
+}
+
+.lock-container {
+    width: 420px;
+    margin: auto;
+    padding-top: 6%;
+}
+
+.error-container {
+    width: 620px;
+    margin: auto;
+    padding-top: 6%;
+}
+
+.big-icon {
+    font-size: 120px;
+}
+
+.error-container h1 {
+    font-size: 44px;
+}*/

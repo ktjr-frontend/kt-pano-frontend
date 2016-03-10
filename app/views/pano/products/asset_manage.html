@@ -1,0 +1,18 @@
+<tr class="text-right" ng-repeat="product in products" ng-if="products.length">
+    <td ng-bind="::product.name"></td>
+    <td ng-bind="::product.type"></td>
+    <td ng-bind="::(product.annual_rate + '%')"></td>
+    <td ng-bind="::(product.substained + '天')"></td>
+    <td ng-bind="::product.guarantees"></td>
+    <td ng-bind="::product.published_at"></td>
+    <td class="text-center">
+        <a class="hover-underline" href="::product.attachments">下载资料</a>
+        <a class="hover-underline" ng-click="contactMe()">与我联系</a>
+    </td>
+</tr>
+<tr ng-if="!products.length && !isLoading()">
+    <td colspan="7" class="text-navy-blue text-center">
+        <i class="pe-7s-attention f1_5rem fb mr5"></i>
+        <span class="f1_5rem">没有数据！</span>
+    </td>
+</tr>

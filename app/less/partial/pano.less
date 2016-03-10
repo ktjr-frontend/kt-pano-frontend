@@ -1,0 +1,135 @@
+
+.global-loading-status{
+    position: absolute;
+    z-index: 9;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 150px;
+}
+.content-header {
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    // background-color: white;
+}
+
+.done-color,
+.approved-color {
+    color: #46bf55;
+}
+
+.initial-color {
+    color: #bec6d7;
+}
+
+.rejected-color {
+    color: @color-red;
+}
+
+.warn-color {
+    color: @color-orange;
+}
+
+#main-view {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 170px;
+}
+
+.hpanel {
+    &.hpanel-card {
+        .panel-body {
+            border-top: 1px solid #edf0f5;
+        }
+    }
+}
+
+.card-list {
+    .card {
+        width: 50%;
+        float: left;
+        &:nth-of-type(2n-1) {
+            padding-right: 5px;
+        }
+        &:nth-of-type(2n) {
+            padding-left: 5px;
+        }
+    }
+    .input {
+        padding: 0 5px;
+        border-radius: 3px;
+        border: 0;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    .card-heading {
+        height: 50px;
+        line-height: 50px;
+        color: #9094b0;
+        input {
+            height: 25px;
+            line-height: 25px;
+            background: #edf0f5;
+            width: 140px;
+            color: #8e8e8e;
+        }
+    }
+    .card-body {
+        background: white;
+        position: relative;
+        color: #696c84;
+        .line {
+            padding: 10px;
+            .item {
+                float: left;
+            }
+            .left {
+                width: 40%;
+            }
+            .right {
+                width: 60%;
+            }
+        }
+        h5 {
+            // padding-left: 10px;
+            margin: 0 10px;
+            font-size: 15px;
+            height: 45px;
+            line-height: 45px;
+            border-bottom: 1px solid #cfd6e4;
+        }
+        select {
+            color: #696c84;
+            height: 28px;
+            line-height: 28px;
+            width: auto;
+            display: inline-block;
+            // margin: 0 5px;
+        }
+        input {
+            color: #696c84;
+            // margin: 0 5px;
+            height: 28px;
+            line-height: 28px;
+            background: #edf0f5;
+            width: 80px;
+        }
+    }
+}
+
+
+/*.fixed-sidebar {
+    #footer{
+        left: 200px;
+    }
+    &.page-small #footer-analytics,
+    &.hide-siderbar #footer-analytics,
+    {
+        left: 0;
+    }
+    &.show-sidebar #footer-analytics{
+        left: 200px;
+    }
+}
+*/

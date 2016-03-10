@@ -1,0 +1,16 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<nav id="menu" ng-include="'views/common/navigation.html'"></nav>
+
+<!-- Main Wrapper -->
+<div id="wrapper" oc-lazy-load="['common/directives/kt-platform-directive.js', 'common/directives/feedback/directive.js', 'common/directives/feedback/theme/v1/style.css']">
+    <div kt-loading-status class="global-loading-status" height="64" width="64"></div>
+    <div class="content container" kt-platform-init>
+        <div ui-view autoscroll="false"></div>
+    </div>
+	<kt-feedback options="options"></kt-feedback>
+</div>
+<!-- footer -->
+<div id="footer" onload="this.style.display = 'block'" style="display:none;" ng-include="'views/common/footer.html'"></div>

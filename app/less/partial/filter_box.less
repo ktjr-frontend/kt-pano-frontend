@@ -1,0 +1,94 @@
+.filter-box {
+    background: white;
+    padding: 10px 25px;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    .dropdowns {
+        float: left;
+        padding-left: 20px;
+    }
+    .dropdown {
+        min-width: 130px;
+        height: 25px;
+        line-height: 24px;
+        border-radius: 3px;
+        border: 1px solid @border-color;
+        position: relative;
+        &.open {
+            border-color: @color-navy-blue;
+        }
+        .arrow {
+            position: absolute;
+            right: -1px;
+            top: -1px;
+            bottom: -1px;
+            background: @color-navy-blue;
+            color: white;
+            border-radius: 0 3px 3px 0;
+            &:active {
+                background: darken(@color-navy-blue, 8%);
+            }
+            .glyphicon {
+                top: 3px;
+                right: 7px;
+            }
+        }
+    }
+    .dropdown-menu {
+        min-width: 130px;
+    }
+    .filter-line {
+        padding: 11px 0 0;
+        border-bottom: 1px dashed @border-color;
+        &:last-of-type{
+            border-bottom: 0;
+        }
+        .name {
+            min-width: 75px;
+            float: left;
+            text-align: right;
+        }
+        .options {
+            padding-left: 75px;
+        }
+    }
+    ul.options-list {
+        list-style-type: none;
+        li {
+            float: left;
+            position: relative;
+            padding: 0 15px;
+            margin-bottom: 10px;
+            &:first-of-type {
+                &:after {
+                    content: '';
+                    height: 10px;
+                    width: 0;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    font-size: 12px;
+                    border-right: 1px solid @border-color;
+                }
+            }
+            a {
+                padding: 0 5px 2px;
+                color: @color-bright;
+                transition: background-color .3s ease;
+                &:hover {
+                    color: white;
+                    border-radius: 2px;
+                    background-color: @color-navy-blue;
+                    // text-decoration: underline;
+                }
+            }
+            &.active a {
+                color: white;
+                border-radius: 2px;
+                // text-decoration: underline;
+                background-color: @color-navy-blue;
+            }
+        }
+    }
+}

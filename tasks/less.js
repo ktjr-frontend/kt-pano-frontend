@@ -1,0 +1,32 @@
+module.exports = {
+    development: {
+        options: {
+            sourceMap: true,
+            sourceMapRootpath: '/',
+            sourceMapBasepath: '/',
+            sourceMapFileInline: true,
+            optimization: 2
+        },
+        files: [{
+            expand: true,
+            cwd: '<%= kt.app %>',
+            src: ['common/directives/**/*.less', 'scripts/directives/**/*.less', 'views/**/*.less', 'less/*.less'],
+            dest: '.tmp',
+            ext: '.css'
+        }]
+    },
+    production: {
+        options: {
+            // optimization: 2,
+            compress: true
+        },
+        files: [{
+            expand: true,
+            cwd: '<%= kt.app %>',
+            src: ['common/directives/**/*.less', 'scripts/directives/**/*.less', 'views/**/*.less', 'less/*.less'],
+            dest: '<%= kt.dist %>',
+            ext: '.css'
+        }]
+
+    }
+};

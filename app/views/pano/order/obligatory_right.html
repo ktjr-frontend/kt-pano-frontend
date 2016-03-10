@@ -1,0 +1,18 @@
+<tr class="text-right" ng-repeat="asset in assets" ng-if="assets.length">
+    <td ng-bind="::asset.name"></td>
+    <td ng-bind="::asset.asset_type"></td>
+    <td ng-bind="::(asset.rate + '%')"></td>
+    <td ng-bind="::asset.sustained"></td>
+    <td ng-bind="::asset.guarantees"></td>
+    <td ng-bind="::(asset.published_start_at + ' ~ ' + asset.published_end_at)"></td>
+    <td class="text-center">
+        <a class="hover-underline" href="::asset.attachments">下载资料</a>
+        <a class="hover-underline" ng-click="contactMe(asset.id)">与我联系</a>
+    </td>
+</tr>
+<tr ng-if="!assets.length && !isLoading()">
+    <td colspan="7" class="text-navy-blue text-center">
+        <i class="pe-7s-attention f1_5rem fb mr5"></i>
+        <span class="f1_5rem">没有数据！</span>
+    </td>
+</tr>

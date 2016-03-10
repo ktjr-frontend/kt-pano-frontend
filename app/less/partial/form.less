@@ -1,0 +1,114 @@
+.form-control,
+.form-control:focus,
+.has-error .form-control:focus,
+.has-success .form-control:focus,
+.has-warning .form-control:focus,
+.navbar-collapse,
+.navbar-form,
+.navbar-form-custom .form-control:focus,
+.navbar-form-custom .form-control:hover,
+.open .btn.dropdown-toggle,
+.panel,
+.popover,
+.progress,
+.progress-bar {
+    box-shadow: none;
+}
+
+
+/* Labels */
+
+.label-success {
+    background-color: @color-green;
+}
+
+.input-group-addon {
+    background: lighten(@color-background, 3%);
+    border-color: @border-color !important;
+}
+
+.has-error .form-control:focus {
+    border-color: @color-red!important;
+}
+
+.has-success .form-control:focus {
+    border-color: @color-green!important;
+}
+
+.control-label,
+.form-control {
+    font-size: 1.5rem;
+    color: @color-text;
+    font-weight: normal;
+}
+
+.form-control {
+    font-size: 1.3rem;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    border-color: @border-color !important;
+    .form-control-feedback {
+        display: none;
+    }
+    &.form-group-nolabel {
+        .form-control {
+            margin-top: 25px;
+        }
+        @media (max-width:768px) {
+            .form-control {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+form {
+    .btn {
+        border: 0;
+    }
+}
+
+.has-success .form-group {
+    .glyphicon-ok {
+        display: block;
+    }
+}
+
+.has-error .form-group {
+    .glyphicon-remove {
+        display: block;
+    }
+}
+
+.panel-body {
+    .form-body {
+        margin: 10px 0;
+        background: white;
+        padding: 30px 0 10px;
+    }
+}
+
+input::-moz-placeholder {
+    color: @text-light;
+    opacity: 1;
+}
+
+input:-ms-input-placeholder {
+    color: @text-light;
+}
+
+input::-webkit-input-placeholder {
+    color: @text-light;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+    background-color: #FFFFFF !important;
+    color: @color-text !important;
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: @color-text !important;
+}

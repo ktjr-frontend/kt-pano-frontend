@@ -1,0 +1,12 @@
+http://www.ktjr.com  
+http://www.ktjr.com/kt/account/login 
+http://www.ktjr.com/kt/account/register  
+http://www.ktjr.com/kt/aboutus/company  
+http://www.ktjr.com/kt/aboutus/contact  
+http://www.ktjr.com/kt/aboutus/cooperation  
+http://www.ktjr.com/kt/aboutus/finacing 
+http://www.ktjr.com/kt/aboutus/joinus   
+http://www.ktjr.com/kt/aboutus/team 
+http://www.ktjr.com/kt/assetpurchase
+http://www.ktjr.com/kt/fundraising  
+http://www.ktjr.com/kt/index

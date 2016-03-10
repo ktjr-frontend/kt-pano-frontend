@@ -1,0 +1,65 @@
+<div class="row" kt-animate-panel child="hpanel">
+    <div class="">
+        <div class="hpanel pr">
+            <uib-tabset>
+                <uib-tab select="tabSelect('pano.order.obligatoryRight', 0)" active="shared.tabActive.tab0">
+                    <tab-heading>
+                        债权类
+                    </tab-heading>
+                </uib-tab>
+                <uib-tab select="tabSelect('pano.order.assetManage', 1)" active="shared.tabActive.tab1">
+                    <tab-heading>
+                        资管类
+                    </tab-heading>
+                </uib-tab>
+            </uib-tabset>
+            <div class="panel-body b-t-none">
+                <div class="filter-box bor-xxs">
+                    <div class="filter-list">
+                        <div class="filter-line clfix" ng-repeat="filter in shared.filters|filter:{type:'list'}">
+                            <div class="name" ng-bind="::(filter.name + '：')"></div>
+                            <div class="options">
+                                <ul class="options-list">
+                                    <li ng-class="{active: condition.active}" ng-repeat="condition in filter.options">
+                                        <a ng-click="goTo(filter.value, condition.value)" ng-bind="condition.name"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ov-h">
+                    <div class="chart-table bor-xxs">
+                        <div class="table-responsive table-body">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr kt-table-sort>
+                                        <th>资产名称</th>
+                                        <th>资产类型</th>
+                                        <th class="sort-column" field="annual_rate">
+                                            <span>利率</span>
+                                            <!-- <i class="sort-icon"></i> -->
+                                            <div class="sort-icons">
+                                                <i class="up fa-angle-up fa"></i>
+                                                <i class="down fa-angle-down fa"></i>
+                                            </div>
+                                        </th>
+                                        <th>期限</th>
+                                        <th>增信方式</th>
+                                        <th>期望上线时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody ui-view>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <uib-pagination total-items="shared.params.totalItems" items-per-page="shared.params.per_page" ng-change="pageChanged()" max-size="shared.params.maxSize" ng-model="shared.params.page" class="pagination-sm"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
