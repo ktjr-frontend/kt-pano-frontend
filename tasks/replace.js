@@ -20,7 +20,7 @@ module.exports = {
         options: {
             patterns: [{
                 match: /href="http:\/\/dev\.ktjr\.com:8000\/"/g,
-                replacement: 'href="https://lode.ktjr.com"'
+                replacement: 'href="https://pano.ktjr.com"'
             }
             /*, {
                 match: /\/mock_data\/seallogo\.dll/g,

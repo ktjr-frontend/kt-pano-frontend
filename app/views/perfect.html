@@ -1,15 +1,15 @@
-<div class="register-container cbs">
+<div class="register-container cbs" kt-full-page-destroy kt-feedback-destroy>
     <div class="row">
         <div class="col-md-12">
             <div class="clfix">
-                <h3 class="title fl">完善信息</h3>
-                <div class="sub-title">请完善您的个人信息，以便我们更好地为您提供服务：</div>
+                <!-- <h3 class="title fl">完善信息</h3> -->
+                <div class="sub-title">完善您的信息，以便我们更好的为您服务：</div>
             </div>
             <div class="hpanel">
                 <div class="panel-body">
                     <form id="perfectForm" name="perfectForm" class="form-horizontal" kt-accessible-form>
                         <div class="form-group" ng-class="{'has-error':perfectForm.name.$invalid && perfectForm.name.$dirty}">
-                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f14 ctl">*</span>姓名</label>
+                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label>
                             <div class="col-md-9">
                                 <input autofocus ng-maxlength="50" ng-minlength="2" kt-validate-on-blur placeholder="您的真实姓名" type="text" required="required" ng-model="user.name" id="" class="form-control" name="name">
                                 <div class="mt5 text-danger" ng-messages="perfectForm.name.$dirty && perfectForm.name.$error">
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.company.$invalid && perfectForm.company.$dirty}">
-                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f14 ctl">*</span>公司名称</label>
+                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司名称</label>
                             <div class="col-md-9">
                                 <input ng-maxlength="50" ng-minlength="2" placeholder="您的公司全称" kt-validate-on-blur type="text" required="required" ng-model="user.company" id="" class="form-control" name="company">
                                 <div class="mt5 text-danger" ng-messages="perfectForm.company.$dirty && perfectForm.company.$error">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.email.$invalid && perfectForm.email.$dirty}">
-                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f14 ctl">*</span>公司邮箱</label>
+                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label>
                             <div class="col-md-9">
                                 <input placeholder="您的邮箱" kt-validate-on-blur type="email" required="required" ng-model="user.email" id="" class="form-control" name="email">
                                 <div class="mt5 text-danger" ng-messages="perfectForm.email.$dirty && perfectForm.email.$error">
@@ -41,11 +41,11 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.email.$invalid && perfectForm.email.$dirty}">
-                            <label class="text-primary-dark text-left control-label col-md-12"><span class="ml5 f14 ctl">*</span>以下哪些是您关注的金融资产类型？</label>
-                            <div class="col-md-9 col-md-offset-3 mt30">
+                            <label class="text-primary-dark text-left control-label col-md-8 col-md-offset-2 mt10"><span class="ml5 f1_4rem ctl">*</span>以下哪些是您关注的金融资产类型？</label>
+                            <div class="col-md-9 col-md-offset-3 mt15">
                                 <div class="checkbox-label" ng-repeat="like in likes">
                                     <input id="{{'like_' + like.value}}" type="checkbox" checklist-model="user.likes" checklist-value="like.value" checklist-change="checkListChange()">
-                                    <label class="f14" for="{{'like_' + like.value}}" ng-bind="::like.name">
+                                    <label for="{{'like_' + like.value}}" ng-bind="::like.name">
                                     </label>
                                 </div>
                                 <input type="hidden" name="likes" ng-model="hasLikes" required>

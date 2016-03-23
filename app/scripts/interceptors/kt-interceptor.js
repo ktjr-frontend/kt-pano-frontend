@@ -97,6 +97,7 @@
                     $rootScope.user = null
                     // $rootScope.currentUrl = '';
                     delete $window.localStorage.token
+                    // delete $window.localStorage.user
                     ipCookie.remove('token')
                     CacheFactory.clearAll()
 

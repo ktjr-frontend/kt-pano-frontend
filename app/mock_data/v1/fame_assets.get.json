@@ -1,6 +1,6 @@
 {
     "total_items": 30,
-    "assets": [{
+    "fame_assets": [{
         "id": "55caf0b1695a32bd2d00000b",
         "type": "理财",
         "directive_rate":"5",
@@ -10,7 +10,8 @@
         "status": "released",
         "annual_rate": 12.0,
         "amount": 100000000.0,
-        "published_at": "2015-08-12",
+        "published_start_at": "2015-08-12",
+        "published_end_at": "2015-08-12",
         "description": "\u003cp\u003e无\u003c/p\u003e\r\n",
         "identifier": "150909-ZETE-A",
         "unallocated_amount": 0.0,
@@ -47,7 +48,8 @@
         "status": "cancelled",
         "annual_rate": 16.0,
         "amount": 100000000.0,
-        "published_at": "2015-08-12",
+        "published_start_at": "2015-08-12",
+        "published_end_at": "2015-08-12",
         "description": "\u003cp\u003e无\u003c/p\u003e\r\n",
         "identifier": "KT-test-08011",
         "unallocated_amount": 100000000.0,
@@ -77,7 +79,8 @@
         "status": "finished",
         "annual_rate": 12.0,
         "amount": 500000000.0,
-        "published_at": "2015-08-12",
+        "published_start_at": "2015-08-12",
+        "published_end_at": "2015-08-12",
         "description": "\u003cp\u003e无\u003c/p\u003e\r\n",
         "identifier": "ZWTH-TH-01",
         "unallocated_amount": 450000000.0,

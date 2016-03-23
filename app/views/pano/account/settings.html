@@ -1,4 +1,4 @@
-<div class="simple-container cbs container">
+<div class="simple-container cbs container" kt-full-page-destroy>
     <div class="clfix">
         <h3 class="simple-title fb fl">账号信息</h3>
     </div>
@@ -58,13 +58,13 @@
     <div class="hpanel">
         <div class="panel-body">
             <div>
-                <div class="f1_3rem">
-                    您的邀请码：<span id="invitee_code" ng-bind="user.invitee_code"  class="mr20"></span>
+                <div class="f1_5rem">
+                    您的邀请码：<span id="invitee_code" ng-bind="user.invitee_code"  class="mr20 text-warning-light f2rem"></span>
                     您可以
                     <a ng-show="isSafari" class="navy-color tu" uib-tooltip="{{copyTooltip}}"  tooltip-placement="bottom" ngclipboard data-clipboard-target="#invitee_code">复制邀请码</a>
                     <a ng-show="!isSafari" class="navy-color tu" uib-tooltip="复制成功！"  tooltip-trigger="none"  tooltip-is-open="tooltipIsOpen" tooltip-placement="bottom" ngclipboard ngclipboard-success="copySuccess()" data-clipboard-target="#invitee_code">复制邀请码</a> 或 <a class="navy-color tu" ng-click="sendInviteCode()">发送邀请码到手机</a>
                 </div>
-                <div class="f1_5rem mt15">该邀请码可使用<span class="navy-color" ng-bind="user.invitee_limit"></span>次，已使用<span class="navy-color" ng-bind="user.invitee_count"></span>次</div>
+                <div class="f1_3rem mt15">该邀请码可使用<span class="navy-color" ng-bind="user.invitee_limit"></span>次，已使用<span class="navy-color" ng-bind="user.invitee_count"></span>次</div>
             </div>
         </div>
     </div>

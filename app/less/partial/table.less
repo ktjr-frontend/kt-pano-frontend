@@ -1,5 +1,8 @@
 .table {
     margin-bottom: 0;
+    >tbody + tbody{
+        border-top: 1px solid @color-table-border;
+    }
 }
 
 .table > thead > tr,
@@ -8,18 +11,18 @@
 {
     & > th {
         // font-weight: bolder;
-
         // font-size: 13px;
     }
     & > td {
         color: @color-bright;
-        padding: 11px 6px;
+        padding: 11px 10px;
     }
     & > th,
     & > td {
         white-space: nowrap;
         border-top: 0;
         border-right: 1px solid @color-table-border;
+        vertical-align: middle;
         &:last-child {
             border-right: 0;
         }
@@ -42,14 +45,14 @@
     border-right: 1px solid @color-table-head;
     background: @color-table-head;
     color: white;
-    padding: 15px 11px;
+    padding: 13px 11px;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: normal;
     &:first-child {
         border-radius: 5px 0 0;
     }
-    &:last-child{
+    &:last-child {
         border-radius: 0 5px 0 0;
     }
     &.text-left {
@@ -64,13 +67,22 @@
     &> td {
         font-size: 1.3rem;
         text-align: center;
-
         // &:first-child {
         //     text-align: left;
         //     &.text-center {
         //         text-align: center;
         //     }
         // }
+        .arrow-down{
+            font-size: 1rem;
+            transform: scale(0.8);
+            color: rgba(60, 180, 61, 0.86);
+        }
+        .arrow-up{
+            font-size: 1rem;
+            transform: scale(0.8);
+            color: rgba(200,0,0,0.7);
+        }
         &.text-left {
             text-align: left;
         }
@@ -117,17 +129,27 @@
 table {
     th.sort-column {
         cursor: pointer;
+        &:hover {
+            .sort-icons {
+                .up,
+                .down {
+                    color: white;
+                }
+            }
+        }
         // 上下箭头样式，只切换颜色
-        .sort-icons{
+        .sort-icons {
             display: inline-block;
             position: relative;
             height: 1em;
-            .up{
+            .up {
+                font-weight: bold;
                 position: absolute;
                 top: -.2em;
                 color: #adadad;
             }
-            .down{
+            .down {
+                font-weight: bold;
                 position: absolute;
                 bottom: -.4em;
                 color: #adadad;
@@ -150,7 +172,12 @@ table {
             }
         }
         &.sort-desc {
-            .down{
+            &:hover {
+                .down {
+                    color: @color-orange-light;
+                }
+            }
+            .down {
                 color: @color-orange-light;
             }
             .sort-icon:before {
@@ -158,7 +185,12 @@ table {
             }
         }
         &.sort-asc {
-            .up{
+            &:hover {
+                .up {
+                    color: @color-orange-light;
+                }
+            }
+            .up {
                 color: @color-orange-light;
             }
             .sort-icon:before {

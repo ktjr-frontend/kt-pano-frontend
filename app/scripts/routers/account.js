@@ -9,8 +9,6 @@
                 /**
                  * 账户相关，包括平台内的账户信息、设置以及登录、注册等
                  */
-                               
-                
                 'account': {
                     abstract: true,
                     url: '/account?apimock',

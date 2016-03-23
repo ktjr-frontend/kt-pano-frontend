@@ -11,7 +11,7 @@ module.exports = {
                     'styles/img/*.*',
                     'images/**/*.*',
                     'download/**/*.*',
-                    'common/libs/echarts3.min.js',
+                    'common/libs/echarts.min.js',
                     'common/libs/html2canvas.min.js',
                     'common/directives/**/*.{jpg,png,jpeg,gif,svg,html}', //common目录用于异步加载
                     'scripts/directives/**/*.{jpg,png,jpeg,gif,svg,html}', //script目录下得diretive 用来异步加载
@@ -37,15 +37,13 @@ module.exports = {
                 cwd: 'app/fonts/pe-icon-7-stroke/',
                 src: ['fonts/*.*'],
                 dest: '<%= kt.dist %>'
-            }
-            /*, {
+            }, {
                 expand: true,
                 dot: true,
-                cwd: 'app/fonts/kt/fonts',
-                src: ['*.*'],
-                dest: '<%= kt.dist %>/fonts/kt'
-            }*/
-            , {
+                cwd: 'app/fonts',
+                src: ['pano/fonts/*.*'],
+                dest: '<%= kt.dist %>/fonts'
+            }, {
                 expand: true,
                 dot: true,
                 cwd: 'app/common/fonts',

@@ -2,15 +2,15 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktProductsService, ktContactUsService) {
+        .controller('ktProductObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktCompassAssetService) {
 
-            var filterInit = ktDataHelper.filterInit($scope.shared.filters)
-            $.extend($scope.shared.params, $location.search())
+            // $scope.shared.tabActive.tab0 = true
+            $.extend($scope.shared.params, $location.search(), { credit_right_or_eq: '债权' })
 
-            filterInit($scope.shared.params)
+            ktDataHelper.filterUpdate($scope.shared.filters, $scope.shared.params)
 
-            ktProductsService.get($scope.shared.params, function(res) {
-                $scope.products = res.products
+            ktCompassAssetService.get(ktDataHelper.cutDirtyParams($scope.shared.params), function(res) {
+                $scope.products = res.compass_assets
                 $scope.shared.params.totalItems = res.total_items
             })
         })

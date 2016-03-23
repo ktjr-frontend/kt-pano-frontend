@@ -33,6 +33,7 @@ module.exports.tasks = {
         css: {
             src: [
                 '<%= kt.dist %>/styles/**/*.css',
+                '<%= kt.dist %>/views/**/*.css',
                 '<%= kt.dist %>/common/directives/**/*.css',
                 '<%= kt.dist %>/scripts/directives/**/*.css'
             ],
@@ -49,7 +50,7 @@ module.exports.tasks = {
         },
         fonts: {
             src: [
-                '<%= kt.dist %>/fonts/lode/**/*.*'
+                '<%= kt.dist %>/fonts/pano/**/*.*'
             ],
             // dist: '.tmp'
         },

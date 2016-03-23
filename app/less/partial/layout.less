@@ -31,6 +31,23 @@ body {
     min-height: 100%;
     // height: 100%;
     overflow-x: hidden;
+    &.page-small {
+        .header-link {
+            display: block;
+        }
+        // #menu {
+        //     margin-left: -@menu-width;
+        // }
+        #wrapper {
+            margin-left: 0;
+        }
+        &.show-sidebar #menu {
+            margin-left: 0;
+        }
+        &.show-sidebar #wrapper {
+            margin-left: @menu-width;
+        }
+    }
     &.simple-page {
         background-color: @color-2;
     }
@@ -53,23 +70,49 @@ body {
 #header {
     background-color: @color-1;
     display: block;
-    height: 80px;
+    min-height: 80px;
     line-height: 75px;
     font-size: 1.3rem;
     margin: 0;
-    padding: 0;
+    padding: 0 3rem;
     position: relative;
     color: white;
+    @media(max-width: 768px) {
+        padding: 0 2rem;
+    }
+    @media(max-width: 480px) {
+        padding: 0 1rem;
+    }
     .navbar-right {
         float: right;
     }
     .navbar-nav>li {
         float: left;
-        &>a.dropdown-toggle {
+        &.dropdown {
             background: none;
+            border: none;
+            .dropdown-toggle {
+                text-indent: 0;
+            }
+            .icon-arrow {
+                position: relative;
+                padding-left: 5px;
+            }
+            &:hover {
+                .icon-arrow {
+                    color: white;
+                }
+            }
+        }
+        .dropdown-menu {
+            left: 10px;
+            right: 10px;
+        }
+        &>a.dropdown-toggle {
+            // background: none;
             // font-size: 1.2rem;
             &:hover {
-                background: none;
+                // background: none;
             }
         }
     }
@@ -85,11 +128,41 @@ body {
     bottom: 0;
     right: 0;
     left: 0;
+    padding: 0 3rem;
+    @media(max-width: 768px) {
+        padding: 0 2rem;
+    }
+    @media(max-width: 480px) {
+        padding: 0 1rem;
+    }
     hr {
         border-top: 1px solid #474d5d;
         margin-top: 45px;
     }
+    .inner {
+        padding-top: 40px;
+    }
+    @media(max-width: 768px) {
+        .inner {
+            padding-top: 20px;
+        }
+        hr {
+            margin-top: 25px;
+        }
+    }
     .footer-nav {
+        .left {
+            text-align: left;
+        }
+        .right {
+            text-align: right;
+        }
+        @media(max-width: 768px) {
+            .left,
+            .right {
+                text-align: center;
+            }
+        }
         span.item,
         a {
             color: white;
@@ -109,12 +182,6 @@ body {
 }
 
 #menu {
-    // width: @menu-width;
-    // bottom: 0;
-    // float: left;
-    // left: 0;
-    // position: absolute;
-    // top: 80px;
     height: 70px;
     transition: all 0.4s ease 0s;
     background-color: @color-1;
@@ -126,11 +193,7 @@ body {
 }
 
 #wrapper {
-    // margin: 0 0 0 @menu-width;
     padding: 0;
-    // background: @color-background;
-    // border-left: 1px solid @border-color;
-    // transition: all 0.4s ease 0s;
     position: relative;
     min-height: 100%;
     z-index: 0;
@@ -156,12 +219,8 @@ body {
 }
 
 .content {
-    // padding: 25px 40px 40px 40px;
     min-width: 520px;
-}
-
-@media(max-width: 768px) {
-    .content {
+    @media(max-width: 768px) {
         padding: 10px;
         min-width: 320px;
     }
@@ -181,25 +240,22 @@ body {
     margin: 0 0 0 @menu-width;
 }
 
-.navbar-nav {
-    margin: 20px 0 0 -13px;
-    &.header-nav {
-        margin-top: 25px;
-    }
-}
-
 .navbar-static-top,
-.navbar-nav > li {
-    &>a {
+.navbar-nav.nav > li {
+    &>a,
+    &.open>a {
+        user-select: none;
+        -webkit-user-select: none;
         color: white;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 1.5rem;
+        // height: 30px;
+        // line-height: 30px;
+        padding: 5px 1.4rem;
         margin: 0 5px;
-        border-radius: 30px;
+        border-radius: 15px;
+        background: none;
         &:hover,
         &:focus {
-            background: @color-navy-blue;
+            background-color: @color-navy-blue;
             color: white;
             transition: background .3s ease;
         }
@@ -218,41 +274,49 @@ body {
     }
 }
 
-
-/*.nav.navbar-nav .dropdown-menu.hdropdown li.active>a {
-    color: white;
-    &:hover {
-        color: lighten(@color-text, 20%);
+.navbar-nav {
+    margin: 24px 0 0 9px;
+    /*@media(max-width: 768px) {
+        margin: 20px 15px 0 0;
+    }*/
+    &.header-nav {
+        margin-top: 25px;
+        margin-left: -22px;
     }
 }
-*/
 
 #navigation {
+    font-size: 1.5rem;
+    .navbar-nav{
+        margin-left: 40px;
+    }
+    @media(max-width: 991px) {
+        clear: both;
+        padding-bottom: 15px;
+        .navbar-nav {
+            margin: 0 0 0 -10px;
+        }
+    }
     // margin-left: -20px;
     .nav {
         & > li {
-            padding: 0 20px;
+            padding: 0 12px;
+            float: left;
+            @media (max-width: 767px) {
+                padding: 0 10px;
+                a {
+                    padding: 3px 10px;
+                    font-size: 1.3rem;
+                }
+            }
+            @media (max-width: 480px) {
+                padding: 0 5px;
+                a {
+                    padding: 2px 8px;
+                    font-size: 1.2rem;
+                    margin: 0;
+                }
+            }
         }
     }
 }
-
-
-/*.color-line {
-    background: @color-bright;
-    height: 6px;
-    background-image: linear-gradient(to right, @color-navy-blue, @color-navy-blue 25%, @color-violet 25%, @color-violet 35%, @color-blue 35%, @color-blue 45%, @color-green 45%, @color-green 55%, @color-yellow 55%, @color-yellow 65%, @color-orange 65%, @color-orange 75%, @color-red 85%, @color-red 85%, @color-red-deep 85%, @color-red-deep 100%);
-    background-size: 100% 6px;
-    background-position: 50% 100%;
-    background-repeat: no-repeat;
-}
-*/
-
-
-/*.fixed-sidebar #menu {
-    position: fixed;
-    overflow-x: visible;
-    // overflow-y: scroll;
-    overflow-y: auto;
-    // width: 197px;
-    margin-right: -17px;
-}*/

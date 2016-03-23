@@ -1,0 +1,183 @@
+.landing-page {
+    @rootSize: 12;
+    @fontSize: 10;
+    @color-blue: #4380dd;
+    @color-blue-light: #2694e1;
+    @color-grey: #ededed;
+    @color-orange: #f1a835;
+    @color-green: #1abd9e;
+    font-size: ~"@{rootSize}px";
+    .size(@value) {
+        @_s: @value/@rootSize;
+        @size: ~"@{_s}rem";
+    }
+    .fontSize(@value) {
+        @_fs: @value/@fontSize;
+        font-size: ~"@{_fs}rem";
+    }
+    .height(@value) {
+        @h: @value/@rootSize;
+        height: ~"@{h}rem";
+    }
+    .width(@value) {
+        @w: @value/@rootSize;
+        width: ~"@{w}rem";
+    }
+    .maxWidth(@value){
+        @mw: @value/@rootSize;
+        max-width: ~"@{mw}rem";
+    }
+    .margin(@value){
+        @mg: @value/@rootSize;
+        margin: ~"@{mg}rem";
+    }
+    .marginLeft(@value) {
+        @ml: @value/@rootSize;
+        margin-left: ~"@{ml}rem";
+    }
+    .marginRight(@value) {
+        @mr: @value/@rootSize;
+        margin-right: ~"@{mr}rem";
+    }
+    .marginTop(@value) {
+        @mt: @value/@rootSize;
+        margin-top: ~"@{mt}rem";
+    }
+    .marginBottom(@value) {
+        @mb: @value/@rootSize;
+        margin-bottom: ~"@{mb}rem";
+    }
+    #header {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 99999;
+        background: none;
+    }
+    .nav > li > a {
+        // background: @color-blue;
+        &:hover,
+        &:focus,
+        &:active {
+            background: darken(@color-blue-light, 8%);
+        }
+    }
+    .section{
+        // padding-top: 90px;
+    }
+    .section-1 {
+        color: white;
+        background-color: @color-blue;
+        background: url(/images/home_bg1.jpg) top center;
+        background-size: cover;
+        .img-pano-container{
+            padding: 0 20px;
+        }
+        .pano-svg {
+            .maxWidth(435);
+        }
+        .line {
+            .maxWidth(195);
+            .marginBottom(50);
+            .marginTop(50);
+        }
+        .content {
+            .maxWidth(750);
+            .fontSize(17);
+            line-height: 1.8;
+        }
+        .buttons{
+            margin-top: 80px;
+            .btn {
+                .width(180);
+                padding: 12px 0;
+                // .height(50);
+                border-radius: 5px;
+                border: 1px solid white;
+                background: none;
+                .fontSize(17);
+                margin: 0 15px;
+                color: white;
+                &:hover{
+                    background: @color-blue;
+                    color: white;
+                    border-color: @color-blue;
+                }
+            }
+        }
+    }
+    .section-2 {
+        font-family: 'fzltxianh';
+        color: black;
+        background-color: white;
+        .container{
+            .maxWidth(1054);
+            width: 100%;
+            // height: 100%;
+            position: relative;
+            // .height(380);
+        }
+        .earth{
+            height:100%;
+        }
+        .left{
+            width: 41.4%;
+            float: left;
+            height: 100%;
+        }
+        .right{
+            position: absolute;
+            // top: 50%;
+            right: 0;
+            // transform: translateY(-50%);
+            width: 55.6%;
+            height: 100%;
+            float: right;
+            .three_cloud{
+                position: absolute;
+                bottom: 9px;
+                left: 0;
+                .width(265);
+            }
+        }
+        .inner{
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        p{
+            .fontSize(20);
+            line-height: 2;
+        }
+        h2{
+            .fontSize(46);
+            .marginTop(50);
+            .marginBottom(50);
+            .cloud{
+                .width(66);
+                vertical-align: baseline;
+                .marginRight(40);
+            }
+        }
+    }
+    .section-3 {
+        color: white;
+        h2{
+            .fontSize(46);
+            .network{
+                .marginRight(35);
+                .width(70);
+                vertical-align: baseline;
+            }
+            p{
+                .fontSize(17);
+            }
+        }
+        // background-color: @color-orange;
+        background: url(/images/home_bg2.jpg) top center;
+    }
+    .section-4 {
+        background-color: @color-green;
+    }
+}

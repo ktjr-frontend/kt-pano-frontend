@@ -1,78 +1,87 @@
+.chart-table-group {
+    .chart-table {
+        &.half {
+            background: @color-3;
+            width: 50%;
+            float: left;
+            &:nth-of-type(2n-1) {
+                padding-right: 10px;
+            }
+            &:nth-of-type(2n) {
+                padding-left: 10px;
+            }
+            @media(max-width: 768px) {
+                width: 100%;
+                &:nth-of-type(n) {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
 .chart-table {
-    background: white;
-    margin: 10px 0;
-    &.bg-none{
+    background: none;
+    margin-bottom: 20px;
+    // border-radius: 5px;
+    &.bg-none {
         background: transparent;
     }
-    .br{
+    .br {
         border-right: 1px solid @color-8;
     }
-    .dashboard-list{
+    .dashboard-list {
         // padding: 10px 0;
-        .tier-list{
+        .tier-list {
             list-style-type: none;
         }
-        li{
+        li {
             color: #696c84;
             height: 2.5em;
             line-height: 2.5em;
             background: white;
-            &:nth-of-type(2n){
+            &:nth-of-type(2n) {
                 background: #e7eaf1;
             }
-            .key-name,.value {
+            .key-name,
+            .value {
                 float: left;
             }
-            .key-name{
+            .key-name {
                 margin-right: 15px;
             }
-            &.item-l1{
+            &.item-l1 {
                 padding-left: 10px;
-                .key-name{
+                .key-name {
                     // font-size: 1.3em;
                 }
             }
-            &.item-l2{
+            &.item-l2 {
                 padding-left: 2.7em;
             }
-            &.item-l3{
+            &.item-l3 {
                 padding-left: 4.7em;
             }
         }
     }
-    // transform: translateZ(0);
-    // transition: transform .5s ease;
-    // &.ng-hide-add{
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     right: 0;
-    //     z-index: 9;
-    // }
-    // &.ng-hide-add-active{
-    //     transform: translateY(-200%);
-    // }
-    // &.ng-hide-remove{
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     right: 0;
-    //     z-index: 9;
-    //     transform: translateY(-200%);
-    // }
-    // &.ng-hide-remove-active{
-    //     transform: translatey(0);
-    // }
+    .chart-table-title {
+        font-size: 1.5rem;
+    }
+    .update-time {
+        color: @color-bright;
+    }
     .chart-table-heading {
+        margin-bottom: 5px;
         user-select: none;
-        color: @color-3;
+        color: @color-text;
         height: 40px;
         line-height: 40px;
         font-size: 12px;
-        border-bottom: 1px solid @color-8;
-        &.tab-like{
+        background: none;
+        // border-bottom: 1px solid @border-color;
+        &.tab-like {
             border-bottom: none;
-            .tab{
+            .tab {
                 background: white;
             }
         }
@@ -105,15 +114,14 @@
                     border: 1px solid #ababab;
                     border-radius: 0;
                 }
-                &:after{
+                &:after {
                     top: -2px;
                     margin-left: -19px;
                     color: @color-orange;
                 }
             }
         }
-        .checkbox-group {}
-        .dropdown {
+        /*.dropdown {
             border: 0;
             border-right: 1px solid @color-8;
             width: 145px;
@@ -133,10 +141,10 @@
             box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.3);
             left: 47px;
             top: 30px;
-        }
-        .input-group{
+        }*/
+        .input-group {
             max-width: 200px;
-            .form-control{
+            .form-control {
                 float: none;
             }
         }
@@ -162,12 +170,22 @@
             }
         }
     }
-    // .chart-table-body {
-    //     .chart {
-    //         padding: 10px 0;
-    //     }
-    // }
-    .chart-table-footer{
+    .chart-table-body {
+        background: white;
+        border-radius: 5px;
+        padding: 0 10px;
+        &.half {
+            width: 50%;
+            float: left;
+            &:nth-of-type(2n-1) {
+                border-radius: 5px 0 0 5px;
+            }
+            &:nth-of-type(2n) {
+                border-radius: 0 5px 5px 0;
+            }
+        }
+    }
+    .chart-table-footer {
         color: @color-3;
         height: 40px;
         line-height: 40px;

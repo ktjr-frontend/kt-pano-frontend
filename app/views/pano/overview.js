@@ -2,164 +2,297 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $stateParams, ktProjectsReportService, ktInstitutionsService, ktDateHelper) {
+        .controller('ktOverviewCtrl', function($scope, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory) {
 
             $scope.$emit('activeProjectChange', {
                 projectID: $stateParams.projectID
             })
 
-            $scope.radioPeriod = 'all'
-            $scope.radioPeriodCustom = 'custom'
+            $scope.updateDate = moment().subtract(1, 'd').format('YYYY-MM-DD')
 
-            $scope.institutions = []
-            $scope.insitutionChange = function(id, name) {
-                $scope.institutionName = name
-                getData(id)
-            }
-
-            ktInstitutionsService.get(function(data) {
-                data.institutions.unshift({
-                    id: 'all',
-                    name: '全部机构'
-                })
-
-                $scope.institutions = data.institutions
-                $scope.institutionName = $scope.institutions[0].name
-                    // getData($scope.institutions[0].id)
-            })
-
-            $scope.radioDataShowType = 'chart'
-
-            $scope.timelimitsChart = {
+            var rateAmountChart = $scope.rateAmountChart = {
                 chartOptions: {},
+                yAxis: 'amount',
+                yAxisFormat: 'rmb',
+                xAxis: 'rate',
+                xAxisFormat: 'percent2',
+                color: ['#dd4444'],
                 list: []
             }
 
-            $scope.$watch('radioPeriod', function(newValue, oldvalue) {
-                if (newValue !== oldvalue && newValue !== 'custom') {
-                    getData($scope.activeInstID)
-                }
-            })
+            var durationRateChart = $scope.durationRateChart = {
+                chartOptions: {},
+                yAxis: 'rate',
+                yAxisFormat: 'percent2',
+                xAxis: '_id',
+                xAxisFormat: null,
+                list: []
+            }
+
+            var durationAmountChart = $scope.durationAmountChart = {
+                chartOptions: {},
+                yAxis: 'amount',
+                yAxisFormat: 'rmb',
+                xAxis: '_id',
+                xAxisFormat: null,
+                list: []
+            }
+
+            var platformAssetTypeChart = $scope.platformAssetTypeChart = {
+                chartOptions: {},
+                yAxis: 'amount',
+                yAxisFormat: 'percent2',
+                xAxis: '_id',
+                xAxisFormat: null,
+                list: []
+            }
 
             var chartOptions = {
                 tooltip: {
-                    axisPointer: {
-                        type: 'line',
-                    },
                     valueType: 'rmb' //自定义属性，tooltip标示，决定是否显示百分比数值
-                },
-                dataZoom: [{
-                    // show: true,
-                    // realtime: true,
-                    top: 48,
-                    left: 78,
-                    height: 290,
-                    start: 30,
-                    end: 70,
-                    backgroundColor: 'rgba(0,0,0,0)', // 背景颜色
-                    dataBackgroundColor: 'rgba(0,0,0,0)', // 数据背景颜色
-                    xAxisIndex: 1,
-                    onZoom: function(e) {
-                        var xAxis = this.getOption().xAxis[1]
-                        var l = xAxis.data.length
-                        var startDate = xAxis.data[Math.ceil((l - 1) * e.start.toFixed(2) / 100)]
-                        var endDate = xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]
-                        console.log(e.start, e.end, e.startValue)
-                        console.log(startDate, endDate, (l - 1) * e.end.toFixed(2) / 100, (l - 1) * e.start.toFixed(2) / 100)
-                    },
-                    type: 'slider'
-                }],
-            }
-
-            function getDataKey(type) {
-                var typesMap = {
-                    'timelimitsChart': ['prncp_balns_by_term', 'incre_loan_amnt_by_term'],
-                    'amountsChart': ['prncp_balns_by_amnt', 'incre_loan_amnt_by_amnt'],
-                    // 'typeChart': ['prncp_balns_by_type', 'incre_loan_amnt_by_type'],
-                    'locationsChart': ['prncp_balns_by_loc', 'incre_loan_amnt_by_loc'],
-                    'gendersChart': ['prncp_balns_by_gender', 'incre_loan_amnt_by_gender'],
-                    'agesChart': ['prncp_balns_by_age', 'prncp_balns_by_age_percent'],
                 }
-
-                var keys = typesMap[type]
-                var prefix = keys[0]
-                var suffix = ''
-                    // prefix = $scope[type].chartDimension === '时点余额' ? keys[0] : keys[1]
-                    // suffix = $scope[type].menuData.value === 'absolute' ? '' : '_percent'
-                if (type === 'locationChart') suffix = suffix + '_' + $scope.locationChart.topDimension.toLowerCase()
-
-                chartOptions = $.extend(true, {}, chartOptions, suffix === '_percent' ? {
-                    tooltip: {
-                        valueType: 'percent' //自定义属性，tooltip标示，决定是否显示百分比数值
-                    },
-                    yAxis: [{
-                        interval: 0.2,
-                        max: 1,
-                        min: 0
-                    }]
-                } : {
-                    tooltip: {
-                        valueType: 'rmb'
-                    }
-                })
-
-                return prefix + suffix
             }
 
-            function udpateData(type) {
-                var data = $scope.data
-
-                var listName = getDataKey(type)
-                $scope[type].list = data[listName]
-                $scope[type].chartOptions = $.extend(true, {}, chartOptions, {
-                    legend: {
-                        data: _.map(data[listName], 'name')
-                    },
-                    xAxis: [{
-                        type: 'category',
-                        boundaryGap: false,
-                        data: data.dates
-                    }, {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: data.dates
-                    }],
-
-                    series: _.map(data[listName], function(v) {
-                        v.type = 'line'
-                        v.stack = '堆积组'
-                        v.barWidth = 40
-                        return v
-                    })
-                })
-            }
-
-            function getData(instID) {
-                var startDate
-                var endDate
-                var datePeriod
-                datePeriod = ktDateHelper.getDate($scope.radioPeriod) || $scope.radioPeriodCustom
-                datePeriod = datePeriod.split('~')
-                startDate = datePeriod[0] || null
-                endDate = datePeriod[1]
-
-                $scope.activeInstID = instID || 'all'
-
-                ktProjectsReportService.get({
-                    type: 'assets_stats',
-                    inst_id: instID,
-                    start_date: startDate,
-                    end_date: endDate
+            rateAmountChart.udpateDataView = function() {
+                var _self = this
+                ktOverviewService.get({
+                    chart: 'summary',
                 }, function(data) {
-                    $scope.data = data
-
-                    udpateData('timelimitsChart')
-
+                    _self.data = data.stat
+                    updateView()
                 })
+
+                function updateView() {
+                    var data = _self.data
+
+                    var xAxisArr = _.map(data, function(v) {
+                        return v[0]
+                    })
+                    var yAxisArr = _.map(data, function(v) {
+                        return v[1]
+                    })
+
+                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                        // color: _self.color,
+                        legend: {
+                            data: _.map(data, function(v) {
+                                return v[2]
+                            }),
+                        },
+                        tooltip: {
+                            axisPointer: {
+                                axis: 'auto',
+                                type: 'line',
+                            },
+                            trigger: 'item',
+                            triggerOn: 'mousemove',
+                            alwaysShowContent: false,
+                            formatter: function(params) {
+                                var res = '<div class="f1_3rem" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;">' +
+                                    params.value[2] + '</div>' +
+                                    '<div class="f1_2rem">加权收益率 : ' + ktValueFactory(params.value[0], _self.xAxisFormat) + '</div>' +
+                                    '<div>' + params.seriesName + ' : ' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</div>';
+                                return res;
+                            },
+                            xAxisFormat: _self.xAxisFormat,
+                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                        },
+                        visualMap: [{
+                                show: false,
+                                dimension: 1,
+                                min: _.min(yAxisArr),
+                                max: _.max(yAxisArr),
+                                precision: 1,
+                                inRange: {
+                                    symbolSize: [10, 50]
+                                },
+                                outOfRange: {
+                                    symbolSize: [10, 50],
+                                    color: ['rgba(0,0,0,.2)']
+                                },
+                                
+                            }
+                            /*, {
+                                show: false,
+                                dimension: 0,
+                                min: 0,
+                                max: _.max(xAxisArr),
+                                precision: 0.01,
+                                inRange: {
+                                    // colorSaturation: [0.1, 1],
+                                    colorLightness: [0.9, 0.6]
+                                },
+                                outOfRange: {
+                                    color: ['rgba(0,0,0,.2)']
+                                },
+
+                            }*/
+                        ],
+                        yAxis: [{
+                            name: '发行量（单位：万元）',
+                            boundaryGap: false,
+                            min: 0,
+                            // max: _.max(yAxisArr) + 1000000
+                        }],
+                        xAxis: [{
+                            max: _.floor(_.max(xAxisArr)),
+                            type: 'value',
+                            boundaryGap: false,
+                        }],
+
+                        series: _.map(data, function(v) {
+                                return {
+                                    name: v[2],
+                                    type: 'scatter',
+                                    data: [v]
+                                }
+                            })
+                    })
+                }
+            }
+
+            durationRateChart.udpateDataView = function() {
+                var _self = this
+                ktOverviewService.get({
+                    chart: 'rate',
+                }, function(data) {
+                    // data = { "stat": { "xAxis": [1, 3, 6, 12, 24], "data": [{ "name": "上周收益率", "data": [0.17, null, 2.3, null, 0.03] }, { "name": "本周收益率", "data": [null, null, 1.04, null, 5.02] }] } }
+                    _self.data = data.stat
+                    updateView()
+                })
+
+                function updateView() {
+                    var data = _self.data
+
+                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                        legend: {
+                            data: _.map(data.data, 'name'),
+                        },
+                        tooltip: {
+                            axisPointer: {
+                                axis: 'auto',
+                                type: 'line',
+                            },
+
+                            xAxisFormat: _self.xAxisFormat,
+                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                        },
+                        yAxis: [{
+                            name: '收益率（单位：%）'
+                        }],
+                        xAxis: [{
+                            type: 'category',
+                            boundaryGap: true,
+                            data: data.xAxis
+                        }],
+
+                        series: _.map(data.data, function(v) {
+                            return {
+                                name: v.name,
+                                type: 'line',
+                                markLine: {
+                                    data: ktDataHelper.getMarkLineCoords(v.data)
+                                },
+                                // symbol: 'path://M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0',
+                                smooth: false,
+                                data: v.data
+                            }
+                        })
+                    })
+                }
+            }
+
+            durationAmountChart.udpateDataView = function() {
+                var _self = this
+                ktOverviewService.get({
+                    chart: 'circulation',
+                }, function(data) {
+                    _self.data = data.stat
+                    updateView()
+                })
+
+                function updateView() {
+                    var data = _self.data
+
+                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                        legend: {
+                            data: _.map(data.data, 'name'),
+                        },
+                        tooltip: {
+                            xAxisFormat: _self.xAxisFormat,
+                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                        },
+                        yAxis: [{
+                            name: '发行量（单位：万元）'
+                        }],
+                        xAxis: [{
+                            type: 'category',
+                            boundaryGap: true,
+                            data: data.xAxis
+                        }],
+
+                        series: _.map(data.data, function(v) {
+                            return {
+                                name: v.name,
+                                type: 'bar',
+                                data: v.data
+                            }
+                        })
+                    })
+                }
+            }
+
+            platformAssetTypeChart.udpateDataView = function() {
+                var _self = this
+                ktOverviewService.get({
+                    chart: 'circulation_pct',
+                }, function(data) {
+                    _self.data = data.stat
+                    updateView()
+                })
+
+                function updateView() {
+                    var data = _self.data
+
+                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                        legend: {
+                            data: _.map(data.data, 'name'),
+                        },
+                        tooltip: {
+                            xAxisFormat: _self.xAxisFormat,
+                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                        },
+                        yAxis: [{
+                            name: '类型占比（单位：%）',
+                            max: 1,
+                            min: 0
+                        }],
+                        xAxis: [{
+                            type: 'category',
+                            axisLabel: {
+                                interval: 0
+                            },
+                            boundaryGap: true,
+                            data: data.xAxis
+                        }],
+
+                        series: _.map(data.data, function(v) {
+                            return {
+                                name: v.name,
+                                type: 'bar',
+                                stack: '类型占比',
+                                data: v.data
+                            }
+                        })
+                    })
+                }
             }
 
             // 初始加载数据
-            getData()
+            rateAmountChart.udpateDataView()
+            durationRateChart.udpateDataView()
+            durationAmountChart.udpateDataView()
+            platformAssetTypeChart.udpateDataView()
 
         })
 })();

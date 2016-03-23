@@ -42,19 +42,23 @@
 }
 
 .hpanel {
-    margin: 10px 14px;
-    // background-color: @color-5;
-    // border-radius: 3px;
-    // padding: 10px;
+    margin: 0 14px;
     border: none;
     box-shadow: none;
-    margin-bottom: 25px;
+    &.has-tabs {
+        margin-top: 15px;
+    }
     .panel-body {
-        padding: 0;
         background: @color-3;
-        padding: 30px;
+        padding: 3rem;
         // border: 1px solid @border-color;
         position: relative;
+        @media(max-width: 768px) {
+            padding: 2rem;
+        }
+        @media(max-width: 480px) {
+            padding: 1rem;
+        }
     }
     &.td-hpanel {
         margin-bottom: 0;
@@ -254,24 +258,30 @@
                 position: relative;
                 padding: 20px 120px 20px 25px;
                 border-bottom: 1px solid @border-color;
-                &:last-of-type{
+                &:last-of-type {
                     border-bottom: 0;
                 }
             }
-            .title{
+            .icon-edit {
+                transform: scale(0.8);
+                vertical-align: -1px;
+                display: inline-block;
+            }
+            .title {
                 font-size: 1.5rem;
             }
-            .key{
+            .key {
                 color: #3d4351;
             }
-            .value{
+            .value {
                 color: @color-navy-blue;
             }
-            .content{
+            .content {
+                font-size: 1.3rem;
                 color: @color-bright;
                 margin-top: 10px;
             }
-            .action{
+            .action {
                 position: absolute;
                 right: 20px;
                 top: 50%;
@@ -287,5 +297,38 @@
         color: white;
         padding: 8px 5px 12px;
         border-bottom: 3px solid @color-navy-blue;
+    }
+    @media(max-width: 900px) {
+        .hpanel {
+            padding: 0 30px;
+            .panel-body {
+                padding: 15px 25px;
+            }
+        }
+        .simple-title{
+            margin: 20px 0 0 40px;
+        }
+    }
+    @media(max-width: 768px) {
+        .hpanel {
+            padding: 0 10px;
+            .panel-body {
+                padding: 10px 18px;
+            }
+        }
+        .simple-title{
+            margin: 15px 0 0 30px;
+        }
+    }
+    @media(max-width: 480px) {
+        .hpanel {
+            padding: 0;
+            .panel-body {
+                padding: 10px;
+            }
+        }
+        .simple-title{
+            margin: 10px 0 5px 10px;
+        }
     }
 }

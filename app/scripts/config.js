@@ -83,7 +83,7 @@
 
             // 本地化分页
             $.extend(uibPaginationConfig, {
-                boundaryLinks: false, //首页 尾页
+                boundaryLinks: true, //首页 尾页
                 directionLinks: true,
                 firstText: '首页',
                 itemsPerPage: 10,

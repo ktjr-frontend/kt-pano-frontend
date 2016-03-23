@@ -2,8 +2,9 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktSettingsCtrl', function($rootScope, $timeout, $scope, $state, $location, $uibModal, $window, ktSweetAlert, ktDataHelper) {
-            $scope.user = $rootScope.user
+        .controller('ktSettingsCtrl', function($rootScope, $timeout, $scope, $state, $location, $uibModal, $window, ktSweetAlert) {
+
+            // $scope.settingUser = $.extend(true, {}, $rootScope.user)
 
             $scope.updateName = function() {
                 var updateNameModal = $uibModal.open({
@@ -12,8 +13,9 @@
                     controller: 'ktUpdateNameCtrl'
                 })
 
-                updateNameModal.result.then(function() {
+                updateNameModal.result.then(function(user) {
                     ktSweetAlert.success('姓名修改成功')
+                    $rootScope.user.name = user.name
 
                 })
             }
@@ -25,8 +27,9 @@
                     controller: 'ktUpdateEmailCtrl'
                 })
 
-                updateEmailModal.result.then(function() {
+                updateEmailModal.result.then(function(user) {
                     ktSweetAlert.success('邮箱修改成功')
+                    $rootScope.user.email = user.email
                 })
             }
 
@@ -50,13 +53,15 @@
                     controller: 'ktPreUpdateMobileCtrl'
                 })
                 preMobileModal.result.then(function() {
+
                     var updateMobileModal = $uibModal.open({
                         size: 'md',
                         templateUrl: 'views/modals/input_phone_captcha.html',
                         controller: 'ktUpdateMobileCtrl'
                     })
-                    updateMobileModal.result.then(function() {
+                    updateMobileModal.result.then(function(user2) {
                         ktSweetAlert.success('手机修改成功！')
+                        $rootScope.user.mobile = user2.mobile
                     })
                 })
             }
@@ -71,13 +76,14 @@
                 }, 1000)
             }
         })
-        .controller('ktUpdateNameCtrl', function($scope, $uibModalInstance, ktAccountService, CacheFactory) {
+        .controller('ktUpdateNameCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
             $scope.title = '修改姓名'
+            $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user.content = 'name'
 
             $scope.submitForm = function() {
-                ktAccountService.update($scope.user, function(res) {
-                    $uibModalInstance.close()
+                ktAccountService.update($scope.user, function() {
+                    $uibModalInstance.close($scope.user)
                     CacheFactory.clearAll()
                 }, function(res) {
                     $scope.error = res.error || '更新出错！'
@@ -89,9 +95,10 @@
                 $uibModalInstance.dismiss('cancel');
             }
         })
-        // 验证原手机号 
-        .controller('ktPreUpdateMobileCtrl', function($scope, $uibModalInstance, ktAccountService, ktGetCaptcha) {
+        // 验证原手机号
+        .controller('ktPreUpdateMobileCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, ktGetCaptcha) {
             $scope.title = '原手机号验证'
+            $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user.content = 'validate_prev_captcha'
             $scope.user.captcha = ''
             $scope.hideMobileInput = true
@@ -111,8 +118,8 @@
             }
 
             $scope.submitForm = function() {
-                ktAccountService.update($scope.user, function(res) {
-                    $uibModalInstance.close()
+                ktAccountService.update($scope.user, function() {
+                    $uibModalInstance.close($scope.user)
                 }, function(res) {
                     $scope.error = res.error || '更新出错！'
                 })
@@ -124,8 +131,9 @@
             }
         })
         // 验证新手机号
-        .controller('ktUpdateMobileCtrl', function($scope, $rootScope, $uibModalInstance, ktAccountService, CacheFactory, ktGetCaptcha) {
+        .controller('ktUpdateMobileCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory, ktGetCaptcha) {
             $scope.title = '新手机号绑定'
+            $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user = { content: 'mobile' }
 
             var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktAccountService, {
@@ -143,8 +151,8 @@
 
             $scope.submitForm = function() {
 
-                ktAccountService.update($scope.user, function(res) {
-                    $uibModalInstance.close()
+                ktAccountService.update($scope.user, function() {
+                    $uibModalInstance.close($scope.user)
                     $rootScope.user.mobile = $scope.user.mobile
                     CacheFactory.clearAll()
                 }, function(res) {
@@ -157,13 +165,14 @@
                 $uibModalInstance.dismiss('cancel');
             }
         })
-        .controller('ktUpdateEmailCtrl', function($scope, $uibModalInstance, ktAccountService, CacheFactory) {
+        .controller('ktUpdateEmailCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
             $scope.title = '修改邮箱'
+            $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user.content = 'email'
 
             $scope.submitForm = function() {
-                ktAccountService.update($scope.user, function(res) {
-                    $uibModalInstance.close()
+                ktAccountService.update($scope.user, function() {
+                    $uibModalInstance.close($scope.user)
                     CacheFactory.clearAll()
                 }, function(res) {
                     $scope.error = res.error || '更新出错！'
@@ -175,13 +184,14 @@
                 $uibModalInstance.dismiss('cancel');
             }
         })
-        .controller('ktUpdatePasswordCtrl', function($scope, $uibModalInstance, ktAccountService, CacheFactory) {
+        .controller('ktUpdatePasswordCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
             $scope.title = '修改密码'
+            $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user.content = 'password'
 
             $scope.submitForm = function() {
-                ktAccountService.update($scope.user, function(res) {
-                    $uibModalInstance.close()
+                ktAccountService.update($scope.user, function() {
+                    $uibModalInstance.close($scope.user)
                     CacheFactory.clearAll()
                 }, function(res) {
                     $scope.error = res.error || '更新出错！'

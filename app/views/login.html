@@ -1,4 +1,4 @@
-<div class="login-container cbs">
+<div class="login-container cbs" kt-full-page-destroy kt-feedback-destroy>
     <div class="clfix">
         <h3 class="title fb fl ml10">登录系统</h3>
         <!-- <p class="f14">最好用的互联网金融小微贷统计平台</p> -->
@@ -50,12 +50,14 @@
                 </div>
                 <div kt-loading-status height="32" width="32"></div>
                 <div class="text-danger mb10" ng-show="loginError"><i class="fa fa-frown-o fb mr5"></i>用户名或密码错误！</div>
-                <button class="btn btn-navy-blue btn-lg btn-block f1_5rem" ng-disabled="loginForm.$invalid || pendingRequests">立即登录</button>
                 <div class="form-group mt10 mb0">
-                    <div class="col-md-6 text-left">
+                    <div class="col-xs-11 col-xs-offset-1 mb10">
+                        <button class="btn btn-navy-blue btn-lg btn-block f1_5rem" ng-disabled="loginForm.$invalid || pendingRequests">立即登录</button>
+                    </div>
+                    <div class="col-xs-5 col-xs-offset-1 text-left">
                         <a title="忘记密码" class="no-notely" ng-click="resetPassword()">忘记密码？</a>
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-xs-6 text-right">
                         <a title="点击注册" class="no-notely" ui-sref="account.register">注册</a>
                     </div>
                 </div>

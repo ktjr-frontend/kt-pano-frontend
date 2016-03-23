@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .provider('ktRouter', function($rootScopeProvider, $stateProvider, $urlRouterProvider, ktPanoRoutesProvider, ktAccountRoutesProvider, ktErrorRoutesProvider) {
+        .provider('ktRouter', function($rootScopeProvider, $stateProvider, $urlRouterProvider, ktHomeRoutesProvider, ktPanoRoutesProvider, ktAccountRoutesProvider, ktErrorRoutesProvider) {
 
             var setUpRoutes = function(routes) {
                 _.each(routes, function(v, k) {
@@ -19,11 +19,12 @@
 
             this.run = function() {
                 // 默认跳转页面
-                $urlRouterProvider.when('', redirectTo('/pano/overview')); // for hashbang mode
-                $urlRouterProvider.when('/', redirectTo('/pano/overview')); // for html5mode
+                $urlRouterProvider.when('', redirectTo('/index')); // for hashbang mode
+                $urlRouterProvider.when('/', redirectTo('/index')); // for html5mode
                 // $urlRouterProvider.otherwise('/error/404');
                 $urlRouterProvider.otherwise(redirectTo('/error/404'));
 
+                setUpRoutes(ktHomeRoutesProvider.routes)
                 setUpRoutes(ktPanoRoutesProvider.routes)
                 setUpRoutes(ktAccountRoutesProvider.routes)
                 setUpRoutes(ktErrorRoutesProvider.routes)

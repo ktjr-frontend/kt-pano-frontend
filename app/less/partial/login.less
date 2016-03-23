@@ -27,7 +27,7 @@ body.account-page {
             box-shadow: none;
         }
     }
-    .btn-lg{
+    .btn-lg {
         border-radius: 5px;
     }
     /*.checkbox label {
@@ -37,7 +37,32 @@ body.account-page {
         }
     }*/
     .btn-navy-blue {
-        .btn-blue-func();
+        &:hover,
+        &:focus,
+        &:active {
+            background: #4e90f5;
+        }
+        &.disabled,
+        &.disabled:hover,
+        &.disabled:focus,
+        &.disabled:active,
+        &.disabled.active,
+        &[disabled],
+        &[disabled]:hover,
+        &[disabled]:focus,
+        &[disabled]:active,
+        &.active[disabled],
+        fieldset[disabled] &,
+        fieldset[disabled] &:hover,
+        fieldset[disabled] &:focus,
+        fieldset[disabled] &:active,
+        fieldset[disabled] &.active {
+            opacity: 1;
+            color: #dde8f9;
+            background-color: #76a8f5;
+            border-color: #76a8f5;
+        }
+        // .btn-blue-func();
     }
     .no-notely {
         color: @color-bright;
@@ -51,8 +76,8 @@ body.account-page {
         padding: 8px 5px 10px;
     }
     .sub-title {
-        font-size: 1.3rem;
-        color: @border-color;
+        font-size: 1.7rem;
+        color: white;
         padding-left: 5px;
         margin-bottom: 20px;
         float: left;
@@ -74,6 +99,12 @@ body.account-page {
         .panel-body {
             border-radius: 10px;
             padding: 50px 50px 30px;
+            @media(max-width: 768px) {
+                padding: 30px 30px 15px;
+            }
+            @media(max-width: 480px) {
+                padding: 15px 15px 10px;
+            }
         }
     }
     @media (min-width: 768px) {
@@ -104,7 +135,7 @@ body.account-page {
                 &:before {
                     content: '\e013';
                     position: absolute;
-                    top: 12px;
+                    top: 9px;
                     left: 4px;
                     font-size: 1rem;
                     color: @color-orange;
@@ -119,10 +150,12 @@ body.account-page {
             }
         }
         label {
+            font-weight: normal;
             cursor: pointer;
-            padding: 8px 20px;
+            padding: 5px 20px;
             border: 1px solid #b7bac0;
             margin-right: 5px;
+            font-size: 1_3rem;
             &:hover {
                 border-color: @color-orange;
                 outline: 1px solid @color-orange;
@@ -136,7 +169,7 @@ body.account-page {
         }
         .panel-body {
             background: none;
-            padding: 20px 10px 10px;
+            padding: 10px;
         }
     }
     .control-label {
@@ -150,6 +183,7 @@ body.account-page {
     }
     .title {
         font-size: 2.3rem;
+        padding-left: 16px;
     }
     .form-group-img-captcha {
         .form-control {
@@ -183,29 +217,3 @@ body.account-page {
     }
     // padding-top: 6%;
 }
-
-
-/*.confirm-container {
-    max-width: 760px;
-    margin: auto;
-}
-
-.lock-container {
-    width: 420px;
-    margin: auto;
-    padding-top: 6%;
-}
-
-.error-container {
-    width: 620px;
-    margin: auto;
-    padding-top: 6%;
-}
-
-.big-icon {
-    font-size: 120px;
-}
-
-.error-container h1 {
-    font-size: 44px;
-}*/

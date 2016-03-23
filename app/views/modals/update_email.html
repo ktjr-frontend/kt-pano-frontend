@@ -4,7 +4,7 @@
     </div>
     <form name="popForm" novalidate kt-autofill-submit class="form-horizontal" method="post" id="popForm" kt-submit="submitForm()">
         <div class="modal-body ov-h">
-            <div class="form-group col-md-12" ng-class="{'has-error':popForm.email.$invalid && popForm.email.$dirty}">
+            <div class="form-group" ng-class="{'has-error':popForm.email.$invalid && popForm.email.$dirty}">
                 <label class="text-primary-dark control-label col-md-3">邮箱</label>
                 <div class="col-md-7">
                     <input placeholder="输入邮箱" kt-validate-on-blur type="email" required ng-model="user.email" class="form-control fl" name="email">

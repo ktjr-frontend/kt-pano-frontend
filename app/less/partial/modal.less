@@ -1,14 +1,20 @@
 .modal-dialog {
     @media (min-width: 768px) {
-        // width: 695px;
-        margin: 30px auto;
+        width: 555px;
+        margin: 100px auto;
     }
 }
 .modal-body {
+    padding: 15px;
     @media (min-width: 768px) {
         .control-label {
             padding-left: 0;
             padding-right: 0;
+        }
+    }
+    .form-group{
+        &:last-of-type{
+            margin-bottom: 0;
         }
     }
 }
@@ -23,7 +29,7 @@
 }
 
 .modal-footer {
-    padding: 1rem 0 2rem;
+    padding: 1rem 0 4rem;
     text-align: center;
     border: 0;
     .btn {
@@ -34,6 +40,8 @@
         border: 0!important;
     }
 }
-
-.inmodal {
+@media(max-width: 480px){
+    .modal-footer{
+        padding: 1rem 0 3rem;
+    }
 }

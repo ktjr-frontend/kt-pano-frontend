@@ -1,55 +1,138 @@
 .filter-box {
+    @dropdown-bg: @color-8;
     background: white;
     padding: 10px 25px;
     font-size: 1.3rem;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    @media(max-width: 768px) {
+        padding: 8px 15px;
+    }
+    @media(max-width: 480px) {
+        padding: 5px 10px;
+    }
+    .normal-filter {
+        padding: 15px 0;
+        .toggle-more-filters {
+            font-size: 1rem;
+            padding: 3px 8px 4px;
+            color: white;
+            background: @color-2;
+            &:hover {
+                background: lighten(@color-2, 6%);
+            }
+            .icon-arrow {
+                transform-origin: 50% 50%;
+            }
+        }
+        .right{
+            float: right;
+            @media(max-width: 480px){
+                float: left;
+                margin: 10px 24px;
+            }
+        }
+        &.expand {
+            margin-bottom: 10px;
+            border-bottom: 1px solid @border-color2;
+            .toggle-more-filters{
+                .icon-arrow {
+                    transform: rotate(90deg) translateX(2px);
+                }
+            }
+        }
+        .name {
+            min-width: 85px;
+            line-height: 23px;
+            text-align: right;
+        }
+        .datepicker {
+            border-radius: 3px;
+            border: 1px solid @border-color;
+            width: 200px;
+            height: 26px;
+            padding: 0 0 0 1em;
+            // background: @dropdown-bg;
+            background: white;
+            margin-left: 13px;
+            cursor: pointer;
+        }
+        .datepicker-container {
+            margin-left: 40px;
+            position: relative;
+            @media(max-width: 768px) {
+                clear: left;
+                margin: 15px 0 0 0;
+            }
+        }
+        .picker-icon {
+            position: absolute;
+            right: 13px;
+            top: 6px;
+            color: #cddce4;
+            cursor: pointer;
+            transition: all .3s;
+            pointer-events: none;
+        }
+        .opened .picker-icon,
+        .datepicker:hover + .picker-icon {
+            color: @color-navy-blue;
+        }
+    }
     .dropdowns {
         float: left;
-        padding-left: 20px;
+        padding-left: 13px;
     }
-    .dropdown {
-        min-width: 130px;
-        height: 25px;
-        line-height: 24px;
-        border-radius: 3px;
-        border: 1px solid @border-color;
-        position: relative;
-        &.open {
-            border-color: @color-navy-blue;
+    
+    .filter-list.has-toggle-btn {
+        .filter-line {
+            padding: 11px 50px 0 0;
         }
-        .arrow {
-            position: absolute;
-            right: -1px;
-            top: -1px;
-            bottom: -1px;
-            background: @color-navy-blue;
-            color: white;
-            border-radius: 0 3px 3px 0;
-            &:active {
-                background: darken(@color-navy-blue, 8%);
-            }
-            .glyphicon {
-                top: 3px;
-                right: 7px;
-            }
-        }
-    }
-    .dropdown-menu {
-        min-width: 130px;
     }
     .filter-line {
         padding: 11px 0 0;
         border-bottom: 1px dashed @border-color;
-        &:last-of-type{
+        position: relative;
+        .toggle-btn {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            border-radius: 2px;
+            padding: 0px 7px;
+            cursor: pointer;
+            background: @color-3;
+            color: white;
+            &:hover,
+            &.expand {
+                background: @color-navy-blue;
+                color: white;
+            }
+            .icon-arrow {
+                // transition: all .5s ease;
+                transform-origin: 50% 50%;
+            }
+            &.expand {
+                .icon-arrow {
+                    color: white;
+                    transform: rotate(90deg) translateX(1px);
+                }
+                // &:hover {
+                //     .icon-arrow {
+                //         color: @color-navy-blue;
+                //         color: white;
+                //     }
+                // }
+            }
+        }
+        &:last-of-type {
             border-bottom: 0;
         }
         .name {
-            min-width: 75px;
+            min-width: 85px;
             float: left;
             text-align: right;
         }
         .options {
-            padding-left: 75px;
+            padding-left: 157px;
         }
     }
     ul.options-list {
@@ -60,6 +143,7 @@
             padding: 0 15px;
             margin-bottom: 10px;
             &:first-of-type {
+                margin-left: -66px;
                 &:after {
                     content: '';
                     height: 10px;
@@ -74,6 +158,8 @@
             }
             a {
                 padding: 0 5px 2px;
+                user-select: none;
+                -webkit-user-select: none;
                 color: @color-bright;
                 transition: background-color .3s ease;
                 &:hover {

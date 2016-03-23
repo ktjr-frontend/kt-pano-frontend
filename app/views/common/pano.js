@@ -13,12 +13,12 @@
                     tpl = $(tpl)
                     $scope.options = {
                         customAjax: function(feedback) {
-                            return ktFeedbackService.save($.extend({from: 'compass'}, user, feedback)).$promise
+                            return ktFeedbackService.save($.extend({ from: 'compass' }, user, feedback)).$promise
                         },
                         postHTML: false,
                         postURL: false,
                         postBrowserInfo: false,
-                        initButtonText: '<i class="pe-7s-chat f2rem"></i>',
+                        initButtonText: '<i class="icon-pano icon-feedback"></i>',
                         html2canvasURL: ktS('common/libs/html2canvas.min.js'),
                         tpl: {
                             description: tpl.filter('#feedback-welcome')[0].outerHTML,

@@ -68,6 +68,14 @@ form {
     .btn {
         border: 0;
     }
+    .btn-group{
+        .btn{
+            border-left: 1px solid #383d4a!important;
+            &:first-child{
+                border-left: 0!important;
+            }
+        }
+    }
 }
 
 .has-success .form-group {

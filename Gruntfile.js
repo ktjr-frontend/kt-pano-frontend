@@ -77,6 +77,8 @@ module.exports = function(grunt) {
         'injector:indexCommonjs',
         'injector:indexAppcss',
         'injector:indexAppjs',
+        'injector:fontSpiderCss',
+        'font-spider:hack',
         // 'copy:styles',
         'connect:livereload',
         'watch'
@@ -98,6 +100,9 @@ module.exports = function(grunt) {
         'injector:indexCommonjs',
         'injector:indexAppcss',
         'injector:indexAppjs',
+        'injector:fontSpiderCss',
+        'responsive_images',
+        'font-spider:hack',
 
         // 'replace:svgfont',
         'svg_sprite',
@@ -132,6 +137,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('default', ['build'])
+    grunt.registerTask('fshack', ['font-spider:hack'])
     grunt.registerTask('fsapp', ['font-spider:app'])
     grunt.registerTask('fsdist', ['font-spider:dist'])
     grunt.registerTask('svg', ['replace:svgfont', 'svgmin'])

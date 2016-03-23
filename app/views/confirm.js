@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktConfirmCtrl', function($scope, $window, $stateParams, ktSweetAlert, ktLoginService, ktLoginCommon) {
+        .controller('ktConfirmCtrl', function($scope, $window, $stateParams, ktSweetAlert, ktLoginCommon) {
             if ($.isEmptyObject($stateParams.institution)) {
                 ktSweetAlert.error({
                     title: '访问出错',
@@ -17,7 +17,7 @@
             $scope.institution = $stateParams.institution;
 
             $scope.submitForm = function() {
-                ktLoginCommon(ktLoginService, $scope)
+                ktLoginCommon($scope)
             }
         })
 })();

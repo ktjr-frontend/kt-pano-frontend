@@ -8,8 +8,8 @@
     angular
         .module('kt.pano')
         // 登录通用控制函数
-        .factory('ktLoginCommon', function($rootScope, $window, $state, $location, ktSweetAlert, ktUrlGet, CacheFactory) {
-            return function(ktLoginService, scope) {
+        .factory('ktLoginCommon', function($rootScope, $window, $state, $location, ktLoginService, ktSweetAlert, ktUrlGet, CacheFactory) {
+            return function(scope, callback) {
                 scope.pendingRequests = true
 
                 ktLoginService.save(scope.user).$promise.then(function(res) {
@@ -18,14 +18,18 @@
                     if (res.token) {
                         CacheFactory.clearAll()
                         $window.localStorage.token = res.token
-                        var url = $rootScope.wantJumpUrl || ktUrlGet('/', $location.search())
+                        var url = $rootScope.wantJumpUrl || ktUrlGet('/pano/overview', $location.search())
                         $location.url(url)
-                    } else {
+                            /*eslint-disable*/
+                        callback && callback(res)
+                            /*eslint-enable*/
+                    }
+                    /*else {
                         $state.go('account.confirm', {
                             institution: res.institution,
                             user: scope.user
                         })
-                    }
+                    }*/
                 }).catch(function(res) {
                     scope.pendingRequests = false
                     var error = res.error || '登录失败！'
@@ -68,7 +72,7 @@
                         }, function(data) {
                             ktSweetAlert.swal({
                                 title: '发送失败',
-                                text: data.msg || '抱歉，系统繁忙！',
+                                text: data.error || '抱歉，系统繁忙！',
                                 type: 'error',
                             });
                         })

@@ -19,23 +19,45 @@
 }
 
 .pagination {
-    margin: 10px 0;
+    margin: 0;
     &.pagination-sm {
         >li {
             >a,
             >span {
-            	border-radius: 2px;
+                border-radius: 2px;
                 padding: 3px 9px;
             }
         }
     }
     > li {
+        &.pagination-prev,
+        &.pagination-first,
+        &.pagination-last,
+        &.pagination-next {
+            >a,
+            >span {
+                background: @pagination-bound-bg;
+                color: white;
+                &:hover, &:focus{
+                    background: lighten(@pagination-bound-bg, 5%);
+                    color: white;
+                }
+            }
+        }
         > a,
         > span {
             margin: 0 3px;
             background: @pagination-direct-bg;
             border: 0;
             color: @color-bright;
+            &:hover,
+            &:focus {
+                color: @color-bright;
+                // cursor: default;
+                z-index: 2;
+                border: 0;
+                background-color: white;
+            }
         }
         &:first-child,
         &:last-child {

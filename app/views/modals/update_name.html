@@ -4,7 +4,7 @@
     </div>
     <form name="popForm" novalidate kt-autofill-submit class="form-horizontal" method="post" id="popForm" kt-submit="submitForm()">
         <div class="modal-body ov-h">
-            <div class="form-group col-md-12" ng-class="{'has-error':popForm.name.$invalid && popForm.name.$dirty}">
+            <div class="form-group" ng-class="{'has-error':popForm.name.$invalid && popForm.name.$dirty}">
                 <label class="text-primary-dark control-label col-md-3">姓名</label>
                 <div class="col-md-7">
                     <input placeholder="输入姓名" type="text" ng-required="true" ng-model="user.name" class="form-control fl" name="name">

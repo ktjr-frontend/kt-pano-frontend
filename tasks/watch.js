@@ -3,6 +3,7 @@ module.exports = {
         files: [
             '<%= kt.app %>/less/**/*.less',
             '<%= kt.app %>/common/styles/**/*.less',
+            '<%= kt.app %>/views/**/*.less',
             '<%= kt.app %>/less/icon_img.sprite.css',
             '<%= kt.app %>/common/directives/**/*.less',
             '<%= kt.app %>/scripts/directives/**/*.less'
@@ -22,7 +23,12 @@ module.exports = {
         ],
         tasks: ['responsive_images']
     },
-
+    fshack: {
+        files: [
+            'font-spider-hack.html'
+        ],
+        tasks: ['fshack'],
+    },
     svgs: {
         files: ['<%= kt.app %>/svgs/**/*.svg', '!<%= kt.app %>/svgs/symbol/*.svg'],
         tasks: ['replace:svgfont']

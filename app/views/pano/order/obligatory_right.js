@@ -2,14 +2,13 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOrderObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktAssetService) {
-            $scope.shared.tabActive.tab0 = true
+        .controller('ktOrderObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktAssetFiltersService, ktAssetService) {
+
+            // $scope.shared.tabActive.tab0 = true
             $.extend($scope.shared.params, $location.search(), { tab: 0 })
 
-            ktAssetService.get({
-                content: 'settings'
-            }, function(data) {
-                $scope.shared.filters = data["0"]
+            ktAssetFiltersService.get(function(data) {
+                $scope.shared.filters = data['0']
                 var filterInit = ktDataHelper.filterInit($scope.shared.filters)
                 filterInit($scope.shared.params)
             })

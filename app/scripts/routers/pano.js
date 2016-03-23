@@ -47,8 +47,7 @@
                     templateUrl: 'views/pano/overview.html',
                     resolve: ktLazyResolve([
                         'views/pano/overview.js',
-                        'common/directives/kt-echart3-directive.js',
-                        'common/directives/kt-linemenu-directive.js'
+                        'common/directives/kt-echart3-directive.js'
                     ]),
                     controller: 'ktOverviewCtrl',
                     data: {
@@ -58,7 +57,54 @@
                     }
                 },
 
-                // 产品信息 
+                // 产品信息
+                'pano.market': {
+                    abstract: true,
+                    url: '/market',
+                    templateUrl: 'views/pano/market/layout.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/market/layout.js',
+                    ]),
+                    controller: 'ktMarketLayoutCtrl',
+                    data: {
+                        pageTitle: '市场数据',
+                    }
+                },
+                'pano.market.default': {
+                    url: '/default?type&from&credit_right_or&start_at&end_at&dimension&asset_type&mapped_exchange&page&per_page&sort_by&order',
+                    templateUrl: 'views/pano/market/default.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/market/default.js',
+                        'common/directives/kt-echart3-directive.js'
+                    ]),
+                    controller: 'ktMarketCtrl',
+                    data: {
+                        pageTitle: '市场数据',
+                    }
+                },
+                /*'pano.market.obligatoryRight': {
+                    url: '/obligatory_right?type&from&credit_right_or&start_at&end_at&dimension&asset_type&mapped_exchange&page&per_page&sort_by&order',
+                    templateUrl: 'views/pano/market/obligatory_right.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/market/obligatory_right.js',
+                    ]),
+                    controller: 'ktMarketObligatoryRightCtrl',
+                    data: {
+                        pageTitle: '产品信息-债权类',
+                    }
+                },
+                'pano.market.assetManage': {
+                    url: '/asset_manages?type&from&credit_right_or&start_at&end_at&dimension&asset_type&mapped_exchange&page&per_page&sort_by&order',
+                    templateUrl: 'views/pano/market/asset_manage.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/market/asset_manage.js',
+                    ]),
+                    controller: 'ktMarketAssetManageCtrl',
+                    data: {
+                        pageTitle: '产品信息-资管类',
+                    }
+                },*/
+                // 产品信息
                 'pano.products': {
                     abstract: true,
                     url: '/products',
@@ -72,7 +118,7 @@
                     }
                 },
                 'pano.products.obligatoryRight': {
-                    url: '/obligatory_right?asset_type&status&published_date&period&fund&exchange&page&per_page&sort_by&order',
+                    url: '/obligatory_right?status_eq&life_days_in&rate_in&asset_type_eq&mapped_exchange_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/obligatory_right.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/obligatory_right.js',
@@ -83,7 +129,7 @@
                     }
                 },
                 'pano.products.assetManage': {
-                    url: '/asset_manage?asset_type&status&published_date&period&fund&exchange&page&per_page&sort_by&order',
+                    url: '/asset_manages?status_eq&life_days_in&rate_in&asset_type_eq&mapped_exchange_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/asset_manage.js',
@@ -93,7 +139,7 @@
                         pageTitle: '产品信息-资管类',
                     }
                 },
-                // 可预约产品 
+                // 可预约产品
                 'pano.order': {
                     abstract: true,
                     url: '/order',
@@ -119,7 +165,7 @@
                 },
 
                 'pano.order.assetManage': {
-                    url: '/asset_manage?asset_type_eq&life_days_in&guarantees_eq&page&per_page&sort_by&order',
+                    url: '/asset_manage?rate_in&life_days_in&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/order/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/order/asset_manage.js',

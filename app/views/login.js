@@ -2,12 +2,18 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktLoginCtrl', function($scope, $rootScope, $window, $timeout, $uibModal, ktSweetAlert, ktLoginService, ktLoginCommon) {
+        .controller('ktLoginCtrl', function($scope, $rootScope, $state, $window, $timeout, $uibModal, ktSweetAlert, ktLoginCommon) {
+
+            $rootScope.goHome = function() {
+                $state.go('home.index')
+            }
+
             $scope.captchaSettings = {
                 randomColours: false,
-                colour1: '#d4e8ea',
-                colour2: '#d4e8ea'
+                colour1: '#eef7fb', //背景
+                colour2: '#4a6920' //前景
             }
+
             $scope.user = $rootScope.user = JSON.parse($window.localStorage.user || '{}')
 
             $scope.submitForm = function() {
@@ -22,7 +28,7 @@
                                 remember: $scope.user.remember
                             })
 
-                            ktLoginCommon(ktLoginService, $scope)
+                            ktLoginCommon($scope)
 
                         } else {
                             $timeout(function() {
@@ -45,7 +51,8 @@
 
             // 忘记密码
             $scope.resetPassword = function() {
-                var modalStepOne, modalStepTwo, modalStepThree
+                var modalStepTwo
+                var modalStepThree
 
                 // modalStepOne = $uibModal.open({
                 //     size: 'md',
@@ -64,7 +71,7 @@
                     controller: 'resetPasswordTwoCtrl'
                 })
 
-                modalStepTwo.result.then(function(mobile) {
+                modalStepTwo.result.then(function() {
                     modalStepThree = $uibModal.open({
                         size: 'md',
                         // animation: false,
@@ -120,7 +127,6 @@
                 }, function (res) {
                     $scope.error = res.error || '保存失败！'
                 })
-                    
             }
             $scope.cancel = function() {
                 $uibModalInstance.dismiss('cancel');
@@ -135,8 +141,8 @@
                 $uibModalInstance.dismiss('cancel');
             }
         })*/
-        .controller('resetPasswordTwoCtrl', function($scope, $uibModalInstance, ktRecoverService, ktGetCaptcha, ktSweetAlert) {
-            $scope.title = '验证码'
+        .controller('resetPasswordTwoCtrl', function($scope, $uibModalInstance, ktRecoverService, ktGetCaptcha) {
+            $scope.title = '验证手机'
                 // $scope.user = {}
             $scope.user.content = 'validate_captcha'
             $scope.user.captcha = ''
@@ -153,7 +159,7 @@
             }
 
             $scope.submitForm = function() {
-                ktRecoverService.update($scope.user, function(res) {
+                ktRecoverService.update($scope.user, function() {
                     $uibModalInstance.close()
                 }, function(res) {
                     $scope.error = res.error || '更新出错！'
@@ -170,7 +176,7 @@
             $scope.user.content = ''
 
             $scope.submitForm = function() {
-                ktRecoverService.update($scope.user, function(res) {
+                ktRecoverService.update($scope.user, function() {
                     $uibModalInstance.close()
                 }, function(res) {
                     $scope.error = res.error || '更新出错！'

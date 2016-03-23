@@ -1,18 +1,56 @@
-<tr class="text-right" ng-repeat="product in products" ng-if="products.length">
-    <td ng-bind="::product.name"></td>
-    <td ng-bind="::product.type"></td>
-    <td ng-bind="::(product.annual_rate + '%')"></td>
-    <td ng-bind="::(product.substained + '天')"></td>
-    <td ng-bind="::product.guarantees"></td>
-    <td ng-bind="::product.published_at"></td>
-    <td class="text-center">
-        <a class="hover-underline" href="::product.attachments">下载资料</a>
-        <a class="hover-underline" ng-click="contactMe()">与我联系</a>
-    </td>
-</tr>
-<tr ng-if="!products.length && !isLoading()">
-    <td colspan="7" class="text-navy-blue text-center">
-        <i class="pe-7s-attention f1_5rem fb mr5"></i>
-        <span class="f1_5rem">没有数据！</span>
-    </td>
-</tr>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr kt-table-sort>
+            <th>标准名</th>
+            <th class="sort-column" field="life_days">
+                <span>产品期限</span>
+                <div class="sort-icons">
+                    <i class="up fa-angle-up fa"></i>
+                    <i class="down fa-angle-down fa"></i>
+                </div>
+            </th>
+            <th class="sort-column" field="rate">
+                <span>年化收益率</span>
+                <div class="sort-icons">
+                    <i class="up fa-angle-up fa"></i>
+                    <i class="down fa-angle-down fa"></i>
+                </div>
+            </th>
+            <th>募集金额</th>
+            <th>剩余金额</th>
+            <th>起息日</th>
+            <th>当前状态</th>
+            <th>平台</th>
+            <th>产品类型</th>
+            <th>底层资产</th>
+            <th>挂牌场所</th>
+            <th>增信措施</th>
+            <th>产品说明书</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-right" ng-repeat="product in products" ng-if="products.length">
+            <td ng-bind="::(product.name || '-')"></td>
+            <td ng-bind="::(product.life || '-')"></td>
+            <td ng-bind="::(product.rate ? ((product.rate | number:2) + '%') : '-')"></td>
+            <td ng-bind="::(product.sum_amount ? (product.sum_amount | ktNumberLocate) : '-')"></td>
+            <td ng-bind="::(product.selling_amount ? (product.selling_amount | ktNumberLocate) : '-')"></td>
+            <td ng-bind="::(product.value_date | date:'yyyy-MM-dd')"></td>
+            <td>
+                <span ng-bind="::(product.status || '-')" ng-class="{'text-warning-light': product.status == '可购买'}"></span>
+            </td>
+            <td ng-bind="::(product.from || '-')"></td>
+            <td ng-bind="::(product.type || '-')"></td>
+            <td ng-bind="::(orginal_asset || '-')"></td>
+            <td ng-bind="::(product.exchange || '-')"></td>
+            <td ng-bind="::(product.trust_party || '-')"></td>
+            <td ng-bind="::(product.attachment_url || '-')"></td>
+        </tr>
+        <tr ng-if="!products.length && !isLoading()">
+            <td colspan="13" class="text-navy-blue text-center">
+                <i class="pe-7s-attention f1_5rem fb mr5"></i>
+                <span class="f1_5rem">没有数据！</span>
+            </td>
+        </tr>
+    </tbody>
+</table>

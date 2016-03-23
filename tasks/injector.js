@@ -1,5 +1,6 @@
 var commonScripts = [
     'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/fullpage.js/dist/jquery.fullpage.min.js',
     // 'bower_components/html2canvas/build/html2canvas.min.js',
     'bower_components/lodash/dist/lodash.min.js',
     'bower_components/angular/angular.js',
@@ -45,12 +46,14 @@ var appScripts = [
     'app/common/factories/kt-uri.js',
     'app/common/factories/kt-image.js',
     'app/common/filters/kt-filter-common.js',
+    'app/common/helpers/kt-common-helpers.js',
     // 'app/common/directives/kt-safari-image-directive.js',
     'app/common/directives/kt-common-directive.js',
     'app/common/directives/kt-echart3-theme-1.js',
-    
+
     'app/scripts/init.js',
     'app/scripts/app.js',
+    'app/scripts/routers/home.js',
     'app/scripts/routers/pano.js',
     'app/scripts/routers/account.js',
     'app/scripts/routers/error.js',
@@ -68,13 +71,14 @@ var appScripts = [
     // 'app/scripts/services/kt-service-institutions.js',
     'app/scripts/services/kt-service-common.js',
     // 'app/scripts/filters/kt-filter-institutions.js',
-    'app/scripts/helpers/kt-date-helps.js',
+    // 'app/scripts/helpers/kt-date-helps.js',
     'app/scripts/helpers/kt-common-helps.js',
     'app/scripts/interceptors/kt-interceptor.js',
 ];
 
 var commonCss = [ // injector 会自动校验文件路径是否存在，所以需要填写基于项目目录的路径，然后再transform里面替换
     '.tmp/less/bootstrap.css',
+    'bower_components/fullpage.js/dist/jquery.fullpage.min.css',
     'bower_components/fontawesome/css/font-awesome.css',
     'bower_components/animate.css/animate.css',
     'bower_components/sweetalert/dist/sweetalert.css',
@@ -86,7 +90,12 @@ var commonCss = [ // injector 会自动校验文件路径是否存在，所以�
 var appCss = [
     'app/common/fonts/pano/css/style.css',
     '.tmp/less/style.css',
+    'app/fonts/pano/css/style.css',
     // '.tmp/less/pano.css',
+];
+
+var fontSpiderCss = [
+    'app/fonts/pano/css/style.css',
 ];
 
 module.exports = {
@@ -169,7 +178,20 @@ module.exports = {
             'app/index.html': appScripts,
         }
     },
-
+    /**
+     * 由于fontSpider不易于项目配置，专门用于压缩字体fontSpider css注入
+     */
+    fontSpiderCss: {
+        options: {
+            starttag: '<!-- injectorFontSpider:css -->',
+            transform: function(filepath) {
+                return '<link rel="stylesheet" href="' + filepath.replace(/\.tmp\/|app\//g, '') + '">'
+            }
+        },
+        files: {
+            'font-spider-hack.html': fontSpiderCss,
+        }
+    },
     /**
      * karam配置文件js注入
      */

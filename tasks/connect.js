@@ -6,7 +6,7 @@ var appConfig = {
 }
 
 // var server = 'http://dev-lode-zh.ktjr.com'
-var server = 'http://10.132.1.12:3000'
+var server = 'http://10.132.1.135:3000'
     // var server = 'http://op-fame.ktjr.com'
 var modRewriteUri = [
     // '^/mock_data/v\d{1,}/([^?]*).*$ /mock_data/$1 [L]',
@@ -113,9 +113,10 @@ module.exports = {
     },
     dist: {
         options: {
+            port: 9999,
             livereload: false,
             open: {
-                target: 'http://localhost:8888',
+                target: 'http://localhost:9999',
             },
             base: '<%= kt.dist %>',
             middleware: function() {

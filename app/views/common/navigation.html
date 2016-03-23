@@ -1,4 +1,4 @@
-<div id="navigation" class="container f1_7rem">
+<div id="navigation" class="">
     <!-- 资金平台-单个项目时候的主菜单 -->
     <ul class="nav navbar-nav" id="sub-menu">
         <li ui-sref-active="active">
@@ -6,8 +6,8 @@
                 总览
             </a>
         </li>
-        <li ng-class="{active:$state.includes('pano.marketAnalytics.*')}">
-            <a ui-sref="pano.order.obligatoryRight">
+        <li ng-class="{active:$state.includes('pano.market.*')}">
+            <a ui-sref="pano.market.default">
                 市场数据
             </a>
         </li>

@@ -105,12 +105,20 @@ a[disabled] {
 /* Slider */
 
 #logo {
+    img {
+        height: 18px;
+    }
     float: left;
     // width: @menu-width;
     // background-color: @color-navy-blue;
     // padding: 18px 10px 18px 18px;
     // height: 56px;
     text-align: center;
+    @media(max-width: 480px) {
+        img {
+            height: 15px;
+        }
+    }
 }
 
 .jqstooltip {
@@ -256,24 +264,6 @@ a[disabled] {
 // body.hide-sidebar #wrapper {
 //   margin-left: 0;
 // }
-body.page-small {
-    .header-link {
-        display: block;
-    }
-    #menu {
-        margin-left: -@menu-width;
-    }
-    #wrapper {
-        margin-left: 0;
-    }
-    &.show-sidebar #menu {
-        margin-left: 0;
-    }
-    &.show-sidebar #wrapper {
-        margin-left: @menu-width;
-    }
-}
-
 // .navbar-form-custom {
 //   float: left;
 //   height: 52px;

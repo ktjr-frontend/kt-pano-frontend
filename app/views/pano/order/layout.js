@@ -6,24 +6,24 @@
 
             var params = $location.search()
             $scope.shared = {}
-            
+
             $scope.shared.params = $.extend({
-                tab: 0,
                 page: 1,
-                per_page: 10,
-                totalItems: 50,
+                per_page: 20,
                 maxSize: 10
             }, params)
 
             /*
              * 这里需要定义tab的active开关，否则每次加载，会默认触发第一个tab的click事件
              */
-            $scope.shared.tabActive = { 
-                tab0: false,
-                tab1: false
-            }
+            // $scope.shared.tabActive = {
+            //     tab0: false,
+            //     tab1: false
+            // }
 
             $scope.tabSelect = function(state, tab) {
+                if ($state.current.name === state) return
+
                 $.extend($scope.shared.params, {
                     tab: tab,
                     page: 1,
@@ -38,24 +38,26 @@
             }
 
             $scope.goTo = function(key, value) {
-                var params = {}
-                params[key] = value
-                $state.go($state.current.name, params)
+                var p = {}
+                p[key] = value
+                $state.go($state.current.name, p)
             }
 
             $scope.pageChanged = function() {
-                $location.search('page', $scope.params.page)
+                $location.search('page', $scope.shared.params.page)
+            }
+
+            $scope.getPublishDate = function(start, end) {
+                var startDate = start ? moment(start).format('YYYY-MM-DD') : '-'
+                var endDate = end ? moment(end).format('YYYY-MM-DD') : '-'
+                return startDate + ' ~ ' + endDate
             }
 
             $scope.contactMe = function(assetID) {
                 ktAssetIntentionService.save({
                     asset_id: assetID
                 }, function() {
-                    ktSweetAlert.swal({
-                        title: '',
-                        text: '资产方以获取您的意向，稍后会与你联系。',
-                        type: 'success'
-                    })
+                    ktSweetAlert.success('资产方已获取您的意向，稍后会与你联系。')
                 })
             }
 

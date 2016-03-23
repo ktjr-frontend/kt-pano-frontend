@@ -40,5 +40,19 @@ module.exports = {
             ]
         },
         src: './app/**/*.html'
+    },
+    hack: {
+        options: {
+            map: [
+                [
+                    '^/fonts/(.*).css',
+                    path.normalize(__dirname + '/..') + '/app/fonts/$1.css'
+                ],
+            ],
+            // ignore: [
+            //     '!/fonts/fame/css/style.css' // ==> /(?:^|\/)fonts\/fame\/css\/style\.css(?=$|\/)/i
+            // ]
+        },
+        src: './font-spider-hack.html'
     }
 };

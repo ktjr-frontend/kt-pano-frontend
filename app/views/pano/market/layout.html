@@ -1,0 +1,86 @@
+<div class="row" kt-animate-panel child="hpanel">
+    <div class="hpanel pr">
+        <!-- <uib-tabset>
+            <uib-tab select="tabSelect('pano.order.obligatoryRight', 0)" active="shared.tabActive.tab0">
+                <tab-heading>
+                    债权类
+                </tab-heading>
+            </uib-tab>
+            <uib-tab select="tabSelect('pano.order.assetManage', 1)" active="shared.tabActive.tab1">
+                <tab-heading>
+                    资管类
+                </tab-heading>
+            </uib-tab>
+        </uib-tabset> -->
+        <div class="panel-body b-t-none">
+            <div class="filter-box bor-xxs">
+                <div class="normal-filter clfix" ng-class="{'expand': showMoreFilters}">
+                    <div class="fl">
+                        <div class="name fl">细分维度：</div>
+                        <div class="dropdowns clfix">
+                            <div class="dropdown" dropdown>
+                                <div dropdown-toggle class="dropdown-toggle cp">
+                                    <span ng-bind="getDimensionName()"></span>
+                                    <div class="arrow">
+                                        <i class="fa fa-angle-down icon-arrow fb f1_5rem"></i>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu animated fadeIn">
+                                    <ul>
+                                        <li ng-repeat="d in shared.dimensions" ng-class="{active: d.value == shared.params.dimension}">
+                                            <a ng-click="goTo('dimension', d.value)" title="{{::d.name}}" ng-bind="::d.name"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fl datepicker-container" oc-lazy-load="['common/directives/datepicker/directive.js', 'common/directives/datepicker/theme/v4/style.css']">
+                        <div class="name fl">时间范围：</div>
+                        <input type="text" readonly class="datepicker" ng-model="datePicker" kt-date-picker datepicker-settings="datepickerSettings">
+                        <i class="icon-pano icon-calendar picker-icon"></i>
+                    </div>
+                    <div class="right">
+                        <a ng-click="showMoreFilters = !showMoreFilters" class="btn toggle-more-filters">
+                            高级筛选<i class="fa fa-angle-right f1_5rem ml5 icon-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="filter-list has-toggle-btn" ng-show="showMoreFilters">
+                    <div class="filter-line clfix" ng-repeat="filter in shared.filters">
+                        <div class="name" ng-bind="::(filter.name + '：')"></div>
+                        <div class="options" ng-if="filter.type === 'list'">
+                            <ul class="options-list clfix">
+                                <li ng-class="{active: condition.active}" ng-repeat="condition in filter.options|filter:filter.filterFn">
+                                    <a ng-click="goTo(filter.value, condition.value)" title="{{::condition.name}}" ng-bind="::condition.name"></a>
+                                </li>
+                            </ul>
+                            <div ng-if="!filter.filterFn.hidden" class="toggle-btn" ng-click="filter.toggleView($event)">
+                                <i class="fa fa-angle-right f1_8rem icon-arrow"></i>
+                            </div>
+                        </div>
+                        <div class="dropdowns clfix" ng-if="filter.type === 'dropdown'">
+                            <div class="dropdown fl" dropdown>
+                                <div dropdown-toggle class="dropdown-toggle cp">
+                                    <span ng-bind="getConditionName(filter.value)"></span>
+                                    <div class="arrow">
+                                        <i class="fa fa-angle-down icon-arrow fb f1_5rem"></i>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu animated fadeIn">
+                                    <ul>
+                                        <li ng-repeat="condition in ::filter.options" ng-class="{active: condition.active}">
+                                            <a ng-click="goTo(filter.value, condition.value)" title="{{::condition.name}}" ng-bind="::condition.name"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ui-view>
+            </div>
+        </div>
+    </div>
+</div>
