@@ -101,7 +101,7 @@ module.exports = function(grunt) {
         'injector:indexAppcss',
         'injector:indexAppjs',
         'injector:fontSpiderCss',
-        'responsive_images',
+        // 'responsive_images',
         'font-spider:hack',
 
         // 'replace:svgfont',

@@ -1,5 +1,6 @@
 var commonScripts = [
     'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/interact/dist/interact.min.js',
     'bower_components/fullpage.js/dist/jquery.fullpage.min.js',
     // 'bower_components/html2canvas/build/html2canvas.min.js',
     'bower_components/lodash/dist/lodash.min.js',

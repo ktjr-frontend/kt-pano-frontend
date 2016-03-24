@@ -22,15 +22,15 @@
     </thead>
     <tbody>
         <tr class="text-right" ng-repeat="asset in assets" ng-if="assets.length">
-            <td ng-bind="::asset.name | ktNullFilter"></td>
-            <td ng-bind="::asset.asset_type | ktNullFilter"></td>
-            <td ng-bind="::(asset.rate ? ((asset.rate | number:2) + '%'): '-')"></td>
-            <td ng-bind="::asset.sustained | ktNullFilter"></td>
+            <td ng-bind="::asset.name | ktNull"></td>
+            <td ng-bind="::asset.asset_type | ktNull"></td>
+            <td ng-bind="::(asset.rate | ktNull | ktNumber:2:'percent2')"></td>
+            <td ng-bind="::asset.sustained | ktNull"></td>
             <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td>
             <td ng-bind="::asset.mount | ktNumberLocate"></td>
-            <td ng-bind="::asset.target | ktNullFilter)"></td>
-            <td ng-bind="::asset.manager | ktNullFilter"></td>
-            <td ng-bind="::asset.status | ktNullFilter"></td>
+            <td ng-bind="::asset.target | ktNull)"></td>
+            <td ng-bind="::asset.manager | ktNull"></td>
+            <td ng-bind="::getStatus(asset.status)"></td>
             <td class="text-center">
                 <a class="hover-underline" href="{{::asset.attachment_url}}">下载资料</a>
                 <a class="hover-underline" ng-click="contactMe(asset.id)">与我联系</a>

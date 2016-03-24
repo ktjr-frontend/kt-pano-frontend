@@ -9,44 +9,49 @@
             var search = $location.search()
 
             var params = $scope.shared.params = $.extend({
-                // page: 1,
                 dimension: 'from',
-                start_at: moment().day(0).subtract(4, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
-                end_at: moment().day(0).format('YYYY-MM-DD'),
-                // per_page: 10,
-                // maxSize: 10
+                start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(4, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
+                end_at: moment().day(0).add(+(moment().day() > 0), 'w').format('YYYY-MM-DD'),
             }, search)
 
             $scope.shared.dimensions = []
             $scope.showMoreFilters = false
 
             $scope.datepickerSettings = {
+                // startOfWeek: 'monday',
                 applyBtnClass: 'btn btn-navy-blue btn-xs',
                 batchMode: 'week-range',
                 singleMonth: false,
                 extraClass: 'date-picker-analytics-top',
                 showWeekNumbers: true,
                 autoClose: false,
+                beforeShowDay: function(t) {
+                    var m = moment()
+                    var valid = t <= (m.day() ? m.day(0).add(1, 'w').toDate() : m.toDate())//  当周以后不可选
+                    var _class = '';
+                    var _tooltip = valid ? '' : '不在可选范围内';
+                    return [valid, _class, _tooltip];
+                },
                 showShortcuts: true,
                 customShortcuts: [{
-                    name: '过去4周',
+                    name: '最近4周',
                     dates: function() {
-                        var start = moment().day(0).toDate();
-                        var end = moment().day(0).subtract(4, 'weeks').add(1, 'days').toDate();
+                        var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                        var end = moment(start).subtract(4, 'w').add(1, 'd').toDate();
                         return [start, end];
                     }
                 }, {
-                    name: '过去8周',
+                    name: '最近8周',
                     dates: function() {
-                        var start = moment().day(0).toDate();
-                        var end = moment().day(0).subtract(8, 'weeks').add(1, 'days').toDate();
+                        var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                        var end = moment(start).subtract(8, 'w').add(1, 'd').toDate();
                         return [start, end];
                     }
                 }, {
-                    name: '过去16周',
+                    name: '最近16周',
                     dates: function() {
-                        var start = moment().day(0).toDate();
-                        var end = moment().day(0).subtract(16, 'weeks').add(1, 'days').toDate();
+                        var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                        var end = moment(start).subtract(16, 'w').add(1, 'd').toDate();
                         return [start, end];
                     }
                 }]

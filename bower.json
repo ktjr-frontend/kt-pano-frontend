@@ -52,7 +52,8 @@
     "clipboard": "^1.5.9",
     "lodash": "~4.0.1",
     "angular-send-feedback": "^1.0.2",
-    "fullpage.js": "^2.7.8"
+    "fullpage.js": "^2.7.8",
+    "interact": "^1.2.6"
   },
   "resolutions": {
     "jquery": "~2.1.3",

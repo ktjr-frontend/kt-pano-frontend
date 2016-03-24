@@ -110,7 +110,7 @@
                                     symbolSize: [10, 50],
                                     color: ['rgba(0,0,0,.2)']
                                 },
-                                
+
                             }
                             /*, {
                                 show: false,
@@ -130,23 +130,23 @@
                         ],
                         yAxis: [{
                             name: '发行量（单位：万元）',
-                            boundaryGap: false,
+                            boundaryGap: true,
                             min: 0,
                             // max: _.max(yAxisArr) + 1000000
                         }],
                         xAxis: [{
-                            max: _.floor(_.max(xAxisArr)),
+                            max: _.ceil(_.max(xAxisArr)),
                             type: 'value',
                             boundaryGap: false,
                         }],
 
                         series: _.map(data, function(v) {
-                                return {
-                                    name: v[2],
-                                    type: 'scatter',
-                                    data: [v]
-                                }
-                            })
+                            return {
+                                name: v[2],
+                                type: 'scatter',
+                                data: [v]
+                            }
+                        })
                     })
                 }
             }

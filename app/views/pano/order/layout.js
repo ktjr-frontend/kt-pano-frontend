@@ -53,6 +53,15 @@
                 return startDate + ' ~ ' + endDate
             }
 
+            $scope.getStatus = function(status){
+                if (status === '已发布') {
+                    return '可预约'
+                } else if (status === '预约结束') {
+                    return '已售罄'
+                }
+                return status || '-'
+            }
+
             $scope.contactMe = function(assetID) {
                 ktAssetIntentionService.save({
                     asset_id: assetID

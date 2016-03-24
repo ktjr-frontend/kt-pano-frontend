@@ -16,7 +16,8 @@ if ENV['stage'].nil?
 end
 
 set :common_repository, 'git@github.kaitongamc.com:Kaitong/kt-frontend-common.git'
-set :repository, 'git@github.kaitongamc.com:Kaitong/kt-pano-frontend.git'
+set :repository, 'git@github.ktjr.com:Kaitong/kt-pano-frontend.git'
+# set :repository, 'git@github.kaitongamc.com:Kaitong/kt-pano-frontend.git'
 # set :branch, 'master'
 
 load File.expand_path("../deploy/#{ENV['stage']}.rb", __FILE__)
@@ -102,7 +103,7 @@ end
 namespace :common_project do
   task :clone => :environment do
     queue! %[git clone -b #{common_branch} #{common_repository} --depth=1]
-    queue %{echo "通用模块clone完成"}
+    queue %{echo "通用模块clone完成,使用分支#{common_branch}"}
     queue! %[rm app/common && mv kt-frontend-common/app ./app/common -f]
     queue %{echo "通用模块移动组装完成---mv kt-frontend-common/app ./app/common"}
   end

@@ -123,9 +123,9 @@ module.exports = {
                 return [
                     //mock data API0
                     function(req, res, next) {
-                        if (!req.url.match(/\.json\??|\/api\/v\d+|\/index\.html|asset-rev.*\.js/g)) {
-                            res.setHeader('Cache-Control', 'max-age=' + 60 * 60 * 24 * 365)
-                        }
+                        // if (!req.url.match(/\.json\??|\/api\/v\d+|\/index\.html|asset-rev.*\.js/g)) {
+                        //     res.setHeader('Cache-Control', 'max-age=' + 60 * 60 * 24 * 365)
+                        // }
                         return next()
                     },
                     modRewrite(modRewriteUri),

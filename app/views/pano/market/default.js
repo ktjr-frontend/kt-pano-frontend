@@ -31,7 +31,7 @@
                     top: 50,
                     left: 65,
                     right: 30, // 距离右面的距离
-                    bottom: isAllDimension ? 110 : 70, // 距离底部的距离
+                    bottom: isAllDimension ? 130 : 70, // 距离底部的距离
                     borderWidth: 0,
                     backgroundColor: '#fafafa',
                     // backgroundColor: 'rgba(231,234,241,0.3)',
@@ -41,7 +41,8 @@
 
             var weekAmountChart = $scope.weekAmountChart = {
                 chartOptions: {
-                    group: 'group1'
+
+                    // group: 'group1'
                 },
                 _params: {},
                 xAxis: params.dimension,
@@ -55,7 +56,10 @@
                 chartOptions: {
                     // group: 'group1'
                 },
-                _params: {},
+                _params: {
+                    start_at: moment(params.end_at).subtract(2, 'w').add(1, 'd').format('YYYY-MM-DD'),
+                    end_at: moment(params.end_at).subtract(1, 'w').format('YYYY-MM-DD'),
+                },
                 xAxis: params.dimension,
                 yAxisFormat: 'rmb', //percent2 意思不需要*100
                 yAxis: 'amount',
@@ -66,7 +70,7 @@
 
             var weekRateChart = $scope.weekRateChart = {
                 chartOptions: {
-                    group: 'group1'
+                    // group: 'group1'
                 },
                 xAxis: params.dimension,
                 yAxisFormat: 'percent2', //percent2 意思不需要*100
@@ -108,7 +112,10 @@
             }
 
             var durationRateChart = $scope.durationRateChart = {
-                _params: {},
+                _params: {
+                    start_at: moment(params.end_at).subtract(2, 'w').add(1, 'd').format('YYYY-MM-DD'),
+                    end_at: moment(params.end_at).subtract(1, 'w').format('YYYY-MM-DD'),
+                },
                 chartOptions: {},
                 xAxis: params.dimension,
                 yAxisFormat: 'percent2', //percent2 意思不需要*100
@@ -118,9 +125,48 @@
 
             }
 
-            function dataZoom(chart) {
+            function customDataZoom(chart, options) {
                 var updatePromise
-                return [{
+                return $.extend(true, {}, options, {
+                    show: true,
+                    attr: {
+                        group: 'group1'
+                    },
+                    styles: {
+                        position: 'absolute',
+                        left: 65,
+                        right: 30,
+                        height: isAllDimension ? 220 : 280,
+                        top: 50,
+                    },
+                    onZoom: function(e) {
+                        if (e.triggerType === 'manual') return
+
+                        var xAxis = chart.getOption().xAxis[1]
+                        var l = xAxis.data.length
+                        var startDate = xAxis.data[((l - 1) * e.start.toFixed(2) / 100) | 0]
+                        var endDate = moment(xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]).day(0).add(1, 'w').format('YYYY-MM-DD')
+
+                        // console.log(e, startDate, endDate)
+                        $timeout.cancel(updatePromise)
+                        updatePromise = $timeout(function() {
+                            $scope.durationAmountChart.udpateDataView({
+                                start_at: startDate,
+                                end_at: endDate
+                            }, true)
+
+                            $scope.durationRateChart.udpateDataView({
+                                start_at: startDate,
+                                end_at: endDate
+                            }, true)
+                        }, 500)
+                    }
+                })
+            }
+
+            /*function dataZoom(chart, options) {
+                var updatePromise
+                return [$.extend({
                     show: true,
                     realtime: false,
                     throttle: 500,
@@ -134,7 +180,7 @@
                         color: 'transparent'
                     },
                     left: 65,
-                    height: isAllDimension ? 240 : 280,
+                    height: isAllDimension ? 220 : 280,
                     start: 0,
                     end: 100,
                     backgroundColor: 'rgba(0,0,0,0)', // 背景颜色
@@ -145,8 +191,9 @@
 
                         var xAxis = this.getOption().xAxis[1]
                         var l = xAxis.data.length
-                        var startDate = xAxis.data[Math.ceil((l - 1) * e.start.toFixed(2) / 100)]
-                        var endDate = xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]
+                        var startDate = xAxis.data[((l - 1) * e.start.toFixed(2) / 100) | 0]
+                        var endDate = moment(xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]).day(0).add(1, 'w').format('YYYY-MM-DD')
+                            // console.log(e.start, e.end, Math.ceil((l - 1) * e.start.toFixed(2) / 100), ((l - 1) * e.end.toFixed(2) / 100) | 0, startDate, endDate)
 
                         chart.dispatchAction({
                             type: 'dataZoom',
@@ -180,8 +227,9 @@
                         // console.log(startDate, endDate, (l - 1) * e.end.toFixed(2) / 100, (l - 1) * e.start.toFixed(2) / 100)
                     },
                     type: 'slider'
-                }]
-            }
+                }, options || {})]
+            }*/
+
             weekAmountChart.udpateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
@@ -196,12 +244,18 @@
 
                 function updateView() {
                     var data = _self.data
-
-                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, {
                         legend: {
                             data: _.map(data.data, 'name')
                         },
-                        dataZoom: dataZoom(echarts.getInstanceByDom($('#weekRateChart')[0])),
+                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), {
+                            start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
+                            end: 100 - (100 / (data.xAxis.length - 1)) / 2
+                        }),
+                        // dataZoom: dataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), {
+                        //     start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
+                        //     end: 100 - (100 / (data.xAxis.length - 1)) / 2
+                        // }),
                         tooltip: {
                             // show: false,
                             // showContent: false,
@@ -266,7 +320,7 @@
                 function initChartOptions() {
                     var data = _self.data
 
-                    return $.extend(true, {}, chartOptions, {
+                    return $.extend(true, {}, chartOptions, _self.chartOptions, {
                         tooltip: {
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -326,11 +380,14 @@
                 function updateView() {
                     var data = _self.data
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, {
                         legend: {
                             data: _.map(data.data, 'name')
                         },
-                        dataZoom: dataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0])),
+                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0]), {
+                            start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
+                            end: 100 - (100 / (data.xAxis.length - 1)) / 2
+                        }),
                         tooltip: {
                             axisPointer: {
                                 axis: 'auto',
@@ -383,7 +440,7 @@
                 function initChartOptions() {
                     var data = _self.data
 
-                    return $.extend(true, {}, chartOptions, {
+                    return $.extend(true, {}, chartOptions, _self.chartOptions, {
                         tooltip: {
                             axisPointer: {
                                 axis: 'auto',
@@ -436,7 +493,7 @@
                 // 资产管理类数据
             $scope.assetManger = {}
             ktRateTrendService.get(function(data) {
-                [].unshift.apply(data.stat.keys, ['资管管理人', '平台'])
+                // [].unshift.apply(data.stat.keys, ['资管管理人', '平台'])
                 $scope.assetManger = data.stat
             })
 
