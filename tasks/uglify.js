@@ -1,11 +1,11 @@
 module.exports = {
-    options: {
-        mangle: false
-    },
     forLazyLoad: {
+        options: {
+            mangle: true //混淆变量
+        },
         files: [{
             expand: true,
-            cwd: '<%= kt.app %>',
+            cwd: '<%= kt.dist %>',
             src: [
                 'scripts/controllers/**/*.js',
                 'views/**/*.js',
@@ -15,5 +15,31 @@ module.exports = {
             ],
             dest: '<%= kt.dist %>'
         }]
-    }
+    },
+    dev: {
+        options: {
+            mangle: true //混淆变量,用于查找混淆导致inject的bug问题
+        },
+        files: [{
+            expand: true,
+            cwd: '.tmp',
+            src: [
+                'scripts/**/*.ngAnnotate.js',
+                'views/**/*.ngAnnotate.js',
+                'common/**/*.ngAnnotate.js',
+                'scripts/config.ngAnnotate.js',
+                '!common/libs/**/*.js'
+            ],
+            dest: '.tmp'
+        }]
+    },
+    hack: {
+        options: {
+            mangle: true,
+        },
+        files: {
+            'dist/scripts/scripts.js': ['.tmp/concat/scripts/scripts.js']
+        }
+    },
+    
 };

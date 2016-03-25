@@ -63,7 +63,7 @@ module.exports = function(grunt) {
         'clean:dev',
         // 'responsive_images',
         'sprite',
-        'less:development',
+        'less:dev',
         // 'less:common',
         // 'copy:commonImgs',
         'copy:dev',
@@ -116,7 +116,11 @@ module.exports = function(grunt) {
         'cssmin',
         'autoprefixer:production',
         'replace:fontsUrl',
-        'uglify',
+        'ngAnnotate:dist',
+        'uglify:forLazyLoad',
+        // 'copy:hack', //用于调试
+        'uglify:generated',
+        // 'uglify:hack', //避免uglify设置mangle=true时候混淆导致scripts文件出错
         'replace:appConfig', //替换config.js 内的一些配置属性
 
         //注意filerev 的顺序

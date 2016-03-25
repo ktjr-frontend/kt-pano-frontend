@@ -22,6 +22,7 @@
                     resolve: ktLazyResolve(['views/common/pano.js'], {
 
                         user: function($q, $rootScope, $state, ktUserService) {
+                            'ngInject';
                             var deferred = $q.defer()
                             ktUserService.get(function(res) {
                                 $rootScope.defaultRoute = 'pano.overview'

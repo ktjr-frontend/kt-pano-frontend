@@ -11,6 +11,15 @@
             ktDataHelper.filterUpdate($scope.shared.filters, $scope.shared.params)
 
             var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension]
+            var defaultShowLength = 8
+            var legendSelected = {}
+            var getSelectedLegend = function(xAxis) {
+                // var showList = xAxis.slice(0, defaultShowLength)
+                _.each(xAxis, function(v, i) {
+                    legendSelected[v] = i <= defaultShowLength
+                })
+            }
+
             var chartOptions = {
                 tooltip: {
                     valueType: 'rmb' //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -31,7 +40,7 @@
                     top: 50,
                     left: 65,
                     right: 30, // 距离右面的距离
-                    bottom: isAllDimension ? 130 : 70, // 距离底部的距离
+                    bottom: isAllDimension ? 110 : 70, // 距离底部的距离
                     borderWidth: 0,
                     backgroundColor: '#fafafa',
                     // backgroundColor: 'rgba(231,234,241,0.3)',
@@ -136,7 +145,7 @@
                         position: 'absolute',
                         left: 65,
                         right: 30,
-                        height: isAllDimension ? 220 : 280,
+                        height: isAllDimension ? 240 : 280,
                         top: 50,
                     },
                     onZoom: function(e) {
@@ -236,7 +245,7 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
                     chart: 'circulation_group_by_week_and_from',
-                    credit_right_or: '债权'
+                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = data.stat
                     updateView()
@@ -244,18 +253,18 @@
 
                 function updateView() {
                     var data = _self.data
+                    var legend = _.map(data.data, 'name')
+                    getSelectedLegend(legend)
+
                     _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, {
                         legend: {
-                            data: _.map(data.data, 'name')
+                            data: legend,
+                            selected: legendSelected,
                         },
                         customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), {
                             start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
                             end: 100 - (100 / (data.xAxis.length - 1)) / 2
                         }),
-                        // dataZoom: dataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), {
-                        //     start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
-                        //     end: 100 - (100 / (data.xAxis.length - 1)) / 2
-                        // }),
                         tooltip: {
                             // show: false,
                             // showContent: false,
@@ -311,7 +320,7 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
                     chart: 'circulation_group_by_life_days_and_from',
-                    credit_right_or: '债权'
+                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = data.stat
                     updateView()
@@ -340,9 +349,11 @@
                 function updateView() {
                     var initOptions = silent ? {} : initChartOptions()
                     var data = _self.data
+
                     _self.chartOptions = $.extend(true, {}, initOptions, {
                         legend: {
-                            data: _.map(data.data, 'name')
+                            data: _.map(data.data, 'name'),
+                            selected: legendSelected,
                         },
                         series: _.map(data.data, function(v) {
                             return {
@@ -371,7 +382,7 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
                     chart: 'rate_group_by_week_and_from',
-                    credit_right_or: '债权'
+                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = data.stat
                     updateView()
@@ -382,7 +393,8 @@
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, {
                         legend: {
-                            data: _.map(data.data, 'name')
+                            data: _.map(data.data, 'name'),
+                            selected: legendSelected,
                         },
                         customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0]), {
                             start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
@@ -431,7 +443,7 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
                     chart: 'rate_group_by_life_days_and_from',
-                    credit_right_or: '债权'
+                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = data.stat
                     updateView()
@@ -468,7 +480,8 @@
 
                     _self.chartOptions = $.extend(true, {}, initOptions, {
                         legend: {
-                            data: _.map(data.data, 'name')
+                            data: _.map(data.data, 'name'),
+                            selected: legendSelected,
                         },
                         series: _.map(data.data, function(v) {
                             return {

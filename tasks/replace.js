@@ -66,17 +66,17 @@ module.exports = {
     appConfig: {
         options: {
             patterns: [{
-                match: /\$compileProvider\.debugInfoEnabled\(\!0\)/g,
-                replacement: '$compileProvider.debugInfoEnabled(!1)'
+                match: /\.debugInfoEnabled\(\!0\)/g,
+                replacement: '.debugInfoEnabled(!1)'
             }, {
-                match: /\$ocLazyLoadProvider\.config\(\{debug\:\!0\}\)/g,
-                replacement: '$ocLazyLoadProvider.config({debug:!1})'
+                match: /\.config\(\{\s*debug\:\!0\s*\}\)/g,
+                replacement: '.config({debug:!1})'
             }]
         },
         files: [{
             expand: true,
             cwd: '<%= kt.dist %>',
-            src: ['scripts/scripts.*js'],
+            src: ['scripts/scripts.js'],
             dest: '<%= kt.dist %>'
         }]
     }

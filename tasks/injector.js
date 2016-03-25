@@ -5,19 +5,19 @@ var commonScripts = [
     // 'bower_components/html2canvas/build/html2canvas.min.js',
     'bower_components/lodash/dist/lodash.min.js',
     'bower_components/angular/angular.js',
-    'bower_components/oclazyload/dist/ocLazyLoad.js',
+    'bower_components/oclazyload/dist/ocLazyLoad.min.js',
     // 'bower_components/ng-file-upload/ng-file-upload-all.min.js',
     'bower_components/angular-cookie/angular-cookie.min.js',
     'bower_components/angular-animate/angular-animate.min.js',
     'bower_components/angular-sanitize/angular-sanitize.min.js',
     // 'bower_components/angular-route/angular-route.min.js',
     'bower_components/angular-messages/angular-messages.min.js',
-    'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.js',
+    'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
     'bower_components/checklist-model/checklist-model.js',
-    'bower_components/angular-resource/angular-resource.js',
+    'bower_components/angular-resource/angular-resource.min.js',
     'bower_components/angular-notify/dist/angular-notify.min.js',
-    'bower_components/angular-cache/dist/angular-cache.js',
+    'bower_components/angular-cache/dist/angular-cache.min.js',
     'bower_components/angulartics/dist/angulartics.min.js',
     'bower_components/angulartics/dist/angulartics-baidu.min.js',
     'bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
@@ -32,13 +32,13 @@ var commonScripts = [
     'bower_components/ngclipboard/dist/ngclipboard.min.js',
     // 'bower_components/angular-send-feedback/dist/angular-send-feedback.min.js',
     'bower_components/angular-apimock/dist/angular-apimock.min.js',
+];
+
+var appScripts = [
     'app/common/libs/jquery.feedback.js',
     'app/common/libs/jquery-date-range-picker.js',
     'app/common/libs/requestAnimationFrame.js',
     'app/common/libs/ua.js',
-];
-
-var appScripts = [
     'app/common/kt-common.js',
     'app/common/locale/angular-locale_zh-cn.js',
     'app/common/factories/kt-resource-assetmap.js',
@@ -174,6 +174,27 @@ module.exports = {
             starttag: '<!-- injectorApp:js -->',
             transform: function(filepath) {
                 return '<script src="' + filepath.replace('app/', '') + '"></script>'
+            }
+        },
+        files: {
+            'app/index.html': appScripts,
+        }
+    },
+    /**
+     * index页面，应用js注入，js被ngAnnotate注入过，用于查找bug
+     */
+    indexAppjs2: {
+        options: {
+            starttag: '<!-- injectorApp:js -->',
+            transform: function(filepath) {
+                return '<script src="' + (function() {
+                    var f = filepath.replace('app/', '')
+                    if (filepath.indexOf('/libs/') === -1) {
+                        f = f.replace(/(\.js)$/, '.ngAnnotate.js')
+                    }
+
+                    return f
+                })() + '"></script>'
             }
         },
         files: {

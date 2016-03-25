@@ -5,7 +5,7 @@
         .controller('ktProductObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktCompassAssetService) {
 
             // $scope.shared.tabActive.tab0 = true
-            $.extend($scope.shared.params, $location.search(), { credit_right_or_eq: '债权' })
+            $.extend($scope.shared.params, $location.search(), { credit_right_or_eq: 'bond' })
 
             ktDataHelper.filterUpdate($scope.shared.filters, $scope.shared.params)
 

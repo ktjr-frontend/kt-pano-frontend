@@ -48,7 +48,6 @@
         })
         .factory('ktGetCaptcha', function(ktSweetAlert, ktCaptchaHelper) {
             return {
-
                 getCaptcha: function(scope, service, params, model) {
                     return function(mobile, channel) {
                         var timerMessage = ktCaptchaHelper.timerMessage(scope)

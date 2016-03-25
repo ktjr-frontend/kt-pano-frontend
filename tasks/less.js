@@ -1,5 +1,5 @@
 module.exports = {
-    development: {
+    dev: {
         options: {
             sourceMap: true,
             sourceMapRootpath: '/',

@@ -5,7 +5,7 @@
         .controller('ktProductAssetManageCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktCompassAssetService) {
 
             // $scope.shared.tabActive.tab1 = true
-            $.extend($scope.shared.params, $location.search(), { credit_right_or_eq: '资管' })
+            $.extend($scope.shared.params, $location.search(), { credit_right_or_eq: 'am' })
 
             ktDataHelper.filterUpdate($scope.shared.filters, $scope.shared.params)
 

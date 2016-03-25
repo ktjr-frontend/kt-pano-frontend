@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .factory('ktApiCache', ['$cacheFactory', function($cacheFactory) {
+        .factory('ktApiCache', function($cacheFactory) {
             return $cacheFactory('ktApiCache');
-        }]);
+        });
 })();

@@ -20,6 +20,19 @@ module.exports = {
                 ],
                 dest: '<%= kt.dist %>'
             }, {
+                /*for ngannotate before uglify*/
+                expand: true,
+                cwd: '<%= kt.app %>',
+                src: [
+                    'scripts/controllers/**/*.js',
+                    'views/**/*.js',
+                    'scripts/directives/**/*.js',
+                    'common/directives/**/*.js',
+                    'common/factories/kt-captcha.js',
+                ],
+                dest: '<%= kt.dist %>'
+
+            }, {
                 expand: true,
                 dot: true,
                 cwd: 'bower_components/fontawesome',
@@ -83,5 +96,10 @@ module.exports = {
             dest: '.tmp'
         }]
 
+    },
+    hack: {
+        files: {
+            'dist/scripts/vendor.js': ['.tmp/concat/scripts/vendor.js']
+        }
     }
 };
