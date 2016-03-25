@@ -21,7 +21,7 @@
         'oc.lazyLoad',
         'angular-cache',
         'ngclipboard',
-        'angular-send-feedback',
+        // 'angular-send-feedback',
         // 'ngFileUpload',
         'kt.common',
         'kt.pano.i18' //国际化
