@@ -175,6 +175,7 @@
                             },
 
                             xAxisFormat: _self.xAxisFormat,
+                            titlePrefix: '产品期限：',
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: [{
@@ -219,6 +220,7 @@
                             data: _.map(data.data, 'name'),
                         },
                         tooltip: {
+                            titlePrefix: '产品期限：',
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },

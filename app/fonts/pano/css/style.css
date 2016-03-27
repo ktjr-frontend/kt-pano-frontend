@@ -17,7 +17,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-@font-face {
+/*@font-face {
     font-family: 'copper';
     src: url('../../pano/fonts/copperplate-regular.eot');
     src: url('../../pano/fonts/copperplate-regular.eot?#font-spider') format('embedded-opentype'), url('../../pano/fonts/copperplate-regular.woff') format('woff'), url('../../pano/fonts/copperplate-regular.ttf') format('truetype'), url('../../pano/fonts/copperplate-regular.svg') format('svg');
@@ -35,4 +35,4 @@
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+}*/

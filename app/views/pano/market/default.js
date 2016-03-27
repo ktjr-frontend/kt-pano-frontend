@@ -14,7 +14,6 @@
             var defaultShowLength = 8
             var legendSelected = {}
             var getSelectedLegend = function(xAxis) {
-                // var showList = xAxis.slice(0, defaultShowLength)
                 _.each(xAxis, function(v, i) {
                     legendSelected[v] = i <= defaultShowLength
                 })
@@ -92,19 +91,19 @@
                         //     value: 'all'
                         // },
                         {
-                            name: '1月',
+                            name: '1个月',
                             value: 1
                         }, {
-                            name: '3月',
+                            name: '3个月',
                             value: 3
                         }, {
-                            name: '6月',
+                            name: '6个月',
                             value: 6
                         }, {
-                            name: '12月',
+                            name: '12个月',
                             value: 12
                         }, {
-                            name: '24月',
+                            name: '24个月',
                             value: 24
                         }
                     ]

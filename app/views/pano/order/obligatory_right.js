@@ -4,7 +4,7 @@
     angular.module('kt.pano')
         .controller('ktOrderObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktAssetFiltersService, ktAssetService) {
 
-            // $scope.shared.tabActive.tab0 = true
+            $scope.shared.tabActive.tab0 = true
             $.extend($scope.shared.params, $location.search(), { tab: 0 })
 
             ktAssetFiltersService.get(function(data) {

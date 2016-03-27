@@ -8,7 +8,7 @@ module.exports = {
             '<%= kt.app %>/common/directives/**/*.less',
             '<%= kt.app %>/scripts/directives/**/*.less'
         ],
-        tasks: ['less:development'],
+        tasks: ['less:dev'],
     },
 
     // less2: {

@@ -1,4 +1,4 @@
-<div class="">
+<div class="container">
     <div id="logo">
         <a ng-click="goHome()">
             <img src="{{logoHorizonal}}" alt="开通金融PANO" height="18">
@@ -14,9 +14,9 @@
                         <b class="fa fa-angle-down icon-arrow fb f1_5rem"></b>
                     </a>
                     <ul class="uib-dropdown-menu animated fadeIn  gray" role="menu" aria-labelledby="dLabel">
-                        <li ui-sref-active="active">
+                        <!-- <li ui-sref-active="active">
                             <a title="数据总览" ui-sref="pano.overview">数据总览</a>
-                        </li>
+                        </li> -->
                         <li ui-sref-active="active">
                             <a title="个人设置" ui-sref="pano.settings">个人设置</a>
                         </li>
@@ -25,6 +25,14 @@
                         </li>
                     </ul>
                 </li>
+            </ul>
+            <ul class="nav navbar-nav header-nav no-borders" ng-if="!user.name">
+                <li ui-sref-active="active">
+                    <a title="登录" class="login menu" ui-sref="account.login">
+                        登录
+                    </a>
+                </li>
+                <li ui-sref-active="active"><a title="注册" class="register menu" ui-sref="account.register">注册</a></li>
             </ul>
         </div>
     </nav>

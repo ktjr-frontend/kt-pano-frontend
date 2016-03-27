@@ -1,38 +1,77 @@
-<div id="fullpage" kt-full-page kt-feedback-destroy page-settings="fullPageSettings">
-    <section class="section section-1" kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp" emit-by-event="fullPageSlide.1">
-        <div class="text-center">
+<div id="fullpage" kt-feedback-destroy class="fzltxianh">
+    <section class="section section-1" kt-full-screen kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp">
+        <div class="container text-center">
             <div class="img-pano-container">
                 <img src="/images/pano.svg" class="img-responsive center-block pano-svg animated" delay="0.1">
             </div>
             <hr class="center-block line animated" delay="0.2" effect="zoomIn">
-            <p class="center-block content animated" delay="0.3">开通PANO是互联网资管理财市场的金融产品信息与交易服务平台。能为您提供最新、最全、最优的金融资产信息披露，数据可视化、主题报告等服务。</p>
+            <h1 class="center-block title animated" delay="0.3">主流平台全面覆盖  市场信息实时获取</h1>
             <div class="buttons animated" delay="0.4">
-                <a ui-sref="account.login" class="login btn">登 录<i class="fa fa-angle-right ml10"></i></a>
-                <a ui-sref="account.register" class="register btn">立即注册<i class="fa fa-angle-right ml10"></i></a>
+                <!-- <a ui-sref="account.login" class="login btn">登 录<i class="fa fa-angle-right ml10"></i></a> -->
+                <a ui-sref="account.register" class="register btn">立即注册</a>
             </div>
         </div>
     </section>
-    <section class="section section-2" kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp" emit-by-event="fullPageSlide.2">
+    <section class="section section-2" kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp">
         <div class="container clfix">
-            <div class="left">
-                <img src="/images/earth.svg" delayed="0.1" class="animated earth fl img-responsive center-block" alt="">
-            </div>
-            <div class="right text-right">
-                <div class="inner">
-                    <h2 class="animated" delayed="0.2"><img src="/images/cloud.svg" class=" cloud" alt="">主流平台 全面覆盖</h2>
-                    <p class="animated" delayed="0.3">海量整合国内主流互金平台，跟踪金融资产的发行及交易信息，<br/>为用户提供开放性的交易机会。</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="inner">
+                        <h2 class="animated" delayed="0.2">
+                            <span class="title">全景呈现</span><i class="icon-pano icon-cloud"></i>
+                        </h2>
+                        <p class="cont">运用强大的产品信息抓取技术，汇集国内主流互金平台金融产品发行信息。开通<span class="en">PANO</span>助您快速全面的了解市场最新数据，解除您逐日跟踪各大平台的烦恼。</p>
+                    </div>
                 </div>
-                <img src="/images/three_cloud.svg" alt="" delayed="0.4" class="animated three_cloud img-responsive">
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <img src="/images/section_2.png" delayed="0.1" class="animated earth img-responsive center-block" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <section class="section section-3">
-        <div class="text-center">
-            <h2><img src="/images/network.svg" alt="" class="network">智能分析 最快发布</h2>
-            <div class="rect">
-                <p>对金融产品提供最及时报价，并智能分析提取最优价格，帮助用户第一时间决策、抢占先机。</p>
+        <div class="container clfix">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <img src="/images/section_3.png" delayed="0.1" class="animated earth img-responsive center-block" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="inner right">
+                        <h2 class="animated" delayed="0.2">
+                            <span class="title">贴身资产服务</span><i class="icon-pano icon-person_rect"></i>
+                        </h2>
+                        <p class="cont">开通<span class="en">PANO</span>与多家优质资产机构合作，精心挑选多品种的可售金融资产及资管产品。为您提供稳定便捷的资产获取渠道和专业的后续交易服务，满足您对金融资产的需求。</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <section class="section section-4">Some section4</section>
+    <section class="section section-4">
+        <div class="container clfix">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="inner">
+                        <h2 class="animated" delayed="0.2">
+                            <span class="title">让数据说话</span><i class="icon-pano icon-search"></i>
+                        </h2>
+                        <p class="cont">数据提供了洞察能力。使用开通<span class="en">PANO</span>，让您对市场数据的分析变得异常简单。灵活的自定义工具、多维度的数据透视、丰富的可视化图表让您的数据更有说服力。</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <img src="/images/section_4.png" delayed="0.1" class="animated earth img-responsive center-block" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section section-5">
+        <div class="buttons text-center">
+            <a ui-sref="account.register" class="register btn">立即注册 <span class="en">PANO</span></a>
+        </div>
+    </section>
 </div>

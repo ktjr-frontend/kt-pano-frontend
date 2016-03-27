@@ -9,7 +9,7 @@
         .module('kt.pano')
         // 登录通用控制函数
         .factory('ktLoginCommon', function($rootScope, $window, $state, $location, ktLoginService, ktSweetAlert, ktUrlGet, CacheFactory) {
-            return function(scope, callback) {
+            return function(scope, successCallback, errorCallback) {
                 scope.pendingRequests = true
 
                 ktLoginService.save(scope.user).$promise.then(function(res) {
@@ -21,7 +21,7 @@
                         var url = $rootScope.wantJumpUrl || ktUrlGet('/pano/overview', $location.search())
                         $location.url(url)
                             /*eslint-disable*/
-                        callback && callback(res)
+                        successCallback && successCallback(res)
                             /*eslint-enable*/
                     }
                     /*else {
@@ -42,6 +42,9 @@
                         text: error,
                         type: 'error',
                     });
+                    /*eslint-disable*/
+                    errorCallback && errorCallback(res)
+                    /*eslint-enable*/
 
                 })
             }

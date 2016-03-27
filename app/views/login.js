@@ -21,6 +21,7 @@
                 if (!CAPTCHA) return
 
                 CAPTCHA.validate($scope.user.img_captcha, function(isValid) {
+                        var form = CAPTCHA._container.closest('form')
 
                         if (isValid) {
                             $window.localStorage.user = JSON.stringify({
@@ -28,7 +29,16 @@
                                 remember: $scope.user.remember
                             })
 
-                            ktLoginCommon($scope)
+                            ktLoginCommon($scope, null, function() {
+
+                                CAPTCHA.generate() //刷新验证码
+                                $scope.user.img_captcha = null
+                                $scope.loginForm.img_captcha.$setPristine() //回复原始避免显示验证码错误
+
+                                form.trigger('accessible.' + form.attr('id'), {
+                                    field: 'mobile'
+                                })
+                            })
 
                         } else {
                             $timeout(function() {
@@ -37,12 +47,12 @@
                                     text: '',
                                     type: 'error',
                                 }, function() {
-                                    var form = CAPTCHA._container.closest('form')
+
                                     form.trigger('accessible.' + form.attr('id'), {
                                         field: 'img_captcha'
                                     })
-                                    $scope.user.img_captcha = '';
-                                });
+                                    $scope.user.img_captcha = ''
+                                })
                             }, 100)
                         }
                     })

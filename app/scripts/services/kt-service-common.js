@@ -42,7 +42,7 @@
         return $resource('/api/' + ktApiVersion + '/fame_assets/settings', {}, {
             get: {
                 method: 'GET',
-                cache: ktAjaxCache
+                // cache: ktAjaxCache
             }
         })
     })
@@ -59,7 +59,7 @@
         return $resource('/api/' + ktApiVersion + '/compass_assets/settings', {}, {
             get: {
                 method: 'GET',
-                cache: ktAjaxCache
+                // cache: ktAjaxCache
             }
         })
     })
@@ -78,7 +78,7 @@
     .factory('ktOverviewService', function($resource, ktAjaxCache, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/stats/overview', {}, {
             get: {
-                cache: ktAjaxCache
+                // cache: ktAjaxCache
             }
         })
     })
@@ -87,7 +87,7 @@
     .factory('ktMarketAnalyticsService', function($resource, ktApiVersion, ktAjaxCache) {
         return $resource('/api/' + ktApiVersion + '/stats/detail', {}, {
             get: {
-                cache: ktAjaxCache
+                // cache: ktAjaxCache
             }
         })
     })

@@ -16,10 +16,10 @@
             /*
              * 这里需要定义tab的active开关，否则每次加载，会默认触发第一个tab的click事件
              */
-            // $scope.shared.tabActive = {
-            //     tab0: false,
-            //     tab1: false
-            // }
+            $scope.shared.tabActive = {
+                tab0: false,
+                tab1: false
+            }
 
             $scope.tabSelect = function(state) {
                 if ($state.current.name !== state) {

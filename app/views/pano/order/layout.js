@@ -16,10 +16,10 @@
             /*
              * 这里需要定义tab的active开关，否则每次加载，会默认触发第一个tab的click事件
              */
-            // $scope.shared.tabActive = {
-            //     tab0: false,
-            //     tab1: false
-            // }
+            $scope.shared.tabActive = {
+                tab0: false,
+                tab1: false
+            }
 
             $scope.tabSelect = function(state, tab) {
                 if ($state.current.name === state) return
@@ -50,10 +50,17 @@
             $scope.getPublishDate = function(start, end) {
                 var startDate = start ? moment(start).format('YYYY-MM-DD') : '-'
                 var endDate = end ? moment(end).format('YYYY-MM-DD') : '-'
-                return startDate + ' ~ ' + endDate
+                if (start && end) {
+                    return startDate + ' ~ ' + endDate
+                } else if (!end && start) {
+                    return startDate
+                } else if (end && !start) {
+                    return '至' + endDate
+                }
+                return '-'
             }
 
-            $scope.getStatus = function(status){
+            $scope.getStatus = function(status) {
                 if (status === '已发布') {
                     return '可预约'
                 } else if (status === '预约结束') {
@@ -71,6 +78,6 @@
             }
 
             $scope.shared.filters = []
-
+            $scope.getConditionName = ktDataHelper.getConditionName($scope.shared.filters)
         })
 })();

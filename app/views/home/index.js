@@ -8,7 +8,7 @@
                 $state.go('home.index')
             }
 
-            $scope.fullPageSettings = {
+            /*$scope.fullPageSettings = {
                 onLeave: function(index, nextIndex, direction) {
                     $scope.$broadcast('fullPageSlide.' + index, {
                         type: 'out',
@@ -22,7 +22,7 @@
                     })
                     // console.log(anchorLink, index)
                 }
-            }
+            }*/
 
         })
 
