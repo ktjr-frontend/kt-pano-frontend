@@ -1,3 +1,10 @@
+#myCanvas{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 .landing-page {
     @rootSize: 12;
     @fontSize: 10;
@@ -156,6 +163,7 @@
         background-size: cover;
         min-height: 600px;
         .container {
+            z-index: 9;
             position: relative;
             top: 50%;
             transform: translateY(-50%);
