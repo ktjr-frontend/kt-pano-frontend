@@ -6,7 +6,7 @@
 (function() {
     'use strict';
 
-    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider, $resourceProvider, $analyticsProvider, TourConfigProvider, apiMockProvider, ktRouterProvider) {
+    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider, $resourceProvider, $analyticsProvider, apiMockProvider, ktRouterProvider) {
 
         // 开发环境开启调试模式，使用ng-inpector调试
         $compileProvider.debugInfoEnabled(true);
@@ -55,7 +55,7 @@
             }
         }
 
-        TourConfigProvider.set('scrollOffset', 50);
+        /*TourConfigProvider.set('scrollOffset', 50);
 
         TourConfigProvider.set('onStart', function() {
             console.log('Started Tour')
@@ -63,7 +63,7 @@
 
         TourConfigProvider.set('onNext', function() {
             console.log('Moving on...')
-        })
+        })*/
 
         // mock data
         apiMockProvider.config({

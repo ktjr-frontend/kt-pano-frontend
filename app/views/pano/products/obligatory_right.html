@@ -43,7 +43,7 @@
             <td ng-bind="::product.trust_party | ktNull"></td>
             <td ng-bind="::product.attachment_url | ktNull"></td>
             <td>
-                <span ng-bind="::product.status | ktNull" ng-class="{'text-warning-light': product.status == '可购买'}"></span>
+                <span ng-bind="::getStatusName(product.status)"></span>
             </td>
         </tr>
         <tr ng-if="!products.length && !isLoading()">

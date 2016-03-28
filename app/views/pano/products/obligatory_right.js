@@ -8,10 +8,8 @@
             $.extend($scope.shared.params, $location.search(), { credit_right_or_eq: 'bond' })
 
             // ktDataHelper.filterUpdate($scope.shared.filters, $scope.shared.params)
-            console.log($scope.shared.params)
 
             ktCompassAssetFiltersService.get(function(data) {
-                debugger
                 $scope.shared.filters = data['0']
                 var filterInit = ktDataHelper.filterInit($scope.shared.filters)
                 filterInit($scope.shared.params)
@@ -21,6 +19,7 @@
                 $scope.products = res.compass_assets
                 $scope.shared.params.totalItems = res.total_items
                 $scope.shared.today_added_count = res.today_added_count
+                $scope.$emit('totalItemGot')
             })
         })
 })();

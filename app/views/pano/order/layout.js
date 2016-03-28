@@ -60,6 +60,20 @@
                 return '-'
             }
 
+            $scope.getRate = function(dr, hr) {
+                if (_.isNil(dr) && _.isNil(hr)) {
+                    return '-'
+                } else if (_.isNil(dr)) {
+                    return dr.toFixed(2) + '%'
+                } else if (_.isNil(hr)) {
+                    return hr.toFixed(2) + '%'
+                } else if (dr === hr) {
+                    return dr.toFixed(2) + '%'
+                }
+
+                return dr.toFixed(2) + '%' + '-' + hr.toFixed(2) + '%'
+            }
+
             $scope.getStatus = function(status) {
                 if (status === '已发布') {
                     return '可预约'

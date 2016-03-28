@@ -18,6 +18,7 @@
                 $scope.products = res.compass_assets
                 $scope.shared.params.totalItems = res.total_items
                 $scope.shared.today_added_count = res.today_added_count
+                $scope.$emit('totalItemGot')
             })
         })
 })();

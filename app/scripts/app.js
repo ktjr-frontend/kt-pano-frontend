@@ -21,7 +21,7 @@
         'oc.lazyLoad',
         'angular-cache',
         'ngclipboard',
-        'bm.uiTour',
+        // 'bm.uiTour',
         // 'angular-send-feedback',
         // 'ngFileUpload',
         'kt.common',

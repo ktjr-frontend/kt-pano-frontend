@@ -85,7 +85,7 @@
                     var w = $(chartId).width()
                     var lineHeight = 15
                     var fontSize =  12
-                    
+
                     if (!isAllDimension) {
                         return {
                             legendLeft: 'center',
@@ -194,7 +194,7 @@
                         var option = _.find(options, { value: v.value })
                         v.type = (option && option.type) ? option.type : 'list'
 
-                        v.toggleView = function($event) {
+                        v.toggleView = function($event) { //折叠
                             v.collapsed = !v.collapsed
                             var target = $($event.target)
                             target = target.hasClass('icon-arrow') ? target.parent() : target

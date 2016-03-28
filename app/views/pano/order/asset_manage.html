@@ -24,7 +24,7 @@
         <tr class="text-right" ng-repeat="asset in assets" ng-if="assets.length">
             <td ng-bind="::asset.name | ktNull"></td>
             <td ng-bind="::asset.asset_type | ktNull"></td>
-            <td ng-bind="::(asset.rate | ktNull | ktNumber:2:'percent2')"></td>
+            <td ng-bind="::getRate(asset.directive_rate, asset.highest_rate)"></td>
             <td ng-bind="::asset.sustained | ktNull"></td>
             <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td>
             <td ng-bind="::asset.mount | ktNumberLocate"></td>
