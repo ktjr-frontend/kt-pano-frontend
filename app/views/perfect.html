@@ -2,17 +2,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="clfix">
-                <!-- <h3 class="title fl">完善信息</h3> -->
-                <div class="sub-title">完善您的信息，以便我们更好的为您服务：</div>
+                <h3 class="title fl">完善信息</h3>
+                <!-- <div class="sub-title">完善您的信息，以便我们更好的为您服务：</div> -->
             </div>
             <div class="hpanel">
                 <div class="panel-body">
                     <form id="perfectForm" name="perfectForm" class="form-horizontal" kt-accessible-form>
                         <div class="form-group" ng-class="{'has-error':perfectForm.name.$invalid && perfectForm.name.$dirty}">
-                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label>
-                            <div class="col-md-9">
+                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label> -->
+                            <div class="col-md-12">
                                 <input autofocus ng-maxlength="50" ng-minlength="2" kt-validate-on-blur placeholder="您的真实姓名" type="text" required="required" ng-model="user.name" id="" class="form-control" name="name">
-                                <div class="mt5 text-danger" ng-messages="perfectForm.name.$dirty && perfectForm.name.$error">
+                                <div class="mt5 text-warning" ng-messages="perfectForm.name.$dirty && perfectForm.name.$error">
                                     <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入真实姓名</div>
                                     <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于2个字符</div>
                                     <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于50个字符</div>
@@ -20,10 +20,10 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.company.$invalid && perfectForm.company.$dirty}">
-                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司名称</label>
-                            <div class="col-md-9">
+                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司名称</label> -->
+                            <div class="col-md-12">
                                 <input ng-maxlength="50" ng-minlength="2" placeholder="您的公司全称" kt-validate-on-blur type="text" required="required" ng-model="user.company" id="" class="form-control" name="company">
-                                <div class="mt5 text-danger" ng-messages="perfectForm.company.$dirty && perfectForm.company.$error">
+                                <div class="mt5 text-warning" ng-messages="perfectForm.company.$dirty && perfectForm.company.$error">
                                     <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入公司全称</div>
                                     <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于2个字符</div>
                                     <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于50个字符</div>
@@ -31,37 +31,33 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.email.$invalid && perfectForm.email.$dirty}">
-                            <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label>
-                            <div class="col-md-9">
+                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label> -->
+                            <div class="col-md-12">
                                 <input placeholder="您的邮箱" kt-validate-on-blur type="email" required="required" ng-model="user.email" id="" class="form-control" name="email">
-                                <div class="mt5 text-danger" ng-messages="perfectForm.email.$dirty && perfectForm.email.$error">
+                                <div class="mt5 text-warning" ng-messages="perfectForm.email.$dirty && perfectForm.email.$error">
                                     <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入您的邮箱</div>
                                     <div ng-message="email"><i class="fa fa-frown-o fb mr5"></i>邮箱格式不正确</div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.email.$invalid && perfectForm.email.$dirty}">
-                            <label class="text-primary-dark text-left control-label col-md-8 col-md-offset-2 mt10"><span class="ml5 f1_4rem ctl">*</span>以下哪些是您关注的金融资产类型？</label>
-                            <div class="col-md-9 col-md-offset-3 mt15">
+                            <label class="text-primary-dark text-left fn col-md-12 mt10"><span class="ml5 f1_4rem ctl">*</span>以下哪些是您关注的金融资产类型？</label>
+                            <div class="col-md-12 mt15">
                                 <div class="checkbox-label" ng-repeat="like in likes">
                                     <input id="{{'like_' + like.value}}" type="checkbox" checklist-model="user.likes" checklist-value="like.value" checklist-change="checkListChange()">
                                     <label for="{{'like_' + like.value}}" ng-bind="::like.name">
                                     </label>
                                 </div>
                                 <input type="hidden" name="likes" ng-model="hasLikes" required>
-                                <div class="mt5 text-danger" ng-messages="perfectForm.likes.$dirty && perfectForm.likes.$error">
+                                <div class="mt5 text-warning" ng-messages="perfectForm.likes.$dirty && perfectForm.likes.$error">
                                     <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的资产类型</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-9 col-md-offset-3 clfix">
+                        <div class="form-group mt40">
+                            <div class="col-md-12 clfix">
                                 <div kt-loading-status height="32" width="32"></div>
-                                <div class="col-half fl">
-                                    <div class="pr5">
-                                        <button class="w100p f1_5rem btn btn-navy-blue" ng-click="submitForm('captcha')" ng-disabled="perfectForm.$invalid || pendingRequests">提交</button>
-                                    </div>
-                                </div>
+                                <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm('captcha')" ng-disabled="perfectForm.$invalid || pendingRequests">提交</button>
                             </div>
                         </div>
                     </form>
@@ -69,4 +65,8 @@
             </div>
         </div>
     </div>
+</div>
+<div class="other-tips">
+    <p>*本站展示的各类金融产品信息作为参考资料仅供行业内专业会员分析学习使用，不视为本站对该金融产品的任何推介。 各类金融产品的信息披露及募集对象以该金融产品销售机构设定的合格投资人及募集对象范围的相关要求为准。
+    </p>
 </div>

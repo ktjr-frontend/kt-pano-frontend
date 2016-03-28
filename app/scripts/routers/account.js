@@ -54,7 +54,7 @@
                         specialClass: 'account-page register-page'
                     }
                 },
-                'account.confirm': {
+                /*'account.confirm': {
                     url: '/confirm',
                     templateUrl: 'views/confirm.html',
                     resolve: ktLazyResolve(['views/confirm.js']),
@@ -66,7 +66,7 @@
                     data: {
                         pageTitle: '信息确认'
                     }
-                },
+                },*/
             }
         })
 })();

@@ -17,13 +17,15 @@
             $scope.shared.dimensions = []
             $scope.showMoreFilters = false
 
+            $.dateRangePickerLanguages.default.shortcuts = '' //不显示快捷方式四个字
+
             $scope.datepickerSettings = {
                 // startOfWeek: 'monday',
                 applyBtnClass: 'btn btn-navy-blue btn-xs',
-                batchMode: 'week-range',
+                // batchMode: 'week-range',
                 singleMonth: false,
-                extraClass: 'date-picker-analytics-top',
-                showWeekNumbers: true,
+                extraClass: 'date-picker-pano-top',
+                showWeekNumbers: false,
                 autoClose: false,
                 beforeShowDay: function(t) {
                     var m = moment()

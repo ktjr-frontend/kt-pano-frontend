@@ -15,6 +15,11 @@ var commonScripts = [
     'bower_components/angular-ui-router/release/angular-ui-router.min.js',
     'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
     'bower_components/checklist-model/checklist-model.js',
+    'bower_components/ngSmoothScroll/dist/angular-smooth-scroll.min.js',
+    'bower_components/ez-ng/dist/ez-ng.min.js',
+    'bower_components/angular-ui-tour/dist/angular-ui-tour.js',
+    // 'bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js',
+    // 'bower_components/angular-bootstrap-tour/dist/angular-bootstrap-tour.min.js',
     'bower_components/angular-resource/angular-resource.min.js',
     'bower_components/angular-notify/dist/angular-notify.min.js',
     'bower_components/angular-cache/dist/angular-cache.min.js',
@@ -74,7 +79,7 @@ var appScripts = [
     'app/scripts/services/kt-service-common.js',
     // 'app/scripts/filters/kt-filter-institutions.js',
     // 'app/scripts/helpers/kt-date-helps.js',
-    'app/scripts/helpers/kt-common-helps.js',
+    'app/scripts/helpers/kt-data-helpers.js',
     'app/scripts/interceptors/kt-interceptor.js',
 ];
 

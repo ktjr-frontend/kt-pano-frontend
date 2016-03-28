@@ -13,6 +13,7 @@
                     nowLocate: moment.localeData().meridiem(moment().hour(), moment().minute()),
                     // currentUrl: '/anlytics/dashboard',
                     logoHorizonal: ktS('images/logo.svg'),
+                    logoHorizonal2: ktS('images/logo2.svg'),
                     // accountLogo: ktS('images/logo.svg'),
                     // accountLink: 'http://www.sinoguarantee.com/',
                     chartColors: ['#6596e0', '#7fd7be', '#47558f', '#9a6af0', '#6adff0', '#f07a6a', '#8ab759',

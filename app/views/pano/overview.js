@@ -53,6 +53,7 @@
                 }
             }
 
+            // 气泡图
             rateAmountChart.udpateDataView = function() {
                 var _self = this
                 ktOverviewService.get({
@@ -104,10 +105,10 @@
                                 max: _.max(yAxisArr),
                                 precision: 1,
                                 inRange: {
-                                    symbolSize: [10, 50]
+                                    symbolSize: [20, 60]
                                 },
                                 outOfRange: {
-                                    symbolSize: [10, 50],
+                                    symbolSize: [20, 60],
                                     color: ['rgba(0,0,0,.2)']
                                 },
 
@@ -136,6 +137,7 @@
                         }],
                         xAxis: [{
                             max: _.ceil(_.max(xAxisArr)),
+                            min: _.floor(_.min(xAxisArr)),
                             type: 'value',
                             boundaryGap: false,
                         }],
@@ -157,7 +159,7 @@
                     chart: 'rate',
                 }, function(data) {
                     // data = { "stat": { "xAxis": [1, 3, 6, 12, 24], "data": [{ "name": "上周收益率", "data": [0.17, null, 2.3, null, 0.03] }, { "name": "本周收益率", "data": [null, null, 1.04, null, 5.02] }] } }
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
 
@@ -179,12 +181,14 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: [{
-                            name: '收益率（单位：%）'
+                            name: '收益率（单位：%）',
+                            max: ktDataHelper.getAxisMax(data.data),
+                            min: ktDataHelper.getAxisMin(data.data)
                         }],
                         xAxis: [{
                             type: 'category',
                             boundaryGap: true,
-                            data: data.xAxis
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
                         }],
 
                         series: _.map(data.data, function(v) {
@@ -208,7 +212,7 @@
                 ktOverviewService.get({
                     chart: 'circulation',
                 }, function(data) {
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
 
@@ -225,18 +229,19 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: [{
-                            name: '发行量（单位：万元）'
+                            name: '发行量（单位：万元）',
                         }],
                         xAxis: [{
                             type: 'category',
                             boundaryGap: true,
-                            data: data.xAxis
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
                         }],
 
                         series: _.map(data.data, function(v) {
                             return {
                                 name: v.name,
                                 type: 'bar',
+                                barMaxWidth: 40,
                                 data: v.data
                             }
                         })
@@ -249,7 +254,7 @@
                 ktOverviewService.get({
                     chart: 'circulation_pct',
                 }, function(data) {
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.chartDataToPercent(data.stat)
                     updateView()
                 })
 
@@ -283,6 +288,7 @@
                                 name: v.name,
                                 type: 'bar',
                                 stack: '类型占比',
+                                barMaxWidth: 40,
                                 data: v.data
                             }
                         })

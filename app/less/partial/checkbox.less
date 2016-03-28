@@ -4,10 +4,12 @@
   .@{parent} input[type="checkbox"]:checked + label {
     &::before {
       background-color: @color;
+      border-radius: 2px;
       border-color: @color;
     }
     &::after {
       color: #fff;
+      transform: scale(.9);
     }
   }
 }

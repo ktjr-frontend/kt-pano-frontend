@@ -19,15 +19,15 @@
             <!-- <th>募集金额</th>
             <th>剩余金额</th>
             <th>起息日</th> -->
-            <th>当前状态</th>
             <th>平台</th>
             <th>产品类型</th>
-            <th>资产类型</th>
+            <!-- <th>资产类型</th> -->
             <th>挂牌场所</th>
             <th>管理人类型</th>
             <th>管理机构</th>
             <!-- <th>增信措施</th> -->
             <th>产品说明书</th>
+            <th>当前状态</th>
         </tr>
     </thead>
     <tbody>
@@ -38,20 +38,20 @@
             <!-- <td ng-bind="::product.sum_amount | ktNumberLocate"></td>
             <td ng-bind="::product.selling_amount | ktNumberLocate"></td>
             <td ng-bind="::(product.value_date | date:'yyyy-MM-dd')"></td> -->
-            <td>
-                <span ng-bind="::product.status | ktNull" ng-class="{'text-warning-light': product.status == '可购买'}"></span>
-            </td>
             <td ng-bind="::product.from | ktNull"></td>
-            <td ng-bind="::product.type | ktNull"></td>
+            <!-- <td ng-bind="::product.type | ktNull"></td> -->
             <td ng-bind="::product.original_asset | ktNull"></td>
             <td ng-bind="::product.exchange | ktNull"></td>
             <!-- <td ng-bind="::product.trust_party"></td> -->
-            <td ng-bind="::product.manager_type | ktNull"></td>
-            <td ng-bind="::product.manager | ktNull"></td>
+            <td ng-bind="::product.credit_manager | ktNull"></td>
+            <td ng-bind="::product.manage_org | ktNull"></td>
             <td ng-bind="::product.attachment_url | ktNull"></td>
+            <td>
+                <span ng-bind="::product.status | ktNull" ng-class="{'text-warning-light': product.status == '可购买'}"></span>
+            </td>
         </tr>
         <tr ng-if="!products.length && !isLoading()">
-            <td colspan="11" class="text-navy-blue text-center">
+            <td colspan="10" class="text-navy-blue text-center">
                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                 <span class="f1_5rem">没有数据！</span>
             </td>

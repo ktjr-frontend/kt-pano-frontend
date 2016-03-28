@@ -23,7 +23,7 @@ body {
     // font-family: "STXihei", "STHeiti Light", "helvetica neue", tahoma, "hiragino sans gb", stheiti, "wenquanyi micro hei", "\5FAE\8F6F\96C5\9ED1", "\5B8B\4F53", sans-serif;
     font-family: "Microsoft YaHei", "helvetica neue", "\5FAE\8F6F\96C5\9ED1", Helvetica, Arial, stheiti, "wenquanyi micro hei", "\5B8B\4F53", sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: @color-gray;
+    background-color: white;
     font-size: 1.4rem;
     color: @color-bright;
     margin: 0;
@@ -165,12 +165,16 @@ body {
         }
         span.item,
         a {
-            color: white;
+            // color: white;
+            color: #858b98;
+            &.white{
+                color: white;
+            }
         }
         a {
             &:hover {
                 text-decoration: underline;
-                color: @color-navy-blue;
+                color: white;
             }
         }
         a.item,

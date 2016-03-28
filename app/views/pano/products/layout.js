@@ -4,15 +4,16 @@
     angular.module('kt.pano')
         .controller('ktProductsLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktCompassAssetFiltersService, ktDataHelper) {
 
-            var params = $location.search()
+            var search = $location.search()
             $scope.shared = {}
+            $scope.shared.today_added_count = 0
 
-            $scope.shared.params = $.extend({
+            var params = $scope.shared.params = $.extend({
                 page: 1,
                 per_page: 20,
                 maxSize: 10
-            }, params)
-
+            }, search)
+            
             /*
              * 这里需要定义tab的active开关，否则每次加载，会默认触发第一个tab的click事件
              */
@@ -23,7 +24,7 @@
 
             $scope.tabSelect = function(state) {
                 if ($state.current.name !== state) {
-                    $state.go(state, $scope.shared.params)
+                    $state.go(state, params)
                 }
             }
 
@@ -34,16 +35,16 @@
             }
 
             $scope.pageChanged = function() {
-                $location.search('page', $scope.shared.params.page)
+                $location.search('page', params.page)
             }
 
             $scope.shared.filters = []
 
-            ktCompassAssetFiltersService.get(function(data) {
-                $scope.shared.filters = data['0']
-                var filterInit = ktDataHelper.filterInit($scope.shared.filters)
-                filterInit($scope.shared.params)
-            })
+            // ktCompassAssetFiltersService.get(function(data) {
+            //     $scope.shared.filters = data['0']
+            //     var filterInit = ktDataHelper.filterInit($scope.shared.filters)
+            //     filterInit(params)
+            // })
 
             $scope.getConditionName = ktDataHelper.getConditionName($scope.shared.filters)
         })

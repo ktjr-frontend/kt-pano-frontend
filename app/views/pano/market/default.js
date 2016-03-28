@@ -39,7 +39,7 @@
                     top: 50,
                     left: 65,
                     right: 30, // 距离右面的距离
-                    bottom: isAllDimension ? 110 : 70, // 距离底部的距离
+                    bottom: isAllDimension ? 130 : 70, // 距离底部的距离
                     borderWidth: 0,
                     backgroundColor: '#fafafa',
                     // backgroundColor: 'rgba(231,234,241,0.3)',
@@ -64,10 +64,7 @@
                 chartOptions: {
                     // group: 'group1'
                 },
-                _params: {
-                    start_at: moment(params.end_at).subtract(2, 'w').add(1, 'd').format('YYYY-MM-DD'),
-                    end_at: moment(params.end_at).subtract(1, 'w').format('YYYY-MM-DD'),
-                },
+                _params: getStartEnd(),
                 xAxis: params.dimension,
                 yAxisFormat: 'rmb', //percent2 意思不需要*100
                 yAxis: 'amount',
@@ -120,10 +117,7 @@
             }
 
             var durationRateChart = $scope.durationRateChart = {
-                _params: {
-                    start_at: moment(params.end_at).subtract(2, 'w').add(1, 'd').format('YYYY-MM-DD'),
-                    end_at: moment(params.end_at).subtract(1, 'w').format('YYYY-MM-DD'),
-                },
+                _params: getStartEnd(),
                 chartOptions: {},
                 xAxis: params.dimension,
                 yAxisFormat: 'percent2', //percent2 意思不需要*100
@@ -131,6 +125,29 @@
                 xAxisFormat: null,
                 list: []
 
+            }
+
+            // 自定义缩放组件的位置初始化，百分比
+            function getStartEndPercent(data) {
+                var l = data.xAxis.length
+                return {
+                    start: l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25,
+                    end: l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
+                }
+            }
+
+            // 用于联动表格的日期初始化显示
+            function getStartEnd() {
+                var start = moment(params.start_at)
+                var end = moment(params.end_at)
+
+                // var diffDays = end.diff(end, 'days')
+                var isGtTwoWeeks = end.weeks() - start.weeks() > 1
+
+                return {
+                    start_at: isGtTwoWeeks ? moment(params.end_at).days(0).subtract(2, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.start_at).days(0).add(1, 'd').format('YYYY-MM-DD'),
+                    end_at: isGtTwoWeeks ? moment(params.end_at).days(0).subtract(1, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.end_at).days(6).add(1, 'd').format('YYYY-MM-DD'),
+                }
             }
 
             function customDataZoom(chart, options) {
@@ -144,7 +161,7 @@
                         position: 'absolute',
                         left: 65,
                         right: 30,
-                        height: isAllDimension ? 240 : 280,
+                        height: isAllDimension ? 220 : 280,
                         top: 50,
                     },
                     onZoom: function(e) {
@@ -246,24 +263,21 @@
                     chart: 'circulation_group_by_week_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
 
                 function updateView() {
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
-                    getSelectedLegend(legend)
+                    getSelectedLegend(legend) //只需要生成一次，其他chart与其相同
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, {
                         legend: {
                             data: legend,
                             selected: legendSelected,
                         },
-                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), {
-                            start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
-                            end: 100 - (100 / (data.xAxis.length - 1)) / 2
-                        }),
+                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), getStartEndPercent(data)),
                         tooltip: {
                             // show: false,
                             // showContent: false,
@@ -321,7 +335,7 @@
                     chart: 'circulation_group_by_life_days_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
 
@@ -339,7 +353,7 @@
                         xAxis: [{
                             type: 'category',
                             boundaryGap: true,
-                            data: data.xAxis
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
                         }],
 
                     })
@@ -383,7 +397,7 @@
                     chart: 'rate_group_by_week_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
 
@@ -395,10 +409,7 @@
                             data: _.map(data.data, 'name'),
                             selected: legendSelected,
                         },
-                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0]), {
-                            start: 100 - (100 / (data.xAxis.length - 1)) * 3 / 2,
-                            end: 100 - (100 / (data.xAxis.length - 1)) / 2
-                        }),
+                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0]), getStartEndPercent(data)),
                         tooltip: {
                             axisPointer: {
                                 axis: 'auto',
@@ -409,7 +420,9 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: [{
-                            name: '收益率（单位：%）'
+                            name: '收益率（单位：%）',
+                            max: ktDataHelper.getAxisMax(data.data),
+                            min: ktDataHelper.getAxisMin(data.data),
                         }],
                         xAxis: [{
                             type: 'category',
@@ -444,7 +457,7 @@
                     chart: 'rate_group_by_life_days_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
 
@@ -462,12 +475,14 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: [{
-                            name: '收益率（单位：%）'
+                            name: '收益率（单位：%）',
+                            max: ktDataHelper.getAxisMax(data.data),
+                            min: ktDataHelper.getAxisMin(data.data),
                         }],
                         xAxis: [{
                             type: 'category',
                             boundaryGap: false,
-                            data: data.xAxis
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
                         }],
 
                     })

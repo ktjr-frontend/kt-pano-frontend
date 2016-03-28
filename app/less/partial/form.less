@@ -27,9 +27,13 @@
     border-color: @border-color !important;
 }
 
-.has-error .form-control:focus {
-    border-color: @color-red!important;
+.has-error .form-control {
+    border-color: @color-orange-light!important;
+    &:focus {
+        border-color: @color-orange!important;
+    }
 }
+
 
 .has-success .form-control:focus {
     border-color: @color-green!important;
@@ -40,12 +44,12 @@
     font-size: 1.5rem;
     color: @color-text;
     font-weight: normal;
+    border-color: @border-color3;
 }
 
-.form-control {
-    font-size: 1.3rem;
-}
-
+// .form-control {
+//     font-size: 1.3rem;
+// }
 .form-group {
     margin-bottom: 15px;
     border-color: @border-color !important;
@@ -68,10 +72,10 @@ form {
     .btn {
         border: 0;
     }
-    .btn-group{
-        .btn{
+    .btn-group {
+        .btn {
             border-left: 1px solid #383d4a!important;
-            &:first-child{
+            &:first-child {
                 border-left: 0!important;
             }
         }
@@ -99,24 +103,24 @@ form {
 }
 
 input::-moz-placeholder {
-    color: @text-light;
+    color: @placeholder-color;
     opacity: 1;
 }
 
 input:-ms-input-placeholder {
-    color: @text-light;
+    color: @placeholder-color;
 }
 
 input::-webkit-input-placeholder {
-    color: @text-light;
+    color: @placeholder-color;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:active,
 input:-webkit-autofill:focus {
-    background-color: #FFFFFF !important;
+    background-color: @color-3 !important;
     color: @color-text !important;
-    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0 1000px @color-3 inset !important;
     -webkit-text-fill-color: @color-text !important;
 }

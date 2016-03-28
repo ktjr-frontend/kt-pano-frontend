@@ -50,6 +50,45 @@
         padding: 0 8px;
     }
 }
+.f1em {
+    font-size: 1em;
+}
+
+.f1_1em {
+    font-size: 1.1em;
+}
+
+.f1_2em {
+    font-size: 1.2em;
+}
+
+.f1_3em {
+    font-size: 1.3em;
+}
+
+.f1_4em {
+    font-size: 1.4em;
+}
+
+.f1_5em {
+    font-size: 1.5em;
+}
+
+.f1_6em {
+    font-size: 1.6em;
+}
+
+.f1_7em {
+    font-size: 1.7em;
+}
+
+.f1_8em {
+    font-size: 1.8em;
+}
+
+.f2em {
+    font-size: 2em;
+}
 
 .f1rem {
     font-size: 1rem;
@@ -295,7 +334,7 @@ strong,
 }
 
 ::-webkit-scrollbar-track:hover {
-    background-color: #f5f5f5;
+    background-color: #e5e5e5;
     /* background-clip: padding-box;
   */
 }
@@ -316,23 +355,27 @@ strong,
   */
 }
 
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb:horizontal {
     border-radius: 3px;
-    background: linear-gradient(to bottom, #e6e6e6, #d3d3d3);
-    /* background-clip: padding-box;
-  */
+    background: linear-gradient(to bottom, #f3f5f8, #d3d3d3);
     min-height: 25px;
     min-width: 25px;
-    /* box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .2);
-  */
     border: 0;
-    /* border-width: 1px 1px 1px 4px;
-  */
 }
 
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:horizontal:hover {
     background-color: #d9d9d9;
-    // border-color: #d0d0d0;
+}
+::-webkit-scrollbar-thumb:vertical {
+    border-radius: 3px;
+    background: linear-gradient(to right, #f3f5f8, #d3d3d3);
+    min-height: 25px;
+    min-width: 25px;
+    border: 0;
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+    background-color: #d9d9d9;
 }
 
 ::-webkit-scrollbar-thumb:active {

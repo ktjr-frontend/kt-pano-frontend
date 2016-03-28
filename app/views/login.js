@@ -8,19 +8,20 @@
                 $state.go('home.index')
             }
 
-            $scope.captchaSettings = {
-                randomColours: false,
-                colour1: '#eef7fb', //背景
-                colour2: '#4a6920' //前景
-            }
+            // $scope.captchaSettings = {
+            //     randomColours: false,
+            //     colour1: '#eef7fb', //背景
+            //     colour2: '#4a6920' //前景
+            // }
 
             $scope.user = $rootScope.user = JSON.parse($window.localStorage.user || '{}')
 
             $scope.submitForm = function() {
-                var CAPTCHA = $scope.captchaSettings.CAPTCHA
-                if (!CAPTCHA) return
+                ktLoginCommon($scope)
+                // var CAPTCHA = $scope.captchaSettings.CAPTCHA
+                // if (!CAPTCHA) return
 
-                CAPTCHA.validate($scope.user.img_captcha, function(isValid) {
+                /*CAPTCHA.validate($scope.user.img_captcha, function(isValid) {
                         var form = CAPTCHA._container.closest('form')
 
                         if (isValid) {
@@ -55,7 +56,7 @@
                                 })
                             }, 100)
                         }
-                    })
+                    })*/
                     // return false
             }
 

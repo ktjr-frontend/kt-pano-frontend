@@ -72,7 +72,10 @@
                     /*jshint -W030 */
                     /*eslint-disable*/
                     angular.isObject(res.data) && !res.data.total_items && (res.data.total_items = headers['x-total'] || headers['X-Total'] || 0)
-                        /*eslint-enable*/
+                    if (headers['ext_data']) {
+                        angular.isObject(res.data) && $.extend(res.data, JSON.parse(headers['ext_data']))
+                    }
+                    /*eslint-enable*/
                 }
                 return res
             },
@@ -95,9 +98,9 @@
 
                     // 清除本地数据
                     $rootScope.user = null
-                    // $rootScope.currentUrl = '';
+                        // $rootScope.currentUrl = '';
                     delete $window.localStorage.token
-                    // delete $window.localStorage.user
+                        // delete $window.localStorage.user
                     ipCookie.remove('token')
                     CacheFactory.clearAll()
 

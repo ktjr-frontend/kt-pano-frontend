@@ -6,7 +6,7 @@
 (function() {
     'use strict';
 
-    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider, $resourceProvider, $analyticsProvider, apiMockProvider, ktRouterProvider) {
+    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider, $resourceProvider, $analyticsProvider, TourConfigProvider, apiMockProvider, ktRouterProvider) {
 
         // 开发环境开启调试模式，使用ng-inpector调试
         $compileProvider.debugInfoEnabled(true);
@@ -53,14 +53,24 @@
             'delete': {
                 method: 'DELETE'
             }
-        };
+        }
+
+        TourConfigProvider.set('scrollOffset', 50);
+
+        TourConfigProvider.set('onStart', function() {
+            console.log('Started Tour')
+        })
+
+        TourConfigProvider.set('onNext', function() {
+            console.log('Moving on...')
+        })
 
         // mock data
         apiMockProvider.config({
             mockDataPath: '/mock_data',
             apiPath: '/api',
             // disable: true //关闭api mock
-        });
+        })
 
         // 启动路由
         ktRouterProvider.run()
