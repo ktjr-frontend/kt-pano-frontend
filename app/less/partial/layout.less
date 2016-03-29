@@ -222,7 +222,7 @@ body {
     right: 0;
 }
 
-.content {
+/*.content {
     min-width: 520px;
     @media(max-width: 768px) {
         padding: 10px;
@@ -234,7 +234,7 @@ body {
     max-width: 1100px;
     margin: auto;
     padding-top: 60px;
-}
+}*/
 
 #page-header {
     padding: 20px 40px;
@@ -257,8 +257,13 @@ body {
         margin: 0 5px;
         border-radius: 15px;
         background: none;
-        &:hover,
+        // &:hover,
         &:focus {
+            background-color: none;
+            // color: white;
+            // transition: background .3s ease;
+        }
+        &:hover {
             background-color: @color-navy-blue;
             color: white;
             transition: background .3s ease;

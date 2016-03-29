@@ -1,18 +1,19 @@
-#myCanvas{
+#myCanvas {
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
 }
+
 .landing-page {
     @rootSize: 12;
     @fontSize: 10;
-    @media(min-width: 1400px){
+    @media(min-width: 1400px) {
         @rootSize: 14;
         @fontSize: 12;
     }
-    @media(min-width: 1700px){
+    @media(min-width: 1700px) {
         @rootSize: 15;
         @fontSize: 13;
     }
@@ -140,7 +141,7 @@
                 .width(220);
                 padding: 12px 0;
                 // .height(50);
-                border-radius: 5px;
+                border-radius: 3px;
                 border: 1px solid white;
                 background: none;
                 .fontSize(17);
@@ -196,6 +197,9 @@
     .section-3,
     .section-4 {
         .minHeight(450);
+        @media(max-width: 480px){
+            .minHeight(400);
+        }
         .title {
             color: black;
             padding: .5em 0;
@@ -218,7 +222,7 @@
         .inner {
             .marginTop(135);
             .paddingRight(35);
-            @media(max-width: 480px){
+            @media(max-width: 480px) {
                 .marginTop(20)!important;
                 .paddingRight(0)!important;
                 .paddingLeft(15)!important;
@@ -231,17 +235,21 @@
         }
         .img-box {
             .marginTop(60);
-            @media(max-width: 480px){
+            text-align: center;
+            @media(max-width: 480px) {
                 .marginTop(20);
-            }
-            img {
-                max-width: 90%;
+                img{
+                    margin: 0!important;
+                }
             }
         }
         .icon-pano {
             font-size: 1.1em;
             color: @color-blue;
             margin-left: 1.1em;
+            @media(max-width: 480px){
+                font-size: 0.8em;
+            }
         }
         .cont {
             max-width: auto;
@@ -250,16 +258,36 @@
             colo: #3d4351;
         }
     }
+    .section-2 {
+        .img-box {
+            img {
+                margin-right: -10px;
+                max-width: 100%;
+            }
+        }
+    }
     .section-3 {
         .img-box {
-            .marginTop(110);
-
+            .marginTop(30);
+            img {
+                max-width: 100%;
+                margin-left: -40px;
+            }
+        }
+    }
+    .section-4 {
+        .img-box {
+            .marginTop(40);
+            img {
+                max-width: 100%;
+                margin-right: -10px;
+            }
         }
     }
     .section-5 {
         .paddingTop(75);
         .paddingBottom(75);
-        @media(max-width: 480px){
+        @media(max-width: 480px) {
             .paddingTop(25);
             .paddingBottom(25);
         }

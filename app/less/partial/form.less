@@ -34,7 +34,6 @@
     }
 }
 
-
 .has-success .form-control:focus {
     border-color: @color-green!important;
 }
@@ -45,6 +44,19 @@
     color: @color-text;
     font-weight: normal;
     border-color: @border-color3;
+}
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline,
+.has-error.radio label,
+.has-error.checkbox label,
+.has-error.radio-inline label,
+.has-error.checkbox-inline label {
+    color: @color-text;
 }
 
 // .form-control {

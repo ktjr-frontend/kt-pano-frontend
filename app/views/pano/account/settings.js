@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktSettingsCtrl', function($rootScope, $timeout, $scope, $state, $location, $uibModal, $window, ktSweetAlert) {
+        .controller('ktSettingsCtrl', function($rootScope, $timeout, $scope, $state, $location, $uibModal, $window, ktSweetAlert, ktAccountService) {
 
             // $scope.settingUser = $.extend(true, {}, $rootScope.user)
 
@@ -72,8 +72,17 @@
                 $scope.tooltipIsOpen = true
                 $timeout(function() {
                     $scope.tooltipIsOpen = false
-                        // $scope.$apply()
                 }, 1000)
+            }
+
+            $scope.sendInviteCode = function() {
+                ktAccountService.get({
+                    content: 'inviter_code'
+                }, function() {
+                    ktSweetAlert.success('发送成功，请注意查看您的手机。')
+                }, function(res) {
+                    ktSweetAlert.error(res.error || '抱歉，系统繁忙。')
+                })
             }
         })
         .controller('ktUpdateNameCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {

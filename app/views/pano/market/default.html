@@ -1,24 +1,21 @@
 <div class="chart-table-group clfix">
+    <!-- 资产产品周发行量趋势 -->
     <div class="chart-table half">
         <div class="chart-table-heading clfix">
             <div class="chart-table-title fl">资产产品周发行量趋势<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="展示了所选定时间范围内（以自然周为单位），各细分维度（平台/资产类型/产品类型/挂牌场所）发行量变化及趋势。图中时间窗可以调控不同期限产品发行量图时间范围并与产品收益率图时间窗关联。" class="icon-pano icon-info f1_2rem ml5"></i></div>
-            <!-- <div class="update-time fr">
-                <span class="ml10">
-                更新时间：<span ng-bind="::(updateDate)"></span>
-                </span>
-            </div> -->
         </div>
         <div class="chart-table-body">
             <div id="weekAmountChart" kt-echart chart-options="weekAmountChart.chartOptions" style="height:400px;">
             </div>
         </div>
     </div>
+    <!-- 不同期限资产产品发行量 -->
     <div class="chart-table half">
         <div class="chart-table-heading clfix">
-            <div class="chart-table-title fl">不同期限资产产品发行量<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="该图与发行量趋势图关联，展示在发行量趋势图的移动时间窗范围内，各细分维度（平台/资产类型/产品类型/挂牌场所）不同期限产品的发行量情况。" class="icon-pano icon-info f1_2rem ml5"></i></div>
+            <div class="chart-table-title fl">不同期限资产产品发行量<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="该图与资产产品周发行量趋势（左图）关联，展示在发行量趋势图的移动时间窗范围内，各细分维度（平台/资产类型/产品类型/挂牌场所）不同期限产品的发行量情况。" class="icon-pano icon-info f1_2rem ml5"></i></div>
             <div class="update-time fr">
                 <span class="ml10">
-                    时间范围：<span ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
+                    时间范围：<span class="animated-panel" kt-blink on-change="durationAmountChart._params" ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
                 </span>
             </div>
         </div>
@@ -29,14 +26,10 @@
     </div>
 </div>
 <div class="chart-table-group clfix">
+    <!-- 资产产品周收益率趋势 -->
     <div class="chart-table half">
         <div class="chart-table-heading clfix">
             <div class="chart-table-title fl">资产产品周收益率趋势<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="展示了所选定时间范围内（以自然周为单位），各细分维度（平台/资产类型/产品类型/挂牌场所）综合年化收益率的变化及趋势。图中时间窗可以调控不同期限产品收益率图时间范围并与产品发行量图时间窗关联。" class="icon-pano icon-info f1_2rem ml5"></i></div>
-            <!--             <div class="update-time fr">
-                <span class="ml10">
-                    更新时间：<span ng-bind="::(updateDate)"></span>
-                </span>
-            </div> -->
             <div class="fr" ng-repeat="filter in ::weekRateChart._filters">
                 <div class="name ib" ng-bind="filter.name"></div>
                 <div class="dropdowns ib vm clfix">
@@ -63,12 +56,13 @@
             </div>
         </div>
     </div>
+    <!-- 不同期限资产产品收益率 -->
     <div class="chart-table half">
         <div class="chart-table-heading clfix">
-            <div class="chart-table-title fl">不同期限资产产品收益率<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="该图与产品收益率趋势图关联，展示在产品收益率趋势图的移动时间窗范围内，各细分维度（平台/资产类型/产品类型/挂牌场所）不同期限产品的综合年化收益率情况。" class="icon-pano icon-info f1_2rem ml5"></i></div>
+            <div class="chart-table-title fl">不同期限资产产品收益率<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="该图与资产产品周收益率趋势（左图）关联，展示在产品收益率趋势图的移动时间窗范围内，各细分维度（平台/资产类型/产品类型/挂牌场所）不同期限产品的综合年化收益率情况。" class="icon-pano icon-info f1_2rem ml5"></i></div>
             <div class="update-time fr">
                 <span class="ml10">
-                    时间范围：<span ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
+                    时间范围：<span class="animated-panel" kt-blink on-change="durationAmountChart._params" ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
                 </span>
             </div>
         </div>
@@ -78,14 +72,10 @@
         </div>
     </div>
 </div>
+<!-- 资管类产品收益率表格 -->
 <div class="chart-table bor-xxs">
     <div class="chart-table-heading clfix">
         <div class="chart-table-title fl">资管产品收益率趋势<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="该表展示了资管产品中不同资管管理人下各平台不同赎回时长的日均年化收益率，并通过箭头表明收益率较前值有所上升或下降。“-”表示平台无此产品或近7日未发售。" class="icon-pano icon-info f1_2rem ml5"></i></div>
-        <!-- <div class="update-time fr">
-            <span class="ml10">
-                本日新增<span class="text-warning-light" ng-bind="::new_count"></span>条产品
-            </span>
-        </div> -->
     </div>
     <div class="table-responsive table-body">
         <table class="table table-striped table-hover">

@@ -8,7 +8,7 @@
                 <label class="text-primary-dark control-label col-md-3"><span class="ml5 f14">*</span>手机号</label>
                 <div class="col-md-7">
                     <input placeholder="您的手机号码" kt-validate-on-blur ng-pattern="/^\d{11}$/" type="text" required="required" ng-model="user.mobile" id="" class="form-control" name="mobile">
-                    <div class="mt5 text-danger" ng-messages="popForm.mobile.$dirty && popForm.mobile.$error">
+                    <div class="mt5 text-warning" ng-messages="popForm.mobile.$dirty && popForm.mobile.$error">
                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入您的手机号</div>
                         <div ng-message="pattern"><i class="fa fa-frown-o fb mr5"></i>请正确输入11位手机号码</div>
                     </div>
@@ -34,13 +34,13 @@
                             </span>
                         </button>
                     </div>
-                    <div class="mt5 text-danger cbs" ng-messages="popForm.captcha.$dirty && popForm.captcha.$error">
+                    <div class="mt5 text-warning cbs" ng-messages="popForm.captcha.$dirty && popForm.captcha.$error">
                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入验证码</div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-7 col-md-offset-3 text-danger cbs" ng-show="!!error">
+                <div class="col-md-7 col-md-offset-3 text-warning cbs" ng-show="!!error">
                     <i class="fa fa-frown-o fb mr5"></i>
                     <span ng-bind="error"></span>
                 </div>

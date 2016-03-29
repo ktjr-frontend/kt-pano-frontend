@@ -16,6 +16,7 @@
             ktAssetService.get(ktDataHelper.cutDirtyParams($scope.shared.params), function(res) {
                 $scope.assets = res.fame_assets
                 $scope.shared.params.totalItems = res.total_items || 1
+                $scope.$emit('totalItemGot')
             })
         })
 })();

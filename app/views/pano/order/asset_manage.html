@@ -15,7 +15,7 @@
             <th>预计上线时间</th>
             <th>起购金额</th>
             <th>投向</th>
-            <th>管理人</th>
+            <th>管理人类型</th>
             <th>状态</th>
             <th>操作</th>
         </tr>
@@ -29,6 +29,7 @@
             <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td>
             <td ng-bind="::asset.mount | ktNumberLocate"></td>
             <td ng-bind="::asset.target | ktNull)"></td>
+            <td ng-bind="::asset.trustee | ktNull"></td>
             <td ng-bind="::asset.manager | ktNull"></td>
             <td ng-bind="::getStatus(asset.status)" ng-class="{'text-warning-light': product.status == '已发布'}"></td>
             <td class="text-center">

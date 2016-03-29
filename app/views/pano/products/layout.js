@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductsLayoutCtrl', function($scope, $timeout, $state, $location, ktSweetAlert, ktCompassAssetFiltersService, ktDataHelper) {
+        .controller('ktProductsLayoutCtrl', function($scope, $window, $timeout, $state, $location, ktSweetAlert, ktCompassAssetFiltersService, ktDataHelper) {
 
             var search = $location.search()
             $scope.shared = {}
@@ -12,7 +12,7 @@
                 page: 1,
                 per_page: 20,
                 totalItems: 10,
-                maxSize: 10
+                maxSize: $window.innerWidth > 480 ? 10 : 4
             }, search)
 
             /*

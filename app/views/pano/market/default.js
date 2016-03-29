@@ -18,6 +18,10 @@
                     legendSelected[v] = i <= defaultShowLength
                 })
             }
+            var rightGap = 40 // 图表主体距离右边距离
+            var leftGap = 65
+            var topGap = 50
+            var bottomGap = isAllDimension ? 140 : 80
 
             var chartOptions = {
                 tooltip: {
@@ -27,8 +31,8 @@
                     show: false,
                 },
                 legend: {
-                    left: isAllDimension ? 40 : 'center',
-                    right: 15,
+                    left: isAllDimension ? leftGap - 25 : 'center',
+                    right: rightGap / 2,
                     textStyle: {
                         fontSize: 12,
                         color: '#626472' // 图例文字颜色
@@ -36,10 +40,10 @@
                 },
                 grid: {
                     show: true,
-                    top: 50,
-                    left: 65,
-                    right: 30, // 距离右面的距离
-                    bottom: isAllDimension ? 130 : 70, // 距离底部的距离
+                    top: topGap,
+                    left: leftGap,
+                    right: rightGap, // 距离右面的距离
+                    bottom: bottomGap, // 距离底部的距离
                     borderWidth: 0,
                     backgroundColor: '#fafafa',
                     // backgroundColor: 'rgba(231,234,241,0.3)',
@@ -49,7 +53,6 @@
 
             var weekAmountChart = $scope.weekAmountChart = {
                 chartOptions: {
-
                     // group: 'group1'
                 },
                 _params: {},
@@ -140,8 +143,6 @@
             function getStartEnd() {
                 var start = moment(params.start_at)
                 var end = moment(params.end_at)
-
-                // var diffDays = end.diff(end, 'days')
                 var isGtTwoWeeks = end.weeks() - start.weeks() > 1
 
                 return {
@@ -152,17 +153,19 @@
 
             function customDataZoom(chart, options) {
                 var updatePromise
-                return $.extend(true, {}, options, {
+
+                return $.extend(true, {}, {
                     show: true,
                     attr: {
                         group: 'group1'
                     },
                     styles: {
                         position: 'absolute',
-                        left: 65,
-                        right: 30,
-                        height: isAllDimension ? 220 : 280,
-                        top: 50,
+                        left: leftGap - 1,
+                        right: rightGap - 1,
+                        bottom: bottomGap,
+                        // height: isAllDimension ? 220 : 280,
+                        top: topGap,
                     },
                     onZoom: function(e) {
                         if (e.triggerType === 'manual') return
@@ -172,7 +175,6 @@
                         var startDate = xAxis.data[((l - 1) * e.start.toFixed(2) / 100) | 0]
                         var endDate = moment(xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]).day(0).add(1, 'w').format('YYYY-MM-DD')
 
-                        // console.log(e, startDate, endDate)
                         $timeout.cancel(updatePromise)
                         updatePromise = $timeout(function() {
                             $scope.durationAmountChart.udpateDataView({
@@ -186,7 +188,7 @@
                             }, true)
                         }, 500)
                     }
-                })
+                }, options || {})
             }
 
             /*function dataZoom(chart, options) {
@@ -272,12 +274,18 @@
                     var legend = _.map(data.data, 'name')
                     getSelectedLegend(legend) //只需要生成一次，其他chart与其相同
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, {
+                    var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
+
+                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
                         legend: {
                             data: legend,
                             selected: legendSelected,
                         },
-                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), getStartEndPercent(data)),
+                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0]), $.extend(getStartEndPercent(data), {
+                            styles: {
+                                bottom: caculateOptions.grid.bottom
+                            }
+                        })),
                         tooltip: {
                             // show: false,
                             // showContent: false,
@@ -287,7 +295,8 @@
                                 axis: 'auto',
                                 type: 'line',
                             },
-
+                            titleSuffix: '所在周发行量',
+                            // noUnit: true,
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
@@ -296,11 +305,17 @@
                         }],
                         xAxis: [{
                             type: 'category',
+                            name: '周',
+                            nameLocation: 'end',
+                            nameGap: 10,
                             boundaryGap: false,
                             data: data.xAxis
                         }, {
                             type: 'category',
                             axisLabel: {
+                                show: false
+                            },
+                            axisTick: {
                                 show: false
                             },
                             boundaryGap: false,
@@ -341,8 +356,9 @@
 
                 function initChartOptions() {
                     var data = _self.data
+                    var caculateOptions = ktDataHelper.chartOptions('#durationAmountChart', _.map(data.data, 'name'))
 
-                    return $.extend(true, {}, chartOptions, _self.chartOptions, {
+                    return $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
                         tooltip: {
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -352,6 +368,9 @@
                         }],
                         xAxis: [{
                             type: 'category',
+                            name: '期限',
+                            nameLocation: 'end',
+                            nameGap: 10,
                             boundaryGap: true,
                             data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
                         }],
@@ -368,9 +387,12 @@
                             data: _.map(data.data, 'name'),
                             selected: legendSelected,
                         },
+                        /*yAxis: [{
+                            max: ktDataHelper.getAxisMax(data.data),
+                            min: ktDataHelper.getAxisMin(data.data),
+                        }],*/
                         series: _.map(data.data, function(v) {
                             return {
-
                                 name: v.name,
                                 itemStyle: {
                                     emphasis: {
@@ -403,19 +425,26 @@
 
                 function updateView() {
                     var data = _self.data
+                    var legend = _.map(data.data, 'name')
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, {
+                    var caculateOptions = ktDataHelper.chartOptions('#weekRateChart', legend)
+
+                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
                         legend: {
-                            data: _.map(data.data, 'name'),
+                            data: legend,
                             selected: legendSelected,
                         },
-                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0]), getStartEndPercent(data)),
+                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), $.extend(getStartEndPercent(data), {
+                            styles: {
+                                bottom: caculateOptions.grid.bottom
+                            }
+                        })),
                         tooltip: {
                             axisPointer: {
                                 axis: 'auto',
                                 type: 'line',
                             },
-
+                            titleSuffix: '所在周收益率',
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
@@ -426,10 +455,19 @@
                         }],
                         xAxis: [{
                             type: 'category',
+                            name: '周',
+                            nameLocation: 'end',
+                            nameGap: 10,
                             boundaryGap: false,
                             data: data.xAxis
                         }, {
                             type: 'category',
+                            axisLabel: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
                             boundaryGap: false,
                             data: data.xAxis
                         }],
@@ -463,8 +501,9 @@
 
                 function initChartOptions() {
                     var data = _self.data
+                    var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', _.map(data.data, 'name'))
 
-                    return $.extend(true, {}, chartOptions, _self.chartOptions, {
+                    return $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
                         tooltip: {
                             axisPointer: {
                                 axis: 'auto',
@@ -476,11 +515,12 @@
                         },
                         yAxis: [{
                             name: '收益率（单位：%）',
-                            max: ktDataHelper.getAxisMax(data.data),
-                            min: ktDataHelper.getAxisMin(data.data),
                         }],
                         xAxis: [{
                             type: 'category',
+                            name: '期限',
+                            nameLocation: 'end',
+                            nameGap: 10,
                             boundaryGap: false,
                             data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
                         }],
@@ -497,6 +537,10 @@
                             data: _.map(data.data, 'name'),
                             selected: legendSelected,
                         },
+                        yAxis: [{
+                            max: ktDataHelper.getAxisMax(data.data),
+                            min: ktDataHelper.getAxisMin(data.data),
+                        }],
                         series: _.map(data.data, function(v) {
                             return {
                                 name: v.name,

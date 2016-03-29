@@ -69,6 +69,9 @@
     }
     .update-time {
         color: @color-bright;
+        @media(max-width: 900px){
+            display: none;
+        }
     }
     .chart-table-heading {
         margin-bottom: 5px;
@@ -174,6 +177,9 @@
         background: white;
         border-radius: 5px;
         padding: 0 10px;
+        @media(max-width: 480px){
+            padding: 0;
+        }
         &.half {
             width: 50%;
             float: left;
@@ -198,7 +204,7 @@
         z-index: 99;
         position: absolute;
         // box-sizing: content-box;        
-        overflow: hidden;
+        // overflow: hidden;
         pointer-events: none;
         .zoom-box{
             // box-sizing: border-box;
@@ -211,6 +217,9 @@
             top: 0;
             right: 0;
             bottom: 0;
+            &:hover{
+                border-color: @color-navy-blue;
+            }
         }
     }
 }

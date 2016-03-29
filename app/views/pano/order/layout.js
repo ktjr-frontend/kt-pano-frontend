@@ -4,14 +4,14 @@
     angular.module('kt.pano')
         .controller('ktOrderLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAssetIntentionService) {
 
-            var params = $location.search()
+            var search = $location.search()
             $scope.shared = {}
 
-            $scope.shared.params = $.extend({
+            var params = $scope.shared.params = $.extend({
                 page: 1,
                 per_page: 20,
                 maxSize: 10
-            }, params)
+            }, search)
 
             /*
              * 这里需要定义tab的active开关，否则每次加载，会默认触发第一个tab的click事件
@@ -24,7 +24,7 @@
             $scope.tabSelect = function(state, tab) {
                 if ($state.current.name === state) return
 
-                $.extend($scope.shared.params, {
+                $.extend(params, {
                     tab: tab,
                     page: 1,
                     per_page: 10,
@@ -34,7 +34,7 @@
                     guarantees_eq: null,
                     life_days_in: null
                 })
-                $state.go(state, $scope.shared.params)
+                $state.go(state, params)
             }
 
             $scope.goTo = function(key, value) {
@@ -43,9 +43,11 @@
                 $state.go($state.current.name, p)
             }
 
-            $scope.pageChanged = function() {
-                $location.search('page', $scope.shared.params.page)
-            }
+            $scope.$on('totalItemGot', function () {//totalItem 不满足初始page的会自动跳转到第一页
+                $scope.pageChanged = function() {
+                    $location.search('page', params.page)
+                }
+            })
 
             $scope.getPublishDate = function(start, end) {
                 var startDate = start ? moment(start).format('YYYY-MM-DD') : '-'
@@ -87,7 +89,9 @@
                 ktAssetIntentionService.save({
                     asset_id: assetID
                 }, function() {
-                    ktSweetAlert.success('资产方已获取您的意向，稍后会与你联系。')
+                    ktSweetAlert.success('资产方已获取您的意向，稍后会与您联系。')
+                }, function () {
+                    ktSweetAlert.error('抱歉！服务器繁忙。')
                 })
             }
 

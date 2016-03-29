@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory) {
+        .controller('ktOverviewCtrl', function($scope, $window, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory) {
 
             $scope.$emit('activeProjectChange', {
                 projectID: $stateParams.projectID
@@ -48,6 +48,9 @@
             }
 
             var chartOptions = {
+                grid: {
+                    right: 60
+                },
                 tooltip: {
                     valueType: 'rmb' //自定义属性，tooltip标示，决定是否显示百分比数值
                 }
@@ -65,6 +68,10 @@
 
                 function updateView() {
                     var data = _self.data
+                    var legend = _.map(data, function(v) {
+                        return v[2]
+                    })
+                    var caculateOptions = ktDataHelper.chartOptions('#rateAmountChart', legend)
 
                     var xAxisArr = _.map(data, function(v) {
                         return v[0]
@@ -73,12 +80,10 @@
                         return v[1]
                     })
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         // color: _self.color,
                         legend: {
-                            data: _.map(data, function(v) {
-                                return v[2]
-                            }),
+                            data: legend,
                         },
                         tooltip: {
                             axisPointer: {
@@ -133,12 +138,19 @@
                             name: '发行量（单位：万元）',
                             boundaryGap: true,
                             min: 0,
-                            // max: _.max(yAxisArr) + 1000000
+                            max: (function() {
+                                var max = _.max(yAxisArr)
+                                var maxLength = _.max(yAxisArr).toFixed(0).length
+                                return _.ceil((max + Math.pow(10, maxLength - 2) * 5), 1 - maxLength)
+                            })()
                         }],
                         xAxis: [{
                             max: _.ceil(_.max(xAxisArr)),
                             min: _.floor(_.min(xAxisArr)),
                             type: 'value',
+                            name: '收益率',
+                            nameLocation: 'end',
+                            nameGap: 10,
                             boundaryGap: false,
                         }],
 
@@ -155,20 +167,22 @@
 
             durationRateChart.udpateDataView = function() {
                 var _self = this
+                
                 ktOverviewService.get({
                     chart: 'rate',
                 }, function(data) {
-                    // data = { "stat": { "xAxis": [1, 3, 6, 12, 24], "data": [{ "name": "上周收益率", "data": [0.17, null, 2.3, null, 0.03] }, { "name": "本周收益率", "data": [null, null, 1.04, null, 5.02] }] } }
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
 
                 function updateView() {
                     var data = _self.data
+                    var legend = _.map(data.data, 'name')
+                    var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', legend)
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
-                            data: _.map(data.data, 'name'),
+                            data: legend
                         },
                         tooltip: {
                             axisPointer: {
@@ -188,7 +202,10 @@
                         xAxis: [{
                             type: 'category',
                             boundaryGap: true,
-                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
+                            name: '期限',
+                            nameLocation: 'end',
+                            nameGap: 10,
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         }],
 
                         series: _.map(data.data, function(v) {
@@ -218,10 +235,12 @@
 
                 function updateView() {
                     var data = _self.data
+                    var legend = _.map(data.data, 'name')
+                    var caculateOptions = ktDataHelper.chartOptions('#durationAmountChart', legend)
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
-                            data: _.map(data.data, 'name'),
+                            data: legend
                         },
                         tooltip: {
                             titlePrefix: '产品期限：',
@@ -234,7 +253,10 @@
                         xAxis: [{
                             type: 'category',
                             boundaryGap: true,
-                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
+                            name: '期限',
+                            nameLocation: 'end',
+                            nameGap: 10,
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         }],
 
                         series: _.map(data.data, function(v) {
@@ -260,10 +282,12 @@
 
                 function updateView() {
                     var data = _self.data
+                    var legend = _.map(data.data, 'name')
+                    var caculateOptions = ktDataHelper.chartOptions('#platformAssetTypeChart', legend)
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
-                            data: _.map(data.data, 'name'),
+                            data: legend
                         },
                         tooltip: {
                             xAxisFormat: _self.xAxisFormat,
@@ -271,13 +295,16 @@
                         },
                         yAxis: [{
                             name: '类型占比（单位：%）',
-                            max: 1,
+                            max: 100,
                             min: 0
                         }],
                         xAxis: [{
                             type: 'category',
+                            name: '平台',
+                            nameLocation: 'end',
+                            nameGap: 10,
                             axisLabel: {
-                                interval: 0
+                                interval: $window.innerWidth > 1000 ? 0 : 'auto'
                             },
                             boundaryGap: true,
                             data: data.xAxis

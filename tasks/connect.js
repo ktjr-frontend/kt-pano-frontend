@@ -5,9 +5,9 @@ var appConfig = {
     dist: 'dist'
 }
 
-// var server = 'http://dev-op-pano.ktjr.com'
+var server = 'http://dev-op-pano.ktjr.com'
 // var server = 'http://10.132.1.135:3000'
-var server = 'http://10.132.1.224:3000'
+// var server = 'http://10.132.1.224:3000'
     // var server = 'http://op-fame.ktjr.com'
 var modRewriteUri = [
     // '^/mock_data/v\d{1,}/([^?]*).*$ /mock_data/$1 [L]',

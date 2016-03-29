@@ -54,10 +54,11 @@
                             delete newParams[i]
                         }
                     })
+
                     return newParams
                 },
                 getMarkLineCoords: function(data) { // null or ''值算出有效间隔点用虚线连接
-                    return _.chain(data).map(function(v, i) {
+                    var coords = _.chain(data).map(function(v, i) {
                             if (!_.isNil(v) && v !== '') {
                                 return i
                             }
@@ -80,21 +81,44 @@
                             return !_.isNil(v)
                         }).value()
 
-                },
-                chartOptions: function (chartId, isAllDimension, legend) {
-                    var w = $(chartId).width()
-                    var lineHeight = 15
-                    var fontSize =  12
+                    return coords
 
-                    if (!isAllDimension) {
-                        return {
-                            legendLeft: 'center',
-                            grid: 70
+                },
+                chartOptions: function(chartId, legend) { //根据legend的不同获取不同的坐标配置
+                    var w = $(chartId + ' canvas').width()
+                    var fontSize = 12
+                    var leftGap = 40
+                    var rightGap = 30
+                    var lineHeight = 30
+                    var lineLength = w - leftGap - rightGap / 2
+                    var baseBottom = 70
+                    var legendTotalLength = _.map(legend, function(v) {
+                        return v.length * fontSize + 25
+                    })
+
+                    var lines = 1
+                    var sum = 0
+
+                    _.each(legendTotalLength, function(v) {
+                        sum = sum + v
+                        if (sum > lineLength) {
+                            sum = v
+                            lines++
+                        }
+                    })
+
+                    var op = {
+                        legend: {
+                            left: lines < 2 ? 'center' : 40
+                        },
+                        grid: {
+                            bottom: lines < 2 ? baseBottom : ((lines - 1) * lineHeight + baseBottom)
                         }
                     }
 
+                    return op
                 },
-                
+
                 chartDataToPercent: function(chart) { //总览页计算各平台资产类型占比的百分比
                     var xAxisSumArr = []
 
@@ -106,7 +130,7 @@
 
                     chart.data = _.map(chart.data, function(v) {
                         v.data = _.map(v.data, function(v2, i2) {
-                            return v2 / (xAxisSumArr[i2] || 1)
+                            return (v2 / (xAxisSumArr[i2] || 1)) * 100
                         })
                         return v
                     })
@@ -122,23 +146,50 @@
                     return chart
                 },
                 chartAxisFormat: function(legend, format) { //格式化坐标轴label
-                    return _.map(legend, function(v) {
+                    var fl = _.map(legend, function(v) {
                         return parseInt(v, 10) + format
                     })
+                    switch (format) {
+                        case 'm':
+                            fl = _.map(legend, function(v) {
+                                return parseInt(v, 10) + '个月'
+                            })
+                            break
+                        case 'M':
+                            fl = _.map(legend, function(v) {
+                                return parseInt(v, 10) + 'M'
+                            })
+                            break
+                        case 'MY':
+                            fl = _.map(legend, function(v) {
+                                var month = parseInt(v, 10)
+                                return month <= 12 ? (month + 'M') : month / 12 + 'Y'
+                            })
+                            break
+                        default:
+                            fl = legend
+                    }
+                    return fl
                 },
-                getAxisMax: function(data) {
-                    return _.chain(data).map(function(v) {
+                getAxisMax: function(data) { //取坐标的最大值
+                    var max = _.chain(data).map(function(v) {
                         return _.max(_.map(v.data, function(v2) {
                             return v2 || null
                         })) || null
                     }).max().add(1).ceil().value()
+
+                    max = max % 2 ? max + 1 : max
+                    return max
                 },
-                getAxisMin: function(data) {
-                    return _.chain(data).map(function(v) {
+                getAxisMin: function(data) { //取坐标的最小值
+                    var min = _.chain(data).map(function(v) {
                         return _.min(_.map(v.data, function(v2) {
                             return v2 || null
                         })) || null
                     }).min().subtract(1).floor().value()
+
+                    min = min % 2 ? (min > 0 ? min - 1 : min) : min
+                    return min
                 },
                 _optionsLengthLimit: function(filter) { //控制每个filter列表的长度
                     var optionWidth = $('.filter-box').width() - 25 * 2 - 157 + 66 //减去相关间距
@@ -169,6 +220,7 @@
                     }
 
                     if (firstLineMaxIndex === filter.options.length) filterFn.hidden = true //如果能放下，隐藏
+
                     return filterFn
 
                 },
@@ -194,7 +246,7 @@
                         var option = _.find(options, { value: v.value })
                         v.type = (option && option.type) ? option.type : 'list'
 
-                        v.toggleView = function($event) { //折叠
+                        v.toggleView = function($event) { //折叠切换
                             v.collapsed = !v.collapsed
                             var target = $($event.target)
                             target = target.hasClass('icon-arrow') ? target.parent() : target

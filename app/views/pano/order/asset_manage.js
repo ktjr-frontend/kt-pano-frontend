@@ -9,7 +9,7 @@
 
             ktAssetFiltersService.get(function(data) {
                 $scope.shared.filters = data['1']
-                 var filterInit = ktDataHelper.filterInit($scope.shared.filters)
+                var filterInit = ktDataHelper.filterInit($scope.shared.filters)
 
                 filterInit($scope.shared.params)
             })
@@ -17,6 +17,7 @@
             ktAssetService.get(ktDataHelper.cutDirtyParams($scope.shared.params), function(res) {
                 $scope.assets = res.fame_assets
                 $scope.shared.params.totalItems = res.total_items
+                $scope.$emit('totalItemGot')
             })
         })
 })();
