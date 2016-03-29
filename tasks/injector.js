@@ -102,7 +102,7 @@ var appCss = [
 ];
 
 var fontSpiderCss = [
-    'app/fonts/pano/css/style.css',
+    // 'app/fonts/pano/css/style.css',
 ];
 
 module.exports = {

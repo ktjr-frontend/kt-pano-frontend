@@ -96,6 +96,7 @@
             }
 
             $scope.shared.filters = []
+            $scope.shared.filtersDatas = null
             $scope.getConditionName = ktDataHelper.getConditionName($scope.shared.filters)
         })
 })();

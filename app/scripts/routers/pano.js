@@ -130,7 +130,7 @@
                     }
                 },
                 'pano.products.assetManage': {
-                    url: '/asset_manages?status_eq&rate_in&life_days_in&credit_manager_eq&page&per_page&sort_by&order',
+                    url: '/asset_manages?status_eq&rate_in&life_days_in&credit_manager_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/asset_manage.js',

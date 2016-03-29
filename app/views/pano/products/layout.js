@@ -32,6 +32,7 @@
             $scope.goTo = function(key, value) {
                 var p = {}
                 p[key] = value
+                p.page = 1
                 $state.go($state.current.name, p)
             }
 
@@ -47,14 +48,14 @@
                 }
                 return status || '-'
             }
+            $scope.getLife = function (life) {
+                var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '-')
+                return lifeName
+            }
 
             $scope.shared.filters = []
+            $scope.shared.filterDatas = null //避免筛选时候重复请求，以及展开状态被重置
 
-            // ktCompassAssetFiltersService.get(function(data) {
-            //     $scope.shared.filters = data['0']
-            //     var filterInit = ktDataHelper.filterInit($scope.shared.filters)
-            //     filterInit(params)
-            // })
 
             $scope.getConditionName = ktDataHelper.getConditionName($scope.shared.filters)
         })

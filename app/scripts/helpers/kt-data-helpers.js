@@ -163,7 +163,7 @@
                         case 'MY':
                             fl = _.map(legend, function(v) {
                                 var month = parseInt(v, 10)
-                                return month <= 12 ? (month + 'M') : month / 12 + 'Y'
+                                return month < 12 ? (month + 'M') : month / 12 + 'Y'
                             })
                             break
                         default:
@@ -188,13 +188,16 @@
                         })) || null
                     }).min().subtract(1).floor().value()
 
-                    min = min % 2 ? (min > 0 ? min - 1 : min) : min
+                    /*eslint-disable*/
+                    min = (min % 2) ? (min > 0 ? (min - 1) : min) : min;
+                    /*eslint-enable*/
+
                     return min
                 },
                 _optionsLengthLimit: function(filter) { //控制每个filter列表的长度
-                    var optionWidth = $('.filter-box').width() - 25 * 2 - 157 + 66 //减去相关间距
+                    var optionWidth = $('.filter-box').width() - 25 * 2 - 157 + 66 //一行的长度，减去相关间距
                     var firstLineMaxIndex = filter.options.length;
-                    var sumWidth = 0
+                    var sumWidth = 0 //条件所占总长度
 
                     _.every(filter.options, function(v, i) {
                         sumWidth += (function() {
@@ -206,13 +209,13 @@
                         }()) * 13 + 5 * 2 + 15 * 2
 
                         if (sumWidth > optionWidth) {
-                            firstLineMaxIndex = i - 1
+                            firstLineMaxIndex = i - 1 //超出一行的长度，获取索引位置
                             return false
                         }
                         return true
                     })
 
-                    var filterFn = function(value, index) {
+                    var filterFn = function(value, index) { //基于计算的长度过滤展示列表
                         if (!filter.collapsed) { //如果不折叠 全部显示
                             return true
                         }
@@ -253,9 +256,10 @@
                             target.toggleClass('expand', !v.collapsed)
                         }
 
+                        // 用于过滤的函数
                         v.filterFn = v.type === 'list' ?
                             (function() {
-                                v.collapsed = true // 默认折叠
+                                v.collapsed = _.isNil(v.collapsed) ? true : v.collapsed // 默认折叠
                                 return _self._optionsLengthLimit(v)
                             })() : function() {
                                 return true

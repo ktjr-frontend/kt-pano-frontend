@@ -3,12 +3,14 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktMarketCtrl', function($scope, $q, $state, $timeout, $location, ktDataHelper, ktMarketAnalyticsService, ktRateTrendService) {
-            // $scope.shared.tabActive.tab1 = true
-            $.extend($scope.shared.params, $location.search())
-            var params = $scope.shared.params
+            // shared.tabActive.tab1 = true
+            var shared = $scope.shared
+            var params = shared.params
+
+            $.extend(params, $location.search())
 
             $scope.updateDate = moment().subtract(1, 'd').format('YYYY-MM-DD')
-            ktDataHelper.filterUpdate($scope.shared.filters, $scope.shared.params)
+            ktDataHelper.filterUpdate(shared.filters, shared.params)
 
             var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension]
             var defaultShowLength = 8
@@ -261,7 +263,7 @@
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
+                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'circulation_group_by_week_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
@@ -346,7 +348,7 @@
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
+                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'circulation_group_by_life_days_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
@@ -372,7 +374,7 @@
                             nameLocation: 'end',
                             nameGap: 10,
                             boundaryGap: true,
-                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         }],
 
                     })
@@ -415,7 +417,7 @@
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
+                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'rate_group_by_week_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
@@ -491,7 +493,7 @@
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, $scope.shared.params, {
+                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'rate_group_by_life_days_and_from',
                     // credit_right_or: 'am'
                 }, _self._params)), function(data) {
@@ -522,7 +524,7 @@
                             nameLocation: 'end',
                             nameGap: 10,
                             boundaryGap: false,
-                            data: ktDataHelper.chartAxisFormat(data.xAxis, '个月')
+                            data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         }],
 
                     })

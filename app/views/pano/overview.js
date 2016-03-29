@@ -49,7 +49,7 @@
 
             var chartOptions = {
                 grid: {
-                    right: 60
+                    right: 60,
                 },
                 tooltip: {
                     valueType: 'rmb' //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -167,7 +167,7 @@
 
             durationRateChart.udpateDataView = function() {
                 var _self = this
-                
+
                 ktOverviewService.get({
                     chart: 'rate',
                 }, function(data) {

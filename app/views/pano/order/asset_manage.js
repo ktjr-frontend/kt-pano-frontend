@@ -3,20 +3,26 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktOrderAssetManageCtrl', function($scope, $state, $location, ktDataHelper, ktAssetFiltersService, ktAssetService) {
+            var shared = $scope.shared
 
-            $scope.shared.tabActive.tab1 = true
-            $.extend($scope.shared.params, $location.search(), { tab: 1 })
+            shared.tabActive.tab1 = true
+            $.extend(shared.params, $location.search(), { tab: 1 })
 
-            ktAssetFiltersService.get(function(data) {
-                $scope.shared.filters = data['1']
-                var filterInit = ktDataHelper.filterInit($scope.shared.filters)
+            if (!shared.filterDatas) {
+                ktAssetFiltersService.get(function(data) {
+                    shared.filterDatas = data
+                    shared.filters = data['1']
+                    var filterInit = ktDataHelper.filterInit(shared.filters)
+                    filterInit(shared.params)
+                })
+            } else {
+                shared.filters = shared.filterDatas['1']
+                ktDataHelper.filterUpdate(shared.filters, shared.params)
+            }
 
-                filterInit($scope.shared.params)
-            })
-
-            ktAssetService.get(ktDataHelper.cutDirtyParams($scope.shared.params), function(res) {
+            ktAssetService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 $scope.assets = res.fame_assets
-                $scope.shared.params.totalItems = res.total_items
+                shared.params.totalItems = res.total_items
                 $scope.$emit('totalItemGot')
             })
         })

@@ -17,7 +17,7 @@
                 </div>
             </th>
             <th>募集金额</th>
-            <th>剩余金额</th>
+            <!-- <th>剩余金额</th> -->
             <th>起息日</th>
             <th>平台</th>
             <th>产品类型</th>
@@ -30,24 +30,24 @@
     </thead>
     <tbody>
         <tr class="text-right" ng-repeat="product in products" ng-if="products.length">
-            <td ng-bind="::product.name | ktNull"></td>
-            <td ng-bind="::product.life | ktNull"></td>
+            <td class="text-left" ng-bind="::product.name | ktNull"></td>
+            <td ng-bind="::getLife(product.life)"></td>
             <td ng-bind="::product.rate | ktNumber:2:'percent2'"></td>
             <td ng-bind="::product.sum_amount | ktNumberLocate"></td>
-            <td ng-bind="::product.selling_amount | ktNumberLocate"></td>
+            <!-- <td ng-bind="::product.selling_amount | ktNumberLocate"></td> -->
             <td ng-bind="::(product.value_date | date:'yyyy-MM-dd')"></td>
             <td ng-bind="::product.from | ktNull"></td>
             <td ng-bind="::product.type | ktNull"></td>
             <td ng-bind="::product.asset_type | ktEclipsis:30" title="{{::product.asset_type | ktNull}}"></td>
-            <td ng-bind="::product.exchange | ktNull"></td>
-            <td ng-bind="::product.trust_party | ktNull"></td>
+            <td class="text-left" ng-bind="::product.exchange | ktNull"></td>
+            <td class="text-left" ng-bind="::product.trust_party | ktEclipsis:25"></td>
             <td ng-bind="::product.attachment_url | ktNull"></td>
             <td>
                 <span ng-bind="::getStatusName(product.status)"></span>
             </td>
         </tr>
         <tr ng-if="!products.length && !isLoading()">
-            <td colspan="13" class="text-navy-blue text-center">
+            <td colspan="12" class="text-navy-blue text-center">
                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                 <span class="f1_5rem">没有数据！</span>
             </td>

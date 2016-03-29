@@ -19,11 +19,11 @@
     </thead>
     <tbody>
         <tr class="text-right" ng-repeat="asset in assets" ng-if="assets.length">
-            <td ng-bind="::asset.name | ktNull"></td>
+            <td class="text-left" ng-bind="::asset.name | ktNull"></td>
             <td ng-bind="::asset.asset_type | ktNull"></td>
             <td ng-bind="::getRate(asset.directive_rate, asset.highest_rate)"></td>
             <td ng-bind="::asset.sustained | ktNull"></td>
-            <td ng-bind="::asset.guarantees | ktNull"></td>
+            <td class="text-left" ng-bind="::asset.guarantees | ktJoin:'，'"></td>
             <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td>
             <td ng-bind="::getStatus(asset.status)" ng-class="{'text-warning-light': product.status == '已发布'}"></td>
             <td class="text-center">

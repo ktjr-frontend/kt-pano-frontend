@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <tr class="text-right" ng-repeat="asset in assets" ng-if="assets.length">
-            <td ng-bind="::asset.name | ktNull"></td>
+            <td class="text-left" ng-bind="::asset.name | ktNull"></td>
             <td ng-bind="::asset.asset_type | ktNull"></td>
             <td ng-bind="::getRate(asset.directive_rate, asset.highest_rate)"></td>
             <td ng-bind="::asset.sustained | ktNull"></td>
@@ -38,7 +38,7 @@
             </td>
         </tr>
         <tr ng-if="!assets.length && !isLoading()">
-            <td colspan="10" class="text-navy-blue text-center">
+            <td colspan="11" class="text-navy-blue text-center">
                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                 <span class="f1_5rem">没有数据！</span>
             </td>
