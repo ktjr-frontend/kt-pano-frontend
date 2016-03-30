@@ -12,7 +12,7 @@
                 page: 1,
                 per_page: 20,
                 totalItems: 10,
-                maxSize: $window.innerWidth > 480 ? 10 : 4
+                maxSize: $window.innerWidth > 480 ? 10 : 3
             }, search)
 
             /*

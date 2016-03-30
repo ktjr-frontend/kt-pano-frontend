@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOrderLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAssetIntentionService) {
+        .controller('ktOrderLayoutCtrl', function($scope, $state, $window, $location, ktSweetAlert, ktDataHelper, ktAssetIntentionService) {
 
             var search = $location.search()
             $scope.shared = {}
@@ -10,7 +10,7 @@
             var params = $scope.shared.params = $.extend({
                 page: 1,
                 per_page: 20,
-                maxSize: 10
+                maxSize: $window.innerWidth > 480 ? 10 : 3
             }, search)
 
             /*
@@ -43,7 +43,7 @@
                 $state.go($state.current.name, p)
             }
 
-            $scope.$on('totalItemGot', function () {//totalItem 不满足初始page的会自动跳转到第一页
+            $scope.$on('totalItemGot', function() { //totalItem 不满足初始page的会自动跳转到第一页
                 $scope.pageChanged = function() {
                     $location.search('page', params.page)
                 }
@@ -90,7 +90,7 @@
                     asset_id: assetID
                 }, function() {
                     ktSweetAlert.success('已收到您的要求，开通会与您联系。')
-                }, function () {
+                }, function() {
                     ktSweetAlert.error('抱歉！服务器繁忙。')
                 })
             }

@@ -28,7 +28,8 @@
             float: right;
             @media(max-width: 480px){
                 float: left;
-                margin: 10px 24px;
+                clear: both;
+                margin: 10px 18px;
             }
         }
         &.expand {
@@ -47,6 +48,7 @@
         }
         .datepicker {
             border-radius: 3px;
+            -webkit-appearance: none;
             border: 1px solid @border-color;
             width: 201px;
             height: 26px;
@@ -179,4 +181,16 @@
             }
         }
     }
+}
+@-moz-document url-prefix() { 
+  .filter-box{
+        .normal-filter{
+            .datepicker{
+                width: 212px;
+            }
+            .picker-icon{
+                top: 7px;
+            }
+        }
+  }
 }
