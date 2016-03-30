@@ -29,7 +29,7 @@ module.exports = {
         }, {
             expand: true,
             cwd: '<%= kt.app %>',
-            src: ['common/directives/**/*.less', 'scripts/directives/**/*.less', 'views/**/*.less', 'less/*.less'],
+            src: ['common/directives/**/*.less', 'scripts/directives/**/*.less', 'views/**/*.less'],
             dest: '<%= kt.dist %>',
             ext: '.css'
         }]

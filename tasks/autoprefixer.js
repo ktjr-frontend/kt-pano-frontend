@@ -1,6 +1,7 @@
 module.exports = {
     options: {
-        browsers: ['> 2% in cn',
+        browsers: [
+            '> 2% in cn',
             'Chrome > 10',
             'Firefox > 20',
             'ie > 8',
@@ -9,11 +10,11 @@ module.exports = {
             'ChromeAndroid > 10'
         ]
     },
-    development: {
+    dev: {
         files: [{
             expand: true,
             cwd: '.tmp',
-            src: ['styles/**/*.css', 'common/directives/**/*.css', 'scripts/directives/**/*.css'],
+            src: ['less/**/*.css', 'common/directives/**/*.css', 'scripts/directives/**/*.css', 'views/**/*.css'],
             dest: '.tmp',
             ext: '.css'
         }]
@@ -22,7 +23,7 @@ module.exports = {
         files: [{
             expand: true,
             cwd: '<%= kt.dist %>',
-            src: ['styles/**/*.css', 'scripts/directives/**/*.css', 'common/directives/**/*.css'],
+            src: ['styles/**/*.css', 'scripts/directives/**/*.css', 'common/directives/**/*.css', 'views/**/*.css'],
             dest: '<%= kt.dist %>',
             ext: '.css'
         }]

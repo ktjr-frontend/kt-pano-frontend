@@ -196,8 +196,8 @@
     .section-2,
     .section-3,
     .section-4 {
-        .minHeight(450);
-        @media(max-width: 480px){
+        min-height: 450px;
+        @media(max-width: 480px) {
             .minHeight(400);
         }
         .title {
@@ -238,7 +238,7 @@
             text-align: center;
             @media(max-width: 480px) {
                 .marginTop(20);
-                img{
+                img {
                     margin: 0!important;
                 }
             }
@@ -247,7 +247,7 @@
             font-size: 1em;
             color: @color-blue;
             margin-left: 1.1em;
-            @media(max-width: 480px){
+            @media(max-width: 480px) {
                 font-size: 0.8em;
             }
         }
@@ -272,6 +272,9 @@
             img {
                 max-width: 100%;
                 margin-left: -40px;
+                @media(max-width: 480px) {
+                    margin-left: -15px!important;
+                }
             }
         }
     }
@@ -281,6 +284,9 @@
             img {
                 max-width: 100%;
                 margin-right: -10px;
+                @media(max-width: 480px) {
+                    margin-left: -15px!important;
+                }
             }
         }
     }

@@ -67,7 +67,7 @@ module.exports = function(grunt) {
         // 'less:common',
         // 'copy:commonImgs',
         'copy:dev',
-        // 'autoprefixer:development',
+        'autoprefixer:dev',
         // 'font-spider:app',
         // 'replace:svgfont',
         'svg_sprite',
