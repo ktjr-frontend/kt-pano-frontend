@@ -51,15 +51,12 @@
                     bottom: bottomGap, // 距离底部的距离
                     borderWidth: 0,
                     backgroundColor: '#fafafa',
-                    // backgroundColor: 'rgba(231,234,241,0.3)',
-                    // borderColor: '#ccc'
                 }
             }
 
             var weekAmountChart = $scope.weekAmountChart = {
                 chartOptions: {
                     filterVisble: false
-                        // group: 'group1'
                 },
                 _params: {},
                 xAxis: params.dimension,
@@ -71,7 +68,6 @@
 
             var durationAmountChart = $scope.durationAmountChart = {
                 chartOptions: {
-                    // group: 'group1'
                 },
                 _params: getStartEnd(),
                 xAxis: params.dimension,
@@ -84,7 +80,6 @@
 
             var weekRateChart = $scope.weekRateChart = {
                 chartOptions: {
-                    // group: 'group1'
                 },
                 xAxis: params.dimension,
                 yAxisFormat: 'percent2', //percent2 意思不需要*100
@@ -92,10 +87,6 @@
                 _filters: [{
                     name: '期限：',
                     options: [
-                        // {
-                        //     name: '全部',
-                        //     value: 'all'
-                        // },
                         {
                             name: '1M',
                             value: 1
@@ -276,7 +267,6 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'circulation_group_by_week_and_from',
-                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
@@ -361,7 +351,6 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'circulation_group_by_life_days_and_from',
-                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
@@ -430,7 +419,6 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'rate_group_by_week_and_from',
-                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
@@ -506,7 +494,6 @@
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'rate_group_by_life_days_and_from',
-                    // credit_right_or: 'am'
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()

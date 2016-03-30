@@ -645,3 +645,64 @@ button[disabled] {
         border-radius: 0 3px 3px 0;
     }
 }
+
+
+/*-------toggle btns -------*/
+
+.tg-btn {
+    &.tg-btn-green{
+        input{
+            &:checked + label{
+               background: @color-green;  
+            }
+        }
+    } 
+    &.tg-btn-blue{
+        input{
+            &:checked + label{
+               background: @color-blue;  
+            }
+        }
+    }
+    &.tg-btn-orange{
+        input{
+            &:checked + label{
+               background: @color-orange;  
+            }
+        }
+    }
+    input {
+        display: none;
+        &:checked + label {
+            background: @color-text;
+            &:after {
+                left: 50%;
+            }
+        }
+    }
+    label {
+        outline: 0;
+        display: block;
+        width: 4em;
+        height: 2em;
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        background: #f0f0f0;
+        border-radius: 2em;
+        padding: 2px;
+        transition: all .4s ease;
+        &:after {
+            position: relative;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 100%;
+            left: 0;
+            border-radius: 50%;
+            background: #fff;
+            transition: all .2s ease;
+        }
+    }
+}
+/*-------toggle btns -------*/

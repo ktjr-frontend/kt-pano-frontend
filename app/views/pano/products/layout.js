@@ -49,7 +49,7 @@
                 return status || '-'
             }
             $scope.getLife = function (life) {
-                var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '-')
+                var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '活期')
                 return lifeName
             }
 

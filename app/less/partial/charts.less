@@ -194,9 +194,9 @@
         }
         .tools {
             position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 1;
+            right: 10px;
+            top: 12px;
+            z-index: 99;
             .tool {
                 float: right;
                 padding: 3px 8px;
@@ -208,10 +208,17 @@
                     color: lighten(@color-2, 8%);
                 }
                 &.on{
-                    color: @color-navy-blue;
+                    color: @color-orange;
                 }   
                 &:last-child {
                     border-radius: 0 5px 0 0;
+                }
+                .tg-btn{
+                    label{
+                        width: 2.4em;
+                        height: 1.2em;
+                        border-radius: 1.2em;
+                    }
                 }
             }
         }
@@ -228,13 +235,12 @@
     .custom-data-zoom {
         z-index: 99;
         position: absolute;
-        // box-sizing: content-box;        
         overflow: hidden;
         // pointer-events: none;
         .zoom-box {
             // box-sizing: border-box;
             pointer-events: initial;
-            border: 1px solid rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.8);
             background: none;
             position: absolute;

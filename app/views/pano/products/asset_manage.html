@@ -45,7 +45,10 @@
             <!-- <td ng-bind="::product.trust_party"></td> -->
             <td ng-bind="::product.credit_manager | ktNull"></td>
             <td ng-bind="::product.manage_org | ktNull"></td>
-            <td ng-bind="::product.attachment_url | ktNull"></td>
+            <td>
+                <a ng-if="product.attachment_url" class="hover-underline" target="_blank" href="{{::product.attachment_url}}">下载资料</a>
+                <span ng-if="!product.attachment_url">-</span>
+            </td>
             <td>
                 <span ng-bind="::getStatusName(product.status)"></span>
             </td>
