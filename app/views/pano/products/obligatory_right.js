@@ -14,12 +14,11 @@
                 ktCompassAssetFiltersService.get(function(data) {
                     shared.filterDatas = data
                     shared.filters = data['0']
-                    var filterInit = ktDataHelper.filterInit(shared.filters)
-                    filterInit(shared.params)
+                    ktDataHelper.filterInit(shared.filters)(shared.params)
                 })
             } else {
                 shared.filters = shared.filterDatas['0']
-                ktDataHelper.filterUpdate(shared.filters, shared.params)
+                ktDataHelper.filterInit(shared.filters)(shared.params)
             }
 
             ktCompassAssetService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {

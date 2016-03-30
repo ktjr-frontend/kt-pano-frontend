@@ -29,7 +29,7 @@
                 autoClose: false,
                 beforeShowDay: function(t) {
                     var m = moment()
-                    var valid = t <= (m.day() ? m.day(0).add(1, 'w').toDate() : m.toDate())//  当周以后不可选
+                    var valid = t <= (m.day() ? m.day(0).add(1, 'w').toDate() : m.toDate()) && t >= moment('2016-03-01').toDate()//  当周以后不可选
                     var _class = '';
                     var _tooltip = valid ? '' : '不在可选范围内';
                     return [valid, _class, _tooltip];

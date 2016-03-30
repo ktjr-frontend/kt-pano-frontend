@@ -23,6 +23,7 @@
 .chart-table {
     background: none;
     margin-bottom: 20px;
+    // position: relative;
     // border-radius: 5px;
     &.bg-none {
         background: transparent;
@@ -69,7 +70,7 @@
     }
     .update-time {
         color: @color-bright;
-        @media(max-width: 900px){
+        @media(max-width: 900px) {
             display: none;
         }
     }
@@ -175,9 +176,10 @@
     }
     .chart-table-body {
         background: white;
+        position: relative;
         border-radius: 5px;
         padding: 0 10px;
-        @media(max-width: 480px){
+        @media(max-width: 480px) {
             padding: 0;
         }
         &.half {
@@ -190,6 +192,29 @@
                 border-radius: 0 5px 5px 0;
             }
         }
+        .tools {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+            .tool {
+                float: right;
+                padding: 3px 8px;
+                // background: @color-2;
+                // color: white;
+                color: @color-2;
+                &:hover,
+                &:active {
+                    color: lighten(@color-2, 8%);
+                }
+                &.on{
+                    color: @color-navy-blue;
+                }   
+                &:last-child {
+                    border-radius: 0 5px 0 0;
+                }
+            }
+        }
     }
     .chart-table-footer {
         color: @color-3;
@@ -200,26 +225,26 @@
         padding-left: 10px;
         background-color: #f9f9f9;
     }
-    .custom-data-zoom{
+    .custom-data-zoom {
         z-index: 99;
         position: absolute;
         // box-sizing: content-box;        
-        // overflow: hidden;
-        pointer-events: none;
-        .zoom-box{
+        overflow: hidden;
+        // pointer-events: none;
+        .zoom-box {
             // box-sizing: border-box;
             pointer-events: initial;
-            border: 1px solid @color-navy-blue;
-            box-shadow: 0 0 0 1000px rgba(0,0,0,0);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.8);
             background: none;
             position: absolute;
             left: 0;
             top: 0;
             right: 0;
             bottom: 0;
-            &:hover{
-                border-color: @color-navy-blue;
-            }
+            // &:hover {
+            //     border-color: @color-navy-blue;
+            // }
         }
     }
 }

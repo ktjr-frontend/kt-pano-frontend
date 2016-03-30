@@ -121,7 +121,7 @@
                 } else if (res.status === 500) { // 注释掉是为了接部分接口
                     ktSweetAlert.swal({
                         title: '请求失败！',
-                        text: '服务器出错了，请稍后再试',
+                        text: '抱歉！服务器繁忙。',
                         type: 'error'
                     });
                     // $state.go('error.500')

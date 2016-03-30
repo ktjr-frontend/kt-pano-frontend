@@ -15,7 +15,9 @@
                  */
                 filterInit: function(filters, options) {
                     var _self = this
-                    _self._dataAdaptor(filters, options)
+                    if (!filters.hasAdapt) {
+                        _self._dataAdaptor(filters, options)
+                    }
                     return function(params) {
                         _self.filterUpdate(filters, params)
                     }
@@ -26,6 +28,12 @@
                             _.each(v.options, function(o) {
                                 /*eslint-disable*/
                                 o.active = o.value == params[v.value]
+                                    /*eslint-enable*/
+                            })
+                        } else { //默认是全部处于选中状态
+                            _.each(v.options, function(o, i) {
+                                /*eslint-disable*/
+                                o.active = i === 0
                                     /*eslint-enable*/
                             })
                         }
@@ -88,7 +96,7 @@
                     var w = $(chartId + ' canvas').width()
                     var fontSize = 12
                     var leftGap = 40
-                    var rightGap = 30
+                    var rightGap = 20
                     var lineHeight = 30
                     var lineLength = w - leftGap - rightGap / 2
                     var baseBottom = 70
@@ -100,16 +108,16 @@
                     var sum = 0
 
                     _.each(legendTotalLength, function(v) {
-                        sum = sum + v
-                        if (sum > lineLength) {
-                            sum = v
-                            lines++
-                        }
-                    })
-
+                            sum = sum + v
+                            if (sum > lineLength) {
+                                sum = v
+                                lines++
+                            }
+                        })
+                        // debugger
                     var op = {
                         legend: {
-                            left: lines < 2 ? 'center' : 40
+                            left: lines < 2 ? 'center' : leftGap
                         },
                         grid: {
                             bottom: lines < 2 ? baseBottom : ((lines - 1) * lineHeight + baseBottom)
@@ -265,6 +273,8 @@
                                 return true
                             }
                     })
+
+                    filters.hasAdapt = true // 打标识，避免重复数据处理
                 }
             }
 

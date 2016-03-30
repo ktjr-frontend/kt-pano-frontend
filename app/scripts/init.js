@@ -21,37 +21,29 @@ $(document).ready(function() {
             $('.splash').css('display', 'none')
         }, 10);
 
-        // 谷歌统计
-        // (function(i, s, o, g, r, a, m) {
-        //     /*jshint -W069 */
-        //     i['GoogleAnalyticsObject'] = r;
-        //     i[r] = i[r] || function() {
-        //         (i[r].q = i[r].q || []).push(arguments)
-        //     }, i[r].l = 1 * new Date();
-        //     a = s.createElement(o),
-        //         m = s.getElementsByTagName(o)[0];
-        //     a.async = 1;
-        //     a.src = g;
-        //     m.parentNode.insertBefore(a, m)
-        // })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        // ga('create', 'UA-66185696-2', 'auto');
-        // ga('send', 'pageview');
-
-        // // 百度统计
-        // window._hmt = window._hmt || [];
-        // (function() {
-        //     var hm = document.createElement('script');
-        //     hm.src = '//hm.baidu.com/hm.js?ff09f3032a8e3f85e8e0cc21aaa1d1ec';
-        //     var s = document.getElementsByTagName('script')[0];
-        //     s.parentNode.insertBefore(hm, s);
-        // })();
-
-        /*;(function() {
-            var cnzz = document.createElement('script');
-            cnzz.src = '//s4.cnzz.com/z_stat.php?id=1256062534&web_id=1256062534';
+        // 百度统计
+        window._hmt = window._hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = '//hm.baidu.com/hm.js?6d94b9f622fe4fbef2aac330d92a64fc';
             var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(cnzz, s);
-        })();*/
+            s.parentNode.insertBefore(hm, s);
+        })();
+
+        // GrowingIO 统计
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function() {
+            _vds.push(['setAccountId', 'b43e047b2988432697b123f5b33c73c9']);
+            (function() {
+                var vds = document.createElement('script');
+                vds.type = 'text/javascript';
+                vds.async = true;
+                vds.src = (document.location.protocol === 'https:' ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(vds, s);
+            })();
+        })();
     })
 
 

@@ -8,7 +8,7 @@
             this.routes = {
                 'home': {
                     abstract: true,
-                    url: '?apimock',
+                    url: '?apimock&landingpagetypea&landingpagetypeb',
                     templateUrl: 'views/common/home.html',
                     data: {
                         pageTitle: '开通金融',

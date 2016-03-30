@@ -119,7 +119,7 @@
                     }
                 },
                 'pano.products.obligatoryRight': {
-                    url: '/obligatory_right?status_eq&life_days_in&rate_in&asset_type_eq&mapped_exchange_eq&from_eq&page&per_page&sort_by&order',
+                    url: '/obligatory_right?status_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/obligatory_right.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/obligatory_right.js',
@@ -154,7 +154,7 @@
                     }
                 },
                 'pano.order.obligatoryRight': {
-                    url: '/obligatory_right?asset_type_eq&life_days_in&guarantees_eq&page&per_page&sort_by&order',
+                    url: '/obligatory_right?asset_type_eq&guarantees_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/order/obligatory_right.html',
                     resolve: ktLazyResolve([
                         'views/pano/order/obligatory_right.js',
@@ -166,7 +166,7 @@
                 },
 
                 'pano.order.assetManage': {
-                    url: '/asset_manage?rate_in&life_days_in&page&per_page&sort_by&order',
+                    url: '/asset_manage?rate_in&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/order/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/order/asset_manage.js',

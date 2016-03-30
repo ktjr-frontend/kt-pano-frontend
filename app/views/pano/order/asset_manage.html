@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <tr class="text-right" ng-repeat="asset in assets" ng-if="assets.length">
-            <td class="text-left" ng-bind="::asset.name | ktNull"></td>
+            <td ng-class="{'text-left': asset.name}"  ng-bind="::asset.name | ktNull"></td>
             <td ng-bind="::asset.asset_type | ktNull"></td>
             <td ng-bind="::getRate(asset.directive_rate, asset.highest_rate)"></td>
             <td ng-bind="::asset.sustained | ktNull"></td>
@@ -34,7 +34,8 @@
             <td ng-bind="::getStatus(asset.status)" ng-class="{'text-warning-light': product.status == '已发布'}"></td>
             <td class="text-center">
                 <a class="hover-underline" href="{{::asset.attachment_url}}">下载资料</a>
-                <a class="hover-underline" ng-click="contactMe(asset.id)">与我联系</a>
+                <a ng-if="getStatus(asset.status) == '可预约'" class="hover-underline" ng-click="contactMe(asset.id)">与我联系</a>
+                <span class="silver" ng-if="getStatus(asset.status) != '可预约'">与我联系</span>
             </td>
         </tr>
         <tr ng-if="!assets.length && !isLoading()">

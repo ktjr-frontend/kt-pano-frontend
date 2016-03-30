@@ -17,6 +17,9 @@
                         'common/directives/kt-captchaimg-directive.js',
                         'common/factories/kt-captcha.js'
                     ]),
+                    controller: ['$scope', function ($scope) {
+                        $scope.footerContainer = true
+                    }],
                     data: {
                         pageTitle: 'Common',
                         specialClass: 'account-page'

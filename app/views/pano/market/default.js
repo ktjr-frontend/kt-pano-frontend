@@ -34,12 +34,15 @@
                 },
                 legend: {
                     left: isAllDimension ? leftGap - 25 : 'center',
-                    right: rightGap / 2,
+                    // right: rightGap / 2,
                     textStyle: {
                         fontSize: 12,
                         color: '#626472' // 图例文字颜色
                     }
                 },
+                yAxis: [{
+                    nameGap: 20
+                }],
                 grid: {
                     show: true,
                     top: topGap,
@@ -55,7 +58,8 @@
 
             var weekAmountChart = $scope.weekAmountChart = {
                 chartOptions: {
-                    // group: 'group1'
+                    filterVisble: false
+                        // group: 'group1'
                 },
                 _params: {},
                 xAxis: params.dimension,
@@ -93,19 +97,19 @@
                         //     value: 'all'
                         // },
                         {
-                            name: '1个月',
+                            name: '1M',
                             value: 1
                         }, {
-                            name: '3个月',
+                            name: '3M',
                             value: 3
                         }, {
-                            name: '6个月',
+                            name: '6M',
                             value: 6
                         }, {
-                            name: '12个月',
+                            name: '1Y',
                             value: 12
                         }, {
-                            name: '24个月',
+                            name: '2Y',
                             value: 24
                         }
                     ]
@@ -135,9 +139,16 @@
             // 自定义缩放组件的位置初始化，百分比
             function getStartEndPercent(data) {
                 var l = data.xAxis.length
+                var start = l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25
+                var end = l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
+
+                if (end - start < 5) {
+                    start = end - 5
+                }
+
                 return {
-                    start: l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25,
-                    end: l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
+                    start: start,
+                    end: end
                 }
             }
 

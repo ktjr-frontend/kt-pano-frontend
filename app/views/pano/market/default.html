@@ -7,6 +7,9 @@
         <div class="chart-table-body">
             <div id="weekAmountChart" kt-echart chart-options="weekAmountChart.chartOptions" style="height:400px;">
             </div>
+            <div class="tools">
+                <a class="tool" ng-class="{'on': weekAmountChart.chartOptions.filterVisible}" ng-click="weekAmountChart.chartOptions.filterVisible = !weekAmountChart.chartOptions.filterVisible"><i class="fa fa-eye"></i></a>
+            </div>
         </div>
     </div>
     <!-- 不同期限资产产品发行量 -->
@@ -53,6 +56,9 @@
         </div>
         <div class="chart-table-body">
             <div id="weekRateChart" kt-echart chart-options="weekRateChart.chartOptions" style="height:400px;">
+            </div>
+            <div class="tools">
+                <a class="tool" ng-class="{'on': weekRateChart.chartOptions.filterVisible}" ng-click="weekRateChart.chartOptions.filterVisible = !weekRateChart.chartOptions.filterVisible"><i class="fa fa-eye"></i></a>
             </div>
         </div>
     </div>

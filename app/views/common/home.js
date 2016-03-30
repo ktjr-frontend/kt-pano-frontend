@@ -7,7 +7,7 @@
                 $state.go('home.index')
             }
 
-            $scope.isHomeView = true
+            $scope.footerContainer = true
 
             if ($window.localStorage.token) {
                 ktUserService.get({
