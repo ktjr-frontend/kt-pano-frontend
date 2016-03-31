@@ -138,7 +138,6 @@ namespace :deploy do
     # link shared uploads the ./dist/uploads.
     queue! %[ln -svf #{shared_uploads} dist/uploads]
   end
-
 end
 
 # For help in making your deploy script, see the Mina documentation:

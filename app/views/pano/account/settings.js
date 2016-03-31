@@ -66,7 +66,8 @@
                 })
             }
 
-            $scope.isSafari = $window.isSafari()
+            $scope.autoCopyDisabled = $window.isSafari() || $window.isSogou()
+            
             $scope.copyTooltip = '按' + ($window.isWindows() ? 'Ctrl' : '⌘') + '-C复制!'
             $scope.copySuccess = function() {
                 $scope.tooltipIsOpen = true
