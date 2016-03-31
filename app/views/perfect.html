@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.email.$invalid && perfectForm.email.$dirty}">
-                            <label class="text-primary-dark text-left fn col-md-12 mt10"><span class="ml5 f1_4rem ctl">*</span>以下哪些是您关注的金融资产类型？</label>
+                            <label class="text-primary-dark text-left fn col-md-12 mt10">以下哪些是您关注的金融资产类型？</label>
                             <div class="col-md-12 mt15">
                                 <div class="checkbox-label" ng-repeat="like in likes">
                                     <input id="{{'like_' + like.value}}" type="checkbox" checklist-model="user.likes" checklist-value="like.value" checklist-change="checkListChange()">

@@ -25,7 +25,7 @@ $(document).ready(function() {
         window._hmt = window._hmt || [];
         (function() {
             var hm = document.createElement('script');
-            hm.src = '//hm.baidu.com/hm.js?6d94b9f622fe4fbef2aac330d92a64fc';
+            hm.src = '//hm.baidu.com/hm.js?3ac43202abd384ca8d53e206a9d630f1';
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(hm, s);
         })();
@@ -34,7 +34,7 @@ $(document).ready(function() {
         var _vds = _vds || [];
         window._vds = _vds;
         (function() {
-            _vds.push(['setAccountId', 'b43e047b2988432697b123f5b33c73c9']);
+            _vds.push(['setAccountId', 'bf0171ce43a26b90']);
             (function() {
                 var vds = document.createElement('script');
                 vds.type = 'text/javascript';
