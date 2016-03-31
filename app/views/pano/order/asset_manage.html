@@ -2,7 +2,7 @@
     <thead>
         <tr kt-table-sort>
             <th>资产名称</th>
-            <th>资产类型</th>
+            <!-- <th>资产类型</th> -->
             <th>
                 <span>年化收益率</span>
                 <!-- <i class="sort-icon"></i> -->
@@ -24,7 +24,7 @@
     <tbody>
         <tr class="text-right" ng-repeat="asset in assets" ng-if="assets.length">
             <td ng-class="{'text-left': asset.name}"  ng-bind="::asset.name | ktEclipsis:25" title="{{::asset.name | ktNull}}"></td>
-            <td ng-bind="::asset.asset_type | ktNull"></td>
+            <!-- <td ng-bind="::asset.asset_type | ktNull"></td> -->
             <td ng-bind="::getRate(asset.directive_rate, asset.highest_rate)"></td>
             <td ng-bind="::getLife(asset.sustained) | ktEclipsis:6" title="{{::getLife(asset.sustained)}}"></td>
             <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td>
@@ -40,7 +40,7 @@
             </td>
         </tr>
         <tr ng-if="!assets.length && !isLoading()">
-            <td colspan="11" class="text-navy-blue text-center">
+            <td colspan="10" class="text-navy-blue text-center">
                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                 <span class="f1_5rem">没有数据！</span>
             </td>

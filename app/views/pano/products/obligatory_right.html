@@ -31,7 +31,7 @@
     <tbody>
         <tr class="text-right" ng-repeat="product in products" ng-if="products.length">
             <td ng-class="{'text-left': product.name}" ng-bind="::product.name | ktNull"></td>
-            <td ng-bind="::getLife(product.life)"></td>
+            <td ng-bind="::getLife(product.life)|ktEclipsis:4" title="{{::getLife(product.life)}}"></td>
             <td ng-bind="::product.rate | ktNumber:2:'percent2'"></td>
             <td ng-bind="::product.sum_amount | ktNumberLocate"></td>
             <!-- <td ng-bind="::product.selling_amount | ktNumberLocate"></td> -->
