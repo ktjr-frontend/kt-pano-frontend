@@ -61,9 +61,9 @@
                                             </span>
                                         </button> -->
                                     </div>
-                                    <div class="cbs pt10 text-warning-light" ng-show="waitCaptchaMessage">
-                                    没收到验证码？ <a class="tu" ng-hide="waitCaptchaTel" ng-click="getCaptcha($event, 'tel', 'captcha')">试试语音获取</a>
-                                    （等待<span ng-bind="timerTel"></span>）
+                                    <div class="cbs pt10 text-warning-light" ng-show="messageTimerMoreThanTen">
+                                    没收到验证码？ <a class="tu" ng-click="getCaptcha($event, 'tel', 'captcha')">试试语音获取</a>
+                                        <div ng-hide="!waitCaptchaTel">（等待<span ng-bind="timerTel"></span>）</div>
                                     </div>
                                     <div class="mt5 text-warning cbs" ng-messages="registerForm.captcha.$dirty && registerForm.captcha.$error">
                                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入验证码</div>

@@ -52,11 +52,12 @@
         .factory('ktGetCaptcha', function(ktSweetAlert, ktCaptchaHelper) {
             return {
                 getCaptcha: function(scope, service, params, model) {
+                    scope.waitCaptchaMessage = false;
+                    scope.waitCaptchaTel = false;
+                    
                     return function(mobile, channel) {
                         var timerMessage = ktCaptchaHelper.timerMessage(scope)
                         var timerTel = ktCaptchaHelper.timerTel(scope)
-                        scope.waitCaptchaMessage = false;
-                        scope.waitCaptchaTel = false;
 
                         service.get($.extend({
                             mobile: mobile,

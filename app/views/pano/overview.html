@@ -3,7 +3,7 @@
         <div class="panel-body clfix pr">
             <div class="chart-table" style="margin-top: -15px;">
                 <div class="chart-table-heading clfix">
-                    <div class="chart-table-title fl">各平台发行量-收益率近7日统计图<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="展示最近7天内各平台产品发行量变化与平台综合年化收益率情况。气泡面积大小对应平台发行量。" class="icon-pano icon-info f1_2rem ml5"></i></div>
+                    <div class="chart-table-title fl">各平台发行量-收益率近7日统计图<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="展示最近7天内各平台产品发行量变化与平台综合年化收益率情况。气泡面积大小对应平台发行量。发行量是最近7日内平台所有产品实际募集金额增加量，收益率是加权统计后的平台所有产品综合年化收益率。" class="icon-pano icon-info f1_2rem ml5"></i></div>
                     <div class="update-time fr">
                         <span class="ml10">
                             更新时间：<span ng-bind="::(updateDate)"></span>
@@ -50,6 +50,10 @@
                     <div id="platformAssetTypeChart" kt-echart chart-options="platformAssetTypeChart.chartOptions" style="height:400px;">
                     </div>
                 </div>
+            </div>
+            <div class="mt30">
+                <p class="tips f1_2rem lh1_8em text-placeholder text-center">*本页面参与计算的产品来自互联网金融平台的活期栏目、票据栏目以及定期或固收栏目，不包括P2P产品、私募基金产品和转让产品。
+                </p>
             </div>
         </div>
     </div>

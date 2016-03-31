@@ -35,7 +35,6 @@
                         }
                     })
 
-
                 }, function(res) {
                     $scope.pendingRequests = false
                     ktSweetAlert.swal({
@@ -55,7 +54,6 @@
             $scope.getCaptcha = function($event, channel) {
                 $event.preventDefault()
                 $event.stopPropagation()
-
 
                 if (channel === 'sms' && $scope.waitCaptchaMessage) return
                 if (channel === 'tel' && $scope.waitCaptchaTel) return

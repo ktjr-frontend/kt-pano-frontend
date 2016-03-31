@@ -6,10 +6,11 @@
 
             var search = $location.search()
             $scope.shared = {}
+            var perPageCount = 20
 
             var params = $scope.shared.params = $.extend({
                 page: 1,
-                per_page: 20,
+                per_page: perPageCount,
                 maxSize: $window.innerWidth > 480 ? 10 : 3
             }, search)
 
@@ -27,7 +28,7 @@
                 $.extend(params, {
                     tab: tab,
                     page: 1,
-                    per_page: 10,
+                    per_page: perPageCount,
                     sort_by: null,
                     order: null,
                     asset_type_eq: null,
@@ -83,6 +84,11 @@
                     return '已售罄'
                 }
                 return status || '-'
+            }
+
+            $scope.getLife = function (life) {
+                var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '-')
+                return lifeName
             }
 
             $scope.contactMe = function(assetID) {

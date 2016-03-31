@@ -8,8 +8,8 @@
             <div id="weekAmountChart" kt-echart chart-options="weekAmountChart.chartOptions" style="height:400px;">
             </div>
             <div class="tools">
-                <div class="tool" uib-tooltip="透视模式开关" tooltip-append-to-body="true" tooltip-placement="top" ng-class="{'on': weekAmountChart.chartOptions.filterVisible}">
-                    <div class="tg-btn">
+                <div class="tool f1_2rem" uib-tooltip="透视模式开关" tooltip-append-to-body="true" tooltip-placement="top" ng-class="{'on': weekAmountChart.chartOptions.filterVisible}">
+                    <div class="tg-btn tg-btn-blue">
                         <input type="checkbox" ng-model="weekAmountChart.chartOptions.filterVisible" id="tg1">
                         <label for="tg1"></label>
                     </div>
@@ -63,8 +63,8 @@
             <div id="weekRateChart" kt-echart chart-options="weekRateChart.chartOptions" style="height:400px;">
             </div>
             <div class="tools">
-                <div class="tool" uib-tooltip="透视模式开关" tooltip-append-to-body="true" tooltip-placement="top" ng-class="{'on': weekRateChart.chartOptions.filterVisible}">
-                    <div class="tg-btn">
+                <div class="tool f1_2rem" uib-tooltip="透视模式开关" tooltip-append-to-body="true" tooltip-placement="top" ng-class="{'on': weekRateChart.chartOptions.filterVisible}">
+                    <div class="tg-btn tg-btn-blue">
                         <input type="checkbox" ng-model="weekRateChart.chartOptions.filterVisible" id="tg2">
                         <label for="tg2"></label>
                     </div>
@@ -105,7 +105,7 @@
                     <th ng-repeat="th in ::assetManger.keys" ng-bind="th"> </th>
                 </tr>
             </thead>
-            <tbody ng-repeat="v in ::assetManger.values">
+            <tbody ng-repeat="v in ::assetManger.values" ng-if="v.children.length">
                 <tr ng-repeat="c in ::v.children">
                     <td ng-if="$index === 0" rowspan="{{::v.children.length}}" ng-bind="::v.name"></td>
                     <td ng-bind="c.name"></td>

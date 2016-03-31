@@ -139,6 +139,8 @@
                             boundaryGap: true,
                             min: 0,
                             max: (function() {
+                                if (!yAxisArr.length) return 'auto'
+
                                 var max = _.max(yAxisArr)
                                 var maxLength = _.max(yAxisArr).toFixed(0).length
                                 return _.ceil((max + Math.pow(10, maxLength - 2) * 5), 1 - maxLength)

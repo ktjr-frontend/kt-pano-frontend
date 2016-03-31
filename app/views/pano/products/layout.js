@@ -3,14 +3,14 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktProductsLayoutCtrl', function($scope, $window, $timeout, $state, $location, ktSweetAlert, ktCompassAssetFiltersService, ktDataHelper) {
-
+            var perPageCount = 20
             var search = $location.search()
             $scope.shared = {}
             $scope.shared.today_added_count = 0
 
             var params = $scope.shared.params = $.extend({
                 page: 1,
-                per_page: 20,
+                per_page: perPageCount,
                 totalItems: 10,
                 maxSize: $window.innerWidth > 480 ? 10 : 3
             }, search)
@@ -48,6 +48,7 @@
                 }
                 return status || '-'
             }
+            
             $scope.getLife = function (life) {
                 var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '活期')
                 return lifeName

@@ -19,8 +19,8 @@ module.exports = {
     baseUrl: {
         options: {
             patterns: [{
-                match: /href="http:\/\/dev\.ktjr\.com:8000\/"/g,
-                replacement: 'href="https://pano.ktjr.com"'
+                match: /href="http:\/\/dev\.ktjr\.com:8888\/"/g,
+                replacement: 'href="http://www.ktpano.com"'
             }
             /*, {
                 match: /\/mock_data\/seallogo\.dll/g,
