@@ -29,9 +29,11 @@
                                     $rootScope.user = data.account
                                     $state.go('pano.overview')
                                     deferred.resolve(data.account)
-                                }, function () {
+                                }, function() {
                                     deferred.resolve(null)
                                 })
+                            } else {
+                                deferred.resolve(null)
                             }
                             return deferred.promise
                         }

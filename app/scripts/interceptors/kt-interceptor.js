@@ -105,7 +105,7 @@
                     CacheFactory.clearAll()
 
                     // ipCookie.remove('connect.sid') //这是httpOnly Cookie 前端无法删除
-
+                    debugger
                     if (res.config && res.config.params && res.config.params.notRequired) { //官网不需要跳转登录页面
                         return $q.reject(res.data)
                     }
