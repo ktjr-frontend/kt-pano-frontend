@@ -18,7 +18,24 @@
                     resolve: ktLazyResolve([
                         'views/common/home.js',
                         'views/home/index.css'
-                    ]),
+                    ], {
+                        user: function($q, $window, $rootScope, $state, ktUserService) {
+                            'ngInject';
+                            var deferred = $q.defer()
+                            if ($window.localStorage.token) {
+                                ktUserService.get({
+                                    notRequired: true
+                                }, function(data) {
+                                    $rootScope.user = data.account
+                                    $state.go('pano.overview')
+                                    deferred.resolve(data.account)
+                                }, function () {
+                                    deferred.resolve(null)
+                                })
+                            }
+                            return deferred.promise
+                        }
+                    }),
                     controller: 'ktHomeCtrl'
                 },
                 'home.index': {

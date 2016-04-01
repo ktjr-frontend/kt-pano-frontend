@@ -25,7 +25,14 @@
 
             $scope.tabSelect = function(state) {
                 if ($state.current.name !== state) {
-                    $state.go(state, params)
+                    $state.go(state, $.extend(params, {
+                        status_eq: null,
+                        life_days_in: null,
+                        rate_in: null,
+                        asset_type_eq: null,
+                        exchange_eq: null,
+                        from_eq: null,
+                    }))
                 }
             }
 
@@ -36,7 +43,7 @@
                 $state.go($state.current.name, p)
             }
 
-            $scope.$on('totalItemGot', function () {//totalItem 不满足初始page的会自动跳转到第一页
+            $scope.$on('totalItemGot', function() { //totalItem 不满足初始page的会自动跳转到第一页
                 $scope.pageChanged = function() {
                     $location.search('page', params.page)
                 }
@@ -48,8 +55,8 @@
                 }
                 return status || '-'
             }
-            
-            $scope.getLife = function (life) {
+
+            $scope.getLife = function(life) {
                 var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '活期')
                 return lifeName
             }

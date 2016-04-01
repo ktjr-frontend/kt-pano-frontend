@@ -16,9 +16,11 @@
             var defaultShowLength = 8
             var legendSelected = {}
             var getSelectedLegend = function(xAxis) {
-                _.each(xAxis, function(v, i) {
-                    legendSelected[v] = i <= defaultShowLength
-                })
+                if (_.isEmpty(legendSelected)) {
+                    _.each(xAxis, function(v, i) {
+                        legendSelected[v] = i <= defaultShowLength
+                    })
+                }
             }
             var rightGap = 40 // 图表主体距离右边距离
             var leftGap = 65
@@ -40,9 +42,9 @@
                         color: '#626472' // 图例文字颜色
                     }
                 },
-                yAxis: [{
+                yAxis: {
                     nameGap: 20
-                }],
+                },
                 grid: {
                     show: true,
                     top: topGap,
@@ -67,8 +69,7 @@
             }
 
             var durationAmountChart = $scope.durationAmountChart = {
-                chartOptions: {
-                },
+                chartOptions: {},
                 _params: getStartEnd(),
                 xAxis: params.dimension,
                 yAxisFormat: 'rmb', //percent2 意思不需要*100
@@ -79,31 +80,28 @@
             }
 
             var weekRateChart = $scope.weekRateChart = {
-                chartOptions: {
-                },
+                chartOptions: {},
                 xAxis: params.dimension,
                 yAxisFormat: 'percent2', //percent2 意思不需要*100
                 yAxis: 'rate',
                 _filters: [{
                     name: '期限：',
-                    options: [
-                        {
-                            name: '1M',
-                            value: 1
-                        }, {
-                            name: '3M',
-                            value: 3
-                        }, {
-                            name: '6M',
-                            value: 6
-                        }, {
-                            name: '1Y',
-                            value: 12
-                        }, {
-                            name: '2Y',
-                            value: 24
-                        }
-                    ]
+                    options: [{
+                        name: '1M',
+                        value: 1
+                    }, {
+                        name: '3M',
+                        value: 3
+                    }, {
+                        name: '6M',
+                        value: 6
+                    }, {
+                        name: '1Y',
+                        value: 12
+                    }, {
+                        name: '2Y',
+                        value: 24
+                    }]
                 }],
                 _getParamName: function(index) {
                     return _.find(this._filters[index].options, { value: this._params.life }).name
@@ -150,8 +148,8 @@
                 var isGtTwoWeeks = end.weeks() - start.weeks() > 1
 
                 return {
-                    start_at: isGtTwoWeeks ? moment(params.end_at).days(0).subtract(2, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.start_at).days(0).add(1, 'd').format('YYYY-MM-DD'),
-                    end_at: isGtTwoWeeks ? moment(params.end_at).days(0).subtract(1, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.end_at).days(6).add(1, 'd').format('YYYY-MM-DD'),
+                    start_at: isGtTwoWeeks ? moment(params.end_at).days(0).subtract(1, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.start_at).days(0).add(1, 'd').format('YYYY-MM-DD'),
+                    end_at: isGtTwoWeeks ? moment(params.end_at).days(0).format('YYYY-MM-DD') : moment(params.end_at).days(6).add(1, 'd').format('YYYY-MM-DD'),
                 }
             }
 
@@ -181,12 +179,12 @@
 
                         $timeout.cancel(updatePromise)
                         updatePromise = $timeout(function() {
-                            $scope.durationAmountChart.udpateDataView({
+                            $scope.durationAmountChart.updateDataView({
                                 start_at: startDate,
                                 end_at: endDate
                             }, true)
 
-                            $scope.durationRateChart.udpateDataView({
+                            $scope.durationRateChart.updateDataView({
                                 start_at: startDate,
                                 end_at: endDate
                             }, true)
@@ -243,12 +241,12 @@
 
                         $timeout.cancel(updatePromise)
                         updatePromise = $timeout(function() {
-                            $scope.durationAmountChart.udpateDataView({
+                            $scope.durationAmountChart.updateDataView({
                                 start_at: startDate,
                                 end_at: endDate
                             }, true)
 
-                            $scope.durationRateChart.udpateDataView({
+                            $scope.durationRateChart.updateDataView({
                                 start_at: startDate,
                                 end_at: endDate
                             }, true)
@@ -261,7 +259,7 @@
                 }, options || {})]
             }*/
 
-            weekAmountChart.udpateDataView = function(paramObj) {
+            weekAmountChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
@@ -275,7 +273,7 @@
                 function updateView() {
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
-                    getSelectedLegend(legend) //只需要生成一次，其他chart与其相同
+                    getSelectedLegend(legend) 
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
 
@@ -303,9 +301,9 @@
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
-                        yAxis: [{
+                        yAxis: {
                             name: '发行量（单位：万元）'
-                        }],
+                        },
                         xAxis: [{
                             type: 'category',
                             name: '周',
@@ -345,7 +343,7 @@
                 }
             }
 
-            durationAmountChart.udpateDataView = function(paramObj, silent) {
+            durationAmountChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
@@ -365,28 +363,31 @@
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
-                        yAxis: [{
+                        yAxis: {
                             name: '发行量（单位：万元）'
-                        }],
-                        xAxis: [{
+                        },
+                        xAxis: {
                             type: 'category',
                             name: '期限',
                             nameLocation: 'end',
                             nameGap: 10,
                             boundaryGap: true,
                             data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
-                        }],
+                        },
 
                     })
                 }
 
                 function updateView() {
-                    var initOptions = silent ? {} : initChartOptions()
+                    var initOptions = initChartOptions()
                     var data = _self.data
+                    var legend = _.map(data.data, 'name')
+
+                    getSelectedLegend(legend)
 
                     _self.chartOptions = $.extend(true, {}, initOptions, {
                         legend: {
-                            data: _.map(data.data, 'name'),
+                            data: legend,
                             selected: legendSelected,
                         },
                         /*yAxis: [{
@@ -413,7 +414,7 @@
             }
 
 
-            weekRateChart.udpateDataView = function(paramObj) {
+            weekRateChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
@@ -427,6 +428,7 @@
                 function updateView() {
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
+                    getSelectedLegend(legend)
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekRateChart', legend)
 
@@ -449,11 +451,11 @@
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
-                        yAxis: [{
+                        yAxis: {
                             name: '收益率（单位：%）',
                             max: ktDataHelper.getAxisMax(data.data),
                             min: ktDataHelper.getAxisMin(data.data),
-                        }],
+                        },
                         xAxis: [{
                             type: 'category',
                             name: '周',
@@ -474,9 +476,11 @@
                         }],
 
                         series: _.map(data.data, function(v) {
+                            console.log(v.data, v.name)
                             return {
                                 name: v.name,
                                 type: 'line',
+                                xAxisIndex: 0,
                                 markLine: {
                                     data: ktDataHelper.getMarkLineCoords(v.data)
                                 },
@@ -485,10 +489,11 @@
                             }
                         })
                     })
+
                 }
             }
 
-            durationRateChart.udpateDataView = function(paramObj, silent) {
+            durationRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
@@ -513,34 +518,37 @@
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
-                        yAxis: [{
+                        yAxis: {
                             name: '收益率（单位：%）',
-                        }],
-                        xAxis: [{
+                        },
+                        xAxis: {
                             type: 'category',
                             name: '期限',
                             nameLocation: 'end',
                             nameGap: 10,
                             boundaryGap: false,
                             data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
-                        }],
+                        },
 
                     })
                 }
 
                 function updateView() {
                     var data = _self.data
-                    var initOptions = silent ? {} : initChartOptions()
+                    var initOptions = initChartOptions()
+                    var legend = _.map(data.data, 'name')
 
+                    getSelectedLegend(legend)
+                    
                     _self.chartOptions = $.extend(true, {}, initOptions, {
                         legend: {
                             data: _.map(data.data, 'name'),
                             selected: legendSelected,
                         },
-                        yAxis: [{
+                        yAxis: {
                             max: ktDataHelper.getAxisMax(data.data),
                             min: ktDataHelper.getAxisMin(data.data),
-                        }],
+                        },
                         series: _.map(data.data, function(v) {
                             return {
                                 name: v.name,
@@ -556,15 +564,14 @@
                 }
             }
 
-            weekAmountChart.udpateDataView()
-            durationAmountChart.udpateDataView()
-            weekRateChart.udpateDataView()
-            durationRateChart.udpateDataView()
-                // echarts.connect('group1')
-                // 资产管理类数据
+            weekAmountChart.updateDataView()
+            durationAmountChart.updateDataView()
+            weekRateChart.updateDataView()
+            durationRateChart.updateDataView()
+
+            // 资产管理类数据
             $scope.assetManger = {}
             ktRateTrendService.get(function(data) {
-                // [].unshift.apply(data.stat.keys, ['资管管理人', '平台'])
                 $scope.assetManger = data.stat
             })
 

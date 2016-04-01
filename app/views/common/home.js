@@ -9,14 +9,14 @@
 
             $scope.footerContainer = true
 
-            if ($window.localStorage.token) {
+            /*if ($window.localStorage.token) {
                 ktUserService.get({
                     notRequired: true
                 }, function(data) {
                     $rootScope.user = data.account
                     $state.go('pano.overview')
                 })
-            }
+            }*/
 
         })
 

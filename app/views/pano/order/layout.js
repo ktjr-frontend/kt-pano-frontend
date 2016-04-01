@@ -33,6 +33,7 @@
                     order: null,
                     asset_type_eq: null,
                     guarantees_eq: null,
+                    rate_in: null,
                     life_days_in: null
                 })
                 $state.go(state, params)

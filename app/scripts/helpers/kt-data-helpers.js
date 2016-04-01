@@ -66,6 +66,19 @@
                     return newParams
                 },
                 getMarkLineCoords: function(data) { // null or ''值算出有效间隔点用虚线连接
+                    if (!_.compact(data).length) {
+                        //使用空值，避免markline不更新
+                        return [
+                            [{
+                                coord: [0, 0],
+                                symbol: 'none'
+                            }, {
+                                coord: [0, 0],
+                                symbol: 'none'
+                            }]
+                        ]
+                    }
+
                     var coords = _.chain(data).map(function(v, i) {
                             if (!_.isNil(v) && v !== '') {
                                 return i
@@ -85,6 +98,16 @@
                                     symbol: 'none'
                                 }]
                             }
+
+                            //使用空值，避免markline不更新
+                            return [{
+                                coord: [0, 0],
+                                symbol: 'none'
+                            }, {
+                                coord: [0, 0],
+                                symbol: 'none'
+                            }]
+
                         }).filter(function(v) {
                             return !_.isNil(v)
                         }).value()
@@ -117,7 +140,8 @@
                         // debugger
                     var op = {
                         legend: {
-                            left: lines < 2 ? 'center' : leftGap
+                            left: lines < 2 ? 'center' : leftGap,
+                            right: lines < 2 ? 'auto' : rightGap
                         },
                         grid: {
                             bottom: lines < 2 ? baseBottom : ((lines - 1) * lineHeight + baseBottom)
@@ -138,13 +162,13 @@
 
                     chart.data = _.map(chart.data, function(v) {
                         v.data = _.map(v.data, function(v2, i2) {
-                            return (v2 / (xAxisSumArr[i2] || 1)) * 100
+                            return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
                         })
                         return v
                     })
                     return chart
                 },
-                chartDataPrune: function(chart) { //替换null为'',否则echarts显示有问题
+                chartDataPrune: function(chart) { //替换null为'',否则echarts显示有问题,横坐标第一个值会没
                     chart.data = _.map(chart.data, function(v) {
                         v.data = _.map(v.data, function(v1) {
                             return _.isNil(v1) ? '' : v1
@@ -157,6 +181,7 @@
                     var fl = _.map(legend, function(v) {
                         return parseInt(v, 10) + format
                     })
+
                     switch (format) {
                         case 'm':
                             fl = _.map(legend, function(v) {
