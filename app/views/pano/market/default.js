@@ -34,7 +34,7 @@
                 },
                 legend: {
                     left: isAllDimension ? leftGap - 25 : 'center',
-                    // right: rightGap / 2,
+                    right: rightGap / 2,
                     textStyle: {
                         fontSize: 12,
                         color: '#626472' // 图例文字颜色

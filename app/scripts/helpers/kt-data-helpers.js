@@ -240,10 +240,14 @@
                     options = options || []
 
                     _.each(filters, function(v) {
+                        var option = _.find(options, { value: v.value })
+
+                        v.type = (option && option.type) ? option.type : 'list'
 
                         v.options = _.map(v.options, function(o) {
                             return {
                                 name: o[0],
+                                visible: option && _.isNil(option.visible) ? option.visible : true,
                                 value: o[1]
                             }
                         })
@@ -251,11 +255,9 @@
                         v.options.unshift({
                             name: '全部',
                             active: true,
+                            visible: true,
                             value: 'all'
                         })
-
-                        var option = _.find(options, { value: v.value })
-                        v.type = (option && option.type) ? option.type : 'list'
 
                         v.toggleView = function($event) { //折叠切换
                             v.collapsed = !v.collapsed
