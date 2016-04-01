@@ -77,8 +77,8 @@
                             <div class="col-md-12">
                                 <input ng-minlength="6" autocomplete="off" autofill="false" ng-maxlength="20" placeholder="密码（6～20位，包含大小写字母和数字）" type="password" required="required" ng-model="registerUser.password" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/" id="" class="form-control" name="password">
                                 <div class="mt5 text-warning" ng-messages="registerForm.password.$dirty && registerForm.password.$error">
-                                    <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于6个字符</div>
-                                    <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于20个字符</div>
+                                    <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于6个字符，必须包含大小写字母和数字</div>
+                                    <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于20个字符，必须包含大小写字母和数字</div>
                                     <div ng-message="pattern"><i class="fa fa-frown-o fb mr5"></i>密码过于简单，必须包含大小写字母和数字</div>
                                 </div>
                             </div>

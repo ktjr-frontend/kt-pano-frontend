@@ -96,7 +96,7 @@
                 ktAssetIntentionService.save({
                     asset_id: assetID
                 }, function() {
-                    ktSweetAlert.success('已收到您的要求，开通会与您联系。')
+                    ktSweetAlert.success('已收到您的要求，开通金融会与您联系。')
                 }, function() {
                     ktSweetAlert.error('抱歉！服务器繁忙。')
                 })

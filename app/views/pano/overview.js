@@ -8,7 +8,7 @@
                 projectID: $stateParams.projectID
             })
 
-            $scope.updateDate = moment().subtract(1, 'd').format('YYYY-MM-DD')
+            $scope.updateDate = moment().subtract(7, 'd').format('YYYY-MM-DD') + ' ~ ' + moment().subtract(1, 'd').format('YYYY-MM-DD')
 
             var rateAmountChart = $scope.rateAmountChart = {
                 chartOptions: {},
