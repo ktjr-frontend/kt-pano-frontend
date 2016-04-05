@@ -51,6 +51,24 @@ body {
     &.simple-page {
         background-color: @color-2;
     }
+    &.pano-page{
+        #header{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 99;
+        }
+        #wrapper{
+            margin-top: 80px;
+            @media(max-width: 991px){
+                margin-top: 120px;
+            }
+            @media(max-width: 767px){
+                margin-top: 116px;
+            }
+        }
+    }
 }
 
 .container {
@@ -77,6 +95,13 @@ body {
     padding: 0 3rem;
     position: relative;
     color: white;
+    &.fixed-head{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 99;
+    }
     @media(max-width: 768px) {
         padding: 0 2rem;
     }

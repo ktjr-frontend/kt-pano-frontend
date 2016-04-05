@@ -163,21 +163,21 @@
                         yAxis: {
                             name: '发行量（单位：万元）',
                             boundaryGap: true,
+                            type: 'log',
+                            // min: 0,
+                            // max: (function() {
+                            //     if (!yAxisArr.length) return 'auto'
 
-                            min: 0,
-                            max: (function() {
-                                if (!yAxisArr.length) return 'auto'
+                            //     var max = _.max(yAxisArr)
+                            //     var maxLength = _.max(yAxisArr).toFixed(0).length
+                            //     var maxyAxis = max + Math.pow(10, maxLength - 2) * 5
 
-                                var max = _.max(yAxisArr)
-                                var maxLength = _.max(yAxisArr).toFixed(0).length
-                                var maxyAxis = max + Math.pow(10, maxLength - 2) * 5
-
-                                // 小于5的时候向下取整，否则向上取整
-                                if (_.parseInt(maxyAxis.toString().slice(1, 2)) < 5) {
-                                    return _.floor(maxyAxis, 1 - maxLength)
-                                }
-                                return _.ceil(maxyAxis, 1 - maxLength)
-                            })()
+                            //     // 小于5的时候向下取整，否则向上取整
+                            //     if (_.parseInt(maxyAxis.toString().slice(1, 2)) < 5) {
+                            //         return _.floor(maxyAxis, 1 - maxLength)
+                            //     }
+                            //     return _.ceil(maxyAxis, 1 - maxLength)
+                            // })()
                         },
                         xAxis: {
                             max: _.ceil(_.max(xAxisArr)),

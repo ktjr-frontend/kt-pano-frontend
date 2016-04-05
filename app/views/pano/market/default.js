@@ -13,12 +13,12 @@
             ktDataHelper.filterUpdate(shared.filters, shared.params)
 
             var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension]
-            var defaultShowLength = 8
+            var defaultShowLength = 6
             var legendSelected = {}
             var getSelectedLegend = function(xAxis) {
                 if (_.isEmpty(legendSelected)) {
                     _.each(xAxis, function(v, i) {
-                        legendSelected[v] = i <= defaultShowLength
+                        legendSelected[v] = i < defaultShowLength
                     })
                 }
             }
@@ -51,8 +51,8 @@
                     left: leftGap,
                     right: rightGap, // 距离右面的距离
                     bottom: bottomGap, // 距离底部的距离
-                    borderWidth: 0,
-                    backgroundColor: '#fafafa',
+                    // borderWidth: 0,
+                    // backgroundColor: '#fafafa',
                 }
             }
 
@@ -302,7 +302,8 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: {
-                            name: '发行量（单位：万元）'
+                            name: '发行量（单位：万元）',
+                            // type: 'log'
                         },
                         xAxis: [{
                             type: 'category',
