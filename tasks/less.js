@@ -4,6 +4,7 @@ module.exports = {
             sourceMap: true,
             sourceMapRootpath: '/',
             sourceMapBasepath: '/',
+            // sourceMapFilename: '.tmp/less.map',
             sourceMapFileInline: true,
             optimization: 2
         },

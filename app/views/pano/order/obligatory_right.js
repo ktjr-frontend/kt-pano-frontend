@@ -20,7 +20,11 @@
                 ktDataHelper.filterInit(shared.filters)(shared.params)
             }
 
+            // var pendingID = ktAssetService.latestPendingID = _.uniqueId('ktAssetService_')
+
             ktAssetService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
+                // if (pendingID !== ktAssetService.latestPendingID) return
+
                 $scope.assets = res.fame_assets
                 shared.params.totalItems = res.total_items || 1
                 $scope.$emit('totalItemGot')

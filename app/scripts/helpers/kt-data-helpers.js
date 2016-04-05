@@ -66,19 +66,6 @@
                     return newParams
                 },
                 getMarkLineCoords: function(data) { // null or ''值算出有效间隔点用虚线连接
-                    if (!_.compact(data).length) {
-                        //使用空值，避免markline不更新
-                        return [
-                            [{
-                                coord: [0, 0],
-                                symbol: 'none'
-                            }, {
-                                coord: [0, 0],
-                                symbol: 'none'
-                            }]
-                        ]
-                    }
-
                     var coords = _.chain(data).map(function(v, i) {
                             if (!_.isNil(v) && v !== '') {
                                 return i
@@ -99,27 +86,31 @@
                                 }]
                             }
 
-                            //使用空值，避免markline不更新
-                            return [{
-                                coord: [0, 0],
-                                symbol: 'none'
-                            }, {
-                                coord: [0, 0],
-                                symbol: 'none'
-                            }]
-
                         }).filter(function(v) {
                             return !_.isNil(v)
                         }).value()
 
+                    coords = this._supplyMarkLine(coords, data.length)
                     return coords
 
+                },
+                _supplyMarkLine: function(coords, length) {
+                    while (coords.length < length) {
+                        coords.push([{
+                            coord: [0, 0],
+                            symbol: 'none'
+                        }, {
+                            coord: [0, 0],
+                            symbol: 'none'
+                        }])
+                    }
+                    return coords
                 },
                 chartOptions: function(chartId, legend) { //根据legend的不同获取不同的坐标配置
                     var w = $(chartId + ' canvas').width()
                     var fontSize = 12
                     var leftGap = 40
-                    var rightGap = 20
+                    var rightGap = 40
                     var lineHeight = 30
                     var lineLength = w - leftGap - rightGap / 2
                     var baseBottom = 70

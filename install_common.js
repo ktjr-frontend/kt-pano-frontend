@@ -5,7 +5,7 @@ var file = require('fs')
 var commomProject = path.normalize(__dirname + '/../kt-frontend-common/app')
 var commonSoftLink = './app/common'
 var isSoftLinkExist = file.existsSync(commonSoftLink)
-var isCommonProjectExist = file.existsSync(commonSoftLink)
+var isCommonProjectExist = file.existsSync(commomProject)
 var cmdStr = 'ln -svf ' + commomProject + ' ' + commonSoftLink
 
 if (isSoftLinkExist) {

@@ -6,7 +6,8 @@ module.exports = {
             '<%= kt.app %>/views/**/*.less',
             '<%= kt.app %>/less/icon_img.sprite.css',
             '<%= kt.app %>/common/directives/**/*.less',
-            '<%= kt.app %>/scripts/directives/**/*.less'
+            '<%= kt.app %>/scripts/directives/**/*.less',
+            'tasks/less.js'
         ],
         // tasks: ['less:dev'],
         tasks: ['less:dev', 'autoprefixer:dev'],

@@ -29,34 +29,36 @@
                 autoClose: false,
                 beforeShowDay: function(t) {
                     var m = moment()
-                    var valid = t <= (m.day() ? m.day(0).add(1, 'w').toDate() : m.toDate()) && t >= moment('2016-03-01').toDate()//  当周以后不可选
+                    var valid = t <= (m.day() ? m.day(0).add(1, 'w').toDate() : m.toDate()) && t >= moment('2016-03-01').toDate() //  当周以后不可选
                     var _class = '';
                     var _tooltip = valid ? '' : '不在可选范围内';
                     return [valid, _class, _tooltip];
                 },
                 showShortcuts: true,
                 customShortcuts: [{
-                    name: '最近4周',
-                    dates: function() {
-                        var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
-                        var end = moment(start).subtract(4, 'w').add(1, 'd').toDate();
-                        return [start, end];
+                        name: '最近4周',
+                        dates: function() {
+                            var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                            var end = moment(start).subtract(4, 'w').add(1, 'd').toDate();
+                            return [start, end];
+                        }
+                    }, {
+                        name: '最近8周',
+                        dates: function() {
+                            var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                            var end = moment(start).subtract(8, 'w').add(1, 'd').toDate();
+                            return [start, end];
+                        }
                     }
-                }, {
-                    name: '最近8周',
-                    dates: function() {
-                        var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
-                        var end = moment(start).subtract(8, 'w').add(1, 'd').toDate();
-                        return [start, end];
-                    }
-                }, {
-                    name: '最近16周',
-                    dates: function() {
-                        var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
-                        var end = moment(start).subtract(16, 'w').add(1, 'd').toDate();
-                        return [start, end];
-                    }
-                }]
+                    /*, {
+                        name: '最近16周',
+                        dates: function() {
+                            var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                            var end = moment(start).subtract(16, 'w').add(1, 'd').toDate();
+                            return [start, end];
+                        }
+                    }*/
+                ]
             }
 
             $scope.datePicker = params.start_at + '~' + params.end_at
