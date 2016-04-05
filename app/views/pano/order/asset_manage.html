@@ -26,7 +26,7 @@
             <td ng-class="{'text-left': asset.name}"  ng-bind="::asset.name | ktEclipsis:25" title="{{::asset.name | ktNull}}"></td>
             <!-- <td ng-bind="::asset.asset_type | ktNull"></td> -->
             <td ng-bind="::getRate(asset.directive_rate, asset.highest_rate)"></td>
-            <td ng-bind="::getLife(asset.sustained) | ktEclipsis:6" title="{{::getLife(asset.sustained)}}"></td>
+            <td ng-bind="::getLife(asset.sustained)" title="{{::getLife(asset.sustained)}}"></td>
             <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td>
             <td ng-bind="::asset.min_amount | ktNumberLocate"></td>
             <td ng-bind="::asset.capital_use | ktEclipsis:14" title="{{::asset.capital_use | ktNull}}"></td>
