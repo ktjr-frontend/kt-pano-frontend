@@ -98,9 +98,7 @@
 
                     // 清除本地数据
                     $rootScope.user = null
-                        // $rootScope.currentUrl = '';
                     delete $window.localStorage.token
-                        // delete $window.localStorage.user
                     ipCookie.remove('token')
                     CacheFactory.clearAll()
 
@@ -123,7 +121,6 @@
                         text: '抱歉！服务器繁忙。',
                         type: 'error'
                     });
-                    // $state.go('error.500')
                 }
                 return $q.reject(res.data)
             }

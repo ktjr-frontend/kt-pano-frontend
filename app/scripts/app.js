@@ -11,7 +11,7 @@
         'ngSanitize',
         'ngMessages',
         'ngAnimate',
-        'cgNotify',
+        // 'cgNotify',
         'apiMock',
         'angulartics',
         'angulartics.baidu',
@@ -22,9 +22,8 @@
         'angular-cache',
         'ngclipboard',
         // 'bm.uiTour',
-        // 'angular-send-feedback',
         // 'ngFileUpload',
         'kt.common',
-        'kt.pano.i18' //国际化
+        // 'kt.pano.i18' //国际化
     ])
 })();

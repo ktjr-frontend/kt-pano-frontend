@@ -44,7 +44,7 @@
                     });
                     /*eslint-disable*/
                     errorCallback && errorCallback(res)
-                    /*eslint-enable*/
+                        /*eslint-enable*/
 
                 })
             }
@@ -54,7 +54,7 @@
                 getCaptcha: function(scope, service, params, model) {
                     scope.waitCaptchaMessage = false;
                     scope.waitCaptchaTel = false;
-                    
+
                     return function(mobile, channel) {
                         var timerMessage = ktCaptchaHelper.timerMessage(scope)
                         var timerTel = ktCaptchaHelper.timerTel(scope)

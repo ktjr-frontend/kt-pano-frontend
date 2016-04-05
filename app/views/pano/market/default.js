@@ -262,7 +262,7 @@
             weekAmountChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
-                
+
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'circulation_group_by_week_and_from',
                 }, _self._params)), function(data) {
@@ -273,7 +273,7 @@
                 function updateView() {
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
-                    getSelectedLegend(legend) 
+                    getSelectedLegend(legend)
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
 

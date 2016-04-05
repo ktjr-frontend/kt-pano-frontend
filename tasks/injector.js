@@ -21,7 +21,7 @@ var commonScripts = [
     // 'bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js',
     // 'bower_components/angular-bootstrap-tour/dist/angular-bootstrap-tour.min.js',
     'bower_components/angular-resource/angular-resource.min.js',
-    'bower_components/angular-notify/dist/angular-notify.min.js',
+    // 'bower_components/angular-notify/dist/angular-notify.min.js',
     'bower_components/angular-cache/dist/angular-cache.min.js',
     'bower_components/angulartics/dist/angulartics.min.js',
     'bower_components/angulartics/dist/angulartics-baidu.min.js',
@@ -68,7 +68,7 @@ var appScripts = [
     'app/scripts/config.js',
 
     'app/scripts/directives/common/kt-logout-directive.js',
-    'app/scripts/i18/zh-cn.js',
+    // 'app/scripts/i18/zh-cn.js',
     'app/scripts/resources/kt-resource-home.js',
     'app/scripts/factories/kt-tools-function.js',
     'app/scripts/factories/kt-tools-cache.js',
@@ -85,11 +85,11 @@ var appScripts = [
 
 var commonCss = [ // injector 会自动校验文件路径是否存在，所以需要填写基于项目目录的路径，然后再transform里面替换
     '.tmp/less/bootstrap.css',
-    'bower_components/fullpage.js/dist/jquery.fullpage.min.css',
+    // 'bower_components/fullpage.js/dist/jquery.fullpage.min.css',
     'bower_components/fontawesome/css/font-awesome.css',
     'bower_components/animate.css/animate.css',
     'bower_components/sweetalert/dist/sweetalert.css',
-    'bower_components/angular-notify/dist/angular-notify.min.css',
+    // 'bower_components/angular-notify/dist/angular-notify.min.css',
     'bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
     'app/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css',
 ];

@@ -6,9 +6,9 @@ var appConfig = {
 }
 
 var server = 'http://dev-op-pano.ktjr.com'
-// var server = 'http://10.132.1.135:3000'
-// var server = 'http://10.132.1.224:3000'
-    // var server = 'http://op-fame.ktjr.com'
+    // var server = 'http://10.132.1.135:3000'
+    // var server = 'http://10.132.1.224:3000'
+
 var modRewriteUri = [
     // '^/mock_data/v\d{1,}/([^?]*).*$ /mock_data/$1 [L]',
     '^/(api/v\\d{1,}/.*)$ ' + server + '/$1 [P]',
@@ -21,14 +21,6 @@ var modRewriteUri = [
 var sessionMidWare = function() {
 
     return function(req, res, next) {
-        /*console.log(req.url)
-        if (req.method === 'POST' && req.url.match(/\/ajax\/v\d\/sessions/)) {
-            var resToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNTVhMWNhODY2OTVhMzJlYTUyMDAwMDAwIiwiZXhwIjoxNDM2NzU5NjA4fQ.2CwqRebKd8HPJlG0nAmYBal2eNgkbhgWLdw6Qp6Aix0'
-            req.session.token = resToken
-            res.end('{"token":"' + resToken + '"}')
-        } else if (req.method === 'GET' && req.url.match(/\/ajax\/v\d\/users/)) {
-            res.end('{"account":{"role": "admin","type": "loaner","name": "demo"}}')
-        }*/
 
         var token = req.session.token
 
@@ -130,9 +122,9 @@ module.exports = {
                         return next()
                     },
                     modRewrite(modRewriteUri),
-                    gzip.staticGzip(appConfig.dist, {
+                    gzip.staticGzip(appConfig.dist, { //启用gzip
                         matchType: /text|css|javascript|image|font/
-                    }), //启用gzip
+                    }),
                     // connect.static(appConfig.dist),
                 ]
             }
