@@ -2,13 +2,15 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $window, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory) {
+        .controller('ktOverviewCtrl', function($scope, $window, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory, ktEchartTheme1) {
 
             $scope.$emit('activeProjectChange', {
                 projectID: $stateParams.projectID
             })
 
             $scope.updateDate = moment().subtract(7, 'd').format('YYYY-MM-DD') + ' ~ ' + moment().subtract(1, 'd').format('YYYY-MM-DD')
+
+            var colors = ktEchartTheme1.color
 
             var rateAmountChart = $scope.rateAmountChart = {
                 chartOptions: {},
@@ -112,18 +114,19 @@
                             data: legend,
                         },
                         tooltip: {
+                            // alwaysShowContent: true,
+                            // enterable: true,
                             axisPointer: {
                                 axis: 'auto',
                                 type: 'line',
                             },
                             trigger: 'item',
                             triggerOn: 'mousemove',
-                            alwaysShowContent: false,
                             formatter: function(params) {
                                 var res = '<div class="f1_3rem" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;">' +
-                                    params.value[2] + '</div>' +
-                                    '<div class="f1_2rem">加权收益率 : ' + ktValueFactory(params.value[0], _self.xAxisFormat) + '</div>' +
-                                    '<div>' + params.seriesName + ' : ' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</div>';
+                                    params.value[2] + '</div><table class="f1_2rem">' +
+                                    '<tr><td class="justify">加权收益率：</td><td>' + ktValueFactory(params.value[0], _self.xAxisFormat) + '</td></tr>' +
+                                    '<tr><td class="justify">' + params.seriesName + '：</td><td>' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</td></tr>';
                                 return res;
                             },
                             xAxisFormat: _self.xAxisFormat,
@@ -321,10 +324,12 @@
                     var caculateOptions = ktDataHelper.chartOptions('#platformAssetTypeChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
+                        color: _.reverse(colors.slice(0, legend.length)),
                         legend: {
                             data: legend
                         },
                         tooltip: {
+                            reverse: true,
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
@@ -345,7 +350,7 @@
                             data: data.xAxis
                         },
 
-                        series: _.map(data.data, function(v) {
+                        series: _.map(_.reverse(data.data), function(v) {
                             return {
                                 name: v.name,
                                 type: 'bar',

@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktMarketCtrl', function($scope, $q, $state, $timeout, $location, ktDataHelper, ktMarketAnalyticsService, ktRateTrendService) {
+        .controller('ktMarketCtrl', function($scope, $q, $state, $timeout, $location, ktDataHelper, ktMarketAnalyticsService, ktRateTrendService, ktEchartTheme1) {
             // shared.tabActive.tab1 = true
             var shared = $scope.shared
             var params = shared.params
@@ -12,8 +12,15 @@
             $scope.updateDate = moment().subtract(1, 'd').format('YYYY-MM-DD')
             ktDataHelper.filterUpdate(shared.filters, shared.params)
 
+            var colors = ktEchartTheme1.color
             var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension]
-            var defaultShowLength = 6
+            var defaultShowLength = (function() {
+                var d = params.dimension
+                if (d === 'asset_type') {
+                    return 7
+                }
+                return 6
+            })()
             var legendSelected = {}
             var getSelectedLegend = function(xAxis) {
                 if (_.isEmpty(legendSelected)) {
@@ -63,9 +70,7 @@
             }
 
             var weekAmountChart = $scope.weekAmountChart = {
-                chartOptions: {
-                    filterVisble: false
-                },
+                chartOptions: {},
                 _params: {},
                 xAxis: params.dimension,
                 yAxisFormat: 'rmb',
@@ -285,6 +290,7 @@
                     var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
+                        color: _.reverse(colors.slice(0, legend.length)),
                         legend: {
                             data: legend,
                             selected: legendSelected,
@@ -295,6 +301,8 @@
                             }
                         })),
                         tooltip: {
+                            // alwaysShowContent: true,
+                            // enterable: true,
                             // show: false,
                             // showContent: false,
                             // triggerOn: 'click',
@@ -303,6 +311,7 @@
                                 axis: 'auto',
                                 type: 'line',
                             },
+                            reverse: true,
                             titleSuffix: '所在周发行量',
                             // noUnit: true,
                             xAxisFormat: _self.xAxisFormat,
@@ -331,7 +340,7 @@
                             data: data.xAxis
                         }],
 
-                        series: _.map(data.data, function(v) {
+                        series: _.map(_.reverse(data.data), function(v) {
                             return {
                                 name: v.name,
                                 xAxisIndex: 0,
@@ -349,7 +358,7 @@
                         })
                     })
 
-                    chart.hideLoading()
+                    chart && chart.hideLoading()
                 }
             }
 
@@ -360,7 +369,10 @@
 
                 if (silent) {
                     chart = echarts.getInstanceByDom($('#durationAmountChart')[0])
-                    chart && chart.showLoading(loadingSettings)
+                    if (chart) {
+                        chart.hideLoading()
+                        chart.showLoading(loadingSettings)
+                    }
                 }
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
@@ -377,7 +389,8 @@
                     return $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
                         tooltip: {
                             xAxisFormat: _self.xAxisFormat,
-                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            yAxisFormat: _self.yAxisFormat, //自定义属性，tooltip标示，决定是否显示百分比数值
+                            reverse: true,
                         },
                         yAxis: {
                             name: '发行量（单位：万元）'
@@ -402,6 +415,7 @@
                     getSelectedLegend(legend)
 
                     _self.chartOptions = $.extend(true, {}, initOptions, {
+                        color: _.reverse(colors.slice(0, legend.length)),
                         legend: {
                             data: legend,
                             selected: legendSelected,
@@ -410,7 +424,7 @@
                             max: ktDataHelper.getAxisMax(data.data),
                             min: ktDataHelper.getAxisMin(data.data),
                         }],*/
-                        series: _.map(data.data, function(v) {
+                        series: _.map(_.reverse(data.data), function(v) {
                             return {
                                 name: v.name,
                                 itemStyle: {
@@ -426,6 +440,7 @@
                             }
                         })
                     })
+                    console.log(chart)
                     chart && chart.hideLoading()
                 }
             }
@@ -438,7 +453,10 @@
 
                 if (silent) {
                     chart = echarts.getInstanceByDom($('#weekRateChart')[0])
-                    chart && chart.showLoading(loadingSettings)
+                    if (chart) {
+                        chart.hideLoading()
+                        chart.showLoading(loadingSettings)
+                    }
                 }
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
@@ -523,7 +541,10 @@
 
                 if (silent) {
                     chart = echarts.getInstanceByDom($('#durationRateChart')[0])
-                    chart && chart.showLoading(loadingSettings)
+                    if (chart) {
+                        chart.hideLoading()
+                        chart.showLoading(loadingSettings)
+                    }
                 }
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {

@@ -30,6 +30,7 @@
                     page: 1,
                     per_page: perPageCount,
                     sort_by: null,
+                    status_eq: null,
                     order: null,
                     asset_type_eq: null,
                     guarantees_eq: null,
