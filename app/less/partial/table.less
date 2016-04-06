@@ -3,12 +3,31 @@
     >tbody + tbody {
         border-top: 1px solid @color-table-border;
     }
+    &.no_wrap {
+        & > thead,
+        & > tbody,
+        & > tfoot {
+            &> th,
+            &>td {
+                white-space: nowrap;
+            }
+        }
+    }
+    &.wrap {
+        & > thead,
+        & > tbody,
+        & > tfoot {
+            &> th,
+            &>td {
+                white-space: normal;
+            }
+        }
+    }
 }
 
 .table > thead > tr,
 .table > tbody > tr,
-.table > tfoot > tr,
-{
+.table > tfoot > tr {
     & > th {
         // font-weight: bolder;
         // font-size: 13px;
@@ -23,6 +42,12 @@
         border-top: 0;
         border-right: 1px solid @color-table-border;
         vertical-align: middle;
+        &.no_wrap{
+            white-space: nowrap;
+        }
+        &.wrap{
+            white-space: normal;
+        }
         &:last-child {
             border-right: 0;
         }
@@ -50,10 +75,10 @@
         text-align: center;
         font-size: 1.3rem;
         font-weight: normal;
-        &.br{
+        &.br {
             border-right: 1px solid #4e5970;
         }
-        &.bb{
+        &.bb {
             border-bottom: 1px solid #4e5970;
         }
         &.text-left {

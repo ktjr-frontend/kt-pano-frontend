@@ -12,8 +12,8 @@
             </th>
             <th>期限</th>
             <th>增信方式</th>
-            <th>预计上线时间</th>
-            <th>状态</th>
+            <!-- <th>预计上线时间</th> -->
+            <!-- <th>状态</th> -->
             <th>操作</th>
         </tr>
     </thead>
@@ -24,8 +24,8 @@
             <td ng-bind="::getRate(asset.directive_rate, asset.highest_rate)"></td>
             <td ng-bind="::getLife(asset.sustained)" title={{::getLife(asset.sustained)}}></td>
             <td ng-class="{'text-left': asset.guarantees.length}"  ng-bind="::asset.guarantees | ktJoin:'，' | ktEclipsis:14" title="{{::asset.guarantees | ktJoin:'，'}}"></td>
-            <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td>
-            <td ng-bind="::getStatus(asset.status)" ng-class="{'text-warning-light': product.status == '已发布'}"></td>
+            <!-- <td ng-bind="::getPublishDate(asset.published_start_at, asset.published_end_at)"></td> -->
+            <!-- <td ng-bind="::getStatus(asset.status)" ng-class="{'text-warning-light': product.status == '已发布'}"></td> -->
             <td class="text-center">
                 <a ng-if="asset.attachment_url" class="hover-underline" target="_blank" href="{{::asset.attachment_url}}">下载资料</a>
                 <span ng-if="!asset.attachment_url" class="silver">下载资料</span>
@@ -34,7 +34,7 @@
             </td>
         </tr>
         <tr ng-if="!assets.length && !isLoading()">
-            <td colspan="8" class="text-navy-blue text-center">
+            <td colspan="6" class="text-navy-blue text-center">
                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                 <span class="f1_5rem">没有数据！</span>
             </td>

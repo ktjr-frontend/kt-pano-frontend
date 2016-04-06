@@ -195,7 +195,7 @@
         .tools {
             position: absolute;
             right: 10px;
-            top: 12px;
+            top: 14px;
             z-index: 99;
             .tool {
                 float: right;
@@ -252,6 +252,21 @@
             // &:hover {
             //     border-color: @color-navy-blue;
             // }
+        }
+    }
+}
+.chart-tooltip-title{
+    color: rgba(255,255,255,.8);
+}
+.chart-tooltip-table{
+    tr{
+        td{
+            &:first-child{
+                padding-right: 5px;
+            }
+            &:last-child{
+                padding-left: 5px;
+            }
         }
     }
 }

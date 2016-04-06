@@ -289,7 +289,7 @@
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         color: _.reverse(colors.slice(0, legend.length)),
                         legend: {
                             data: legend,
@@ -386,7 +386,7 @@
                     var data = _self.data
                     var caculateOptions = ktDataHelper.chartOptions('#durationAmountChart', _.map(data.data, 'name'))
 
-                    return $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
+                    return $.extend(true, {}, chartOptions, caculateOptions, {
                         tooltip: {
                             xAxisFormat: _self.xAxisFormat,
                             yAxisFormat: _self.yAxisFormat, //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -473,7 +473,7 @@
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekRateChart', legend)
 
-                    _self.chartOptions = $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
+                    _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
                             data: legend,
                             selected: legendSelected,
@@ -558,7 +558,7 @@
                     var data = _self.data
                     var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', _.map(data.data, 'name'))
 
-                    return $.extend(true, {}, chartOptions, _self.chartOptions, caculateOptions, {
+                    return $.extend(true, {}, chartOptions, caculateOptions, {
                         tooltip: {
                             axisPointer: {
                                 axis: 'auto',

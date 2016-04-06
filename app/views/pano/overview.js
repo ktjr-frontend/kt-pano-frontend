@@ -123,8 +123,8 @@
                             trigger: 'item',
                             triggerOn: 'mousemove',
                             formatter: function(params) {
-                                var res = '<div class="f1_3rem" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;">' +
-                                    params.value[2] + '</div><table class="f1_2rem">' +
+                                var res = '<div class="f1_2rem chart-tooltip-title" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;">' +
+                                    params.value[2] + '</div><table class="f1_2rem chart-tooltip-table">' +
                                     '<tr><td class="justify">加权收益率：</td><td>' + ktValueFactory(params.value[0], _self.xAxisFormat) + '</td></tr>' +
                                     '<tr><td class="justify">' + params.seriesName + '：</td><td>' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</td></tr>';
                                 return res;
