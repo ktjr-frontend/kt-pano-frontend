@@ -132,7 +132,7 @@
                     var op = {
                         legend: {
                             left: lines < 2 ? 'center' : leftGap,
-                            right: lines < 2 ? 'auto' : rightGap
+                            right: lines < 2 ? 'auto' : rightGap / 2
                         },
                         grid: {
                             bottom: lines < 2 ? baseBottom : ((lines - 1) * lineHeight + baseBottom)

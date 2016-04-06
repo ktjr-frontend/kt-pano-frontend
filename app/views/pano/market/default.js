@@ -27,6 +27,12 @@
             var topGap = 50
             var bottomGap = isAllDimension ? 140 : 80
 
+            var loadingSettings = {
+                text: '努力加载中...',
+                color: '#3d4351',
+                textColor: '#3d4351',
+            }
+
             var chartOptions = {
                 tooltip: {
                     valueType: 'rmb' //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -271,6 +277,7 @@
                 })
 
                 function updateView() {
+                    var chart = echarts.getInstanceByDom($('#weekAmountChart')[0])
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
                     getSelectedLegend(legend)
@@ -282,7 +289,7 @@
                             data: legend,
                             selected: legendSelected,
                         },
-                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekAmountChart')[0]), $.extend(getStartEndPercent(data), {
+                        customDataZoom: customDataZoom(chart, $.extend(getStartEndPercent(data), {
                             styles: {
                                 bottom: caculateOptions.grid.bottom
                             }
@@ -341,12 +348,20 @@
                             }
                         })
                     })
+
+                    chart.hideLoading()
                 }
             }
 
             durationAmountChart.updateDataView = function(paramObj, silent) {
                 var _self = this
+                var chart
                 $.extend(_self._params, paramObj || {})
+
+                if (silent) {
+                    chart = echarts.getInstanceByDom($('#durationAmountChart')[0])
+                    chart && chart.showLoading(loadingSettings)
+                }
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'circulation_group_by_life_days_and_from',
@@ -411,13 +426,20 @@
                             }
                         })
                     })
+                    chart && chart.hideLoading()
                 }
             }
 
 
-            weekRateChart.updateDataView = function(paramObj) {
+            weekRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
+                var chart
                 $.extend(_self._params, paramObj || {})
+
+                if (silent) {
+                    chart = echarts.getInstanceByDom($('#weekRateChart')[0])
+                    chart && chart.showLoading(loadingSettings)
+                }
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'rate_group_by_week_and_from',
@@ -490,12 +512,19 @@
                         })
                     })
 
+                    chart && chart.hideLoading()
                 }
             }
 
             durationRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
+                var chart
                 $.extend(_self._params, paramObj || {})
+
+                if (silent) {
+                    chart = echarts.getInstanceByDom($('#durationRateChart')[0])
+                    chart && chart.showLoading(loadingSettings)
+                }
 
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'rate_group_by_life_days_and_from',
@@ -561,6 +590,8 @@
                             }
                         })
                     })
+
+                    chart && chart.hideLoading()
                 }
             }
 
