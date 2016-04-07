@@ -49,11 +49,13 @@
             </div>
             <div class="ov-h">
                 <div class="chart-table bor-xxs">
-                    <div class="table-responsive table-body" ui-view>
+                    <div class="table-responsive table-body" fixed-bottom="44" fixed-link="fixed-table-link" ui-view>
                     </div>
                 </div>
-                <div class="text-center">
-                    <uib-pagination total-items="shared.params.totalItems" items-per-page="shared.params.per_page" ng-change="pageChanged()" max-size="shared.params.maxSize" ng-model="shared.params.page" class="pagination-sm"></uib-pagination>
+                <div>
+                    <div class="text-center fixed-table-link" data-bottom="0">
+                        <uib-pagination total-items="shared.params.totalItems" items-per-page="shared.params.per_page" ng-change="pageChanged()" max-size="shared.params.maxSize" ng-model="shared.params.page" class="pagination-sm"></uib-pagination>
+                    </div>
                 </div>
             </div>
         </div>

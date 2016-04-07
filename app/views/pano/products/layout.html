@@ -50,17 +50,21 @@
                     <div class="chart-table-heading clfix">
                         <div class="chart-table-title fl">本日新增<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared.today_added_count"></span>条产品</div>
                     </div>
-                    <div class="table-responsive table-body" ui-view>
+                    <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link" ui-view>
                     </div>
                 </div>
-                <div class="text-center">
-                    <uib-pagination total-items="shared.params.totalItems" items-per-page="shared.params.per_page" ng-change="pageChanged()" max-size="shared.params.maxSize" ng-model="shared.params.page" class="pagination-sm"></uib-pagination>
+                <div>
+                    <div class="text-center fixed-table-link" data-bottom="75">
+                        <uib-pagination total-items="shared.params.totalItems" items-per-page="shared.params.per_page" ng-change="pageChanged()" max-size="shared.params.maxSize" ng-model="shared.params.page" class="pagination-sm fixed-table-link"></uib-pagination>
+                    </div>
                 </div>
             </div>
-            <div class="mt30">
-                <p class="footer-notes f1_2rem lh1_8em text-placeholder">*产品数据覆盖互联网金融平台的活期栏目、票据栏目以及定期或固收栏目，不包括P2P产品、私募基金产品和转让产品。
-                    <br>展示产品分为资产类和资管类。资产类是产品成立时即对应具体投资标的或指向特定融资人的产品。资管类是由特定管理人主动管理，产品发行无明确限额的灵活期限产品。
-                </p>
+            <div>
+                <div class="mt30 fixed-table-link" data-bottom="10">
+                    <p class="footer-notes  f1_2rem lh1_8em text-placeholder">*产品数据覆盖互联网金融平台的活期栏目、票据栏目以及定期或固收栏目，不包括P2P产品、私募基金产品和转让产品。
+                        <br>展示产品分为资产类和资管类。资产类是产品成立时即对应具体投资标的或指向特定融资人的产品。资管类是由特定管理人主动管理，产品发行无明确限额的灵活期限产品。
+                    </p>
+                </div>
             </div>
         </div>
     </div>

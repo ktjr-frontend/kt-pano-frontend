@@ -5,7 +5,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .factory('ktDataHelper', function() {
+        .factory('ktDataHelper', function($window) {
             return {
                 /**
                  * [filterInit 筛选组件的初始化]
@@ -38,6 +38,13 @@
                             })
                         }
                     })
+                },
+                getPerPage: function () { //windows pc 用户根据屏幕高度设置每页条数
+                    if (!$window.isWindows() || $window.detectmob()) return 20
+
+                    var minH = $window.innerHeight - 80 - 44 - 80
+                    var lines = (minH / 40) | 0
+                    return lines || 10
                 },
                 getConditionName: function(filters) { // 获取条件具体名称
                     return function(type) {
@@ -106,6 +113,7 @@
                     }
                     return coords
                 },
+
                 chartOptions: function(chartId, legend) { //根据legend的不同获取不同的坐标配置
                     var w = $(chartId + ' canvas').width()
                     var fontSize = 12
@@ -160,6 +168,17 @@
                     return chart
                 },
                 chartDataPrune: function(chart) { //替换null为'',否则echarts显示有问题,横坐标第一个值会没
+                    var buShiYong = _.find(chart.data, function (v) {
+                        return v.name === '不适用'
+                    })
+                    
+                    if (buShiYong) { //主要用于挂牌场所，
+                        _.remove(chart.data, function (v) {
+                            return v.name === '不适用'
+                        })
+                        chart.data.push(buShiYong)
+                    }
+
                     chart.data = _.map(chart.data, function(v) {
                         v.data = _.map(v.data, function(v1) {
                             return _.isNil(v1) ? '' : v1
@@ -259,6 +278,20 @@
                         var option = _.find(options, { value: v.value })
 
                         v.type = (option && option.type) ? option.type : 'list'
+
+                        // 如果是挂牌场所，需要把“不适用”放到最后
+                        if (v.value === 'exchange_eq' || v.value === 'mapped_exchange') {
+                            var buShiYong = _.find(v.options, function (o) {
+                               return o[0] === '不适用' 
+                            })
+
+                            _.remove(v.options, function (o) {
+                                return o[0] === '不适用'
+                            })
+                            /*eslint-disable*/
+                            buShiYong && v.options.push(buShiYong)
+                            /*eslint-enable*/
+                        }
 
                         v.options = _.map(v.options, function(o) {
                             return {

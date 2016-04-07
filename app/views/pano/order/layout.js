@@ -3,10 +3,10 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktOrderLayoutCtrl', function($scope, $state, $window, $location, ktSweetAlert, ktDataHelper, ktAssetIntentionService) {
+            var perPageCount = ktDataHelper.getPerPage()
 
             var search = $location.search()
             $scope.shared = {}
-            var perPageCount = 20
 
             var params = $scope.shared.params = $.extend({
                 page: 1,

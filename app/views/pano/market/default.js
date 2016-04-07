@@ -118,7 +118,7 @@
                     return _.find(this._filters[index].options, { value: this._params.life }).name
                 },
                 _params: {
-                    life: 12
+                    life: 6
                 },
                 xAxisFormat: null,
                 list: []
@@ -156,11 +156,11 @@
             function getStartEnd() {
                 var start = moment(params.start_at)
                 var end = moment(params.end_at)
-                var isGtTwoWeeks = end.weeks() - start.weeks() > 1
+                var isGtOneWeek = end.weeks() - start.weeks() > 0
 
                 return {
-                    start_at: isGtTwoWeeks ? moment(params.end_at).days(0).subtract(1, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.start_at).days(0).add(1, 'd').format('YYYY-MM-DD'),
-                    end_at: isGtTwoWeeks ? moment(params.end_at).days(0).format('YYYY-MM-DD') : moment(params.end_at).days(6).add(1, 'd').format('YYYY-MM-DD'),
+                    start_at: isGtOneWeek ? moment(params.end_at).days(0).subtract(1, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.start_at).days(0).add(1, 'd').format('YYYY-MM-DD'),
+                    end_at: isGtOneWeek ? moment(params.end_at).days(0).format('YYYY-MM-DD') : moment(params.end_at).days(6).add(1, 'd').format('YYYY-MM-DD'),
                 }
             }
 
