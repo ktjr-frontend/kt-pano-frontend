@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktHomeCtrl', function($scope, $state, $window, $rootScope, ktUserService) {
+        .controller('ktHomeCtrl', function($scope, $state, $rootScope) {
             $rootScope.goHome = function() {
                 $state.go('home.index')
             }

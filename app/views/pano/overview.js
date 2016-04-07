@@ -4,10 +4,6 @@
     angular.module('kt.pano')
         .controller('ktOverviewCtrl', function($scope, $window, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory, ktEchartTheme1) {
 
-            $scope.$emit('activeProjectChange', {
-                projectID: $stateParams.projectID
-            })
-
             $scope.updateDate = moment().subtract(7, 'd').format('YYYY-MM-DD') + ' ~ ' + moment().subtract(1, 'd').format('YYYY-MM-DD')
 
             var colors = ktEchartTheme1.color

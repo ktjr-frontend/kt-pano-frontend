@@ -38,7 +38,7 @@
     })
 
     // 资产过滤条件
-    .factory('ktAssetFiltersService', function($resource, ktApiVersion, ktAjaxCache) {
+    .factory('ktAssetFiltersService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/fame_assets/settings', {}, {
             get: {
                 method: 'GET',
@@ -55,7 +55,7 @@
     })
 
     // 产品过滤条件
-    .factory('ktCompassAssetFiltersService', function($resource, ktApiVersion, ktAjaxCache) {
+    .factory('ktCompassAssetFiltersService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/compass_assets/settings', {}, {
             get: {
                 method: 'GET',
@@ -75,7 +75,7 @@
     })
 
     // 总览
-    .factory('ktOverviewService', function($resource, ktAjaxCache, ktApiVersion) {
+    .factory('ktOverviewService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/stats/overview', {}, {
             get: {
                 // cache: ktAjaxCache
@@ -84,7 +84,7 @@
     })
 
     // 市场数据
-    .factory('ktMarketAnalyticsService', function($resource, ktApiVersion, ktAjaxCache) {
+    .factory('ktMarketAnalyticsService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/stats/detail', {}, {
             get: {
                 // cache: ktAjaxCache

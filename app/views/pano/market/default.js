@@ -357,8 +357,9 @@
                             }
                         })
                     })
-
+                    /*eslint-disable*/
                     chart && chart.hideLoading()
+                    /*eslint-enable*/
                 }
             }
 
@@ -440,8 +441,9 @@
                             }
                         })
                     })
-                    console.log(chart)
+                    /*eslint-disable*/
                     chart && chart.hideLoading()
+                    /*eslint-enable*/
                 }
             }
 
@@ -529,8 +531,9 @@
                             }
                         })
                     })
-
+                    /*eslint-disable*/
                     chart && chart.hideLoading()
+                    /*eslint-enable*/
                 }
             }
 
@@ -611,8 +614,9 @@
                             }
                         })
                     })
-
+                    /*eslint-disable*/
                     chart && chart.hideLoading()
+                    /*eslint-enable*/
                 }
             }
 

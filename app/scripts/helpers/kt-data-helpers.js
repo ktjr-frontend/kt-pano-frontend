@@ -39,7 +39,7 @@
                         }
                     })
                 },
-                getPerPage: function () { //windows pc 用户根据屏幕高度设置每页条数
+                getPerPage: function() { //windows pc 用户根据屏幕高度设置每页条数
                     if (!$window.isWindows() || $window.detectmob()) return 20
 
                     var minH = $window.innerHeight - 80 - 44 - 80
@@ -153,27 +153,42 @@
                 chartDataToPercent: function(chart) { //总览页计算各平台资产类型占比的百分比
                     var xAxisSumArr = []
 
-                    _.each(chart.xAxis, function(v, i) {
+                    _.each(chart.xAxis, function(v, i) { //计算和
                         xAxisSumArr[i] = _.sum(_.map(chart.data, function(v2) {
                             return v2.data[i]
                         }))
                     })
 
-                    chart.data = _.map(chart.data, function(v) {
+                    /*_.remove(chart.xAxis, function(v, i) { //删除空值的坐标
+                        return xAxisSumArr[i] === 0
+                    })
+
+                    _.each(chart.data, function(v) {
+                        _.remove(v.data, function(v2, i2) {
+                            return xAxisSumArr[i2] === 0
+                        })
+                    })
+
+                    _.remove(xAxisSumArr, function(v) {
+                        return v === 0
+                    })*/
+
+                    chart.data = _.map(chart.data, function(v) { // 计算所占比例
                         v.data = _.map(v.data, function(v2, i2) {
                             return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
                         })
                         return v
                     })
+
                     return chart
                 },
                 chartDataPrune: function(chart) { //替换null为'',否则echarts显示有问题,横坐标第一个值会没
-                    var buShiYong = _.find(chart.data, function (v) {
+                    var buShiYong = _.find(chart.data, function(v) {
                         return v.name === '不适用'
                     })
-                    
+
                     if (buShiYong) { //主要用于挂牌场所，
-                        _.remove(chart.data, function (v) {
+                        _.remove(chart.data, function(v) {
                             return v.name === '不适用'
                         })
                         chart.data.push(buShiYong)
@@ -281,16 +296,16 @@
 
                         // 如果是挂牌场所，需要把“不适用”放到最后
                         if (v.value === 'exchange_eq' || v.value === 'mapped_exchange') {
-                            var buShiYong = _.find(v.options, function (o) {
-                               return o[0] === '不适用' 
-                            })
-
-                            _.remove(v.options, function (o) {
+                            var buShiYong = _.find(v.options, function(o) {
                                 return o[0] === '不适用'
                             })
-                            /*eslint-disable*/
+
+                            _.remove(v.options, function(o) {
+                                    return o[0] === '不适用'
+                                })
+                                /*eslint-disable*/
                             buShiYong && v.options.push(buShiYong)
-                            /*eslint-enable*/
+                                /*eslint-enable*/
                         }
 
                         v.options = _.map(v.options, function(o) {
