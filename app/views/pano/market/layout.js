@@ -5,14 +5,14 @@
         .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktMarketSettingsService) {
 
             $scope.shared = {}
-
-            var search = $location.search()
-
-            var params = $scope.shared.params = $.extend({
-                dimension: 'from',
+            var defaultParams = {
+                dimension: 'asset_type',
                 start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(4, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
                 end_at: moment().day(0).add(+(moment().day() > 0), 'w').format('YYYY-MM-DD'),
-            }, search)
+            }
+            var search = $location.search()
+
+            var params = $scope.shared.params = $.extend({}, defaultParams, search)
 
             $scope.shared.dimensions = []
             $scope.showMoreFilters = false
@@ -76,7 +76,7 @@
                 if (!$scope.shared.dimensions.length) return ''
 
                 var d = _.find($scope.shared.dimensions, {
-                    value: params.dimension || 'from'
+                    value: params.dimension || defaultParams.dimension
                 })
                 return d.name
             }
@@ -101,6 +101,8 @@
 
             ktMarketSettingsService.get(function(data) {
                 var dimensions = data['0'].shift()
+                defaultParams.dimension = dimensions.options[0][1]
+
                 $scope.shared.dimensions = _.map(dimensions.options, function(v) {
                     return {
                         name: v[0],
