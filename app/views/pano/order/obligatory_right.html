@@ -28,7 +28,7 @@
             <!-- <td ng-bind="::getStatus(asset.status)" ng-class="{'text-warning-light': product.status == '已发布'}"></td> -->
             <td class="text-center">
                 <a ng-if="asset.attachment_url" class="hover-underline" target="_blank" href="{{::asset.attachment_url}}">下载资料</a>
-                <span ng-if="!asset.attachment_url" class="silver">下载资料</span>
+                <!-- <span ng-if="!asset.attachment_url" class="silver">下载资料</span> -->
                 <a ng-if="getStatus(asset.status) == '可预约'" class="hover-underline" ng-click="contactMe(asset.id)">与我联系</a>
                 <span class="silver" ng-if="getStatus(asset.status) != '可预约'">与我联系</span>
             </td>

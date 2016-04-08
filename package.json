@@ -1,8 +1,8 @@
 {
-  "name": "KaiTongCompass",
+  "name": "KaiTongPano",
   "version": "1.0.33",
   "private": true,
-  "description": "KaiTong Compass",
+  "description": "KaiTong Pano",
   "dependencies": {
     "bower": "^1.4.1",
     "gm": "^1.18.1",
