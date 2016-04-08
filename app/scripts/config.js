@@ -105,8 +105,6 @@
 
 
             $rootScope.apiCode = Math.random().toString(16).slice(2); // ajax disable catch
-            // $rootScope.version = '1.0.0'; // html,image version
-
             $rootScope.ktS = ktS // 资源哈希表
 
             //常用资源文件
@@ -120,26 +118,9 @@
                 window.history.back()
             }
 
-            /*function permitValidate(event, toState, toParams) {
-                var permit = toState.data.permit
-                if ($rootScope.user && permit) {
-                    if ($.inArray('zijin', permit) > -1 && $rootScope.user.institution.inst_type !== 'zijin') {
-                        event.preventDefault()
-                        $state.go('error.404', toParams)
-                    } else if ($.inArray('admin', permit) > -1 && $rootScope.user.role !== 'admin') {
-                        event.preventDefault()
-                        $state.go('error.404', toParams)
-                    } else if ($.inArray('zhudai', permit) > -1 && $rootScope.user.institution.inst_type !== 'zhudai') {
-                        event.preventDefault()
-                        $state.go('error.404', toParams)
-                    }
-                }
-            }*/
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
-                // 权限控制，需要登录才能访问的页面逻辑，
                 // 首页获取user的逻辑不要尝试在这里解决，放到路由的resolve里面解决，否则很容易造成死循环，注意这个坑
-                // var permit = toState.data.permit
                 var search = $location.search()
 
                 // 确保传递apimock
@@ -150,12 +131,9 @@
                 if (toState.name.indexOf('pano') > -1) {
                     $rootScope.wantJumpUrl = $state.href(toState.name, toParams)
                 }
-
-                // permitValidate(event, toState, toParams)
             })
 
             $rootScope.$on('$stateChangeError', function(event, toState, toParams) {
-                // console.log(arguments[5])
                 $state.go('error.404', toParams);
             });
 
@@ -164,7 +142,6 @@
             });
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-                // permitValidate(event, toState, toParams)
 
                 // 存储非错误和登录注册框的url 供redirect或者返回用
                 if (toState.name.indexOf('analytics') > -1) {

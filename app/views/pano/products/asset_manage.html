@@ -27,7 +27,7 @@
             <th>管理机构</th>
             <!-- <th>增信措施</th> -->
             <th>产品说明书</th>
-            <th>当前状态</th>
+            <!-- <th>当前状态</th> -->
         </tr>
     </thead>
     <tbody>
@@ -49,12 +49,12 @@
                 <a ng-if="product.attachment_url" class="hover-underline" target="_blank" href="{{::product.attachment_url}}">下载资料</a>
                 <span ng-if="!product.attachment_url">-</span>
             </td>
-            <td>
+            <!-- <td>
                 <span ng-bind="::getStatusName(product.status)"></span>
-            </td>
+            </td> -->
         </tr>
         <tr ng-if="!products.length && !isLoading()">
-            <td colspan="8" class="text-navy-blue text-center">
+            <td colspan="7" class="text-navy-blue text-center">
                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                 <span class="f1_5rem">没有数据！</span>
             </td>

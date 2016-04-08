@@ -33,22 +33,6 @@
         })
     })
 
-    // 登录接口
-    .factory('ktLoginService', function($resource, ktApiVersion) {
-        return $resource('/api/' + ktApiVersion + '/sessions/:confirm', {
-            confirm: '@confirm'
-        }, {
-            'post': {
-                method: 'POST',
-                // apiMock: true,
-            },
-            'save': {
-                method: 'POST',
-                // apiMock: true,
-            }
-        })
-    })
-
     // 注册接口
     .factory('ktRegisterService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/registrations/:content', {

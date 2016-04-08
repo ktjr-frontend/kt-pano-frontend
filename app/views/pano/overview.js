@@ -191,7 +191,13 @@
                         series: _.map(data, function(v) {
                             return {
                                 name: v[2],
-                                type: 'scatter',
+                                showEffectOn: 'emphasis',
+                                type: 'effectScatter',
+                                rippleEffect: {
+                                    period: 8,
+                                    scale: 1.5,
+                                    brushType: 'fill'
+                                },
                                 data: [v]
                             }
                         })

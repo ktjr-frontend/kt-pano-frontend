@@ -1,13 +1,11 @@
-
 .sweet-alert button {
     // background-color: #34495e;
-    &.confirm{
-        .btn-blue-func();
-        &:hover{
-            background: @color-navy-blue!important;
-        }
-        &:active{
-            background: darken(@color-navy-blue, 6%)!important;
+    &.confirm {
+        // .btn-blue-func();
+        background: @color-table-head!important;
+        &:hover,
+        &:active {
+            background: darken(@color-table-head, 6%)!important;
         }
     }
     color: white;
@@ -20,6 +18,11 @@
     padding: 5px 50px;
     margin: 20px 5px;
     cursor: pointer;
+}
+.sweet-alert .sa-button-container {
+    margin-top: 30px;
+    border-top: 1px solid @border-color;
+    margin-bottom: -20px;
 }
 
 .sweet-alert button:focus {
@@ -50,10 +53,11 @@
 .sweet-alert p {
     font-size: 1.4rem;
     font-weight: 400;
-    color: @color-text;
+    color: @color-table-head;
 }
 
 .sweet-alert h2 {
+    margin: 20px 0;
     font-size: 2rem;
 }
 
@@ -87,31 +91,32 @@
 .homer-notify.alert-info {
     border-left: 6px solid @color-blue;
 }
-.homer-notify{
-    &.left-top{
+
+.homer-notify {
+    &.left-top {
         left: 0;
         top: 0;
     }
-    &.left-top{
+    &.left-top {
         left: 0;
         top: auto;
         bottom: 0;
     }
-    &.right-top{
+    &.right-top {
         right: 0;
         top: 0;
     }
-    &.right-bottom{
+    &.right-bottom {
         right: 0;
         top: auto;
         bottom: 0;
     }
-    &.center-top{
+    &.center-top {
         top: 0;
         left: 50%;
         transform: translateX(-50%);
     }
-    &.center-bottom{
+    &.center-bottom {
         top: auto;
         bottom: 0;
         left: 50%;
@@ -120,7 +125,8 @@
 }
 
 .sweet-alert button.confirm {
-    &.disabled,&.disabled:hover {
+    &.disabled,
+    &.disabled:hover {
         background-color: #D0D0D0!important;
         pointer-events: none!important;
         cursor: not-allowed!important;

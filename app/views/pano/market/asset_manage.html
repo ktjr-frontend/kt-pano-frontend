@@ -16,7 +16,7 @@
             <th>起购金额</th>
             <th>投向</th>
             <th>管理人</th>
-            <th>状态</th>
+            <!-- <th>状态</th> -->
             <th>操作</th>
         </tr>
     </thead>
@@ -30,14 +30,14 @@
             <td ng-bind="::asset.mount"></td>
             <td ng-bind="::asset.target"></td>
             <td ng-bind="::asset.manager"></td>
-            <td ng-bind="::asset.status"></td>
+            <!-- <td ng-bind="::asset.status"></td> -->
             <td class="text-center">
                 <a class="hover-underline" href="::asset.attachment_url">下载资料</a>
                 <a class="hover-underline" ng-click="contactMe(asset.id)">与我联系</a>
             </td>
         </tr>
         <tr ng-if="!assets.length && !isLoading()">
-            <td colspan="10" class="text-navy-blue text-center">
+            <td colspan="9" class="text-navy-blue text-center">
                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                 <span class="f1_5rem">没有数据！</span>
             </td>
