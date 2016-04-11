@@ -159,8 +159,8 @@
                 var isGtOneWeek = end.weeks() - start.weeks() > 0
 
                 return {
-                    start_at: isGtOneWeek ? moment(params.end_at).days(0).subtract(1, 'w').add(1, 'd').format('YYYY-MM-DD') : moment(params.start_at).days(0).add(1, 'd').format('YYYY-MM-DD'),
-                    end_at: isGtOneWeek ? moment(params.end_at).days(0).format('YYYY-MM-DD') : moment(params.end_at).days(6).add(1, 'd').format('YYYY-MM-DD'),
+                    start_at: isGtOneWeek ? moment(params.end_at).weekday(0).subtract(1, 'w').format('YYYY-MM-DD') : moment(params.start_at).weekday(0).format('YYYY-MM-DD'),
+                    end_at: isGtOneWeek ? moment(params.end_at).weekday(6).subtract(1, 'w').format('YYYY-MM-DD') : moment(params.end_at).weekday(6).format('YYYY-MM-DD'),
                 }
             }
 
@@ -290,76 +290,76 @@
                     var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                        color: _.reverse(colors.slice(0, legend.length)),
-                        legend: {
-                            data: legend,
-                            selected: legendSelected,
-                        },
-                        customDataZoom: customDataZoom(chart, $.extend(getStartEndPercent(data), {
-                            styles: {
-                                bottom: caculateOptions.grid.bottom
-                            }
-                        })),
-                        tooltip: {
-                            // alwaysShowContent: true,
-                            // enterable: true,
-                            // show: false,
-                            // showContent: false,
-                            // triggerOn: 'click',
-                            // trigger: 'item',
-                            axisPointer: {
-                                axis: 'auto',
-                                type: 'line',
+                            color: _.reverse(colors.slice(0, legend.length)),
+                            legend: {
+                                data: legend,
+                                selected: legendSelected,
                             },
-                            reverse: true,
-                            titleSuffix: '所在周发行量',
-                            // noUnit: true,
-                            xAxisFormat: _self.xAxisFormat,
-                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
-                        },
-                        yAxis: {
-                            name: '发行量（单位：万元）',
-                            // type: 'log'
-                        },
-                        xAxis: [{
-                            type: 'category',
-                            name: '周',
-                            nameLocation: 'end',
-                            nameGap: 10,
-                            boundaryGap: false,
-                            data: data.xAxis
-                        }, {
-                            type: 'category',
-                            axisLabel: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
-                            boundaryGap: false,
-                            data: data.xAxis
-                        }],
-
-                        series: _.map(_.reverse(data.data), function(v) {
-                            return {
-                                name: v.name,
-                                xAxisIndex: 0,
-                                stack: '总量',
-                                itemStyle: {
-                                    emphasis: {
-                                        shadowColor: 'rgba(0,0,0,.5)'
-                                    }
+                            customDataZoom: customDataZoom(chart, $.extend(getStartEndPercent(data), {
+                                styles: {
+                                    bottom: caculateOptions.grid.bottom
+                                }
+                            })),
+                            tooltip: {
+                                // alwaysShowContent: true,
+                                // enterable: true,
+                                // show: false,
+                                // showContent: false,
+                                // triggerOn: 'click',
+                                // trigger: 'item',
+                                axisPointer: {
+                                    axis: 'auto',
+                                    type: 'line',
                                 },
-                                areaStyle: { normal: {} },
-                                type: 'line',
-                                smooth: false,
-                                data: v.data
-                            }
+                                reverse: true,
+                                titleSuffix: '所在周发行量',
+                                // noUnit: true,
+                                xAxisFormat: _self.xAxisFormat,
+                                yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            },
+                            yAxis: {
+                                name: '发行量（单位：万元）',
+                                // type: 'log'
+                            },
+                            xAxis: [{
+                                type: 'category',
+                                name: '周',
+                                nameLocation: 'end',
+                                nameGap: 10,
+                                boundaryGap: false,
+                                data: data.xAxis
+                            }, {
+                                type: 'category',
+                                axisLabel: {
+                                    show: false
+                                },
+                                axisTick: {
+                                    show: false
+                                },
+                                boundaryGap: false,
+                                data: data.xAxis
+                            }],
+
+                            series: _.map(_.reverse(data.data), function(v) {
+                                return {
+                                    name: v.name,
+                                    xAxisIndex: 0,
+                                    stack: '总量',
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowColor: 'rgba(0,0,0,.5)'
+                                        }
+                                    },
+                                    areaStyle: { normal: {} },
+                                    type: 'line',
+                                    smooth: false,
+                                    data: v.data
+                                }
+                            })
                         })
-                    })
-                    /*eslint-disable*/
+                        /*eslint-disable*/
                     chart && chart.hideLoading()
-                    /*eslint-enable*/
+                        /*eslint-enable*/
                 }
             }
 
@@ -416,34 +416,34 @@
                     getSelectedLegend(legend)
 
                     _self.chartOptions = $.extend(true, {}, initOptions, {
-                        color: _.reverse(colors.slice(0, legend.length)),
-                        legend: {
-                            data: legend,
-                            selected: legendSelected,
-                        },
-                        /*yAxis: [{
-                            max: ktDataHelper.getAxisMax(data.data),
-                            min: ktDataHelper.getAxisMin(data.data),
-                        }],*/
-                        series: _.map(_.reverse(data.data), function(v) {
-                            return {
-                                name: v.name,
-                                itemStyle: {
-                                    emphasis: {
-                                        barBorderWidth: 1,
-                                        barBorderColor: 'rgba(0,0,0,.5)'
-                                    }
-                                },
-                                stack: '总量',
-                                type: 'bar',
-                                barWidth: 30,
-                                data: v.data
-                            }
+                            color: _.reverse(colors.slice(0, legend.length)),
+                            legend: {
+                                data: legend,
+                                selected: legendSelected,
+                            },
+                            /*yAxis: [{
+                                max: ktDataHelper.getAxisMax(data.data),
+                                min: ktDataHelper.getAxisMin(data.data),
+                            }],*/
+                            series: _.map(_.reverse(data.data), function(v) {
+                                return {
+                                    name: v.name,
+                                    itemStyle: {
+                                        emphasis: {
+                                            barBorderWidth: 1,
+                                            barBorderColor: 'rgba(0,0,0,.5)'
+                                        }
+                                    },
+                                    stack: '总量',
+                                    type: 'bar',
+                                    barWidth: 30,
+                                    data: v.data
+                                }
+                            })
                         })
-                    })
-                    /*eslint-disable*/
+                        /*eslint-disable*/
                     chart && chart.hideLoading()
-                    /*eslint-enable*/
+                        /*eslint-enable*/
                 }
             }
 
@@ -476,64 +476,64 @@
                     var caculateOptions = ktDataHelper.chartOptions('#weekRateChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                        legend: {
-                            data: legend,
-                            selected: legendSelected,
-                        },
-                        customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), $.extend(getStartEndPercent(data), {
-                            styles: {
-                                bottom: caculateOptions.grid.bottom
-                            }
-                        })),
-                        tooltip: {
-                            axisPointer: {
-                                axis: 'auto',
-                                type: 'line',
+                            legend: {
+                                data: legend,
+                                selected: legendSelected,
                             },
-                            titleSuffix: '所在周收益率',
-                            xAxisFormat: _self.xAxisFormat,
-                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
-                        },
-                        yAxis: {
-                            name: '收益率（单位：%）',
-                            max: ktDataHelper.getAxisMax(data.data),
-                            min: ktDataHelper.getAxisMin(data.data),
-                        },
-                        xAxis: [{
-                            type: 'category',
-                            name: '周',
-                            nameLocation: 'end',
-                            nameGap: 10,
-                            boundaryGap: false,
-                            data: data.xAxis
-                        }, {
-                            type: 'category',
-                            axisLabel: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
-                            boundaryGap: false,
-                            data: data.xAxis
-                        }],
-
-                        series: _.map(data.data, function(v) {
-                            return {
-                                name: v.name,
-                                type: 'line',
-                                xAxisIndex: 0,
-                                markLine: {
-                                    data: ktDataHelper.getMarkLineCoords(v.data)
+                            customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), $.extend(getStartEndPercent(data), {
+                                styles: {
+                                    bottom: caculateOptions.grid.bottom
+                                }
+                            })),
+                            tooltip: {
+                                axisPointer: {
+                                    axis: 'auto',
+                                    type: 'line',
                                 },
-                                smooth: false,
-                                data: v.data
-                            }
+                                titleSuffix: '所在周收益率',
+                                xAxisFormat: _self.xAxisFormat,
+                                yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            },
+                            yAxis: {
+                                name: '收益率（单位：%）',
+                                max: ktDataHelper.getAxisMax(data.data),
+                                min: ktDataHelper.getAxisMin(data.data),
+                            },
+                            xAxis: [{
+                                type: 'category',
+                                name: '周',
+                                nameLocation: 'end',
+                                nameGap: 10,
+                                boundaryGap: false,
+                                data: data.xAxis
+                            }, {
+                                type: 'category',
+                                axisLabel: {
+                                    show: false
+                                },
+                                axisTick: {
+                                    show: false
+                                },
+                                boundaryGap: false,
+                                data: data.xAxis
+                            }],
+
+                            series: _.map(data.data, function(v) {
+                                return {
+                                    name: v.name,
+                                    type: 'line',
+                                    xAxisIndex: 0,
+                                    markLine: {
+                                        data: ktDataHelper.getMarkLineCoords(v.data)
+                                    },
+                                    smooth: false,
+                                    data: v.data
+                                }
+                            })
                         })
-                    })
-                    /*eslint-disable*/
+                        /*eslint-disable*/
                     chart && chart.hideLoading()
-                    /*eslint-enable*/
+                        /*eslint-enable*/
                 }
             }
 
@@ -594,29 +594,29 @@
                     getSelectedLegend(legend)
 
                     _self.chartOptions = $.extend(true, {}, initOptions, {
-                        legend: {
-                            data: _.map(data.data, 'name'),
-                            selected: legendSelected,
-                        },
-                        yAxis: {
-                            max: ktDataHelper.getAxisMax(data.data),
-                            min: ktDataHelper.getAxisMin(data.data),
-                        },
-                        series: _.map(data.data, function(v) {
-                            return {
-                                name: v.name,
-                                type: 'line',
-                                markLine: {
-                                    data: ktDataHelper.getMarkLineCoords(v.data)
-                                },
-                                smooth: false,
-                                data: v.data
-                            }
+                            legend: {
+                                data: _.map(data.data, 'name'),
+                                selected: legendSelected,
+                            },
+                            yAxis: {
+                                max: ktDataHelper.getAxisMax(data.data),
+                                min: ktDataHelper.getAxisMin(data.data),
+                            },
+                            series: _.map(data.data, function(v) {
+                                return {
+                                    name: v.name,
+                                    type: 'line',
+                                    markLine: {
+                                        data: ktDataHelper.getMarkLineCoords(v.data)
+                                    },
+                                    smooth: false,
+                                    data: v.data
+                                }
+                            })
                         })
-                    })
-                    /*eslint-disable*/
+                        /*eslint-disable*/
                     chart && chart.hideLoading()
-                    /*eslint-enable*/
+                        /*eslint-enable*/
                 }
             }
 
