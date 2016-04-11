@@ -179,8 +179,16 @@
                             // })()
                         },
                         xAxis: {
-                            max: _.ceil(_.max(xAxisArr)),
-                            min: _.floor(_.min(xAxisArr)),
+                            max: (function() {
+                                var max = _.max(xAxisArr)
+                                var decimal = _.round(max - (max | 0), 2)
+                                return _.ceil(max) + 1 * (decimal > 0.8)
+                            })(),
+                            min: (function() {
+                                var min = _.min(xAxisArr)
+                                var decimal = _.round(min - (min | 0), 2)
+                                return _.floor(min) - 1 * (decimal < 0.3)
+                            })(),
                             type: 'value',
                             name: '收益率',
                             nameLocation: 'end',

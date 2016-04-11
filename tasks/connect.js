@@ -4,6 +4,8 @@ var appConfig = {
     app: 'app',
     dist: 'dist'
 }
+var port = 8888
+var livereloadPort = 35728
 
 var server = 'http://dev-op-pano.ktjr.com'
     // var server = 'http://10.132.1.135:3000'
@@ -59,14 +61,14 @@ var sessionMidWare = function() {
 }
 module.exports = {
     options: {
-        port: 8888,
+        port: port,
         hostname: '*',
-        livereload: 35728
+        livereload: livereloadPort
     },
     livereload: {
         options: {
             open: {
-                target: 'http://localhost:8888',
+                target: 'http://localhost:' + port,
             },
             middleware: function(connect) {
 
