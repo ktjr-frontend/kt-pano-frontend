@@ -10,7 +10,7 @@
     "grunt-cli": "^0.1.13"
   },
   "scripts": {
-    "setup": "npm install & bower install & npm run fit_common",
+    "setup": "npm install & bower install & npm run fit_common && grunt githooks",
     "fit_common": "node install_common.js",
     "unit_test": "grunt injector:karma karma",
     "webdriver": "java -jar /usr/local/lib/node_modules/protractor/selenium/selenium-server-standalone-2.42.2.jar -Dwebdriver.chrome.driver=/usr/local/lib/node_modules/protractor/selenium/chromedriver",

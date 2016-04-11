@@ -65,10 +65,8 @@ module.exports = function(grunt) {
         'sprite',
         'less:dev',
         // 'less:common',
-        // 'copy:commonImgs',
         'copy:dev',
         // 'autoprefixer:dev',
-        // 'font-spider:app',
         // 'replace:svgfont',
         'svg_sprite',
         'svgmin',
@@ -79,7 +77,6 @@ module.exports = function(grunt) {
         'injector:indexAppjs',
         'injector:fontSpiderCss',
         'font-spider:hack',
-        // 'copy:styles',
         'connect:livereload',
         'watch'
     ]);
@@ -95,7 +92,6 @@ module.exports = function(grunt) {
         // 'responsive_images',
         'sprite',
         'less:production',
-        // 'font-spider:app',
         'injector:indexCommoncss',
         'injector:indexCommonjs',
         'injector:indexAppcss',
@@ -137,7 +133,6 @@ module.exports = function(grunt) {
         'filerev:assetsRev',
         'injector:assetsMap',
         'htmlmin',
-        // 'font-spider:dist',
     ]);
 
     grunt.registerTask('default', ['build'])
