@@ -98,7 +98,7 @@
                     asset_id: assetID
                 }, function() {
                     ktSweetAlert.swal({
-                        title: '已收到您的要求，开通金融会与您联系。',
+                        title: '已收到您的要求，开通金融会尽快与您联系',
                         type: 'success',
                         text: '<i class="icon-pano icon-phone mr5 f1_2rem"></i><a class="mr20">010-84551488</a><i class="icon-pano icon-message mr5 f1_2rem"></i><a href="mailto:HelloPano@ktjr.com">HelloPano@ktjr.com</a>',
                         html: true
