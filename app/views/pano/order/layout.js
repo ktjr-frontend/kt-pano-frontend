@@ -29,12 +29,12 @@
                     tab: tab,
                     page: 1,
                     per_page: perPageCount,
-                    sort_by: null,
                     status_eq: null,
-                    order: null,
                     asset_type_eq: null,
                     guarantees_eq: null,
                     rate_in: null,
+                    sort_by: null,
+                    order: null,
                     life_days_in: null
                 })
                 $state.go(state, params)
@@ -88,7 +88,7 @@
                 return status || '-'
             }
 
-            $scope.getLife = function (life) {
+            $scope.getLife = function(life) {
                 var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '-')
                 return lifeName
             }

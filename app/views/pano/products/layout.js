@@ -33,6 +33,8 @@
                         asset_type_eq: null,
                         exchange_eq: null,
                         from_eq: null,
+                        sort_by: null,
+                        order: null
                     }))
                 }
             }
