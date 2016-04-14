@@ -34,6 +34,7 @@
                         exchange_eq: null,
                         from_eq: null,
                         sort_by: null,
+                        page: 1,
                         order: null
                     }))
                 }
