@@ -4,9 +4,9 @@
     angular.module('kt.pano')
         .controller('ktOrderObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktAssetFiltersService, ktAssetService) {
             var shared = $scope.shared
-
+            var search = $location.search()
             shared.tabActive.tab0 = true
-            $.extend(shared.params, $location.search(), { tab: 0 })
+            $.extend(shared.params, search, { tab: 0 })
 
             if (!shared.filterDatas) {
                 ktAssetFiltersService.get(function(data) {
@@ -27,7 +27,7 @@
 
                 $scope.assets = res.fame_assets
                 shared.params.totalItems = res.total_items || 1
-                $scope.$emit('totalItemGot')
+                $scope.$emit('totalItemGot', search)
             })
         })
 })();

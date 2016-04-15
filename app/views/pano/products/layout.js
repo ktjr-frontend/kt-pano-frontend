@@ -47,7 +47,10 @@
                 $state.go($state.current.name, p)
             }
 
-            $scope.$on('totalItemGot', function() { //totalItem 不满足初始page的会自动跳转到第一页
+            $scope.$on('totalItemGot', function(event, data) { //totalItem 不满足初始page的会自动跳转到第一页
+                console.log(data)
+                params.page = data.page
+
                 $scope.pageChanged = function() {
                     $location.search('page', params.page)
                 }
@@ -67,7 +70,6 @@
 
             $scope.shared.filters = []
             $scope.shared.filterDatas = null //避免筛选时候重复请求，以及展开状态被重置
-
 
             $scope.getConditionName = ktDataHelper.getConditionName($scope.shared.filters)
         })

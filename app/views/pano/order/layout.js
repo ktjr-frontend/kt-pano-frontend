@@ -46,7 +46,8 @@
                 $state.go($state.current.name, p)
             }
 
-            $scope.$on('totalItemGot', function() { //totalItem 不满足初始page的会自动跳转到第一页
+            $scope.$on('totalItemGot', function(event, data) { //totalItem 不满足初始page的会自动跳转到第一页
+                params.page = data.page
                 $scope.pageChanged = function() {
                     $location.search('page', params.page)
                 }
