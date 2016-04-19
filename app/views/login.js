@@ -185,6 +185,8 @@
             $scope.title = '设置新密码'
                 // $scope.user = {}
             $scope.user.content = ''
+            $scope.user.password = ''
+            $scope.user.password_confirmation = ''
 
             $scope.submitForm = function() {
                 ktRecoverService.update($scope.user, function() {

@@ -17,7 +17,7 @@
             <div class="form-group cbs" ng-class="{'has-error':popForm.captcha.$invalid && popForm.captcha.$dirty}">
                 <label class="text-primary-dark control-label col-md-3"><span class="ml5 f14">*</span>验证码</label>
                 <div class="col-md-7">
-                    <input style="width: 123px;" placeholder="输入验证码" type="text" required="required" ng-model="user.captcha" id="" class="form-control fl" name="captcha">
+                    <input style="width: 123px;" placeholder="输入验证码" type="text" ng-pattern="/^\d{4}$/" required="required" ng-model="user.captcha" id="" class="form-control fl" name="captcha">
                     <div class="btn-group fl ml10">
                         <button style="width: 80px;height:34px;" ng-disabled="waitCaptchaMessage || popForm.mobile.$invalid" ng-click="getCaptcha($event, 'sms', 'captcha')" class="btn f1_3rem btn-dark fl ml10">
                             <!-- <i class="pe-7s-mail fb va-1 mr5"></i> -->
@@ -36,6 +36,7 @@
                     </div>
                     <div class="mt5 text-warning cbs" ng-messages="popForm.captcha.$dirty && popForm.captcha.$error">
                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入验证码</div>
+                        <div ng-message="pattern"><i class="fa fa-frown-o fb mr5"></i>验证码错误</div>
                     </div>
                 </div>
             </div>
