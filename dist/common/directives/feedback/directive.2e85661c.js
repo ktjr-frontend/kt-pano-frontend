@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("kt.common").directive("ktFeedback",function(){return{restrict:"EA",replace:!0,transclude:!0,scope:{options:"="},link:function(a,b,c){$.feedback(a.options),a.$watch("options",function(a,b,c){$.feedback.destroy(),$.feedback(a)})}}}).directive("ktFeedbackDestroy",function(){return{restrict:"AE",link:function(){$.feedback.destroy()}}})}();

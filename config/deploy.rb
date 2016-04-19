@@ -36,7 +36,7 @@ end
 set :shared_paths, ['log', 'node_modules', 'bower_components']
 
 # Optional settings:
-  
+
 #   set :user, 'deploy'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 #   set :forward_agent, true     # SSH forward_agent.
@@ -84,10 +84,10 @@ task :deploy => :environment do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
     invoke :'git:clone'
-    invoke :'common_project:clone'
-    invoke :'deploy:link_shared_paths'
-    invoke :'bower:install'
-    invoke :'grunt:build'
+    # invoke :'common_project:clone'
+    # invoke :'deploy:link_shared_paths'
+    # invoke :'bower:install'
+    # invoke :'grunt:build'
     # invoke :'deploy:link_backend_assets'
     # invoke :'deploy:link_shared_uploads'
     # invoke :'rails:db_migrate'
@@ -122,7 +122,7 @@ end
 namespace :bower do
   task :install => :environment do
     queue! %[npm install]
-    queue! %[bower install] 
+    queue! %[bower install]
   end
 end
 

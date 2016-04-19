@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("kt.pano").controller("ktConfirmCtrl",["$scope","$window","$stateParams","ktSweetAlert","ktLoginCommon",function(a,b,c,d,e){$.isEmptyObject(c.institution)&&d.error({title:"访问出错",text:"您的机构信息有错误！",type:"error"},function(){b.history.back()}),a.user=c.user,a.institution=c.institution,a.submitForm=function(){e(a)}}])}();

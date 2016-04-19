@@ -1,0 +1,20 @@
+{
+    "account": {
+        "email": "qiming@123.com",
+        "mobile": 13799990000,
+        "refilled": "true",
+        "name": "启明",
+        "invitee_code": "DAADS",
+        "institution_id": "5642bb1d64657669f2000001",
+        "receive_mail": "否",
+        "institution": {
+            "id": 2,
+            "inst_type": "zijin",
+            "inst_id": "5642bb1d64657669f2000001",
+            "name": "中合担保",
+            "active": true,
+            "created_at": "2016-01-22T16:34:19.000+08:00",
+            "updated_at": "2016-01-22T16:34:19.000+08:00"
+        }
+    }
+}
