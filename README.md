@@ -34,5 +34,6 @@
 1. node_modules问题
 	1. 如果遇到，gm & convert命令错误,需要预先安装graphicsmagick 或者 imagemagick  (mac :brew install or centos: sudo yum install imagemagick)
 	1. phantomjs安装下载超时，手动浏览器下载后，复制到错误提示所在的目录,例如下图：![](./readme/r1.png)
+	1. 项目提交的时候，会自动执行grunt lint, 如果抛错会终止提交，请解决错误后重新提交
     
     
