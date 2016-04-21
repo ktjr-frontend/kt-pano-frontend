@@ -48,7 +48,6 @@
             }
 
             $scope.$on('totalItemGot', function(event, data) { //totalItem 不满足初始page的会自动跳转到第一页
-                console.log(data)
                 params.page = data.page
 
                 $scope.pageChanged = function() {

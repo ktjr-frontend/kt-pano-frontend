@@ -69,10 +69,10 @@
             $scope.getRate = function(dr, hr) {
                 if (_.isNil(dr) && _.isNil(hr)) {
                     return '-'
-                } else if (_.isNil(dr)) {
-                    return dr.toFixed(2) + '%'
-                } else if (_.isNil(hr)) {
+                } else if (_.isNil(dr) && !_.isNil(hr)) {
                     return hr.toFixed(2) + '%'
+                } else if (_.isNil(hr) && !_.isNil(dr)) {
+                    return dr.toFixed(2) + '%'
                 } else if (dr === hr) {
                     return dr.toFixed(2) + '%'
                 }
