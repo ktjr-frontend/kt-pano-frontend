@@ -8,6 +8,7 @@
 
             shared.tabActive.tab1 = true
             $.extend(shared.params, search, { credit_right_or_eq: 'am' })
+            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
 
             if (!shared.filterDatas) {
                 ktCompassAssetFiltersService.get(function(data) {
@@ -22,7 +23,7 @@
 
             ktCompassAssetService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 $scope.products = res.compass_assets
-                shared.params.totalItems = res.total_items
+                shared._params.totalItems = res.total_items
                 shared.today_added_count = res.today_added_count
                 $scope.$emit('totalItemGot', search)
             })

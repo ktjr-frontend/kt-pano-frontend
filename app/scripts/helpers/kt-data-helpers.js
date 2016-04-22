@@ -62,11 +62,34 @@
 
                     }
                 },
-                cutDirtyParams: function(params) { //删除全部时候的参数，避免后台出错
+                pruneDirtyParams: function (params, search, list) {
+                    _.each(params, function(v, i) {
+                        //如果url地址中不包含则删除
+                        if (search) {
+                            var l = _.isArray(list) ? list : [list]
+                            if (list && _.includes(l, i) && !search[i]) {
+                                delete params[i]
+                            } else if (!search[i] && _.includes(l, i)) {
+                                delete params[i]
+                            }
+                        }
+                    })
+                },
+                cutDirtyParams: function(params, search, list) { //删除全部时候的参数，避免后台出错
                     var newParams = $.extend(true, {}, params)
                     _.each(newParams, function(v, i) {
                         if (newParams[i] === 'all') {
                             delete newParams[i]
+                        }
+
+                        //如果url地址中不包含则删除
+                        if (search) {
+                            var l = _.isArray(list) ? list : [list]
+                            if (list && _.includes(l, i) && !search[i]) {
+                                delete params[i]
+                            } else if (!search[i] && _.includes(l, i)) {
+                                delete params[i]
+                            }
                         }
                     })
 
