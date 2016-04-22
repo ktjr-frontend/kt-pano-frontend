@@ -8,6 +8,7 @@
 
             shared.tabActive.tab1 = true
             $.extend(shared.params, search, { tab: 1 })
+            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
 
             if (!shared.filterDatas) {
                 ktAssetFiltersService.get(function(data) {
@@ -22,7 +23,7 @@
 
             ktAssetService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 $scope.assets = res.fame_assets
-                shared.params.totalItems = res.total_items
+                shared._params.totalItems = res.total_items
                 $scope.$emit('totalItemGot', search)
             })
         })

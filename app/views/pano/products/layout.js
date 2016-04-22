@@ -11,10 +11,13 @@
 
             var params = $scope.shared.params = $.extend({
                 page: 1,
-                per_page: perPageCount,
+                per_page: perPageCount
+            }, search)
+
+            $scope.shared._params = {
                 totalItems: 10,
                 maxSize: $window.innerWidth > 480 ? 10 : 3
-            }, search)
+            }
 
             /*
              * 这里需要定义tab的active开关，否则每次加载，会默认触发第一个tab的click事件

@@ -1,6 +1,6 @@
-# kt-lode-frontend
+# kt-pano-frontend
 
-> 小贷资产管理交易平台 - 前端项目
+> 信息服务平台 - 前端项目
 
 ## 预装环境
 1. [nodejs](https://nodejs.org/en/)(^4.1.0)
