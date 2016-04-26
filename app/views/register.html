@@ -11,7 +11,7 @@
                             <div class="form-group" ng-class="{'has-error':registerForm.inviter_code.$invalid && registerForm.inviter_code.$dirty}">
                                 <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>邀请码</label> -->
                                 <div class="col-md-12">
-                                    <input kt-validate-on-blur ng-minlength="6" ng-maxlength="6" placeholder="邀请码" type="text" required="required" ng-model="registerUser.inviter_code" id="" class="form-control" name="inviter_code">
+                                    <input kt-validate-on-blur ng-minlength="6" ng-maxlength="6" placeholder="邀请码（不区分大小写）" type="text" required="required" ng-model="registerUser.inviter_code" id="" class="form-control" name="inviter_code">
                                     <div class="mt5 text-warning" ng-messages="registerForm.inviter_code.$dirty && registerForm.inviter_code.$error">
                                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请填写邀请码</div>
                                         <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>请输入6位邀请码</div>
@@ -75,27 +75,27 @@
                         <div class="form-group" ng-class="{'has-error':registerForm.password.$invalid && registerForm.password.$dirty}">
                             <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>密码</label> -->
                             <div class="col-md-12">
-                                <input ng-minlength="6" autocomplete="off" autofill="false" ng-maxlength="20" placeholder="密码（6～20位，包含大小写字母和数字）" type="password" required="required" ng-model="registerUser.password" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/" id="" class="form-control" name="password">
+                                <input ng-minlength="6" autocomplete="off" autofill="false" ng-maxlength="20" placeholder="密码（6～20位，包含字母和数字）" type="password" required="required" ng-model="registerUser.password" ng-pattern="/^(?=.*\d)(?=.*[a-z]).{6,20}$/" id="" class="form-control" name="password">
                                 <div class="mt5 text-warning" ng-messages="registerForm.password.$dirty && registerForm.password.$error">
-                                    <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于6个字符，需包含大小写字母和数字</div>
-                                    <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于20个字符，需包含大小写字母和数字</div>
-                                    <div ng-message="pattern"><i class="fa fa-frown-o fb mr5"></i>密码过于简单，需包含大小写字母和数字</div>
+                                    <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于6个字符，需包含字母和数字</div>
+                                    <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于20个字符，需包含字母和数字</div>
+                                    <div ng-message="pattern"><i class="fa fa-frown-o fb mr5"></i>密码过于简单，需包含字母和数字</div>
                                 </div>
                             </div>
                         </div>
                         <!-- diabled chrome autofill error -->
-                        <!-- <div class="v-none">
+                        <div class="v-none">
                             <input type="password" name="hack">
-                        </div> -->
-                        <div class="form-group" ng-class="{'has-error':registerForm.password_confirmation.$invalid && registerForm.password_confirmation.$dirty}">
-                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>确认密码</label> -->
+                        </div>
+                        <!--<div class="form-group" ng-class="{'has-error':registerForm.password_confirmation.$invalid && registerForm.password_confirmation.$dirty}">
+                            <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>确认密码</label> ~~>
                             <div class="col-md-12">
                                 <input placeholder="再次输入您的密码" type="password" required="required" ng-model="registerUser.password_confirmation" kt-compare-to="registerUser.password" id="" class="form-control" name="password_confirmation">
                                 <div class="mt5 text-warning" ng-messages="registerForm.password_confirmation.$dirty && registerForm.password_confirmation.$error">
                                     <div ng-message="ktCompareTo"><i class="fa fa-frown-o fb mr5"></i>两次输入的密码请保持一致</div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <div class="col-md-12 clfix">
                                 <div kt-loading-status height="32" width="32"></div>

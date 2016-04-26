@@ -18,6 +18,7 @@
         @fontSize: 13;
     }
     @color-blue: #4380dd;
+    @color-blue-dark: #3370cd;
     @color-blue-light: #1d91f4;
     @color-grey: #ededed;
     @color-orange: #fead04;
@@ -142,15 +143,15 @@
                 padding: 12px 0 13px;
                 // .height(50);
                 border-radius: 3px;
-                border: 1px solid white;
-                background: none;
+                border: 1px solid @color-blue;
+                background: @color-blue;
                 .fontSize(17);
                 margin: 0 15px;
                 color: white;
                 &:hover {
-                    background: @color-blue;
+                    background: @color-blue-dark;
                     color: white;
-                    border-color: @color-blue;
+                    border-color: @color-blue-dark;
                 }
             }
         }

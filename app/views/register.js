@@ -12,6 +12,7 @@
 
             $scope.submitForm = function() {
                 $scope.pendingRequests = true
+                $scope.registerUser.password_confirmation = $scope.registerUser.password //隐藏重复输入密码的逻辑
 
                 ktRegisterService.save($scope.registerUser).$promise.then(function() {
                     // $scope.pendingRequests = false
