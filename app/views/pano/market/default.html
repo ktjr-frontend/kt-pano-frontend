@@ -8,8 +8,9 @@
             <div id="weekAmountChart" kt-echart chart-options="weekAmountChart.chartOptions" style="height:400px;">
             </div>
             <div class="tools">
-                <div class="tool f1_2rem" uib-tooltip="透视模式开关" tooltip-append-to-body="true" tooltip-placement="top" ng-class="{'on': weekAmountChart.chartOptions.filterVisible}">
+                <div class="tool f1_2rem" ng-class="{'on': weekAmountChart.chartOptions.filterVisible}">
                     <div class="tg-btn tg-btn-blue">
+                        <span class="name">观察窗：</span>
                         <input type="checkbox" ng-model="weekAmountChart.chartOptions.filterVisible" id="tg1">
                         <label for="tg1"></label>
                     </div>
@@ -63,8 +64,9 @@
             <div id="weekRateChart" kt-echart chart-options="weekRateChart.chartOptions" style="height:400px;">
             </div>
             <div class="tools">
-                <div class="tool f1_2rem" uib-tooltip="透视模式开关" tooltip-append-to-body="true" tooltip-placement="top" ng-class="{'on': weekRateChart.chartOptions.filterVisible}">
+                <div class="tool f1_2rem" ng-class="{'on': weekRateChart.chartOptions.filterVisible}">
                     <div class="tg-btn tg-btn-blue">
+                        <span class="name">观察窗：</span>
                         <input type="checkbox" ng-model="weekRateChart.chartOptions.filterVisible" id="tg2">
                         <label for="tg2"></label>
                     </div>

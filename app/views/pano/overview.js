@@ -200,6 +200,11 @@
                             return {
                                 name: v[2],
                                 showEffectOn: 'emphasis',
+                                itemStyle: {
+                                    normal: {
+                                        opacity: 0.7,
+                                    }
+                                },
                                 type: 'effectScatter',
                                 rippleEffect: {
                                     period: 8,
@@ -244,6 +249,7 @@
                         },
                         yAxis: {
                             name: '收益率（单位：%）',
+                            interval: 1,
                             max: ktDataHelper.getAxisMax(data.data),
                             min: ktDataHelper.getAxisMin(data.data)
                         },

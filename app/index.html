@@ -16,7 +16,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="user-scalable=no, width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-
     <!-- for seo-begin -->
     <meta name="Keywords" content="开通金融,开通金融信息（北京）有限公司,开通金融信息有限公司,开通金融信息公司,开通金融公司,李欣贺,人人贷,友信,中合担保,开通,金融,互联网金融,金融平台,金融信息服务平台,金融资产交易" />
     <meta name="Description" content="开通金融信息服务（北京）有限公司是北京市金融工作局批准设立的专业金融信息服务机构，由人人贷和中合中小企业融资担保股份有限公司共同发起设立。开通金融结合互联网大数据技术专注于不断推进金融业态创新，为会员持续提供具有价值的金融信息服务及专业、安全、高效的金融资产登记、交易、清结算平台支持。" />
@@ -27,14 +26,12 @@
     <meta name="ICBM" content="116.46, 39.92" />
     <meta name="fragment" content="!" />
     <!-- for seo-end -->
-
     <!-- 百度 360 站点认证-->
     <!-- <meta name="baidu-site-verification" content="ypsLgIvlfX" /> -->
     <meta name="baidu-site-verification" content="dPEKGNf49M" />
     <meta name="360-site-verification" content="7bd4aeb6fa185618c496cca5e5c1a0be" />
     <!-- <meta name="360-site-verification" content="f8d956cdb60d0d16491787980ee4d615" /> -->
     <!-- 百度 360 站点认证-->
-
     <!-- 防止百度搜索引擎转码 -->
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <!-- 移动设备-win8磁贴-->
@@ -42,10 +39,8 @@
     <meta name="msapplication-TileImage" content="images/ico/ms-icon-144x144.png">
     <!-- 移动设备-浏览器顶栏颜色-->
     <meta name="theme-color" content="#ffffff">
-    
     <link rel="dns-prefetch" href="//www.google-analytics.com">
     <link rel="dns-prefetch" href="//hm.baidu.com">
-
     <!-- 移动设备-ios&android桌面图标-->
     <link rel="apple-touch-icon" sizes="57x57" href="images/ico/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/ico/apple-icon-60x60.png">
@@ -57,24 +52,20 @@
     <link rel="apple-touch-icon" sizes="152x152" href="images/ico/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/ico/apple-icon-180x180.png">
     <link rel="icon" type="image/png" sizes="192x192" href="images/ico/android-icon-192x192.png">
-
     <!-- pc端-size 按顺序排列，否则在高清屏幕会有多余的请求 -->
     <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="images/ico/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/ico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="images/ico/favicon-96x96.png">
     <link rel="manifest" href="images/ico/manifest.json">
-
     <!--[if lt IE 10 ]>
     <base href="http://dev.ktjr.com:8888/">
     <![endif] -->
     <!--[if (gte IE 10) | !IE]><!-->
     <base href="/">
     <!--<![endif]-->
-
     <!-- Page title set in ktPageTitle directive -->
     <title kt-page-title inst-name="PANO-基于互联网资管市场的信息服务"></title>
-
     <!-- build:css({.,app,.tmp}) styles/vendor.css -->
     <!-- injectorCommon:css -->
     <link rel="stylesheet" href="less/bootstrap.css"/>
@@ -85,7 +76,6 @@
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
     <!-- endinjector -->
     <!-- endbuild -->
-    
     <!-- build:css({.tmp,app}) styles/style.css -->
     <!-- injectorApp:css -->
     <link rel="stylesheet" href="common/fonts/pano/css/style.css"/>
@@ -97,26 +87,21 @@
 <!-- Body -->
 
 <body class="{{$state.current.data.specialClass}}">
-
     <!--[if lt IE 9]>
     <p class="alert alert-danger" style="text-align:center;z-index:2001;position:fixed; width: 100%;">您使用的浏览器 <strong>版本太低</strong>。 为了更好的体验，请 <a href="http://browsehappy.com/">下载高级浏览器</a>。</p>
     <![endif]-->
-
     <!-- Simple splash screen-->
     <div class="splash">
         <div class="splash-title">
             <img src="images/logo2.svg" height="60" width="80%" alt="开通金融PANO">
             <p class="mt10">基于互联网资管市场的信息服务</p>
-            <img alt="" src="images/loading-bars.svg" width="64" height="64" /> 
+            <img alt="" src="images/loading-bars.svg" width="64" height="64" />
         </div>
     </div>
-
     <!-- Page view wrapper -->
     <div class="uiview" ui-view id="main-view"></div>
-
     <!-- injectorAssetMap:js -->
     <!-- endinjector -->
-
     <!-- build:js({.,app}) scripts/vendor.js -->
     <!-- injectorCommon:js -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -146,9 +131,7 @@
     <script src="bower_components/angular-apimock/dist/angular-apimock.min.js"></script>
     <!-- endinjector -->
     <!-- endbuild -->
-    
     <script src="common/libs/echarts.min.js"></script>
-    
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!-- injectorApp:js -->
     <script src="common/libs/jquery.feedback.js"></script>
@@ -187,6 +170,15 @@
     <!-- endinjector -->
     <!-- endbuild -->
 
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?3ac43202abd384ca8d53e206a9d630f1";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
     <!-- cnzz anlytics-->
     <!--<script type="text/javascript">
         var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");

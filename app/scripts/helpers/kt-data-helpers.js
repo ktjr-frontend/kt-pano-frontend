@@ -257,9 +257,9 @@
                         return _.max(_.map(v.data, function(v2) {
                             return v2 || null
                         })) || null
-                    }).max().add(1).ceil().value()
+                    }).max().ceil().value()
 
-                    max = max % 2 ? max + 1 : max
+                    // max = max % 2 ? max + 1 : max
                     return max
                 },
                 getAxisMin: function(data) { //取坐标的最小值
@@ -267,10 +267,10 @@
                         return _.min(_.map(v.data, function(v2) {
                             return v2 || null
                         })) || null
-                    }).min().subtract(1).floor().value()
+                    }).min().floor().value()
 
                     /*eslint-disable*/
-                    min = (min % 2) ? (min > 0 ? (min - 1) : min) : min;
+                    // min = (min % 2) ? (min > 0 ? (min - 1) : min) : min;
                     /*eslint-enable*/
 
                     return min

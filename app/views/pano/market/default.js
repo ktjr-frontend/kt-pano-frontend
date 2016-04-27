@@ -496,6 +496,7 @@
                             },
                             yAxis: {
                                 name: '收益率（单位：%）',
+                                interval: 1,
                                 max: ktDataHelper.getAxisMax(data.data),
                                 min: ktDataHelper.getAxisMin(data.data),
                             },
@@ -599,6 +600,7 @@
                                 selected: legendSelected,
                             },
                             yAxis: {
+                                interval: 1,
                                 max: ktDataHelper.getAxisMax(data.data),
                                 min: ktDataHelper.getAxisMin(data.data),
                             },
