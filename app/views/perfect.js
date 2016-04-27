@@ -2,9 +2,10 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, CacheFactory, ktRegisterService, ktSweetAlert) {
+        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, CacheFactory, ktRegisterService, ktSweetAlert, ktSession) {
 
             $rootScope.goHome = function() {
+                ktSession.clear()
                 $state.go('home.index')
             }
 

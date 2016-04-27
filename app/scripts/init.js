@@ -21,14 +21,14 @@ $(document).ready(function() {
             $('.splash').css('display', 'none')
         }, 10);
 
-        // // 百度统计
-        // window._hmt = window._hmt || [];
-        // (function() {
-        //     var hm = document.createElement('script');
-        //     hm.src = '//hm.baidu.com/hm.js?3ac43202abd384ca8d53e206a9d630f1';
-        //     var s = document.getElementsByTagName('script')[0];
-        //     s.parentNode.insertBefore(hm, s);
-        // })();
+        // 百度统计
+        window._hmt = window._hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = '//hm.baidu.com/hm.js?3ac43202abd384ca8d53e206a9d630f1';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
 
         // GrowingIO 统计
         var _vds = _vds || [];

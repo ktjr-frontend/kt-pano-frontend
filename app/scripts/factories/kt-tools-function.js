@@ -12,6 +12,11 @@
             return function(scope, successCallback, errorCallback) {
                 scope.pendingRequests = true
 
+                $window.localStorage.user = JSON.stringify({
+                    mobile: scope.user.remember ? scope.user.mobile : '',
+                    remember: scope.user.remember
+                })
+
                 ktLoginService.save(scope.user).$promise.then(function(res) {
                     scope.pendingRequests = false
 
@@ -80,6 +85,19 @@
                             });
                         })
                     }
+                }
+            }
+        })
+        .factory('ktSession', function($window, $rootScope, ipCookie, CacheFactory) {
+            return {
+                clear: function() {
+                    // delete $window.localStorage.user
+                    delete $window.localStorage.token
+                        // $rootScope.currentUrl = ''
+                    $rootScope.user = null
+                    $rootScope.wantJumpUrl = ''
+                    ipCookie.remove('token')
+                    CacheFactory.clearAll()
                 }
             }
         })
