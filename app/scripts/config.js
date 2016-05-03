@@ -101,14 +101,14 @@
                 nextText: '下一页',
                 previousText: '上一页',
                 rotate: true
-            });
+            })
 
 
-            $rootScope.apiCode = Math.random().toString(16).slice(2); // ajax disable catch
+            $rootScope.apiCode = Math.random().toString(16).slice(2) // ajax disable catch
             $rootScope.ktS = ktS // 资源哈希表
 
             //常用资源文件
-            var resource = ktHomeResource.get($rootScope.version)
+            var resource = ktHomeResource.get()
             $.extend($rootScope, resource)
 
             echarts.registerTheme('theme1', ktEchartTheme1) //echarts-3.x
@@ -135,26 +135,26 @@
 
             $rootScope.$on('$stateChangeError', function(event, toState, toParams) {
                 $state.go('error.404', toParams);
-            });
+            })
 
             $rootScope.$on('$stateNotFound', function(event, toState, toParams) {
                 $state.go('error.404', toParams);
-            });
+            })
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 
                 // 存储非错误和登录注册框的url 供redirect或者返回用
                 if (toState.name.indexOf('analytics') > -1) {
-                    $rootScope.wantJumpUrl = '';
+                    $rootScope.wantJumpUrl = ''
                 }
 
                 // 存储状态
-                $rootScope.previousState = fromState.name;
-                $rootScope.previousStateParams = fromParams;
-                $rootScope.currentState = toState.name;
+                $rootScope.previousState = fromState.name
+                $rootScope.previousStateParams = fromParams
+                $rootScope.currentState = toState.name
 
                 ktLogService.get()
-            });
+            })
 
             // ng-include 加载完后延迟显示footer, 避免闪烁
             $rootScope.$on('$includeContentLoaded', function() {
@@ -162,5 +162,5 @@
                     $('#footer').css('display', 'block')
                 }, 100)
             })
-        });
+        })
 })();
