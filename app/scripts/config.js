@@ -103,21 +103,15 @@
                 rotate: true
             })
 
-
-            $rootScope.apiCode = Math.random().toString(16).slice(2) // ajax disable catch
-            $rootScope.ktS = ktS // 资源哈希表
-
-            //常用资源文件
-            var resource = ktHomeResource.get()
-            $.extend($rootScope, resource)
-
             echarts.registerTheme('theme1', ktEchartTheme1) //echarts-3.x
 
+            ktHomeResource.init()
+            $rootScope.apiCode = Math.random().toString(16).slice(2) // ajax disable catch
+            $rootScope.ktS = ktS // 资源哈希表
             $rootScope.$state = $state
             $rootScope.back = function() {
                 window.history.back()
             }
-
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
                 // 首页获取user的逻辑不要尝试在这里解决，放到路由的resolve里面解决，否则很容易造成死循环，注意这个坑
