@@ -138,7 +138,7 @@
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 
                 // 存储非错误和登录注册框的url 供redirect或者返回用
-                if (toState.name.indexOf('analytics') > -1) {
+                if (toState.name.indexOf('pano') > -1) {
                     $rootScope.wantJumpUrl = ''
                 }
 
@@ -147,7 +147,9 @@
                 $rootScope.previousStateParams = fromParams
                 $rootScope.currentState = toState.name
 
-                ktLogService.get()
+                setTimeout(function() {
+                    ktLogService.get()
+                }, 500)
             })
 
             // ng-include 加载完后延迟显示footer, 避免闪烁
