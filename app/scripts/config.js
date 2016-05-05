@@ -147,7 +147,7 @@
                 $rootScope.previousStateParams = fromParams
                 $rootScope.currentState = toState.name
 
-                setTimeout(function() {
+                setTimeout(function() { //定时器为了等待state 切换完成（url地址），
                     ktLogService.get()
                 }, 500)
             })

@@ -11,8 +11,9 @@ body.account-page {
     #header {
         background: @color-3;
         border-bottom: 1px solid @border-color;
+        padding: 0;
     }
-    .other-tips{
+    .other-tips {
         font-size: 1.2rem;
         text-align: center;
         max-width: 750px;
@@ -76,7 +77,6 @@ body.account-page {
         }
         // .btn-blue-func();
     }
-
     a.no-notely:hover {
         color: @color-navy-blue;
     }
@@ -86,6 +86,11 @@ body.account-page {
         padding-left: 15px;
         margin: 0 0 28px;
         font-weight: normal;
+        @media(max-width: 480px) {
+            font-size: 1.5rem;
+            padding-left: 10px;
+            margin: 0 0 10px;
+        }
     }
     .sub-title {
         font-size: 1.7rem;
@@ -116,9 +121,19 @@ body.account-page {
                 padding: 30px 15px;
             }
             @media(max-width: 480px) {
-                padding: 15px 10px;
+                padding: 15px 18px;
             }
         }
+    }
+    @media(max-width: 480px) {
+        .form-control {
+            height: 40px;
+            font-size: 1.4rem;
+        }
+        .btn-navy-blue {
+            font-size: 1.5rem;
+        }
+
     }
     @media (min-width: 768px) {
         .control-label {
@@ -128,6 +143,7 @@ body.account-page {
     }
 }
 
+
 /*.account-page #footer-analytics {
     position: fixed;
 }*/
@@ -135,6 +151,11 @@ body.account-page {
 .register-container {
     max-width: 490px;
     margin: 50px auto;
+    @media(min-width: 401px) {
+        .phone-captcha {
+            margin-left: 10px;
+        }
+    }
     .checkbox-label {
         float: left;
         color: @placeholder-color;
@@ -176,50 +197,17 @@ body.account-page {
             }
         }
     }
-    // .hpanel {
-    //     background: none;
-    //     @media (min-width: 768px) {
-    //         margin: 0 59px 0 -59px;
-    //     }
-    //     .panel-body {
-    //         background: none;
-    //         padding: 10px;
-    //     }
-    // }
-    // .control-label {
-    //     &.text-left {
-    //         text-align: left;
-    //     }
-    //     color: white;
-    // }
-    // .form-control {
-    //     border: 0;
-    // }
-    // .title {
-    //     font-size: 2.3rem;
-    //     padding-left: 16px;
-    // }
-    // .form-group-img-captcha {
-    //     .form-control {
-    //         width: 36%;
-    //         float: left;
-    //     }
-    //     .captcha-canvas {
-    //         float: left;
-    //         margin-left: 2%;
-    //     }
-    // }
     .btns {
-        .btn-get-captcha{
+        .btn-get-captcha {
             border: 1px solid @border-color;
             background: #e7eaee;
             color: @placeholder-color;
-            outline:none;
-            &:hover{
+            outline: none;
+            &:hover {
                 background: lighten(#e7eaee, 5%);
             }
-            &:active{
-                box-shadow: inset 0 1px 1px rgba(0,0,0,.3);
+            &:active {
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, .3);
             }
         }
         .icon-pano {

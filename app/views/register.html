@@ -45,7 +45,7 @@
                                 <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>验证码</label> -->
                                 <div class="col-md-12">
                                     <input style="width: 228px;" kt-validate-on-blur autocomplete="off" autofill="off" placeholder="验证码" type="text" required="required" ng-pattern="/^\d{4}$/" ng-model="registerUser.captcha" id="" class="form-control fl mb5" name="captcha">
-                                    <div class="btns fl ml10 mt5">
+                                    <div class="btns phone-captcha fl mt5">
                                         <button style="width: 150px" ng-disabled="waitCaptchaMessage || registerForm.mobile.$invalid" ng-click="getCaptcha($event, 'sms', 'captcha')" class="btn f1_3rem fl btn-get-captcha">
                                             <i class="icon-pano icon-message va-1 f1_6rem mr5"></i>
                                             <span ng-hide="waitCaptchaMessage">短信获取</span>
