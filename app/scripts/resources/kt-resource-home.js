@@ -39,19 +39,21 @@
                     $.extend($rootScope, config)
 
                     // 页面激活时更新时间
-                    $(window).on('focus', function() {
-                        $rootScope.nowLocate = localeDate()
-                    })
-
-                    var tp = null
-                    DocumentVisible.addEvent(function() {
-                        $timeout.cancel(tp)
-                        tp = $timeout(function() {
-                                if (!DocumentVisible.hidden) {
-                                    $rootScope.nowLocate = localeDate()
-                                }
-                            }, 500) // timeout for chrome twice fire visibilityChange bug
-                    })
+                    if (_.isUndefined(DocumentVisible.hidden)) {
+                        $(window).on('focus', function() {
+                            $rootScope.nowLocate = localeDate()
+                        })
+                    } else {
+                        var tp = null
+                        DocumentVisible.addEvent(function() {
+                            $timeout.cancel(tp)
+                            tp = $timeout(function() {
+                                    if (!DocumentVisible.hidden) {
+                                        $rootScope.nowLocate = localeDate()
+                                    }
+                                }, 500) // timeout for chrome twice fire visibilityChange bug
+                        })
+                    }
                 }
             }
         })

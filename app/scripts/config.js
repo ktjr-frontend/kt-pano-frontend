@@ -146,6 +146,7 @@
                 $rootScope.previousState = fromState.name
                 $rootScope.previousStateParams = fromParams
                 $rootScope.currentState = toState.name
+                $rootScope.nowLocate = moment.localeData().meridiem(moment().hour(), moment().minute())
 
                 setTimeout(function() { //定时器为了等待state 切换完成（url地址），
                     ktLogService.get()
