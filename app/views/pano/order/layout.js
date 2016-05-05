@@ -99,18 +99,29 @@
             }
 
             $scope.contactMe = function(assetID) {
-                ktAssetIntentionService.save({
-                    asset_id: assetID
-                }, function() {
-                    ktSweetAlert.swal({
-                        title: '已收到您的要求，开通金融会尽快与您联系',
-                        type: 'success',
-                        text: '<i class="icon-pano icon-phone mr5 f1_2rem"></i><a class="mr20">010-84551488</a><i class="icon-pano icon-message mr5 f1_2rem"></i><a href="mailto:HelloPano@ktjr.com">HelloPano@ktjr.com</a>',
-                        html: true
-                    })
-                }, function() {
-                    ktSweetAlert.error('抱歉！服务器繁忙。')
+                ktSweetAlert.swal({
+                    title: '对该资产有意向',
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    text: '如果您对该资产有意向，我们将尽快与您联系。'
+                }, function(isConfirmed) {
+                    if (isConfirmed) {
+                        ktAssetIntentionService.save({
+                            asset_id: assetID
+                        }, function() {
+                            ktSweetAlert.swal({
+                                title: '已收到您的要求，开通金融会尽快与您联系',
+                                type: 'success',
+                                text: '<i class="icon-pano icon-phone mr5 f1_2rem"></i><a class="mr20">010-84551488</a><i class="icon-pano icon-message mr5 f1_2rem"></i><a href="mailto:HelloPano@ktjr.com">HelloPano@ktjr.com</a>',
+                                html: true
+                            })
+                        }, function() {
+                            ktSweetAlert.error('抱歉！服务器繁忙。')
+                        })
+                    }
                 })
+
             }
 
             $scope.shared.filters = []

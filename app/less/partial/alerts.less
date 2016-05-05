@@ -2,10 +2,11 @@
     // background-color: #34495e;
     &.confirm {
         // .btn-blue-func();
-        background: @color-table-head!important;
+        box-shadow: none!important;
+        background: @color-navy-blue!important;
         &:hover,
         &:active {
-            background: darken(@color-table-head, 6%)!important;
+            background: darken(@color-navy-blue, 6%)!important;
         }
     }
     color: white;
@@ -18,6 +19,11 @@
     padding: 5px 50px;
     margin: 20px 5px;
     cursor: pointer;
+}
+.sweet-alert .la-ball-fall{
+    top: 50%;
+    margin-top: 0;
+    transform: translateY(-50%);
 }
 .sweet-alert .sa-button-container {
     margin-top: 30px;
