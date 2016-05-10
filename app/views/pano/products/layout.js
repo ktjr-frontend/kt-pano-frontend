@@ -35,6 +35,7 @@
                         rate_in: null,
                         asset_type_eq: null,
                         exchange_eq: null,
+                        credit_manager_eq: null,
                         from_eq: null,
                         sort_by: null,
                         page: 1,

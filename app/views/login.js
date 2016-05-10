@@ -8,6 +8,16 @@
                 $state.go('home.index')
             }
 
+            try {
+                $window.localStorage.getItem('nothing')
+            } catch (e) {
+                ktSweetAlert.swal({
+                    title: '错误：',
+                    text: '您的浏览器不支持localStorage，可能是无痕浏览模式导致的，请不要使用无痕上网模式',
+                    type: 'error',
+                })
+            }
+
             // $scope.captchaSettings = {
             //     randomColours: false,
             //     colour1: '#eef7fb', //背景
@@ -18,8 +28,8 @@
 
             $scope.submitForm = function() {
                 ktLoginCommon($scope)
-                // var CAPTCHA = $scope.captchaSettings.CAPTCHA
-                // if (!CAPTCHA) return
+                    // var CAPTCHA = $scope.captchaSettings.CAPTCHA
+                    // if (!CAPTCHA) return
 
                 /*CAPTCHA.validate($scope.user.img_captcha, function(isValid) {
                         var form = CAPTCHA._container.closest('form')
@@ -57,7 +67,7 @@
                             }, 100)
                         }
                     })*/
-                    // return false
+                // return false
             }
 
             // 忘记密码
