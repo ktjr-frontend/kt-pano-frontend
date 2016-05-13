@@ -257,7 +257,7 @@
                         return _.max(_.map(v.data, function(v2) {
                             return v2 || null
                         })) || null
-                    }).max().ceil().value()
+                    }).max().ceil().value() + 1
 
                     // max = max % 2 ? max + 1 : max
                     return max
