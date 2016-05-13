@@ -2,14 +2,14 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktLoginCtrl', function($scope, $rootScope, $state, $window, $timeout, $uibModal, ktSweetAlert, ktLoginCommon) {
+        .controller('ktLoginCtrl', function($scope, $rootScope, $state, $timeout, $uibModal, ktSweetAlert, ktLoginCommon) {
 
             $rootScope.goHome = function() {
                 $state.go('home.index')
             }
 
             try {
-                $window.localStorage.getItem('nothing')
+                window.localStorage.setItem('_detect', 'work')
             } catch (e) {
                 ktSweetAlert.swal({
                     title: '错误：',
@@ -24,7 +24,7 @@
             //     colour2: '#4a6920' //前景
             // }
 
-            $scope.user = $rootScope.user = JSON.parse($window.localStorage.user || '{}')
+            $scope.user = $rootScope.user = JSON.parse(window.localStorage.user || '{}')
 
             $scope.submitForm = function() {
                 ktLoginCommon($scope)

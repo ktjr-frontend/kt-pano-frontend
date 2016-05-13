@@ -23,6 +23,7 @@
                 yAxis: 'rate',
                 yAxisFormat: 'percent2',
                 xAxis: '_id',
+                color: ['#6596e0', '#ffa500'],
                 xAxisFormat: null,
                 list: []
             }
@@ -87,6 +88,9 @@
                     chart: 'summary',
                 }, function(data) {
                     _self.data = data.stat
+                    if (_self.data.crawled_at) {
+                        $scope.updateDate = moment(_self.data.crawled_at).subtract(7, 'd').format('YYYY-MM-DD') + ' ~ ' + moment().subtract(1, 'd').format('YYYY-MM-DD')
+                    }
                     updateView()
                 })
 
@@ -122,7 +126,7 @@
                                 var res = '<div class="f1_2rem chart-tooltip-title" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;">' +
                                     params.value[2] + '</div><table class="f1_2rem chart-tooltip-table">' +
                                     '<tr><td class="justify">加权收益率：</td><td>' + ktValueFactory(params.value[0], _self.xAxisFormat) + '</td></tr>' +
-                                    '<tr><td class="justify">' + params.seriesName + '：</td><td>' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</td></tr>';
+                                    '<tr><td class="justify">发行量：</td><td>' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</td></tr>';
                                 return res;
                             },
                             xAxisFormat: _self.xAxisFormat,
@@ -232,6 +236,7 @@
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
                     var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', legend)
+                    var color = _self.color
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
@@ -242,7 +247,7 @@
                                 axis: 'auto',
                                 type: 'line',
                             },
-
+                            color: color,
                             xAxisFormat: _self.xAxisFormat,
                             titlePrefix: '产品期限：',
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -251,7 +256,7 @@
                             name: '收益率（单位：%）',
                             interval: 1,
                             max: ktDataHelper.getAxisMax(data.data),
-                            min: ktDataHelper.getAxisMin(data.data)
+                            min: 0
                         },
                         xAxis: {
                             type: 'category',
@@ -262,16 +267,24 @@
                             data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         },
 
-                        series: _.map(data.data, function(v) {
+                        series: _.map(data.data, function(v, i) {
                             return {
                                 name: v.name,
                                 type: 'line',
+                                // color: '#ffa500',
+                                lineStyle: {
+                                    normal: { color: color[i] },
+                                },
+                                itemStyle: {
+                                    normal: { color: color[i] },
+                                },
                                 markLine: {
                                     data: ktDataHelper.getMarkLineCoords(v.data)
                                 },
                                 // symbol: 'path://M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0',
                                 smooth: false,
                                 data: v.data
+
                             }
                         })
                     })

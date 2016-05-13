@@ -18,6 +18,8 @@
                 var d = params.dimension
                 if (d === 'asset_type') {
                     return 7
+                } else if (d === 'from') {
+                    return 12
                 }
                 return 6
             })()
@@ -56,7 +58,16 @@
                     }
                 },
                 yAxis: {
-                    nameGap: 20
+                    nameGap: 20,
+                    splitLine: { // 分隔线
+                        show: true, // 默认显示，属性show控制显示与否
+                        // onGap: null,
+                        lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: ['#f3f3f3'],
+                            width: 1,
+                            type: 'solid'
+                        }
+                    }
                 },
                 grid: {
                     show: true,
@@ -312,7 +323,8 @@
                                     type: 'line',
                                 },
                                 reverse: true,
-                                titleSuffix: '所在周发行量',
+                                titleFormat: '@ToWeekEnd',
+                                titleSuffix: '发行量',
                                 // noUnit: true,
                                 xAxisFormat: _self.xAxisFormat,
                                 yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -423,7 +435,7 @@
                             },
                             /*yAxis: [{
                                 max: ktDataHelper.getAxisMax(data.data),
-                                min: ktDataHelper.getAxisMin(data.data),
+                                min: 0,
                             }],*/
                             series: _.map(_.reverse(data.data), function(v) {
                                 return {
@@ -490,7 +502,8 @@
                                     axis: 'auto',
                                     type: 'line',
                                 },
-                                titleSuffix: '所在周收益率',
+                                titleFormat: '@ToWeekEnd',
+                                titleSuffix: '收益率',
                                 xAxisFormat: _self.xAxisFormat,
                                 yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                             },
@@ -498,7 +511,7 @@
                                 name: '收益率（单位：%）',
                                 interval: 1,
                                 max: ktDataHelper.getAxisMax(data.data),
-                                min: ktDataHelper.getAxisMin(data.data),
+                                min: 0,
                             },
                             xAxis: [{
                                 type: 'category',
@@ -602,7 +615,7 @@
                             yAxis: {
                                 interval: 1,
                                 max: ktDataHelper.getAxisMax(data.data),
-                                min: ktDataHelper.getAxisMin(data.data),
+                                min: 0,
                             },
                             series: _.map(data.data, function(v) {
                                 return {
