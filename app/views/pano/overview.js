@@ -4,7 +4,7 @@
     angular.module('kt.pano')
         .controller('ktOverviewCtrl', function($scope, $window, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory, ktEchartTheme1) {
 
-            $scope.updateDate = moment().subtract(7, 'd').format('YYYY-MM-DD') + ' ~ ' + moment().subtract(1, 'd').format('YYYY-MM-DD')
+            $scope.updateDate = '获取中...'
 
             var colors = ktEchartTheme1.color
 
@@ -88,8 +88,9 @@
                     chart: 'summary',
                 }, function(data) {
                     _self.data = data.stat
-                    if (_self.data.crawled_at) {
-                        $scope.updateDate = moment(_self.data.crawled_at).subtract(7, 'd').format('YYYY-MM-DD') + ' ~ ' + moment().subtract(1, 'd').format('YYYY-MM-DD')
+
+                    if (data.crawled_at) {
+                        $scope.updateDate = moment(data.crawled_at).subtract(6, 'd').format('YYYY-MM-DD') + ' ~ ' + moment(data.crawled_at).format('YYYY-MM-DD')
                     }
                     updateView()
                 })
