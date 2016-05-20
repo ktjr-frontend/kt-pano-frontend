@@ -248,7 +248,7 @@
                                 axis: 'auto',
                                 type: 'line',
                             },
-                            color: color,
+                            // color: color,
                             xAxisFormat: _self.xAxisFormat,
                             titlePrefix: '产品期限：',
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -268,17 +268,17 @@
                             data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         },
 
-                        series: _.map(data.data, function(v, i) {
+                        series: _.map(data.data, function(v) {
                             return {
                                 name: v.name,
                                 type: 'line',
                                 // color: '#ffa500',
-                                lineStyle: {
-                                    normal: { color: color[i] },
-                                },
-                                itemStyle: {
-                                    normal: { color: color[i] },
-                                },
+                                // lineStyle: {
+                                //     normal: { color: color[i] },
+                                // },
+                                // itemStyle: {
+                                //     normal: { color: color[i] },
+                                // },
                                 markLine: {
                                     data: ktDataHelper.getMarkLineCoords(v.data)
                                 },
@@ -331,6 +331,11 @@
                             return {
                                 name: v.name,
                                 type: 'bar',
+                                itemStyle: {
+                                    normal: {
+                                        opacity: 0.8
+                                    }
+                                },
                                 barMaxWidth: 40,
                                 data: v.data
                             }
@@ -384,6 +389,11 @@
                             return {
                                 name: v.name,
                                 type: 'bar',
+                                itemStyle: {
+                                    normal: {
+                                        opacity: 0.8
+                                    }
+                                },
                                 stack: '类型占比',
                                 barMaxWidth: 40,
                                 data: v.data

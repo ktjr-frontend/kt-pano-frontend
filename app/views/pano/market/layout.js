@@ -7,7 +7,7 @@
             $scope.shared = {}
             var defaultParams = {
                 dimension: 'asset_type',
-                start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(4, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
+                start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(6, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
                 end_at: moment().day(0).add(+(moment().day() > 0), 'w').format('YYYY-MM-DD'),
             }
             var search = $location.search()
@@ -38,15 +38,22 @@
                 customShortcuts: [{
                         name: '最近4周',
                         dates: function() {
-                            var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
-                            var end = moment(start).subtract(4, 'w').add(1, 'd').toDate();
+                            var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                            var start = moment(end).subtract(4, 'w').add(1, 'd').toDate();
+                            return [start, end];
+                        }
+                    }, {
+                        name: '最近6周',
+                        dates: function() {
+                            var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                            var start = moment(end).subtract(6, 'w').add(1, 'd').toDate();
                             return [start, end];
                         }
                     }, {
                         name: '最近8周',
                         dates: function() {
-                            var start = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
-                            var end = moment(start).subtract(8, 'w').add(1, 'd').toDate();
+                            var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
+                            var start = moment(end).subtract(8, 'w').add(1, 'd').toDate();
                             return [start, end];
                         }
                     }

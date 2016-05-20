@@ -7,14 +7,16 @@
             var shared = $scope.shared
             var params = shared.params
 
+
             $.extend(params, $location.search())
 
-            $scope.updateDate = moment().subtract(1, 'd').format('YYYY-MM-DD')
+            $scope.updateDate = '获取中...'
+            // $scope.updateDate = moment().subtract(1, 'd').format('YYYY-MM-DD')
             ktDataHelper.filterUpdate(shared.filters, shared.params)
 
             var colors = ktEchartTheme1.color
-            var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension]
-            var defaultShowLength = (function() {
+            var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension] // 是否是当前维度的所有筛选
+            var defaultShowLength = (function() { // 默认显示的几个legend，根据不同维度展示不同的长度
                 var d = params.dimension
                 if (d === 'asset_type') {
                     return 7
@@ -36,7 +38,7 @@
             var topGap = 50
             var bottomGap = isAllDimension ? 140 : 80
 
-            var loadingSettings = {
+            var loadingSettings = { // 设置图表异步加载的样式
                 text: '努力加载中...',
                 color: '#3d4351',
                 textColor: '#3d4351',
@@ -150,14 +152,23 @@
             // 自定义缩放组件的位置初始化，百分比
             function getStartEndPercent(data) {
                 var l = data.xAxis.length
-                var start = l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25
-                var end = l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
+                var minWidth = 100 / l
+                var lpps = _.map(data.xAxis, function(v, i) { // 横轴文本的位置百分比
+                    return (i + 1 / 2) * minWidth
+                })
+
+                // var start = l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25
+                // var end = l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
+                var start = l > 1 ? 100 - minWidth * 2 : 25
+                var end = l > 1 ? 100 - minWidth : 75
 
                 if (end - start < 5) {
                     start = end - 5
                 }
 
                 return {
+                    xAxisPositionPercents: lpps,
+                    minWidth: _.floor(minWidth),
                     start: start,
                     end: end
                 }
@@ -194,10 +205,24 @@
                     onZoom: function(e) {
                         if (e.triggerType === 'manual') return
 
-                        var xAxis = chart.getOption().xAxis[1]
-                        var l = xAxis.data.length
-                        var startDate = xAxis.data[((l - 1) * e.start.toFixed(2) / 100) | 0]
-                        var endDate = moment(xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]).day(0).add(1, 'w').format('YYYY-MM-DD')
+                        var opts = chart.getOption()
+                        var lpps = opts.customDataZoom.xAxisPositionPercents
+                        var xAxis = opts.xAxis[1]
+                            // var l = xAxis.data.length
+                        var coverxAxis = _.chain(lpps).map(function(v, i) {
+                            return (v < e.end && v > e.start) ? i : null
+                        }).filter(function(v) {
+                            return !_.isNull(v)
+                        }).value()
+
+                        if (!coverxAxis.length) return
+
+                        // @old 没有间隙的处理方法
+                        // var startDate = xAxis.data[((l - 1) * e.start.toFixed(2) / 100) | 0]
+                        // var endDate = moment(xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]).day(0).add(1, 'w').format('YYYY-MM-DD')
+
+                        var startDate = xAxis.data[coverxAxis[0]]
+                        var endDate = moment(xAxis.data[coverxAxis.pop()]).day(0).add(1, 'w').format('YYYY-MM-DD')
 
                         $timeout.cancel(updatePromise)
                         updatePromise = $timeout(function() {
@@ -281,6 +306,7 @@
                 }, options || {})]
             }*/
 
+            // 左1图-发行量周统计
             weekAmountChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
@@ -288,6 +314,10 @@
                 ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     chart: 'circulation_group_by_week_and_from',
                 }, _self._params)), function(data) {
+                    if (data.crawled_at) {
+                        $scope.updateDate = moment(data.crawled_at).format('YYYY-MM-DD')
+                    }
+
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
                     updateView()
                 })
@@ -337,8 +367,15 @@
                                 type: 'category',
                                 name: '周',
                                 nameLocation: 'end',
+                                axisLabel: {
+                                    interval: (data.xAxis.length > 6 || window.detectmob()) ? 'auto' : 0
+                                },
+                                axisTick: {
+                                    show: true,
+                                    interval: 0
+                                },
                                 nameGap: 10,
-                                boundaryGap: false,
+                                boundaryGap: true,
                                 data: data.xAxis
                             }, {
                                 type: 'category',
@@ -348,7 +385,7 @@
                                 axisTick: {
                                     show: false
                                 },
-                                boundaryGap: false,
+                                boundaryGap: true,
                                 data: data.xAxis
                             }],
 
@@ -375,6 +412,7 @@
                 }
             }
 
+            // 右1图-发行量期限统计
             durationAmountChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 var chart
@@ -441,6 +479,9 @@
                                 return {
                                     name: v.name,
                                     itemStyle: {
+                                        normal: {
+                                            opacity: 0.8,
+                                        },
                                         emphasis: {
                                             barBorderWidth: 1,
                                             barBorderColor: 'rgba(0,0,0,.5)'
@@ -459,7 +500,7 @@
                 }
             }
 
-
+            // 左2图-收益率周统计
             weekRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 var chart
@@ -517,8 +558,15 @@
                                 type: 'category',
                                 name: '周',
                                 nameLocation: 'end',
+                                axisLabel: {
+                                    interval: (data.xAxis.length > 6 || window.detectmob()) ? 'auto' : 0
+                                },
+                                axisTick: {
+                                    show: true,
+                                    interval: 0
+                                },
                                 nameGap: 10,
-                                boundaryGap: false,
+                                boundaryGap: true,
                                 data: data.xAxis
                             }, {
                                 type: 'category',
@@ -528,7 +576,7 @@
                                 axisTick: {
                                     show: false
                                 },
-                                boundaryGap: false,
+                                boundaryGap: true,
                                 data: data.xAxis
                             }],
 
@@ -551,6 +599,7 @@
                 }
             }
 
+            // 右2图-收益率期限统计
             durationRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 var chart
@@ -593,7 +642,7 @@
                             name: '期限',
                             nameLocation: 'end',
                             nameGap: 10,
-                            boundaryGap: false,
+                            boundaryGap: true,
                             data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         },
 

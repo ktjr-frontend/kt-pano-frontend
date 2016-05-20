@@ -25,6 +25,7 @@
                 $scope.products = res.compass_assets
                 shared._params.totalItems = res.total_items
                 shared.today_added_count = res.today_added_count
+                shared.today_added_amount = res.today_added_amount
                 $scope.$emit('totalItemGot', search)
             })
         })
