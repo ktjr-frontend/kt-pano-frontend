@@ -118,11 +118,13 @@
                     <td ng-bind="c.name"></td>
                     <td ng-repeat="td in ::c.data track by $index">
                         <div class="td-inner">
-                            <span ng-bind="::(td[0] | ktNumber:2:'percent2')"></span>
-                            <div class="bp">
+                            <span ng-bind="::(td[0] | ktNumber:2:'percent2')">
+
+                            </span>
+                            <sup class="bp">
                                 <span class="glyphicon" ng-class="{'glyphicon-arrow-down arrow-down': td[1] === -1, 'glyphicon-arrow-up arrow-up': td[1] === 1}"></span>
-                                <span class="f1rem bp-value" ng-show="td[1] !== 0" ng-bind="td[2] | ktAppend:'BP'"></span>
-                            </div>
+                                <span class="f1rem bp-value" ng-show="td[1] !== 0" ng-bind="td[2] | ktAppend:'bp'"></span>
+                            </sup>
                         </div>
                     </td>
                 </tr>
