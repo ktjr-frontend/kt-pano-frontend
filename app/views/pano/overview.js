@@ -237,7 +237,7 @@
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
                     var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', legend)
-                    var color = _self.color
+                    // var color = _self.color
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {

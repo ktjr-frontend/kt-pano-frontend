@@ -110,24 +110,27 @@
         // }
         .td-inner {
             position: relative;
-            padding: 0 10px;
+            // padding: 0 10px;
             .bp {
-                position: absolute;
-                top: auto;
-                right: -8px;
-                bottom: -9px;
+                display: inline-block;
+                // position: absolute;
+                // top: auto;
+                // right: -8px;
+                // bottom: -9px;
+            }
+            .bp-value{
+                font-family: serif, sans-serif;
             }
         }
-        .arrow-down {
+        .arrow-down, .arrow-up{
             font-size: 1rem;
             margin-right: -5px;
-            transform: scale(0.8);
+            transform: scale(0.75);
+        }
+        .arrow-down {
             color: rgba(60, 180, 61, 0.86);
         }
         .arrow-up {
-            font-size: 1rem;
-            margin-right: -5px;
-            transform: scale(0.8);
             color: rgba(200, 0, 0, 0.7);
         }
         &.text-left {
