@@ -10,12 +10,11 @@
                         <span class="key">姓<i class="blank"></i><i class="blank"></i>名：</span>
                         <span class="value" ng-bind="user.name"></span>
                     </div>
-                    <!-- <div class="content" ng-bind="user.name"></div> -->
-                    <div class="action">
+                    <!-- <div class="action">
                         <a ng-click="updateName()" class="btn btn-navy-blue f1_2rem">
                             <i class="icon-pano icon-edit f1rem mr5"></i>修改
                         </a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="line">
                     <div class="title">
@@ -34,8 +33,20 @@
                         <span class="key">工作邮箱：</span>
                         <span class="value" ng-bind="user.email"></span>
                     </div>
+                    <div class="title">
+                        <span class="key">公司名称：</span>
+                        <span class="value" ng-bind="user.company"></span>
+                    </div>
+                    <div class="title">
+                        <span class="key">部<i class="blank"></i><i class="blank"></i>门：</span>
+                        <span class="value" ng-bind="user.department"></span>
+                    </div>
+                    <div class="title">
+                        <span class="key">职<i class="blank"></i><i class="blank"></i>位：</span>
+                        <span class="value" ng-bind="user.job"></span>
+                    </div>
                     <div class="action">
-                        <a ng-click="updateEmail()" class="btn btn-navy-blue f1_2rem">
+                        <a ng-click="updateProfile()" class="btn btn-navy-blue f1_2rem">
                             <i class="icon-pano icon-edit f1rem mr5"></i>修改
                         </a>
                     </div>

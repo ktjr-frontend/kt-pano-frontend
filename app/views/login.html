@@ -5,7 +5,7 @@
     </div>
     <div class="hpanel">
         <div class="panel-body">
-            <form name="loginForm" kt-accessible-form class="form-horizontal" method="post" id="loginForm" ng-submit="submitForm()">
+            <form name="loginForm" novalidate kt-accessible-form class="form-horizontal" method="post" id="loginForm" ng-submit="submitForm()">
                 <input type="hidden" name="redirect" value="{{currentUrl}}">
                 <div class="form-group has-feedback" ng-class="{'has-error':loginForm.mobile.$invalid && loginForm.mobile.$dirty}">
                     <!-- <label class="text-primary-dark col-md-2 control-label" for="mobile">账户</label> -->

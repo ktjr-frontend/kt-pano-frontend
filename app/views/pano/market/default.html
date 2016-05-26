@@ -24,7 +24,8 @@
             <div class="chart-table-title fl">不同期限资产产品发行量<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="该图与资产产品周发行量趋势（左图）关联，展示在发行量趋势图的移动时间窗范围内，各细分维度（平台/资产类型/产品类型/挂牌场所）不同期限产品的发行量情况。" class="icon-pano icon-info f1_2rem ml5"></i></div>
             <div class="update-time fr">
                 <span class="ml10">
-                    时间范围：<span class="animated-panel" kt-blink watch-values="start_at,end_at" on-change="durationAmountChart._params" ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
+                    时间范围：<span ng-show="durationAmountChart._params.start_at !== '-' && durationAmountChart._params.end_at !== '-'" class="animated-panel" kt-blink watch-values="start_at,end_at" on-change="durationAmountChart._params" ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
+                    <span ng-show="durationAmountChart._params.start_at === '-' || durationAmountChart._params.end_at === '-'" class="text-warning"><i class="fa fa-frown-o fb mr5"></i>时间范围有误</span>
                 </span>
             </div>
         </div>
@@ -80,7 +81,8 @@
             <div class="chart-table-title fl">不同期限资产产品收益率<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="该图与资产产品周收益率趋势（左图）关联，展示在产品收益率趋势图的移动时间窗范围内，各细分维度（平台/资产类型/产品类型/挂牌场所）不同期限产品的综合年化收益率情况。" class="icon-pano icon-info f1_2rem ml5"></i></div>
             <div class="update-time fr">
                 <span class="ml10">
-                    时间范围：<span class="animated-panel" kt-blink watch-values="start_at,end_at" on-change="durationAmountChart._params" ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
+                    时间范围：<span ng-show="durationAmountChart._params.start_at !== '-' && durationAmountChart._params.end_at !== '-'" class="animated-panel" kt-blink watch-values="start_at,end_at" on-change="durationAmountChart._params" ng-bind="durationAmountChart._params.start_at + ' ~ ' + durationAmountChart._params.end_at"></span>
+                    <span ng-show="durationAmountChart._params.start_at === '-' || durationAmountChart._params.end_at === '-'" class="text-warning"><i class="fa fa-frown-o fb mr5"></i>时间范围有误</span>
                 </span>
             </div>
         </div>

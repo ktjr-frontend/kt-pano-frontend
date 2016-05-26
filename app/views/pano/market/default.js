@@ -7,11 +7,9 @@
             var shared = $scope.shared
             var params = shared.params
 
-
             $.extend(params, $location.search())
 
             $scope.updateDate = '获取中...'
-            // $scope.updateDate = moment().subtract(1, 'd').format('YYYY-MM-DD')
             ktDataHelper.filterUpdate(shared.filters, shared.params)
 
             var colors = ktEchartTheme1.color
@@ -25,7 +23,7 @@
                 }
                 return 6
             })()
-            var legendSelected = {}
+            var legendSelected = {} //默认选中的图例
             var getSelectedLegend = function(xAxis) {
                 if (_.isEmpty(legendSelected)) {
                     _.each(xAxis, function(v, i) {
@@ -149,18 +147,39 @@
 
             }
 
+            $scope.$watch('weekAmountChart.chartOptions.filterVisible', function(newValue) {
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: '观察窗按钮',
+                    eventAction: newValue ? '打开' : '关闭',
+                    eventLabel: '市场数据 发行量趋势图',
+                })
+            })
+
+            $scope.$watch('weekRateChart.chartOptions.filterVisible', function(newValue) {
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: '观察窗按钮',
+                    eventAction: newValue ? '打开' : '关闭',
+                    eventLabel: '市场数据 收益率趋势图',
+                })
+            })
+
             // 自定义缩放组件的位置初始化，百分比
             function getStartEndPercent(data) {
                 var l = data.xAxis.length
-                var minWidth = 100 / l
+                var minWidth = l > 1 ? 100 / (l - 1) : 50
                 var lpps = _.map(data.xAxis, function(v, i) { // 横轴文本的位置百分比
-                    return (i + 1 / 2) * minWidth
+                    // return (i + 1 / 2) * minWidth
+                    return l > 1 ? i * minWidth : 50 // 一个点特殊处理
                 })
 
                 // var start = l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25
                 // var end = l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
-                var start = l > 1 ? 100 - minWidth * 2 : 25
-                var end = l > 1 ? 100 - minWidth : 75
+                /*eslint-disable*/
+                var start = l === 1 ? 25 : (l === 2 ? 0 : 100 - minWidth * 3 / 2) // 特殊里1个点和2个点的时候
+                var end = l === 1 ? 75 : (l === 2 ? 50 : 100 - minWidth / 2)
+                /*eslint-enable*/
 
                 if (end - start < 5) {
                     start = end - 5
@@ -168,7 +187,7 @@
 
                 return {
                     xAxisPositionPercents: lpps,
-                    minWidth: _.floor(minWidth),
+                    minWidth: _.floor(minWidth / 3),
                     start: start,
                     end: end
                 }
@@ -210,31 +229,46 @@
                         var xAxis = opts.xAxis[1]
                             // var l = xAxis.data.length
                         var coverxAxis = _.chain(lpps).map(function(v, i) {
-                            return (v < e.end && v > e.start) ? i : null
+                            return (v <= e.end && v >= e.start) ? i : null
                         }).filter(function(v) {
                             return !_.isNull(v)
                         }).value()
 
-                        if (!coverxAxis.length) return
-
                         // @old 没有间隙的处理方法
                         // var startDate = xAxis.data[((l - 1) * e.start.toFixed(2) / 100) | 0]
                         // var endDate = moment(xAxis.data[((l - 1) * e.end.toFixed(2) / 100) | 0]).day(0).add(1, 'w').format('YYYY-MM-DD')
+                        var startDate
+                        var endDate
+                        if (!coverxAxis.length) {
+                            startDate = '-' // 错误的时间值，图表清空
+                            endDate = '-'
+                        } else {
+                            startDate = xAxis.data[coverxAxis[0]]
+                            endDate = moment(xAxis.data[coverxAxis.pop()]).day(0).add(1, 'w').format('YYYY-MM-DD')
+                        }
 
-                        var startDate = xAxis.data[coverxAxis[0]]
-                        var endDate = moment(xAxis.data[coverxAxis.pop()]).day(0).add(1, 'w').format('YYYY-MM-DD')
+                        if (durationAmountChart._params.start_at === startDate && durationAmountChart._params.end_at === endDate) {
+                            return
+                        }
 
                         $timeout.cancel(updatePromise)
                         updatePromise = $timeout(function() {
-                            $scope.durationAmountChart.updateDataView({
+                            durationAmountChart.updateDataView({
                                 start_at: startDate,
                                 end_at: endDate
                             }, true)
 
-                            $scope.durationRateChart.updateDataView({
+                            durationRateChart.updateDataView({
                                 start_at: startDate,
                                 end_at: endDate
                             }, true)
+
+                            ga('send', {
+                                hitType: 'event',
+                                eventCategory: '观察窗窗体',
+                                eventAction: '有效拖拽',
+                                eventLabel: '市场数据' + (chart.getDom().id === 'weekAmountChart' ? '发行量趋势图' : '收益率趋势图'),
+                            })
                         }, 500)
                     }
                 }, options || {})
@@ -323,7 +357,7 @@
                 })
 
                 function updateView() {
-                    var chart = echarts.getInstanceByDom($('#weekAmountChart')[0])
+                    var chart = _self.echart = echarts.getInstanceByDom($('#weekAmountChart')[0])
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
                     getSelectedLegend(legend)
@@ -371,11 +405,11 @@
                                     interval: (data.xAxis.length > 6 || window.detectmob()) ? 'auto' : 0
                                 },
                                 axisTick: {
-                                    show: true,
+                                    show: false,
                                     interval: 0
                                 },
                                 nameGap: 10,
-                                boundaryGap: true,
+                                boundaryGap: false,
                                 data: data.xAxis
                             }, {
                                 type: 'category',
@@ -385,7 +419,7 @@
                                 axisTick: {
                                     show: false
                                 },
-                                boundaryGap: true,
+                                boundaryGap: false,
                                 data: data.xAxis
                             }],
 
@@ -415,11 +449,10 @@
             // 右1图-发行量期限统计
             durationAmountChart.updateDataView = function(paramObj, silent) {
                 var _self = this
-                var chart
+                var chart = _self.echart = echarts.getInstanceByDom($('#durationAmountChart')[0])
                 $.extend(_self._params, paramObj || {})
 
                 if (silent) {
-                    chart = echarts.getInstanceByDom($('#durationAmountChart')[0])
                     if (chart) {
                         chart.hideLoading()
                         chart.showLoading(loadingSettings)
@@ -430,6 +463,9 @@
                     chart: 'circulation_group_by_life_days_and_from',
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
+                    updateView()
+                }, function() {
+                    _self.data = { data: [], xAxis: [] }
                     updateView()
                 })
 
@@ -469,7 +505,7 @@
                             color: _.reverse(colors.slice(0, legend.length)),
                             legend: {
                                 data: legend,
-                                selected: legendSelected,
+                                selected: silent ? chart.getOption().legend[0].selected : legendSelected,
                             },
                             /*yAxis: [{
                                 max: ktDataHelper.getAxisMax(data.data),
@@ -503,11 +539,10 @@
             // 左2图-收益率周统计
             weekRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
-                var chart
+                var chart = _self.echart = echarts.getInstanceByDom($('#durationAmountChart')[0])
                 $.extend(_self._params, paramObj || {})
 
                 if (silent) {
-                    chart = echarts.getInstanceByDom($('#weekRateChart')[0])
                     if (chart) {
                         chart.hideLoading()
                         chart.showLoading(loadingSettings)
@@ -524,6 +559,7 @@
                 function updateView() {
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
+                    var echart = _self.echart = echarts.getInstanceByDom($('#weekRateChart')[0])
                     getSelectedLegend(legend)
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekRateChart', legend)
@@ -533,7 +569,7 @@
                                 data: legend,
                                 selected: legendSelected,
                             },
-                            customDataZoom: customDataZoom(echarts.getInstanceByDom($('#weekRateChart')[0]), $.extend(getStartEndPercent(data), {
+                            customDataZoom: customDataZoom(echart, $.extend(getStartEndPercent(data), {
                                 styles: {
                                     bottom: caculateOptions.grid.bottom
                                 }
@@ -562,11 +598,11 @@
                                     interval: (data.xAxis.length > 6 || window.detectmob()) ? 'auto' : 0
                                 },
                                 axisTick: {
-                                    show: true,
+                                    show: false,
                                     interval: 0
                                 },
                                 nameGap: 10,
-                                boundaryGap: true,
+                                boundaryGap: false,
                                 data: data.xAxis
                             }, {
                                 type: 'category',
@@ -576,7 +612,7 @@
                                 axisTick: {
                                     show: false
                                 },
-                                boundaryGap: true,
+                                boundaryGap: false,
                                 data: data.xAxis
                             }],
 
@@ -602,11 +638,10 @@
             // 右2图-收益率期限统计
             durationRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
-                var chart
+                var chart = _self.echart = echarts.getInstanceByDom($('#durationRateChart')[0])
                 $.extend(_self._params, paramObj || {})
 
                 if (silent) {
-                    chart = echarts.getInstanceByDom($('#durationRateChart')[0])
                     if (chart) {
                         chart.hideLoading()
                         chart.showLoading(loadingSettings)
@@ -617,6 +652,9 @@
                     chart: 'rate_group_by_life_days_and_from',
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
+                    updateView()
+                }, function() {
+                    _self.data = { data: [], xAxis: [] }
                     updateView()
                 })
 
@@ -642,7 +680,7 @@
                             name: '期限',
                             nameLocation: 'end',
                             nameGap: 10,
-                            boundaryGap: true,
+                            boundaryGap: false,
                             data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
                         },
 
@@ -659,7 +697,7 @@
                     _self.chartOptions = $.extend(true, {}, initOptions, {
                             legend: {
                                 data: _.map(data.data, 'name'),
-                                selected: legendSelected,
+                                selected: silent ? chart.getOption().legend[0].selected : legendSelected,
                             },
                             yAxis: {
                                 interval: 1,

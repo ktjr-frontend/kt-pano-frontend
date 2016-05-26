@@ -6,7 +6,7 @@
 
             // $scope.settingUser = $.extend(true, {}, $rootScope.user)
 
-            $scope.updateName = function() {
+            /*$scope.updateName = function() {
                 var updateNameModal = $uibModal.open({
                     size: 'md',
                     templateUrl: 'views/modals/update_name.html',
@@ -18,9 +18,9 @@
                     $rootScope.user.name = user.name
 
                 })
-            }
+            }*/
 
-            $scope.updateEmail = function() {
+            /*$scope.updateEmail = function() {
                 var updateEmailModal = $uibModal.open({
                     size: 'md',
                     templateUrl: 'views/modals/update_email.html',
@@ -30,6 +30,19 @@
                 updateEmailModal.result.then(function(user) {
                     ktSweetAlert.success('邮箱修改成功')
                     $rootScope.user.email = user.email
+                })
+            }*/
+
+            $scope.updateProfile = function() {
+                var updateProfileModal = $uibModal.open({
+                    size: 'md',
+                    templateUrl: 'views/modals/update_profile.html',
+                    controller: 'ktUpdateProfileCtrl'
+                })
+
+                updateProfileModal.result.then(function(user) {
+                    ktSweetAlert.success('信息修改成功')
+                    $.extend($rootScope.user, user)
                 })
             }
 
@@ -86,10 +99,51 @@
                 })
             }
         })
-        .controller('ktUpdateNameCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
+        /*.controller('ktUpdateNameCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
             $scope.title = '修改姓名'
             $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user.content = 'name'
+
+            $scope.submitForm = function() {
+                ktAccountService.update($scope.user, function() {
+                    $uibModalInstance.close($scope.user)
+                    CacheFactory.clearAll()
+                }, function(res) {
+                    $scope.error = res.error || '更新出错！'
+                })
+            }
+
+            $scope.cancel = function($event) {
+                $event.preventDefault()
+                $uibModalInstance.dismiss('cancel');
+            }
+        })
+
+        .controller('ktUpdateEmailCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
+            $scope.title = '修改邮箱'
+            $scope.user = $.extend(true, {}, $rootScope.user)
+            $scope.user.content = 'email'
+
+            $scope.submitForm = function() {
+                ktAccountService.update($scope.user, function() {
+                    $uibModalInstance.close($scope.user)
+                    CacheFactory.clearAll()
+                }, function(res) {
+                    $scope.error = res.error || '更新出错！'
+                })
+            }
+
+            $scope.cancel = function($event) {
+                $event.preventDefault()
+                $uibModalInstance.dismiss('cancel');
+            }
+        })
+        */
+        // 更新信息
+        .controller('ktUpdateProfileCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
+            $scope.title = '修改用户信息'
+            $scope.user = $.extend(true, {}, $rootScope.user)
+            $scope.user.content = 'update'
 
             $scope.submitForm = function() {
                 ktAccountService.update($scope.user, function() {
@@ -164,25 +218,6 @@
                 ktAccountService.update($scope.user, function() {
                     $uibModalInstance.close($scope.user)
                     $rootScope.user.mobile = $scope.user.mobile
-                    CacheFactory.clearAll()
-                }, function(res) {
-                    $scope.error = res.error || '更新出错！'
-                })
-            }
-
-            $scope.cancel = function($event) {
-                $event.preventDefault()
-                $uibModalInstance.dismiss('cancel');
-            }
-        })
-        .controller('ktUpdateEmailCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, CacheFactory) {
-            $scope.title = '修改邮箱'
-            $scope.user = $.extend(true, {}, $rootScope.user)
-            $scope.user.content = 'email'
-
-            $scope.submitForm = function() {
-                ktAccountService.update($scope.user, function() {
-                    $uibModalInstance.close($scope.user)
                     CacheFactory.clearAll()
                 }, function(res) {
                     $scope.error = res.error || '更新出错！'
