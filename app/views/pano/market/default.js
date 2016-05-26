@@ -539,7 +539,7 @@
             // 左2图-收益率周统计
             weekRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
-                var chart = _self.echart = echarts.getInstanceByDom($('#durationAmountChart')[0])
+                var chart = _self.echart = echarts.getInstanceByDom($('#weekRateChart')[0])
                 $.extend(_self._params, paramObj || {})
 
                 if (silent) {
