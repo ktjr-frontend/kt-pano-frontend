@@ -42,6 +42,10 @@
                 yAxis: 'amount',
                 yAxisFormat: 'percent2',
                 xAxis: '_id',
+                color: [
+                    // '#6691d8', '#5cbae1', '#68d5b2', '#eace81', '#f4956f', '#e97384', '#af75e5'
+                    '#6691d8', '#5cbae1', '#68d5b2', '#eace81', '#f4b673', '#e97384', '#8987ed',
+                ],
                 xAxisFormat: null,
                 list: []
             }
@@ -237,7 +241,7 @@
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
                     var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', legend)
-                    // var color = _self.color
+                        // var color = _self.color
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
@@ -357,9 +361,10 @@
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
                     var caculateOptions = ktDataHelper.chartOptions('#platformAssetTypeChart', legend)
+                    var color = _self.color || colors.slice(0, legend.length)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                        color: _.reverse(colors.slice(0, legend.length)),
+                        color: _.reverse(color),
                         legend: {
                             data: legend
                         },

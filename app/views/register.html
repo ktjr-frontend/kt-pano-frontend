@@ -12,10 +12,19 @@
                                 <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>邀请码</label> -->
                                 <div class="col-md-12">
                                     <input kt-validate-on-blur ng-minlength="6" ng-maxlength="6" placeholder="邀请码（不区分大小写）" type="text" required="required" ng-model="registerUser.inviter_code" id="" class="form-control" name="inviter_code">
-                                    <div class="mt5 text-warning" ng-messages="registerForm.inviter_code.$dirty && registerForm.inviter_code.$error">
+                                    <div class="mt5 text-warning fl" ng-messages="registerForm.inviter_code.$dirty && registerForm.inviter_code.$error">
                                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请填写邀请码</div>
                                         <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>请输入6位邀请码</div>
                                         <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>请输入6位邀请码</div>
+                                    </div>
+                                    <div class="text-warning input-tip mt5 fr">
+                                        <span ng-mouseenter="QRCodeVisible = true" ng-mouseleave="QRCodeVisible = false">如何获取邀请码？</span>
+                                        <div class="qtcode" ng-show="QRCodeVisible">
+                                            <h5>联系微信客服获取:</h5>
+                                            <div class="img-con">
+                                                <img src="/images/weixin.jpg" alt="微信客服二维码">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

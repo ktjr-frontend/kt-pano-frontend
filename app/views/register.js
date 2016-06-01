@@ -8,6 +8,7 @@
                 $state.go('home.index')
             }
 
+            $scope.QRCodeVisible = false
             $scope.registerUser = {}
 
             $scope.submitForm = function() {

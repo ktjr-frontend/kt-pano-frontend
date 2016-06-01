@@ -134,7 +134,6 @@ body.account-page {
         .btn-navy-blue {
             font-size: 1.5rem;
         }
-
     }
     @media (min-width: 768px) {
         .control-label {
@@ -152,6 +151,48 @@ body.account-page {
 .register-container {
     max-width: 490px;
     margin: 50px auto;
+    .input-tip {
+        position: relative;
+    }
+    .qtcode {
+        position: absolute;
+        background-color: white;
+        width: 130px;
+        transform: translateY(-50%) translateX(100%);
+        left: 30px;
+        border: 1px solid @border-color3;
+        border-radius: 3px;
+        &:before, &:after{
+            content: '';
+            display: block;
+            left: -10px;
+            top: 60px;
+            position: absolute;
+            border-width: 5px;
+            border-color: transparent white transparent transparent;
+            border-style: solid;
+        }
+        &:before{
+            border-color: transparent @border-color3 transparent transparent;
+            left: -12px;
+            top: 59px;
+            border-width: 6px;
+        }
+        .img-con {
+            padding: 10px;
+            img {
+                width: 100%;
+            }
+        }
+        h5 {
+            text-align: center;
+            background-color: @color-3;
+            margin: 0;
+            font-size: 1.3rem;
+            height: 25px;
+            line-height: 25px;
+        }
+    }
     @media(min-width: 401px) {
         .phone-captcha {
             margin-left: 10px;

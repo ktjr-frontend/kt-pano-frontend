@@ -32,7 +32,7 @@
                         postHTML: false,
                         postURL: false,
                         postBrowserInfo: false,
-                        initButtonText: '<i class="icon-pano icon-feedback"></i>',
+                        initButtonText: '<i class="icon-pano icon-pen"></i>',
                         html2canvasURL: ktS('common/libs/html2canvas.min.js'),
                         tpl: {
                             description: tpl.filter('#feedback-welcome')[0].outerHTML,

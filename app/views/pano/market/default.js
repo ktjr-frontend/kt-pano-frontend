@@ -35,6 +35,11 @@
             var leftGap = 65
             var topGap = 50
             var bottomGap = isAllDimension ? 140 : 80
+            var shortDatePeriod = function(xAxis) { //横轴显示简略的格式
+                return _.map(xAxis, function(x) {
+                    return moment(x).format('MMDD~') + moment(x).weekday(6).format('MMDD')
+                })
+            }
 
             var loadingSettings = { // 设置图表异步加载的样式
                 text: '努力加载中...',
@@ -148,6 +153,8 @@
             }
 
             $scope.$watch('weekAmountChart.chartOptions.filterVisible', function(newValue) {
+                if (_.isUndefined(newValue)) return
+
                 ga('send', {
                     hitType: 'event',
                     eventCategory: '观察窗按钮',
@@ -157,6 +164,8 @@
             })
 
             $scope.$watch('weekRateChart.chartOptions.filterVisible', function(newValue) {
+                if (_.isUndefined(newValue)) return
+
                 ga('send', {
                     hitType: 'event',
                     eventCategory: '观察窗按钮',
@@ -179,7 +188,7 @@
                 /*eslint-disable*/
                 var start = l === 1 ? 25 : (l === 2 ? 0 : 100 - minWidth * 3 / 2) // 特殊里1个点和2个点的时候
                 var end = l === 1 ? 75 : (l === 2 ? 50 : 100 - minWidth / 2)
-                /*eslint-enable*/
+                    /*eslint-enable*/
 
                 if (end - start < 5) {
                     start = end - 5
@@ -227,7 +236,8 @@
                         var opts = chart.getOption()
                         var lpps = opts.customDataZoom.xAxisPositionPercents
                         var xAxis = opts.xAxis[1]
-                            // var l = xAxis.data.length
+
+                        // var l = xAxis.data.length
                         var coverxAxis = _.chain(lpps).map(function(v, i) {
                             return (v <= e.end && v >= e.start) ? i : null
                         }).filter(function(v) {
@@ -387,6 +397,7 @@
                                     type: 'line',
                                 },
                                 reverse: true,
+                                titlexAxisIndex: 1,
                                 titleFormat: '@ToWeekEnd',
                                 titleSuffix: '发行量',
                                 // noUnit: true,
@@ -410,7 +421,7 @@
                                 },
                                 nameGap: 10,
                                 boundaryGap: false,
-                                data: data.xAxis
+                                data: shortDatePeriod(data.xAxis)
                             }, {
                                 type: 'category',
                                 axisLabel: {
@@ -580,6 +591,7 @@
                                     type: 'line',
                                 },
                                 titleFormat: '@ToWeekEnd',
+                                titlexAxisIndex: 1,
                                 titleSuffix: '收益率',
                                 xAxisFormat: _self.xAxisFormat,
                                 yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
@@ -603,7 +615,7 @@
                                 },
                                 nameGap: 10,
                                 boundaryGap: false,
-                                data: data.xAxis
+                                data: shortDatePeriod(data.xAxis)
                             }, {
                                 type: 'category',
                                 axisLabel: {
