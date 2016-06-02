@@ -37,15 +37,22 @@
                 list: []
             }
 
+            /*    <!-- 给设计师调色用 上线注释掉 --> */
+            $scope.tmplColor = ''
+            $scope.$watch('tmplColor', function(newValue) {
+                var color = _.map(newValue.split(','), _.trim)
+                if (!color.length) return
+                echarts.getInstanceByDom($('#platformAssetTypeChart')[0]).setOption({
+                    color: color
+                })
+            });
+
             var platformAssetTypeChart = $scope.platformAssetTypeChart = {
                 chartOptions: {},
                 yAxis: 'amount',
                 yAxisFormat: 'percent2',
                 xAxis: '_id',
-                color: [
-                    // '#6691d8', '#5cbae1', '#68d5b2', '#eace81', '#f4956f', '#e97384', '#af75e5'
-                    '#6691d8', '#5cbae1', '#68d5b2', '#eace81', '#f4b673', '#e97384', '#8987ed',
-                ],
+                color: ktDataHelper.getDimentionSpecialColor('asset_type'),
                 xAxisFormat: null,
                 list: []
             }
@@ -364,7 +371,7 @@
                     var color = _self.color || colors.slice(0, legend.length)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                        color: _.reverse(color),
+                        color: _.reverse(color.slice(0)),
                         legend: {
                             data: legend
                         },

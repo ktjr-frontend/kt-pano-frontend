@@ -4,6 +4,15 @@
 ;
 (function() {
     'use strict';
+    var dimensionSpecialColor = {
+        asset_type: [
+            '#6691d8', '#5cbae1', '#68d5b2', '#929fed', '#bf99ec', '#eace81', '#f4956f'
+            // '#6691d8', '#8987ed', '#5cbae1', '#68d5b2', '#eace81', '#f4b673', '#e97384'
+            // '#6691d8', '#5cbae1', '#68d5b2', '#eace81', '#f4b673', '#e97384', '#8987ed'
+            // '#5a84ce', '#74b9d6', '#77bfa7', '#787edc', '#be9ce9', '#5caaaa', '#ebba54'
+        ]
+    }
+
     angular.module('kt.pano')
         .factory('ktDataHelper', function($window) {
             return {
@@ -39,6 +48,9 @@
                         }
                     })
                 },
+                getDimentionSpecialColor: function(d) {
+                    return dimensionSpecialColor[d] || []
+                },
                 getPerPage: function() { //windows pc 用户根据屏幕高度设置每页条数
                     if (!$window.isWindows() || $window.detectmob()) return 20
 
@@ -62,7 +74,7 @@
 
                     }
                 },
-                pruneDirtyParams: function (params, search, list) {
+                pruneDirtyParams: function(params, search, list) {
                     _.each(params, function(v, i) {
                         //如果url地址中不包含则删除
                         if (search) {

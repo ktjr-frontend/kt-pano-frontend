@@ -85,6 +85,29 @@
                 }
             }
 
+            if (params.dimension === 'asset_type') {
+                chartOptions.color = ktDataHelper.getDimentionSpecialColor('asset_type')
+            }
+
+            /*    <!-- 给设计师调色用 上线注释掉 --> */
+            $scope.tmplColor = ''
+            $scope.$watch('tmplColor', function(newValue) {
+                var color = _.map(newValue.split(','), _.trim)
+                if (!color.length) return
+                echarts.getInstanceByDom($('#weekAmountChart')[0]).setOption({
+                    color: color
+                })
+                echarts.getInstanceByDom($('#durationAmountChart')[0]).setOption({
+                    color: color
+                })
+                echarts.getInstanceByDom($('#weekRateChart')[0]).setOption({
+                    color: color
+                })
+                echarts.getInstanceByDom($('#durationRateChart')[0]).setOption({
+                    color: color
+                })
+            });
+
             var weekAmountChart = $scope.weekAmountChart = {
                 chartOptions: {},
                 _params: {},
@@ -371,11 +394,12 @@
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
                     getSelectedLegend(legend)
+                    var color = _self.color || chartOptions.color || colors.slice(0, legend.length)
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                            color: _.reverse(colors.slice(0, legend.length)),
+                            color: _.reverse(color.slice(0)),
                             legend: {
                                 data: legend,
                                 selected: legendSelected,
@@ -509,11 +533,11 @@
                     var initOptions = initChartOptions()
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
-
                     getSelectedLegend(legend)
+                    var color = _self.color || chartOptions.color || colors.slice(0, legend.length)
 
                     _self.chartOptions = $.extend(true, {}, initOptions, {
-                            color: _.reverse(colors.slice(0, legend.length)),
+                            color: _.reverse(color.slice(0)),
                             legend: {
                                 data: legend,
                                 selected: silent ? chart.getOption().legend[0].selected : legendSelected,
