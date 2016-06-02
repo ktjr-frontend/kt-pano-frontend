@@ -38,14 +38,14 @@
             }
 
             /*    <!-- 给设计师调色用 上线注释掉 --> */
-            $scope.tmplColor = ''
+            /*$scope.tmplColor = ''
             $scope.$watch('tmplColor', function(newValue) {
                 var color = _.map(newValue.split(','), _.trim)
                 if (!color.length) return
                 echarts.getInstanceByDom($('#platformAssetTypeChart')[0]).setOption({
                     color: color
                 })
-            });
+            });*/
 
             var platformAssetTypeChart = $scope.platformAssetTypeChart = {
                 chartOptions: {},
