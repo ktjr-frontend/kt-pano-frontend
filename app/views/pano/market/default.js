@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktMarketCtrl', function($scope, $q, $state, $timeout, $location, ktDataHelper, ktMarketAnalyticsService, ktRateTrendService, ktEchartTheme1) {
+        .controller('ktMarketCtrl', function($scope, $q, $state, $timeout, $location, ktDataHelper, ktAnalyticsService, ktEchartTheme1) {
             // shared.tabActive.tab1 = true
             var shared = $scope.shared
             var params = shared.params
@@ -107,73 +107,6 @@
                     color: color
                 })
             });*/
-
-            var weekAmountChart = $scope.weekAmountChart = {
-                chartOptions: {},
-                _params: {},
-                xAxis: params.dimension,
-                yAxisFormat: 'rmb',
-                yAxis: 'amount',
-                xAxisFormat: null,
-                list: []
-            }
-
-            var durationAmountChart = $scope.durationAmountChart = {
-                chartOptions: {},
-                _params: getStartEnd(),
-                xAxis: params.dimension,
-                yAxisFormat: 'rmb', //percent2 意思不需要*100
-                yAxis: 'amount',
-                xAxisFormat: null,
-                list: []
-
-            }
-
-            var weekRateChart = $scope.weekRateChart = {
-                chartOptions: {},
-                xAxis: params.dimension,
-                yAxisFormat: 'percent2', //percent2 意思不需要*100
-                yAxis: 'rate',
-                _filters: [{
-                    name: '期限：',
-                    options: [{
-                        name: '1M',
-                        value: 1
-                    }, {
-                        name: '3M',
-                        value: 3
-                    }, {
-                        name: '6M',
-                        value: 6
-                    }, {
-                        name: '1Y',
-                        value: 12
-                    }, {
-                        name: '2Y',
-                        value: 24
-                    }]
-                }],
-                _getParamName: function(index) {
-                    return _.find(this._filters[index].options, { value: this._params.life }).name
-                },
-                _params: {
-                    life: 6
-                },
-                xAxisFormat: null,
-                list: []
-
-            }
-
-            var durationRateChart = $scope.durationRateChart = {
-                _params: getStartEnd(),
-                chartOptions: {},
-                xAxis: params.dimension,
-                yAxisFormat: 'percent2', //percent2 意思不需要*100
-                yAxis: 'rate',
-                xAxisFormat: null,
-                list: []
-
-            }
 
             $scope.$watch('weekAmountChart.chartOptions.filterVisible', function(newValue) {
                 if (_.isUndefined(newValue)) return
@@ -374,11 +307,21 @@
             }*/
 
             // 左1图-发行量周统计
+            var weekAmountChart = $scope.weekAmountChart = {
+                chartOptions: {},
+                _params: {},
+                xAxis: params.dimension,
+                yAxisFormat: 'rmb',
+                yAxis: 'amount',
+                xAxisFormat: null,
+                list: []
+            }
             weekAmountChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                ktAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                    content: 'detail',
                     chart: 'circulation_group_by_week_and_from',
                 }, _self._params)), function(data) {
                     if (data.crawled_at) {
@@ -482,6 +425,15 @@
             }
 
             // 右1图-发行量期限统计
+            var durationAmountChart = $scope.durationAmountChart = {
+                chartOptions: {},
+                _params: getStartEnd(),
+                xAxis: params.dimension,
+                yAxisFormat: 'rmb', //percent2 意思不需要*100
+                yAxis: 'amount',
+                xAxisFormat: null,
+                list: []
+            }
             durationAmountChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 var chart = _self.echart = echarts.getInstanceByDom($('#durationAmountChart')[0])
@@ -494,7 +446,8 @@
                     }
                 }
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                ktAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                    content: 'detail',
                     chart: 'circulation_group_by_life_days_and_from',
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
@@ -572,6 +525,39 @@
             }
 
             // 左2图-收益率周统计
+            var weekRateChart = $scope.weekRateChart = {
+                chartOptions: {},
+                xAxis: params.dimension,
+                yAxisFormat: 'percent2', //percent2 意思不需要*100
+                yAxis: 'rate',
+                _filters: [{
+                    name: '期限：',
+                    options: [{
+                        name: '1M',
+                        value: 1
+                    }, {
+                        name: '3M',
+                        value: 3
+                    }, {
+                        name: '6M',
+                        value: 6
+                    }, {
+                        name: '1Y',
+                        value: 12
+                    }, {
+                        name: '2Y',
+                        value: 24
+                    }]
+                }],
+                _getParamName: function(index) {
+                    return _.find(this._filters[index].options, { value: this._params.life }).name
+                },
+                _params: {
+                    life: 6
+                },
+                xAxisFormat: null,
+                list: []
+            }
             weekRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 var chart = _self.echart = echarts.getInstanceByDom($('#weekRateChart')[0])
@@ -584,7 +570,8 @@
                     }
                 }
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                ktAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                    content: 'detail',
                     chart: 'rate_group_by_week_and_from',
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
@@ -672,6 +659,15 @@
             }
 
             // 右2图-收益率期限统计
+            var durationRateChart = $scope.durationRateChart = {
+                _params: getStartEnd(),
+                chartOptions: {},
+                xAxis: params.dimension,
+                yAxisFormat: 'percent2', //percent2 意思不需要*100
+                yAxis: 'rate',
+                xAxisFormat: null,
+                list: []
+            }
             durationRateChart.updateDataView = function(paramObj, silent) {
                 var _self = this
                 var chart = _self.echart = echarts.getInstanceByDom($('#durationRateChart')[0])
@@ -684,7 +680,8 @@
                     }
                 }
 
-                ktMarketAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                ktAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
+                    content: 'detail',
                     chart: 'rate_group_by_life_days_and_from',
                 }, _self._params)), function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
@@ -765,7 +762,9 @@
 
             // 资产管理类数据
             $scope.assetManger = {}
-            ktRateTrendService.get(function(data) {
+            ktAnalyticsService.get({
+                content: 'rate_trend'
+            }, function(data) {
                 $scope.assetManger = data.stat
             })
 

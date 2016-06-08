@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOrderObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktAssetFiltersService, ktAssetService) {
+        .controller('ktOrderObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktAssetService) {
             var shared = $scope.shared
             var search = $location.search()
 
@@ -11,7 +11,9 @@
             ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
 
             if (!shared.filterDatas) {
-                ktAssetFiltersService.get(function(data) {
+                ktAssetService.get({
+                    content: 'settings'
+                }, function(data) {
                     shared.filterDatas = data
                     shared.filters = data['0']
                     ktDataHelper.filterInit(shared.filters)(shared.params)

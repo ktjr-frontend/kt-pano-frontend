@@ -4,12 +4,10 @@
 ;
 (function() {
     'use strict';
+    // 针对资产类型，单独配色
     var dimensionSpecialColor = {
         asset_type: [
             '#6691d8', '#5cbae1', '#68d5b2', '#929fed', '#bf99ec', '#eace81', '#f4956f'
-            // '#6691d8', '#8987ed', '#5cbae1', '#68d5b2', '#eace81', '#f4b673', '#e97384'
-            // '#6691d8', '#5cbae1', '#68d5b2', '#eace81', '#f4b673', '#e97384', '#8987ed'
-            // '#5a84ce', '#74b9d6', '#77bfa7', '#787edc', '#be9ce9', '#5caaaa', '#ebba54'
         ]
     }
 
@@ -287,16 +285,57 @@
 
                     return min
                 },
+
+                // 与_optionsLengthLimit类似，不过此方法可以单独处理一个列表
+                listOneLineFilter: function(list, container, subtractL, fontSize, paddingMargin) {
+                    var optionWidth = $(container).width() - subtractL
+                    var firstLineMaxIndex = list.length;
+                    var sumWidth = 0 //条件所占总长度
+                    _.every(list, function(v, i) {
+                        sumWidth += (function() {
+                            if (!v) return 0
+                            return _.reduce(v.split(''), function(initial, n) {
+                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.53)
+                            }, 0)
+
+                        }()) * fontSize + paddingMargin
+                        if (sumWidth > optionWidth) {
+                            firstLineMaxIndex = i - 1 //超出一行的长度，获取索引位置
+                            return false
+                        }
+                        return true
+                    })
+
+                    var filterFn = function(value, index) { //基于计算的长度过滤展示列表
+                        if (!list.collapsed) { //如果不折叠 全部显示
+                            return true
+                        }
+                        return index <= firstLineMaxIndex
+                    }
+
+                    if (firstLineMaxIndex === list.length) filterFn.hidden = true //如果能放下，隐藏
+
+                    list.collapsed = _.isNil(list.collapsed) ? true : list.collapsed // 默认折叠
+                    list.filterFn = filterFn
+                    list.toggleView = function($event) { //折叠切换
+                        list.collapsed = !list.collapsed
+                        var target = $($event.target)
+                        target = target.hasClass('icon-arrow') ? target.parent() : target
+                        target.toggleClass('expand', !list.collapsed)
+                    }
+                    return list
+                },
+
                 _optionsLengthLimit: function(filter) { //控制每个filter列表的长度
                     var optionWidth = $('.filter-box').width() - 25 * 2 - 157 + 66 //一行的长度，减去相关间距
                     var firstLineMaxIndex = filter.options.length;
                     var sumWidth = 0 //条件所占总长度
 
-                    _.every(filter.options, function(v, i) {
+                    _.every(filter.options, function(v, i) { //用every替代each 可以break
                         sumWidth += (function() {
                             if (!v.name) return 0
                             return _.reduce(v.name.split(''), function(initial, n) {
-                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.5)
+                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.53)
                             }, 0)
 
                         }()) * 13 + 5 * 2 + 15 * 2

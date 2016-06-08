@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktMarketSettingsService) {
+        .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
 
             $scope.shared = {}
             var defaultParams = {
@@ -106,7 +106,9 @@
                 $scope[filterName + 'Collapsed'] = !$scope[filterName + 'Collapsed']
             }
 
-            ktMarketSettingsService.get(function(data) {
+            ktAnalyticsService.get({
+                content: 'settings',
+            }, function(data) {
                 var dimensions = data['0'].shift()
                 defaultParams.dimension = dimensions.options[0][1]
 

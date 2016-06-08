@@ -2,40 +2,11 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $window, $stateParams, ktDataHelper, ktOverviewService, ktValueFactory, ktEchartTheme1) {
+        .controller('ktOverviewCtrl', function($scope, $state, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1) {
 
             $scope.updateDate = '获取中...'
 
             var colors = ktEchartTheme1.color
-
-            var rateAmountChart = $scope.rateAmountChart = {
-                chartOptions: {},
-                yAxis: 'amount',
-                yAxisFormat: 'rmb',
-                xAxis: 'rate',
-                xAxisFormat: 'percent2',
-                color: ['#dd4444'],
-                list: []
-            }
-
-            var durationRateChart = $scope.durationRateChart = {
-                chartOptions: {},
-                yAxis: 'rate',
-                yAxisFormat: 'percent2',
-                xAxis: '_id',
-                color: ['#6596e0', '#ffa500'],
-                xAxisFormat: null,
-                list: []
-            }
-
-            var durationAmountChart = $scope.durationAmountChart = {
-                chartOptions: {},
-                yAxis: 'amount',
-                yAxisFormat: 'rmb',
-                xAxis: '_id',
-                xAxisFormat: null,
-                list: []
-            }
 
             /*    <!-- 给设计师调色用 上线注释掉 --> */
             /*$scope.tmplColor = ''
@@ -46,16 +17,6 @@
                     color: color
                 })
             });*/
-
-            var platformAssetTypeChart = $scope.platformAssetTypeChart = {
-                chartOptions: {},
-                yAxis: 'amount',
-                yAxisFormat: 'percent2',
-                xAxis: '_id',
-                color: ktDataHelper.getDimentionSpecialColor('asset_type'),
-                xAxisFormat: null,
-                list: []
-            }
 
             var chartOptions = {
                 yAxis: {
@@ -93,9 +54,19 @@
             }
 
             // 气泡图
+            var rateAmountChart = $scope.rateAmountChart = {
+                chartOptions: {},
+                yAxis: 'amount',
+                yAxisFormat: 'rmb',
+                xAxis: 'rate',
+                xAxisFormat: 'percent2',
+                color: ['#dd4444'],
+                list: []
+            }
             rateAmountChart.updateDataView = function() {
                 var _self = this
-                ktOverviewService.get({
+                ktAnalyticsService.get({
+                    content: 'overview',
                     chart: 'summary',
                 }, function(data) {
                     _self.data = data.stat
@@ -122,6 +93,12 @@
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         // color: _self.color,
+                        onclick: function(e) {
+                            var url = $state.href('pano.institutions.detail', {
+                                id: e.seriesName,
+                            })
+                            window.open(url, '_blank');
+                        },
                         legend: {
                             data: legend,
                         },
@@ -156,8 +133,7 @@
                                 outOfRange: {
                                     symbolSize: [10, 50],
                                     color: ['rgba(0,0,0,.2)']
-                                },
-
+                                }
                             }
                             /*, {
                                 show: false,
@@ -234,10 +210,21 @@
                 }
             }
 
+            // 期限利率图
+            var durationRateChart = $scope.durationRateChart = {
+                chartOptions: {},
+                yAxis: 'rate',
+                yAxisFormat: 'percent2',
+                xAxis: '_id',
+                color: ['#6596e0', '#ffa500'],
+                xAxisFormat: null,
+                list: []
+            }
             durationRateChart.updateDataView = function() {
                 var _self = this
 
-                ktOverviewService.get({
+                ktAnalyticsService.get({
+                    content: 'overview',
                     chart: 'rate',
                 }, function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
@@ -303,9 +290,19 @@
                 }
             }
 
+            // 期限发行量图
+            var durationAmountChart = $scope.durationAmountChart = {
+                chartOptions: {},
+                yAxis: 'amount',
+                yAxisFormat: 'rmb',
+                xAxis: '_id',
+                xAxisFormat: null,
+                list: []
+            }
             durationAmountChart.updateDataView = function() {
                 var _self = this
-                ktOverviewService.get({
+                ktAnalyticsService.get({
+                    content: 'overview',
                     chart: 'circulation',
                 }, function(data) {
                     _self.data = ktDataHelper.chartDataPrune(data.stat)
@@ -355,9 +352,20 @@
                 }
             }
 
+            // 资金平台类型占比图
+            var platformAssetTypeChart = $scope.platformAssetTypeChart = {
+                chartOptions: {},
+                yAxis: 'amount',
+                yAxisFormat: 'percent2',
+                xAxis: '_id',
+                color: ktDataHelper.getDimentionSpecialColor('asset_type'),
+                xAxisFormat: null,
+                list: []
+            }
             platformAssetTypeChart.updateDataView = function() {
                 var _self = this
-                ktOverviewService.get({
+                ktAnalyticsService.get({
+                    content: 'overview',
                     chart: 'circulation_pct',
                 }, function(data) {
                     _self.data = ktDataHelper.chartDataToPercent(data.stat)

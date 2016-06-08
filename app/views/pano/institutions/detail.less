@@ -1,0 +1,287 @@
+@import "app/common/styles/theme/v4/bootstrap/variables.less";
+@import "app/common/styles/theme/v4/variables.less";
+@tag-color: #e7eaf3;
+@tag-hover-color: #758099;
+@color-gray: #9fa3ac;
+@color-gray-light: #e8ebf0;
+.hpanel {
+    .panel-body {
+        &.pw3 {
+            padding: 2.5rem 3rem;
+        }
+    }
+}
+
+.inst-detail {
+    font-size: 1.3rem;
+    .table-body{
+        border: 1px solid @tag-color;
+        border-radius: 6px;
+    }
+    .table {
+        > thead {
+            > tr {
+                &:first-child {
+                    th:first-child, th:last-child{
+                        border-radius: 0;
+                    }
+                }
+
+                > th {
+                    background: @tag-color;
+                    border-right: 1px solid @tag-color;
+                    color: @color-table-head;
+                    &:last-child{
+                        border-right: 0;
+                    }
+                }
+            }
+        }
+        > tbody{
+            > tr {
+                > td{
+                    border-right: 0;
+                }
+            }
+        }
+    }
+    .btn {
+        min-width: 55px;
+        background: @tag-color;
+        border: 0;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        color: @color-bright;
+        &:hover {
+            border: 0;
+            background: @tag-hover-color;
+            color: white;
+        }
+    }
+    .chart-table {
+        // margin-top: 20px;
+        border-bottom: 1px solid @color-3;
+    }
+    .box {
+        padding: 0px;
+        border-radius: 5px;
+        background: white;
+        margin-bottom: 20px;
+        .box-head {
+            height: 40px;
+            line-height: 40px;
+            background: @color-table-head;
+            border-radius: 5px 5px 0 0;
+        }
+        .box-body {
+            padding: 20px;
+        }
+        .nav-tabs {
+            padding-top: 9px;
+            margin-left: 20px;
+            > li > a {
+                font-size: 1.5rem;
+                padding: 5px 15px;
+            }
+            >li.active a {
+                background: white;
+            }
+        }
+        .filter-box {
+            padding: 0;
+        }
+        .normal-filter {
+            padding: 12px 0;
+            background: @tag-color;
+            .datepicker-container {
+                margin-left: 0;
+            }
+        }
+    }
+    h3 {
+        font-size: 1.5rem;
+        color: @color-1;
+        margin: 3px 0 15px;
+    }
+}
+
+.init-main-info {
+    .logo {
+        float: left;
+        text-align: center;
+        background: @color-3;
+        height: 110px;
+        width: 245px;
+        img {
+            max-width: 80%;
+            top: 50%;
+            position: relative;
+            transform: translateY(-50%);
+        }
+    }
+    .main {
+        overflow: hidden;
+        padding-left: 20px;
+        // h3 {
+        //     margin: 3px 0 15px;
+        //     color: color-1;
+        //     font-size: 1.5rem;
+        // }
+        p {
+            line-height: 1.6em;
+        }
+    }
+    .lines {
+        padding: 20px 0;
+        .line {
+            position: relative;
+            overflow: hidden;
+            clear: both;
+            padding: 12px 50px 0 170px;
+        }
+        .name {
+            margin-left: -170px;
+            width: 130px;
+            float: left;
+            text-align: right;
+            color: @color-gray;
+        }
+        .toggle-btn {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            border-radius: 2px;
+            padding: 0px 7px;
+            cursor: pointer;
+            background: #cddce4;
+            color: white;
+            &:hover,
+            &.expand {
+                background: #4380dd;
+                color: white;
+            }
+            .icon-arrow {
+                transform-origin: 50% 50%;
+            }
+            &.expand {
+                .icon-arrow {
+                    color: white;
+                    transform: rotate(90deg) translateX(1px);
+                }
+            }
+        }
+        .list {
+            list-style-type: none;
+            li {
+                float: left;
+                margin: 0 5px 8px;
+            }
+            a.item {
+                padding: 3px 8px;
+                border-radius: 3px;
+                color: @color-bright;
+                background: @tag-color;
+                &:hover {
+                    color: white;
+                    background: @tag-hover-color;
+                }
+            }
+        }
+    }
+}
+
+.aside-info {
+    padding-left: 5px;
+    @media(max-width: 767px) {
+        padding-left: 15px;
+    }
+    table {
+        width: 100%;
+        table-layout: fixed;
+        th,
+        td {
+            padding: 7px 3px;
+            font-weight: normal;
+            word-break: break-all;
+            word-wrap: break-word;
+            // white-space: nowrap;
+        }
+    }
+    .table-desc {
+        th {
+            width: 95px;
+            text-align: right;
+            color: @color-gray;
+            white-space: nowrap;
+        }
+        /*td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }*/
+    }
+    .table-list {
+        width: 100%;
+        tbody {
+            th,
+            td {
+                color: @color-gray;
+            }
+        }
+        thead {
+            th {
+                background: @tag-color;
+                text-align: center;
+                &:first-child {
+                    width: 95px;
+                    text-align: right;
+                }
+            }
+        }
+        tr {
+            td {
+                white-space: nowrap;
+                text-align: left;
+                // padding-left: 10px;
+                &:first-child {
+                    text-align: right;
+                }
+            }
+        }
+    }
+    .list {
+        list-style-type: none;
+        &.list-with-btns {
+            li {
+                padding-right: 50px;
+            }
+        }
+        li {
+            padding: 6px 0;
+            position: relative;
+            &:before {
+                content: "•";
+                font-weight: bold;
+                margin-right: 5px;
+                color: @color-gray-light;
+            }
+            a {
+                color: @color-gray;
+                &:hover {
+                    color: @color-bright;
+                }
+            }
+            .btn {
+                position: absolute;
+                right: 0;
+                top: 5px;
+                color: @color-bright;
+                &:hover {
+                    border: 0;
+                    background: @tag-hover-color;
+                    color: white;
+                }
+            }
+        }
+    }
+}

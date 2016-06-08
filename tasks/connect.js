@@ -7,7 +7,8 @@ var appConfig = {
 var port = 8888
 var livereloadPort = 35728
 
-var server = 'http://stage-pano.ktjr.com'
+// var server = 'http://stage-pano.ktjr.com'
+var server = 'http://localhost:3000'
     // var server = 'http://10.132.1.26:3000'
     // var server = 'http://10.132.1.224:3000'
 

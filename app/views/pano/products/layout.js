@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductsLayoutCtrl', function($scope, $window, $timeout, $state, $location, ktSweetAlert, ktCompassAssetFiltersService, ktDataHelper) {
+        .controller('ktProductsLayoutCtrl', function($scope, $window, $timeout, $state, $location, ktSweetAlert, ktDataHelper) {
             var perPageCount = ktDataHelper.getPerPage()
 
             var search = $location.search()

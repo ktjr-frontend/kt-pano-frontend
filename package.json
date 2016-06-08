@@ -13,16 +13,22 @@
   "scripts": {
     "setup": "npm install & bower install & npm run fit_common && grunt githooks",
     "fit_common": "node install_common.js",
+    "start": "grunt live",
+    "start:mock": "grunt live & node mock-server.js",
     "unit_test": "grunt injector:karma karma",
     "webdriver": "java -jar /usr/local/lib/node_modules/protractor/selenium/selenium-server-standalone-2.42.2.jar -Dwebdriver.chrome.driver=/usr/local/lib/node_modules/protractor/selenium/chromedriver",
     "e2e": "protractor conf.js",
     "perform": "grunt phantomas"
   },
   "devDependencies": {
+    "body-parser": "^1.15.1",
     "connect-gzip": "^0.1.6",
     "connect-modrewrite": "^0.8.1",
+    "cookie-parser": "^1.4.3",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.1.1",
+    "express": "^4.13.4",
+    "express-http-proxy": "^0.6.0",
     "gmsmith": "^0.5.0",
     "grunt-autoprefixer": "^3.0.3",
     "grunt-babel": "^5.0.1",
@@ -60,6 +66,7 @@
     "karma-jasmine": "^0.3.6",
     "load-grunt-configs": "^0.4.3",
     "load-grunt-tasks": "^0.6.0",
+    "mockjs": "^1.0.1-beta2",
     "time-grunt": "^1.0.0"
   }
 }

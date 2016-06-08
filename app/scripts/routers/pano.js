@@ -177,6 +177,29 @@
                     }
                 },
 
+                // 机构
+                'pano.institutions': {
+                    abstract: true,
+                    url: '/institutions',
+                    template: '<ui-view/>',
+                    data: {
+                        pageTitle: '机构',
+                    }
+                },
+                'pano.institutions.detail': {
+                    url: '/:id?dimension',
+                    templateUrl: 'views/pano/institutions/detail.html',
+                    resolve: ktLazyResolve([
+                        'common/directives/kt-echart3-directive.js',
+                        'views/pano/institutions/detail.js',
+                        'views/pano/institutions/detail.css',
+                    ]),
+                    controller: 'ktInsitutionCtrl',
+                    data: {
+                        pageTitle: '机构详情页',
+                    }
+                },
+
                 'pano.settings': {
                     url: '/settings',
                     templateUrl: 'views/pano/account/settings.html',
