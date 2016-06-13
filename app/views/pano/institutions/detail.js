@@ -33,7 +33,8 @@
                     dimension: params.dimension,
                 }
                 data[params.dimension] = $state.params.id
-                $state.go('pano.market.default', data)
+                var url = $state.href('pano.market.default', data)
+                window.open(url, '_blank')
             }
 
             $scope.datepickerSettings = {
@@ -100,11 +101,11 @@
             var leftGap = 65
             var topGap = 50
             var bottomGap = 80
-            /*var loadingSettings = { // 设置图表异步加载的样式
+            var loadingSettings = { // 设置图表异步加载的样式
                 text: '努力加载中...',
                 color: '#3d4351',
                 textColor: '#3d4351',
-            }*/
+            }
 
             var chartOptions = {
                 tooltip: {
@@ -157,6 +158,12 @@
             weekAmountChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
+                _self.echart = echarts.getInstanceByDom($('#weekAmountChart')[0])
+
+                if (_self.echart) {
+                    _self.echart.hideLoading()
+                    _self.echart.showLoading(loadingSettings)
+                }
 
                 ktAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     content: 'detail',
@@ -171,76 +178,80 @@
                 })
 
                 function updateView() {
-                    // var chart = _self.echart = echarts.getInstanceByDom($('#weekAmountChart')[0])
+                    var chart = _self.echart = echarts.getInstanceByDom($('#weekAmountChart')[0])
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekAmountChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                            legend: {
-                                data: legend,
+                        legend: {
+                            data: legend,
+                        },
+                        tooltip: {
+                            axisPointer: {
+                                axis: 'auto',
+                                type: 'line',
                             },
-                            tooltip: {
-                                axisPointer: {
-                                    axis: 'auto',
-                                    type: 'line',
-                                },
-                                reverse: true,
-                                titlexAxisIndex: 1,
-                                titleFormat: '@ToWeekEnd',
-                                titleSuffix: '发行量',
-                                // noUnit: true,
-                                xAxisFormat: _self.xAxisFormat,
-                                yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            reverse: true,
+                            titlexAxisIndex: 1,
+                            titleFormat: '@ToWeekEnd',
+                            titleSuffix: '发行量',
+                            // noUnit: true,
+                            xAxisFormat: _self.xAxisFormat,
+                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                        },
+                        yAxis: {
+                            name: '发行量（单位：万元）',
+                            // type: 'log'
+                        },
+                        xAxis: [{
+                            type: 'category',
+                            name: '周',
+                            nameLocation: 'end',
+                            axisLabel: {
+                                interval: (data.xAxis.length > 6 || window.detectmob()) ? 'auto' : 0
                             },
-                            yAxis: {
-                                name: '发行量（单位：万元）',
-                                // type: 'log'
+                            axisTick: {
+                                show: false,
+                                interval: 0
                             },
-                            xAxis: [{
-                                type: 'category',
-                                name: '周',
-                                nameLocation: 'end',
-                                axisLabel: {
-                                    interval: (data.xAxis.length > 6 || window.detectmob()) ? 'auto' : 0
-                                },
-                                axisTick: {
-                                    show: false,
-                                    interval: 0
-                                },
-                                nameGap: 10,
-                                boundaryGap: false,
-                                data: shortDatePeriod(data.xAxis)
-                            }, {
-                                type: 'category',
-                                axisLabel: {
-                                    show: false
-                                },
-                                axisTick: {
-                                    show: false
-                                },
-                                boundaryGap: false,
-                                data: data.xAxis
-                            }],
+                            nameGap: 10,
+                            boundaryGap: false,
+                            data: shortDatePeriod(data.xAxis)
+                        }, {
+                            type: 'category',
+                            axisLabel: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                            boundaryGap: false,
+                            data: data.xAxis
+                        }],
 
-                            series: _.map(_.reverse(data.data), function(v) {
-                                return {
-                                    name: v.name,
-                                    xAxisIndex: 0,
-                                    stack: '总量',
-                                    itemStyle: {
-                                        emphasis: {
-                                            shadowColor: 'rgba(0,0,0,.5)'
-                                        }
-                                    },
-                                    areaStyle: { normal: {} },
-                                    type: 'line',
-                                    smooth: false,
-                                    data: v.data
-                                }
-                            })
+                        series: _.map(_.reverse(data.data), function(v) {
+                            return {
+                                name: v.name,
+                                xAxisIndex: 0,
+                                stack: '总量',
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowColor: 'rgba(0,0,0,.5)'
+                                    }
+                                },
+                                areaStyle: { normal: {} },
+                                type: 'line',
+                                smooth: false,
+                                data: v.data
+                            }
                         })
+                    })
+
+                    /*eslint-disable*/
+                    chart && chart.hideLoading()
+                        /*eslint-enable*/
 
                 }
             }
@@ -283,6 +294,12 @@
             weekRateChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
+                _self.echart = echarts.getInstanceByDom($('#weekRateChart')[0])
+
+                if (_self.echart) {
+                    _self.echart.hideLoading()
+                    _self.echart.showLoading(loadingSettings)
+                }
 
                 ktAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     content: 'detail',
@@ -295,7 +312,7 @@
                 function updateView() {
                     var data = _self.data
                     var legend = _.map(data.data, 'name')
-                    // var echart = _self.echart = echarts.getInstanceByDom($('#weekRateChart')[0])
+                    var chart = _self.echart = echarts.getInstanceByDom($('#weekRateChart')[0])
 
                     var caculateOptions = ktDataHelper.chartOptions('#weekRateChart', legend)
 
@@ -359,6 +376,10 @@
                             }
                         })
                     })
+
+                    /*eslint-disable*/
+                    chart && chart.hideLoading()
+                        /*eslint-enable*/
                 }
             }
 
@@ -375,6 +396,12 @@
             assetTypePercentChart.updateDataView = function(paramObj) {
                 var _self = this
                 $.extend(_self._params, paramObj || {})
+                _self.echart = echarts.getInstanceByDom($('#assetTypePercentChart')[0])
+
+                if (_self.echart) {
+                    _self.echart.hideLoading()
+                    _self.echart.showLoading(loadingSettings)
+                }
 
                 ktAnalyticsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                     content: 'overview',
@@ -394,7 +421,7 @@
                 function updateView() {
                     var data = _self.data
                     var legend = _.map(data, 'name')
-                    // var echart = _self.echart = echarts.getInstanceByDom($('#assetTypePercentChart')[0])
+                    var chart = _self.echart = echarts.getInstanceByDom($('#assetTypePercentChart')[0])
 
                     var caculateOptions = ktDataHelper.chartOptions('#assetTypePercentChart', legend)
 
@@ -445,6 +472,10 @@
                             }
                         }]
                     })
+
+                    /*eslint-disable*/
+                    chart && chart.hideLoading()
+                        /*eslint-enable*/
                 }
             }
 
@@ -454,7 +485,8 @@
             }, function(data) {
                 var inst = $scope.inst = data.institution
                 inst.assets = inst.assets.split(/[,，]/g)
-                ktDataHelper.listOneLineFilter(inst.assets, '.init-main-info', 260, 13, 10)
+                ktDataHelper.listOneLineFilter(inst.assets, '.init-main-info', 260, 13, 10, 3)
+                inst.descObj = ktDataHelper.textEllipsis(inst.desc, '.init-main-info .desc', 0, 13, 4)
             })
 
             weekAmountChart.updateDataView()
@@ -473,7 +505,8 @@
             $scope.moreTableView = function(type) {
                 var data = {}
                 amendSpecialParams(data)
-                $state.go('pano.products.' + type, data)
+                var url = $state.href('pano.products.' + type, data)
+                window.open(url, '_blank')
             }
 
             var assetParams = {

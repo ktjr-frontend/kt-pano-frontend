@@ -49,14 +49,16 @@
                 getDimentionSpecialColor: function(d) {
                     return dimensionSpecialColor[d] || []
                 },
-                getPerPage: function() { //windows pc 用户根据屏幕高度设置每页条数
+                //windows pc 用户根据屏幕高度设置每页条数
+                getPerPage: function() {
                     if (!$window.isWindows() || $window.detectmob()) return 20
 
                     var minH = $window.innerHeight - 80 - 44 - 80
                     var lines = (minH / 40) | 0
                     return lines || 10
                 },
-                getConditionName: function(filters) { // 获取条件具体名称
+                // 获取条件具体名称
+                getConditionName: function(filters) {
                     return function(type) {
                         var filter = _.find(filters, function(v) {
                             return v.value === type
@@ -72,6 +74,7 @@
 
                     }
                 },
+                // 去掉值是all的参数
                 pruneDirtyParams: function(params, search, list) {
                     _.each(params, function(v, i) {
                         //如果url地址中不包含则删除
@@ -85,7 +88,8 @@
                         }
                     })
                 },
-                cutDirtyParams: function(params, search, list) { //删除全部时候的参数，避免后台出错
+                //删除全部时候的参数，避免后台出错
+                cutDirtyParams: function(params, search, list) {
                     var newParams = $.extend(true, {}, params)
                     _.each(newParams, function(v, i) {
                         if (newParams[i] === 'all') {
@@ -105,7 +109,8 @@
 
                     return newParams
                 },
-                getMarkLineCoords: function(data) { // null or ''值算出有效间隔点用虚线连接
+                // null or ''值算出有效间隔点用虚线连接
+                getMarkLineCoords: function(data) {
                     var coords = _.chain(data).map(function(v, i) {
                             if (!_.isNil(v) && v !== '') {
                                 return i
@@ -146,8 +151,8 @@
                     }
                     return coords
                 },
-
-                chartOptions: function(chartId, legend) { //根据legend的不同获取不同的坐标配置
+                //根据legend的不同获取不同的坐标配置
+                chartOptions: function(chartId, legend) {
                     var w = $(chartId + ' canvas').width()
                     var fontSize = 12
                     var leftGap = 40
@@ -182,8 +187,8 @@
 
                     return op
                 },
-
-                chartDataToPercent: function(chart) { //总览页计算各平台资产类型占比的百分比
+                //总览页计算各平台资产类型占比的百分比
+                chartDataToPercent: function(chart) {
                     var xAxisSumArr = []
 
                     _.each(chart.xAxis, function(v, i) { //计算和
@@ -215,7 +220,8 @@
 
                     return chart
                 },
-                chartDataPrune: function(chart) { //替换null为'',否则echarts显示有问题,横坐标第一个值会没
+                //替换null为'',否则echarts显示有问题,横坐标第一个值会没
+                chartDataPrune: function(chart) {
                     var buShiYong = _.find(chart.data, function(v) {
                         return v.name === '不适用'
                     })
@@ -235,7 +241,8 @@
                     })
                     return chart
                 },
-                chartAxisFormat: function(legend, format) { //格式化坐标轴label
+                //格式化坐标轴label
+                chartAxisFormat: function(legend, format) {
                     var fl = _.map(legend, function(v) {
                         return parseInt(v, 10) + format
                     })
@@ -262,7 +269,8 @@
                     }
                     return fl
                 },
-                getAxisMax: function(data) { //取坐标的最大值
+                //取坐标的最大值
+                getAxisMax: function(data) {
                     var max = _.chain(data).map(function(v) {
                         return _.max(_.map(v.data, function(v2) {
                             return v2 || null
@@ -272,7 +280,8 @@
                     // max = max % 2 ? max + 1 : max
                     return max
                 },
-                getAxisMin: function(data) { //取坐标的最小值
+                //取坐标的最小值
+                getAxisMin: function(data) {
                     var min = _.chain(data).map(function(v) {
                         return _.min(_.map(v.data, function(v2) {
                             return v2 || null
@@ -286,22 +295,65 @@
                     return min
                 },
 
-                // 与_optionsLengthLimit类似，不过此方法可以单独处理一个列表
-                listOneLineFilter: function(list, container, subtractL, fontSize, paddingMargin) {
+                // 与listOneLineFilter类似，不过处理的是字符串
+                textEllipsis: function(text, container, subtractL, fontSize, maxLine) {
                     var optionWidth = $(container).width() - subtractL
-                    var firstLineMaxIndex = list.length;
-                    var sumWidth = 0 //条件所占总长度
+                    var letters = text.split('')
+                    var textWidth = 0
+                    var ml = maxLine || 1
+                    var maxWidth = optionWidth * ml - fontSize * 6
+                    var truncateText = {
+                        value: '',
+                        showToggleBtn: false, //用于控制toggle按钮的显示隐层
+                        isTruncate: false,
+                        // toggleView: function($event) { //折叠切换
+                        //     this.collapsed = !this.collapsed
+                        //     var target = $($event.target)
+                        //     target = target.hasClass('icon-arrow') ? target.parent() : target
+                        //     target.toggleClass('expand', !this.collapsed)
+                        // }
+                    }
+
+                    _.every(letters, function(v) {
+                        textWidth += fontSize * (v.charCodeAt(0) > 128 ? 1 : 0.52)
+                        if (textWidth >= maxWidth) {
+                            truncateText.value += '...'
+                            truncateText.isTruncate = true
+                            truncateText.showToggleBtn = true
+                            return false
+                        }
+                        truncateText.value += v
+                        return true
+                    })
+                    return truncateText
+                },
+                // 与_optionsLengthLimit类似，不过此方法可以单独处理一个列表
+                listOneLineFilter: function(list, container, subtractL, fontSize, paddingMargin, maxLine) {
+                    var optionWidth = $(container).width() - subtractL
+                    var lineMaxIndex = list.length;
+                    var sumWidth = 0 //每一行标签所占总长度
+                    var ml = maxLine || 1
+                    var lines = 0; //filter内容
+
                     _.every(list, function(v, i) {
-                        sumWidth += (function() {
+                        var vLength = (function() {
                             if (!v) return 0
                             return _.reduce(v.split(''), function(initial, n) {
-                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.53)
+                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.52)
                             }, 0)
 
                         }()) * fontSize + paddingMargin
+
+                        sumWidth += vLength
+
                         if (sumWidth > optionWidth) {
-                            firstLineMaxIndex = i - 1 //超出一行的长度，获取索引位置
-                            return false
+                            lines++
+                            if (lines >= ml) {
+                                lineMaxIndex = i - 1 //超出一行的长度，获取索引位置
+                                return false
+                            }
+                            sumWidth = vLength //重置新一行的初始长度
+                            return true
                         }
                         return true
                     })
@@ -310,10 +362,10 @@
                         if (!list.collapsed) { //如果不折叠 全部显示
                             return true
                         }
-                        return index <= firstLineMaxIndex
+                        return index <= lineMaxIndex
                     }
 
-                    if (firstLineMaxIndex === list.length) filterFn.hidden = true //如果能放下，隐藏
+                    if (lineMaxIndex === list.length) filterFn.hidden = true //如果能放下，隐藏
 
                     list.collapsed = _.isNil(list.collapsed) ? true : list.collapsed // 默认折叠
                     list.filterFn = filterFn
@@ -325,8 +377,8 @@
                     }
                     return list
                 },
-
-                _optionsLengthLimit: function(filter) { //控制每个filter列表的长度
+                //控制每个filter列表的长度
+                _optionsLengthLimit: function(filter) {
                     var optionWidth = $('.filter-box').width() - 25 * 2 - 157 + 66 //一行的长度，减去相关间距
                     var firstLineMaxIndex = filter.options.length;
                     var sumWidth = 0 //条件所占总长度
@@ -335,7 +387,7 @@
                         sumWidth += (function() {
                             if (!v.name) return 0
                             return _.reduce(v.name.split(''), function(initial, n) {
-                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.53)
+                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.52)
                             }, 0)
 
                         }()) * 13 + 5 * 2 + 15 * 2
@@ -359,7 +411,8 @@
                     return filterFn
 
                 },
-                _dataAdaptor: function(filters, options) { // 将后台取到的filters数据加工符合前端的数据
+                // 将后台取到的filters数据加工符合前端的数据-市场数据，产品信息，可预约产品页
+                _dataAdaptor: function(filters, options) {
                     var _self = this
                     options = options || []
 

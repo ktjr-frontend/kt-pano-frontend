@@ -12,7 +12,17 @@
                                 </div>
                                 <div class="main">
                                     <h3 ng-bind="inst.name"></h3>
-                                    <p ng-bind="inst.desc | ktNull"></p>
+                                    <p class="desc">
+                                        <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
+                                        <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.desc | ktNull"></span>
+                                        <!-- <a ng-class="{expand: !inst.descObj.isTruncate}" ng-if="inst.descObj.showToggleBtn" class="ml5 toggle-btn toggle-btn-bottom" ng-click="inst.descObj.isTruncate = !inst.descObj.isTruncate">
+                                            <i class="fa fa-angle-right f1_8rem icon-arrow"></i>
+                                        </a> -->
+                                        <a ng-if="inst.descObj.showToggleBtn" class="ml5 tu" ng-click="inst.descObj.isTruncate = !inst.descObj.isTruncate">
+                                            <span ng-show="inst.descObj.isTruncate">更多</span>
+                                            <span ng-show="!inst.descObj.isTruncate">收起</span>
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                             <div class="lines">
@@ -44,7 +54,7 @@
                                                 <span ng-bind="a"></span>
                                             </li>
                                         </ul>
-                                        <div ng-if="!inst.assets.filterFn.hidden" class="toggle-btn" ng-click="inst.assets.toggleView($event)">
+                                        <div ng-if="!inst.assets.filterFn.hidden" class="toggle-btn toggle-btn-bottom" ng-click="inst.assets.toggleView($event)">
                                             <i class="fa fa-angle-right f1_8rem icon-arrow"></i>
                                         </div>
                                     </div>
@@ -339,13 +349,13 @@
                             <h3>股东情况</h3>
                             <table class="table-list">
                                 <thead>
-                                    <th>股东类型<i class="blank"></i></th>
+                                    <th>股东类型</th>
                                     <th>股东</th>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="sh in inst.shareholders">
                                         <td>
-                                            <span ng-bind="sh.type | ktNull"></span><i class="blank"></i>
+                                            <span ng-bind="sh.type | ktNull"></span>
                                         </td>
                                         <td ng-bind="sh.name | ktNull"></td>
                                     </tr>

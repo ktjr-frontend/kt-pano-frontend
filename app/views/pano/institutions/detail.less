@@ -14,7 +14,7 @@
 
 .inst-detail {
     font-size: 1.3rem;
-    .table-body{
+    .table-body {
         border: 1px solid @tag-color;
         border-radius: 6px;
     }
@@ -22,24 +22,24 @@
         > thead {
             > tr {
                 &:first-child {
-                    th:first-child, th:last-child{
+                    th:first-child,
+                    th:last-child {
                         border-radius: 0;
                     }
                 }
-
                 > th {
                     background: @tag-color;
                     border-right: 1px solid @tag-color;
                     color: @color-table-head;
-                    &:last-child{
+                    &:last-child {
                         border-right: 0;
                     }
                 }
             }
         }
-        > tbody{
+        > tbody {
             > tr {
-                > td{
+                > td {
                     border-right: 0;
                 }
             }
@@ -110,13 +110,46 @@
         float: left;
         text-align: center;
         background: @color-3;
-        height: 110px;
+        height: 112px;
         width: 245px;
         img {
             max-width: 80%;
             top: 50%;
             position: relative;
             transform: translateY(-50%);
+        }
+    }
+    .toggle-btn {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        border-radius: 2px;
+        padding: 0px 7px;
+        cursor: pointer;
+        background: #cddce4;
+        color: white;
+        &.toggle-btn-bottom {
+            top: auto;
+            bottom: 7px;
+        }
+        &:hover,
+        &.expand {
+            background: #4380dd;
+            color: white;
+        }
+        .icon-arrow {
+            transform-origin: 50% 50%;
+        }
+        &.expand {
+            &.toggle-btn-bottom{
+                .icon-arrow{
+                    transform: rotate(-90deg) translateX(1px);
+                }
+            }
+            .icon-arrow {
+                color: white;
+                transform: rotate(90deg) translateX(1px);
+            }
         }
     }
     .main {
@@ -129,6 +162,11 @@
         // }
         p {
             line-height: 1.6em;
+            .toggle-btn{
+                position: static;
+                display: inline-block;
+                padding: 1px 7px;
+            }
         }
     }
     .lines {
@@ -146,7 +184,7 @@
             text-align: right;
             color: @color-gray;
         }
-        .toggle-btn {
+        /*.toggle-btn {
             position: absolute;
             right: 20px;
             top: 10px;
@@ -155,6 +193,10 @@
             cursor: pointer;
             background: #cddce4;
             color: white;
+            &.toggle-btn-bottom {
+                top: auto;
+                bottom: 7px;
+            }
             &:hover,
             &.expand {
                 background: #4380dd;
@@ -169,7 +211,7 @@
                     transform: rotate(90deg) translateX(1px);
                 }
             }
-        }
+        }*/
         .list {
             list-style-type: none;
             li {
@@ -177,7 +219,7 @@
                 margin: 0 5px 8px;
             }
             a.item {
-                padding: 3px 8px;
+                padding: 3px 8px 4px;
                 border-radius: 3px;
                 color: @color-bright;
                 background: @tag-color;
@@ -233,8 +275,8 @@
                 background: @tag-color;
                 text-align: center;
                 &:first-child {
-                    width: 95px;
-                    text-align: right;
+                    width: 125px;
+                    // text-align: right;
                 }
             }
         }
@@ -243,9 +285,9 @@
                 white-space: nowrap;
                 text-align: center;
                 // padding-left: 10px;
-                &:first-child {
-                    text-align: right;
-                }
+                // &:first-child {
+                //     text-align: right;
+                // }
             }
         }
     }
