@@ -12,7 +12,7 @@
         'ngMessages',
         'ngAnimate',
         // 'cgNotify',
-        'apiMock',
+        // 'apiMock',
         'angulartics',
         'angulartics.baidu',
         'angulartics.google.analytics',

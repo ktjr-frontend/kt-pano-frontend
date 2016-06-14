@@ -479,21 +479,8 @@
                 }
             }
 
-            // 机构基本信息
-            ktInsitutionsService.get({
-                instID: $state.params.id
-            }, function(data) {
-                var inst = $scope.inst = data.institution
-                inst.assets = inst.assets.split(/[,，]/g)
-                ktDataHelper.listOneLineFilter(inst.assets, '.init-main-info', 260, 13, 10, 3)
-                inst.descObj = ktDataHelper.textEllipsis(inst.desc, '.init-main-info .desc', 0, 13, 4)
-            })
-
-            weekAmountChart.updateDataView()
-            weekRateChart.updateDataView()
-            assetTypePercentChart.updateDataView()
-
             /*----------------------------------tab分割线-----------------------------------*/
+            //添加不同的参数
             function amendSpecialParams(data) {
                 if (params.dimension === 'from') {
                     data.from_eq = params.from
@@ -515,18 +502,53 @@
             }
             amendSpecialParams(assetParams)
 
-            // 资产类
-            ktCompassAssetService.get($.extend({
-                credit_right_or_eq: 'bond'
-            }, assetParams), function(res) {
-                $scope.products = res.compass_assets
-            })
+            // 产品信息-资产类
+            function getBondList() {
+                ktCompassAssetService.get($.extend({
+                    credit_right_or_eq: 'bond'
+                }, assetParams), function(res) {
+                    $scope.products = res.compass_assets
+                })
+            }
 
-            // 资管类
-            ktCompassAssetService.get($.extend({
-                credit_right_or_eq: 'am'
-            }, assetParams), function(res) {
-                $scope.products2 = res.compass_assets
+            // 产品信息-资管类
+            function getAmList() {
+                ktCompassAssetService.get($.extend({
+                    credit_right_or_eq: 'am'
+                }, assetParams), function(res) {
+                    $scope.products2 = res.compass_assets
+                })
+            }
+
+            $scope.inst = {}
+            $scope.moduleVisible = function(moduleName) {
+                return $scope.inst && _.includes($scope.inst.tab, moduleName)
+            }
+
+            // 机构基本信息
+            ktInsitutionsService.get({
+                instID: $state.params.id
+            }, function(data) {
+                var inst = $scope.inst = data.institution
+                    // inst.assets = inst.assets.split(/[,，]/g)
+                    // ktDataHelper.listOneLineFilter(inst.assets, '.init-main-info', 260, 13, 10, 3)
+                if (!inst) return
+
+                inst.descObj = ktDataHelper.textEllipsis(inst.desc, '.init-main-info .desc', 0, 13, 4, 6)
+                inst.assetsObj = ktDataHelper.textEllipsis(inst.assets, '.init-main-info', 260, 13, 3, 1)
+
+                if ($scope.moduleVisible('chart')) {
+                    weekAmountChart.updateDataView()
+                    weekRateChart.updateDataView()
+                    assetTypePercentChart.updateDataView()
+                } else {
+                    $scope.tabActive.tab1 = false
+                    $scope.tabActive.tab2 = true
+                }
+
+                if ($scope.moduleVisible('am')) getAmList()
+                if ($scope.moduleVisible('bond')) getBondList()
+
             })
 
         })

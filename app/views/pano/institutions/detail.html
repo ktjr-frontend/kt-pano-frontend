@@ -1,5 +1,5 @@
 <div class="row inst-detail">
-    <div class="hpanel pr">
+    <div class="hpanel pr" ng-show="inst" ng-class="{'v-hidden': !inst.name}">
         <div class="panel-body b-t-none pw3">
             <div class="row">
                 <div class="col-sm-8">
@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                             <div class="lines">
-                                <section class="line">
+                                <section class="line" ng-show="inst.business_model">
                                     <div class="name">业务模式：</div>
                                     <div class="value">
                                         <ul class="list">
@@ -36,7 +36,7 @@
                                         </ul>
                                     </div>
                                 </section>
-                                <section class="line">
+                                <section class="line" ng-show="inst.asset_types.length">
                                     <div class="name">已发产品资产类型：</div>
                                     <div class="value">
                                         <ul class="list">
@@ -46,20 +46,27 @@
                                         </ul>
                                     </div>
                                 </section>
-                                <section class="line">
+                                <section class="line" ng-show="inst.assets">
                                     <div class="name">主要产品系列：</div>
                                     <div class="value">
-                                        <ul class="list">
+                                        <p class="normal-text assets ml5">
+                                            <span ng-show="inst.assetsObj.isTruncate" ng-bind="inst.assetsObj.value | ktNull"></span>
+                                            <span ng-show="!inst.assetsObj.isTruncate" ng-bind="inst.assets | ktNull"></span>
+                                        </p>
+                                        <!-- <ul class="list">
                                             <li ng-repeat="a in inst.assets|filter:inst.assets.filterFn track by $index">
                                                 <span ng-bind="a"></span>
                                             </li>
-                                        </ul>
-                                        <div ng-if="!inst.assets.filterFn.hidden" class="toggle-btn toggle-btn-bottom" ng-click="inst.assets.toggleView($event)">
+                                        </ul> -->
+                                        <!-- <div ng-if="!inst.assets.filterFn.hidden" class="toggle-btn toggle-btn-bottom" ng-click="inst.assets.toggleView($event)">
                                             <i class="fa fa-angle-right f1_8rem icon-arrow"></i>
-                                        </div>
+                                        </div> -->
+                                        <a ng-class="{expand: !inst.assetsObj.isTruncate}" ng-if="inst.assetsObj.showToggleBtn" class="ml5 toggle-btn toggle-btn-bottom" ng-click="inst.assetsObj.isTruncate = !inst.assetsObj.isTruncate">
+                                            <i class="fa fa-angle-right f1_8rem icon-arrow"></i>
+                                        </a>
                                     </div>
                                 </section>
-                                <section class="line">
+                                <section class="line" ng-show="inst.parters.length">
                                     <div class="name">主要合作机构：</div>
                                     <div class="value">
                                         <ul class="list">
@@ -77,7 +84,7 @@
                     <article class="box">
                         <div class="box-head">
                             <uib-tabset>
-                                <uib-tab active="tabActive.tab1">
+                                <uib-tab active="tabActive.tab1" ng-show="moduleVisible('chart')">
                                     <tab-heading>
                                         图表信息
                                     </tab-heading>
@@ -151,7 +158,7 @@
                             </div>
                         </div>
                         <div class="box-body" ng-show="tabActive.tab2">
-                            <div class="chart-table bor-xxs">
+                            <div class="chart-table bor-xxs" ng-show="moduleVisible('bond')">
                                 <div class="chart-table-heading clfix">
                                     <span class="f1_5rem">资产类</span>
                                 </div>
@@ -194,7 +201,7 @@
                                     <a class="btn btn-default btn-xs" ng-click="moreTableView('obligatoryRight')">更多</a>
                                 </div>
                             </div>
-                            <div class="chart-table bor-xxs">
+                            <div class="chart-table bor-xxs" ng-show="moduleVisible('am')">
                                 <div class="chart-table-heading clfix">
                                     <span class="f1_5rem">资管类</span>
                                 </div>
@@ -242,36 +249,36 @@
                         <div class="box-body">
                             <h3>常用信息</h3>
                             <table class="table-desc">
-                                <tr>
+                                <tr ng-show="inst.name">
                                     <th>机构名称：</th>
                                     <td ng-bind="inst.name| ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.ipo">
                                     <th>是否上市：</th>
                                     <td ng-bind="inst.ipo| ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.landline">
                                     <th>机构电话：</th>
                                     <td ng-bind="inst.landline| ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.website">
                                     <th>公司网址：</th>
                                     <td>
                                         <a ng-href="{{inst.website}}" ng-bind="inst.website | ktNull" target="_blank"></a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.email">
                                     <th>机构邮箱：</th>
                                     <td ng-bind="inst.email| ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.address">
                                     <th>办公地址：</th>
                                     <td ng-bind="inst.address| ktNull"></td>
                                 </tr>
                             </table>
                         </div>
                     </section>
-                    <section class="box">
+                    <section class="box" ng-show="inst.notices.length">
                         <div class="box-body">
                             <h3>重要新闻</h3>
                             <ul class="list">
@@ -281,7 +288,7 @@
                             </ul>
                         </div>
                     </section>
-                    <section class="box">
+                    <section class="box" ng-show="inst.members.length">
                         <div class="box-body">
                             <h3>主要人员</h3>
                             <table class="table-desc">
@@ -292,59 +299,59 @@
                             </table>
                         </div>
                     </section>
-                    <section class="box">
+                    <section class="box" ng-show="inst.license">
                         <div class="box-body">
                             <h3>工商管理注册信息</h3>
                             <table class="table-desc">
-                                <tr>
+                                <tr ng-show="inst.license.name">
                                     <th>机构全称：</th>
                                     <td ng-bind="inst.license.name | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.org_code">
                                     <th>组织机构代码：</th>
                                     <td ng-bind="inst.license.org_code | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.legal_person">
                                     <th>法人代表：</th>
                                     <td ng-bind="inst.license.legal_person | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.nature">
                                     <th>企业性质：</th>
                                     <td ng-bind="inst.license.nature | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.range">
                                     <th>经营范围：</th>
                                     <td ng-bind="inst.license.range | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.established_at">
                                     <th>成立日期：</th>
                                     <td ng-bind="inst.license.established_at | date:'yyyy-MM-dd'"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.duration">
                                     <th>营业期限：</th>
                                     <td ng-bind="inst.license.duration"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.authority">
                                     <th>登记机关：</th>
                                     <td ng-bind="inst.license.authority | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.license_code">
                                     <th>统一社会信用<i class="blank"></i>
                                         <br>代码/注册号：</th>
                                     <td ng-bind="inst.license.license_code | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.address">
                                     <th>注册地址：</th>
                                     <td ng-bind="inst.license.address | ktNull"></td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="inst.license.capital">
                                     <th>注册资本：</th>
                                     <td ng-bind="inst.license.capital | ktNull"></td>
                                 </tr>
                             </table>
                         </div>
                     </section>
-                    <section class="box">
+                    <section class="box" ng-show="inst.shareholders.length">
                         <div class="box-body">
                             <h3>股东情况</h3>
                             <table class="table-list">
@@ -363,7 +370,7 @@
                             </table>
                         </div>
                     </section>
-                    <section class="box">
+                    <section class="box" ng-show="inst.reports.length">
                         <div class="box-body">
                             <h3>年报</h3>
                             <ul class="list list-with-btns">
@@ -377,6 +384,12 @@
                 </aside>
                 <!-- 右边栏 -->
             </div>
+        </div>
+    </div>
+    <div class="row" ng-show="!inst && !isLoading()">
+        <div class="col-sm-12 text-center mt50">
+            <i class="pe-7s-attention f1_5rem fb mr5"></i>
+            <span class="f1_5rem">没有相关机构信息！</span>
         </div>
     </div>
 </div>

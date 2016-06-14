@@ -296,12 +296,12 @@
                 },
 
                 // 与listOneLineFilter类似，不过处理的是字符串
-                textEllipsis: function(text, container, subtractL, fontSize, maxLine) {
+                textEllipsis: function(text, container, subtractL, fontSize, maxLine, spaceCount) {
                     var optionWidth = $(container).width() - subtractL
                     var letters = text.split('')
                     var textWidth = 0
                     var ml = maxLine || 1
-                    var maxWidth = optionWidth * ml - fontSize * 6
+                    var maxWidth = optionWidth * ml - fontSize * spaceCount
                     var truncateText = {
                         value: '',
                         showToggleBtn: false, //用于控制toggle按钮的显示隐层
@@ -315,7 +315,7 @@
                     }
 
                     _.every(letters, function(v) {
-                        textWidth += fontSize * (v.charCodeAt(0) > 128 ? 1 : 0.52)
+                        textWidth += fontSize * (v.charCodeAt(0) > 128 ? 1 : 0.5)
                         if (textWidth >= maxWidth) {
                             truncateText.value += '...'
                             truncateText.isTruncate = true

@@ -36,7 +36,7 @@ var commonScripts = [
     'bower_components/clipboard/dist/clipboard.min.js',
     'bower_components/ngclipboard/dist/ngclipboard.min.js',
     // 'bower_components/angular-send-feedback/dist/angular-send-feedback.min.js',
-    'bower_components/angular-apimock/dist/angular-apimock.min.js',
+    // 'bower_components/angular-apimock/dist/angular-apimock.min.js',
 ];
 
 var appScripts = [

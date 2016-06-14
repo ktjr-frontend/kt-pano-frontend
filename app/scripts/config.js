@@ -6,7 +6,7 @@
 (function() {
     'use strict';
 
-    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider, $resourceProvider, $analyticsProvider, apiMockProvider, ktRouterProvider) {
+    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider, $resourceProvider, $analyticsProvider, ktRouterProvider) {
 
         // 开发环境开启调试模式，使用ng-inpector调试
         $compileProvider.debugInfoEnabled(true);
@@ -65,12 +65,12 @@
             console.log('Moving on...')
         })*/
 
-        // mock data
-        apiMockProvider.config({
-            mockDataPath: '/mock_data',
-            apiPath: '/api',
-            // disable: true //关闭api mock
-        })
+        // mock data 废弃了启用mock-server.js替代
+        // apiMockProvider.config({
+        //     mockDataPath: '/mock_data',
+        //     apiPath: '/api',
+        //     // disable: true //关闭api mock
+        // })
 
         // 启动路由
         ktRouterProvider.run()
