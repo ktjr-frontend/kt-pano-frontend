@@ -152,7 +152,7 @@
                             }*/
                         ],
                         yAxis: {
-                            name: '发行量（单位：万元）',
+                            name: '发行量（万元）',
                             boundaryGap: true,
                             type: 'log',
                             // min: 0,
@@ -252,7 +252,7 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: {
-                            name: '收益率（单位：%）',
+                            name: '收益率（%）',
                             interval: 1,
                             max: ktDataHelper.getAxisMax(data.data),
                             min: 0
@@ -324,7 +324,7 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: {
-                            name: '发行量（单位：万元）',
+                            name: '发行量（万元）',
                         },
                         xAxis: {
                             type: 'category',
@@ -389,7 +389,7 @@
                             yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
                         yAxis: {
-                            name: '类型占比（单位：%）',
+                            name: '类型占比（%）',
                             max: 100,
                             min: 0
                         },

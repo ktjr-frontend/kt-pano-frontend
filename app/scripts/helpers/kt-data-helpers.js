@@ -57,6 +57,11 @@
                     var lines = (minH / 40) | 0
                     return lines || 10
                 },
+                // 获取产品期限
+                getLife: function(life) {
+                    var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '活期')
+                    return lifeName
+                },
                 // 获取条件具体名称
                 getConditionName: function(filters) {
                     return function(type) {

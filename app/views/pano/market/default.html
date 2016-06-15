@@ -118,7 +118,9 @@
             <tbody ng-repeat="v in ::assetManger.values" ng-if="v.children.length">
                 <tr ng-repeat="c in ::v.children">
                     <td ng-if="$index === 0" rowspan="{{::v.children.length}}" ng-bind="::v.name"></td>
-                    <td ng-bind="c.name"></td>
+                    <td>
+                        <a ui-sref="pano.institutions.detail({id: c.name, dimension: 'from'})" ng-bind="::c.name | ktNull" target="_blank"></a>
+                    </td>
                     <td ng-repeat="td in ::c.data track by $index">
                         <div class="td-inner">
                             <span ng-bind="::(td[0] | ktNumber:2:'percent2')">

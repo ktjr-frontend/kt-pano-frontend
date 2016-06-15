@@ -66,10 +66,7 @@
                 return status || '-'
             }
 
-            $scope.getLife = function(life) {
-                var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '活期')
-                return lifeName
-            }
+            $scope.getLife = ktDataHelper.getLife
 
             $scope.shared.filters = []
             $scope.shared.filterDatas = null //避免筛选时候重复请求，以及展开状态被重置
