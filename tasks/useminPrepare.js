@@ -1,5 +1,5 @@
 module.exports = {
-    html: 'app/index.html',
+    // html: 'app/index.html',
     options: {
         dest: 'dist',
         flow: {
@@ -28,5 +28,8 @@ module.exports = {
                 }]
             }
         }
+    },
+    dist: {
+        src: ['app/index.html', 'app/views/h5/**/*.html']
     }
 };

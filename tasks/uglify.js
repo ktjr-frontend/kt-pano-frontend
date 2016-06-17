@@ -9,6 +9,7 @@ module.exports = {
             src: [
                 'scripts/controllers/**/*.js',
                 'views/**/*.js',
+                '!views/h5/**/*.js',
                 'scripts/directives/**/*.js',
                 'common/directives/**/*.js',
                 'common/factories/kt-captcha.js',
@@ -41,5 +42,5 @@ module.exports = {
             'dist/scripts/scripts.js': ['.tmp/concat/scripts/scripts.js']
         }
     },
-    
+
 };

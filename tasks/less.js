@@ -24,13 +24,13 @@ module.exports = {
         files: [{
             expand: true,
             cwd: '<%= kt.app %>',
-            src: ['less/*.less'],
+            src: ['less/*.less', 'views/h5/**/*.less'],
             dest: '.tmp',
             ext: '.css'
         }, {
             expand: true,
             cwd: '<%= kt.app %>',
-            src: ['common/directives/**/*.less', 'scripts/directives/**/*.less', 'views/**/*.less'],
+            src: ['common/directives/**/*.less', 'scripts/directives/**/*.less', 'views/**/*.less', '!views/h5/**/*.less'],
             dest: '<%= kt.dist %>',
             ext: '.css'
         }]

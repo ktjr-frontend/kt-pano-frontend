@@ -17,6 +17,7 @@ module.exports.tasks = {
         html: {
             src: [
                 '<%= kt.dist %>/views/**/*.html',
+                '!<%= kt.dist %>/views/h5/**/*.html',
                 '<%= kt.dist %>/common/directives/**/*.html',
                 '<%= kt.dist %>/scripts/directives/**/*.html',
             ],

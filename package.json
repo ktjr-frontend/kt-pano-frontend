@@ -15,6 +15,7 @@
     "fit_common": "node install_common.js",
     "start": "grunt live",
     "start:mock": "grunt live & node mock-server.js",
+    "px2rem": "px2rem -b 3 .tmp/views/h5/*.css" ,
     "unit_test": "grunt injector:karma karma",
     "webdriver": "java -jar /usr/local/lib/node_modules/protractor/selenium/selenium-server-standalone-2.42.2.jar -Dwebdriver.chrome.driver=/usr/local/lib/node_modules/protractor/selenium/chromedriver",
     "e2e": "protractor conf.js",

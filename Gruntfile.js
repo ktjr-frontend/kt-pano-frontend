@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     var configs = require('load-grunt-configs')(grunt, options);
     grunt.initConfig(configs)
 
-    //更新资源文件用到的版本号
+    //更新资源文件用到的版本号 @deprecated
     grunt.registerTask('updateVersion', 'update the version', function() {
         var pkg = grunt.file.readJSON('package.json');
         var newVersion = grunt.option('version-set');

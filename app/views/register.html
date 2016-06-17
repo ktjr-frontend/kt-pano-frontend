@@ -28,6 +28,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group" ng-class="{'has-error':registerForm.name.$invalid && registerForm.name.$dirty}">
+                                <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label> -->
+                                <div class="col-md-12">
+                                    <input autofocus ng-maxlength="50" ng-minlength="2" kt-validate-on-blur placeholder="您的真实姓名（提交后不可修改）" type="text" required ng-model="user.name" id="" class="form-control" name="name">
+                                    <div class="mt5 text-warning" ng-messages="registerForm.name.$dirty && registerForm.name.$error">
+                                        <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入真实姓名</div>
+                                        <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于2个字符</div>
+                                        <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于50个字符</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$dirty}">
+                                <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label> -->
+                                <div class="col-md-12">
+                                    <input placeholder="您的工作邮箱" kt-validate-on-blur type="email" required ng-model="user.email" id="" class="form-control" name="email">
+                                    <div class="mt5 text-warning" ng-messages="registerForm.email.$dirty && registerForm.email.$error">
+                                        <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入您的工作邮箱</div>
+                                        <div ng-message="email"><i class="fa fa-frown-o fb mr5"></i>邮箱格式不正确</div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group" ng-class="{'has-error':registerForm.mobile.$invalid && registerForm.mobile.$dirty}">
                                 <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>手机号</label> -->
                                 <div class="col-md-12">
