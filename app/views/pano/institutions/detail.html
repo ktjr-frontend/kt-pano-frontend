@@ -293,7 +293,7 @@
                             <h3>主要人员</h3>
                             <table class="table-desc">
                                 <tr ng-repeat="m in inst.members">
-                                    <th ng-bind="m.job | ktAppend:'：'"></th>
+                                    <th class="break-word" ng-bind="m.job | ktAppend:'：'"></th>
                                     <td ng-bind="m.name | ktNull"></td>
                                 </tr>
                             </table>
