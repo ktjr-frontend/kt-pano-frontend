@@ -1,0 +1,20 @@
+<div class="f1_2rem chart-tooltip-title" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;"><%- title %></div>
+<table class="f1_2rem chart-tooltip-table">
+    <tr>
+        <th>资产类型</th>
+        <th class="text-right">发行量占比</th>
+        <th class="text-right">发行量</th>
+        <th class="text-right">加权收益率</th>
+    </tr>
+    <% _.forEach(params, function(p) { %>
+        <tr>
+            <td class="justify">
+                <i class="fa-circle fa" style="transform: scale(0.8);color:<%- color[p.seriesIndex]%>;"></i>
+                <%- p.seriesName %>
+            </td>
+            <td class="text-right"><span><%- ktValueFactory(p.data, 'percent2').replace(/^(0万元|0)$/g, '-') %></span></td>
+            <td class="text-right"><span><%- ktValueFactory(p.amount, 'rmb').replace(/^(0万元|0)$/g, '-') %></span></td>
+            <td class="text-right"><span><%- ktValueFactory(p.rate, 'percent2').replace(/^(0万元|0)$/g, '-') %></span></td>
+        </tr>
+    <% }); %>
+</table>

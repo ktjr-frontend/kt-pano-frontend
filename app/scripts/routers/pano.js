@@ -47,6 +47,7 @@
                     url: '/overview',
                     templateUrl: 'views/pano/overview.html',
                     resolve: ktLazyResolve([
+                        'views/pano/overview.css',
                         'views/pano/overview.js',
                         'common/directives/kt-echart3-directive.js'
                     ]),

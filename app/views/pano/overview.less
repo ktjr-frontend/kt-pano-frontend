@@ -1,0 +1,242 @@
+@import "app/common/styles/theme/v4/bootstrap/variables.less";
+@import "app/common/styles/theme/v4/variables.less";
+@tag-color: #e7eaf3;
+@tag-hover-color: #758099;
+@color-gray: #9fa3ac;
+@color-gray-light: #e8ebf0;
+@rank-color1: #8b9ebb;
+@rank-color2: #aabdda;
+@rank-color3: #c0d1ea;
+.overview {
+    font-size: 1.3rem;
+    .chart-table-body{
+        .table-caption{
+            line-height: 24px;
+        }
+        .caption{
+            float: left;
+        }
+        .sub-caption{
+            color: @color-6;
+            margin: 0 0 0 15px;
+            float: left;
+        }
+        &.inner-table{
+            padding: 20px;
+        }
+    }
+    .table-body {
+        border: 1px solid @tag-color;
+        border-radius: 6px;
+    }
+    .table {
+        > thead {
+            > tr {
+                &:first-child {
+                    th:first-child,
+                    th:last-child {
+                        border-radius: 0;
+                    }
+                }
+                > th {
+                    background: @tag-color;
+                    border-right: 1px solid @tag-color;
+                    color: @color-table-head;
+                    &:last-child {
+                        border-right: 0;
+                    }
+                }
+            }
+        }
+        > tbody {
+            > tr {
+                > td {
+                    border-right: 0;
+                }
+            }
+        }
+    }
+    .btn {
+        min-width: 55px;
+        background: @tag-color;
+        border: 0;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        color: @color-bright;
+        &:hover {
+            border: 0;
+            background: @tag-hover-color;
+            color: white;
+        }
+    }
+    .box {
+        padding: 0px;
+        border-radius: 5px;
+        background: white;
+        margin-bottom: 20px;
+        .box-head {
+            height: 40px;
+            line-height: 40px;
+            background: @color-table-head;
+            border-radius: 5px 5px 0 0;
+        }
+        .box-body {
+            padding: 20px;
+        }
+    }
+    h3 {
+        font-size: 1.5rem;
+        color: @color-1;
+        margin: 3px 0 15px;
+    }
+    .aside-info {
+        margin-top: -15px;
+        padding-left: 5px;
+        @media(max-width: 767px) {
+            padding-left: 15px;
+        }
+        >h3 {
+            margin: 0 0 5px;
+            height: 40px;
+            line-height: 40px;
+        }
+        .rank-list {
+            list-style-type: none;
+            li {
+                margin: 0 -10px;
+                padding: 8px 100px 8px 40px;
+                position: relative;
+                color: @color-gray;
+                &:hover {
+                    color: @color-text;
+                    background: @color-3;
+                    a{
+                        color: @color-text;
+                    }
+                }
+                a {
+                    color: @color-gray;
+                    &:hover {
+                        color: @color-bright;
+                    }
+                }
+            }
+            .index {
+                position: absolute;
+                padding: 0 5px;
+                font-style: normal;
+                border-radius: 2px;
+                left: 10px;
+                color: @color-gray;
+                background: @color-gray-light;
+                &.rank-1 {
+                    background: @rank-color1;
+                    color: white;
+                }
+                &.rank-2 {
+                    background: @rank-color2;
+                    color: white;
+                }
+                &.rank-3 {
+                    background: @rank-color3;
+                    color: white;
+                }
+                &.rank-double-digit{
+                    padding: 0 1.5px;
+                }
+            }
+            .amount {
+                position: absolute;
+                right: 10px;
+            }
+        }
+        .list {
+            list-style-type: none;
+            &.list-with-btns {
+                li {
+                    padding-right: 70px;
+                }
+            }
+            &.list-with-subhead{
+                li{
+                    a{
+                        color: @color-bright;
+                        &:hover{
+                            color: @color-text;
+                        }
+                    }
+                }
+            }
+            &.list-with-timeline{
+                li{
+                    overflow: visible;
+                    a{
+                        display: block;
+                    }
+                    &:after{
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        height: 56px;
+                        top: 18px;
+                        width: 1px;
+                        left: 3px;
+                        z-index: 0;
+                        border-left: 1px solid @color-gray-light;
+                    }
+                    &:last-child{
+                        &:after{
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .subhead{
+                color: @color-gray;
+                margin-top: 5px;
+                font-size: 1rem;
+            }
+            li {
+                padding: 8px 0 8px 15px;
+                position: relative;
+                &:before {
+                    content: "";
+                    font-weight: bold;
+                    margin-right: 5px;
+                    position: absolute;
+                    display: block;
+                    background: @color-gray-light;
+                    border-radius: 50%;
+                    border: 2px splid white;
+                    height: 7px;
+                    width: 7px;
+                    left: 0;
+                    top: 14px;
+                    z-index: 9;
+                }
+                &:hover{
+                    &:before{
+                        background: @color-inactive;
+                    }
+                }
+                a {
+                    color: @color-gray;
+                    &:hover {
+                        color: @color-bright;
+                    }
+                }
+                .btn {
+                    position: absolute;
+                    right: 0;
+                    top: 5px;
+                    color: @color-bright;
+                    &:hover {
+                        border: 0;
+                        background: @tag-hover-color;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

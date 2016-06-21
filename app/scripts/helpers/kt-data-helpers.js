@@ -166,7 +166,9 @@
                     var lineLength = w - leftGap - rightGap / 2
                     var baseBottom = 70
                     var legendTotalLength = _.map(legend, function(v) {
-                        return v.length * fontSize + 25
+                        return _.chain(v.split('')).map(function (char) {
+                            return (char.charCodeAt(0) > 128 ? 1 : 0.5) * fontSize
+                        }).sum().value() + 25
                     })
 
                     var lines = 1
@@ -193,12 +195,12 @@
                     return op
                 },
                 //总览页计算各平台资产类型占比的百分比
-                chartDataToPercent: function(chart) {
+                chartDataToPercent: function(chart, key) {
                     var xAxisSumArr = []
-
+                    var dataKey = key || 'data'
                     _.each(chart.xAxis, function(v, i) { //计算和
                         xAxisSumArr[i] = _.sum(_.map(chart.data, function(v2) {
-                            return v2.data[i]
+                            return v2[dataKey][i]
                         }))
                     })
 
@@ -217,7 +219,7 @@
                     })*/
 
                     chart.data = _.map(chart.data, function(v) { // 计算所占比例
-                        v.data = _.map(v.data, function(v2, i2) {
+                        v[dataKey + '_percent'] = _.map(v[dataKey], function(v2, i2) {
                             return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
                         })
                         return v

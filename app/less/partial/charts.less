@@ -237,6 +237,19 @@
                 }
             }
         }
+        .btn-group{
+            margin-right: 10px;
+            .btn{
+                border: 0;
+                color: @color-10;
+                background: @color-gray-light;
+                -webkit-font-smoothing: antialiased;
+                &.active{
+                    background: @color-inactive;
+                    color: white;
+                }
+            }
+        }
     }
     .chart-table-footer {
         color: @color-3;
@@ -276,12 +289,16 @@
 .chart-tooltip-table{
     color: rgba(255,255,255,0.8);
     tr{
+        th{
+            padding: 0 5px;
+        }
         td{
+            padding: 0 5px;
             &:first-child{
-                padding-right: 5px;
+                padding-left: 0;
             }
             &:last-child{
-                padding-left: 5px;
+                padding-right: 0;
             }
         }
     }

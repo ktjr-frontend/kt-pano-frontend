@@ -2,11 +2,22 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $state, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1) {
+        .controller('ktOverviewCtrl', function($scope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1) {
 
             $scope.updateDate = '获取中...'
+            $scope.updateDateTo = '获取中...'
+            $scope.getLife = ktDataHelper.getLife
+            $scope.goTo = function($event, url) {
+                $event.stopPropagation()
+                window.open(url, '_blank')
+            }
 
             var colors = ktEchartTheme1.color
+            var loadingSettings = { // 设置图表异步加载的样式
+                text: '努力加载中...',
+                color: '#3d4351',
+                textColor: '#3d4351',
+            }
 
             /*    <!-- 给设计师调色用 上线注释掉 --> */
             /*$scope.tmplColor = ''
@@ -53,7 +64,7 @@
                 }
             }
 
-            // 气泡图
+            // 气泡图-近七日和周平均
             var rateAmountChart = $scope.rateAmountChart = {
                 chartOptions: {},
                 yAxis: 'amount',
@@ -61,18 +72,28 @@
                 xAxis: 'rate',
                 xAxisFormat: 'percent2',
                 color: ['#dd4444'],
+                tab: 'last7days',
                 list: []
             }
-            rateAmountChart.updateDataView = function() {
+            rateAmountChart.updateDataView = function(options, silent) {
                 var _self = this
-                ktAnalyticsService.get({
+                var chart = _self.echart = echarts.getInstanceByDom($('#rateAmountChart')[0])
+                if (silent) {
+                    if (chart) {
+                        chart.hideLoading()
+                        chart.showLoading(loadingSettings)
+                    }
+                }
+
+                ktAnalyticsService.get($.extend({
                     content: 'overview',
                     chart: 'summary',
-                }, function(data) {
+                }, options || {}), function(data) {
                     _self.data = data.stat
 
                     if (data.crawled_at) {
                         $scope.updateDate = moment(data.crawled_at).subtract(6, 'd').format('YYYY-MM-DD') + ' ~ ' + moment(data.crawled_at).format('YYYY-MM-DD')
+                        $scope.updateDateTo = moment(data.crawled_at).format('YYYY-MM-DD')
                     }
                     updateView()
                 })
@@ -92,126 +113,136 @@
                     })
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                        // color: _self.color,
-                        onclick: function(e) {
-                            var url = $state.href('pano.institutions.detail', {
-                                id: e.seriesName,
-                            })
-                            window.open(url, '_blank');
-                        },
-                        legend: {
-                            data: legend,
-                        },
-                        tooltip: {
-                            // alwaysShowContent: true,
-                            // enterable: true,
-                            axisPointer: {
-                                axis: 'auto',
-                                type: 'line',
+                            // color: _self.color,
+                            onclick: function(e) {
+                                var url = $state.href('pano.institutions.detail', {
+                                    id: e.seriesName,
+                                })
+                                window.open(url, '_blank');
                             },
-                            trigger: 'item',
-                            triggerOn: 'mousemove',
-                            formatter: function(params) {
-                                var res = '<div class="f1_2rem chart-tooltip-title" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;">' +
-                                    params.value[2] + '</div><table class="f1_2rem chart-tooltip-table">' +
-                                    '<tr><td class="justify">加权收益率：</td><td>' + ktValueFactory(params.value[0], _self.xAxisFormat) + '</td></tr>' +
-                                    '<tr><td class="justify">发行量：</td><td>' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</td></tr>';
-                                return res;
+                            legend: {
+                                data: legend,
                             },
-                            xAxisFormat: _self.xAxisFormat,
-                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
-                        },
-                        visualMap: [{
-                                show: false,
-                                dimension: 1,
-                                min: _.min(yAxisArr),
-                                max: _.max(yAxisArr),
-                                precision: 1,
-                                inRange: {
-                                    symbolSize: [10, 50]
+                            tooltip: {
+                                // alwaysShowContent: true,
+                                // enterable: true,
+                                axisPointer: {
+                                    axis: 'auto',
+                                    type: 'line',
                                 },
-                                outOfRange: {
-                                    symbolSize: [10, 50],
-                                    color: ['rgba(0,0,0,.2)']
-                                }
-                            }
-                            /*, {
-                                show: false,
-                                dimension: 0,
-                                min: 0,
-                                max: _.max(xAxisArr),
-                                precision: 0.01,
-                                inRange: {
-                                    // colorSaturation: [0.1, 1],
-                                    colorLightness: [0.9, 0.6]
+                                trigger: 'item',
+                                triggerOn: 'mousemove',
+                                formatter: function(params) {
+                                    var res = '<div class="f1_2rem chart-tooltip-title" style="border-bottom: 1px solid rgba(255,255,255,.3);padding-bottom: 5px;margin-bottom:5px;">' +
+                                        params.value[2] + '</div><table class="f1_2rem chart-tooltip-table">' +
+                                        '<tr><td class="justify">加权收益率：</td><td>' + ktValueFactory(params.value[0], _self.xAxisFormat) + '</td></tr>' +
+                                        '<tr><td class="justify">发行量：</td><td>' + ktValueFactory(params.value[1], _self.yAxisFormat) + '</td></tr>';
+                                    return res;
                                 },
-                                outOfRange: {
-                                    color: ['rgba(0,0,0,.2)']
-                                },
-
-                            }*/
-                        ],
-                        yAxis: {
-                            name: '发行量（万元）',
-                            boundaryGap: true,
-                            type: 'log',
-                            // min: 0,
-                            // max: (function() {
-                            //     if (!yAxisArr.length) return 'auto'
-
-                            //     var max = _.max(yAxisArr)
-                            //     var maxLength = _.max(yAxisArr).toFixed(0).length
-                            //     var maxyAxis = max + Math.pow(10, maxLength - 2) * 5
-
-                            //     // 小于5的时候向下取整，否则向上取整
-                            //     if (_.parseInt(maxyAxis.toString().slice(1, 2)) < 5) {
-                            //         return _.floor(maxyAxis, 1 - maxLength)
-                            //     }
-                            //     return _.ceil(maxyAxis, 1 - maxLength)
-                            // })()
-                        },
-                        xAxis: {
-                            max: (function() {
-                                var max = _.max(xAxisArr)
-                                var decimal = _.round(max - (max | 0), 2)
-                                return _.ceil(max) + 1 * (decimal > 0.8)
-                            })(),
-                            min: (function() {
-                                var min = _.min(xAxisArr)
-                                var decimal = _.round(min - (min | 0), 2)
-                                return _.floor(min) - 1 * (decimal < 0.3)
-                            })(),
-                            type: 'value',
-                            name: '收益率',
-                            nameLocation: 'end',
-                            nameGap: 10,
-                            boundaryGap: false,
-                        },
-
-                        series: _.map(data, function(v) {
-                            return {
-                                name: v[2],
-                                showEffectOn: 'emphasis',
-                                itemStyle: {
-                                    normal: {
-                                        opacity: 0.7,
+                                xAxisFormat: _self.xAxisFormat,
+                                yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            },
+                            visualMap: [{
+                                    show: false,
+                                    dimension: 1,
+                                    min: _.min(yAxisArr),
+                                    max: _.max(yAxisArr),
+                                    precision: 1,
+                                    inRange: {
+                                        symbolSize: [10, 50]
+                                    },
+                                    outOfRange: {
+                                        symbolSize: [10, 50],
+                                        color: ['rgba(0,0,0,.2)']
                                     }
-                                },
-                                type: 'effectScatter',
-                                rippleEffect: {
-                                    period: 8,
-                                    scale: 1.5,
-                                    brushType: 'fill'
-                                },
-                                data: [v]
-                            }
+                                }
+                                /*, {
+                                    show: false,
+                                    dimension: 0,
+                                    min: 0,
+                                    max: _.max(xAxisArr),
+                                    precision: 0.01,
+                                    inRange: {
+                                        // colorSaturation: [0.1, 1],
+                                        colorLightness: [0.9, 0.6]
+                                    },
+                                    outOfRange: {
+                                        color: ['rgba(0,0,0,.2)']
+                                    },
+
+                                }*/
+                            ],
+                            yAxis: {
+                                name: '发行量（万元）',
+                                boundaryGap: true,
+                                type: 'log',
+                                // min: 0,
+                                // max: (function() {
+                                //     if (!yAxisArr.length) return 'auto'
+
+                                //     var max = _.max(yAxisArr)
+                                //     var maxLength = _.max(yAxisArr).toFixed(0).length
+                                //     var maxyAxis = max + Math.pow(10, maxLength - 2) * 5
+
+                                //     // 小于5的时候向下取整，否则向上取整
+                                //     if (_.parseInt(maxyAxis.toString().slice(1, 2)) < 5) {
+                                //         return _.floor(maxyAxis, 1 - maxLength)
+                                //     }
+                                //     return _.ceil(maxyAxis, 1 - maxLength)
+                                // })()
+                            },
+                            xAxis: {
+                                max: (function() {
+                                    var max = _.max(xAxisArr)
+                                    var decimal = _.round(max - (max | 0), 2)
+                                    return _.ceil(max) + 1 * (decimal > 0.8)
+                                })(),
+                                min: (function() {
+                                    var min = _.min(xAxisArr)
+                                    var decimal = _.round(min - (min | 0), 2)
+                                    return _.floor(min) - 1 * (decimal < 0.3)
+                                })(),
+                                type: 'value',
+                                name: '收益率',
+                                nameLocation: 'end',
+                                nameGap: 10,
+                                boundaryGap: false,
+                            },
+
+                            series: _.map(data, function(v) {
+                                return {
+                                    name: v[2],
+                                    showEffectOn: 'emphasis',
+                                    itemStyle: {
+                                        normal: {
+                                            opacity: 0.7,
+                                        }
+                                    },
+                                    type: 'effectScatter',
+                                    rippleEffect: {
+                                        period: 8,
+                                        scale: 1.5,
+                                        brushType: 'fill'
+                                    },
+                                    data: [v]
+                                }
+                            })
                         })
-                    })
+                        /*eslint-disable*/
+                    chart && chart.hideLoading()
+                        /*eslint-enable*/
                 }
             }
 
-            // 期限利率图
-            var durationRateChart = $scope.durationRateChart = {
+            $scope.$watch('rateAmountChart.tab', function(newValue, oldValue) {
+                if (_.isUndefined(newValue) || newValue === oldValue) return
+                rateAmountChart.updateDataView({
+                    chart: newValue === 'last7days' ? 'summary' : 'summary_avg' // to be defined
+                }, true)
+            })
+
+            // 期限利率图 @deprecated 用下面组合图替代
+            /*var durationRateChart = $scope.durationRateChart = {
                 chartOptions: {},
                 yAxis: 'rate',
                 yAxisFormat: 'percent2',
@@ -288,30 +319,46 @@
                         })
                     })
                 }
-            }
+            }*/
 
-            // 期限发行量图
+            // 期限发行量图-收益率
             var durationAmountChart = $scope.durationAmountChart = {
                 chartOptions: {},
                 yAxis: 'amount',
                 yAxisFormat: 'rmb',
+                yAxisFormat2: 'percent2',
                 xAxis: '_id',
                 xAxisFormat: null,
                 list: []
             }
             durationAmountChart.updateDataView = function() {
                 var _self = this
-                ktAnalyticsService.get({
+                var circulationPromise = ktAnalyticsService.get({
                     content: 'overview',
                     chart: 'circulation',
-                }, function(data) {
-                    _self.data = ktDataHelper.chartDataPrune(data.stat)
+                }).$promise
+                var ratePromise = ktAnalyticsService.get({
+                    content: 'overview',
+                    chart: 'rate',
+                }).$promise
+
+                $q.all([circulationPromise, ratePromise]).then(function(data) {
+                    _self.data1 = ktDataHelper.chartDataPrune(data[0].stat)
+                    _self.data2 = ktDataHelper.chartDataPrune(data[1].stat)
+                    _self.data1.data = _.map(_self.data1.data, function(v) {
+                        return { name: v.name.replace('周期', '周期发行量'), data: v.data }
+                    })
+                    _self.data2.data = _.map(_self.data2.data, function(v) {
+                        return { name: v.name.replace('周期', '周期收益率'), data: v.data }
+                    })
                     updateView()
                 })
 
                 function updateView() {
-                    var data = _self.data
-                    var legend = _.map(data.data, 'name')
+                    var data1 = _self.data1
+                    var data2 = _self.data2
+                    var legend = _.concat(_.map(data1.data, 'name'), _.map(data2.data, 'name'))
+
                     var caculateOptions = ktDataHelper.chartOptions('#durationAmountChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
@@ -321,21 +368,64 @@
                         tooltip: {
                             titlePrefix: '产品期限：',
                             xAxisFormat: _self.xAxisFormat,
-                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            yAxisFormat: _self.yAxisFormat + '{0,1}|' + _self.yAxisFormat2 + '{2,3}', //自定义属性，tooltip标示，决定是否显示百分比数值
                         },
-                        yAxis: {
+                        yAxis: [{
                             name: '发行量（万元）',
-                        },
+                            textStyle: {
+                                color: '#666b76',
+                                fontSize: 10
+                            },
+                            axisLabel: {
+                                formatter: function(value) {
+                                    var yAxisFormat = durationAmountChart.yAxisFormat
+                                    return ktValueFactory(value, yAxisFormat).toString().replace(/%|万元|百万|元/g, '')
+                                }
+                            }
+                        }, {
+                            name: '收益率（%）',
+                            textStyle: {
+                                color: '#666b76',
+                                fontSize: 10
+                            },
+                            axisLabel: {
+                                formatter: function(value) {
+                                    var yAxisFormat = durationAmountChart.yAxisFormat2
+                                    return ktValueFactory(value, yAxisFormat).toString().replace(/%|万元|百万|元/g, '')
+                                }
+                            },
+                            interval: 1,
+                            max: ktDataHelper.getAxisMax(data2.data),
+                            min: 0
+                        }],
                         xAxis: {
                             type: 'category',
                             boundaryGap: true,
-                            name: '期限',
+                            axisLabel: {
+                                formatter: function(value) {
+                                    var xAxisFormat = durationAmountChart.xAxisFormat
+                                    return ktValueFactory(value, xAxisFormat)
+                                }
+                            },
+                            // name: '期限',
                             nameLocation: 'end',
                             nameGap: 10,
-                            data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
+                            data: ktDataHelper.chartAxisFormat(data1.xAxis, 'MY')
                         },
-
-                        series: _.map(data.data, function(v) {
+                        // series: _.map(data1.data, function(v) {
+                        //     return {
+                        //         name: v.name,
+                        //         type: 'bar',
+                        //         itemStyle: {
+                        //             normal: {
+                        //                 opacity: 0.8
+                        //             }
+                        //         },
+                        //         barMaxWidth: 40,
+                        //         data: v.data
+                        //     }
+                        // })
+                        series: _.concat(_.map(data1.data, function(v) {
                             return {
                                 name: v.name,
                                 type: 'bar',
@@ -347,15 +437,27 @@
                                 barMaxWidth: 40,
                                 data: v.data
                             }
-                        })
+                        }), _.map(data2.data, function(v) {
+                            return {
+                                name: v.name,
+                                type: 'line',
+                                yAxisIndex: 1,
+                                markLine: {
+                                    data: ktDataHelper.getMarkLineCoords(v.data)
+                                },
+                                smooth: false,
+                                data: v.data
+                            }
+                        }))
                     })
                 }
             }
 
-            // 资金平台类型占比图
+            // 资产类型周统计占比图
             var platformAssetTypeChart = $scope.platformAssetTypeChart = {
                 chartOptions: {},
                 yAxis: 'amount',
+                updateDate: '获取中...',
                 yAxisFormat: 'percent2',
                 xAxis: '_id',
                 color: ktDataHelper.getDimentionSpecialColor('asset_type'),
@@ -365,10 +467,10 @@
             platformAssetTypeChart.updateDataView = function() {
                 var _self = this
                 ktAnalyticsService.get({
-                    content: 'overview',
+                    content: 'overview_mock',
                     chart: 'circulation_pct',
                 }, function(data) {
-                    _self.data = ktDataHelper.chartDataToPercent(data.stat)
+                    _self.data = ktDataHelper.chartDataToPercent(data.stat, 'amount')
                     updateView()
                 })
 
@@ -377,6 +479,12 @@
                     var legend = _.map(data.data, 'name')
                     var caculateOptions = ktDataHelper.chartOptions('#platformAssetTypeChart', legend)
                     var color = _self.color || colors.slice(0, legend.length)
+                    _self.updateDate = _.first(data.xAxis) + ' ~ ' + moment(_.last(data.xAxis)).weekday(6).format('YYYY-MM-DD')
+
+                    var echartTooltip //用于echart的tooltip显示
+                    $templateRequest('views/tooltips/echart_table_tooltip.html').then(function(tpl) {
+                        echartTooltip = _.template(tpl, { imports: { ktValueFactory: ktValueFactory } })
+                    })
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         color: _.reverse(color.slice(0)),
@@ -386,7 +494,24 @@
                         tooltip: {
                             reverse: true,
                             xAxisFormat: _self.xAxisFormat,
-                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            yAxisFormat: _self.yAxisFormat, //自定义属性，tooltip标示，决定是否显示百分比数值
+                            formatter: function(p) {
+                                if (!echartTooltip) return '';
+                                var params = _.reverse(p)
+                                var title = params[0].name
+                                title += ' ~ ' + moment(title).weekday(6).format('YYYY-MM-DD')
+                                _.each(params, function(v, i) {
+                                    v.amount = data.data[i].amount[v.seriesIndex]
+                                    v.rate = data.data[i].rate[v.seriesIndex]
+                                })
+
+                                var res = echartTooltip({
+                                    title: title,
+                                    params: params,
+                                    color: _.reverse(color.slice(0))
+                                })
+                                return res
+                            }
                         },
                         yAxis: {
                             name: '类型占比（%）',
@@ -399,7 +524,7 @@
                             nameLocation: 'end',
                             nameGap: 10,
                             axisLabel: {
-                                interval: $window.innerWidth > 1000 ? 0 : 'auto'
+                                interval: 'auto'
                             },
                             boundaryGap: true,
                             data: data.xAxis
@@ -416,7 +541,7 @@
                                 },
                                 stack: '类型占比',
                                 barMaxWidth: 40,
-                                data: v.data
+                                data: v.amount_percent
                             }
                         })
                     })
@@ -425,9 +550,48 @@
 
             // 初始加载数据
             rateAmountChart.updateDataView()
-            durationRateChart.updateDataView()
+                // durationRateChart.updateDataView()
             durationAmountChart.updateDataView()
             platformAssetTypeChart.updateDataView()
 
+            /*-----------------------右边栏------------------------*/
+
+            // 新闻
+            ktAnalyticsService.get({
+                content: 'notices',
+            }, function(data) {
+                $scope.notices = data.notices
+            })
+
+            // 平台7日发行量
+            ktAnalyticsService.get({
+                content: 'from_amounts',
+            }, function(data) {
+                $scope.from_amounts = data.from_amounts
+            })
+
+            // 交易所7日发行量
+            ktAnalyticsService.get({
+                content: 'exchange_amounts',
+            }, function(data) {
+                $scope.exchange_amounts = data.exchange_amounts
+            })
+
+            // 报告
+            ktAnalyticsService.get({
+                content: 'reports',
+            }, function(data) {
+                $scope.reports = data.reports
+            })
+
+            // 推荐产品
+            ktAnalyticsService.get({
+                content: 'overview_products',
+            }, function(data) {
+                $scope.compass_assets_bond = data.compass_assets_bond
+                $scope.compass_assets_am = data.compass_assets_am
+                $scope.fame_assets_bond = data.fame_assets_bond
+                $scope.fame_assets_am = data.fame_assets_am
+            })
         })
 })();
