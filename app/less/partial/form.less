@@ -107,6 +107,49 @@ form {
     }
 }
 
+.radio {
+    &.radio-sm {
+        input[type="radio"] + label {
+            &:after {
+                height: 8px;
+                width: 8px;
+                top: 6px;
+                margin-left: -15px;
+            }
+            &:before {
+                height: 14px;
+                width: 14px;
+                margin-left: -15px;
+                top: 3px;
+            }
+        }
+    }
+}
+
+.checkbox {
+    line-height: 1em;
+    &.checkbox-sm {
+        input[type="checkbox"] + label {
+            &:before {
+                top: 0;
+                height: 14px;
+                width: 14px;
+                margin-left: -15px;
+            }
+        }
+        input[type="checkbox"]:checked + label {
+            &:after {
+                top: 1px;
+                margin-left: -15px;
+                height: 8px;
+                width: 8px;
+                left: -1px;
+                transform: scale(.85);
+            }
+        }
+    }
+}
+
 .panel-body {
     .form-body {
         margin: 10px 0;

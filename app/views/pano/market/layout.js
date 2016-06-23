@@ -15,7 +15,7 @@
             var params = $scope.shared.params = $.extend({}, defaultParams, search)
 
             $scope.shared.dimensions = []
-            $scope.showMoreFilters = false
+                // $scope.showMoreFilters = false
 
             $.dateRangePickerLanguages.default.shortcuts = '' //不显示快捷方式四个字
 
@@ -102,26 +102,36 @@
 
             $scope.shared.filters = []
 
-            $scope.toggleOptions = function(filterName) {
-                $scope[filterName + 'Collapsed'] = !$scope[filterName + 'Collapsed']
-            }
-
+            // 获取配置列表
             ktAnalyticsService.get({
                 content: 'settings',
             }, function(data) {
                 var dimensions = data['0'].shift()
-                defaultParams.dimension = dimensions.options[0][1]
-
-                $scope.shared.dimensions = _.map(dimensions.options, function(v) {
+                    // defaultParams.dimension = dimensions.options[0][1]
+                $scope.specialFiltersOrigin = data['0'].slice(1)
+                dimensions = $scope.shared.dimensions = _.map(dimensions.options, function(v) {
                     return {
                         name: v[0],
                         value: v[1]
                     }
                 })
+                dimensions.isOpen = false
 
-                $scope.shared.filters = data['0']
-                var filterInit = ktDataHelper.filterInit($scope.shared.filters)
-                filterInit(params)
+                // 特殊筛选特殊处理-挂牌场所 资产类型 平台 三者的关系
+                var sfs = $scope.shared.specialFilters = {}
+
+                ktDataHelper.initSpecialFilters(sfs, $scope.specialFiltersOrigin, params, $scope)
+
+                $scope.$watch('shared.params.dimension', function() {
+                    sfs.init()
+                })
+
+                // sfs.init()
+
+                // @deprecated
+                // $scope.shared.filters = data['0']
+                // var filterInit = ktDataHelper.filterInit($scope.shared.filters)
+                // filterInit(params)
 
             })
 

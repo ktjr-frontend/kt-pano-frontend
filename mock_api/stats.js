@@ -98,7 +98,7 @@ module.exports = function(app) {
 
     app.get(apiPrefix + '/stats/notices', function(req, res, next) {
         var data = Mock.mock({
-            'notices|0-5': [{
+            'notices|5': [{
                 name: '@cword(10,40)',
                 url: '@url(http)',
                 date: '@date',
@@ -130,7 +130,7 @@ module.exports = function(app) {
 
     app.get(apiPrefix + '/stats/reports', function(req, res, next) {
         var data = Mock.mock({
-            'reports|0-5': [{
+            'reports|5': [{
                 name: '@cword(8,25)',
                 url: '@url(http)'
             }]

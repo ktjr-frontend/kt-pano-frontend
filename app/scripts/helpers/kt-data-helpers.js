@@ -166,7 +166,7 @@
                     var lineLength = w - leftGap - rightGap / 2
                     var baseBottom = 70
                     var legendTotalLength = _.map(legend, function(v) {
-                        return _.chain(v.split('')).map(function (char) {
+                        return _.chain(v.split('')).map(function(char) {
                             return (char.charCodeAt(0) > 128 ? 1 : 0.5) * fontSize
                         }).sum().value() + 25
                     })
@@ -424,7 +424,7 @@
                     options = options || []
 
                     _.each(filters, function(v) {
-                        var option = _.find(options, { value: v.value })
+                        var option = _.find(options, { value: v.value }) //自定义可见 option
 
                         v.type = (option && option.type) ? option.type : 'list'
 
@@ -435,9 +435,10 @@
                             })
 
                             _.remove(v.options, function(o) {
-                                    return o[0] === '不适用'
-                                })
-                                /*eslint-disable*/
+                                return o[0] === '不适用'
+                            })
+
+                            /*eslint-disable*/
                             buShiYong && v.options.push(buShiYong)
                                 /*eslint-enable*/
                         }
@@ -449,6 +450,10 @@
                                 value: o[1]
                             }
                         })
+
+                        if (v.type === 'dropdown') {
+                            v.options.isOpen = false
+                        }
 
                         v.options.unshift({
                             name: '全部',
@@ -475,6 +480,167 @@
                     })
 
                     filters.hasAdapt = true // 打标识，避免重复数据处理
+                },
+
+                // 特殊处理 市场数据页的筛选框 平台 资产类型 挂牌场所维度
+                initSpecialFilters: function(sfs, originData, params, $scope) {
+                    sfs.init = function() {
+                        this.data = _.cloneDeep(originData)
+
+                        var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension]
+                        var dimensionFilters = []
+                        var pinyin = window.utils.HanZiPinYin
+                        var groupByArr = ['0123456789', 'ABCD', 'EFGH', 'IJKL', 'MNOP', 'QRST', 'UVWX', 'YZ', '不适用'] //分组依据
+
+                        if (!isAllDimension) {
+                            dimensionFilters = params[params.dimension].split(',')
+                        }
+
+                        // 初始化适配前端的数据
+                        _.each(this.data, function(sf) {
+                            sf.defaultCheckedLength = 8
+                            sf.isOpen = false
+                            sf.active = false
+
+                            if (params.dimension === sf.value) { //确定当前维度
+                                sf.active = true
+                            }
+
+                            // 更新选中项列表和选项内的checked 状态
+                            sf.updateOptionsCheckedStats = function() {
+                                sf.checkedItems = (function(df) {
+                                    if (!df) return []
+                                    return df.split(',')
+                                })(params[sf.value])
+
+                                sf.updateCheckedStats()
+                                sf.checkedAll = !sf.checkedItems.length
+                            }
+
+                            // 更新选项的checked状态
+                            sf.updateCheckedStats = function() {
+                                _.each(sf.options, function(o) {
+                                    _.each(o, function(v) {
+                                        v.checked = _.includes(sf.checkedItems, v.value)
+                                    })
+                                })
+                            }
+
+                            // 更新选中项列表
+                            sf.updateCheckedItems = function() {
+                                sf.checkedItems = _.chain(sf.options).map(function(o) {
+                                    return _.chain(o).filter(function(v) {
+                                        return v.checked
+                                    }).map('value').value()
+                                }).flattenDeep().value()
+                            }
+
+                            // 单个删除已选中列表的条目
+                            sf.delCheckedItems = function(value) {
+                                _.remove(sf.checkedItems, function(v) {
+                                    return v === value
+                                })
+                                sf.updateCheckedStats()
+                            }
+
+                            // 全部删除
+                            sf.clearChecked = function() {
+                                sf.checkedItems = []
+                                _.each(sf.options, function(o) {
+                                    _.each(o, function(v) {
+                                        v.checked = false
+                                    })
+                                })
+                            }
+
+                            // 更新url
+                            sf.updateUrl = function() {
+                                $scope.goTo(sf.value, sf.checkedItems.join(','))
+                                sf.isOpen = false
+                            }
+
+                            // 选项组件打开时 更新一下状态
+                            sf.onToggle = function(open) {
+                                if (open) {
+                                    $scope.$apply(function() {
+                                        sf.updateOptionsCheckedStats()
+                                    })
+                                }
+                            }
+
+                            // 数据初始化，按字母分组 排序
+                            sf.options = _.chain(sf.options).map(function(o) {
+                                return {
+                                    name: o[0],
+                                    value: o[1],
+                                    checked: false,
+                                    spell: pinyin.get(o[0].slice(0, 1)),
+                                    // recommended: false,
+                                }
+                            }).groupBy(function(o) {
+                                if (o.name === '不适用') return '不适用'
+                                var match = _.find(groupByArr, function(g) {
+                                    return g.indexOf(o.spell.slice(0, 1)) > -1
+                                })
+                                return match === '0123456789' ? '0-9' : match
+                            }).value()
+
+                            _.each(sf.options, function(o, k) {
+                                sf.options[k] = _.sortBy(o, function(v) {
+                                    return v.spell
+                                })
+                            })
+
+                            // sf.recommend_options = _.cloneDeep(originData.slice(0, 1)[0].options.slice(0, 8))
+                            // 推荐的内容选项
+                            if (sf.recommend_options) {
+                                var ro = _.map(sf.recommend_options, function(o) {
+                                    return {
+                                        name: o[0],
+                                        value: o[1],
+                                        checked: false,
+                                        // spell: pinyin.get(o.name.slice(0, 1)), // 第一个字的拼音首字母
+                                        // recommended: true // 是否热门推荐的
+                                    }
+                                })
+
+                                sf.options.recommend_options = ro
+                            }
+
+                            if (!isAllDimension && sf.active) { // 如果是当前维度并不是全选状态
+
+                                _.each(sf.options, function(o) {
+                                    _.each(o, function(v) {
+                                        v.checked = _.includes(dimensionFilters, o.value)
+                                    })
+                                })
+
+                            } else if (sf.active) { // 如果是当前维度，按设定的长度指定选中状态
+
+                                var count = 0;
+                                _.each(sf.options, function(o) {
+                                    _.each(o, function(v) {
+                                        if (count < sf.defaultCheckedLength) {
+                                            v.checked = true
+                                            count++
+                                        }
+                                    })
+                                })
+
+                                // _.each(sf.options, function(o, i) {
+                                //     if (i < sf.defaultCheckedLength) {
+                                //         o.checked = true
+                                //             // o.spell = pinyin.get(o.name.slice(0, 1))
+                                //     }
+                                // })
+                            } else { // 如果不是当前维度
+                                sf.updateOptionsCheckedStats()
+                                    // _.each(sf.options, function(o, i) {
+                                    //     o.spell = pinyin.get(o.name.slice(0, 1))
+                                    // })
+                            }
+                        })
+                    }
                 }
             }
 

@@ -244,8 +244,9 @@
                 color: @color-10;
                 background: @color-gray-light;
                 -webkit-font-smoothing: antialiased;
-                &.active{
+                &.active,&:hover{
                     background: @color-inactive;
+                    box-shadow: none;
                     color: white;
                 }
             }
@@ -289,10 +290,7 @@
 .chart-tooltip-table{
     color: rgba(255,255,255,0.8);
     tr{
-        th{
-            padding: 0 5px;
-        }
-        td{
+        td, th{
             padding: 0 5px;
             &:first-child{
                 padding-left: 0;

@@ -15,30 +15,33 @@
         <div class="panel-body b-t-none">
             <div class="filter-box bor-xxs">
                 <div class="normal-filter clfix" ng-class="{'expand': showMoreFilters}">
-                    <div class="fl">
-                        <div class="name fl">细分维度：</div>
-                        <div class="dropdowns clfix">
-                            <div class="dropdown" dropdown>
-                                <div dropdown-toggle class="dropdown-toggle cp">
-                                    <span ng-bind="getDimensionName()"></span>
-                                    <div class="arrow">
-                                        <i class="fa fa-angle-down icon-arrow fb f1_5rem"></i>
+                    <div class="line clfix">
+                        <div class="fl">
+                            <div class="name fl">细分维度：</div>
+                            <div class="dropdowns clfix">
+                                <div class="dropdown" dropdown>
+                                    <!-- is-open="shared.dimensions.isOpen" ng-mouseenter="shared.dimensions.isOpen = true" ng-mouseleave="shared.dimensions.isOpen = false" -->
+                                    <div dropdown-toggle class="dropdown-toggle cp">
+                                        <span ng-bind="getDimensionName()"></span>
+                                        <div class="arrow">
+                                            <i class="fa fa-angle-down icon-arrow fb f1_5rem"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="dropdown-menu animated fadeIn">
-                                    <ul>
-                                        <li ng-repeat="d in shared.dimensions" ng-class="{active: d.value == shared.params.dimension}">
-                                            <a ng-click="goTo('dimension', d.value)" title="{{::d.name}}" ng-bind="::d.name"></a>
-                                        </li>
-                                    </ul>
+                                    <div class="dropdown-menu animated fadeIn">
+                                        <ul>
+                                            <li ng-repeat="d in shared.dimensions" ng-class="{active: d.value == shared.params.dimension}">
+                                                <a ng-click="goTo('dimension', d.value)" title="{{::d.name}}" ng-bind="::d.name"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="fl datepicker-container" oc-lazy-load="['common/directives/datepicker/directive.js', 'common/directives/datepicker/theme/v4/style.css']">
-                        <div class="name fl">时间范围：</div>
-                        <input type="text" readonly class="datepicker" ng-model="datePicker" kt-date-picker datepicker-settings="datepickerSettings">
-                        <i class="icon-pano icon-calendar picker-icon"></i>
+                        <div class="fl datepicker-container" oc-lazy-load="['common/directives/datepicker/directive.js', 'common/directives/datepicker/theme/v4/style.css']">
+                            <div class="name fl">时间范围：</div>
+                            <input type="text" readonly class="datepicker" ng-model="datePicker" kt-date-picker datepicker-settings="datepickerSettings">
+                            <i class="icon-pano icon-calendar picker-icon"></i>
+                        </div>
                     </div>
                     <!-- <div class="right">
                         <a ng-click="showMoreFilters = !showMoreFilters" class="btn toggle-more-filters">
@@ -46,8 +49,78 @@
                         </a>
                     </div> -->
                 </div>
-                <div class="filter-list has-toggle-btn" ng-show="showMoreFilters">
-                    <div class="filter-line clfix" ng-repeat="filter in shared.filters">
+                <div class="filter-list has-toggle-btn">
+                    <!-- 特殊处理的filter -平台，资产类型，挂牌场所-->
+                    <div class="filter-line clfix">
+                        <div class="name">数据筛选：</div>
+                        <div class="dropdowns clfix">
+                            <div class="dropdown fl mr10 dropdown-conjoined" ng-repeat="(index,filter) in shared.specialFilters.data|filter:{active: false}" dropdown is-open="filter.isOpen" on-toggle="filter.onToggle(open)">
+                                <!-- ng-mouseenter="filter.isOpen = true" ng-mouseleave="filter.isOpen = false" is-open="filter.isOpen"-->
+                                <div dropdown-toggle class="dropdown-toggle cp">
+                                    <span ng-bind="::filter.name"></span>
+                                    <div class="arrow">
+                                        <i class="fa fa-angle-down icon-arrow fb f1_5rem"></i>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu  dropdown-menu-large animated fadeIn" ng-click="$event.stopPropagation()">
+                                    <button class="btn btn-xs btn-navy-blue btn-confirm-filter" ng-click="filter.updateUrl($event)">确定</button>
+                                    <div class="checkbox-lines">
+                                        <div class="section bd-b" ng-class="{'pb-none': filter.checkedItems.length}">
+                                            <div class="line clfix">
+                                                <div class="title">已选择：</div>
+                                                <div class="checkboxes clfix" style="padding-right: 40px;">
+                                                    <!-- <div class="checked-item" ng-show="filter.checkedAll">
+                                                        全部
+                                                    </div> -->
+                                                    <div class="checked-item" ng-repeat="o in filter.checkedItems">
+                                                        <span ng-bind="o"></span>
+                                                        <i class="pe-7s-close delete-item" ng-click="filter.delCheckedItems(o)"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="section" ng-if="filter.options.recommend_options">
+                                            <div class="line clfix">
+                                                <div class="title pr1em">
+                                                    热门
+                                                </div>
+                                                <div class="checkboxes clfix">
+                                                    <div class="checkbox checkbox-sm checkbox-primary" ng-repeat="(i,o) in filter.options.recommend_options">
+                                                        <input type="checkbox" id="chkbx_{{index}}_ro_{{i}}" ng-model="o.checked" name="chkbx_{{index}}_ro_{{i}}" ng-change="filter.updateCheckedItems()">
+                                                        <label for="chkbx_{{index}}_ro_{{i}}" ng-bind="o.name"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="section">
+                                            <!-- <div class="line clfix">
+                                                <div class="title pr1em">
+                                                    <div class="radio radio-sm radio-info radio-inline">
+                                                        <input type="radio" id="checkAll{{$index}}" ng-model="filter.checkedAll" name="checkAll{{$index}}">
+                                                        <label for="checkAll{{$index}}">全部</label>
+                                                    </div>
+                                                </div>
+                                                <div class="checkboxed"></div>
+                                            </div> -->
+                                            <div class="line clfix" ng-repeat="(k, t) in filter.options" ng-if="k !== 'recommend_options'">
+                                                <div class="title pr1em" ng-bind="k">
+                                                </div>
+                                                <div class="checkboxes clfix">
+                                                    <div class="checkbox checkbox-sm checkbox-primary" ng-repeat="(i,o) in t">
+                                                        <input type="checkbox" id="chkbx_{{index}}_{{k}}_{{i}}" ng-model="o.checked" name="chkbx_{{index}}_{{k}}_{{i}}" ng-change="filter.updateCheckedItems()">
+                                                        <label for="chkbx_{{index}}_{{k}}_{{i}}" ng-bind="o.name"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 特殊处理的filter -平台，资产类型，挂牌场所-->
+                    <!-- deprecated replaced by specialFilters -->
+                    <!-- <div class="filter-line clfix" ng-repeat="filter in shared.filters">
                         <div class="name" ng-bind="::(filter.name + '：')"></div>
                         <div class="options" ng-if="filter.type === 'list'">
                             <ul class="options-list clfix">
@@ -76,7 +149,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div ui-view>
