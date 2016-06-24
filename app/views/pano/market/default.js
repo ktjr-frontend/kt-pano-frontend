@@ -7,13 +7,16 @@
             var shared = $scope.shared
             var params = shared.params
 
-            $.extend(params, $location.search())
+            var search = $location.search()
+            $.extend(params, search)
+            ktDataHelper.pruneDirtyParams(params, search, ['from', 'mapped_exchange', 'asset_type'])
 
             $scope.updateDate = '获取中...'
             ktDataHelper.filterUpdate(shared.filters, shared.params)
 
             var colors = ktEchartTheme1.color
             var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension] // 是否是当前维度的所有筛选
+
             var defaultShowLength = (function() { // 默认显示的几个legend，根据不同维度展示不同的长度
                 var d = params.dimension
                 if (d === 'asset_type') {

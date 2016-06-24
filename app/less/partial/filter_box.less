@@ -18,7 +18,7 @@
         }
     }
     .normal-filter {
-        padding: 15px 0;
+        padding: 15px 0 0;
         .toggle-more-filters {
             font-size: 1rem;
             padding: 3px 8px 4px;
@@ -118,6 +118,15 @@
     .checkbox-lines {
         padding: 10px 20px;
         font-size: 1.2rem;
+        a {
+            color: @color-1;
+            &:hover {
+                color: @color-navy-blue;
+            }
+        }
+        .checkboxes{
+            padding-left: 80px;
+        }
         .section {
             padding: 8px 0;
             &.pb-none {
@@ -139,28 +148,28 @@
             line-height: 20px;
             margin: 10px 0;
         }
-        .checkboxes {
-            padding-left: 80px;
-            .checkbox {
-                float: left;
-                margin: 0 10px 5px 0;
-            }
-            .checked-item {
-                background: @color-3;
-                border-radius: 3px;
-                padding: 0 10px 1px;
-                float: left;
-                font-size: 1.2rem;
-                margin: 0 10px 10px 0;
-                .delete-item {
-                    font-size: 2rem;
-                    font-weight: bold;
-                    margin-left: 10px;
-                    vertical-align: -4px;
-                    &:hover {
-                        cursor: pointer;
-                        color: @color-navy-blue;
-                    }
+    }
+    .checkboxes {
+        .checkbox {
+            float: left;
+            margin: 0 10px 5px 0;
+        }
+        .checked-item {
+            background: @color-3;
+            border-radius: 3px;
+            padding: 0 10px 1px;
+            float: left;
+            font-size: 1.2rem;
+            line-height: 1.8em;
+            margin: 0 10px 10px 0;
+            .delete-item {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-left: 10px;
+                vertical-align: -4px;
+                &:hover {
+                    cursor: pointer;
+                    color: @color-navy-blue;
                 }
             }
         }
@@ -170,12 +179,45 @@
             padding: 11px 50px 0 0;
         }
     }
+    .filter-items {
+        padding-left: 98px;
+    }
+    .dialog-view {
+        position: absolute;
+        min-width: 600px;
+        background: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+        border-radius: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        z-index: 999;
+        .dialog-head {
+            height: 40px;
+            line-height: 40px;
+            background: #f6f7fa;
+            h3 {
+                margin: 0;
+                font-size: 1.3rem;
+                height: 100%;
+                line-height: inherit;
+            }
+            .btn {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
+        }
+    }
     .filter-line {
         padding: 11px 0 0;
         border-bottom: 1px dashed @border-color;
         position: relative;
         user-select: none;
-        line-height: 25px;
+        // line-height: 25px;
+        &.no-bd {
+            border: 0;
+        }
         .toggle-btn {
             position: absolute;
             right: 20px;

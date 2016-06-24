@@ -150,6 +150,6 @@ module.exports = function(app) {
     // 可预约资产
     app.get(apiPrefix + '/fame_assets', proxyMidWare)
     app.get(apiPrefix + '/fame_assets/settings', proxyMidWare)
-    app.get(apiPrefix + '/asset_intentions', proxyMidWare)
+    app.post(apiPrefix + '/asset_intentions', proxyMidWare)
 
 }

@@ -85,9 +85,11 @@
                         //如果url地址中不包含则删除
                         if (search) {
                             var l = _.isArray(list) ? list : [list]
-                            if (list && _.includes(l, i) && !search[i]) {
-                                delete params[i]
-                            } else if (!search[i] && _.includes(l, i)) {
+                            if (list) { // 如果依据列表删除
+                                if (_.includes(l, i) && !search[i]) {
+                                    delete params[i]
+                                }
+                            } else if (!search[i]) { // 没依据则都删除
                                 delete params[i]
                             }
                         }
@@ -100,17 +102,9 @@
                         if (newParams[i] === 'all') {
                             delete newParams[i]
                         }
-
-                        //如果url地址中不包含则删除
-                        if (search) {
-                            var l = _.isArray(list) ? list : [list]
-                            if (list && _.includes(l, i) && !search[i]) {
-                                delete params[i]
-                            } else if (!search[i] && _.includes(l, i)) {
-                                delete params[i]
-                            }
-                        }
                     })
+
+                    this.pruneDirtyParams(newParams, search, list)
 
                     return newParams
                 },
@@ -487,18 +481,12 @@
                     sfs.init = function() {
                         this.data = _.cloneDeep(originData)
 
-                        var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension]
-                        var dimensionFilters = []
                         var pinyin = window.utils.HanZiPinYin
                         var groupByArr = ['0123456789', 'ABCD', 'EFGH', 'IJKL', 'MNOP', 'QRST', 'UVWX', 'YZ', '不适用'] //分组依据
 
-                        if (!isAllDimension) {
-                            dimensionFilters = params[params.dimension].split(',')
-                        }
-
                         // 初始化适配前端的数据
                         _.each(this.data, function(sf) {
-                            sf.defaultCheckedLength = 8
+                            sf.defaultCheckedLength = 8 // 展示项默认是8个
                             sf.isOpen = false
                             sf.active = false
 
@@ -506,18 +494,17 @@
                                 sf.active = true
                             }
 
-                            // 更新选中项列表和选项内的checked 状态
+                            // 弹出窗口，更新选中项列表和选项内的checked 状态
                             sf.updateOptionsCheckedStats = function() {
-                                sf.checkedItems = (function(df) {
-                                    if (!df) return []
-                                    return df.split(',')
-                                })(params[sf.value])
+                                sf.updateRealCheckedItems()
+
+                                sf.checkedItems = _.cloneDeep(sf.realCheckedItems)
 
                                 sf.updateCheckedStats()
                                 sf.checkedAll = !sf.checkedItems.length
                             }
 
-                            // 更新选项的checked状态
+                            // 弹出窗口，更新选项的checked状态
                             sf.updateCheckedStats = function() {
                                 _.each(sf.options, function(o) {
                                     _.each(o, function(v) {
@@ -543,6 +530,45 @@
                                 sf.updateCheckedStats()
                             }
 
+                            // 选定了并确定了选中项，对外展示的
+                            sf.updateRealCheckedItems = function() {
+
+                                var isAllDimension = params[sf.value] === 'all' || !params[sf.value]
+
+                                sf.realCheckedItems = (function(df) {
+                                    if (isAllDimension && sf.active) {
+                                        // var opt = sf.options.recommend_options || sf.options
+                                        if (sf.options.recommend_options) {
+                                            return _.chain(sf.options.recommend_options).map(function(o) {
+                                                return o.value
+                                            }).slice(0, sf.defaultCheckedLength).value()
+                                        }
+
+                                        return _.chain(sf.options).map(function(o) {
+                                            return _.map(o, function(v) {
+                                                return v
+                                            })
+                                        }).flattenDeep().sortBy('spell').map(function (o) {
+                                            return o.value
+                                        }).filter(function (o) {
+                                            return o !== '不适用'
+                                        }).slice(0, sf.defaultCheckedLength).value()
+                                    }
+
+                                    return df ? df.split(',') : []
+                                })(params[sf.value])
+
+                            }
+
+                            // 删除真实的选项（指弹窗外显示的）并更新url
+                            sf.delRealCheckedItems = function(value) {
+                                _.remove(sf.realCheckedItems, function(v) {
+                                    return v === value
+                                })
+                                sf.updateUrl()
+                                    // sf.updateRealCheckedItems()
+                            }
+
                             // 全部删除
                             sf.clearChecked = function() {
                                 sf.checkedItems = []
@@ -553,19 +579,46 @@
                                 })
                             }
 
+                            // 应用所选项
+                            sf.applyCheckedItems = function() {
+                                sf.realCheckedItems = _.cloneDeep(sf.checkedItems);
+                            }
+
                             // 更新url
                             sf.updateUrl = function() {
-                                $scope.goTo(sf.value, sf.checkedItems.join(','))
+                                // sf.realCheckedItems = _.cloneDeep(sf.checkedItems);
+                                $scope.goTo(sf.value, sf.realCheckedItems.join(','))
                                 sf.isOpen = false
                             }
 
-                            // 选项组件打开时 更新一下状态
+                            // 应用所选项并更新url
+                            sf.applyAndUpdateUrl = function() {
+                                sf.applyCheckedItems()
+                                sf.updateUrl()
+                            }
+
+                            // dropdown组件打开时 更新一下状态
                             sf.onToggle = function(open) {
                                 if (open) {
                                     $scope.$apply(function() {
                                         sf.updateOptionsCheckedStats()
                                     })
                                 }
+                            }
+
+                            // 展示filter内的dialog
+                            sf.toggleDialog = function($event) {
+                                $event.stopPropagation()
+                                sf.isOpen = !sf.isOpen
+                                if (sf.isOpen) {
+                                    sf.updateOptionsCheckedStats()
+                                }
+                            }
+
+                            sf.onClose = function() {
+                                $scope.$apply(function() {
+                                    sf.isOpen = false
+                                })
                             }
 
                             // 数据初始化，按字母分组 排序
@@ -578,7 +631,7 @@
                                     // recommended: false,
                                 }
                             }).groupBy(function(o) {
-                                if (o.name === '不适用') return '不适用'
+                                if (o.name === '不适用') return '其他'
                                 var match = _.find(groupByArr, function(g) {
                                     return g.indexOf(o.spell.slice(0, 1)) > -1
                                 })
@@ -607,13 +660,16 @@
                                 sf.options.recommend_options = ro
                             }
 
-                            if (!isAllDimension && sf.active) { // 如果是当前维度并不是全选状态
+                            sf.updateRealCheckedItems()
+
+                            /*if (!isAllDimension && sf.active) { // 如果是当前维度并不是全选状态
 
                                 _.each(sf.options, function(o) {
                                     _.each(o, function(v) {
                                         v.checked = _.includes(dimensionFilters, o.value)
                                     })
                                 })
+                                sf.updateRealCheckedItems() //当前维度要更新展示项真实条件
 
                             } else if (sf.active) { // 如果是当前维度，按设定的长度指定选中状态
 
@@ -626,19 +682,11 @@
                                         }
                                     })
                                 })
+                                sf.updateRealCheckedItems() //当前维度要更新展示项真实条件
 
-                                // _.each(sf.options, function(o, i) {
-                                //     if (i < sf.defaultCheckedLength) {
-                                //         o.checked = true
-                                //             // o.spell = pinyin.get(o.name.slice(0, 1))
-                                //     }
-                                // })
                             } else { // 如果不是当前维度
                                 sf.updateOptionsCheckedStats()
-                                    // _.each(sf.options, function(o, i) {
-                                    //     o.spell = pinyin.get(o.name.slice(0, 1))
-                                    // })
-                            }
+                            }*/
                         })
                     }
                 }

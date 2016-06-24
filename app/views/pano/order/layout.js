@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOrderLayoutCtrl', function($scope, $state, $window, $location, ktSweetAlert, ktDataHelper, ktAssetIntentionService) {
+        .controller('ktOrderLayoutCtrl', function($scope, $state, $filter, $window, $location, ktSweetAlert, ktDataHelper, ktAssetIntentionService) {
             var perPageCount = ktDataHelper.getPerPage()
 
             var search = $location.search()
@@ -57,6 +57,7 @@
                 }
             })
 
+            // 预计上线时间
             $scope.getPublishDate = function(start, end) {
                 var startDate = start ? moment(start).format('YYYY-MM-DD') : '-'
                 var endDate = end ? moment(end).format('YYYY-MM-DD') : '-'
@@ -70,6 +71,7 @@
                 return '-'
             }
 
+            // 年化收益率
             $scope.getRate = function(dr, hr) {
                 if (_.isNil(dr) && _.isNil(hr)) {
                     return '-'
@@ -84,6 +86,7 @@
                 return dr.toFixed(2) + '%' + '-' + hr.toFixed(2) + '%'
             }
 
+            // 获取状态
             $scope.getStatus = function(status) {
                 if (status === '已发布') {
                     return '可预约'
@@ -93,11 +96,13 @@
                 return status || '-'
             }
 
+            // 产品期限
             $scope.getLife = function(life) {
                 var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '-')
                 return lifeName
             }
 
+            // 与我联系
             $scope.contactMe = function(assetID) {
                 ktSweetAlert.swal({
                     title: '对该资产有意向',
@@ -121,7 +126,21 @@
                         })
                     }
                 })
+            }
 
+            // 项目亮点
+            $scope.showPoint = function(contents) {
+                var filterStyle = function(value) {
+                    var v = $filter('ktFontFamilyIgnore')(value)
+                    v = $filter('ktFontSizeIgnore')(v)
+                    return v
+                }
+
+                ktSweetAlert.swal({
+                    title: '<h5 class="text-left f1_6rem">项目亮点</h5>',
+                    html: true,
+                    text: '<div class="asset-point-list text-left lh1_5em">' + filterStyle(contents) + '</div>'
+                })
             }
 
             $scope.shared.filters = []
