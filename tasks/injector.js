@@ -6,6 +6,7 @@ var commonScripts = [
     'bower_components/lodash/dist/lodash.min.js',
     'bower_components/angular/angular.min.js',
     'bower_components/oclazyload/dist/ocLazyLoad.min.js',
+    'bower_components/ng-file-upload/ng-file-upload-all.min.js',
     // 'bower_components/ng-file-upload/ng-file-upload-all.min.js',
     'bower_components/angular-cookie/angular-cookie.min.js',
     'bower_components/angular-animate/angular-animate.min.js',

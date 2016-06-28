@@ -2,14 +2,43 @@
     <div class="row">
         <div class="col-md-12">
             <div class="clfix">
-                <h3 class="title fl">完善信息</h3>
-                <div class="sub-title">请填写您的真实信息，以便实名认证，为您提供更多个性化服务及功能</div>
+                <h3 class="title fl">上传名片</h3>
+                <div class="sub-title">请上传您的名片，以便实名认证，为您提供更多个性化服务及功能</div>
             </div>
             <div class="hpanel">
                 <div class="panel-body">
                     <form id="perfectForm" novalidate name="perfectForm" class="form-horizontal" kt-accessible-form>
-                        <div class="form-group" ng-class="{'has-error':perfectForm.name.$invalid && perfectForm.name.$dirty}">
-                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label> -->
+                        <div class="form-group" ng-class="{'has-error':perfectForm.business_card.$invalid && perfectForm.business_card.$dirty}">
+                            <div class="col-md-12">
+                                <div class="qrcode-bs-card text-center" ng-show="!user.business_card">
+                                    <h5>手机扫描二维码上传：</h5>
+                                    <div class="qrcode-body">
+                                        <img class="qrcode" src="/images/weixin.jpg" alt="扫描上传名片">
+                                        <div class="buttons upload">
+                                            <div class="btn btn-file" ng-class="{disabled: pendingUpload}">
+                                                <span>本地上传</span>
+                                                <input ngf-validate="{size: {max: '2MB'}" ngf-select="upload($files, $event)" ng-disabled="pendingUpload" accept="image/*" ngf-accept="'image/*'" ngf-pattern="'.jpg,.jpeg,.png,.bmp,.gif'" ngf-multiple="false" type="file" name="file" ng-model="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="qrcode-bs-card preview text-center" ng-show="user.business_card">
+                                    <h5>已上传的名片：</h5>
+                                    <div class="qrcode-body">
+                                        <img ng-src="{{user.business_card}}" alt="您的名片" class="qrcode">
+                                        <div class="buttons delete">
+                                            <button class="btn btn-file" ng-click="user.business_card = null">删除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" required ng-model="user.business_card" class="form-control" name="business_card">
+                                <div class="mt5 text-warning" ng-messages="perfectForm.business_card.$dirty && perfectForm.business_card.$error">
+                                    <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请上传名片</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="form-group" ng-class="{'has-error':perfectForm.name.$invalid && perfectForm.name.$dirty}">
+                            <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label> ~~>
                             <div class="col-md-12">
                                 <input autofocus ng-maxlength="50" ng-minlength="2" kt-validate-on-blur placeholder="您的真实姓名（提交后不可修改）" type="text" required ng-model="user.name" id="" class="form-control" name="name">
                                 <div class="mt5 text-warning" ng-messages="perfectForm.name.$dirty && perfectForm.name.$error">
@@ -20,7 +49,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.email.$invalid && perfectForm.email.$dirty}">
-                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label> -->
+                            <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label> ~~>
                             <div class="col-md-12">
                                 <input placeholder="您的工作邮箱" kt-validate-on-blur type="email" required ng-model="user.email" id="" class="form-control" name="email">
                                 <div class="mt5 text-warning" ng-messages="perfectForm.email.$dirty && perfectForm.email.$error">
@@ -30,7 +59,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.company.$invalid && perfectForm.company.$dirty}">
-                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司名称</label> -->
+                            <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司名称</label> ~~>
                             <div class="col-md-12">
                                 <input ng-maxlength="50" ng-minlength="2" placeholder="您的公司名称" kt-validate-on-blur type="text" required ng-model="user.company" id="" class="form-control" name="company">
                                 <div class="mt5 text-warning" ng-messages="perfectForm.company.$dirty && perfectForm.company.$error">
@@ -41,7 +70,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.department.$invalid && perfectForm.department.$dirty}">
-                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>所在部门</label> -->
+                            <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>所在部门</label> ~~>
                             <div class="col-md-12">
                                 <input ng-maxlength="50" ng-minlength="2" placeholder="您的所在部门" kt-validate-on-blur type="text" required ng-model="user.department" id="" class="form-control" name="department">
                                 <div class="mt5 text-warning" ng-messages="perfectForm.department.$dirty && perfectForm.department.$error">
@@ -52,7 +81,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error':perfectForm.job.$invalid && perfectForm.job.$dirty}">
-                            <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>职位</label> -->
+                            <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>职位</label> ~~>
                             <div class="col-md-12">
                                 <input ng-maxlength="50" ng-minlength="2" placeholder="您的职位" kt-validate-on-blur type="text" required ng-model="user.job" id="" class="form-control" name="job">
                                 <div class="mt5 text-warning" ng-messages="perfectForm.job.$dirty && perfectForm.job.$error">
@@ -61,9 +90,8 @@
                                     <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于50个字符</div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group" ng-class="{'has-error':perfectForm.email.$invalid && perfectForm.email.$dirty}">
+                        </div>-->
+                        <!-- <div class="form-group" ng-class="{'has-error':perfectForm.likes.$invalid && perfectForm.likes.$dirty}">
                             <label class="text-primary-dark text-left fn col-md-12 mt10">以下哪些是您关注的金融资产类型？</label>
                             <div class="col-md-12 mt15">
                                 <div class="checkbox-label" ng-repeat="like in likes">
@@ -76,7 +104,7 @@
                                     <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的资产类型</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group mt40">
                             <div class="col-md-12 clfix">
                                 <div kt-loading-status height="32" width="32" ignores="/api/v1/shadows"></div>
@@ -90,6 +118,7 @@
     </div>
 </div>
 <div class="other-tips">
-    <p>*本站展示的各类金融产品信息作为参考资料仅供行业内专业会员分析学习使用，不视为本站对该金融产品的任何推介。 <br>各类金融产品的信息披露及募集对象以该金融产品销售机构设定的合格投资人及募集对象范围的相关要求为准。
+    <p>*本站展示的各类金融产品信息作为参考资料仅供行业内专业会员分析学习使用，不视为本站对该金融产品的任何推介。
+        <br>各类金融产品的信息披露及募集对象以该金融产品销售机构设定的合格投资人及募集对象范围的相关要求为准。
     </p>
 </div>

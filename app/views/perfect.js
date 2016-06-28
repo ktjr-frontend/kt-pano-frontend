@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, CacheFactory, ktRegisterService, ktSweetAlert, ktSession) {
+        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, CacheFactory, ktRegisterService, ktSweetAlert, ktSession, ktBusinessCardUpload) {
 
             $rootScope.goHome = function() {
                 ktSession.clear()
@@ -10,7 +10,28 @@
             }
 
             $scope.user = {}
-            $scope.user.likes = []
+            $scope.user.business_card = '/images/logo-new.svg'
+            $scope.upload = function(file) {
+                if (!file) return
+                $scope.pendingUpload = true
+
+                ktBusinessCardUpload({
+                    file: file[0],
+                }).then(function(res) {
+                    $scope.pendingUpload = false
+                    $scope.user.business_card = res.url
+                }, function(res) {
+                    ktSweetAlert.swal({
+                        title: '失败',
+                        text: res.error || '抱歉，服务器繁忙！',
+                        type: 'error',
+                    })
+                    $scope.pendingUpload = false
+                })
+
+            }
+
+            /*$scope.user.likes = []
             $scope.likes = [{
                 name: '票 据',
                 value: 0
@@ -51,7 +72,7 @@
                 if (newValue !== oldValue) {
                     $scope.hasLikes = $scope.user.likes.length ? true : ''
                 }
-            });
+            });*/
 
             $scope.submitForm = function() {
                 $scope.pendingRequests = true

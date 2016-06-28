@@ -71,4 +71,15 @@
         return $resource('/api/' + ktApiVersion + '/feedbacks')
     })
 
+    // 上传名片
+    .factory('ktBusinessCardUpload', function($urlMatcherFactory, Upload, ktApiVersion) {
+        return function upload(data) {
+            var url = $urlMatcherFactory.compile('/api/' + ktApiVersion + '/upload_business_card').format(data)
+            return Upload.upload({
+                url: url,
+                data: data || {}
+            })
+        }
+    })
+
 })();
