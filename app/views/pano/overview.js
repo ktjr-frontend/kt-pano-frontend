@@ -12,6 +12,21 @@
                 window.open(url, '_blank')
             }
 
+            // 年化收益率
+            $scope.getRate = function(dr, hr) {
+                if (_.isNil(dr) && _.isNil(hr)) {
+                    return '-'
+                } else if (_.isNil(dr) && !_.isNil(hr)) {
+                    return hr.toFixed(2) + '%'
+                } else if (_.isNil(hr) && !_.isNil(dr)) {
+                    return dr.toFixed(2) + '%'
+                } else if (dr === hr) {
+                    return dr.toFixed(2) + '%'
+                }
+
+                return dr.toFixed(2) + '%' + '-' + hr.toFixed(2) + '%'
+            }
+
             var colors = ktEchartTheme1.color
             var loadingSettings = { // 设置图表异步加载的样式
                 text: '努力加载中...',

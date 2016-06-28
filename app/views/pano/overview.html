@@ -94,8 +94,9 @@
                                     </thead>
                                     <tbody>
                                         <tr class="text-right" ng-repeat="p in compass_assets_bond.assets" ng-if="compass_assets_bond.assets.length" kt-table-line-select target-element=".link">
-                                            <td ng-class="{'text-left': p.name}" ng-bind="::p.name | ktNull">
-                                                <!-- <a ng-click="goTo($event, p.link)" class="link" ></a> -->
+                                            <td ng-class="{'text-left': p.name}">
+                                                <a ng-click="goTo($event, p.link)" class="link" ></a>
+                                                <span ng-bind="::p.name | ktNull"></span>
                                             </td>
                                             <td ng-bind="::getLife(p.life)|ktEclipsis:8" title="{{::getLife(p.life)}}"></td>
                                             <td ng-bind="::p.rate | ktNumber:2:'percent2'"></td>
@@ -137,8 +138,9 @@
                                     </thead>
                                     <tbody>
                                         <tr class="text-right" ng-repeat="p in compass_assets_am.assets" ng-if="compass_assets_am.assets.length" kt-table-line-select target-element=".link">
-                                            <td ng-class="{'text-left': p.name}" ng-bind="::p.name | ktNull">
-                                                <!-- <a ng-click="goTo($event, p.link)" class="link" ng-bind="::p.name | ktNull"></a> -->
+                                            <td ng-class="{'text-left': p.name}">
+                                                <a ng-click="goTo($event, p.link)" class="link" ng-bind="::p.name | ktNull"></a>
+                                                <span ng-bind="::p.name | ktNull"></span>
                                             </td>
                                             <td ng-bind="::getLife(p.life)|ktEclipsis:8" title="{{::getLife(p.life)}}"></td>
                                             <td ng-bind="::p.rate | ktNumber:2:'percent2'"></td>
@@ -187,7 +189,7 @@
                                         <tr class="text-right" ng-repeat="p in fame_assets_bond.assets" ng-if="fame_assets_bond.assets.length">
                                             <td ng-class="{'text-left': p.name}" ng-bind="::p.name | ktNull"></td>
                                             <td ng-bind="::getLife(p.sustained)|ktEclipsis:8" title="{{::getLife(p.sustained)}}"></td>
-                                            <td ng-bind="::p.rate | ktNumber:2:'percent2'"></td>
+                                            <td ng-bind="::getRate(p.directive_rate, p.highest_rate)"></td>
                                             <td ng-bind="::p.asset_type | ktEclipsis:25" title="{{::p.asset_type | ktNull}}"></td>
                                             <td ng-class="{'text-left': p.guarantees.length}" ng-bind="::p.guarantees | ktJoin:'，'" title="{{::p.guarantees | ktJoin:'，'}}"></td>
                                         </tr>
@@ -224,7 +226,7 @@
                                         <tr class="text-right" ng-repeat="p in fame_assets_am.assets" ng-if="fame_assets_am.assets.length">
                                             <td ng-class="{'text-left': p.name}" ng-bind="::p.name | ktNull"></td>
                                             <td ng-bind="::getLife(p.sustained)|ktEclipsis:8" title="{{::getLife(p.sustained)}}"></td>
-                                            <td ng-bind="::p.rate | ktNumber:2:'percent2'"></td>
+                                            <td ng-bind="::getRate(p.directive_rate, p.highest_rate)"></td>
                                             <td ng-bind="::p.min_amount | ktNumberLocate"></td>
                                             <td ng-bind="::p.trustee | ktNull"></td>
                                             <td ng-bind="::p.manager | ktNull"></td>

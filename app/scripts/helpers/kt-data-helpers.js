@@ -521,7 +521,7 @@
 
                             // 更新选中项列表
                             sf.updateCheckedItems = function(option) {
-                                if (sf.active && sf.checkedItems.length >= 10) {
+                                if (sf.active && sf.checkedItems.length >= 10 && option.checked) {
                                     option.checked = false
                                     notify.closeAll()
                                     notify({
