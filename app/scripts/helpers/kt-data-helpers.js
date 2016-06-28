@@ -514,16 +514,22 @@
                             }
 
                             // 更新选中项列表
-                            sf.updateCheckedItems = function() {
+                            sf.updateCheckedItems = function(option) {
+                                if (sf.active && sf.checkedItems.length >= 10) {
+                                    option.active = false
+                                    return
+                                }
+
                                 sf.checkedItems = _.chain(sf.options).map(function(o) {
                                     return _.chain(o).filter(function(v) {
                                         return v.checked
-                                    }).map('value').value()
-                                }).flattenDeep().value()
+                                    }).value()
+                                }).flattenDeep().sortBy('spell').map('value').value()
                             }
 
                             // 单个删除已选中列表的条目
-                            sf.delCheckedItems = function(value) {
+                            sf.delCheckedItems = function($event, value) {
+                                $event.stopPropagation()
                                 _.remove(sf.checkedItems, function(v) {
                                     return v === value
                                 })
@@ -548,9 +554,9 @@
                                             return _.map(o, function(v) {
                                                 return v
                                             })
-                                        }).flattenDeep().sortBy('spell').map(function (o) {
+                                        }).flattenDeep().sortBy('spell').map(function(o) {
                                             return o.value
-                                        }).filter(function (o) {
+                                        }).filter(function(o) {
                                             return o !== '不适用'
                                         }).slice(0, sf.defaultCheckedLength).value()
                                     }
@@ -581,7 +587,14 @@
 
                             // 应用所选项
                             sf.applyCheckedItems = function() {
+                                if (sf.active && !sf.checkedItems.length) {
+                                    // $scope.$apply(function() {
+                                    sf.error = '请至少选择一个展示项'
+                                        // })
+                                    return false
+                                }
                                 sf.realCheckedItems = _.cloneDeep(sf.checkedItems);
+                                return true
                             }
 
                             // 更新url
@@ -593,8 +606,9 @@
 
                             // 应用所选项并更新url
                             sf.applyAndUpdateUrl = function() {
-                                sf.applyCheckedItems()
-                                sf.updateUrl()
+                                if (sf.applyCheckedItems()) {
+                                    sf.updateUrl()
+                                }
                             }
 
                             // dropdown组件打开时 更新一下状态
@@ -627,7 +641,7 @@
                                     name: o[0],
                                     value: o[1],
                                     checked: false,
-                                    spell: pinyin.get(o[0].slice(0, 1)),
+                                    spell: o[0] === '不适用' ? '不适用' : pinyin.get(o[0].slice(0, 1)),
                                     // recommended: false,
                                 }
                             }).groupBy(function(o) {
@@ -644,7 +658,6 @@
                                 })
                             })
 
-                            // sf.recommend_options = _.cloneDeep(originData.slice(0, 1)[0].options.slice(0, 8))
                             // 推荐的内容选项
                             if (sf.recommend_options) {
                                 var ro = _.map(sf.recommend_options, function(o) {
@@ -661,32 +674,6 @@
                             }
 
                             sf.updateRealCheckedItems()
-
-                            /*if (!isAllDimension && sf.active) { // 如果是当前维度并不是全选状态
-
-                                _.each(sf.options, function(o) {
-                                    _.each(o, function(v) {
-                                        v.checked = _.includes(dimensionFilters, o.value)
-                                    })
-                                })
-                                sf.updateRealCheckedItems() //当前维度要更新展示项真实条件
-
-                            } else if (sf.active) { // 如果是当前维度，按设定的长度指定选中状态
-
-                                var count = 0;
-                                _.each(sf.options, function(o) {
-                                    _.each(o, function(v) {
-                                        if (count < sf.defaultCheckedLength) {
-                                            v.checked = true
-                                            count++
-                                        }
-                                    })
-                                })
-                                sf.updateRealCheckedItems() //当前维度要更新展示项真实条件
-
-                            } else { // 如果不是当前维度
-                                sf.updateOptionsCheckedStats()
-                            }*/
                         })
                     }
                 }

@@ -237,7 +237,7 @@
             $scope.$watch('rateAmountChart.tab', function(newValue, oldValue) {
                 if (_.isUndefined(newValue) || newValue === oldValue) return
                 rateAmountChart.updateDataView({
-                    chart: newValue === 'last7days' ? 'summary' : 'summary_avg' // to be defined
+                    chart: newValue === 'last7days' ? 'summary' : 'history' // to be defined
                 }, true)
             })
 
@@ -467,8 +467,8 @@
             platformAssetTypeChart.updateDataView = function() {
                 var _self = this
                 ktAnalyticsService.get({
-                    content: 'overview_mock',
-                    chart: 'circulation_pct',
+                    content: 'overview',
+                    chart: 'circulation_ratio',
                 }, function(data) {
                     _self.data = ktDataHelper.chartDataToPercent(data.stat, 'amount')
                     updateView()
@@ -556,7 +556,7 @@
 
             /*-----------------------右边栏------------------------*/
 
-            // 新闻
+            /*// 新闻
             ktAnalyticsService.get({
                 content: 'notices',
             }, function(data) {
@@ -592,6 +592,30 @@
                 $scope.compass_assets_am = data.compass_assets_am
                 $scope.fame_assets_bond = data.fame_assets_bond
                 $scope.fame_assets_am = data.fame_assets_am
+            })*/
+
+            // 侧栏和推荐产品
+            ktAnalyticsService.get({
+                content: 'hodgepodge',
+            }, function(data) {
+                $scope.notices = data.notices
+                $scope.from_amounts = _.map(data.froms, function(v) {
+                    return {
+                        name: v[0],
+                        amount: v[1]
+                    }
+                })
+                $scope.exchange_amounts = _.map(data.exchanges, function(v) {
+                    return {
+                        name: v[0],
+                        amount: v[1]
+                    }
+                })
+                $scope.reports = data.reports
+                $scope.compass_assets_am = data.compass_ams
+                $scope.compass_assets_bond = data.compass_bonds
+                $scope.fame_assets_am = data.fame_ams
+                $scope.fame_assets_bond = data.fame_bonds
             })
         })
 })();

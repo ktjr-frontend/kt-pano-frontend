@@ -74,7 +74,7 @@
                                                     </div> -->
                                                     <div class="checked-item" ng-repeat="o in filter.checkedItems">
                                                         <span ng-bind="::o"></span>
-                                                        <i class="pe-7s-close delete-item" ng-click="::filter.delCheckedItems(o)"></i>
+                                                        <i class="pe-7s-close delete-item" ng-click="::filter.delCheckedItems($event,o)"></i>
                                                     </div>
                                                     <a ng-show="filter.checkedItems.length" class="fl" ng-click="::filter.clearChecked()">全部取消</a>
                                                 </div>
@@ -87,7 +87,7 @@
                                                 </div>
                                                 <div class="checkboxes clfix">
                                                     <div class="checkbox checkbox-sm checkbox-primary" ng-repeat="(i,o) in ::filter.options.recommend_options">
-                                                        <input type="checkbox" id="chkbx_{{::index}}_ro_{{::i}}" ng-model="o.checked" name="chkbx_{{::index}}_ro_{{::i}}" ng-change="::filter.updateCheckedItems()">
+                                                        <input type="checkbox" id="chkbx_{{::index}}_ro_{{::i}}" ng-model="o.checked" name="chkbx_{{::index}}_ro_{{::i}}" ng-change="::filter.updateCheckedItems($event)">
                                                         <label for="chkbx_{{::index}}_ro_{{::i}}" ng-bind="::o.name"></label>
                                                     </div>
                                                 </div>
@@ -108,7 +108,7 @@
                                                 </div>
                                                 <div class="checkboxes clfix">
                                                     <div class="checkbox checkbox-sm checkbox-primary" ng-repeat="(i,o) in ::t">
-                                                        <input type="checkbox" id="chkbx_{{::index}}_{{::k}}_{{::i}}" ng-model="o.checked" name="chkbx_{{::index}}_{{::k}}_{{::i}}" ng-change="::filter.updateCheckedItems()">
+                                                        <input type="checkbox" id="chkbx_{{::index}}_{{::k}}_{{::i}}" ng-model="o.checked" name="chkbx_{{::index}}_{{::k}}_{{::i}}" ng-change="::filter.updateCheckedItems($event)">
                                                         <label for="chkbx_{{::index}}_{{::k}}_{{::i}}" ng-bind="::o.name"></label>
                                                     </div>
                                                 </div>
@@ -126,9 +126,9 @@
                             <div class="checkboxes clfix">
                                 <div class="checked-item" ng-repeat="o in filter.realCheckedItems">
                                     <span ng-bind="::o"></span>
-                                    <i class="pe-7s-close delete-item" ng-click="::filter.delRealCheckedItems(o)"></i>
+                                    <i ng-show="filter.realCheckedItems.length > 1" class="pe-7s-close delete-item" ng-click="::filter.delRealCheckedItems(o)"></i>
                                 </div>
-                                <a class="fl btn btn-navy-blue btn-xs" ng-click="::filter.toggleDialog($event)">选择</a>
+                                <a class="fl btn btn-navy-blue btn-xs m-t-n-xxs" ng-click="::filter.toggleDialog($event)">选择</a>
                                 <div class="dialog-view" ng-show="filter.isOpen" kt-blank-click-hide on-close="filter.onClose()">
                                     <div class="dialog-head">
                                         <h3 class="text-center">展示项</h3>
@@ -136,16 +136,17 @@
                                     </div>
                                     <div class="dialog-body">
                                         <div class="checkbox-lines">
-                                            <div class="section bd-b" ng-class="{'pb-none': filter.checkedItems.length}">
+                                            <div class="section bd-b" ng-class="{'pb-none': filter.checkedItems.length || filter.error}">
                                                 <div class="line clfix">
                                                     <div class="title">已选择：</div>
                                                     <div class="checkboxes clfix" style="padding-right: 40px;">
-                                                        <!-- <div class="checked-item" ng-show="filter.checkedAll">
-                                                        全部
-                                                    </div> -->
+                                                        <div class="checked-item error text-warning" ng-show="filter.error && !filter.checkedItems.length">
+                                                            <i class="fa fa-frown-o fb mr5"></i>
+                                                            <span ng-bind="filter.error"></span>
+                                                        </div>
                                                         <div class="checked-item" ng-repeat="o in filter.checkedItems">
                                                             <span ng-bind="::o"></span>
-                                                            <i class="pe-7s-close delete-item" ng-click="::filter.delCheckedItems(o)"></i>
+                                                            <i class="pe-7s-close delete-item" ng-click="::filter.delCheckedItems($event,o)"></i>
                                                         </div>
                                                         <a ng-show="filter.checkedItems.length" class="fl" ng-click="::filter.clearChecked()">全部取消</a>
                                                     </div>
@@ -158,7 +159,7 @@
                                                     </div>
                                                     <div class="checkboxes clfix">
                                                         <div class="checkbox checkbox-sm checkbox-primary" ng-repeat="(i,o) in filter.options.recommend_options">
-                                                            <input type="checkbox" id="chkbx_d_{{::index}}_ro_{{::i}}" ng-model="o.checked" name="chkbx_d_{{::index}}_ro_{{::i}}" ng-change="::filter.updateCheckedItems()">
+                                                            <input type="checkbox" id="chkbx_d_{{::index}}_ro_{{::i}}" ng-model="o.checked" name="chkbx_d_{{::index}}_ro_{{::i}}" ng-change="filter.updateCheckedItems($event)">
                                                             <label for="chkbx_d_{{::index}}_ro_{{::i}}" ng-bind="::o.name"></label>
                                                         </div>
                                                     </div>
@@ -170,7 +171,7 @@
                                                     </div>
                                                     <div class="checkboxes clfix">
                                                         <div class="checkbox checkbox-sm checkbox-primary" ng-repeat="(i,o) in t">
-                                                            <input type="checkbox" id="chkbx_d_{{::index}}_{{::k}}_{{i}}" ng-model="o.checked" name="chkbx_d_{{::index}}_{{::k}}_{{i}}" ng-change="::filter.updateCheckedItems()">
+                                                            <input type="checkbox" id="chkbx_d_{{::index}}_{{::k}}_{{i}}" ng-model="o.checked" name="chkbx_d_{{::index}}_{{::k}}_{{i}}" ng-change="filter.updateCheckedItems($event)">
                                                             <label for="chkbx_d_{{::index}}_{{::k}}_{{i}}" ng-bind="::o.name"></label>
                                                         </div>
                                                     </div>

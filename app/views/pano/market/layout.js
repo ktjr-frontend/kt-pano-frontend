@@ -124,6 +124,7 @@
 
                 $scope.$watch('shared.params.dimension', function() {
                     sfs.init()
+
                 })
 
                 // sfs.init()

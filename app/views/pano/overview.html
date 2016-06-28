@@ -73,7 +73,7 @@
                         <div class="chart-table-body inner-table">
                             <div class="table-caption clfix">
                                 <h3 class="caption">资产类</h3>
-                                <span class="sub-caption" ng-bind="compass_assets_bond.recommend_resion"></span>
+                                <span class="sub-caption" ng-bind="compass_assets_bond.reason"></span>
                                 <a ui-sref="pano.products.obligatoryRight" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
@@ -89,7 +89,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="text-right" ng-repeat="p in compass_assets_bond.list" ng-if="compass_assets_bond.list.length" kt-table-line-select target-element=".link">
+                                        <tr class="text-right" ng-repeat="p in compass_assets_bond.assets" ng-if="compass_assets_bond.assets.length" kt-table-line-select target-element=".link">
                                             <td ng-class="{'text-left': p.name}">
                                                 <a ng-click="goTo($event, p.link)" class="link" ng-bind="::p.name | ktNull"></a>
                                             </td>
@@ -102,7 +102,7 @@
                                             </td>
                                             <td ng-bind="::p.asset_type | ktEclipsis:25" title="{{::p.asset_type | ktNull}}"></td>
                                         </tr>
-                                        <tr ng-if="!compass_assets_bond.list.length && !isLoading()">
+                                        <tr ng-if="!compass_assets_bond.assets.length && !isLoading()">
                                             <td colspan="6" class="text-navy-blue text-center">
                                                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                                                 <span class="f1_5rem">近期未发布新产品</span>
@@ -116,7 +116,7 @@
                         <div class="chart-table-body inner-table">
                             <div class="table-caption clfix">
                                 <h3 class="caption">资管类</h3>
-                                <span class="sub-caption" ng-bind="compass_assets_am.recommend_resion"></span>
+                                <span class="sub-caption" ng-bind="compass_assets_am.reason"></span>
                                 <a ui-sref="pano.products.assetManage" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
@@ -132,7 +132,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="text-right" ng-repeat="p in compass_assets_am.list" ng-if="compass_assets_am.list.length" kt-table-line-select target-element=".link">
+                                        <tr class="text-right" ng-repeat="p in compass_assets_am.assets" ng-if="compass_assets_am.assets.length" kt-table-line-select target-element=".link">
                                             <td ng-class="{'text-left': p.name}">
                                                 <a ng-click="goTo($event, p.link)" class="link" ng-bind="::p.name | ktNull"></a>
                                             </td>
@@ -145,7 +145,7 @@
                                             <td ng-bind="::p.credit_manager | ktNull"></td>
                                             <td ng-bind="::p.manage_org | ktNull"></td>
                                         </tr>
-                                        <tr ng-if="!compass_assets_am.list.length && !isLoading()">
+                                        <tr ng-if="!compass_assets_am.assets.length && !isLoading()">
                                             <td colspan="6" class="text-navy-blue text-center">
                                                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                                                 <span class="f1_5rem">近期未发布新产品</span>
@@ -165,7 +165,7 @@
                         <div class="chart-table-body inner-table">
                             <div class="table-caption clfix">
                                 <h3 class="caption">资产类</h3>
-                                <span class="sub-caption" ng-bind="fame_assets_bond.recommend_resion"></span>
+                                <span class="sub-caption" ng-bind="fame_assets_bond.reason"></span>
                                 <a ui-sref="pano.order.obligatoryRight" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
@@ -180,14 +180,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="text-right" ng-repeat="p in fame_assets_bond.list" ng-if="fame_assets_bond.list.length">
+                                        <tr class="text-right" ng-repeat="p in fame_assets_bond.assets" ng-if="fame_assets_bond.assets.length">
                                             <td ng-class="{'text-left': p.name}" ng-bind="::p.name | ktNull"></td>
                                             <td ng-bind="::getLife(p.life)|ktEclipsis:4" title="{{::getLife(p.life)}}"></td>
                                             <td ng-bind="::p.rate | ktNumber:2:'percent2'"></td>
                                             <td ng-bind="::p.asset_type | ktEclipsis:25" title="{{::p.asset_type | ktNull}}"></td>
                                             <td ng-class="{'text-left': p.guarantees.length}" ng-bind="::p.guarantees | ktJoin:'，'" title="{{::p.guarantees | ktJoin:'，'}}"></td>
                                         </tr>
-                                        <tr ng-if="!fame_assets_bond.list.length && !isLoading()">
+                                        <tr ng-if="!fame_assets_bond.assets.length && !isLoading()">
                                             <td colspan="5" class="text-navy-blue text-center">
                                                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                                                 <span class="f1_5rem">近期未发布新产品</span>
@@ -201,7 +201,7 @@
                         <div class="chart-table-body inner-table">
                             <div class="table-caption clfix">
                                 <h3 class="caption">资管类</h3>
-                                <span class="sub-caption" ng-bind="fame_assets_am.recommend_resion"></span>
+                                <span class="sub-caption" ng-bind="fame_assets_am.reason"></span>
                                 <a ui-sref="pano.order.assetManage" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
@@ -217,7 +217,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="text-right" ng-repeat="p in fame_assets_am.list" ng-if="fame_assets_am.list.length">
+                                        <tr class="text-right" ng-repeat="p in fame_assets_am.assets" ng-if="fame_assets_am.assets.length">
                                             <td ng-class="{'text-left': p.name}" ng-bind="::p.name | ktNull"></td>
                                             <td ng-bind="::getLife(p.life)|ktEclipsis:4" title="{{::getLife(p.life)}}"></td>
                                             <td ng-bind="::p.rate | ktNumber:2:'percent2'"></td>
@@ -225,7 +225,7 @@
                                             <td ng-bind="::p.trustee | ktNull"></td>
                                             <td ng-bind="::p.manager | ktNull"></td>
                                         </tr>
-                                        <tr ng-if="!fame_assets_am.list.length && !isLoading()">
+                                        <tr ng-if="!fame_assets_am.assets.length && !isLoading()">
                                             <td colspan="6" class="text-navy-blue text-center">
                                                 <i class="pe-7s-attention f1_5rem fb mr5"></i>
                                                 <span class="f1_5rem">近期未发布新产品</span>
@@ -243,7 +243,7 @@
                         </p>
                     </div>
                 </div>
-                <!-- 右边栏 -->
+                <!--************** 右边栏 ***************-->
                 <aside class="col-sm-3 aside-info">
                     <h3 ng-show="notices.length">重要新闻</h3>
                     <section class="box" ng-show="notices.length">
@@ -252,7 +252,7 @@
                                 <li ng-repeat="n in notices" class="ellip">
                                     <a title="{{::n.name}}" ng-href="{{::n.url}}" ng-bind="::n.name" class="ellip" target="_blank"></a>
                                     <div class="clfix subhead">
-                                        <span class="fl" ng-bind="::n.date | date:'yyyy-MM-dd'"></span>
+                                        <span class="fl" ng-bind="::n.published_at | date:'yyyy-MM-dd'"></span>
                                         <span class="fr" ng-bind="::n.from"></span>
                                     </div>
                                 </li>
