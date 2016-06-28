@@ -21,7 +21,7 @@ var commonScripts = [
     // 'bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js',
     // 'bower_components/angular-bootstrap-tour/dist/angular-bootstrap-tour.min.js',
     'bower_components/angular-resource/angular-resource.min.js',
-    // 'bower_components/angular-notify/dist/angular-notify.min.js',
+    'bower_components/angular-notify/dist/angular-notify.min.js',
     'bower_components/angular-cache/dist/angular-cache.min.js',
     'bower_components/angulartics/dist/angulartics.min.js',
     'bower_components/angulartics/dist/angulartics-baidu.min.js',
@@ -91,7 +91,7 @@ var commonCss = [ // injector 会自动校验文件路径是否存在，所以�
     'bower_components/fontawesome/css/font-awesome.css',
     'bower_components/animate.css/animate.css',
     'bower_components/sweetalert/dist/sweetalert.css',
-    // 'bower_components/angular-notify/dist/angular-notify.min.css',
+    'bower_components/angular-notify/dist/angular-notify.min.css',
     'bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
     'app/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css',
 ];

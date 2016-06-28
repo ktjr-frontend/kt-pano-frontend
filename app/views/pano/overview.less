@@ -9,19 +9,19 @@
 @rank-color3: #c0d1ea;
 .overview {
     font-size: 1.3rem;
-    .chart-table-body{
-        .table-caption{
+    .chart-table-body {
+        .table-caption {
             line-height: 24px;
         }
-        .caption{
+        .caption {
             float: left;
         }
-        .sub-caption{
+        .sub-caption {
             color: @color-6;
             margin: 0 0 0 15px;
             float: left;
         }
-        &.inner-table{
+        &.inner-table {
             padding: 20px;
         }
     }
@@ -74,6 +74,41 @@
         border-radius: 5px;
         background: white;
         margin-bottom: 20px;
+        &.contact-weixin {
+            background: url(/images/mountain.jpg) no-repeat;
+            background-size: cover;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 0;
+                background: rgba(73, 109, 133, .4);
+                border-radius: 5px;
+            }
+            .box-body {
+                position: relative;
+            }
+            .tips {
+                padding: 10px 0;
+                .any-question {
+                    float: left;
+                    font-size: 1.2rem;
+                    line-height: 1.8em;
+                    color: white;
+                    border-bottom: 1px solid white;
+                    padding-bottom: 10px;
+                }
+                img {
+                    width: 75px;
+                    padding: 3px;
+                    background: rgba(255, 255, 255, .2);
+                    float: right;
+                }
+            }
+        }
         .box-head {
             height: 40px;
             line-height: 40px;
@@ -110,7 +145,7 @@
                 &:hover {
                     color: @color-text;
                     background: @color-3;
-                    a{
+                    a {
                         color: @color-text;
                     }
                 }
@@ -141,7 +176,7 @@
                     background: @rank-color3;
                     color: white;
                 }
-                &.rank-double-digit{
+                &.rank-double-digit {
                     padding: 0 1.5px;
                 }
             }
@@ -157,23 +192,23 @@
                     padding-right: 70px;
                 }
             }
-            &.list-with-subhead{
-                li{
-                    a{
+            &.list-with-subhead {
+                li {
+                    a {
                         color: @color-bright;
-                        &:hover{
+                        &:hover {
                             color: @color-text;
                         }
                     }
                 }
             }
-            &.list-with-timeline{
-                li{
+            &.list-with-timeline {
+                li {
                     overflow: visible;
-                    a{
+                    a {
                         display: block;
                     }
-                    &:after{
+                    &:after {
                         content: '';
                         display: block;
                         position: absolute;
@@ -184,14 +219,14 @@
                         z-index: 0;
                         border-left: 1px solid @color-gray-light;
                     }
-                    &:last-child{
-                        &:after{
+                    &:last-child {
+                        &:after {
                             display: none;
                         }
                     }
                 }
             }
-            .subhead{
+            .subhead {
                 color: @color-gray;
                 margin-top: 5px;
                 font-size: 1rem;
@@ -214,8 +249,8 @@
                     top: 14px;
                     z-index: 9;
                 }
-                &:hover{
-                    &:before{
+                &:hover {
+                    &:before {
                         background: @color-inactive;
                     }
                 }

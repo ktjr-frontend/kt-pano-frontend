@@ -89,7 +89,7 @@
                     content: 'overview',
                     chart: 'summary',
                 }, options || {}), function(data) {
-                    _self.data = data.stat
+                    _self.data = ktDataHelper.sortByFirstChar(data.stat)
 
                     if (data.crawled_at) {
                         $scope.updateDate = moment(data.crawled_at).subtract(6, 'd').format('YYYY-MM-DD') + ' ~ ' + moment(data.crawled_at).format('YYYY-MM-DD')
@@ -345,12 +345,21 @@
                 $q.all([circulationPromise, ratePromise]).then(function(data) {
                     _self.data1 = ktDataHelper.chartDataPrune(data[0].stat)
                     _self.data2 = ktDataHelper.chartDataPrune(data[1].stat)
+                    _.each(_self.data1.data, function(v) {
+                        var m1 = v.name.match(/上周期（(.*)）/)
+                        var m2 = v.name.match(/本周期（(.*)）/)
+
+                        _self.lastPeriod = (m1 ? '上周期：' + m1[1] : _self.lastPeriod)
+                        _self.thisPeriod = (m2 ? '本周期：' + m2[1] : _self.thisPeriod)
+                    })
+
                     _self.data1.data = _.map(_self.data1.data, function(v) {
-                        return { name: v.name.replace('周期', '周期发行量'), data: v.data }
+                        return { name: v.name.replace(/周期（.+）/g, '周期发行量'), data: v.data }
                     })
                     _self.data2.data = _.map(_self.data2.data, function(v) {
-                        return { name: v.name.replace('周期', '周期收益率'), data: v.data }
+                        return { name: v.name.replace(/周期（.+）/g, '周期收益率'), data: v.data }
                     })
+
                     updateView()
                 })
 
@@ -358,10 +367,11 @@
                     var data1 = _self.data1
                     var data2 = _self.data2
                     var legend = _.concat(_.map(data1.data, 'name'), _.map(data2.data, 'name'))
-
+                    var color = _.concat(colors.slice(0, 2), colors.slice(0, 2))
                     var caculateOptions = ktDataHelper.chartOptions('#durationAmountChart', legend)
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
+                        color: color,
                         legend: {
                             data: legend
                         },
@@ -442,6 +452,11 @@
                                 name: v.name,
                                 type: 'line',
                                 yAxisIndex: 1,
+                                /*itemStyle: {
+                                    normal: {
+                                        color: colors[i]
+                                    }
+                                },*/
                                 markLine: {
                                     data: ktDataHelper.getMarkLineCoords(v.data)
                                 },
@@ -499,10 +514,11 @@
                                 if (!echartTooltip) return '';
                                 var params = _.reverse(p)
                                 var title = params[0].name
+                                var l = params.length
                                 title += ' ~ ' + moment(title).weekday(6).format('YYYY-MM-DD')
                                 _.each(params, function(v, i) {
-                                    v.amount = data.data[i].amount[v.seriesIndex]
-                                    v.rate = data.data[i].rate[v.seriesIndex]
+                                    v.amount = data.data[l - i - 1].amount[v.dataIndex]
+                                    v.rate = data.data[l - i - 1].rate[v.dataIndex]
                                 })
 
                                 var res = echartTooltip({
