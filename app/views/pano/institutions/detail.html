@@ -281,9 +281,13 @@
                     <section class="box" ng-show="inst.notices.length">
                         <div class="box-body">
                             <h3>重要新闻</h3>
-                            <ul class="list">
+                            <ul class="list list-with-subhead">
                                 <li ng-repeat="n in inst.notices" class="ellip">
-                                    <a ng-href="{{n.url}}" ng-bind="n.name" target="_blank"></a>
+                                    <a title="{{::n.name}}" ng-href="{{::n.url}}" ng-bind="::n.name" class="ellip" target="_blank"></a>
+                                    <div class="clfix subhead">
+                                        <span class="fl" ng-bind="::n.happened_at | date:'yyyy-MM-dd'"></span>
+                                        <span class="fr" ng-bind="::n.from"></span>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

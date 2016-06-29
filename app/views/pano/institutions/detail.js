@@ -413,7 +413,7 @@
                     _self.data = _.chain(_self.data.data).map(function(v) {
                         return {
                             name: v.name,
-                            value: v.data[0] || 0
+                            value: v.data_percent[0] || 0
                         }
                     }).value()
 
