@@ -12,7 +12,7 @@
     }
 
     angular.module('kt.pano')
-        .factory('ktDataHelper', function($window) {
+        .factory('ktDataHelper', function($window, notify) {
             return {
                 /**
                  * [filterInit 筛选组件的初始化]
@@ -188,7 +188,13 @@
 
                     return op
                 },
-                //总览页计算各平台资产类型占比的百分比
+                // 总览气泡图按字母排序
+                sortByFirstChar: function(data) {
+                    return _.sortBy(data, function(v) {
+                        return window.utils.HanZiPinYin.get(v[2].slice(0, 1))
+                    })
+                },
+                //总览页计算资产类型发行量占比的百分比
                 chartDataToPercent: function(chart, key) {
                     var xAxisSumArr = []
                     var dataKey = key || 'data'
@@ -212,11 +218,11 @@
                         return v === 0
                     })*/
 
-                    chart.data = _.map(chart.data, function(v) { // 计算所占比例
+                    _.each(chart.data, function(v) { // 计算所占比例
                         v[dataKey + '_percent'] = _.map(v[dataKey], function(v2, i2) {
-                            return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
-                        })
-                        return v
+                                return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
+                            })
+                            // return v
                     })
 
                     return chart
@@ -515,8 +521,15 @@
 
                             // 更新选中项列表
                             sf.updateCheckedItems = function(option) {
-                                if (sf.active && sf.checkedItems.length >= 10) {
-                                    option.active = false
+                                if (sf.active && sf.checkedItems.length >= 10 && option.checked) {
+                                    option.checked = false
+                                    notify.closeAll()
+                                    notify({
+                                        messageTemplate: '<span><i class="fa fa-warning mr5"></i>{{$message}}</span>',
+                                        classes: 'pano-nofity pano-nofity-warning',
+                                        message: '最多可选10个！',
+                                        duration: 1500
+                                    })
                                     return
                                 }
 

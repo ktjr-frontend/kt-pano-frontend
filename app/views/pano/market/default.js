@@ -17,15 +17,16 @@
             var colors = ktEchartTheme1.color
             var isAllDimension = params[params.dimension] === 'all' || !params[params.dimension] // 是否是当前维度的所有筛选
 
-            var defaultShowLength = (function() { // 默认显示的几个legend，根据不同维度展示不同的长度
-                var d = params.dimension
-                if (d === 'asset_type') {
-                    return 7
-                } else if (d === 'from') {
-                    return 12
-                }
-                return 6
-            })()
+            // var defaultShowLength = (function() { // 默认显示的几个legend，根据不同维度展示不同的长度
+            //     var d = params.dimension
+            //     if (d === 'asset_type') {
+            //         return 8
+            //     } else if (d === 'from') {
+            //         return 12
+            //     }
+            //     return 6
+            // })()
+            var defaultShowLength = 10
             var legendSelected = {} //默认选中的图例
             var getSelectedLegend = function(xAxis) {
                 if (_.isEmpty(legendSelected)) {

@@ -188,6 +188,13 @@
         @media(max-width: 480px) {
             padding: 0;
         }
+        .bottom-tip{
+            padding-bottom: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            transform: scale(0.9);
+            color: @placeholder-color;
+        }
         &.half {
             width: 50%;
             float: left;
@@ -241,11 +248,18 @@
             margin-right: 10px;
             .btn{
                 border: 0;
-                color: @color-10;
-                background: @color-gray-light;
+                color: @color-bright;
+                background: @color-3;
+                padding: 1px 5px 3px;
                 -webkit-font-smoothing: antialiased;
-                &.active,&:hover{
-                    background: @color-inactive;
+                & + .btn{
+                    margin-left: 0;
+                }
+                &:hover {
+                    border: 0;
+                }
+                &.active{
+                    background: #c0d1ea;
                     box-shadow: none;
                     color: white;
                 }

@@ -6,7 +6,7 @@
 
             $scope.shared = {}
             var defaultParams = {
-                dimension: 'asset_type',
+                dimension: 'from',
                 start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(6, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
                 end_at: moment().day(0).add(+(moment().day() > 0), 'w').format('YYYY-MM-DD'),
             }
@@ -79,6 +79,7 @@
                 }
             })
 
+            // 当前维度的名称
             $scope.getDimensionName = function() {
                 if (!$scope.shared.dimensions.length) return ''
 
