@@ -52,9 +52,37 @@
 <!-- Body -->
 
 <body>
-    <div>
-        hello
+    <section class="open-use-browser">
+        <img src="/images/weixin_open_tips.png" alt="">
+    </section>
+    <header>
+        <img class="logo" src="/images/logo2.svg" alt="开通金融logo">
+    </header>
+    <div class="container">
+        <h2 class="title">名片上传</h2>
+        <div class="body">
+            <form name="uploadBusinessCardForm" action="/api/v1/upload_business_card" enctype="multipart/form-data" method="post" accept-charset="utf-8" target="uploadFile">
+                <input type="hidden" name="origin" value="mobile">
+                <div class="btn-file">
+                    <input type="file" name="file" id="file">
+                    <!-- <span>+</span> -->
+                </div>
+                <div class="business-card-preview">
+                    <img alt="名片预览">
+                </div>
+                <div class="form-footer">
+                    <div class="buttons">
+                        <button class="btn btn-submit" id="doneBtn">完成</button>
+                        <button class="btn btn-redo" id="reUploadBtn">重新上传</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="success">
+            名片上传成功，请在电脑端查看
+        </div>
     </div>
+    <!-- <iframe id="uploadFile" name="uploadFile" frameborder="0"></iframe> -->
     <!-- build:js({.tmp,app}) /views/h5/upload_business_card.js -->
     <script src="/views/h5/upload_business_card.js"></script>
     <!-- endbuild -->
