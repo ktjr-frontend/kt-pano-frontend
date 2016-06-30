@@ -100,7 +100,7 @@
                                     <tbody>
                                         <tr class="text-right" ng-repeat="p in compass_assets_bond.assets" ng-if="compass_assets_bond.assets.length" kt-table-line-select target-element=".link">
                                             <td ng-class="{'text-left': p.name}">
-                                                <a ng-click="goTo($event, p.link)" class="link"></a>
+                                                <!-- <a ng-click="goTo($event, p.link)" class="link"></a> -->
                                                 <span ng-bind="::p.name | ktNull"></span>
                                             </td>
                                             <td ng-bind="::getLife(p.life)|ktEclipsis:8" title="{{::getLife(p.life)}}"></td>
@@ -144,7 +144,7 @@
                                     <tbody>
                                         <tr class="text-right" ng-repeat="p in compass_assets_am.assets" ng-if="compass_assets_am.assets.length" kt-table-line-select target-element=".link">
                                             <td ng-class="{'text-left': p.name}">
-                                                <a ng-click="goTo($event, p.link)" class="link"></a>
+                                                <!-- <a ng-click="goTo($event, p.link)" class="link"></a> -->
                                                 <span ng-bind="::p.name | ktNull"></span>
                                             </td>
                                             <td ng-bind="::getLife(p.life)|ktEclipsis:8" title="{{::getLife(p.life)}}"></td>
