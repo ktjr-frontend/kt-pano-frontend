@@ -322,14 +322,43 @@
                 padding-right: 70px;
             }
         }
+        &.list-with-subhead {
+            li {
+                a {
+                    color: @color-bright;
+                    &:hover {
+                        color: @color-text;
+                    }
+                }
+            }
+        }
         li {
-            padding: 6px 0;
+            padding: 6px 0 6px 15px;
             position: relative;
             &:before {
-                content: "•";
+                content: "";
                 font-weight: bold;
                 margin-right: 5px;
-                color: @color-gray-light;
+                position: absolute;
+                display: block;
+                background: @color-gray-light;
+                border-radius: 50%;
+                border: 2px splid white;
+                height: 5px;
+                width: 5px;
+                left: 0;
+                top: 13px;
+                z-index: 9;
+            }
+            &:hover {
+                &:before {
+                    background: @color-inactive;
+                }
+            }
+            .subhead {
+                color: @color-gray;
+                margin-top: 5px;
+                font-size: 1rem;
             }
             a {
                 color: @color-gray;
