@@ -33,6 +33,18 @@
         }
     }
     &.dropdown-conjoined{
+        &.has_conditions{
+            border: 1px solid @color-navy-blue;
+            .dropdown-toggle{
+                color: @color-navy-blue;
+            }
+            &.open{
+                border-color: @border-color;
+                .dropdown-toggle{
+                    color: @color-bright;
+                }
+            }
+        }
         .dropdown-toggle{
             position: relative;
             z-index: 999;

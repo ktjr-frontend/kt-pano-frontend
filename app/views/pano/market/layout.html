@@ -54,7 +54,7 @@
                     <div class="filter-line clfix no-bd">
                         <div class="name">数据筛选：</div>
                         <div class="dropdowns clfix">
-                            <div class="dropdown dropdown-md fl mr10 dropdown-conjoined" ng-repeat="(index,filter) in shared.specialFilters.data|filter:{active: false}" dropdown is-open="filter.isOpen" on-toggle="filter.onToggle(open)">
+                            <div class="dropdown dropdown-md fl mr10 dropdown-conjoined" ng-repeat="(index,filter) in shared.specialFilters.data|filter:{active: false}" ng-class="{'has_conditions': filter.realCheckedItems.length}" dropdown is-open="filter.isOpen" on-toggle="filter.onToggle(open)">
                                 <!-- ng-mouseenter="filter.isOpen = true" ng-mouseleave="filter.isOpen = false" is-open="filter.isOpen"-->
                                 <div dropdown-toggle class="dropdown-toggle cp">
                                     <span ng-bind="filter.realCheckedItems.length ? filter.realCheckedItems.join() :filter.name"></span>
