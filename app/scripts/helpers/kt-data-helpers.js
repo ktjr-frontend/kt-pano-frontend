@@ -12,7 +12,7 @@
     }
 
     angular.module('kt.pano')
-        .factory('ktDataHelper', function($window, notify) {
+        .factory('ktDataHelper', function($window, $state, notify) {
             return {
                 /**
                  * [filterInit 筛选组件的初始化]
@@ -617,7 +617,10 @@
                             // 更新url
                             sf.updateUrl = function() {
                                 // sf.realCheckedItems = _.cloneDeep(sf.checkedItems);
-                                $scope.goTo(sf.value, sf.realCheckedItems.join(','))
+                                // $scope.goTo(sf.value, sf.realCheckedItems.join(','))
+                                var p = {}
+                                p[sf.value] = sf.realCheckedItems.join(',')
+                                $state.go($state.current.name, p)
                                 sf.isOpen = false
                             }
 
