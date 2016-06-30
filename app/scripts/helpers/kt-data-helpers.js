@@ -495,6 +495,7 @@
                             sf.defaultCheckedLength = 8 // 展示项默认是8个
                             sf.isOpen = false
                             sf.active = false
+                            sf.id = _.uniqueId('sf_')
 
                             if (params.dimension === sf.value) { //确定当前维度
                                 sf.active = true
@@ -528,6 +529,7 @@
                                         messageTemplate: '<span><i class="fa fa-warning mr5"></i>{{$message}}</span>',
                                         classes: 'pano-nofity pano-nofity-warning',
                                         message: '最多可选10个！',
+                                        container: $('#' + sf.id)[0],
                                         duration: 1500
                                     })
                                     return
@@ -572,6 +574,8 @@
                                         }).filter(function(o) {
                                             return o !== '不适用'
                                         }).slice(0, sf.defaultCheckedLength).value()
+                                    } else if (isAllDimension) {
+                                        return []
                                     }
 
                                     return df ? df.split(',') : []

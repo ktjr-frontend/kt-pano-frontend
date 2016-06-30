@@ -91,6 +91,10 @@
 
             $scope.goTo = function(key, value) {
                 var p = {}
+                // 重置三个维度的筛选项
+                _.each($scope.shared.dimensions, function (v) {
+                    p[v.value] = 'all'
+                })
 
                 if ($.isPlainObject(key)) {
                     $.extend(p, key)
