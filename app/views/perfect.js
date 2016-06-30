@@ -2,15 +2,16 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, CacheFactory, ktRegisterService, ktSweetAlert, ktSession, ktBusinessCardUpload) {
+        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, CacheFactory, ktRegisterService, ktSweetAlert, ktSession, ktBusinessCardUpload, user) {
 
             $rootScope.goHome = function() {
                 ktSession.clear()
                 $state.go('home.index')
             }
+            $rootScope.user = user
 
             $scope.user = {}
-            $scope.user.business_card = '/images/logo-new.svg'
+                // $scope.user.business_card = '/images/logo-new.svg'
             $scope.upload = function(file) {
                 if (!file) return
                 $scope.pendingUpload = true
@@ -29,6 +30,41 @@
                     $scope.pendingUpload = false
                 })
 
+            }
+
+            // 二维码
+            $scope.qrcode = {}
+            $scope.qrcode.settings = {
+                text: location.origin + '/views/h5/ubc.html?_t=' + $rootScope.user.id,
+                width: 340,
+                height: 340,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            }
+
+            // 提交表单
+            $scope.submitForm = function() {
+                $scope.pendingRequests = true
+                ktRegisterService.update($scope.user, function() {
+                    $scope.pendingRequests = false
+                    ktSweetAlert.swal({
+                        title: '提交成功！',
+                        text: '',
+                        type: 'success',
+                    }, function() {
+                        CacheFactory.clearAll()
+                        $state.go($rootScope.defaultRoute || 'pano.overview')
+                    });
+                }, function(res) {
+                    $scope.pendingRequests = false
+                    ktSweetAlert.swal({
+                        title: '提交失败',
+                        text: $.isArray(res.error) ? res.error.join('<br/>') : (res.error || '抱歉，您的信息没有提交成功，请再次尝试！'),
+                        type: 'error',
+                    });
+                })
+                return false;
             }
 
             /*$scope.user.likes = []
@@ -73,29 +109,6 @@
                     $scope.hasLikes = $scope.user.likes.length ? true : ''
                 }
             });*/
-
-            $scope.submitForm = function() {
-                $scope.pendingRequests = true
-                ktRegisterService.update($scope.user, function() {
-                    $scope.pendingRequests = false
-                    ktSweetAlert.swal({
-                        title: '提交成功！',
-                        text: '',
-                        type: 'success',
-                    }, function() {
-                        CacheFactory.clearAll()
-                        $state.go($rootScope.defaultRoute || 'pano.overview')
-                    });
-                }, function(res) {
-                    $scope.pendingRequests = false
-                    ktSweetAlert.swal({
-                        title: '提交失败',
-                        text: $.isArray(res.error) ? res.error.join('<br/>') : (res.error || '抱歉，您的信息没有提交成功，请再次尝试！'),
-                        type: 'error',
-                    });
-                })
-                return false;
-            }
 
         })
 })();

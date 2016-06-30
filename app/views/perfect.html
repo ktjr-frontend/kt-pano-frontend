@@ -13,7 +13,8 @@
                                 <div class="qrcode-bs-card text-center" ng-show="!user.business_card">
                                     <h5>手机扫描二维码上传：</h5>
                                     <div class="qrcode-body">
-                                        <img class="qrcode" src="/images/weixin.jpg" alt="扫描上传名片">
+                                        <div class="qrcode" kt-qr-code qrcode="qrcode"></div>
+                                        <!-- <img class="qrcode" src="/images/weixin.jpg" alt="扫描上传名片"> -->
                                         <div class="buttons upload">
                                             <div class="btn btn-file" ng-class="{disabled: pendingUpload}">
                                                 <span>本地上传</span>

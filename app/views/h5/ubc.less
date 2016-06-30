@@ -115,6 +115,7 @@ header {
             color: white;
             border: 0;
             border-radius: 0.080515rem;
+            @dotSize: 0.040258rem;
             &.btn-submit {
                 background: #626b81;
                 &:active {
@@ -127,6 +128,31 @@ header {
                 background: #82899c;
                 &:active {
                     background: darken(#82899c, 10%);
+                }
+            }
+            .dotting {
+                display: inline-block;
+                min-width: @dotSize;
+                min-height: @dotSize;
+                margin-right: 0.064412rem;
+            }
+            &.ajax {
+                .dotting {
+                    animation: dot 2s infinite step-start both;
+                }
+            }
+            @keyframes dot {
+                25% {
+                    box-shadow: none;
+                }
+                50% {
+                    box-shadow: @dotSize 0 currentColor;
+                }
+                75% {
+                    box-shadow: @dotSize 0 currentColor, @dotSize*3 0 currentColor;
+                }
+                100% {
+                    box-shadow: @dotSize 0 currentColor, @dotSize*3 0 currentColor, @dotSize*5 0 currentColor;
                 }
             }
         }
@@ -150,7 +176,7 @@ header {
         }
     }
     &.done {
-        .title{
+        .title {
             display: none;
         }
         .body {

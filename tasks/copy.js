@@ -13,6 +13,7 @@ module.exports = {
                     'images/**/*.*',
                     'download/**/*.*',
                     'common/libs/echarts.min.js',
+                    // 'common/libs/qrcode.min.js',
                     'common/libs/html2canvas.min.js',
                     'common/directives/**/*.{jpg,png,jpeg,gif,svg,html}', //common目录用于异步加载
                     'scripts/directives/**/*.{jpg,png,jpeg,gif,svg,html}', //script目录下得diretive 用来异步加载

@@ -26,30 +26,7 @@
         // 确认完成
         doneBtn.addEventListener('click', function(ev) {
             ev.preventDefault()
-            if (!bsnsCard) return
-            var data = {
-                business_card_url: bsnsCard
-            }
 
-            xhr.open('PUT', '/api/v1/upload_business_card')
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-            xhr.setRequestHeader('Authorization', token)
-            xhr.send(JSON.stringify(data))
-            xhr.onload = function () {
-                container.classList.remove('preview')
-                container.classList.add('done')
-            }
-        })
-
-        // 重新上传
-        reUploadBtn.addEventListener('click', function(ev) {
-            ev.preventDefault()
-            bsnsCard = ''
-            container.classList.remove('preview')
-        })
-
-        // 选了图片自动上传
-        file.addEventListener('change', function(ev) {
             var oData = new FormData(form)
             xhr.open('POST', '/api/v1/upload_business_card', true)
             xhr.setRequestHeader('Authorization', token)
@@ -57,11 +34,44 @@
                 if (xhr.status === 200) {
                     bsnsCard = oev.data.url
                     previewImg.src = bsnsCard
-                    container.classList.add('preview')
+                    container.classList.remove('preview')
+                    container.classList.add('done')
+                    this.disabled = false
                 }
             }
-
+            // container.classList.remove('preview')
+            // container.classList.add('uploading')
+            this.disabled = true
+            // reUploadBtn.disabled = true
+            this.innerHTML = '上传中<i class="dotting"></i>'
+            this.classList.add('ajax')
             xhr.send(oData)
+        })
+
+        // 重新上传
+        reUploadBtn.addEventListener('click', function(ev) {
+            ev.preventDefault()
+            bsnsCard = ''
+            doneBtn.disabled = false
+            doneBtn.innerHTML = '完成'
+            xhr.abort()
+            container.classList.remove('preview')
+            form.reset()
+        })
+
+        // 选了图片预览
+        file.addEventListener('change', function(ev) {
+            var reader = new FileReader()
+            reader.addEventListener('load', function () {
+                previewImg.src = reader.result
+                container.classList.add('preview')
+            })
+
+            if (file.files[0]) {
+                reader.readAsDataURL(file.files[0])
+            }
+
+
             ev.preventDefault()
         })
     })

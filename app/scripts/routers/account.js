@@ -29,8 +29,24 @@
                     url: '/perfect',
                     templateUrl: 'views/perfect.html',
                     resolve: ktLazyResolve([
-                        'views/perfect.js'
-                    ]),
+                        'common/directives/kt-qrcode-directive.js',
+                        'views/perfect.js',
+                    ], {
+                        user: function($q, $window, ktUserService) {
+                            'ngInject';
+                            var deferred = $q.defer()
+                            if ($window.localStorage.token) {
+                                ktUserService.get(function(data) {
+                                    deferred.resolve(data.account)
+                                }, function() {
+                                    deferred.resolve(null)
+                                })
+                            } else {
+                                deferred.resolve(null)
+                            }
+                            return deferred.promise
+                        }
+                    }),
                     controller: 'ktPerfectCtrl',
                     data: {
                         pageTitle: '账户设置',
