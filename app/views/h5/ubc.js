@@ -1,6 +1,7 @@
 ;
 (function(w, d) {
-    function isAndroidWeixn() {
+
+    function isAndroidWeixin() {
         var ua = navigator.userAgent.toLowerCase();
         if (ua.match(/Android.*MicroMessenger/i)) {
             return true;
@@ -9,15 +10,16 @@
     }
 
     d.addEventListener('DOMContentLoaded', function() {
-        if (isAndroidWeixn()) {
+        if (isAndroidWeixin()) {
             d.querySelector('html').classList.add('weixin')
         }
+
         var tm = location.href.match(/_t=(.*)/)
         var token = tm ? tm[1] : ''
         var bsnsCard = ''
         var container = d.querySelector('.container')
         var previewImg = d.querySelector('.business-card-preview img')
-        var file = d.querySelector('#file')
+        var file = d.querySelector('#file') // 上传名片域
         var form = d.forms.namedItem('uploadBusinessCardForm')
         var doneBtn = d.querySelector('#doneBtn')
         var reUploadBtn = d.querySelector('#reUploadBtn')
@@ -39,10 +41,8 @@
                     this.disabled = false
                 }
             }
-            // container.classList.remove('preview')
-            // container.classList.add('uploading')
+
             this.disabled = true
-            // reUploadBtn.disabled = true
             this.innerHTML = '上传中<i class="dotting"></i>'
             this.classList.add('ajax')
             xhr.send(oData)
@@ -51,18 +51,19 @@
         // 重新上传
         reUploadBtn.addEventListener('click', function(ev) {
             ev.preventDefault()
+
             bsnsCard = ''
+            container.classList.remove('preview')
             doneBtn.disabled = false
             doneBtn.innerHTML = '完成'
             xhr.abort()
-            container.classList.remove('preview')
             form.reset()
         })
 
         // 选了图片预览
         file.addEventListener('change', function(ev) {
             var reader = new FileReader()
-            reader.addEventListener('load', function () {
+            reader.addEventListener('load', function() {
                 previewImg.src = reader.result
                 container.classList.add('preview')
             })
@@ -70,7 +71,6 @@
             if (file.files[0]) {
                 reader.readAsDataURL(file.files[0])
             }
-
 
             ev.preventDefault()
         })

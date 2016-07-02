@@ -8,6 +8,8 @@
                 $state.go($rootScope.defaultRoute)
             }
 
+            // $rootScope.sharedData = {}
+
             $scope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState) {
 
                 window.requestAnimationFrame(function() {

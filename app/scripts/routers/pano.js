@@ -16,7 +16,7 @@
                     data: {
                         breadcrumb: false,
                         pageTitle: '微贷平台',
-                        permit: ['login'],
+                        // permit: ['login'],
                         specialClass: 'pano-page'
                     },
                     resolve: ktLazyResolve(['views/common/pano.js'], {
@@ -24,12 +24,20 @@
                         user: function($q, $rootScope, $state, ktUserService) {
                             'ngInject';
                             var deferred = $q.defer()
+
                             ktUserService.get(function(res) {
                                 $rootScope.defaultRoute = 'pano.overview'
                                 $rootScope.user = res.account
-                                if (res.account.refilled !== 'true') {
-                                    $state.go('account.perfect')
-                                    return
+
+                                // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
+                                if (!$rootScope.forceJumpState) {
+                                    if (res.account.role === 'unfilled') {
+                                        $state.go('account.perfect')
+                                        return
+                                    } else if (res.account.role === 'rejected') {
+                                        $state.go('pano.settings', { forceJump: true })
+                                        return
+                                    }
                                 }
 
                                 deferred.resolve(res.account)
@@ -53,6 +61,10 @@
                     ]),
                     controller: 'ktOverviewCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed', 'unchecked']
+                        }],
                         // breadcrumb: true,
                         // breadcrumbTitle: '资产特征',
                         pageTitle: '总览',
@@ -69,6 +81,10 @@
                     ]),
                     controller: 'ktMarketLayoutCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '市场数据',
                     }
                 },
@@ -116,6 +132,10 @@
                     ]),
                     controller: 'ktProductsLayoutCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '产品信息',
                     }
                 },
@@ -151,6 +171,10 @@
                     ]),
                     controller: 'ktOrderLayoutCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '可预约产品',
                     }
                 },
@@ -184,6 +208,10 @@
                     url: '/institutions',
                     template: '<ui-view/>',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '机构',
                     }
                 },
@@ -209,6 +237,9 @@
                         'views/pano/account/settings.js'
                     ]),
                     controller: 'ktSettingsCtrl',
+                    params: {
+                        forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
+                    },
                     data: {
                         pageTitle: '账户设置',
                         specialClass: 'simple-page'

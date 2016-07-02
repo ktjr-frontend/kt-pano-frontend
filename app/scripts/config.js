@@ -79,7 +79,7 @@
     angular
         .module('kt.pano')
         .config(configApp)
-        .run(function($rootScope, $state, $location, $timeout, $http, ktLogService, ktHomeResource, uibPaginationConfig, ktUserService, ktS, CacheFactory, ktEchartTheme1) {
+        .run(function($rootScope, $state, $location, $timeout, $http, ktLogService, ktPermits, ktHomeResource, uibPaginationConfig, ktUserService, ktS, CacheFactory, ktEchartTheme1) {
 
             // ajax 请求的缓存策略
             /*eslint-disable*/
@@ -114,6 +114,21 @@
             }
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+
+                // 权限控制，无法控制刷新页面的行为
+                /*if (toState.data.permits) {
+                    if (!ktPermits(toState.data.permits)) {
+                        event.preventDefault()
+                        return
+                    }
+                }*/
+
+                $rootScope.error401 = '' // 重置401的错误
+
+                if (toParams.forceJump) {
+                    $rootScope.forceJumpState = toState
+                }
+
                 // 首页获取user的逻辑不要尝试在这里解决，放到路由的resolve里面解决，否则很容易造成死循环，注意这个坑
                 var search = $location.search()
 
@@ -136,6 +151,11 @@
             })
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+
+                // 清楚避免循环逻辑的状态标示
+                if ($rootScope.forceJumpState && $rootScope.forceJumpState.name === toState.name) {
+                    $rootScope.forceJumpState = null
+                }
 
                 // 存储非错误和登录注册框的url 供redirect或者返回用
                 if (toState.name.indexOf('pano') > -1) {

@@ -81,13 +81,13 @@
             },
 
             responseError: function(res) {
-                var $state = $injector.get('$state') //拦截器内需要使用$inject方式手动注入，否则报错$inject:cdep
+                // var $state = $injector.get('$state') //拦截器内需要使用$inject方式手动注入，否则报错$inject:cdep
                 var $rootScope = $injector.get('$rootScope')
                 var $location = $injector.get('$location')
-                var $window = $injector.get('$window')
+                // var $window = $injector.get('$window')
                 var ktSweetAlert = $injector.get('ktSweetAlert')
-                var ipCookie = $injector.get('ipCookie')
-                var CacheFactory = $injector.get('CacheFactory')
+                // var ipCookie = $injector.get('ipCookie')
+                // var CacheFactory = $injector.get('CacheFactory')
 
                 if (res.status === 419 || res.status === 401) {
                     var search = $location.search()
@@ -97,17 +97,19 @@
                     if (search.apimock) stateParams.apimock = search.apimock
 
                     // 清除本地数据
-                    $rootScope.user = null
-                    delete $window.localStorage.token
-                    ipCookie.remove('token')
-                    CacheFactory.clearAll()
+                    // $rootScope.user = null
+                    // delete $window.localStorage.token
+                    // ipCookie.remove('token')
+                    // CacheFactory.clearAll()
 
                     // ipCookie.remove('connect.sid') //这是httpOnly Cookie 前端无法删除
                     if (res.config && res.config.params && res.config.params.notRequired) { //官网不需要跳转登录页面
                         return $q.reject(res.data)
                     }
 
-                    $state.go('account.login', stateParams)
+                    $rootScope.error401 = '没有权限！'
+
+                    // $state.go('error.401', stateParams)
 
                 } else if (res.status === 403) {
                     ktSweetAlert.swal({

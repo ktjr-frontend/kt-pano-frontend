@@ -72,6 +72,7 @@ var appScripts = [
 
     // 'app/scripts/i18/zh-cn.js',
     'app/scripts/resources/kt-resource-home.js',
+    'app/scripts/factories/kt-permits.js',
     'app/scripts/factories/kt-tools-function.js',
     'app/scripts/factories/kt-tools-cache.js',
     'app/scripts/directives/common/kt-logout-directive.js',
