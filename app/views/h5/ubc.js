@@ -14,7 +14,7 @@
             d.querySelector('html').classList.add('weixin')
         }
 
-        var tm = location.href.match(/_t=(.*)/)
+        var tm = location.href.match(/t=(.*)/)
         var token = tm ? tm[1] : ''
         var bsnsCard = ''
         var container = d.querySelector('.container')
@@ -41,6 +41,7 @@
                     container.classList.add('done')
                     this.disabled = false
                 }
+                // alert(xhr.status)
             }
 
             this.disabled = true

@@ -86,7 +86,7 @@
                         })
 
                         updateBusinessCardModal.result.then(function(u) {
-                            ktSweetAlert.success('信息修改成功')
+                            // ktSweetAlert.success('信息修改成功')
                             $.extend($rootScope.user, u)
                         })
                     })

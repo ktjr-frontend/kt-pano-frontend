@@ -133,6 +133,7 @@
                 var filterStyle = function(value) {
                     var v = $filter('ktFontFamilyIgnore')(value)
                     v = $filter('ktFontSizeIgnore')(v)
+                    v = $filter('ktParagraphStyleIgnore')(v)
                     return v
                 }
 

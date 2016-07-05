@@ -551,7 +551,7 @@
                         },
                         xAxis: {
                             type: 'category',
-                            name: '平台',
+                            name: '周',
                             nameLocation: 'end',
                             nameGap: 10,
                             axisLabel: {
