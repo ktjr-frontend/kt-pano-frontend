@@ -74,12 +74,19 @@
     // 上传名片
     .factory('ktBusinessCardUpload', function($urlMatcherFactory, Upload, ktApiVersion) {
         return function upload(data) {
-            var url = $urlMatcherFactory.compile('/api/' + ktApiVersion + '/upload_business_card').format(data)
+            var url = $urlMatcherFactory.compile('/api/' + ktApiVersion + '/cards').format(data)
             return Upload.upload({
                 url: url,
                 data: data || {}
             })
         }
+    })
+
+    // 获取用户上传的名片
+    .factory('ktCardsService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/cards/:content', {
+            content: '@content'
+        })
     })
 
 })();

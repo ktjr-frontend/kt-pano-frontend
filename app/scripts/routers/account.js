@@ -30,6 +30,8 @@
                     templateUrl: 'views/perfect.html',
                     resolve: ktLazyResolve([
                         'common/directives/kt-qrcode-directive.js',
+                        'scripts/directives/business-card-upload/style.css',
+                        'scripts/directives/business-card-upload/directive.js',
                         'views/perfect.js',
                     ], {
                         user: function($q, $window, ktUserService) {

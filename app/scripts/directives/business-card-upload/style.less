@@ -1,0 +1,48 @@
+@import "app/common/styles/theme/v4/bootstrap/variables.less";
+@import "app/common/styles/theme/v4/variables.less";
+.qrcode-bs-card {
+    width: 170px;
+    margin: 0 auto;
+    &.preview {
+        width: 100%;
+        .buttons {
+            width: 170px;
+            margin: 20px auto 0;
+        }
+        img.qrcode {
+            max-width: 100%;
+            max-height: 200px;
+            padding: 10px;
+            width: auto;
+            border: 1px solid @border-color;
+        }
+    }
+    .qrcode {
+        width: 100%;
+        img {
+            width: 100%;
+        }
+    }
+    .buttons {
+        position: relative;
+        margin-top: 20px;
+        width: 100%;
+        &.upload:before {
+            content: '或';
+            position: absolute;
+            left: -2em;
+            top: .5em;
+        }
+        .btn-file {
+            width: 100%;
+            color: #6a717d;
+            -webkit-font-smoothing: antialiased;
+            background: #f3f5f8;
+        }
+    }
+    h5 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #afb1b6;
+    }
+}

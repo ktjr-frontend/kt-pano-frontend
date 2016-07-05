@@ -28,13 +28,14 @@
         // 确认完成
         doneBtn.addEventListener('click', function(ev) {
             ev.preventDefault()
-
             var oData = new FormData(form)
-            xhr.open('POST', '/api/v1/upload_business_card', true)
-            xhr.setRequestHeader('Authorization', token)
+            oData.append('token', token)
+            xhr.open('POST', '/api/v1/cards', true)
+                // xhr.setRequestHeader('Authorization', token)
             xhr.onload = function(oev) {
-                if (xhr.status === 200) {
-                    bsnsCard = oev.data.url
+                var data = JSON.parse(oev.currentTarget.responseText)
+                if (xhr.status === 201) {
+                    bsnsCard = data.card_url
                     previewImg.src = bsnsCard
                     container.classList.remove('preview')
                     container.classList.add('done')
@@ -44,7 +45,7 @@
 
             this.disabled = true
             this.innerHTML = '上传中<i class="dotting"></i>'
-            this.classList.add('ajax')
+            this.classList.add('pending')
             xhr.send(oData)
         })
 
@@ -65,11 +66,17 @@
             var reader = new FileReader()
             reader.addEventListener('load', function() {
                 previewImg.src = reader.result
+                file.disabled = false
+                container.classList.remove('preparing')
                 container.classList.add('preview')
             })
 
             if (file.files[0]) {
-                reader.readAsDataURL(file.files[0])
+                file.disabled = true
+                container.classList.add('preparing')
+                setTimeout(function() {
+                    reader.readAsDataURL(file.files[0])
+                }, 50)
             }
 
             ev.preventDefault()

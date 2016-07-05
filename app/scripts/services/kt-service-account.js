@@ -7,12 +7,12 @@
     angular.module('kt.pano')
 
     // user service
-    .factory('ktUserService', function($resource, ktAjaxCache, ktApiVersion) {
+    .factory('ktUserService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/sessions', {}, {
             'get': {
                 method: 'GET',
                 // apiMock: true,
-                cache: ktAjaxCache
+                // cache: ktAjaxCache
             }
         })
     })
@@ -53,6 +53,5 @@
             content: '@content'
         })
     })
-
 
 })();

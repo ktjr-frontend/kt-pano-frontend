@@ -188,10 +188,16 @@
 
                     return op
                 },
-                // 总览气泡图按字母排序
+                // 总览气泡图按首字母排序
                 sortByFirstChar: function(data) {
                     return _.sortBy(data, function(v) {
                         return window.utils.HanZiPinYin.get(v[2].slice(0, 1))
+                    })
+                },
+                // 总览气泡图按名称所有字母排序
+                sortByChars: function(data) {
+                    return _.sortBy(data, function(v) {
+                        return window.utils.HanZiPinYin.get(v[2])
                     })
                 },
                 //总览页计算资产类型发行量占比的百分比

@@ -27,20 +27,20 @@
 
                             ktUserService.get(function(res) {
                                 $rootScope.defaultRoute = 'pano.overview'
-                                $rootScope.user = res.account
+                                var user = $rootScope.user = res.account
 
                                 // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
                                 if (!$rootScope.forceJumpState) {
-                                    if (res.account.role === 'unfilled') {
+                                    if (user.status === 'initialized') {
                                         $state.go('account.perfect')
                                         return
-                                    } else if (res.account.role === 'rejected') {
+                                    } else if (user.status === 'rejected') {
                                         $state.go('pano.settings', { forceJump: true })
                                         return
                                     }
                                 }
 
-                                deferred.resolve(res.account)
+                                deferred.resolve(user)
                             }, function() {
                                 deferred.resolve(null)
                             })
@@ -63,7 +63,7 @@
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            value: ['passed', 'unchecked']
+                            value: ['passed', 'pended']
                         }],
                         // breadcrumb: true,
                         // breadcrumbTitle: '资产特征',
@@ -233,7 +233,11 @@
                     url: '/settings',
                     templateUrl: 'views/pano/account/settings.html',
                     resolve: ktLazyResolve([
+                        'views/pano/account/settings.css',
                         'common/factories/kt-captcha.js',
+                        'common/directives/kt-qrcode-directive.js',
+                        'scripts/directives/business-card-upload/style.css',
+                        'scripts/directives/business-card-upload/directive.js',
                         'views/pano/account/settings.js'
                     ]),
                     controller: 'ktSettingsCtrl',

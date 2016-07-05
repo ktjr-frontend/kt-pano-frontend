@@ -104,7 +104,7 @@
                     content: 'overview',
                     chart: 'summary',
                 }, options || {}), function(data) {
-                    _self.data = ktDataHelper.sortByFirstChar(data.stat)
+                    _self.data = ktDataHelper.sortByChars(data.stat)
 
                     if (data.crawled_at) {
                         $scope.updateDate = moment(data.crawled_at).subtract(6, 'd').format('YYYY-MM-DD') + ' ~ ' + moment(data.crawled_at).format('YYYY-MM-DD')

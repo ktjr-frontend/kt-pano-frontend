@@ -14,6 +14,10 @@ module.exports = function(app) {
 
     // 总览页
     app.get(apiPrefix + '/stats/overview', proxyMidWare)
+    // app.get(apiPrefix + '/stats/overview', function (req, res, next) {
+    //     res.status(401).send('Bad Request');
+    // })
+
     app.get(apiPrefix + '/stats/hodgepodge', proxyMidWare)
 
     // 资产类型的发行量-收益率统计图 @deprecated

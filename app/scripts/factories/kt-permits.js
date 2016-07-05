@@ -5,9 +5,9 @@
         .factory('ktPermits', function($rootScope, ktSweetAlert) {
             var permitChecker = {
                 roleCheck: function(permitValues) {
-                    if (!$rootScope.user || !$rootScope.user.role) return true
+                    if (!$rootScope.user || !$rootScope.user.status) return true
 
-                    var role = $rootScope.user.role
+                    var role = $rootScope.user.status
                     var isOk = _.includes(permitValues, role)
                     if (!isOk) {
                         switch (role) {
@@ -19,7 +19,7 @@
                                     text: '您的信息审核未通过，请根据提示重新填写或联系PANO酱：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO酱微信客服二维码" width="120" /></div>'
                                 })
                                 break
-                            case 'unchecked':
+                            case 'pended':
                                 ktSweetAlert.swal({
                                     title: '很抱歉，您暂无权限查看该页面^_^',
                                     type: 'info',
@@ -45,12 +45,12 @@
             return function(role) {
                 var res = null
                 switch (role) {
-                    case 'unfilled':
+                    case 'initialized':
                         $state.go('account.perfect')
                         res = false
                         break
                     case 'rejected':
-                    case 'unchecked':
+                    case 'pended':
                         $state.go('pano.settings')
                         res = false
                         break

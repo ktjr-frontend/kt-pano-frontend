@@ -81,13 +81,15 @@
             },
 
             responseError: function(res) {
-                // var $state = $injector.get('$state') //拦截器内需要使用$inject方式手动注入，否则报错$inject:cdep
+                var $state = $injector.get('$state') //拦截器内需要使用$inject方式手动注入，否则报错$inject:cdep
                 var $rootScope = $injector.get('$rootScope')
                 var $location = $injector.get('$location')
-                // var $window = $injector.get('$window')
                 var ktSweetAlert = $injector.get('ktSweetAlert')
-                // var ipCookie = $injector.get('ipCookie')
-                // var CacheFactory = $injector.get('CacheFactory')
+                var $window = $injector.get('$window')
+                var CacheFactory = $injector.get('CacheFactory')
+                var ipCookie = $injector.get('ipCookie')
+                var ktUserService = $injector.get('ktUserService')
+                    // var $sce = $injector.get('$sce')
 
                 if (res.status === 419 || res.status === 401) {
                     var search = $location.search()
@@ -107,9 +109,21 @@
                         return $q.reject(res.data)
                     }
 
-                    $rootScope.error401 = '没有权限！'
-
-                    // $state.go('error.401', stateParams)
+                    // 如果是登录状态
+                    if ($rootScope.user) {
+                        ktUserService.get(function(data) {
+                            $rootScope.user = data.account
+                            $rootScope.error401 = {
+                                asRole: true // 无权限的用户角色 展示无权限内容
+                            }
+                        })
+                    } else {
+                        $rootScope.user = null
+                        delete $window.localStorage.token
+                        ipCookie.remove('token')
+                        CacheFactory.clearAll()
+                        $state.go('account.login')
+                    }
 
                 } else if (res.status === 403) {
                     ktSweetAlert.swal({

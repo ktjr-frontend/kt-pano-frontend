@@ -7,14 +7,16 @@
             </div>
             <div class="hpanel">
                 <div class="panel-body">
-                    <form id="perfectForm" novalidate name="perfectForm" class="form-horizontal" kt-accessible-form>
+                    <div kt-business-card kt-submit="submitForm()" kt-user="user" upload-type="normal"></div>
+                    <!-- <div ng-include="'views/_upload_business_card_form.html'"></div> -->
+                    <!--<form id="perfectForm" novalidate name="perfectForm" class="form-horizontal" kt-accessible-form>
                         <div class="form-group" ng-class="{'has-error':perfectForm.business_card.$invalid && perfectForm.business_card.$dirty}">
                             <div class="col-md-12">
                                 <div class="qrcode-bs-card text-center" ng-show="!user.business_card">
                                     <h5>手机扫描二维码上传：</h5>
                                     <div class="qrcode-body">
                                         <div class="qrcode" kt-qr-code qrcode="qrcode"></div>
-                                        <!-- <img class="qrcode" src="/images/weixin.jpg" alt="扫描上传名片"> -->
+                                        <!~~ <img class="qrcode" src="/images/weixin.jpg" alt="扫描上传名片"> ~~>
                                         <div class="buttons upload">
                                             <div class="btn btn-file" ng-class="{disabled: pendingUpload}">
                                                 <span>本地上传</span>
@@ -38,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="form-group" ng-class="{'has-error':perfectForm.name.$invalid && perfectForm.name.$dirty}">
+                        <!~~<div class="form-group" ng-class="{'has-error':perfectForm.name.$invalid && perfectForm.name.$dirty}">
                             <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label> ~~>
                             <div class="col-md-12">
                                 <input autofocus ng-maxlength="50" ng-minlength="2" kt-validate-on-blur placeholder="您的真实姓名（提交后不可修改）" type="text" required ng-model="user.name" id="" class="form-control" name="name">
@@ -91,8 +93,8 @@
                                     <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于50个字符</div>
                                 </div>
                             </div>
-                        </div>-->
-                        <!-- <div class="form-group" ng-class="{'has-error':perfectForm.likes.$invalid && perfectForm.likes.$dirty}">
+                        </div>~~>
+                        <!~~ <div class="form-group" ng-class="{'has-error':perfectForm.likes.$invalid && perfectForm.likes.$dirty}">
                             <label class="text-primary-dark text-left fn col-md-12 mt10">以下哪些是您关注的金融资产类型？</label>
                             <div class="col-md-12 mt15">
                                 <div class="checkbox-label" ng-repeat="like in likes">
@@ -105,14 +107,14 @@
                                     <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的资产类型</div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div> ~~>
                         <div class="form-group mt40">
                             <div class="col-md-12 clfix">
                                 <div kt-loading-status height="32" width="32" ignores="/api/v1/shadows"></div>
                                 <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm('captcha')" ng-disabled="perfectForm.$invalid || pendingRequests">提交</button>
                             </div>
                         </div>
-                    </form>
+                    </form>-->
                 </div>
             </div>
         </div>
