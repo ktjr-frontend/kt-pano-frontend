@@ -2,10 +2,10 @@
     <div class="alert alert-warning alert-dismissible" role="alert" ng-if="visibleJudgement(['rejected', 'pended'])">
         <div class="alert-container">
             <div class="alert-body" ng-if="user.status === 'rejected'">
-                <em class="f2_5rem">很抱歉</em>，您所提交的信息因 <em ng-bind="user.reason"></em> （审核不通过原因）未能通过认证审核。<em ng-bind="user.solution"></em>（解决方法），感谢您对开通PANO的关注！
+                <em>很抱歉</em>，您所提交的信息因 <em class="f2_5rem" ng-bind="user.reason"></em> 未能通过认证审核。<em ng-bind="user.solution"></em>，感谢您对开通PANO的关注！
             </div>
             <div class="alert-body" ng-if="user.status === 'pended'">
-                您在 <em ng-bind="user.pended_at | date:'yyyy-MM-dd HH:mm:ss'"></em> 提交的信息正在审核中，审核结果会在一个工作日内以邮件的形式通知，请您耐心等待，如有问题可联系本页右下方的PANO酱。
+                您在 <em ng-bind="user.pended_at | date:'yyyy-MM-dd HH:mm:ss'"></em> 提交的信息正在审核中，审核结果会在一个工作日内以邮件的形式通知，请您耐心等待，如有问题可联系本页右下方的PANO微信小秘书。
             </div>
             <div class="alert-footer clfix" ng-if="user.status === 'rejected'">
                 <div class="fl">请在下方进行修改重新提交</div>
@@ -67,11 +67,11 @@
                         <span class="key">名<i class="blank"></i><i class="blank"></i>片：</span>
                         <div class="value">
                             <img class="business-card" ng-src="{{user.card_url}}" height="170" alt="用户的名片">
-                        </div>
-                        <div class="action" ng-if="visibleJudgement(['rejected', 'passed'])">
-                            <a ng-click="updateBusinessCard()" class="btn btn-navy-blue f1_2rem">
-                                重新上传
-                            </a>
+                            <div class="action" ng-if="visibleJudgement(['rejected', 'passed'])">
+                                <a ng-click="updateBusinessCard()" class="btn btn-navy-blue f1_2rem">
+                                    重新上传
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="action">

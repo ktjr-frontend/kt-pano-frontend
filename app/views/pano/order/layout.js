@@ -134,7 +134,7 @@
                     var v = $filter('ktFontFamilyIgnore')(value)
                     v = $filter('ktFontSizeIgnore')(v)
                     v = $filter('ktParagraphStyleIgnore')(v)
-                    v = v.replace(/<p[^>]*>\s*<\/p>/g, '')
+                    v = v.replace(/<p[^>]*>(?:<embed[^>]+>(?:<\/embed>)?)*\s*<\/p>/g, '')
                     return v
                 }
 

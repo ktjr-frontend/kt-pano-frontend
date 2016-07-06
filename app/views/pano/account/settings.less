@@ -51,7 +51,7 @@
             font-size: 1.5rem;
             margin-bottom: 10px;
             position: relative;
-            .action {
+            &>.action {
                 position: relative;
                 display: inline-block;
                 left: 20px;
@@ -64,9 +64,16 @@
         }
         .value {
             color: @color-navy-blue;
+            position: relative;
             .business-card{
                 padding: 3px;
                 border: 1px solid @border-color;
+            }
+            &>.action{
+                position: absolute;
+                top: 50%;
+                right: -100px;
+                transform: translateY(-50%);
             }
         }
         div.value {

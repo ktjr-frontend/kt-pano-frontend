@@ -76,7 +76,7 @@
                     // 二维码
                     $scope.qrcode = {}
                     $scope.qrcode.settings = {
-                        text: location.origin + '/views/h5/ubc.html?r=' + Math.random().toString(16).slice(2, 7) + '&t=' + $scope.user.id,
+                        text: location.origin + '/views/h5/ubc.html?r=' + Math.random().toString(16).slice(2, 8) + '&t=' + $scope.user.id,
                         // text: location.origin + '/views/h5/ubc.html?_t=30fe7def0f5da26975187574285259ef1b96020b',
                         width: 340,
                         height: 340,
@@ -92,16 +92,16 @@
                                 content: 'confirm'
                             }, function(data) {
                                 $scope.pendingRequests = false
-                                ktSweetAlert.swal({
-                                    title: '提交成功！',
-                                    text: '',
-                                    type: 'success',
-                                }, function() {
+                                // ktSweetAlert.swal({
+                                //     title: '提交成功！',
+                                //     text: '',
+                                //     type: 'success',
+                                // }, function() {
                                     userCardDisabled = true
                                     $timeout.cancel(getUserCardPromise)
                                     $.extend($scope.user, data.account)
                                     ktSubmit()
-                                })
+                                // })
                             },
                             function(res) {
                                 $scope.pendingRequests = false

@@ -43,7 +43,7 @@
 
             // 根据用户角色判断是否显示
             $scope.visibleJudgement = function(permitsList) {
-                return _.includes(permitsList || [], $rootScope.user.status)
+                return _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
             }
 
             // 更新用户资料
@@ -95,27 +95,38 @@
 
             // 重新提交审核
             $scope.updateUserStatus = function() {
-                ktCardsService.update({
-                        content: 'confirm'
-                    }, function() {
-                        $scope.pendingRequests = false
-                        ktSweetAlert.swal({
-                            title: '',
-                            text: '您的信息已提交审核，审核结果会在一个工作日内以邮件的形式通知，请您耐心等待。',
-                            type: 'success',
-                        }, function() {
-                            // CacheFactory.clearAll()
-                            $rootScope.user.status = 'pended'
-                        })
-                    },
-                    function(res) {
-                        $scope.pendingRequests = false
-                        ktSweetAlert.swal({
-                            title: '提交失败',
-                            text: $.isArray(res.error) ? res.error.join('<br/>') : (res.error || '抱歉，您的信息没有提交成功，请再次尝试！'),
-                            type: 'error',
-                        });
-                    })
+                ktSweetAlert.swal({
+                    title: '您确定重新提交审核吗？',
+                    text: '提交审核后，审核结果会在一个工作日内以邮件的形式通知您。',
+                    type: 'info',
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                }, function(isConfirm) {
+                    if (isConfirm) {
+                        ktCardsService.update({
+                                content: 'confirm'
+                            }, function() {
+                                $scope.pendingRequests = false
+                                ktSweetAlert.swal({
+                                    title: '',
+                                    text: '您的信息已提交审核，审核结果会在一个工作日内以邮件的形式通知，请您耐心等待。',
+                                    type: 'success',
+                                }, function() {
+                                    // CacheFactory.clearAll()
+                                    $rootScope.user.status = 'pended'
+                                })
+                            },
+                            function(res) {
+                                $scope.pendingRequests = false
+                                ktSweetAlert.swal({
+                                    title: '提交失败',
+                                    text: $.isArray(res.error) ? res.error.join('<br/>') : (res.error || '抱歉，您的信息没有提交成功，请再次尝试！'),
+                                    type: 'error',
+                                });
+                            })
+                    }
+                })
             }
 
             $scope.updatePassword = function() {
@@ -232,7 +243,7 @@
             }
         })
         // 更新名片
-        .controller('ktUpdateBusinessCardCtrl', function($rootScope, $scope, $uibModalInstance) {
+        .controller('ktUpdateBusinessCardCtrl', function($rootScope, $scope, $uibModalInstance, ktSweetAlert) {
             $scope.title = '上传名片'
             $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user.card_url = null // 默认展示二维码
@@ -246,7 +257,7 @@
             $scope.close = function($event, isConfirm) {
                 $event.preventDefault()
                 if (isConfirm) {
-                    // ktSweetAlert.success('信息修改成功')
+                    ktSweetAlert.success('信息修改成功')
                     $rootScope.user.card_url = $scope.user.card_url
                     $rootScope.user.status = $scope.user.status
                 }

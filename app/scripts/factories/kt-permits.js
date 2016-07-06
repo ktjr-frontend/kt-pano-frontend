@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .factory('ktPermits', function($rootScope, ktSweetAlert) {
+        .factory('ktPermits', function($rootScope, $state, ktSweetAlert) {
             var permitChecker = {
                 roleCheck: function(permitValues) {
                     if (!$rootScope.user || !$rootScope.user.status) return true
@@ -16,7 +16,9 @@
                                     title: '很抱歉，您暂无权限查看该页面^ ^',
                                     // type: 'info',
                                     html: true,
-                                    text: '您的信息审核未通过，请根据提示重新填写或联系PANO酱：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO酱微信客服二维码" width="120" /></div>'
+                                    text: '您的信息审核未通过，请根据提示重新填写或联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
+                                }, function() {
+                                    $state.go('pano.settings')
                                 })
                                 break
                             case 'pended':
@@ -25,6 +27,8 @@
                                     // type: 'info',
                                     // html: true,
                                     text: ' 您的信息正在审核中，审核结果会在一个工作日内以邮件的形式通知您，请耐心等待。'
+                                }, function () {
+                                    $state.go('pano.overview')
                                 })
                                 break
                             default:

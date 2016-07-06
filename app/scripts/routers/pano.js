@@ -10,7 +10,7 @@
                  *  微贷平台
                  */
                 'pano': {
-                    url: '/pano?apimock', //父view的设置，通过ui-sref的跳转会将参数带到子view
+                    url: '/pano?apimock&jump', //父view的设置，通过ui-sref的跳转会将参数带到子view
                     abstract: true,
                     templateUrl: 'views/common/pano.html',
                     data: {
@@ -20,7 +20,7 @@
                         specialClass: 'pano-page'
                     },
                     params: {
-                        passPermits: false, //从index 页面自动跳转到pano.overview 不走校验 走跳转
+                        jump: null, //从index 页面自动跳转到pano.overview 不走校验 走跳转
                         forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
                     },
                     resolve: ktLazyResolve(['views/common/pano.js']

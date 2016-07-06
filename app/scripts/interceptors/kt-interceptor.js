@@ -105,7 +105,7 @@
                     // 如果是登录状态
                     if ($rootScope.user) {
                         $rootScope.error401 = {
-                            asRole: true // 无权限的用户角色 展示无权限内容
+                            asRole: true // 无权限的用户角色 展示无权限内容  @deprecated
                         }
                     } else {
                         $rootScope.user = null
