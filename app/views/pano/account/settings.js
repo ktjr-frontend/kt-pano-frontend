@@ -250,6 +250,7 @@
             $scope.user.content = 'update_business_card'
 
             $scope.submitForm = function() {
+                ktSweetAlert.success('信息修改成功')
                 $uibModalInstance.close($scope.user)
                     // CacheFactory.clearAll()
             }
