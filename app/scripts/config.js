@@ -118,7 +118,7 @@
 
                 // 路由权限拦截
                 if (toState.name.indexOf('pano.') > -1 && !toParams.forceJump) {
-                    if ($rootScope.user && $rootScope.user.status && toState.data.permits) {
+                    if ($rootScope.user && $rootScope.user.status && toState.data.permits && !toParams.passPermits) {
                         if (!ktPermits(toState.data.permits)) {
                             event.preventDefault()
                             return
@@ -160,6 +160,7 @@
                         ]
                     }
                 } else {
+                    toParams.passPermits = false
                     toParams.forceJump = false
                     delete toState.resolve.user
                 }
@@ -199,7 +200,9 @@
                 }*/
 
                 toParams.forceJump = false
-                    // 存储非错误和登录注册框的url 供redirect或者返回用
+                toParams.passPermits = false
+
+                // 存储非错误和登录注册框的url 供redirect或者返回用
                 if (toState.name.indexOf('pano') > -1) {
                     $rootScope.wantJumpUrl = ''
                 }

@@ -28,7 +28,7 @@
                                     notRequired: true
                                 }, function(res) {
                                     $rootScope.user = res.account
-                                    $state.go('pano.overview')
+                                    $state.go('pano.overview', { passPermits: true })
 
                                     // if (!ktRoleResolve(res.account.role)) {
                                     //     return

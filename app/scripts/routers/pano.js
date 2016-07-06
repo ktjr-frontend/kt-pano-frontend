@@ -20,6 +20,7 @@
                         specialClass: 'pano-page'
                     },
                     params: {
+                        passPermits: false, //从index 页面自动跳转到pano.overview 不走校验 走跳转
                         forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
                     },
                     resolve: ktLazyResolve(['views/common/pano.js']
