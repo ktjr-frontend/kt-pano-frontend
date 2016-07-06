@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktPanoCtrl', function($scope, $rootScope, $state, $templateRequest, ktS, ktFeedbackService, user) {
+        .controller('ktPanoCtrl', function($scope, $rootScope, $state, $templateRequest, ktS, ktFeedbackService) {
 
             $rootScope.goHome = function() {
                 $state.go($rootScope.defaultRoute)
@@ -29,7 +29,7 @@
                     tpl = $(tpl)
                     $scope.options = {
                         customAjax: function(feedback) {
-                            return ktFeedbackService.save($.extend({ from: 'compass' }, user, feedback)).$promise
+                            return ktFeedbackService.save($.extend({ from: 'compass' }, $rootScope.user, feedback)).$promise
                         },
                         postHTML: false,
                         postURL: false,

@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktSettingsCtrl', function($rootScope, $timeout, $scope, $state, $location, $uibModal, $window, ktSweetAlert, ktAccountService, ktCardsService, ktUserService) {
+        .controller('ktSettingsCtrl', function($rootScope, $timeout, $scope, $state, $location, $uibModal, $window, ktSweetAlert, ktAccountService, ktCardsService) {
 
             // $scope.settingUser = $.extend(true, {}, $rootScope.user)
 
@@ -34,9 +34,9 @@
             }*/
 
             // 设置页面涉及到用户状态，专门更新一下用户信息
-            ktUserService.get(function(res) {
-                $rootScope.user = res.account
-            })
+            // ktUserService.get(function(res) {
+            //     $rootScope.user = res.account
+            // })
 
             // CacheFactory.clearAll()
             // var user = $rootScope.user

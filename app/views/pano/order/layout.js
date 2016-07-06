@@ -134,6 +134,7 @@
                     var v = $filter('ktFontFamilyIgnore')(value)
                     v = $filter('ktFontSizeIgnore')(v)
                     v = $filter('ktParagraphStyleIgnore')(v)
+                    v = v.replace(/<p[^>]*>\s*<\/p>/g, '')
                     return v
                 }
 

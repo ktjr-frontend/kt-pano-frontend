@@ -114,20 +114,64 @@
             }
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+                if (!toState.resolve) { toState.resolve = {} }
 
-                // 权限控制，无法控制刷新页面的行为
-                /*if (toState.data.permits) {
-                    if (!ktPermits(toState.data.permits)) {
-                        event.preventDefault()
-                        return
+                // 路由权限拦截
+
+                if (toState.name.indexOf('pano.') > -1 && !toParams.forceJump) {
+                    if ($rootScope.user && $rootScope.user.status && toState.data.permits) {
+                        // if (toState.data.permits) {
+                        if (!ktPermits(toState.data.permits)) {
+                            event.preventDefault()
+                            return
+                        }
+                        // }
+                    } else {
+                        toState.resolve.user = [
+                            '$q',
+                            function($q) {
+                                var deferred = $q.defer();
+                                ktUserService.get(function(res) {
+                                    $rootScope.defaultRoute = 'pano.overview'
+                                    var user = $rootScope.user = res.account
+
+                                    // 权限控制，无法控制刷新页面的行为
+                                    if (toState.data.permits) {
+                                        if (!ktPermits(toState.data.permits)) {
+                                            event.preventDefault()
+                                            return
+                                        }
+                                    }
+
+                                    // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
+                                    if (!toParams.forceJump && toState.data.permits) {
+                                        if (user.status === 'initialized') {
+                                            $state.go('account.perfect')
+                                        } else if (user.status === 'rejected') {
+                                            $state.go('pano.settings', { forceJump: true })
+                                        } else if (user.status === 'pended') {
+                                            $state.go($rootScope.defaultRoute, { forceJump: true })
+                                        }
+                                    }
+
+                                    deferred.resolve(user)
+                                }, function() {
+                                    deferred.resolve(null)
+                                })
+                                return deferred.promise
+                            }
+                        ]
                     }
-                }*/
+                } else {
+                    toParams.forceJump = false
+                    delete toState.resolve.user
+                }
 
                 $rootScope.error401 = '' // 重置401的错误
 
-                if (toParams.forceJump) {
+                /*if (toParams.forceJump) {
                     $rootScope.forceJumpState = toState
-                }
+                }*/
 
                 // 首页获取user的逻辑不要尝试在这里解决，放到路由的resolve里面解决，否则很容易造成死循环，注意这个坑
                 var search = $location.search()
@@ -153,11 +197,12 @@
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 
                 // 清楚避免循环逻辑的状态标示
-                if ($rootScope.forceJumpState && $rootScope.forceJumpState.name === toState.name) {
+                /*if ($rootScope.forceJumpState && $rootScope.forceJumpState.name === toState.name) {
                     $rootScope.forceJumpState = null
-                }
+                }*/
 
-                // 存储非错误和登录注册框的url 供redirect或者返回用
+                toParams.forceJump = false
+                    // 存储非错误和登录注册框的url 供redirect或者返回用
                 if (toState.name.indexOf('pano') > -1) {
                     $rootScope.wantJumpUrl = ''
                 }

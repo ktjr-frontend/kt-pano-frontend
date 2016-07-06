@@ -40,6 +40,8 @@
                     container.classList.remove('preview')
                     container.classList.add('done')
                     this.disabled = false
+                } else {
+                    alert(data.error || '抱歉服务器繁忙，稍后重试！')
                 }
                 // alert(xhr.status)
             }

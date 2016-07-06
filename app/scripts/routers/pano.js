@@ -19,34 +19,39 @@
                         // permit: ['login'],
                         specialClass: 'pano-page'
                     },
-                    resolve: ktLazyResolve(['views/common/pano.js'], {
+                    params: {
+                        forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
+                    },
+                    resolve: ktLazyResolve(['views/common/pano.js']
+                    //     , {
 
-                        user: function($q, $rootScope, $state, ktUserService) {
-                            'ngInject';
-                            var deferred = $q.defer()
+                    //     user: function($q, $rootScope, $state, ktUserService) {
+                    //         'ngInject';
+                    //         var deferred = $q.defer()
 
-                            ktUserService.get(function(res) {
-                                $rootScope.defaultRoute = 'pano.overview'
-                                var user = $rootScope.user = res.account
+                    //         ktUserService.get(function(res) {
+                    //             $rootScope.defaultRoute = 'pano.overview'
+                    //             var user = $rootScope.user = res.account
 
-                                // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
-                                if (!$rootScope.forceJumpState) {
-                                    if (user.status === 'initialized') {
-                                        $state.go('account.perfect')
-                                        return
-                                    } else if (user.status === 'rejected') {
-                                        $state.go('pano.settings', { forceJump: true })
-                                        return
-                                    }
-                                }
+                    //             // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
+                    //             if (!$rootScope.forceJumpState) {
+                    //                 if (user.status === 'initialized') {
+                    //                     $state.go('account.perfect')
+                    //                 } else if (user.status === 'rejected') {
+                    //                     $state.go('pano.settings', { forceJump: true })
+                    //                 } else if (user.status === 'pended') {
+                    //                     $state.go($rootScope.defaultRoute, { forceJump: true })
+                    //                 }
+                    //             }
 
-                                deferred.resolve(user)
-                            }, function() {
-                                deferred.resolve(null)
-                            })
-                            return deferred.promise
-                        }
-                    }),
+                    //             deferred.resolve(user)
+                    //         }, function() {
+                    //             deferred.resolve(null)
+                    //         })
+                    //         return deferred.promise
+                    //     }
+                    // }
+                    ),
                     controller: 'ktPanoCtrl'
                 },
 
@@ -241,9 +246,6 @@
                         'views/pano/account/settings.js'
                     ]),
                     controller: 'ktSettingsCtrl',
-                    params: {
-                        forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
-                    },
                     data: {
                         pageTitle: '账户设置',
                         specialClass: 'simple-page'
