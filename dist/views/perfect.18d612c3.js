@@ -1,1 +1,0 @@
-!function(){"use strict";angular.module("kt.pano").controller("ktPerfectCtrl",["$scope","$rootScope","$state","ktSession","user",function(a,b,c,d,e){b.goHome=function(){d.clear(),c.go("home.index")},a.user=b.user=e,a.submitForm=function(){c.go(b.defaultRoute||"pano.overview")}}])}();

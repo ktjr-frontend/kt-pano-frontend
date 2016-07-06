@@ -47,21 +47,31 @@
 
                     // 轮询获取用户名片
                     var getUserCardPromise
-                    var dialogClosed = false
+                    var userCardDisabled = false
 
                     function getUserCard() {
                         getUserCardPromise = $timeout(function() {
                             ktCardsService.get(function(data) {
                                 if (data.user && data.user.card_url) {
-                                    $scope.user.card_url = data.user.card_url
+                                    var img = new Image()
+                                    img.onload = function () {
+                                        $scope.user.card_url = data.user.card_url
+                                        img = null
+                                    }
+                                    img.src = data.user.card_url
                                 }
-                                if (!dialogClosed) {
+                                if (!userCardDisabled) {
                                     getUserCard()
                                 }
                             })
                         }, 3500)
                     }
                     getUserCard()
+
+                    $scope.$on('$stateChangeSuccess', function () {
+                        $timeout.cancel(getUserCardPromise)
+                        userCardDisabled = true
+                    })
 
                     // 二维码
                     $scope.qrcode = {}
@@ -87,7 +97,7 @@
                                     text: '',
                                     type: 'success',
                                 }, function() {
-                                    dialogClosed = true
+                                    userCardDisabled = true
                                     $timeout.cancel(getUserCardPromise)
                                     $.extend($scope.user, data.account)
                                     ktSubmit()
@@ -108,7 +118,7 @@
                     // 关闭弹出窗口
                     $scope.closeDialog = function(params) {
                         $timeout.cancel(getUserCardPromise)
-                        dialogClosed = true
+                        userCardDisabled = true
                         close(params)
                     }
 

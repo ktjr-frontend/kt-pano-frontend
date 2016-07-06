@@ -117,15 +117,12 @@
                 if (!toState.resolve) { toState.resolve = {} }
 
                 // 路由权限拦截
-
                 if (toState.name.indexOf('pano.') > -1 && !toParams.forceJump) {
                     if ($rootScope.user && $rootScope.user.status && toState.data.permits) {
-                        // if (toState.data.permits) {
                         if (!ktPermits(toState.data.permits)) {
                             event.preventDefault()
                             return
                         }
-                        // }
                     } else {
                         toState.resolve.user = [
                             '$q',
@@ -136,20 +133,20 @@
                                     var user = $rootScope.user = res.account
 
                                     // 权限控制，无法控制刷新页面的行为
-                                    if (toState.data.permits) {
+                                    /*if (toState.data.permits) {
                                         if (!ktPermits(toState.data.permits)) {
                                             event.preventDefault()
                                             return
                                         }
-                                    }
+                                    }*/
 
                                     // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
-                                    if (!toParams.forceJump && toState.data.permits) {
+                                    if (!toParams.forceJump) {
                                         if (user.status === 'initialized') {
                                             $state.go('account.perfect')
                                         } else if (user.status === 'rejected') {
                                             $state.go('pano.settings', { forceJump: true })
-                                        } else if (user.status === 'pended') {
+                                        } else if (user.status === 'pended' && toState.name !== 'pano.settings') {
                                             $state.go($rootScope.defaultRoute, { forceJump: true })
                                         }
                                     }

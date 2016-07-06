@@ -34,7 +34,7 @@
                         'scripts/directives/business-card-upload/directive.js',
                         'views/perfect.js',
                     ], {
-                        user: function($q, $window, ktUserService) {
+                        getUser: function($q, $window, ktUserService) {
                             'ngInject';
                             var deferred = $q.defer()
                             if ($window.localStorage.token) {

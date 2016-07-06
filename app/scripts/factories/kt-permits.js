@@ -13,8 +13,8 @@
                         switch (role) {
                             case 'rejected':
                                 ktSweetAlert.swal({
-                                    title: '很抱歉，您暂无权限查看该页面^_^',
-                                    type: 'info',
+                                    title: '很抱歉，您暂无权限查看该页面^ ^',
+                                    // type: 'info',
                                     html: true,
                                     text: '您的信息审核未通过，请根据提示重新填写或联系PANO酱：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO酱微信客服二维码" width="120" /></div>'
                                 })
@@ -22,13 +22,13 @@
                             case 'pended':
                                 ktSweetAlert.swal({
                                     title: '很抱歉，您暂无权限查看该页面^_^',
-                                    type: 'info',
+                                    // type: 'info',
                                     // html: true,
                                     text: ' 您的信息正在审核中，审核结果会在一个工作日内以邮件的形式通知您，请耐心等待。'
                                 })
                                 break
                             default:
-                                ktSweetAlert.info('很抱歉，您暂无权限查看该页面^_^')
+                                ktSweetAlert.info('很抱歉，您暂无权限查看该页面^ ^')
                         }
                     }
                     return isOk

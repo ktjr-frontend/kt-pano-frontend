@@ -19,7 +19,7 @@
                         'views/common/home.js',
                         'views/home/index.css'
                     ], {
-                        user: function($q, $window, $rootScope, $state, ktUserService) {
+                        getUser: function($q, $window, $rootScope, $state, ktUserService) {
                             'ngInject';
                             var deferred = $q.defer()
 

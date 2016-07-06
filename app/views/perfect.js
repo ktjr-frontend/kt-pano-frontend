@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, ktSession, user) {
+        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, ktSession, getUser) {
 
             $rootScope.goHome = function() {
                 ktSession.clear()
@@ -10,7 +10,7 @@
             }
 
             // CacheFactory.clearAll()
-            $scope.user = $rootScope.user = user
+            $scope.user = $rootScope.user = getUser
 
             // 提交表单
             $scope.submitForm = function() {
