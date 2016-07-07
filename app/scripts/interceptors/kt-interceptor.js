@@ -103,17 +103,17 @@
                     }
 
                     // 如果是登录状态
-                    if (res.config.url !== '/api/v1/sessions' && res.config.method !== 'GET') {
-                        $rootScope.error401 = {
-                            asRole: true // 无权限的用户角色 展示无权限内容  @deprecated
-                        }
-                    } else {
+                    // if (res.config.url !== '/api/v1/sessions' && res.config.method !== 'GET') {
+                    //     $rootScope.error401 = {
+                    //         asRole: true // 无权限的用户角色 展示无权限内容  @deprecated
+                    //     }
+                    // } else {
                         $rootScope.user = null
                         delete $window.localStorage.token
                         ipCookie.remove('token')
                         CacheFactory.clearAll()
                         $state.go('account.login')
-                    }
+                    // }
 
                 } else if (res.status === 403) {
                     ktSweetAlert.swal({

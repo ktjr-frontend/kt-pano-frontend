@@ -22,6 +22,9 @@ module.exports = {
                     createConfig: function(context, block) {
                         var generated = context.options.generated;
                         generated.options = {
+                            // compress: {
+                            //     drop_console: true
+                            // },
                             mangle: true
                         }
                     }

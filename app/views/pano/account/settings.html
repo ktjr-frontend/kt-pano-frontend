@@ -5,7 +5,7 @@
                 很抱歉，您所提交的信息因 <em class="f1_6rem" ng-bind="user.reason"></em> 未能通过认证审核。<em class="f1_6rem" ng-bind="user.solution"></em>，感谢您对开通PANO的关注！
             </div>
             <div class="alert-body" ng-if="user.status === 'pended'">
-                您在 <em ng-bind="user.pended_at | date:'yyyy-MM-dd HH:mm:ss'"></em> 提交的信息正在审核中，审核结果会在一个工作日内以邮件的形式通知，请您耐心等待，如有问题可联系本页右下方的PANO微信小秘书。
+                您在 <em ng-bind="user.pended_at | date:'yyyy-MM-dd HH:mm:ss'"></em> 提交的信息正在审核中，审核结果会在1个工作日内以邮件的形式通知，请您耐心等待，如有问题可联系本页右下方的PANO微信小秘书。
             </div>
             <div class="alert-footer clfix" ng-if="user.status === 'rejected'">
                 <div class="fl">请在下方进行修改后，</div>
