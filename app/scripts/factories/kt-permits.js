@@ -13,26 +13,30 @@
                         switch (role) {
                             case 'rejected':
                                 ktSweetAlert.swal({
-                                    title: '很抱歉，您暂无权限查看该页面^ ^',
+                                    title: '很抱歉，您暂无权限查看该页面。',
                                     // type: 'info',
                                     html: true,
-                                    text: '您的信息审核未通过，请根据提示重新填写或联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
+                                    text: '您的认证信息审核未通过，请根据提示内容修改后重新提交审核。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
                                 }, function() {
-                                    $state.go('pano.settings')
+                                    if ($state.current.name !== 'pano.settings') {
+                                        $state.go('pano.settings', { forceJump: true })
+                                    }
                                 })
                                 break
                             case 'pended':
                                 ktSweetAlert.swal({
-                                    title: '很抱歉，您暂无权限查看该页面^_^',
+                                    title: '很抱歉，您暂无权限查看该页面。',
                                     // type: 'info',
                                     // html: true,
-                                    text: ' 您的信息正在审核中，审核结果会在一个工作日内以邮件的形式通知您，请耐心等待。'
-                                }, function () {
-                                    $state.go('pano.overview')
+                                    text: '您的信息正在审核中，审核结果会在1个工作日内以邮件的形式通知您，请耐心等待。'
+                                }, function() {
+                                    if (!_.includes(['pano.overview', 'pano.settings'], $state.current.name)) {
+                                        $state.go('pano.overview', { forceJump: true })
+                                    }
                                 })
                                 break
                             default:
-                                ktSweetAlert.info('很抱歉，您暂无权限查看该页面^ ^')
+                                ktSweetAlert.info('很抱歉，您暂无权限查看该页面。')
                         }
                     }
                     return isOk

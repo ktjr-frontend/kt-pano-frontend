@@ -97,10 +97,8 @@
             $scope.updateUserStatus = function() {
                 ktSweetAlert.swal({
                     title: '您确定重新提交审核吗？',
-                    text: '提交审核后，审核结果会在一个工作日内以邮件的形式通知您。',
-                    type: 'info',
+                    text: '提交审核后，审核结果会在1个工作日内以邮件的形式通知您。',
                     showCancelButton: true,
-                    closeOnConfirm: false,
                     showLoaderOnConfirm: true,
                 }, function(isConfirm) {
                     if (isConfirm) {
@@ -108,14 +106,7 @@
                                 content: 'confirm'
                             }, function() {
                                 $scope.pendingRequests = false
-                                ktSweetAlert.swal({
-                                    title: '',
-                                    text: '您的信息已提交审核，审核结果会在一个工作日内以邮件的形式通知，请您耐心等待。',
-                                    type: 'success',
-                                }, function() {
-                                    // CacheFactory.clearAll()
-                                    $rootScope.user.status = 'pended'
-                                })
+                                $rootScope.user.status = 'pended'
                             },
                             function(res) {
                                 $scope.pendingRequests = false

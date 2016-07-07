@@ -10,7 +10,7 @@
         'ngResource',
         'ngSanitize',
         'ngMessages',
-        'ngAnimate',
+        // 'ngAnimate',
         'cgNotify',
         // 'apiMock',
         'angulartics',

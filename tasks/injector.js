@@ -9,7 +9,7 @@ var commonScripts = [
     'bower_components/ng-file-upload/ng-file-upload-all.min.js',
     // 'bower_components/ng-file-upload/ng-file-upload-all.min.js',
     'bower_components/angular-cookie/angular-cookie.min.js',
-    'bower_components/angular-animate/angular-animate.min.js',
+    // 'bower_components/angular-animate/angular-animate.min.js',
     'bower_components/angular-sanitize/angular-sanitize.min.js',
     // 'bower_components/angular-route/angular-route.min.js',
     'bower_components/angular-messages/angular-messages.min.js',

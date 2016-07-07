@@ -103,7 +103,7 @@
                     }
 
                     // 如果是登录状态
-                    if ($rootScope.user) {
+                    if (res.config.url !== '/api/v1/sessions' && res.config.method !== 'GET') {
                         $rootScope.error401 = {
                             asRole: true // 无权限的用户角色 展示无权限内容  @deprecated
                         }

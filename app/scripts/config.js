@@ -113,21 +113,19 @@
                 window.history.back()
             }
 
-            // $rootScope.reloadStatus = true // 是否是重新刷新状态
-
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
 
                 if (!toState.resolve) { toState.resolve = {} }
 
                 // 路由权限拦截
-                if (toState.name.indexOf('pano.') > -1) {
+                if (toState.name.indexOf('pano.') > -1 && (($rootScope.user && $rootScope.user.status !== 'passed') || !$rootScope.user)) {
                     // if ($rootScope.user && $rootScope.user.status && toState.data.permits && !toParams.jump) {
                     //     if (!ktPermits(toState.data.permits)) {
                     //         event.preventDefault()
                     //         return
                     //     }
                     // } else {
-                    toState.resolve.user = [
+                    toState.resolve.user = [ // 注意这样会导致每个state都会reload，当前页面路由的改变会刷新页面 所以上面判断
                             '$q',
                             function($q) {
                                 var deferred = $q.defer();
@@ -141,16 +139,16 @@
                                             event.preventDefault()
                                             return
                                         }
-                                    }
-
                                     // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
-                                    if (!toParams.forceJump) {
+                                    } else if (toParams.jump && !toParams.forceJump) {
                                         if (user.status === 'initialized') {
                                             $state.go('account.perfect')
                                         } else if (user.status === 'rejected') {
                                             $state.go('pano.settings', { forceJump: true })
                                         } else if (user.status === 'pended' && toState.name !== 'pano.settings') {
                                             $state.go($rootScope.defaultRoute, { forceJump: true })
+                                        } else { // 默认跳转的state，可以移除跳转的标识jump，否则会在路由上存在jump
+                                            $state.go(toState.name, { forceJump: true })
                                         }
                                     }
 
@@ -195,7 +193,6 @@
 
                 toParams.forceJump = false
                 toParams.jump = null
-                    // $rootScope.reloadStatus = false
 
                 // 存储非错误和登录注册框的url 供redirect或者返回用
                 if (toState.name.indexOf('pano') > -1) {
