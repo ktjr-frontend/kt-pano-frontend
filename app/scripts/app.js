@@ -10,7 +10,7 @@
         'ngResource',
         'ngSanitize',
         'ngMessages',
-        'ngAnimate',
+        // 'ngAnimate',
         'cgNotify',
         // 'apiMock',
         'angulartics',
@@ -22,7 +22,7 @@
         'angular-cache',
         'ngclipboard',
         // 'bm.uiTour',
-        // 'ngFileUpload',
+        'ngFileUpload',
         'kt.common',
         // 'kt.pano.i18' //国际化
     ])

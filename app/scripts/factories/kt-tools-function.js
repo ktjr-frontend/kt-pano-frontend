@@ -23,12 +23,13 @@
                     if (res.token) {
                         CacheFactory.clearAll()
                         $window.localStorage.token = res.token
-                        var url = $rootScope.wantJumpUrl || ktUrlGet('/pano/overview', $location.search())
+                        var url = $rootScope.wantJumpUrl || ktUrlGet('/pano/overview', $.extend({ jump: true }, $location.search()))
                         $location.url(url)
                             /*eslint-disable*/
                         successCallback && successCallback(res)
                             /*eslint-enable*/
                     }
+
                     /*else {
                         $state.go('account.confirm', {
                             institution: res.institution,

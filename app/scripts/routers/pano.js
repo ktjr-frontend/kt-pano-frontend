@@ -10,35 +10,49 @@
                  *  微贷平台
                  */
                 'pano': {
-                    url: '/pano?apimock', //父view的设置，通过ui-sref的跳转会将参数带到子view
+                    url: '/pano?apimock&jump', //父view的设置，通过ui-sref的跳转会将参数带到子view
                     abstract: true,
                     templateUrl: 'views/common/pano.html',
                     data: {
                         breadcrumb: false,
                         pageTitle: '微贷平台',
-                        permit: ['login'],
+                        // permit: ['login'],
                         specialClass: 'pano-page'
                     },
-                    resolve: ktLazyResolve(['views/common/pano.js'], {
+                    params: {
+                        jump: null, //从index 页面自动跳转到pano.overview 不走校验 走跳转
+                        forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
+                    },
+                    resolve: ktLazyResolve(['views/common/pano.js']
+                    //     , {
 
-                        user: function($q, $rootScope, $state, ktUserService) {
-                            'ngInject';
-                            var deferred = $q.defer()
-                            ktUserService.get(function(res) {
-                                $rootScope.defaultRoute = 'pano.overview'
-                                $rootScope.user = res.account
-                                if (res.account.refilled !== 'true') {
-                                    $state.go('account.perfect')
-                                    return
-                                }
+                    //     user: function($q, $rootScope, $state, ktUserService) {
+                    //         'ngInject';
+                    //         var deferred = $q.defer()
 
-                                deferred.resolve(res.account)
-                            }, function() {
-                                deferred.resolve(null)
-                            })
-                            return deferred.promise
-                        }
-                    }),
+                    //         ktUserService.get(function(res) {
+                    //             $rootScope.defaultRoute = 'pano.overview'
+                    //             var user = $rootScope.user = res.account
+
+                    //             // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
+                    //             if (!$rootScope.forceJumpState) {
+                    //                 if (user.status === 'initialized') {
+                    //                     $state.go('account.perfect')
+                    //                 } else if (user.status === 'rejected') {
+                    //                     $state.go('pano.settings', { forceJump: true })
+                    //                 } else if (user.status === 'pended') {
+                    //                     $state.go($rootScope.defaultRoute, { forceJump: true })
+                    //                 }
+                    //             }
+
+                    //             deferred.resolve(user)
+                    //         }, function() {
+                    //             deferred.resolve(null)
+                    //         })
+                    //         return deferred.promise
+                    //     }
+                    // }
+                    ),
                     controller: 'ktPanoCtrl'
                 },
 
@@ -53,6 +67,10 @@
                     ]),
                     controller: 'ktOverviewCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed', 'pended']
+                        }],
                         // breadcrumb: true,
                         // breadcrumbTitle: '资产特征',
                         pageTitle: '总览',
@@ -69,6 +87,10 @@
                     ]),
                     controller: 'ktMarketLayoutCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '市场数据',
                     }
                 },
@@ -116,6 +138,10 @@
                     ]),
                     controller: 'ktProductsLayoutCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '产品信息',
                     }
                 },
@@ -151,6 +177,10 @@
                     ]),
                     controller: 'ktOrderLayoutCtrl',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '可预约产品',
                     }
                 },
@@ -184,6 +214,10 @@
                     url: '/institutions',
                     template: '<ui-view/>',
                     data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            value: ['passed']
+                        }],
                         pageTitle: '机构',
                     }
                 },
@@ -205,7 +239,11 @@
                     url: '/settings',
                     templateUrl: 'views/pano/account/settings.html',
                     resolve: ktLazyResolve([
+                        'views/pano/account/settings.css',
                         'common/factories/kt-captcha.js',
+                        'common/directives/kt-qrcode-directive.js',
+                        'scripts/directives/business-card-upload/style.css',
+                        'scripts/directives/business-card-upload/directive.js',
                         'views/pano/account/settings.js'
                     ]),
                     controller: 'ktSettingsCtrl',

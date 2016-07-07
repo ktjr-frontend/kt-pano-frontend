@@ -84,10 +84,11 @@
                 var $state = $injector.get('$state') //拦截器内需要使用$inject方式手动注入，否则报错$inject:cdep
                 var $rootScope = $injector.get('$rootScope')
                 var $location = $injector.get('$location')
-                var $window = $injector.get('$window')
                 var ktSweetAlert = $injector.get('ktSweetAlert')
-                var ipCookie = $injector.get('ipCookie')
+                var $window = $injector.get('$window')
                 var CacheFactory = $injector.get('CacheFactory')
+                var ipCookie = $injector.get('ipCookie')
+                    // var $sce = $injector.get('$sce')
 
                 if (res.status === 419 || res.status === 401) {
                     var search = $location.search()
@@ -96,31 +97,36 @@
                     // 确保apimock 的传递
                     if (search.apimock) stateParams.apimock = search.apimock
 
-                    // 清除本地数据
-                    $rootScope.user = null
-                    delete $window.localStorage.token
-                    ipCookie.remove('token')
-                    CacheFactory.clearAll()
-
                     // ipCookie.remove('connect.sid') //这是httpOnly Cookie 前端无法删除
                     if (res.config && res.config.params && res.config.params.notRequired) { //官网不需要跳转登录页面
                         return $q.reject(res.data)
                     }
 
-                    $state.go('account.login', stateParams)
+                    // 如果是登录状态
+                    // if (res.config.url !== '/api/v1/sessions' && res.config.method !== 'GET') {
+                    //     $rootScope.error401 = {
+                    //         asRole: true // 无权限的用户角色 展示无权限内容  @deprecated
+                    //     }
+                    // } else {
+                        $rootScope.user = null
+                        delete $window.localStorage.token
+                        ipCookie.remove('token')
+                        CacheFactory.clearAll()
+                        $state.go('account.login')
+                    // }
 
                 } else if (res.status === 403) {
                     ktSweetAlert.swal({
                         title: '请求失败！',
                         text: '您的权限不足！',
                         type: 'error'
-                    });
-                } else if (res.status === 500) { // 注释掉是为了接部分接口
+                    })
+                } else if (res.status === 500 || res.status === 502) { // 注释掉是为了接部分接口
                     ktSweetAlert.swal({
                         title: '请求失败！',
                         text: '抱歉！服务器繁忙。',
                         type: 'error'
-                    });
+                    })
                 }
                 return $q.reject(res.data)
             }

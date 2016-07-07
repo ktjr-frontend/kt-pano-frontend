@@ -1,0 +1,162 @@
+@import "app/common/styles/theme/v4/bootstrap/variables.less";
+@import "app/common/styles/theme/v4/variables.less";
+.simple-container {
+    margin-bottom: 50px;
+    color: @color-bright;
+    .alert {
+        margin: 20px 50px -10px;
+        padding: 0px 30px;
+        border: 0;
+        background: @color-1;
+        font-size: 1.3rem;
+        color: white;
+        .alert-body{
+            padding: 20px 0;
+            line-height: 1.7em;
+        }
+        .alert-footer{
+            padding: 20px 0;
+            line-height: 30px;
+            border-top: 1px solid @color-2;
+        }
+        em {
+            font-style: normal;
+            color: @color-orange;
+        }
+    }
+    .hpanel {
+        padding: 0 50px;
+        margin: 0;
+        .panel-body {
+            background: white;
+            border-radius: 5px;
+            padding: 20px 30px;
+        }
+    }
+    .setting-list {
+        .line {
+            position: relative;
+            padding: 20px 120px 20px 25px;
+            border-bottom: 1px dashed @border-color;
+            &:last-of-type {
+                border-bottom: 0;
+            }
+        }
+        .icon-edit {
+            transform: scale(0.8);
+            vertical-align: -1px;
+            display: inline-block;
+        }
+        .title {
+            font-size: 1.5rem;
+            padding: 8px 0;
+            position: relative;
+            &>.action {
+                position: relative;
+                display: inline-block;
+                left: 20px;
+                top: auto;
+                transform: translateY(0);
+            }
+            &.bd-b{
+                border-bottom: 1px dashed @border-color;
+            }
+        }
+        .key {
+            color: @color-bright;
+        }
+        .value {
+            color: @color-text;
+            position: relative;
+            .business-card-big{
+                position: absolute;
+                max-width: 500px;
+                max-height: 500px;
+                background: white;
+                position: absolute;
+                border: 1px solid @border-color;
+                top: 50%;
+                z-index: 99;
+                left: 100%;
+                transform: translateY(-50%) translateX(20px);
+                padding: 5px;
+            }
+            .business-card{
+                padding: 3px;
+                border: 1px solid @border-color;
+            }
+            &>.action{
+                position: absolute;
+                top: 50%;
+                right: -100px;
+                transform: translateY(-50%);
+            }
+        }
+        div.value {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .content {
+            font-size: 1.3rem;
+            color: lighten(@color-bright, 30%);
+            // margin-top: 10px;
+        }
+        .action {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    .simple-title {
+        font-size: 2rem;
+        margin-left: 55px;
+        margin-top: 25px;
+        font-weight: normal;
+        color: white;
+        padding: 8px 5px 12px;
+        border-bottom: 3px solid @color-navy-blue;
+    }
+    @media(max-width: 900px) {
+        .alert {
+            padding: 0 30px;
+        }
+        .hpanel {
+            padding: 0 30px;
+            .panel-body {
+                padding: 15px 25px;
+            }
+        }
+        .simple-title {
+            margin: 20px 0 0 40px;
+        }
+    }
+    @media(max-width: 768px) {
+        .alert {
+            padding: 0 10px;
+        }
+        .hpanel {
+            padding: 0 10px;
+            .panel-body {
+                padding: 10px 18px;
+            }
+        }
+        .simple-title {
+            margin: 15px 0 0 30px;
+        }
+    }
+    @media(max-width: 480px) {
+        .alert {
+            padding: 0;
+        }
+        .hpanel {
+            padding: 0;
+            .panel-body {
+                padding: 10px;
+            }
+        }
+        .simple-title {
+            margin: 10px 0 5px 10px;
+        }
+    }
+}

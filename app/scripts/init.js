@@ -64,7 +64,6 @@ $(document).ready(function() {
         })();
     })
 
-
     /*jshint -W030 */
     /*eslint-disable*/
     console && console.log('%c安全警告！', 'color:red;font-size:50px;-webkit-text-stroke: 1px #333;')

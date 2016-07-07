@@ -27,6 +27,9 @@ body.account-page {
     .checkbox.remember-me {
         padding-top: 0;
         min-height: auto;
+        input[type="checkbox"]:checked + label::after{
+            top: 2px;
+        }
     }
 }
 
@@ -151,6 +154,49 @@ body.account-page {
 .register-container {
     max-width: 490px;
     margin: 50px auto;
+    /*.qrcode-bs-card {
+        width: 170px;
+        margin: 0 auto;
+        &.preview {
+            width: 100%;
+            .buttons {
+                width: 170px;
+                margin: 20px auto 0;
+            }
+            .qrcode {
+                padding: 10px;
+                border: 1px solid @border-color;
+            }
+        }
+        .qrcode {
+            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+        .buttons {
+            position: relative;
+            margin-top: 20px;
+            width: 100%;
+            &.upload:before {
+                content: '或';
+                position: absolute;
+                left: -2em;
+                top: .5em;
+            }
+            .btn-file {
+                width: 100%;
+                color: #6a717d;
+                -webkit-font-smoothing: antialiased;
+                background: #f3f5f8;
+            }
+        }
+        h5 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #afb1b6;
+        }
+    }*/
     .input-tip {
         position: relative;
     }
@@ -162,7 +208,8 @@ body.account-page {
         left: 35px;
         border: 1px solid @border-color3;
         border-radius: 3px;
-        &:before, &:after{
+        &:before,
+        &:after {
             content: '';
             display: block;
             left: -14px;
@@ -172,7 +219,7 @@ body.account-page {
             border-color: transparent white transparent transparent;
             border-style: solid;
         }
-        &:before{
+        &:before {
             border-color: transparent @border-color3 transparent transparent;
             left: -15px;
             // top: 59px;

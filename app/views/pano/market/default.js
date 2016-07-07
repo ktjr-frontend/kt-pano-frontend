@@ -143,37 +143,44 @@
                     return l > 1 ? i * minWidth : 50 // 一个点特殊处理
                 })
 
-                // var start = l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25
-                // var end = l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
-                /*eslint-disable*/
-                var start = l === 1 ? 25 : (l === 2 ? 0 : 100 - minWidth * 3 / 2) // 特殊里1个点和2个点的时候
-                var end = l === 1 ? 75 : (l === 2 ? 50 : 100 - minWidth / 2)
-                    /*eslint-enable*/
+                // // var start = l > 2 ? 100 - (100 / (l - 1)) * 3 / 2 : 25
+                // // var end = l > 2 ? 100 - (100 / (l - 1)) / 2 : 75
+                // /*eslint-disable*/
+                // var start = l === 1 ? 25 : (l === 2 ? 0 : 100 - minWidth * 3 / 2) // 特殊里1个点和2个点的时候
+                // var end = l === 1 ? 75 : (l === 2 ? 50 : 100 - minWidth / 2)
+                //     /*eslint-enable*/
 
-                if (end - start < 5) {
-                    start = end - 5
-                }
+                // if (end - start < 5) {
+                //     start = end - 5
+                // }
 
                 return {
                     xAxisPositionPercents: lpps,
                     minWidth: _.floor(minWidth / 3),
-                    start: start,
-                    end: end
+                    start: 0,
+                    end: 100
+                    // start: start,
+                    // end: end
                 }
             }
 
             // 用于联动表格的日期初始化显示
             function getStartEnd() {
-                var start = moment(params.start_at)
+                /*var start = moment(params.start_at)
                 var end = moment(params.end_at)
                 var isGtOneWeek = end.weeks() - start.weeks() > 0
 
                 return {
                     start_at: isGtOneWeek ? moment(params.end_at).weekday(0).subtract(1, 'w').format('YYYY-MM-DD') : moment(params.start_at).weekday(0).format('YYYY-MM-DD'),
                     end_at: isGtOneWeek ? moment(params.end_at).weekday(6).subtract(1, 'w').format('YYYY-MM-DD') : moment(params.end_at).weekday(6).format('YYYY-MM-DD'),
+                }*/
+                return {
+                    start_at: params.start_at,
+                    end_at: params.end_at
                 }
             }
 
+            // 自定义的观察窗
             function customDataZoom(chart, options) {
                 var updatePromise
 
@@ -763,14 +770,6 @@
             durationAmountChart.updateDataView()
             weekRateChart.updateDataView()
             durationRateChart.updateDataView()
-
-            // 资产管理类数据
-            $scope.assetManger = {}
-            ktAnalyticsService.get({
-                content: 'rate_trend'
-            }, function(data) {
-                $scope.assetManger = data.stat
-            })
 
         })
 })();

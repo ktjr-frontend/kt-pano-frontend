@@ -5,7 +5,7 @@ var app = express();
 // var router = express.Router();
 
 var mockApi = require('./mock_api').mockApi;
-app.set('proxyHost', 'http://stage-pano.ktjr.com')
+app.set('proxyHost', 'http://dev-pano.ktjr.com')
 app.set('apiPrefix', '/api/v1')
 
 // mockapi中间件放到bodyparser前面，否则由于代理的问题导致请求被挂起，类似的相关问题：
@@ -27,5 +27,5 @@ var server = app.listen(3000, function() {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('Mock server listening at http://%s:%s', host, port);
 });

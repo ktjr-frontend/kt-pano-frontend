@@ -35,5 +35,10 @@
 	1. 如果遇到，gm & convert命令错误,需要预先安装graphicsmagick 或者 imagemagick  (mac :brew install or centos: sudo yum install imagemagick)
 	1. phantomjs安装下载超时，手动浏览器下载后，复制到错误提示所在的目录,例如下图：![](./readme/r1.png)
 	1. 项目提交的时候，会自动执行grunt lint, 如果抛错会终止提交，请解决错误后重新提交
+
+## 注意项：
+
+1. 本项目是依赖于kt-frontend-common公共项目的，而且为了避免在不同服务器构建的MD5文件指纹不同的问题，使用本地构建并用git维护dist目录。所以，在构建时确保kt-frontend-common公共项目使用正确的分支，如果公共项目有改动，请注意记得提交到远端！
+
     
     

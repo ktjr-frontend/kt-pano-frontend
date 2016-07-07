@@ -1,5 +1,6 @@
 var proxy = require('express-http-proxy');
 var parse = require('url').parse
+var Mock = require('mockjs')
 
 module.exports = function(app) {
     var host = app.get('proxyHost')
@@ -16,6 +17,29 @@ module.exports = function(app) {
 
     app.get(apiPrefix + '/sessions', proxyMidWare)
     app.post(apiPrefix + '/sessions', proxyMidWare)
+    // app.get(apiPrefix + '/sessions', function(req, res, next) {
+    //     var data = Mock.mock({
+    //         'account': {
+    //             'email': 'wangguochao@baidu.com',
+    //             'company': 'wangguochao',
+    //             'job': 'it',
+    //             'department': 'it',
+    //             'mobile': 15210569227,
+    //             'name': 'wangguochao',
+    //             'invitee_code': 'WZKQCG',
+    //             'refilled': 'true',
+    //             'role': 'initialized',
+    //             'invitee_limit': 5,
+    //             'business_card': '/images/logo-new.svg',
+    //             'invitee_count': 0
+    //         }
+    //     })
+    //     res.json(data)
+    // })
+
+    app.get(apiPrefix + '/cards', proxyMidWare)
+    app.post(apiPrefix + '/cards', proxyMidWare)
+    app.put(apiPrefix + '/cards/:confirm', proxyMidWare)
 
     app.get(apiPrefix + '/accounts/:type', proxyMidWare)
     app.put(apiPrefix + '/accounts/:type', proxyMidWare)

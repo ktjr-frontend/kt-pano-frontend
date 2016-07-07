@@ -19,16 +19,22 @@
                         'views/common/home.js',
                         'views/home/index.css'
                     ], {
-                        user: function($q, $window, $rootScope, $state, ktUserService) {
+                        getUser: function($q, $window, $rootScope, $state, ktUserService) {
                             'ngInject';
                             var deferred = $q.defer()
+
                             if ($window.localStorage.token) {
                                 ktUserService.get({
                                     notRequired: true
-                                }, function(data) {
-                                    $rootScope.user = data.account
-                                    $state.go('pano.overview')
-                                    deferred.resolve(data.account)
+                                }, function(res) {
+                                    $rootScope.user = res.account
+                                    $state.go('pano.overview', { jump: 'true' })
+
+                                    // if (!ktRoleResolve(res.account.role)) {
+                                    //     return
+                                    // }
+
+                                    deferred.resolve(res.account)
                                 }, function() {
                                     deferred.resolve(null)
                                 })

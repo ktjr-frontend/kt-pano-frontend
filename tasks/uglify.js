@@ -1,4 +1,9 @@
 module.exports = {
+    // options: {
+    //   compress: {
+    //     drop_console: true
+    //   }
+    // },
     forLazyLoad: {
         options: {
             mangle: true //混淆变量

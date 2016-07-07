@@ -142,5 +142,13 @@
 
             })
 
+            // 资产管理类数据
+            $scope.assetManger = {}
+            ktAnalyticsService.get({
+                content: 'rate_trend'
+            }, function(data) {
+                $scope.assetManger = data.stat
+            })
+
         })
 })();
