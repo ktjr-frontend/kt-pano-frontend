@@ -529,11 +529,10 @@
                                 if (!echartTooltip) return '';
                                 var params = _.reverse(p)
                                 var title = params[0].name
-                                var l = params.length
                                 title += ' ~ ' + moment(title).weekday(6).format('YYYY-MM-DD')
-                                _.each(params, function(v, i) {
-                                    v.amount = data.data[l - i - 1].amount[v.dataIndex]
-                                    v.rate = data.data[l - i - 1].rate[v.dataIndex]
+                                _.each(params, function(v) {
+                                    v.amount = data.data[v.seriesIndex].amount[v.dataIndex]
+                                    v.rate = data.data[v.seriesIndex].rate[v.dataIndex]
                                 })
 
                                 var res = echartTooltip({

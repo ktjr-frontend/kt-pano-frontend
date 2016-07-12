@@ -1,16 +1,8 @@
-var proxy = require('express-http-proxy');
-var parse = require('url').parse
+var proxyMidWare = require('./proxy').proxyMidWare
 var Mock = require('mockjs')
 
 module.exports = function(app) {
-    var host = app.get('proxyHost')
     var apiPrefix = app.get('apiPrefix')
-    var proxyMidWare = proxy(host, {
-        forwardPath: function(req, res) {
-            return parse(req.url).path;
-        }
-    })
-
 
     // 总览页
     app.get(apiPrefix + '/stats/overview', proxyMidWare)

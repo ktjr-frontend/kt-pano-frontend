@@ -9,11 +9,11 @@
         </div>
         <div ng-if="error401.asRole" class="header.html">
             <section ng-show="user.status === 'pended'">
-                <h4>很抱歉，您暂无权限查看该页面^_^</h4>
-                <div class="c-tb">您的信息正在审核中，审核结果会在一个工作日内以邮件的形式通知您， 请耐心等待。</div>
+                <h4>很抱歉，您暂无权限查看该页面</h4>
+                <div class="c-tb">您的信息正在审核中，审核结果会在1个工作日内以邮件的形式通知您， 请耐心等待。</div>
             </section>
             <section ng-show="user.status === 'rejected'">
-                <h4>很抱歉，您暂无权限查看该页面^_^</h4>
+                <h4>很抱歉，您暂无权限查看该页面</h4>
                 <div class="c-tb">您的信息审核未通过，请去<a ui-sref="pano.settings" class="tu mr2 ml2">个人设置页</a>根据提示重新填写或联系下方的PANO微信小秘书：</div>
                 <div class="text-center mt20">
                     <img src="/images/weixin.jpg" alt="微信PANO微信小秘书" width="170">

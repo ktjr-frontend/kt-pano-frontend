@@ -43,7 +43,6 @@
                 } else {
                     alert(data.error || '抱歉服务器繁忙，稍后重试！')
                 }
-                // alert(xhr.status)
             }
 
             this.disabled = true

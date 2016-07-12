@@ -14,9 +14,6 @@
                         <b class="fa fa-angle-down icon-arrow fb f1_5rem"></b>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeIn gray" role="menu" aria-labelledby="dLabel">
-                        <!-- <li ui-sref-active="active">
-                            <a title="数据总览" ui-sref="pano.overview">数据总览</a>
-                        </li> -->
                         <li ui-sref-active="active">
                             <a title="个人设置" ui-sref="pano.settings">个人设置</a>
                         </li>
@@ -52,30 +49,12 @@
             <li class="hdropdown" ng-class="{active:$state.includes('pano.products.*')}">
                 <a ui-sref="pano.products.obligatoryRight">
                    产品信息
-                   <!-- <b class="fa fa-angle-down icon-arrow fb f1_5rem"></b> -->
                 </a>
-                <!-- <ul uib-dropdown-menu class="animated fadeIn  gray" role="menu" aria-labelledby="dLabel">
-                    <li ui-sref-active="active">
-                        <a title="资产类" ui-sref="pano.products.obligatoryRight">资产类</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a title="资管类" ui-sref="pano.products.assetManage">资管类</a>
-                    </li>
-                </ul> -->
             </li>
             <li class="hdropdown" ng-class="{active:$state.includes('pano.order.*')}">
                 <a ui-sref="pano.order.obligatoryRight">
                     可预约产品
-                    <!-- <b class="fa fa-angle-down icon-arrow fb f1_5rem"></b> -->
                 </a>
-                <!-- <ul uib-dropdown-menu class="animated fadeIn  gray" role="menu" aria-labelledby="dLabel">
-                    <li ui-sref-active="active">
-                        <a title="资产类" ui-sref="pano.order.obligatoryRight">资产类</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a title="资管类" ui-sref="pano.order.assetManage">资管类</a>
-                    </li>
-                </ul> -->
             </li>
         </ul>
     </nav>
