@@ -226,9 +226,8 @@
 
                     _.each(chart.data, function(v) { // 计算所占比例
                         v[dataKey + '_percent'] = _.map(v[dataKey], function(v2, i2) {
-                                return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
-                            })
-                            // return v
+                            return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
+                        })
                     })
 
                     return chart

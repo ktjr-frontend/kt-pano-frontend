@@ -8,8 +8,6 @@
                 $state.go($rootScope.defaultRoute)
             }
 
-            // $rootScope.sharedData = {}
-
             $scope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState) {
 
                 window.requestAnimationFrame(function() {
@@ -22,7 +20,7 @@
                     // 切换页面成功后回到顶部
                     $('body').scrollTop(0)
                 })
-            });
+            })
 
             $templateRequest('common/directives/feedback/template.html')
                 .then(function(tpl) {
@@ -45,7 +43,6 @@
                         },
                     }
                 })
-
         })
 
 })();
