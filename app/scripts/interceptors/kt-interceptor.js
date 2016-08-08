@@ -40,7 +40,7 @@
         return {
             request: function(req) {
                 var $location = $injector.get('$location')
-                var $rootScope = $injector.get('$rootScope')
+                // var $rootScope = $injector.get('$rootScope')
                 var ktS = $injector.get('ktS')
                 var ktUri = $injector.get('ktUri')
                 var search = $location.search()
@@ -52,9 +52,9 @@
                 }
 
                 //数据接口缓存处理
-                if (req.url.indexOf('/ajax/v') > -1) {
+                if (req.url.indexOf('/api/v') > -1) {
                     req.url = ktUri.appendParams(req.url, {
-                        ac: $rootScope.apiCode
+                        ac: Math.random().toString(16).slice(2)
                     })
 
                     // 其他资源文件根据版本缓存

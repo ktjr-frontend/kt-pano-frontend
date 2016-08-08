@@ -88,6 +88,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('build', [
+        'lint',
         'clean:dist',
         // 'responsive_images',
         'sprite',

@@ -24,34 +24,34 @@
                         forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
                     },
                     resolve: ktLazyResolve(['views/common/pano.js']
-                    //     , {
+                        //     , {
 
-                    //     user: function($q, $rootScope, $state, ktUserService) {
-                    //         'ngInject';
-                    //         var deferred = $q.defer()
+                        //     user: function($q, $rootScope, $state, ktUserService) {
+                        //         'ngInject';
+                        //         var deferred = $q.defer()
 
-                    //         ktUserService.get(function(res) {
-                    //             $rootScope.defaultRoute = 'pano.overview'
-                    //             var user = $rootScope.user = res.account
+                        //         ktUserService.get(function(res) {
+                        //             $rootScope.defaultRoute = 'pano.overview'
+                        //             var user = $rootScope.user = res.account
 
-                    //             // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
-                    //             if (!$rootScope.forceJumpState) {
-                    //                 if (user.status === 'initialized') {
-                    //                     $state.go('account.perfect')
-                    //                 } else if (user.status === 'rejected') {
-                    //                     $state.go('pano.settings', { forceJump: true })
-                    //                 } else if (user.status === 'pended') {
-                    //                     $state.go($rootScope.defaultRoute, { forceJump: true })
-                    //                 }
-                    //             }
+                        //             // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
+                        //             if (!$rootScope.forceJumpState) {
+                        //                 if (user.status === 'initialized') {
+                        //                     $state.go('account.perfect')
+                        //                 } else if (user.status === 'rejected') {
+                        //                     $state.go('pano.settings', { forceJump: true })
+                        //                 } else if (user.status === 'pended') {
+                        //                     $state.go($rootScope.defaultRoute, { forceJump: true })
+                        //                 }
+                        //             }
 
-                    //             deferred.resolve(user)
-                    //         }, function() {
-                    //             deferred.resolve(null)
-                    //         })
-                    //         return deferred.promise
-                    //     }
-                    // }
+                        //             deferred.resolve(user)
+                        //         }, function() {
+                        //             deferred.resolve(null)
+                        //         })
+                        //         return deferred.promise
+                        //     }
+                        // }
                     ),
                     controller: 'ktPanoCtrl'
                 },
@@ -69,7 +69,10 @@
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            value: ['passed', 'pended']
+                            grade: {
+                                0: ['passed'],
+                                1: ['passed', 'pended']
+                            }
                         }],
                         // breadcrumb: true,
                         // breadcrumbTitle: '资产特征',
@@ -89,7 +92,9 @@
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            value: ['passed']
+                            grade: {
+                                1: ['passed']
+                            }
                         }],
                         pageTitle: '市场数据',
                     }
@@ -140,7 +145,9 @@
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            value: ['passed']
+                            grade: {
+                                1: ['passed']
+                            }
                         }],
                         pageTitle: '产品信息',
                     }
@@ -179,7 +186,9 @@
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            value: ['passed']
+                            grade: {
+                                1: ['passed']
+                            }
                         }],
                         pageTitle: '可预约产品',
                     }
@@ -216,7 +225,9 @@
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            value: ['passed']
+                            grade: {
+                                1: ['passed']
+                            }
                         }],
                         pageTitle: '机构',
                     }
