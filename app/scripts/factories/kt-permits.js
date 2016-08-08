@@ -19,8 +19,10 @@
                                     html: true,
                                     text: '您的认证信息审核未通过，请根据提示内容修改后重新提交审核。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
                                 }, function() {
-                                    if (grade === '1' && $state.current.name !== 'pano.settings') {
-                                        $state.go('pano.settings', { forceJump: true })
+                                    if (grade === '1') {
+                                        if ($state.current.name !== 'pano.settings') {
+                                            $state.go('pano.settings', { forceJump: true })
+                                        }
                                     } else {
                                         $state.go('account.login', { forceJump: true })
                                     }
@@ -40,7 +42,7 @@
                                 break
                             default:
                                 ktSweetAlert.swal({
-                                    title: '很抱歉，您暂无权限查看该页面。'
+                                    title: '很抱歉，您暂无权限查看该页面。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
                                 })
                         }
                     }
