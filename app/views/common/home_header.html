@@ -7,10 +7,10 @@
     <nav role="navigation">
         <!-- <kt-minimaliza-menu></kt-minimaliza-menu> -->
         <div class="navbar-right">
-            <ul class="nav navbar-nav header-nav no-borders mr15" ng-if="user && user.name">
+            <ul class="nav navbar-nav header-nav no-borders mr15" ng-if="user && user.mobile">
                 <li uib-dropdown class="hdropdown">
                     <a uib-dropdown-toggle>
-                        <i class="icon-man icon-pano f1rem mr10"></i><span ng-bind="nowLocate"></span>好，<span ng-bind="user.name"></span>
+                        <i class="icon-man icon-pano f1rem mr10"></i><span ng-bind="nowLocate"></span>好，<span ng-bind="user.name || user.mobile"></span>
                         <b class="fa fa-angle-down icon-arrow fb f1_5rem"></b>
                     </a>
                     <ul class="uib-dropdown-menu animated fadeIn  gray" role="menu" aria-labelledby="dLabel">
@@ -23,7 +23,7 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav header-nav no-borders" ng-if="!user.name">
+            <ul class="nav navbar-nav header-nav no-borders" ng-if="!user.mobile">
                 <li ui-sref-active="active" class="first">
                     <a title="登录" class="login menu" ui-sref="account.login">
                         登录

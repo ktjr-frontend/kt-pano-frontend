@@ -66,7 +66,7 @@
                     <div class="title">
                         <span class="key">名<i class="blank"></i><i class="blank"></i>片：</span>
                         <div class="value">
-                            <img ng-mouseenter="bigPitcureVisble = true" ng-mouseleave="bigPitcureVisble = false" class="business-card" ng-src="{{user.card_url}}" height="170" alt="用户的名片">
+                            <img ng-mouseenter="bigPitcureVisble = true" ng-mouseleave="bigPitcureVisble = false" class="business-card" ng-src="{{user.card_url}}" alt="用户的名片">
                             <img ng-show="bigPitcureVisble" class="business-card-big" ng-src="{{user.card_url}}" alt="用户的名片">
                             <div class="action" ng-if="visibleJudgement(['rejected', 'passed'])">
                                 <a ng-click="updateBusinessCard()" class="btn btn-navy-blue f1_2rem">

@@ -4,12 +4,12 @@ var appConfig = {
     app: 'app',
     dist: 'dist'
 }
-var port = 8888
+var port = 8880
 var livereloadPort = 35728
 
-var server = 'http://stage-pano.ktjr.com'
+var server = 'http://dev-pano.ktjr.com'
 // var server = 'http://localhost:3000'
-    // var server = 'http://10.132.1.9:3000'
+// var server = 'http://10.132.1.125:3000'
 
 var modRewriteUri = [
     // '^/mock_data/v\d{1,}/([^?]*).*$ /mock_data/$1 [L]',
