@@ -141,7 +141,7 @@
                         if (user.grade === '1') {
                             $state.go($rootScope.defaultRoute, { forceJump: true })
                         } else {
-                            $state.go('pano.settings', { forceJump: true })
+                            $state.go('pano.settings', { forceJump: true }, { location: 'replace' })
                         }
                     } else { // 默认跳转的state，可以移除跳转的标识jump，否则会在路由上存在jump
                         $state.go(toState.name, { forceJump: true })

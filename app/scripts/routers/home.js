@@ -28,7 +28,7 @@
                                     notRequired: true
                                 }, function(res) {
                                     $rootScope.user = res.account
-                                    $state.go('pano.overview', { jump: 'true' })
+                                    $state.go('pano.overview', { jump: 'true' }, { location: 'replace' })
 
                                     // if (!ktRoleResolve(res.account.role)) {
                                     //     return
