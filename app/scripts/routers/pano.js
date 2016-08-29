@@ -70,7 +70,7 @@
                         permits: [{
                             name: 'role', // 角色维度的权限
                             grade: {
-                                0: ['passed'],
+                                0: ['passed', 'pended'],
                                 1: ['passed', 'pended']
                             }
                         }],
@@ -226,8 +226,8 @@
                         permits: [{
                             name: 'role', // 角色维度的权限
                             grade: {
-                                0: ['passed'],
-                                1: ['passed']
+                                0: ['passed', 'pended'],
+                                1: ['passed', 'pended']
                             }
                         }],
                         pageTitle: '机构',

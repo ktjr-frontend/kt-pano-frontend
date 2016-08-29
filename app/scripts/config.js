@@ -113,6 +113,7 @@
                 window.history.back()
             }
 
+            // 判断是否需要权限验证
             function judgeUserPermit(user) {
                 if (!user || !user.grade) {
                     return true
@@ -138,11 +139,11 @@
                     } else if (user.status === 'rejected') {
                         $state.go('pano.settings', { forceJump: true })
                     } else if (user.status === 'pended' && toState.name !== 'pano.settings') {
-                        if (user.grade === '1') {
+                        // if (user.grade === '1') {
                             $state.go($rootScope.defaultRoute, { forceJump: true })
-                        } else {
-                            $state.go('pano.settings', { forceJump: true }, { location: 'replace' })
-                        }
+                        // } else {
+                        //     $state.go('pano.settings', { forceJump: true }, { location: 'replace' })
+                        // }
                     } else { // 默认跳转的state，可以移除跳转的标识jump，否则会在路由上存在jump
                         $state.go(toState.name, { forceJump: true })
                     }

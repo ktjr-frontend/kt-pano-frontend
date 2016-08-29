@@ -33,11 +33,12 @@
                                     title: '很抱歉，您暂无权限查看该页面。',
                                     text: '您的信息正在审核中，审核结果会在1个工作日内以邮件的形式通知您，请耐心等待。'
                                 }, function() {
-                                    if (grade === '1' && !_.includes(['pano.overview', 'pano.settings'], $state.current.name)) {
+                                    if (!_.includes(['pano.overview', 'pano.settings'], $state.current.name)) {
                                         $state.go('pano.overview', { forceJump: true })
-                                    } else {
-                                        $state.go('pano.settings', { forceJump: true })
                                     }
+                                    // else {
+                                    //     $state.go('pano.settings', { forceJump: true })
+                                    // }
                                 })
                                 break
                             default:
