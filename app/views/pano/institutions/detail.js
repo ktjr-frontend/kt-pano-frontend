@@ -27,8 +27,7 @@
             // 用户浏览更多的权限
             $scope.moreHidden = function() {
                 var user = $rootScope.user
-                console.log(user)
-                return !(user.status === 'pended' || user.grade === 0)
+                return !(user.status === 'pended' || user.grade === '0')
             }
 
             $scope.tabActive = {
