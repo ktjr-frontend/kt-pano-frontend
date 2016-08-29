@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktInsitutionCtrl', function($scope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktCompassAssetService, ktDataHelper, ktValueFactory) {
+        .controller('ktInsitutionCtrl', function($scope, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktCompassAssetService, ktDataHelper, ktValueFactory) {
 
             var defaultParams = {
                 dimension: 'from',
@@ -22,6 +22,13 @@
                 } else if (params.dimension === 'mapped_exchange') {
                     return 'from'
                 }
+            }
+
+            // 用户浏览更多的权限
+            $scope.moreHidden = function() {
+                var user = $rootScope.user
+                console.log(user)
+                return !(user.status === 'pended' || user.grade === 0)
             }
 
             $scope.tabActive = {
