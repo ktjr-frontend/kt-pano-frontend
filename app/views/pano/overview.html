@@ -83,7 +83,7 @@
                             <div class="table-caption clfix">
                                 <h3 class="caption">资产类</h3>
                                 <span class="sub-caption" ng-bind="compass_assets_bond.reason"></span>
-                                <a ui-sref="pano.products.obligatoryRight" class="more fr hover-underline" target="_blank">更多</a>
+                                <a ng-if="moreHidden()" ui-sref="pano.products.obligatoryRight" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
                                 <table class="table table-striped table-hover">
@@ -127,7 +127,7 @@
                             <div class="table-caption clfix">
                                 <h3 class="caption">资管类</h3>
                                 <span class="sub-caption" ng-bind="compass_assets_am.reason"></span>
-                                <a ui-sref="pano.products.assetManage" class="more fr hover-underline" target="_blank">更多</a>
+                                <a ng-if="moreHidden()" ui-sref="pano.products.assetManage" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
                                 <table class="table table-striped table-hover">
@@ -177,7 +177,7 @@
                             <div class="table-caption clfix">
                                 <h3 class="caption">资产类</h3>
                                 <span class="sub-caption" ng-bind="fame_assets_bond.reason"></span>
-                                <a ui-sref="pano.order.obligatoryRight" class="more fr hover-underline" target="_blank">更多</a>
+                                <a ng-if="moreHidden()" ui-sref="pano.order.obligatoryRight" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
                                 <table class="table table-striped table-hover">
@@ -213,7 +213,7 @@
                             <div class="table-caption clfix">
                                 <h3 class="caption">资管类</h3>
                                 <span class="sub-caption" ng-bind="fame_assets_am.reason"></span>
-                                <a ui-sref="pano.order.assetManage" class="more fr hover-underline" target="_blank">更多</a>
+                                <a ng-if="moreHidden()" ui-sref="pano.order.assetManage" class="more fr hover-underline" target="_blank">更多</a>
                             </div>
                             <div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
                                 <table class="table table-striped table-hover">

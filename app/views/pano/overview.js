@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1) {
+        .controller('ktOverviewCtrl', function($scope, $rootScope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1) {
 
             $scope.updateDate = '获取中...'
             $scope.updateDateTo = '获取中...'
@@ -10,6 +10,12 @@
             $scope.goTo = function($event, url) {
                 $event.stopPropagation()
                 window.open(url, '_blank')
+            }
+
+            // 用户浏览更多的权限
+            $scope.moreHidden = function() {
+                var user = $rootScope.user
+                return !(user.status === 'pended' || user.grade === 0)
             }
 
             // 年化收益率
@@ -585,44 +591,6 @@
             platformAssetTypeChart.updateDataView()
 
             /*-----------------------右边栏------------------------*/
-
-            /*// 新闻
-            ktAnalyticsService.get({
-                content: 'notices',
-            }, function(data) {
-                $scope.notices = data.notices
-            })
-
-            // 平台7日发行量
-            ktAnalyticsService.get({
-                content: 'from_amounts',
-            }, function(data) {
-                $scope.from_amounts = data.from_amounts
-            })
-
-            // 交易所7日发行量
-            ktAnalyticsService.get({
-                content: 'exchange_amounts',
-            }, function(data) {
-                $scope.exchange_amounts = data.exchange_amounts
-            })
-
-            // 报告
-            ktAnalyticsService.get({
-                content: 'reports',
-            }, function(data) {
-                $scope.reports = data.reports
-            })
-
-            // 推荐产品
-            ktAnalyticsService.get({
-                content: 'overview_products',
-            }, function(data) {
-                $scope.compass_assets_bond = data.compass_assets_bond
-                $scope.compass_assets_am = data.compass_assets_am
-                $scope.fame_assets_bond = data.fame_assets_bond
-                $scope.fame_assets_am = data.fame_assets_am
-            })*/
 
             // 侧栏和推荐产品
             ktAnalyticsService.get({
