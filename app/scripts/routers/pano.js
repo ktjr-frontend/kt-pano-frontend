@@ -226,6 +226,7 @@
                         permits: [{
                             name: 'role', // 角色维度的权限
                             grade: {
+                                0: ['passed'],
                                 1: ['passed']
                             }
                         }],
