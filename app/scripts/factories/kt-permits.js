@@ -20,11 +20,11 @@
                                     text: '您的认证信息审核未通过，请根据提示内容修改后重新提交审核。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
                                 }, function() {
                                     // if (grade === '1') {
-                                        if ($state.current.name !== 'pano.settings') {
-                                            $state.go('pano.settings', { forceJump: true })
-                                        }
+                                    if ($state.current.name !== 'pano.settings') {
+                                        $state.go('pano.settings', { forceJump: true })
+                                    }
                                     // } else {
-                                        // $state.go('account.login', { forceJump: true })
+                                    // $state.go('account.login', { forceJump: true })
                                     // }
                                 })
                                 break
@@ -33,7 +33,7 @@
                                     title: '很抱歉，您暂无权限查看该页面。',
                                     text: '您的信息正在审核中，审核结果会在1个工作日内以邮件的形式通知您，请耐心等待。'
                                 }, function() {
-                                    if (!_.includes(['pano.overview', 'pano.settings'], $state.current.name)) {
+                                    if (!_.includes(['pano.overview', 'pano.settings', 'pano.institutions.detail'], $state.current.name)) {
                                         $state.go('pano.overview', { forceJump: true })
                                     }
                                     // else {
