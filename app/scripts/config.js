@@ -79,7 +79,7 @@
     angular
         .module('kt.pano')
         .config(configApp)
-        .run(function($rootScope, $state, $location, $timeout, $http, ktLogService, ktPermits, ktHomeResource, uibPaginationConfig, ktUserService, ktS, CacheFactory, ktEchartTheme1) {
+        .run(function($rootScope, $state, $window, $location, $timeout, $http, ktLogService, ktPermits, ktHomeResource, uibPaginationConfig, ktUserService, ktS, CacheFactory, ktEchartTheme1) {
 
             // ajax 请求的缓存策略
             /*eslint-disable*/
@@ -140,16 +140,21 @@
                         $state.go('pano.settings', { forceJump: true })
                     } else if (user.status === 'pended' && toState.name !== 'pano.settings') {
                         // if (user.grade === '1') {
-                            $state.go($rootScope.defaultRoute, { forceJump: true })
-                        // } else {
-                        //     $state.go('pano.settings', { forceJump: true }, { location: 'replace' })
-                        // }
+                        $state.go($rootScope.defaultRoute, { forceJump: true })
+                            // } else {
+                            //     $state.go('pano.settings', { forceJump: true }, { location: 'replace' })
+                            // }
                     } else { // 默认跳转的state，可以移除跳转的标识jump，否则会在路由上存在jump
                         $state.go(toState.name, { forceJump: true })
                     }
                 }
             }
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+
+                // 通过url传播token 实现单点登录
+                if (toParams._t) {
+                    $window.localStorage.token = decodeURIComponent(toParams._t)
+                }
 
                 if (!toState.resolve) { toState.resolve = {} }
 

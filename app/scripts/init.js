@@ -5,7 +5,9 @@
 $(document).ready(function() {
     'use strict';
 
-    $('html').toggleClass('ie', isIe()).toggleClass('safari', isSafari()).toggleClass('mobile', detectmob()).toggleClass('windows', isWindows());
+    $('html').toggleClass('ie', isIe()).toggleClass('safari', isSafari())
+        .toggleClass('mobile', detectmob()).toggleClass('windows', isWindows())
+        .toggleClass('is-weixin', isWeixin())
 
     //加载的时候禁止鼠标中轮滚动和移动设备上得触摸事件
     $(window).on('mousewheel touchstart', function(e) {

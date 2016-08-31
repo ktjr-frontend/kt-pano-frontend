@@ -10,7 +10,7 @@
                  *  微贷平台
                  */
                 'pano': {
-                    url: '/pano?apimock&jump', //父view的设置，通过ui-sref的跳转会将参数带到子view
+                    url: '/pano?apimock&jump&_t', //父view的设置，通过ui-sref的跳转会将参数带到子view
                     abstract: true,
                     templateUrl: 'views/common/pano.html',
                     data: {
