@@ -152,6 +152,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="checkbox agreement-me checkbox-primary">
+                                    <input id="agreement" type="checkbox" required="required" ng-model="registerUser.agreement" ng-true-value="1" ng-false-value="0">
+                                    <label class="no-notely" for="agreement">
+                                        我已仔细阅读并同意 <a href="/pano-agreement.htm" target="_blank">开通PANO用户协议</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-12 clfix">
                                 <div kt-loading-status height="32" width="32" ignores="/api/v1/shadows"></div>
                                 <button class="btn btn-navy-blue btn-block btn-lg" ng-click="submitForm('captcha')" ng-disabled="registerForm.$invalid || pendingRequests">注 册</button>

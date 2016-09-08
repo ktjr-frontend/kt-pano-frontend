@@ -9,7 +9,9 @@
             }
 
             $scope.QRCodeVisible = false
-            $scope.registerUser = {}
+            $scope.registerUser = {
+                agreement: 1
+            }
 
             $scope.registerUser.likes = []
             $scope.likes = [{
