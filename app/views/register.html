@@ -116,7 +116,7 @@
                         <div class="form-group" ng-class="{'has-error':registerForm.password.$invalid && registerForm.password.$dirty}">
                             <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>密码</label> -->
                             <div class="col-md-12">
-                                <input ng-minlength="6" autocomplete="off" autofill="false" ng-maxlength="20" placeholder="密码（6～20位，包含字母和数字）" type="password" required="required" ng-model="registerUser.password" ng-pattern="/^(?=.*\d)(?=.*[a-z]).{6,20}$/" id="" class="form-control" name="password">
+                                <input ng-minlength="6" autocomplete="off" autofill="false" ng-maxlength="20" placeholder="密码（6～20位，包含字母和数字）" type="password" required="required" ng-model="registerUser.password" ng-pattern="/^(?=.*\d)(?=.*[A-z]).{6,20}$/" id="" class="form-control" name="password">
                                 <div class="mt5 text-warning" ng-messages="registerForm.password.$dirty && registerForm.password.$error">
                                     <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于6个字符，需包含字母和数字</div>
                                     <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于20个字符，需包含字母和数字</div>
@@ -137,7 +137,7 @@
                                 </div>
                             </div>
                         </div>-->
-                        <div class="form-group" ng-class="{'has-error':registerForm.likes.$invalid && registerForm.likes.$dirty}">
+                        <!-- <div class="form-group" ng-class="{'has-error':registerForm.likes.$invalid && registerForm.likes.$dirty}">
                             <label class="text-primary-dark text-left fn col-md-12 mt10">以下哪些是您关注的金融资产类型？</label>
                             <div class="col-md-12 mt15">
                                 <div class="checkbox-label" ng-repeat="like in likes">
@@ -150,7 +150,7 @@
                                     <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的资产类型</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <div class="col-md-12">
                                 <div class="checkbox agreement-me checkbox-primary">

@@ -13,7 +13,7 @@
                 agreement: 1
             }
 
-            $scope.registerUser.likes = []
+            /*$scope.registerUser.likes = []
             $scope.likes = [{
                 name: '票 据',
                 value: 0
@@ -54,7 +54,7 @@
                 if (newValue !== oldValue) {
                     $scope.hasLikes = $scope.registerUser.likes.length ? true : ''
                 }
-            });
+            });*/
 
             $scope.submitForm = function() {
                 $scope.pendingRequests = true
