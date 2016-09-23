@@ -2,7 +2,8 @@ module.exports = {
     dist: {
         options: {
             collapseWhitespace: true,
-            conservativeCollapse: true,
+            collapseInlineTagWhitespace: true,
+            conservativeCollapse: false,
             collapseBooleanAttributes: true,
             removeCommentsFromCDATA: true,
             removeComments: true,
