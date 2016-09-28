@@ -42,7 +42,7 @@
                 var $location = $injector.get('$location')
                 // var $rootScope = $injector.get('$rootScope')
                 var ktS = $injector.get('ktS')
-                var ktUri = $injector.get('ktUri')
+                // var ktUri = $injector.get('ktUri')
                 var search = $location.search()
 
                 //apimock 替换为get方式
@@ -53,9 +53,9 @@
 
                 //数据接口缓存处理
                 if (req.url.indexOf('/api/v') > -1) {
-                    req.url = ktUri.appendParams(req.url, {
-                        ac: Math.random().toString(16).slice(2)
-                    })
+                    // req.url = ktUri.appendParams(req.url, {
+                    //     ac: Math.random().toString(16).slice(2)
+                    // })
 
                     // 其他资源文件根据版本缓存
                 } else {

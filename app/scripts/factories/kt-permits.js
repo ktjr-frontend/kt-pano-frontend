@@ -44,7 +44,7 @@
                             default:
                                 var title = '很抱歉，您暂无权限查看该页面。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
                                 if (grade === '0') {
-                                    title = '很抱歉，您的账户类型暂无权限查看该页面。如希望获得更多权限，可联系PANO微信小秘书：'
+                                    title = '很抱歉，您的账户类型暂无权限查看该页面。<br/>如希望获得更多权限，可联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
                                 }
 
                                 ktSweetAlert.swal({
