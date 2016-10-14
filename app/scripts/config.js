@@ -180,6 +180,7 @@
                         ]
                     } else {
                         delete toState.resolve.user
+                        $rootScope.defaultRoute = 'pano.overview'
                         permitInterceptor(event, toState, toParams, $rootScope.user)
                     }
                 } else {
