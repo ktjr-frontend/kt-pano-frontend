@@ -7,9 +7,10 @@ var appConfig = {
 var port = 8880
 var livereloadPort = 35728
 
-var server = 'http://dev-pano.ktjr.com'
-// var server = 'http://localhost:3000'
-// var server = 'http://10.132.1.125:3000'
+// var server = 'http://dev-pano.ktjr.com'
+var server = 'http://pano.ktjr.com'
+    // var server = 'http://localhost:3000'
+    // var server = 'http://10.132.1.125:3000'
 
 var modRewriteUri = [
     // '^/mock_data/v\d{1,}/([^?]*).*$ /mock_data/$1 [L]',
@@ -117,12 +118,12 @@ module.exports = {
             middleware: function() {
                 return [
                     //mock data API0
-                   /* function(req, res, next) {
-                        if (!req.url.match(/\.json\??|\/api\/v\d+|\/index\.html|asset-rev.*\.js/g)) {
-                            res.setHeader('Cache-Control', 'max-age=' + 60 * 60 * 24 * 365)
-                        }
-                        return next()
-                    },*/
+                    /* function(req, res, next) {
+                         if (!req.url.match(/\.json\??|\/api\/v\d+|\/index\.html|asset-rev.*\.js/g)) {
+                             res.setHeader('Cache-Control', 'max-age=' + 60 * 60 * 24 * 365)
+                         }
+                         return next()
+                     },*/
                     modRewrite(modRewriteUri),
                     gzip.staticGzip(appConfig.dist, { //启用gzip
                         matchType: /text|css|javascript|image|font/

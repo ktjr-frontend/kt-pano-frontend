@@ -157,8 +157,9 @@
                     var leftGap = 40
                     var rightGap = 40
                     var lineHeight = 30
-                    var lineLength = w - leftGap - rightGap / 2
-                    var baseBottom = 70
+                    var lineWidthOffset = -10 //偏差
+                    var lineLength = w - leftGap - rightGap / 2 + lineWidthOffset
+                    var baseBottom = 70 // 默认底部高度
                     var legendTotalLength = _.map(legend, function(v) {
                         return _.chain(v.split('')).map(function(char) {
                             return (char.charCodeAt(0) > 128 ? 1 : 0.5) * fontSize
@@ -168,17 +169,18 @@
                     var lines = 1
                     var sum = 0
 
+                    // 计算总行数
                     _.each(legendTotalLength, function(v) {
-                            sum = sum + v
-                            if (sum > lineLength) {
-                                sum = v
-                                lines++
-                            }
-                        })
-                        // debugger
+                        sum = sum + v
+                        if (sum > lineLength) {
+                            sum = v
+                            lines++
+                        }
+                    })
+
                     var op = {
                         legend: {
-                            left: lines < 2 ? 'center' : leftGap,
+                            left: lines < 2 ? 'center' : leftGap, // 一行的时候居中对齐
                             right: lines < 2 ? 'auto' : rightGap / 2
                         },
                         grid: {
