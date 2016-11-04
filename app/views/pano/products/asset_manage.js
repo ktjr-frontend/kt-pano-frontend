@@ -10,7 +10,7 @@
             $.extend(shared.params, search, { credit_right_or_eq: 'am' })
             ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
 
-           /* if (!shared.filterDatas) {
+            if (!shared.filterDatas) {
                 ktCompassAssetService.get({
                     content: 'settings'
                 }, function(data) {
@@ -21,7 +21,7 @@
             } else {
                 shared.filters = shared.filterDatas['1']
                 ktDataHelper.filterInit(shared.filters)(shared.params)
-            }*/
+            }
 
             ktCompassAssetService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 $scope.products = res.compass_assets
