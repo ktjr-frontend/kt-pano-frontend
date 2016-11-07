@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktRegisterCtrl', function($rootScope, $scope, $window, $state, CacheFactory, ktLoginService, ktRegisterService, ktSweetAlert, ktGetCaptcha) {
+        .controller('ktRegisterCtrl', function($rootScope, $scope, $timeout, $window, $state, CacheFactory, ktLoginService, ktRegisterService, ktSweetAlert, ktGetCaptcha) {
 
             $rootScope.goHome = function() {
                 $state.go('home.index')
@@ -93,7 +93,11 @@
                 return false;
             }
 
-            $scope.captchaSettings = {}
+            $scope.captchaSettings = {
+                randomColours: false,
+                colour1: '#eef7fb', //背景
+                colour2: '#4a6920' //前景
+            }
 
             var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktRegisterService, { content: 'captcha' }, $scope.registerUser)
 
@@ -102,12 +106,39 @@
                 $event.preventDefault()
                 $event.stopPropagation()
 
-                if (channel === 'sms' && $scope.waitCaptchaMessage) return
-                if (channel === 'tel' && $scope.waitCaptchaTel) return
+                var CAPTCHA = $scope.captchaSettings.CAPTCHA
+                if (!CAPTCHA) {
+                    ktSweetAlert.swal({
+                        title: '验证码组件有误',
+                        text: '验证码组件有误！',
+                        type: 'error',
+                    });
+                    return
+                }
 
-                //获取语音或短信验证码
-                getCaptcha($scope.registerUser.mobile, channel)
+                CAPTCHA.validate($scope.registerUser.img_captcha, function(isValid) {
+                    if (isValid) {
+                        if (channel === 'sms' && $scope.waitCaptchaMessage) return
+                        if (channel === 'tel' && $scope.waitCaptchaTel) return
 
+                        //获取语音或短信验证码
+                        getCaptcha($scope.registerUser.mobile, channel)
+                    } else {
+                        $timeout(function() {
+                            ktSweetAlert.swal({
+                                title: '提示',
+                                text: '图形验证码不正确！',
+                                type: 'error',
+                            }, function() {
+                                var form = CAPTCHA._container.closest('form')
+                                form.trigger('accessible.' + form.attr('id'), {
+                                    field: 'img_captcha'
+                                })
+                                $scope.registerUser.img_captcha = '';
+                            })
+                        }, 100)
+                    }
+                })
             }
         })
 })();
