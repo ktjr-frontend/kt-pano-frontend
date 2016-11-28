@@ -18,56 +18,10 @@
                 })
             }
 
-            // $scope.captchaSettings = {
-            //     randomColours: false,
-            //     colour1: '#eef7fb', //背景
-            //     colour2: '#4a6920' //前景
-            // }
-
             $scope.user = $rootScope.user = JSON.parse(window.localStorage.user || '{}')
 
             $scope.submitForm = function() {
                 ktLoginCommon($scope)
-                    // var CAPTCHA = $scope.captchaSettings.CAPTCHA
-                    // if (!CAPTCHA) return
-
-                /*CAPTCHA.validate($scope.user.img_captcha, function(isValid) {
-                        var form = CAPTCHA._container.closest('form')
-
-                        if (isValid) {
-                            $window.localStorage.user = JSON.stringify({
-                                mobile: $scope.user.remember ? $scope.user.mobile : '',
-                                remember: $scope.user.remember
-                            })
-
-                            ktLoginCommon($scope, null, function() {
-
-                                CAPTCHA.generate() //刷新验证码
-                                $scope.user.img_captcha = null
-                                $scope.loginForm.img_captcha.$setPristine() //回复原始避免显示验证码错误
-
-                                form.trigger('accessible.' + form.attr('id'), {
-                                    field: 'mobile'
-                                })
-                            })
-
-                        } else {
-                            $timeout(function() {
-                                ktSweetAlert.swal({
-                                    title: '图形验证码不正确！',
-                                    text: '',
-                                    type: 'error',
-                                }, function() {
-
-                                    form.trigger('accessible.' + form.attr('id'), {
-                                        field: 'img_captcha'
-                                    })
-                                    $scope.user.img_captcha = ''
-                                })
-                            }, 100)
-                        }
-                    })*/
-                // return false
             }
 
             // 忘记密码
@@ -125,7 +79,6 @@
                     console.log('cancel reset_password')
                 })*/
 
-
             }
 
         })
@@ -162,21 +115,50 @@
                 $uibModalInstance.dismiss('cancel');
             }
         })*/
-        .controller('resetPasswordTwoCtrl', function($scope, $uibModalInstance, ktRecoverService, ktGetCaptcha) {
+        .controller('resetPasswordTwoCtrl', function($scope, $uibModalInstance, ktRecoverService, ktGetCaptcha, ktCaptchaService, ktSweetAlert) {
             $scope.title = '验证手机'
                 // $scope.user = {}
             $scope.user.content = 'validate_captcha'
             $scope.user.captcha = ''
             $scope.notLastStep = true
 
-            var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktRecoverService, { content: 'captcha' }, $scope.user)
+            $scope.imgCaptcha = {}
+            $scope.refreshImgCaptcha = function() {
+                ktCaptchaService.get(function(data) {
+                    $scope.imgCaptcha.url = data.url
+                    $scope.imgCaptcha.img_captcha_key = data.key
+                })
+            }
+
+            $scope.refreshImgCaptcha()
+
+            // 初始化图形验证码
+            var getCaptcha = ktGetCaptcha.initCaptcha($scope, ktRecoverService, { content: 'captcha' }, $scope.user)
             $scope.getCaptcha = function($event, channel) {
                 $event.preventDefault()
                 $event.stopPropagation()
 
                 if (channel === 'sms' && $scope.waitCaptchaMessage) return
                 if (channel === 'tel' && $scope.waitCaptchaTel) return
-                getCaptcha($scope.user.mobile, channel)
+
+                if ($scope.popForm.mobile.$invalid) {
+                    ktSweetAlert.error('手机号号码不正确！')
+                    $scope.popForm.mobile.$setDirty()
+                    return
+                }
+
+                if ($scope.popForm.img_captcha.$invalid) {
+                    ktSweetAlert.error('请填写图形验证码！')
+                    $scope.popForm.img_captcha.$setDirty()
+                    return
+                }
+
+                getCaptcha({
+                    img_captcha: $scope.user.img_captcha,
+                    img_captcha_key: $scope.imgCaptcha.img_captcha_key,
+                    mobile: $scope.user.mobile,
+                    channel: channel
+                })
             }
 
             $scope.submitForm = function() {

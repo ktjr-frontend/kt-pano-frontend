@@ -14,7 +14,7 @@
                     url: '/account?apimock',
                     templateUrl: 'views/common/simple.html',
                     resolve: ktLazyResolve([
-                        'common/directives/kt-captchaimg-directive.js',
+                        // 'common/directives/kt-captchaimg-directive.js',
                         'common/factories/kt-captcha.js'
                     ]),
                     controller: ['$scope', function ($scope) {

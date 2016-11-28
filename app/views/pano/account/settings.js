@@ -257,7 +257,7 @@
             }
         })
         // 验证原手机号
-        .controller('ktPreUpdateMobileCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, ktGetCaptcha) {
+        .controller('ktPreUpdateMobileCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, ktGetCaptcha, ktCaptchaService, ktSweetAlert) {
             $scope.title = '原手机号验证'
             $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user.content = 'validate_prev_captcha'
@@ -265,7 +265,18 @@
             $scope.hideMobileInput = true
             $scope.notLastStep = true
 
-            var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktAccountService, {
+            $scope.imgCaptcha = {}
+            $scope.refreshImgCaptcha = function() {
+                ktCaptchaService.get(function(data) {
+                    $scope.imgCaptcha.url = data.url
+                    $scope.imgCaptcha.img_captcha_key = data.key
+                })
+            }
+
+            $scope.refreshImgCaptcha()
+
+            // 初始化图形验证码
+            var getCaptcha = ktGetCaptcha.initCaptcha($scope, ktAccountService, {
                 content: 'prev_captcha'
             }, $scope.user)
 
@@ -275,7 +286,25 @@
 
                 if (channel === 'sms' && $scope.waitCaptchaMessage) return
                 if (channel === 'tel' && $scope.waitCaptchaTel) return
-                getCaptcha($scope.user.mobile, channel)
+
+                if ($scope.popForm.mobile.$invalid) {
+                    ktSweetAlert.error('手机号号码不正确！')
+                    $scope.popForm.mobile.$setDirty()
+                    return
+                }
+
+                if ($scope.popForm.img_captcha.$invalid) {
+                    ktSweetAlert.error('请填写图形验证码！')
+                    $scope.popForm.img_captcha.$setDirty()
+                    return
+                }
+
+                getCaptcha({
+                    mobile: $scope.user.mobile,
+                    img_captcha: $scope.user.img_captcha,
+                    img_captcha_key: $scope.imgCaptcha.img_captcha_key,
+                    channel: channel
+                })
             }
 
             $scope.submitForm = function() {
@@ -292,12 +321,23 @@
             }
         })
         // 验证新手机号
-        .controller('ktUpdateMobileCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, ktGetCaptcha) {
+        .controller('ktUpdateMobileCtrl', function($rootScope, $scope, $uibModalInstance, ktAccountService, ktGetCaptcha, ktCaptchaService, ktSweetAlert) {
             $scope.title = '新手机号绑定'
             $scope.user = $.extend(true, {}, $rootScope.user)
             $scope.user = { content: 'mobile' }
 
-            var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktAccountService, {
+            $scope.imgCaptcha = {}
+            $scope.refreshImgCaptcha = function() {
+                ktCaptchaService.get(function(data) {
+                    $scope.imgCaptcha.url = data.url
+                    $scope.imgCaptcha.img_captcha_key = data.key
+                })
+            }
+
+            $scope.refreshImgCaptcha()
+
+            // 初始化图形验证码
+            var getCaptcha = ktGetCaptcha.initCaptcha($scope, ktAccountService, {
                 content: 'captcha'
             }, $scope.user)
 
@@ -307,7 +347,25 @@
 
                 if (channel === 'sms' && $scope.waitCaptchaMessage) return
                 if (channel === 'tel' && $scope.waitCaptchaTel) return
-                getCaptcha($scope.user.mobile, channel)
+
+                if ($scope.popForm.mobile.$invalid) {
+                    ktSweetAlert.error('手机号号码不正确！')
+                    $scope.popForm.mobile.$setDirty()
+                    return
+                }
+
+                if ($scope.popForm.img_captcha.$invalid) {
+                    ktSweetAlert.error('请填写图形验证码！')
+                    $scope.popForm.img_captcha.$setDirty()
+                    return
+                }
+
+                getCaptcha({
+                    mobile: $scope.user.mobile,
+                    img_captcha: $scope.user.img_captcha,
+                    img_captcha_key: $scope.imgCaptcha.img_captcha_key,
+                    channel: channel
+                })
             }
 
             $scope.submitForm = function() {

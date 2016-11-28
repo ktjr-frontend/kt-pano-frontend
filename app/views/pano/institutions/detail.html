@@ -172,7 +172,8 @@
                                                 <th>募集金额</th>
                                                 <th>起息日</th>
                                                 <th>资产类型</th>
-                                                <th>挂牌场所</th>
+                                                <th ng-if="params.dimension === 'mapped_exchange'">平台</th>
+                                                <th ng-if="params.dimension === 'from'">挂牌场所</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -183,9 +184,13 @@
                                                 <td ng-bind="::product.sum_amount | ktNumberLocate"></td>
                                                 <td ng-bind="::(product.value_date | ktNull | date:'yyyy-MM-dd')"></td>
                                                 <td ng-bind="::product.asset_type | ktEclipsis:25" title="{{::product.asset_type | ktNull}}"></td>
-                                                <td class="text-left">
+                                                <td ng-if="params.dimension === 'from'">
                                                     <a ng-if="product.exchange !== '不适用'" ui-sref="pano.institutions.detail({id: product.exchange, dimension: 'mapped_exchange'})" ng-bind="::product.exchange" target="_blank"></a>
                                                     <span ng-if="product.exchange === '不适用'">不适用</span>
+                                                </td>
+                                                <td ng-if="params.dimension === 'mapped_exchange'">
+                                                    <a ng-if="product.from !== '不适用'" ui-sref="pano.institutions.detail({id: product.from, dimension: 'from'})" ng-bind="::product.from" target="_blank"></a>
+                                                    <span ng-if="product.from === '不适用'">不适用</span>
                                                 </td>
                                             </tr>
                                             <tr ng-if="!products.length && !isLoading()">

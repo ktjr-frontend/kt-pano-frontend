@@ -57,20 +57,17 @@
         })
         .factory('ktGetCaptcha', function(ktSweetAlert, ktCaptchaHelper) {
             return {
-                getCaptcha: function(scope, service, params, model) {
+                initCaptcha: function(scope, service, params, model) {
                     scope.waitCaptchaMessage = false;
                     scope.waitCaptchaTel = false;
 
-                    return function(mobile, channel) {
+                    return function(reqParams) {
                         var timerMessage = ktCaptchaHelper.timerMessage(scope)
                         var timerTel = ktCaptchaHelper.timerTel(scope)
 
-                        service.get($.extend({
-                            mobile: mobile,
-                            channel: channel
-                        }, params), function(data) {
+                        service.get($.extend(reqParams, params), function(data) {
                             model.verif_id = data.verif_id
-                            if (channel === 'sms') {
+                            if (reqParams.channel === 'sms') {
                                 scope.waitCaptchaMessage = true;
                                 timerMessage(60);
                             } else {
@@ -79,6 +76,7 @@
                             }
 
                         }, function(data) {
+                            scope.refreshImgCaptcha()
                             ktSweetAlert.swal({
                                 title: '发送失败',
                                 text: data.error || '抱歉，系统繁忙！',

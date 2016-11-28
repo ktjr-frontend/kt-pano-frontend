@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktRegisterCtrl', function($rootScope, $scope, $timeout, $window, $state, CacheFactory, ktLoginService, ktRegisterService, ktSweetAlert, ktGetCaptcha) {
+        .controller('ktRegisterCtrl', function($rootScope, $scope, $timeout, $window, $state, CacheFactory, ktLoginService, ktRegisterService, ktSweetAlert, ktGetCaptcha, ktCaptchaService) {
 
             $rootScope.goHome = function() {
                 $state.go('home.index')
@@ -93,52 +93,48 @@
                 return false;
             }
 
-            $scope.captchaSettings = {
-                randomColours: false,
-                colour1: '#eef7fb', //背景
-                colour2: '#4a6920' //前景
+            $scope.imgCaptcha = {}
+            $scope.refreshImgCaptcha = function() {
+                ktCaptchaService.get(function(data) {
+                    $scope.imgCaptcha.url = data.url
+                    $scope.imgCaptcha.img_captcha_key = data.key
+                })
             }
 
-            var getCaptcha = ktGetCaptcha.getCaptcha($scope, ktRegisterService, { content: 'captcha' }, $scope.registerUser)
+            // 页面加载获取一次图形验证码
+            $scope.refreshImgCaptcha()
 
-            // 获取验证码，首先校验图形验证码，通过事件的异步方式
+            // 初始化获取短信验证码
+            var getCaptcha = ktGetCaptcha.initCaptcha($scope, ktRegisterService, { content: 'captcha' }, $scope.registerUser)
+
+            // 获取短信验证码，首先校验图形验证码，通过事件的异步方式
             $scope.getCaptcha = function($event, channel) {
                 $event.preventDefault()
                 $event.stopPropagation()
 
-                var CAPTCHA = $scope.captchaSettings.CAPTCHA
-                if (!CAPTCHA) {
-                    ktSweetAlert.swal({
-                        title: '验证码组件有误',
-                        text: '验证码组件有误！',
-                        type: 'error',
-                    });
+                if (channel === 'sms' && $scope.waitCaptchaMessage) return
+                if (channel === 'tel' && $scope.waitCaptchaTel) return
+
+                if ($scope.registerForm.mobile.$invalid) {
+                    ktSweetAlert.error('手机号号码不正确！')
+                    $scope.registerForm.mobile.$setDirty()
                     return
                 }
 
-                CAPTCHA.validate($scope.registerUser.img_captcha, function(isValid) {
-                    if (isValid) {
-                        if (channel === 'sms' && $scope.waitCaptchaMessage) return
-                        if (channel === 'tel' && $scope.waitCaptchaTel) return
+                if ($scope.registerForm.img_captcha.$invalid) {
+                    ktSweetAlert.error('请填写图形验证码！')
+                    $scope.registerForm.img_captcha.$setDirty()
+                    return
+                }
 
-                        //获取语音或短信验证码
-                        getCaptcha($scope.registerUser.mobile, channel)
-                    } else {
-                        $timeout(function() {
-                            ktSweetAlert.swal({
-                                title: '提示',
-                                text: '图形验证码不正确！',
-                                type: 'error',
-                            }, function() {
-                                var form = CAPTCHA._container.closest('form')
-                                form.trigger('accessible.' + form.attr('id'), {
-                                    field: 'img_captcha'
-                                })
-                                $scope.registerUser.img_captcha = '';
-                            })
-                        }, 100)
-                    }
+                //获取语音或短信验证码
+                getCaptcha({
+                    mobile: $scope.registerUser.mobile,
+                    img_captcha: $scope.registerUser.img_captcha,
+                    img_captcha_key: $scope.imgCaptcha.img_captcha_key,
+                    channel: channel
                 })
+
             }
         })
 })();
