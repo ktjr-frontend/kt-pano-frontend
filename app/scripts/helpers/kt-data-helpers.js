@@ -11,6 +11,22 @@
         ]
     }
 
+    // 多音字指定
+    var spellSpecialMap = {
+        '乐视金融': 'LSJR',
+        '乐视': 'L',
+        '重庆': 'C'
+    }
+
+    var pinyin = {
+        getFirstCharSpell: function(str) {
+            return spellSpecialMap[str.slice(0, 2)] || window.utils.HanZiPinYin.get(str.slice(0, 1))
+        },
+        get: function(str) {
+            return spellSpecialMap[str] || window.utils.HanZiPinYin.get(str)
+        }
+    }
+
     angular.module('kt.pano')
         .factory('ktDataHelper', function($window, $state, notify) {
             return {
@@ -193,13 +209,13 @@
                 // 总览气泡图按首字母排序
                 sortByFirstChar: function(data) {
                     return _.sortBy(data, function(v) {
-                        return window.utils.HanZiPinYin.get(v[2].slice(0, 1))
+                        return pinyin.getFirstCharSpell(v[2])
                     })
                 },
                 // 总览气泡图按名称所有字母排序
                 sortByChars: function(data) {
                     return _.sortBy(data, function(v) {
-                        return window.utils.HanZiPinYin.get(v[2])
+                        return pinyin.get(v[2])
                     })
                 },
                 //总览页计算资产类型发行量占比的百分比
@@ -494,7 +510,6 @@
                     sfs.init = function() {
                         this.data = _.cloneDeep(originData)
 
-                        var pinyin = window.utils.HanZiPinYin
                         var groupByArr = ['0123456789', 'ABCD', 'EFGH', 'IJKL', 'MNOP', 'QRST', 'UVWX', 'YZ', '不适用'] //分组依据
 
                         // 初始化适配前端的数据
@@ -668,7 +683,7 @@
                                     name: o[0],
                                     value: o[1],
                                     checked: false,
-                                    spell: o[0] === '不适用' ? '不适用' : pinyin.get(o[0].slice(0, 1)),
+                                    spell: o[0] === '不适用' ? '不适用' : pinyin.getFirstCharSpell(o[0]),
                                     // recommended: false,
                                 }
                             }).groupBy(function(o) {

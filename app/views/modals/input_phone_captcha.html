@@ -17,12 +17,13 @@
             <div class="form-group" ng-class="{'has-error':popForm.img_captcha.$invalid && popForm.img_captcha.$dirty}">
                 <label class="text-primary-dark control-label col-md-3"><span class="ml5 f14">*</span>图形验证码</label>
                 <div class="col-md-7">
-                    <input style="width: 198px;" placeholder="输入图形验证码" kt-validate-on-blur type="text" required="required" ng-model="user.img_captcha" id="img_captcha" class="form-control fl" name="img_captcha">
+                    <input style="width: 198px;" placeholder="输入图形验证码" kt-validate-on-blur type="text" required="required" ng-pattern="/^\w{4}$/" ng-model="user.img_captcha" id="img_captcha" class="form-control fl" name="img_captcha">
                     <div class="fl ml10">
                         <img class="image-captcha" src="{{imgCaptcha.url}}" height="35" ng-click="refreshImgCaptcha()" alt="验证码">
                     </div>
                     <div class="mt5 cbs text-warning" ng-messages="popForm.img_captcha.$dirty && popForm.img_captcha.$error">
                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入图形验证码</div>
+                        <div ng-message="pattern"><i class="fa fa-frown-o fb mr5"></i>图形验证码有误</div>
                     </div>
                 </div>
             </div>

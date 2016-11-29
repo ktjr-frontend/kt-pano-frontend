@@ -122,7 +122,7 @@
                 }
 
                 if ($scope.registerForm.img_captcha.$invalid) {
-                    ktSweetAlert.error('请填写图形验证码！')
+                    ktSweetAlert.error('请正确填写图形验证码！')
                     $scope.registerForm.img_captcha.$setDirty()
                     return
                 }

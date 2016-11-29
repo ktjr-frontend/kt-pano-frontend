@@ -270,24 +270,36 @@
                             </ul>
                         </div>
                     </section>
-                    <h3 ng-show="from_amounts.length">互联网金融平台近7日发行量</h3>
+                    <h3 ng-show="from_amounts.length">
+                        互联网金融平台近7日发行量
+                        <div class='simple-pagin'>
+                            <i class="fa fa-angle-left" ng-click="preFromPage()" ng-class="{disabled: from_page <= 0}"></i>
+                            <i class="fa fa-angle-right" ng-click="nextFromPage()" ng-class="{disabled: from_page >= max_from_page}"></i>
+                        </div>
+                    </h3>
                     <section class="box" ng-show="from_amounts.length">
                         <div class="box-body">
                             <ul class="rank-list">
-                                <li ng-repeat="fa in from_amounts" class="ellip">
-                                    <i class="index rank-{{$index + 1}}" ng-class="{'rank-double-digit': $index >= 9}" ng-bind="$index + 1"></i>
+                                <li ng-repeat="fa in from_amounts|filter:fromAmountsFilter" class="ellip">
+                                    <i class="index rank-{{from_page * pageSize + $index + 1}}" ng-class="{'rank-double-digit': (from_page * pageSize + $index) >= 9}" ng-bind="from_page * pageSize + $index + 1"></i>
                                     <a title="{{::fa.name}}" ui-sref="pano.institutions.detail({id: fa.name, dimension: 'from'})" class="content" ng-bind="::fa.name" target="_blank"></a>
                                     <span class="amount" ng-bind="::fa.amount | ktNumberLocate"></span>
                                 </li>
                             </ul>
                         </div>
                     </section>
-                    <h3 ng-show="exchange_amounts.length">挂牌场所近7日发行量</h3>
+                    <h3 ng-show="exchange_amounts.length">
+                        挂牌场所近7日发行量
+                        <div class='simple-pagin'>
+                            <i class="fa fa-angle-left" ng-click="preExchangePage()" ng-class="{disabled: exchange_page <= 0}"></i>
+                            <i class="fa fa-angle-right" ng-click="nextExchangePage()" ng-class="{disabled: exchange_page >= max_exchange_page}"></i>
+                            </div>
+                    </h3>
                     <section class="box" ng-show="exchange_amounts.length">
                         <div class="box-body">
                             <ul class="rank-list">
-                                <li ng-repeat="ea in exchange_amounts" class="ellip">
-                                    <i class="index rank-{{$index + 1}}" ng-class="{'rank-double-digit': $index >= 9}" ng-bind="$index + 1"></i>
+                                <li ng-repeat="ea in exchange_amounts|filter:exchangeAmountsFilter" class="ellip">
+                                    <i class="index rank-{{exchange_page * pageSize + $index + 1}}" ng-class="{'rank-double-digit': exchange_page * pageSize + $index >= 9}" ng-bind="exchange_page * pageSize + $index + 1"></i>
                                     <a title="{{::ea.name}}" ui-sref="pano.institutions.detail({id: ea.name, dimension: 'mapped_exchange'})" class="content" ng-bind="::ea.name" target="_blank"></a>
                                     <span class="amount" ng-bind="::ea.amount | ktNumberLocate"></span>
                                 </li>

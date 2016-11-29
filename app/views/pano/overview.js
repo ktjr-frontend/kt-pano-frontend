@@ -593,6 +593,42 @@
             /*-----------------------右边栏------------------------*/
 
             // 侧栏和推荐产品
+            var pageSize = $scope.pageSize = 10 // 10条一页
+
+            $scope.nextFromPage = function() {
+                if ($scope.from_page < $scope.max_from_page) {
+                    $scope.from_page += 1
+                }
+            }
+            $scope.preFromPage = function() {
+                if ($scope.from_page > 0) {
+                    $scope.from_page -= 1
+                }
+            }
+
+            $scope.nextExchangePage = function() {
+                if ($scope.exchange_page < $scope.max_exchange_page) {
+                    $scope.exchange_page += 1
+                }
+            }
+            $scope.preExchangePage = function() {
+                if ($scope.exchange_page > 0) {
+                    $scope.exchange_page -= 1
+                }
+            }
+
+            $scope.from_page = 0
+            $scope.exchange_page = 0
+            $scope.max_from_page = 0
+            $scope.max_exchange_page = 0
+
+            $scope.fromAmountsFilter = function(value, index) {
+                return index >= $scope.from_page * pageSize && index < $scope.from_page * pageSize + pageSize
+            }
+            $scope.exchangeAmountsFilter = function(value, index) {
+                return index >= $scope.exchange_page * pageSize && index < $scope.exchange_page * pageSize + pageSize
+            }
+
             ktAnalyticsService.get({
                 content: 'hodgepodge',
             }, function(data) {
@@ -603,12 +639,16 @@
                         amount: v[1]
                     }
                 })
+                $scope.max_from_page = Math.ceil(data.froms.length / pageSize) - 1
+
                 $scope.exchange_amounts = _.map(data.exchanges, function(v) {
                     return {
                         name: v[0],
                         amount: v[1]
                     }
                 })
+                $scope.max_exchange_page = Math.ceil(data.exchanges.length / pageSize) - 1
+
                 $scope.reports = data.reports
                 $scope.compass_assets_am = data.compass_ams
                 $scope.compass_assets_bond = data.compass_bonds

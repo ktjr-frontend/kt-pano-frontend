@@ -7,18 +7,16 @@ var appConfig = {
 var port = 8880
 var livereloadPort = 35728
 
-// var server = 'http://dev-pano.ktjr.com'
-var server = 'http://dev-op-pano.ktjr.com'
+var server = 'http://dev-pano.ktjr.com'
+// var server = 'http://pano.ktjr.com'
+    // var server = 'http://dev-op-pano.ktjr.com'
     // var server = 'http://localhost:3000'
     // var server = 'http://10.132.1.125:3000'
 
 var modRewriteUri = [
-    // '^/mock_data/v\d{1,}/([^?]*).*$ /mock_data/$1 [L]',
     '^/(api/v\\d{1,}/.*)$ ' + server + '/$1 [P]',
     '^/(uploads/.*)$ ' + server + '/$1 [P]',
     '^/(.(?!\\.))*$ /index.html [L]',
-    // '^/seallogo.dll.*$ /mock_data/seallogo.dll'
-    // '^\/src/([^\\?]*)(?:\\?.*)?$ /Users/luxueyan/work/tanx-m-ssp/src/$1 [L]',
 ]
 
 // var sessionMidWare = function() {

@@ -130,6 +130,19 @@
         @media(max-width: 767px) {
             padding-left: 15px;
         }
+        .simple-pagin {
+            float: right;
+            .fa-angle-left,
+            .fa-angle-right {
+                color: #4380dd;
+                &.disabled {
+                    color: #acacac;
+                }
+                &:active {
+                    color: lighten(#4380dd, 10%);
+                }
+            }
+        }
         >h3 {
             margin: 0 0 5px;
             height: 40px;

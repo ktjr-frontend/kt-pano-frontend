@@ -294,7 +294,7 @@
                 }
 
                 if ($scope.popForm.img_captcha.$invalid) {
-                    ktSweetAlert.error('请填写图形验证码！')
+                    ktSweetAlert.error('请正确填写图形验证码！')
                     $scope.popForm.img_captcha.$setDirty()
                     return
                 }
@@ -355,7 +355,7 @@
                 }
 
                 if ($scope.popForm.img_captcha.$invalid) {
-                    ktSweetAlert.error('请填写图形验证码！')
+                    ktSweetAlert.error('请正确填写图形验证码！')
                     $scope.popForm.img_captcha.$setDirty()
                     return
                 }
