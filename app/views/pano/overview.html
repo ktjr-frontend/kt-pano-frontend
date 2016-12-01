@@ -272,8 +272,8 @@
                     </section>
                     <h3 ng-show="from_amounts.length">
                         互联网金融平台近7日发行量
-                        <div class='simple-pagin'>
-                            <i class="fa fa-angle-left" ng-click="preFromPage()" ng-class="{disabled: from_page <= 0}"></i>
+                        <div class="simple-pagin" ng-show="max_from_page">
+                            <i class="fa fa-angle-left mr5" ng-click="preFromPage()" ng-class="{disabled: from_page <= 0}"></i>
                             <i class="fa fa-angle-right" ng-click="nextFromPage()" ng-class="{disabled: from_page >= max_from_page}"></i>
                         </div>
                     </h3>
@@ -290,8 +290,8 @@
                     </section>
                     <h3 ng-show="exchange_amounts.length">
                         挂牌场所近7日发行量
-                        <div class='simple-pagin'>
-                            <i class="fa fa-angle-left" ng-click="preExchangePage()" ng-class="{disabled: exchange_page <= 0}"></i>
+                        <div class="simple-pagin" ng-show="max_exchange_page">
+                            <i class="fa fa-angle-left mr5" ng-click="preExchangePage()" ng-class="{disabled: exchange_page <= 0}"></i>
                             <i class="fa fa-angle-right" ng-click="nextExchangePage()" ng-class="{disabled: exchange_page >= max_exchange_page}"></i>
                             </div>
                     </h3>
