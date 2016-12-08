@@ -120,6 +120,37 @@ body {
     @media(max-width: 480px) {
         padding: 0 1rem;
     }
+    .home-header-navbar-left{
+        float:left;
+        margin-top:3px;
+        a{
+            text-decoration:none;
+            color:#fff;
+            font-size:14px;
+            margin-left:70px;
+            // padding:0 17px;
+            position: relative;
+            // &.active,
+            // &:hover{
+            //    color:white;
+            //    &:after{
+            //     left:0;
+            //     right:0;
+            //    } 
+            // }
+            // &:after{
+            //     content:'';
+            //     display: block;
+            //     height: 1px;
+            //     position: absolute;
+            //     bottom: -5px;
+            //     left: 50%;
+            //     right: 50%;
+            //     background: white;
+            //     transition: all .3s ease-out;
+            // }
+        }
+    }
     .navbar-right {
         float: right;
     }
@@ -189,11 +220,61 @@ body {
     padding: 0 3rem;
     .home-link {
         margin-bottom: 15px;
+        position: relative;
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 25px;
+            width: 120px;
+            height: 1px;
+            background: #484f5f;
+        }
+    }
+    .contact {
+        text-align: left;
+        position: relative;
+        margin-right: 30px;
+        margin-bottom: 15px;
+        span {
+            margin-right: 10px;
+            font-size: 13px;
+        }
+        // .item:first-child {
+        //     margin-bottom: 20px;
+        // }
+        // @media(max-width: 767px) {
+        //     text-align: center;
+        //     .item:first-child {
+        //         margin-bottom: 10px;
+        //     }
+        // }
+        // @media(min-width: 768px) {
+        //     &:before {
+        //         content: '';
+        //         position: absolute;
+        //         height: 80%;
+        //         width: 0;
+        //         border-left: 1px solid @color-2;
+        //         left: -30px;
+        //         top: 10%;
+        //     }
+        // }
+        // .item {
+        //     display: block;
+        // }
+    }
+    .record {
+        span {
+            margin-right: 10px;
+            font-size: 13px;
+            color: #858b98;
+        }
     }
     @media(max-width: 767px) {
         padding: 0 2rem;
         .home-link {
-            display: none;
+            // display: none;
         }
     }
     @media(max-width: 480px) {
@@ -204,7 +285,7 @@ body {
         margin-top: 35px;
     }
     .inner {
-        padding-top: 40px;
+        padding-top: 20px;
     }
     @media(max-width: 767px) {
         .inner {
@@ -216,6 +297,7 @@ body {
     }
     .contact-way {
         float: right;
+        overflow: hidden;
         @media(max-width: 767px) {
             float: none;
             margin: 10px 0 35px;
@@ -223,48 +305,26 @@ body {
         @media(max-width: 360px) {
             margin-bottom: 66px;
         }
-        .way1 {
-            display: inline-block;
-            text-align: left;
-            position: relative;
-            margin-right: 30px;
-            .item:first-child {
-                margin-bottom: 20px;
+        .weixin-qcode {
+            width: 113px;
+            height: 123px;
+            padding: 10px;
+            position: absolute;
+            right: 0;
+            top: -10px;
+            background: #373d4a;
+            text-align: center;
+            p{
+                font-size:11px;
+                margin-top: 5px;
             }
-            @media(max-width: 767px) {
-                text-align: center;
-                .item:first-child {
-                    margin-bottom: 10px;
-                }
+            @media(max-width: 767px){
+                float:none;
+                margin-left:20% ;
+                position: static;
+
             }
-            @media(min-width: 768px) {
-                &:before {
-                    content: '';
-                    position: absolute;
-                    height: 80%;
-                    width: 0;
-                    border-left: 1px solid @color-2;
-                    left: -30px;
-                    top: 10%;
-                }
-            }
-            .item {
-                display: block;
-            }
-        }
-        .way2 {
-            vertical-align: top;
-            display: inline-block;
-            position: relative;
-            .weixin-qcode {
-                width: 87px;
-                height: 87px;
-                // padding: 7px;
-                position: absolute;
-                right: 0;
-                top: 22px;
-                background: #363b48;
-                /*&:before,
+            /*&:before,
                 &:after {
                     content: '';
                     position: absolute;
@@ -285,19 +345,18 @@ body {
                     height: 8px;
                     border-width: 0 1px 1px 0;
                 }*/
-                img {
-                    width: 100%;
-                    height: 100%;
-                }
+            img {
+                width: 83px;
+                height: 83px;
             }
-            @media(max-width: 360px) {
-                width: 100%;
-                text-align: center;
-                margin-top: 10px;
-                .weixin-qcode {
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
+        }
+        @media(max-width: 360px) {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            .weixin-qcode {
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
     }
@@ -315,7 +374,7 @@ body {
         @media(max-width: 767px) {
             .left,
             .right {
-                text-align: center;
+                // text-align: center;
             }
         }
         span.item,
@@ -448,7 +507,7 @@ body {
         margin: 20px 15px 0 0;
     }*/
     &.header-nav {
-        margin-top: 25px;
+        margin-top: 28px;
         margin-left: -22px;
     }
 }

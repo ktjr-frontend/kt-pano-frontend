@@ -1,1 +1,0 @@
-!function(){"use strict";angular.module("kt.pano").controller("ktHomeCtrl",["$scope","$state","$rootScope",function(a,b,c){c.goHome=function(){b.go("home.index")},a.footerContainer=!0}])}();

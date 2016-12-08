@@ -1,0 +1,164 @@
+<!-- <div class="color-line"></div> -->
+<div class="pull-left m">
+    <a ui-sref="account.login" class="btn btn-navy-blue" title="点击返回首页">返回登录</a>
+</div>
+<div class="confirm-container cbs">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="hpanel">
+                <div class="panel-body">
+                    <div class="text-center m-b-lg">
+                        <h3 class="text-primary-dark">信息确认</h3>
+                        <p class="f14">请确认贵机构以下信息是否正确，如信息有误，请尽快联系我公司以进行修改</p>
+                    </div>
+                    <form name="confirmInfoForm" method="post" id="confirmInfoForm" ng-submit="submitForm()">
+                        <!-- <div class="form-group col-lg-12" ng-repeat="(key, value) in institution">
+                            <label ng-bind="getName(key)" class="text-primary-dark text-right col-md-4 control-label">
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="key"></span> 
+                            </div>
+                        </div> -->
+                        <div class="form-group col-lg-12">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                                <div class="row">注册机构名称：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.name"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                                <div class="row">注册会员类别：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.leaguers | ktJoin:'，'"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                                <div class="row">注册机构类别：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.type"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                                <div class="row">注册资质类别：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.qualifications | ktJoin:'，'"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-lg-12">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                                <div class="row">联系地址：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.address"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                                <div class="row">邮政编码：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.zip_code"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                                <div class="row">授权经办人信息：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <!-- <span ng-bind="::institution.founded_date"></span> -->
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-right col-md-4 control-label">
+                                <div class="row f12">姓名：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.operator.name"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-right col-md-4 control-label">
+                                <div class="row f12">部门：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.operator.department"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-right col-md-4 control-label">
+                                <div class="row f12">办公电话：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.operator.landline"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-right col-md-4 control-label">
+                                <div class="row f12">手机：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.operator.mobile"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-right col-md-4 control-label">
+                                <div class="row f12">电子邮箱：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.operator.email"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label class="text-right col-md-4 control-label">
+                                <div class="row f12">传真：</div>
+                            </label>
+                            <div class="col-md-8">
+                                <span ng-bind="::institution.operator.fax"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12" ng-class="{'has-error':confirmInfoForm.reserve_rate.$invalid && confirmInfoForm.reserve_rate.$dirty}">
+                            <label class="text-primary-dark text-right col-md-4 control-label">
+                            </label>
+                            <div class="col-md-8">
+                                <div class="checkbox checkbox-success">
+                                    <input ng-model="user.confirm" name="confirm" ng-true-value="'confirm'" required id="confirm" type="checkbox">
+                                    <label for="confirm" class="f14">
+                                        我已阅读并愿意遵守以下协议：
+                                    </label>
+                                    <div class="mt5 text-danger" ng-messages="assetsReserveForm.read_rule.$dirty && assetsReserveForm.read_rule.$error">
+                                        <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请确认已阅读并遵守以上管理办法</div>
+                                    </div>
+                                    <div class="f12">
+                                        <a title="开通金融资产交易平台会员管理办法" href="/manage_rule.htm" target="_blank">《开通金融资产交易平台会员管理办法（试行）》</a>
+                                    </div>
+                                    <div class="f12">
+                                        <a title="开通金融资产交易平台会员管理办法" href="/service_terms.htm" target="_blank">《开通金融信息服务（北京）有限公司网络平台信息服务条款》</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="text-center">
+                                <div kt-loading-status height="32" width="32"></div>
+                            </div>
+                            <div class="col-md-8 col-md-offset-4">
+                                <button class="btn btn-navy-blue" ng-disabled="confirmInfoForm.$invalid || pendingRequests">确认并登录</button>
+                                <button class="btn btn-default" ng-click="back()">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer -->
+<div id="footer-analytics" ng-include="'views/common/analytics_footer.html'"></div>
