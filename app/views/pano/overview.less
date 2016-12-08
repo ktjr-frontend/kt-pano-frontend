@@ -133,11 +133,15 @@
         }
         .simple-pagin {
             float: right;
+            font-size: 20px;
             .fa-angle-left,
             .fa-angle-right {
+                padding: 0 5px;
+                cursor: pointer;
                 color: #4380dd;
                 &.disabled {
                     color: #acacac;
+                    cursor: not-allowed;
                 }
                 &:active {
                     color: lighten(#4380dd, 10%);
