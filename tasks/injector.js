@@ -47,6 +47,7 @@ var appScripts = [
     'app/common/libs/ua.js',
     'app/common/libs/utils.js',
     'app/common/libs/visible.js',
+    // 'app/common/libs/canvas2image.js',
     'app/common/kt-common.js',
     'app/common/locale/angular-locale_zh-cn.js',
     'app/common/factories/kt-resource-assetmap.js',
