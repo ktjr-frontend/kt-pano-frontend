@@ -3,7 +3,6 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
-            debugger
             $scope.shared = {}
             var defaultParams = {
                 dimension: 'from',
