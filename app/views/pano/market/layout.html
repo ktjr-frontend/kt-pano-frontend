@@ -1,17 +1,18 @@
-<div class="row" child="hpanel">
-    <div class="hpanel pr">
-        <!-- <uib-tabset>
-            <uib-tab select="tabSelect('pano.order.obligatoryRight', 0)" active="shared.tabActive.tab0">
+
+<div child="hpanel">
+    <div class="hpanel pr has-tabs">
+        <uib-tabset>
+            <uib-tab select="tabSelect('pano.market.default')" active="shared.tabActive.tab0">
                 <tab-heading>
                     债权类
                 </tab-heading>
             </uib-tab>
-            <uib-tab select="tabSelect('pano.order.assetManage', 1)" active="shared.tabActive.tab1">
+            <uib-tab select="tabSelect('pano.market.assetManage')" active="shared.tabActive.tab1">
                 <tab-heading>
                     资管类
                 </tab-heading>
             </uib-tab>
-        </uib-tabset> -->
+        </uib-tabset>
         <div class="panel-body b-t-none">
             <div class="filter-box bor-xxs">
                 <div class="normal-filter clfix" ng-class="{'expand': showMoreFilters}">
@@ -218,7 +219,7 @@
                     </div> -->
                 </div>
             </div>
-            <div ui-view>
+            <div  ui-view>
             </div>
             <div class="mt30">
                 <p class="footer-notes f1_2rem lh1_8em text-placeholder">

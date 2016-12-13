@@ -3,6 +3,7 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktOrderAssetManageCtrl', function($scope, $state, $location, ktDataHelper, ktAssetFiltersService, ktAssetService) {
+            debugger
             $scope.shared.tabActive.tab1 = true
             $.extend($scope.shared.params, $location.search(), { tab: 1 })
 

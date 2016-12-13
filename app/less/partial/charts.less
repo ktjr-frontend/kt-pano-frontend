@@ -69,15 +69,25 @@
         font-size: 1.5rem;
     }
     .update-time {
-        color: @color-bright;
+        // color: @color-bright;
+        color: #b0b7ce;
         @media(max-width: 900px) {
             display: none;
         }
-        @media(max-width: 768px){
+        @media(max-width: 768px) {
             display: block;
         }
-        @media(max-width: 480px){
+        @media(max-width: 480px) {
             display: none;
+        }
+    }
+    .icon-download {
+        color: #b0b7ce;
+        cursor: pointer;
+        font-size: 14px;
+        vertical-align: -4px;
+        &:hover {
+            color: darken(#b0b7ce, 10%);
         }
     }
     .chart-table-heading {
@@ -188,7 +198,7 @@
         @media(max-width: 480px) {
             padding: 0;
         }
-        .bottom-tip{
+        .bottom-tip {
             padding-bottom: 10px;
             font-size: 1.2rem;
             text-align: center;
@@ -223,18 +233,18 @@
                 &:active {
                     color: lighten(@color-2, 8%);
                 }
-                &.on{
+                &.on {
                     color: @color-orange;
                 }
                 &:last-child {
                     border-radius: 0 5px 0 0;
                 }
-                .tg-btn{
-                    .name{
+                .tg-btn {
+                    .name {
                         font-size: 1rem;
                         color: @color-6;
                     }
-                    label{
+                    label {
                         vertical-align: -8px;
                         display: inline-block;
                         width: 2.2em;
@@ -244,21 +254,21 @@
                 }
             }
         }
-        .btn-group{
+        .btn-group {
             margin-right: 10px;
-            .btn{
+            .btn {
                 border: 0;
                 color: @color-bright;
                 background: @color-3;
                 padding: 1px 5px 3px;
                 -webkit-font-smoothing: antialiased;
-                & + .btn{
+                & + .btn {
                     margin-left: 0;
                 }
                 &:hover {
                     border: 0;
                 }
-                &.active{
+                &.active {
                     background: #c0d1ea;
                     box-shadow: none;
                     color: white;
@@ -298,18 +308,21 @@
         }
     }
 }
-.chart-tooltip-title{
-    color: rgba(255,255,255,1);
+
+.chart-tooltip-title {
+    color: rgba(255, 255, 255, 1);
 }
-.chart-tooltip-table{
-    color: rgba(255,255,255,0.8);
-    tr{
-        td, th{
+
+.chart-tooltip-table {
+    color: rgba(255, 255, 255, 0.8);
+    tr {
+        td,
+        th {
             padding: 0 5px;
-            &:first-child{
+            &:first-child {
                 padding-left: 0;
             }
-            &:last-child{
+            &:last-child {
                 padding-right: 0;
             }
         }

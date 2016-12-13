@@ -3,7 +3,7 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
-
+            debugger
             $scope.shared = {}
             var defaultParams = {
                 dimension: 'from',
@@ -141,6 +141,24 @@
                 // filterInit(params)
 
             })
+
+            //切换tab
+            $scope.tabSelect = function(state) {
+                if ($state.current.name !== state) {
+                    $state.go(state, $.extend(params, {
+                        status_eq: null,
+                        life_days_in: null,
+                        rate_in: null,
+                        asset_type_eq: null,
+                        exchange_eq: null,
+                        credit_manager_eq: null,
+                        from_eq: null,
+                        sort_by: null,
+                        page: 1,
+                        order: null
+                    }))
+                }
+            }
 
             // 资产管理类数据
             $scope.assetManger = {}

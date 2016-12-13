@@ -8,73 +8,160 @@
             <h1 class="center-block title animated" delay="0.3">主流平台全面覆盖<span class="blank f1_5rem"></span>市场信息实时获取</h1>
             <div class="buttons animated" delay="0.4">
                 <!-- <a ui-sref="account.login" class="login btn">登 录<i class="fa fa-angle-right ml10"></i></a> -->
-                <a ui-sref="account.register" class="register btn">立即注册</a>
+                <a ui-sref="account.register" ng-class="{'active_bg':default_bg}" ng-init="default_bg=true" ng-click="default_bg=true" class="register btn ">PC端</a>
+                <a class="btn" ng-class="{'active_bg':!default_bg}" ng-click="default_bg=false">微信端</a>
             </div>
         </div>
         <!-- <canvas id="myCanvas" resize height="100%" width="100%"></canvas> -->
     </section>
-    <section class="section section-2" kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp">
-        <div class="container clfix">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="inner">
-                        <h2 class="animated" delayed="0.2">
-                            <span class="title">全景呈现</span><i class="icon-pano icon-cloud"></i>
-                        </h2>
-                        <p class="cont">汇集国内主流互金平台金融产品发行信息，助您快速全面了解市场最新数据，解除您逐日跟踪各大平台的烦恼。</p>
+    <div ng-if="default_bg">
+        <section class="section section-2" kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp">
+            <div class="container clfix">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inner">
+                            <h2 class="animated" delayed="0.2">
+                                <span class="title">互金市场全景数据</span>
+                            </h2>
+                            <p class="cont">多维度、多指标、多模型分析互金市场全量数据，丰富的图表助您快速全面了解市场情况，解除您逐日追踪各大平台的烦恼。</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="img-box">
-                        <img src="/images/section_2.png" delayed="0.1" class="animated" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section section-3">
-        <div class="container clfix">
-            <div class="row">
-                <div class="col-md-6 col-md-push-6">
-                    <div class="inner right">
-                        <h2 class="animated" delayed="0.2">
-                            <span class="title">贴身资产服务</span><i class="icon-pano icon-person_rect"></i>
-                        </h2>
-                        <p class="cont">开通<span class="en">PANO</span>与多家优质资产机构合作，精心挑选多品种的可售金融资产及资管产品。为您提供稳定便捷的资产获取渠道和专业的后续交易服务。</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-md-pull-6">
-                    <div class="img-box">
-                        <img src="/images/section_3.png" delayed="0.1" class="animated" alt="">
+                    <div class="col-md-6">
+                        <div class="img-box">
+                            <img src="/images/section_2.png" delayed="0.1" class="animated" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="section section-4">
-        <div class="container clfix">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="inner">
-                        <h2 class="animated" delayed="0.2">
-                            <span class="title">让数据说话</span><i class="icon-pano icon-search"></i>
-                        </h2>
-                        <p class="cont">开通<span class="en">PANO</span>让您对市场数据的分析变得异常简单。灵活的自定义筛选、多维度的数据透视、丰富的可视化工具帮助您从市场数据中获取更深刻的洞察力。</p>
+        </section>
+        <section class="section section-3">
+            <div class="container clfix">
+                <div class="row">
+                    <div class="col-md-6 col-md-push-6">
+                        <div class="inner right">
+                            <h2 class="animated" delayed="0.2">
+                                <span class="title">产品信息全面更新</span>
+                            </h2>
+                            <p class="cont">开通<span class="en">PANO</span>汇聚国内主流互金平台金融产品发行信息，积累上百万互金平台发行产品数据，助您把握各平台产品最新发行情况。</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="img-box">
-                        <img src="/images/section_4.png" delayed="0.1" class="animated" alt="">
+                    <div class="col-md-6 col-md-pull-6">
+                        <div class="img-box">
+                            <img src="/images/section_3.png" delayed="0.1" class="animated" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="section section-5">
+        </section>
+        <section class="section section-4">
+            <div class="container clfix">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inner">
+                            <h2 class="animated" delayed="0.2">
+                                <span class="title">机构信息深度介绍</span>
+                            </h2>
+                            <p class="cont">开整合互金平台及交易所基本信息和产品发行情况，让您更深入全面地了解各机构的实际状况。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="img-box">
+                            <img src="/images/section_4.png" delayed="0.1" class="animated" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-3 section-6">
+            <div class="container clfix">
+                <div class="row">
+                    <div class="col-md-6 col-md-push-6">
+                        <div class="inner right">
+                            <h2 class="animated" delayed="0.2">
+                                <span class="title">互金市场最新资讯</span>
+                            </h2>
+                            <p class="cont">提取各大重要财经新闻平台上的互金资讯，每日跟踪更新新闻内容，为您提供最及时的重要市场报道。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-pull-6">
+                        <div class="img-box">
+                            <img src="/images/section_5.png" delayed="0.1" class="animated" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div ng-if="!default_bg">
+        <section class="section section-2" kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp">
+            <div class="container clfix">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inner">
+                            <h2 class="animated" delayed="0.2">
+                                <span class="title">11111112222222</span>
+                            </h2>
+                            <p class="cont">汇集国内主流互金平台金融产品发行信息，助您快速全面了解市场最新数据，解除您逐日跟踪各大平台的烦恼。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="img-box">
+                            <img src="/images/section_5.png" delayed="0.1" class="animated" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-3">
+            <div class="container clfix">
+                <div class="row">
+                    <div class="col-md-6 col-md-push-6">
+                        <div class="inner right">
+                            <h2 class="animated" delayed="0.2">
+                                <span class="title">贴身资产服务</span>
+                            </h2>
+                            <p class="cont">开通<span class="en">PANO</span>与多家优质资产机构合作，精心挑选多品种的可售金融资产及资管产品。为您提供稳定便捷的资产获取渠道和专业的后续交易服务。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-pull-6">
+                        <div class="img-box">
+                            <img src="/images/section_3.png" delayed="0.1" class="animated" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-4">
+            <div class="container clfix">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inner">
+                            <h2 class="animated" delayed="0.2">
+                                <span class="title">让数据说话</span>
+                            </h2>
+                            <p class="cont">开通<span class="en">PANO</span>让您对市场数据的分析变得异常简单。灵活的自定义筛选、多维度的数据透视、丰富的可视化工具帮助您从市场数据中获取更深刻的洞察力。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="img-box">
+                            <img src="/images/section_4.png" delayed="0.1" class="animated" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-5">
+            <div class="wxCode">
+                <p>扫描前往移动端</p>
+                <img src="/images/weixin_code.png">
+            </div>
+        </section>
+    </div>
+ <!--    <section class="section section-5">
         <div class="buttons text-center">
             <a ui-sref="account.register" class="register btn">立即注册 <span class="en">PANO</span></a>
         </div>
-    </section>
+    </section> -->
 </div>
 <!-- 光效制作 -->
 <!-- <script src="/common/libs/paper-core.min.js"></script>

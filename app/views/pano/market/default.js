@@ -4,6 +4,7 @@
     angular.module('kt.pano')
         .controller('ktMarketCtrl', function($scope, $q, $state, $timeout, $location, ktDataHelper, ktAnalyticsService, ktEchartTheme1) {
             // shared.tabActive.tab1 = true
+            debugger
             var shared = $scope.shared
             var params = shared.params
 

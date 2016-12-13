@@ -7,9 +7,9 @@
     <nav role="navigation">
         <!-- <kt-minimaliza-menu></kt-minimaliza-menu> -->
         <div class="home-header-navbar-left">
-            <a  href="">总览</a>
-            <a  href="">市场数据</a>
-            <a  href="">产品信息</a>
+            <a ui-sref="pano.overview">总览</a>
+            <a ui-sref="pano.market.default">市场数据</a>
+            <a ui-sref="pano.products.obligatoryRight">产品信息</a>
         </div>
         <div class="navbar-right">
             <ul class="nav navbar-nav header-nav no-borders mr15" ng-if="user && user.status">
@@ -30,11 +30,11 @@
             </ul>
             <ul class="nav navbar-nav header-nav no-borders" ng-if="!user.status">
                 <li ui-sref-active="active" class="first">
-                    <a title="登录" class="login menu" ui-sref="account.login">
+                    <a title="登录" class="login menu " ui-sref="account.login">
                         登录
                     </a>
                 </li>
-                <li ui-sref-active="active" class="first"><a title="注册" class="register menu" ui-sref="account.register">注册</a></li>
+                <li ui-sref-active="active"><a title="注册" class="register menu" ui-sref="account.register">注册</a></li>
             </ul>
         </div>
     </nav>
