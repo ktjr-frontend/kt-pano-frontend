@@ -3,7 +3,10 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
-            $scope.shared = {}
+            $scope.shared = {
+                tab_show: true
+            }
+
             var defaultParams = {
                 dimension: 'from',
                 start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(6, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
@@ -144,18 +147,7 @@
             //切换tab
             $scope.tabSelect = function(state) {
                 if ($state.current.name !== state) {
-                    $state.go(state, $.extend(params, {
-                        status_eq: null,
-                        life_days_in: null,
-                        rate_in: null,
-                        asset_type_eq: null,
-                        exchange_eq: null,
-                        credit_manager_eq: null,
-                        from_eq: null,
-                        sort_by: null,
-                        page: 1,
-                        order: null
-                    }))
+                    $state.go(state)
                 }
             }
 

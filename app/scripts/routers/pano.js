@@ -123,12 +123,12 @@
                 //     }
                 // },
                 'pano.market.assetManage': {
-                    url: '/asset_manages?type&from&credit_right_or&start_at&end_at&dimension&asset_type&mapped_exchange&page&per_page&sort_by&order',
+                    url: '/asset_manages',
                     templateUrl: 'views/pano/market/asset_manage.html',
                     resolve: ktLazyResolve([
-                        'views/pano/market/default.js',
+                        'views/pano/market/asset_manage.js',
                     ]),
-                    controller: 'ktMarketCtrl',
+                    controller: 'ktOrderAssetManageCtrl',
                     data: {
                         pageTitle: '产品信息-资管类',
                     }

@@ -2,19 +2,19 @@
 <div child="hpanel">
     <div class="hpanel pr has-tabs">
         <uib-tabset>
-            <uib-tab select="tabSelect('pano.market.default')" active="shared.tabActive.tab0">
+            <uib-tab select="tabSelect('pano.market.default')" ng-click="shared.tab_show=true"  active="shared.tabActive.tab0">
                 <tab-heading>
-                    债权类
+                    资产类
                 </tab-heading>
             </uib-tab>
-            <uib-tab select="tabSelect('pano.market.assetManage')" active="shared.tabActive.tab1">
+            <uib-tab select="tabSelect('pano.market.assetManage')" ng-click="shared.tab_show=false"  active="shared.tabActive.tab1">
                 <tab-heading>
                     资管类
                 </tab-heading>
             </uib-tab>
         </uib-tabset>
-        <div class="panel-body b-t-none">
-            <div class="filter-box bor-xxs">
+        <div class="panel-body b-t-none" >
+            <div class="filter-box bor-xxs" ng-show="shared.tab_show">
                 <div class="normal-filter clfix" ng-class="{'expand': showMoreFilters}">
                     <div class="line clfix">
                         <div class="fl">
@@ -222,10 +222,13 @@
             <div  ui-view>
             </div>
             <div class="mt30">
-                <p class="footer-notes f1_2rem lh1_8em text-placeholder">
+                <p class="footer-notes f1_2rem lh1_8em text-placeholder" ng-show="shared.tab_show">
                     *市场数据覆盖互联网金融平台的活期产品、票据产品以及定期或固收产品，不包括P2P产品、私募基金产品和转让产品。
-                    <br>展示产品分为资产类和资管类。资产类是产品成立时即对应具体投资标的或指向特定融资人的产品。资管类是由特定管理人主动管理，产品发行无明确限额的灵活期限产品。
-                    <br> 本页面参与图形计算和展示的为资产类。参与表格计算和展示的为资管类。
+                    <br>资产类是产品成立时即对应具体投资标的或指向特定融资人的产品。
+                </p>
+                 <p class="footer-notes f1_2rem lh1_8em text-placeholder" ng-show="!shared.tab_show">
+                    *市场数据覆盖互联网金融平台的活期产品、票据产品以及定期或固收产品，不包括P2P产品、私募基金产品和转让产品。
+                    <br>资管类是由特定管理人主动管理，产品发行无明确限额的灵活期限产品。
                 </p>
             </div>
         </div>
