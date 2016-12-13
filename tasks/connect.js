@@ -123,9 +123,9 @@ module.exports = {
                          return next()
                      },*/
                     modRewrite(modRewriteUri),
-                    gzip.staticGzip(appConfig.dist, { //启用gzip
-                        matchType: /text|css|javascript|image|font/
-                    }),
+                    // gzip.staticGzip(appConfig.dist, { //启用gzip
+                    //     matchType: /text|css|javascript|image|font/
+                    // }),
                     // connect.static(appConfig.dist),
                 ]
             }
