@@ -239,21 +239,21 @@
                 display: none;
                 .right-arrow {
                     position: absolute;
-                    top: 6px;
+                    top: 8px;
                     left: -19px;
                     display: inline-block;
-                    border: 8px solid transparent;
+                    border: 6px solid transparent;
                     border-left-color: rgba(255, 255, 255, 0.12);
                     width: 0;
                     height: 0;
                 }
                 .pano-code-hide {
-                    width: 120px;
+                    width: 115px;
                     position: absolute;
                     border-radius: 3px;
                     top: -50px;
                     display: inline-block;
-                    padding: 10px 10px 5px 10px;
+                    padding: 10px 7px 5px 7px;
                     background: rgba(255, 255, 255, 0.12);
                     .pano-text {
                         margin-top: 5px;
@@ -285,16 +285,16 @@
             position: relative;
             .fontSize(35);
             // border-bottom: 1px solid @border-color;
-            &:after {
-                content: '';
-                height: .8em;
-                width: 0;
-                border-right: 1px solid @border-color;
-                transform: rotate(30deg) translateY(-50%);
-                top: 50%;
-                position: absolute;
-                right: -.5em;
-            }
+            // &:after {
+            //     content: '';
+            //     height: .8em;
+            //     width: 0;
+            //     border-right: 1px solid @border-color;
+            //     transform: rotate(30deg) translateY(-50%);
+            //     top: 50%;
+            //     position: absolute;
+            //     right: -.5em;
+            // }
         }
         .title1 {
             color: black;
@@ -304,20 +304,34 @@
             position: relative;
             .fontSize(35);
             // border-bottom: 1px solid @border-color;
-            &:after {
-                content: '';
-                height: .8em;
-                width: 0;
-                border-right: 1px solid @border-color;
-                transform: rotate(30deg) translateY(-50%);
-                top: 50%;
-                position: absolute;
-                right: -.5em;
-                top: 1.1em;
-            }
+            // &:after {
+            //     content: '';
+            //     height: .8em;
+            //     width: 0;
+            //     border-right: 1px solid @border-color;
+            //     transform: rotate(30deg) translateY(-50%);
+            //     top: 50%;
+            //     position: absolute;
+            //     right: -.5em;
+            //     top: 1.1em;
+            // }
         }
         .inner {
             .marginTop(105);
+            .paddingRight(35);
+            @media(max-width: 480px) {
+                .marginTop(20)!important;
+                .paddingRight(0)!important;
+                .paddingLeft(15)!important;
+            }
+            &.right {
+                .paddingLeft(35)!important;
+                .paddingRight(0)!important;
+                .paddingLeft(15)!important;
+            }
+        }
+        .inner-wx{
+            .marginTop(175);
             .paddingRight(35);
             @media(max-width: 480px) {
                 .marginTop(20)!important;
@@ -345,6 +359,24 @@
                 }
             }
         }
+        .row-3{
+            margin-top:3em;
+        }
+        // .img-box-m{
+        //     .marginTop(60);
+        //     text-align: center;
+        //     @media(max-width: 768px) {
+        //         img {
+        //             width: 100%;
+        //         }
+        //     }
+        //     @media(max-width: 480px) {
+        //         .marginTop(20);
+        //         img {
+        //             margin: 0!important;
+        //         }
+        //     }
+        // }
         .icon-pano {
             font-size: 1em;
             color: @color-blue;
@@ -467,6 +499,7 @@
         background: #4380dd;
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
+        display: none;
         &:hover .fixed-middle , &:hover .fixed-big-code{
             display: block;
         }
@@ -495,9 +528,9 @@
             display: none;
             .code_show {
                 display: inline-block;
-                padding: 10px 10px 5px 10px;
+                padding: 10px 5px 5px 5px;
                 background: #dbe0e7;
-                width: 120px;
+                width: 115px;
                 text-align: center;
                 color: #000;
                 border-radius: 3px;
