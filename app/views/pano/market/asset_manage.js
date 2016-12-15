@@ -7,11 +7,15 @@
             $scope.tab_show = false
             $scope.assetManger = {}
             ktAnalyticsService.get({
-                content: 'rate_trend'
-            }, function(data) {
-                $scope.assetManger = data.stat
-            })
-            // $.extend($scope.shared.params, $location.search(), { tab: 1 })
+                    content: 'rate_trend'
+                }, function(data) {
+                    $scope.assetManger = data.stat
+                    if (data.crawled_at) {
+                        $scope.updateDate = moment(data.crawled_at).format('YYYY-MM-DD')
+
+                    }
+                })
+                // $.extend($scope.shared.params, $location.search(), { tab: 1 })
 
             // ktAssetFiltersService.get(function(data) {
             //     $scope.shared.filters = data['1']

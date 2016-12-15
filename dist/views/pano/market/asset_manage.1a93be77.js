@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("kt.pano").controller("ktOrderAssetManageCtrl",["$scope","$state","$location","ktDataHelper","ktAnalyticsService",function(a,b,c,d,e){a.tab_show=!1,a.assetManger={},e.get({content:"rate_trend"},function(b){a.assetManger=b.stat,b.crawled_at&&(a.updateDate=moment(b.crawled_at).format("YYYY-MM-DD"))})}])}();
