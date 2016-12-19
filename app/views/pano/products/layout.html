@@ -1,18 +1,18 @@
-<div class="row" child="hpanel">
-    <div class="hpanel pr has-tabs">
+<div child="hpanel">
+    <div class="hpanel hpanel pr has-tabs">
         <uib-tabset>
-            <uib-tab select="tabSelect('pano.products.obligatoryRight')" active="shared.tabActive.tab0">
+            <uib-tab select="tabSelect('pano.products.obligatoryRight')"  active="shared.tabActive.tab0">
                 <tab-heading>
                     资产类
                 </tab-heading>
             </uib-tab>
-            <uib-tab select="tabSelect('pano.products.assetManage')" active="shared.tabActive.tab1">
+            <uib-tab select="tabSelect('pano.products.assetManage')"  active="shared.tabActive.tab1">
                 <tab-heading>
                     资管类
                 </tab-heading>
             </uib-tab>
         </uib-tabset>
-        <div class="panel-body b-t-none">
+        <div class="panel-body b-t-none" >
             <div class="filter-box bor-xxs">
                 <div class="filter-list has-toggle-btn">
                     <div class="filter-line clfix" ng-repeat="filter in shared.filters">

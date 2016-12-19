@@ -4,7 +4,6 @@
     angular.module('kt.pano')
         .controller('ktProductsLayoutCtrl', function($scope, $window, $timeout, $state, $location, ktSweetAlert, ktDataHelper) {
             var perPageCount = ktDataHelper.getPerPage()
-
             var search = $location.search()
             $scope.shared = {}
             $scope.shared.today_added_count = 0

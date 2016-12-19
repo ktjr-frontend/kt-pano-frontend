@@ -111,28 +111,28 @@
                         pageTitle: '市场数据',
                     }
                 },
-                /*'pano.market.obligatoryRight': {
-                    url: '/obligatory_right?type&from&credit_right_or&start_at&end_at&dimension&asset_type&mapped_exchange&page&per_page&sort_by&order',
-                    templateUrl: 'views/pano/market/obligatory_right.html',
-                    resolve: ktLazyResolve([
-                        'views/pano/market/obligatory_right.js',
-                    ]),
-                    controller: 'ktMarketObligatoryRightCtrl',
-                    data: {
-                        pageTitle: '产品信息-债权类',
-                    }
-                },
+                // 'pano.market.obligatoryRight': {
+                //     url: '/obligatory_right?type&from&credit_right_or&start_at&end_at&dimension&asset_type&mapped_exchange&page&per_page&sort_by&order',
+                //     templateUrl: 'views/pano/market/obligatory_right.html',
+                //     resolve: ktLazyResolve([
+                //         'views/pano/market/obligatory_right.js',
+                //     ]),
+                //     controller: 'ktMarketObligatoryRightCtrl',
+                //     data: {
+                //         pageTitle: '产品信息-债权类',
+                //     }
+                // },
                 'pano.market.assetManage': {
-                    url: '/asset_manages?type&from&credit_right_or&start_at&end_at&dimension&asset_type&mapped_exchange&page&per_page&sort_by&order',
+                    url: '/asset_manages',
                     templateUrl: 'views/pano/market/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/market/asset_manage.js',
                     ]),
-                    controller: 'ktMarketAssetManageCtrl',
+                    controller: 'ktOrderAssetManageCtrl',
                     data: {
                         pageTitle: '产品信息-资管类',
                     }
-                },*/
+                },
                 // 产品信息
                 'pano.products': {
                     abstract: true,
