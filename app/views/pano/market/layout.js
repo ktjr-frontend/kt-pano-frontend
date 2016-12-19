@@ -3,8 +3,10 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
+            $scope.shared = {
+                tab_show: true
+            }
 
-            $scope.shared = {}
             var defaultParams = {
                 dimension: 'from',
                 start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(6, 'weeks').add(1, 'days').format('YYYY-MM-DD'),
@@ -141,6 +143,13 @@
                 // filterInit(params)
 
             })
+
+            //切换tab
+            $scope.tabSelect = function(state) {
+                if ($state.current.name !== state) {
+                    $state.go(state)
+                }
+            }
 
             // 资产管理类数据
             $scope.assetManger = {}

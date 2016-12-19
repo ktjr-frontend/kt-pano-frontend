@@ -5,7 +5,7 @@
         .controller('ktPanoCtrl', function($scope, $rootScope, $state, $templateRequest, ktS, ktFeedbackService) {
 
             $rootScope.goHome = function() {
-                $state.go($rootScope.defaultRoute)
+                $state.go('home.index')
             }
 
             $scope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState) {
