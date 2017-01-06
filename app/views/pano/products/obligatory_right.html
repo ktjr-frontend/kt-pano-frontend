@@ -1,8 +1,122 @@
 <div class="chart-table-heading clfix">
-    <div class="chart-table-title fl">本日新增<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared.today_added_count"></span>条产品，新增发行量<span class="text-warning-light f1_2em pr2 pl2" ng-bind="(shared.today_added_amount / 10000) | ktNumber:0"></span>万元</div>
-    <div class="fr text-placeholder">*默认按产品发布时间逆序排列</div>
+    <div class="chart-table-title fl">
+        本日新增<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared.today_added_count"></span>条产品，更新<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared.today_updated_count"></span>条产品，总新增发行量<span class="text-warning-light f1_2em pr2 pl2" ng-bind="(shared.today_added_amount / 10000) | ktNumber:0"></span>万元
+    </div>
+    <div class="fr text-placeholder">*原始产品新增<span class="text-warning-light f1_2em pr2 pl2">1100</span>条，更新<span class="text-warning-light f1_2em pr2 pl2">88</span>条</div>
 </div>
-<div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
+<div class="table-body">
+    <div class="table-kind bor-xxs">
+        <div class="table-head">
+            <div class="rank-bar fl clfix">
+                <a>默认排序</a>
+                <a>按更新时间
+                    <i class="icon-pano icon-arrow-up"></i>
+                </a>
+                <a>按年化收益率
+                    <i class="icon-pano icon-arrow-up"></i>
+                </a>
+            </div>
+            <div class="checkbox-bar">
+                <label>
+                    <input type="checkbox" checklist-model='shared.params.created_or_updated_in' checklist-value="'1'">
+                    <i class="icon-pano icon-checkbox"></i><i class="icon-pano icon-checkbox-checked"></i>只看新增
+                </label>
+                <label>
+                    <input type="checkbox" checklist-model='shared.params.created_or_updated_in' checklist-value="'2'">
+                    <i class="icon-pano icon-checkbox"></i><i class="icon-pano icon-checkbox-checked"></i>只看更新
+                </label>
+            </div>
+        </div>
+        <div class="table-body">
+            <div class="tr">
+                <div class="tr-head tags">冰泉金服利-企业借款类<span class="tag tag-orange">新增</span></div>
+                <div class="tr-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="td-caption">
+                                    产品期限
+                                </div>
+                                <div class="td-body">
+                                    12个月
+                                </div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    产品期限
+                                </div>
+                                <div class="td-body">
+                                    12个月
+                                </div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    产品期限
+                                </div>
+                                <div class="td-body">
+                                    12个月
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tr">
+                <div class="tr-head">冰泉金服利-企业借款类<span class="tag tag-green">更新</span></div>
+                <div class="tr-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="td-caption">
+                                    产品期限
+                                </div>
+                                <div class="td-body">
+                                    12个月
+                                </div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    产品期限
+                                </div>
+                                <div class="td-body">
+                                    12个月
+                                </div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    产品期限
+                                </div>
+                                <div class="td-body">
+                                    12个月
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- <div class="td">
+                        <div class="td-head">产品期限</div>
+                        <div class="td-body">12个月</div>
+                    </div>
+                    <div class="td"></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="table-foot text-center fixed-table-link" data-bottom="75">
+            <div class="page-total-items">
+                共<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared._params.totalItems"></span>条记录
+            </div>
+            <div class="pagins">
+                <uib-pagination total-items="shared._params.totalItems" items-per-page="shared.params.per_page" ng-change="pageChanged()" max-size="shared._params.maxSize" ng-model="shared.params.page" class="pagination-sm fixed-table-link"></uib-pagination>
+                <div class="pagination-enhance">
+                    <div class="en">共<span ng-bind="shared._params.totalPages"></span>页</div>
+                    <div class="en">跳转到第
+                        <input type="text" ng-model="shared._params.page" ng-keyup="goToByEnterKey($event, 'page', shared._params.page)"/>页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="table-responsive table-body" fixed-bottom="124" fixed-link="fixed-table-link">
     <table class="table table-striped table-hover">
         <thead>
             <tr kt-table-sort>
@@ -22,7 +136,7 @@
                     </div>
                 </th>
                 <th>募集金额</th>
-                <!-- <th>剩余金额</th> -->
+                <!~~ <th>剩余金额</th> ~~>
                 <th class="sort-column" field="value_date">
                     <span>起息日</span>
                     <div class="sort-icons">
@@ -36,7 +150,7 @@
                 <th>挂牌场所</th>
                 <th>增信措施</th>
                 <th>产品说明书</th>
-                <!-- <th>当前状态</th> -->
+                <!~~ <th>当前状态</th> ~~>
             </tr>
         </thead>
         <tbody>
@@ -45,7 +159,7 @@
                 <td ng-bind="::getLife(product.life)|ktEclipsis:4" title="{{::getLife(product.life)}}"></td>
                 <td ng-bind="::product.rate | ktNumber:2:'percent2'"></td>
                 <td ng-bind="::product.sum_amount | ktNumberLocate"></td>
-                <!-- <td ng-bind="::product.selling_amount | ktNumberLocate"></td> -->
+                <!~~ <td ng-bind="::product.selling_amount | ktNumberLocate"></td> ~~>
                 <td ng-bind="::(product.value_date | ktNull | date:'yyyy-MM-dd')"></td>
                 <td>
                     <a ng-if="product.from" ui-sref="pano.institutions.detail({id: product.from, dimension: 'from'})" ng-bind="::product.from | ktNull" target="_blank"></a>
@@ -62,9 +176,9 @@
                     <a ng-if="product.attachment_url" class="hover-underline" target="_blank" href="{{::product.attachment_url}}">下载资料</a>
                     <span ng-if="!product.attachment_url">-</span>
                 </td>
-                <!-- <td>
+                <!~~ <td>
                     <span ng-bind="::getStatusName(product.status)"></span>
-                </td> -->
+                </td> ~~>
             </tr>
             <tr ng-if="!products.length && !isLoading()">
                 <td colspan="11" class="text-navy-blue text-center">
@@ -74,4 +188,4 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div>-->

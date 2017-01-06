@@ -79,9 +79,9 @@
                     return lifeName
                 },
                 // 获取条件具体名称
-                getConditionName: function(filters) {
+                getConditionName: function(shared) {
                     return function(type) {
-                        var filter = _.find(filters, function(v) {
+                        var filter = _.find(shared.filters, function(v) {
                             return v.value === type
                         }) || {}
 

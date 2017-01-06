@@ -140,6 +140,7 @@
                     templateUrl: 'views/pano/products/layout.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/layout.js',
+                        'views/pano/products/layout.css',
                     ]),
                     controller: 'ktProductsLayoutCtrl',
                     data: {
@@ -153,7 +154,7 @@
                     }
                 },
                 'pano.products.obligatoryRight': {
-                    url: '/obligatory_right?status_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
+                    url: '/obligatory_right?key_word&created_or_updated_in&status_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/obligatory_right.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/obligatory_right.js',
@@ -164,7 +165,7 @@
                     }
                 },
                 'pano.products.assetManage': {
-                    url: '/asset_manages?status_eq&rate_in&life_days_in&credit_manager_eq&from_eq&page&per_page&sort_by&order',
+                    url: '/asset_manages?key_word&created_or_updated_in&status_eq&rate_in&life_days_in&credit_manager_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/asset_manage.js',

@@ -1,0 +1,28 @@
+@import "../../../common/styles/theme/v4/variables.less";
+.products {
+    .search-bar {
+        .input-group {
+            width: 350px;
+            .form-control {
+                border: 0;
+                height: 30px;
+                border-radius: 100px 0 0 100px;
+                &:focus {
+                    border: 1px solid @color-navy-blue;
+                }
+            }
+            .input-group-addon {
+                border: 0;
+                background: @color-navy-blue;
+                color: white;
+                border-radius: 0 100px 100px 0;
+                &:hover {
+                    cursor: pointer;
+                }
+                &:active {
+                    background: darken(@color-navy-blue, 10%);
+                }
+            }
+        }
+    }
+}

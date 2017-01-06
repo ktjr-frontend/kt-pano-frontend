@@ -50,6 +50,11 @@
                 $state.go($state.current.name, p)
             }
 
+            $scope.goToByEnterKey = function(event, key, value) {
+                if (event.keyCode !== 13) return
+                $scope.goTo(key, value)
+            }
+
             $scope.$on('totalItemGot', function(event, data) { //totalItem 不满足初始page的会自动跳转到第一页
                 params.page = data.page
 
@@ -70,6 +75,6 @@
             $scope.shared.filters = []
             $scope.shared.filterDatas = null //避免筛选时候重复请求，以及展开状态被重置
 
-            $scope.getConditionName = ktDataHelper.getConditionName($scope.shared.filters)
+            $scope.getConditionName = ktDataHelper.getConditionName($scope.shared)
         })
 })();
