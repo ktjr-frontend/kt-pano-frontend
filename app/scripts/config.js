@@ -79,7 +79,7 @@
     angular
         .module('kt.pano')
         .config(configApp)
-        .run(function($rootScope, $state, $window, $location, $timeout, $http, ktLogService, ktPermits, ktHomeResource, uibPaginationConfig, ktUserService, ktS, CacheFactory, ktEchartTheme1) {
+        .run(function($rootScope, $state, $window, $location, $timeout, $http, ktLogService, ktPermits, ktHomeResource, uibPaginationConfig, ktUserService, ktS, ktSweetAlert, CacheFactory, ktEchartTheme1) {
 
             // ajax 请求的缓存策略
             /*eslint-disable*/
@@ -204,12 +204,38 @@
                 }
             })
 
-            $rootScope.$on('$stateChangeError', function(event, toState, toParams) {
-                $state.go('error.404', toParams);
+            $rootScope.$on('$stateChangeError', function() {
+                // $state.go('error.404', toParams);
+                ktSweetAlert.swal({
+                    title: '提示',
+                    text: '抱歉您查看的网页出错了，请刷新重试。',
+                    confirmButtonText: '刷新页面',
+                    showCancelButton: true,
+                    cancelButtonText: '返回首页',
+                }, function(isConfirm) {
+                    if (isConfirm) {
+                        $state.go($state.current.name, {}, { reload: true })
+                    } else {
+                        $state.go('home.index')
+                    }
+                })
             })
 
-            $rootScope.$on('$stateNotFound', function(event, toState, toParams) {
-                $state.go('error.404', toParams);
+            $rootScope.$on('$stateNotFound', function() {
+                // $state.go('error.404', toParams);
+                ktSweetAlert.swal({
+                    title: '提示',
+                    text: '抱歉您查看的网页出错了，请刷新重试。',
+                    confirmButtonText: '刷新页面',
+                    showCancelButton: true,
+                    cancelButtonText: '返回首页',
+                }, function(isConfirm) {
+                    if (isConfirm) {
+                        $state.go($state.current.name, {}, { reload: true })
+                    } else {
+                        $state.go('home.index')
+                    }
+                })
             })
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
