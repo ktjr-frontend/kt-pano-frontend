@@ -21,7 +21,14 @@
             $scope.user = $rootScope.user = JSON.parse(window.localStorage.user || '{}')
 
             $scope.submitForm = function() {
-                ktLoginCommon($scope)
+                ktLoginCommon($scope, function() {
+                    $rootScope.show2016Report = true
+                    /*ktSweetAlert.swal({
+                        title: '提示',
+                        text: '《2016互金理财市场年度报告》新鲜出炉，<br/>快到右上角【报告】模块下载吧！',
+                        type: ''
+                    })*/
+                })
             }
 
             // 忘记密码

@@ -24,7 +24,7 @@
                 $urlRouterProvider.when('', redirectTo('/index')); // for hashbang mode
                 $urlRouterProvider.when('/', redirectTo('/index')); // for html5mode
                 // $urlRouterProvider.otherwise('/error/404');
-                $urlRouterProvider.otherwise(redirectTo('/error/404'));
+                $urlRouterProvider.otherwise(redirectTo('/index'));
 
                 setUpRoutes(ktHomeRoutesProvider.routes)
                 setUpRoutes(ktPanoRoutesProvider.routes)

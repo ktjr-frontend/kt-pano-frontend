@@ -273,6 +273,17 @@
                 </div>
                 <!--************** 右边栏 ***************-->
                 <aside class="col-sm-3 aside-info">
+                    <h3 ng-show="reports.length">报告</h3>
+                    <section class="box" ng-show="reports.length">
+                        <div class="box-body">
+                            <ul class="list list-with-btns">
+                                <li ng-repeat="r in reports" class="ellip" uib-popover-template="dynamicPopover.templateUrl" popover-placement="left" popover-is-open="$index === 0 && show2016Report === true" popover-title="{{dynamicPopover.title}}">
+                                    <a title="{{::r.name}}" ng-href="{{::r.url}}" ng-bind="::r.name" target="_blank"></a>
+                                    <a class="btn btn-default btn-xs" ng-href="{{::r.url}}" target="_blank">下载</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
                     <h3 ng-show="notices.length">重要新闻</h3>
                     <section class="box" ng-show="notices.length">
                         <div class="box-body">
@@ -321,17 +332,7 @@
                             </ul>
                         </div>
                     </section>
-                    <h3 ng-show="reports.length">报告</h3>
-                    <section class="box" ng-show="reports.length">
-                        <div class="box-body">
-                            <ul class="list list-with-btns">
-                                <li ng-repeat="r in reports" class="ellip">
-                                    <a title="{{::r.name}}" ng-href="{{::r.url}}" ng-bind="::r.name" target="_blank"></a>
-                                    <a class="btn btn-default btn-xs" ng-href="{{::r.url}}" target="_blank">下载</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
+
                     <section class="box contact-weixin" ng-show="exchange_amounts.length">
                         <div class="box-body">
                             <div class="tips clfix">
