@@ -718,6 +718,31 @@
                             sf.updateRealCheckedItems()
                         })
                     }
+                },
+
+                // 处理当前页面筛选状态
+                intFitlerStatus: function($scope, search) {
+
+                    // 当前页面的过滤状态
+                    var NORMAL_STATUS = $scope.NORMAL_STATUS = 0 // 无筛选无搜索状态
+                    var SEARCH_STATUS = $scope.SEARCH_STATUS = 1 // 搜索状态来
+                    var FILTER_STATUS = $scope.FILTER_STATUS = 2 // 筛选状态
+                    var _self = this
+
+                    // 判断当前页面的筛选和搜索状态
+                    $scope.getFitlerStatus = function() {
+                        var validParams = _self.cutDirtyParams(search)
+                        var validParamKeys = _.filter(_.keys(validParams), function(v) {
+                            return !_.includes(['page', 'per_page', 'credit_right_or_eq', 'created_or_updated_in'], v)
+                        })
+
+                        if (_.includes(validParamKeys, 'key_word')) {
+                            return SEARCH_STATUS
+                        } else if (validParamKeys.length) {
+                            return FILTER_STATUS
+                        }
+                        return NORMAL_STATUS
+                    }
                 }
             }
 

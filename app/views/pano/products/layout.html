@@ -66,7 +66,7 @@
             <div class="search-bar">
                 <div class="input-group">
                     <input type="text" class="form-control" ng-model='shared.params.key_word' ng-keyup="goToByEnterKey($event, 'key_word', shared.params.key_word)">
-                    <span class="input-group-addon">
+                    <span class="input-group-addon" ng-click="goTo('key_word', shared.params.key_word)">
                         <i class="icon-pano icon-search2"></i>
                     </span>
                 </div>

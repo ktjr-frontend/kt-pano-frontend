@@ -1,19 +1,33 @@
 <div class="chart-table-heading clfix">
-    <div class="chart-table-title fl">
-        本日新增<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared.today_added_count"></span>条产品，更新<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared.today_updated_count"></span>条产品，总新增发行量<span class="text-warning-light f1_2em pr2 pl2" ng-bind="(shared.today_added_amount / 10000) | ktNumber:0"></span>万元
+    <!-- 无搜索，无筛选 -->
+    <div class="chart-table-title fl" ng-if="getFitlerStatus() === NORMAL_STATUS">
+        本日新增<em ng-bind="::count.bond.product_increasement"></em>条产品，更新<em ng-bind="::count.bond.product_updated"></em>条产品，总新增发行量<em ng-bind="::(count.bond.circulation_increasement / 10000) | ktNumber:0"></em>万元
     </div>
-    <div class="fr text-placeholder">*原始产品新增<span class="text-warning-light f1_2em pr2 pl2">1100</span>条，更新<span class="text-warning-light f1_2em pr2 pl2">88</span>条</div>
+    <!-- 只有筛选 -->
+    <div class="chart-table-title fl" ng-if="getFitlerStatus() === FILTER_STATUS">
+        匹配到<em ng-bind="::count.bond.count"></em>条产品，其中新增<em ng-bind="::count.bond.product_increasement"></em>条，更新<em ng-bind="::count.bond.product_updated"></em>条
+    </div>
+    <!-- 只要有搜索 -->
+    <div class="chart-table-title fl" ng-if="getFitlerStatus() === SEARCH_STATUS">
+        匹配到共<em ng-bind="::count.find.count"></em>条相关产品，其中
+        <span ng-repeat="item in count.find.search_results">
+            <span ng-bind="::item.value"></span>相关<em ng-bind="::item.search_count" class="is-link" ng-click="searchTabClick(item.name)"></em>条，
+        </span>
+    </div>
+    <div ng-if="getFitlerStatus() === NORMAL_STATUS" class="fr text-placeholder">*原始产品新增<em ng-bind="::count.bond.origin_product_increasement"></em>条，更新<em ng-bind="::count.bond.origin_product_updated"></em>条<i tooltip-append-to-body="true" tooltip-placement="left" uib-tooltip="原始产品指互金平台发行的产品。" class="icon-pano icon-info f1_2rem ml5"></i></div>
 </div>
 <div class="table-body">
     <div class="table-kind bor-xxs">
-        <div class="table-head">
+        <div class="table-head" kt-table-sort>
             <div class="rank-bar fl clfix">
                 <a>默认排序</a>
-                <a>按更新时间
+                <a class="sort-column" field="updated_time">按更新时间
                     <i class="icon-pano icon-arrow-up"></i>
+                    <i class="icon-pano icon-arrow-up icon-arrow-up-reverse"></i>
                 </a>
-                <a>按年化收益率
+                <a class="sort-column" field="rate">按年化收益率
                     <i class="icon-pano icon-arrow-up"></i>
+                    <i class="icon-pano icon-arrow-up icon-arrow-up-reverse"></i>
                 </a>
             </div>
             <div class="checkbox-bar">
@@ -28,8 +42,12 @@
             </div>
         </div>
         <div class="table-body">
-            <div class="tr">
-                <div class="tr-head tags">冰泉金服利-企业借款类<span class="tag tag-orange">新增</span></div>
+            <div class="tr" ng-repeat="product in products" ng-if="products.length" ng-click="gotoDetail(product.id)">
+                <div class="tr-head tags">
+                    <span ng-bind="product.name"></span>
+                    <span ng-if="product.created_or_updated_in === '1'" class="tag tag-orange">新增</span>
+                    <span ng-if="product.created_or_updated_in === '2'" class="tag tag-green">更新</span>
+                </div>
                 <div class="tr-body">
                     <table>
                         <tr>
@@ -37,79 +55,77 @@
                                 <div class="td-caption">
                                     产品期限
                                 </div>
+                                <div class="td-body" ng-bind="product.life | ktNull"></div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    年化收益率
+                                </div>
+                                <div class="td-body" ng-bind="product.rate | ktNull"></div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    募集规模
+                                </div>
+                                <div class="td-body" ng-bind="product.sum_amount | ktNumberLocate | ktNull"></div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    产品类型
+                                </div>
+                                <div class="td-body" ng-bind="product.type | ktNull"></div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    资产类型
+                                </div>
+                                <div class="td-body" ng-bind="product.asset_type | ktNull"></div>
+                            </td>
+                            <td>
+                                <div class="td-caption">
+                                    平台
+                                </div>
                                 <div class="td-body">
-                                    12个月
+                                    <a ng-if="::product.from" ng-bind="product.from | ktNull" ui-sref="pano.institutions.detail({id: product.from, dimension: 'from'})"></a>
+                                    <span ng-if="!product.from">-</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="td-caption">
-                                    产品期限
+                                    挂牌场所
                                 </div>
                                 <div class="td-body">
-                                    12个月
+                                    <a ng-if="product.exchange !== '不适用'" ng-bind="product.exchange | ktNull" ui-sref="pano.institutions.detail({id: product.exchange, dimension: 'mapped_exchange'})"></a>
+                                    <span ng-if="product.exchange === '不适用'">不适用</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="td-caption">
-                                    产品期限
+                                    累计募集条数
                                 </div>
-                                <div class="td-body">
-                                    12个月
-                                </div>
+                                <div class="td-body" ng-bind="product.sum_count | ktNull | ktAppend:'条'"></div>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div class="tr">
-                <div class="tr-head">冰泉金服利-企业借款类<span class="tag tag-green">更新</span></div>
-                <div class="tr-body">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="td-caption">
-                                    产品期限
-                                </div>
-                                <div class="td-body">
-                                    12个月
-                                </div>
-                            </td>
-                            <td>
-                                <div class="td-caption">
-                                    产品期限
-                                </div>
-                                <div class="td-body">
-                                    12个月
-                                </div>
-                            </td>
-                            <td>
-                                <div class="td-caption">
-                                    产品期限
-                                </div>
-                                <div class="td-body">
-                                    12个月
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <!-- <div class="td">
-                        <div class="td-head">产品期限</div>
-                        <div class="td-body">12个月</div>
-                    </div>
-                    <div class="td"></div> -->
+            <div class="tr" ng-if="!products.length && !isLoading()">
+                <div class="text-navy-blue text-center">
+                    <i class="pe-7s-attention f1_5rem fb mr5"></i>
+                    <span class="f1_5rem">近期未发布新产品</span>
                 </div>
             </div>
         </div>
         <div class="table-foot text-center fixed-table-link" data-bottom="75">
             <div class="page-total-items">
-                共<span class="text-warning-light f1_2em pr2 pl2" ng-bind="shared._params.totalItems"></span>条记录
+                共<em ng-bind="shared._params.totalItems"></em>条记录
             </div>
             <div class="pagins">
                 <uib-pagination total-items="shared._params.totalItems" items-per-page="shared.params.per_page" ng-change="pageChanged()" max-size="shared._params.maxSize" ng-model="shared.params.page" class="pagination-sm fixed-table-link"></uib-pagination>
                 <div class="pagination-enhance">
                     <div class="en">共<span ng-bind="shared._params.totalPages"></span>页</div>
                     <div class="en">跳转到第
-                        <input type="text" ng-model="shared._params.page" ng-keyup="goToByEnterKey($event, 'page', shared._params.page)"/>页
+                        <input type="text" ng-model="shared._params.page" ng-keyup="pageGoto($event, 'page', shared._params.page)" />页
                     </div>
                 </div>
             </div>

@@ -8,8 +8,8 @@
 
     // 项目
     .factory('ktProductsService', function($resource, ktApiVersion) {
-        return $resource('/api/' + ktApiVersion + '/products/:productID', {
-            productID: '@productID'
+        return $resource('/api/' + ktApiVersion + '/products/:content', {
+            content: '@content'
         }, {
             'get': {
                 method: 'GET',
