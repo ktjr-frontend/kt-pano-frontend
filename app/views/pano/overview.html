@@ -277,7 +277,7 @@
                     <section class="box" ng-show="reports.length">
                         <div class="box-body">
                             <ul class="list list-with-btns">
-                                <li ng-repeat="r in reports" class="ellip" uib-popover-template="dynamicPopover.templateUrl" popover-placement="left" popover-is-open="$index === 0 && show2016Report === true" popover-title="{{dynamicPopover.title}}">
+                                <li ng-repeat="r in reports" class="ellip" uib-popover-template="dynamicPopover.templateUrl" popover-placement="left" popover-is-open="$index === 0 && show2016Report === true" popover-title="{{dynamicPopover.title}}" popover-trigger="none">
                                     <a title="{{::r.name}}" ng-href="{{::r.url}}" ng-bind="::r.name" target="_blank"></a>
                                     <a class="btn btn-default btn-xs" ng-href="{{::r.url}}" target="_blank">下载</a>
                                 </li>
