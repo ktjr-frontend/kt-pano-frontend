@@ -36,6 +36,7 @@ var commonScripts = [
     'bower_components/sweetalert/dist/sweetalert.min.js',
     'bower_components/clipboard/dist/clipboard.min.js',
     'bower_components/ngclipboard/dist/ngclipboard.min.js',
+    'bower_components/swiper/dist/js/swiper.js'
     // 'bower_components/angular-send-feedback/dist/angular-send-feedback.min.js',
     // 'bower_components/angular-apimock/dist/angular-apimock.min.js',
 ];
@@ -97,6 +98,7 @@ var commonCss = [ // injector 会自动校验文件路径是否存在，所以�
     'bower_components/angular-notify/dist/angular-notify.min.css',
     'bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
     'app/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css',
+    'bower_components/swiper/dist/css/swiper.css'
 ];
 
 var appCss = [

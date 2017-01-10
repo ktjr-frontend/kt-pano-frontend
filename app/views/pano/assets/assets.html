@@ -1,0 +1,278 @@
+<div class="asset-crumb">
+    <div class="crumb-title">
+        <ul>
+            <li class="li-style">
+                <a href="">产品信息</a>
+            </li>
+            <li class="li-style">
+                <a href=""> 资产类</a>
+            </li>
+            <li class="li-style">
+                <a href="" ng-bind="assetsDatas.form"></a>
+            </li>
+            <li class="li-style">
+                <a href="" ng-bind="assetsDatas.name"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="asset-body">
+        <div class="asset-content">
+            <div class="asset-content-top">
+                <div class="product-name" ng-bind="assetsDatas.name"></div>
+                <div class="product-data">
+                    <div class="product-data-one">
+                        <div class="product-data-top">
+                            <div class="product-dt-top">产品期限</div>
+                            <div class="product-dt-down" ng-bind="assetsDatas.lives[0]"></div>
+                        </div>
+                        <div class="product-data-top">
+                            <div class="product-dt-top">年化收益率</div>
+                            <div class="product-dt-down" ng-bind="assetsDatas.rate"></div>
+                        </div>
+                        <div class="product-data-top">
+                            <div class="product-dt-top">募集金额</div>
+                            <div class="product-dt-down" ng-bind="assetsDatas.sum_amount"></div>
+                        </div>
+                    </div>
+                    <div class="product-data-two">
+                        <div class="return-rate">各期限收益率情况</div>
+                        <div class="product-table-all">
+                            <div class="product-table" ng-repeat="partition in assetsDatas.partitions">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>产品期限</th>
+                                            <th>年化收益率</th>
+                                            <th>募集金额</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-tr-data" >
+                                            <td><a href="" ng-bind="partition.life"></a></td>
+                                            <td ng-bind="partition.amount"></td>
+                                            <td ng-bind="partition.rate"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-data-three">
+                        <ul>
+                            <li>
+                                <span>发行平台：</span>
+                                <em><a href="" ng-bind="assetsDatas.form"></a></em>
+                            </li>
+                            <li>
+                                <span>资产类型：</span>
+                                <em ng-bind="assetsDatas.asset_type"></em>
+                            </li>
+                            <li>
+                                <span>增信措施：</span>
+                                <em ng-bind="assetsDatas.credit_measures"></em>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <span>挂牌场所：</span>
+                                <em ng-bind="assetsDatas.credit_party"></em>
+                            </li>
+                            <li>
+                                <span>底层资产：</span>
+                                <em ng-bind="assetsDatas.asset"></em>
+                            </li>
+                            <li>
+                                <span>产品类型：</span>
+                                <em ng-bind="assetsDatas.product_type"></em>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product-data-four">
+                        <span>产品说明书：</span>
+                            <a class="product-button" ng-href="{{assetsDatas.attachment_url}}" target="_blank">下载</a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-chart">
+                <!-- 日募集情况 -->
+                <div class="chart-title">
+                    <div class="raise-status">日募集情况</div>
+                    <span class="myspan">日均募集规模：
+                      <em>1,300万元</em>
+                  </span>
+                    <span class="myspan">最高募集量：
+                      <em>900万元</em>
+                  </span>
+                    <span class="myspan">最低募集量：
+                      <em>500万元</em>
+                  </span>
+                    <div class="chart-date">
+                        <input type="text" class="datepicker ng-pristine ng-untouched ng-valid" ng-model="datepicker" kt-date-picker datepicker-settings="datepickerSettings">
+                        <i class="icon-pano icon-calendar picker-icon"></i>
+                    </div>
+                </div>
+                <div class="product-echarts"></div>
+            </div>
+            <div class="original-product-data">  <!-- 原始产品数据 -->
+                <div class="original-title">
+                    <span class="original-title-left">原始产品数据</span>
+                    <div class="original-title-right">
+                        <span>累计募集条数:
+                            <em class="data-num">10</em>条
+                        </span>
+                    </div>
+                </div>
+                <div class="original-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>产品名称</th>
+                                <th>产品期限</th>
+                                <th>年化收益率</th>
+                                <th>募集金额</th>
+                                <th>起息日</th>
+                                <th>起投金融</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="original_product in original_products">
+                                <td ng-bind="original_product.name"></td>
+                                <td ng-bind="original_product.life"></td>
+                                <td ng-bind="original_product.rate"></td>
+                                <td ng-bind="original_product.amount"></td>
+                                <td ng-bind="original_product.value_date"></td>
+                                <td ng-bind="original_product.begin_amount"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="more-data">
+                    <a href="">全部数据</a>
+                </div>
+            </div>
+            <!-- 发行平台 -->
+            <div class="release-platform">
+                <div class="release-title">发行平台</div>
+                <article class="box init-main-info">
+                        <div class="box-body">
+                            <div class="clfix">
+                                <div class="logo">
+                                    <a ng-href="{{inst.website}}" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
+                                </div>
+                                <div class="main">
+                                    <h3 ng-bind="inst.name"></h3>
+                                    <p class="desc">
+                                        <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
+                                        <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.form_introduce | ktNull"></span>
+                                        <a ng-if="inst.descObj.showToggleBtn" class="ml5 tu" ng-click="inst.descObj.isTruncate = !inst.descObj.isTruncate">
+                                            <span ng-show="inst.descObj.isTruncate">更多</span>
+                                            <span ng-show="!inst.descObj.isTruncate">收起</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="lines">
+                                <section class="line" ng-show="inst.business_model">
+                                    <div class="name">业务模式：</div>
+                                    <div class="value">
+                                        <ul class="list">
+                                            <li>
+                                                <span ng-bind="inst.business_model"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <section class="line" ng-show="inst.published_asset_type.length">
+                                    <div class="name">已发产品资产类型：</div>
+                                    <div class="value">
+                                        <ul class="list">
+                                            <li ng-repeat="at in inst.published_asset_type">
+                                                <span ng-bind="at"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <div class="more-data"><a href="">更多</a></div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+           <!-- 挂牌场所 -->
+            <div class="listing-place">
+                <div class="release-title">挂牌场所</div>
+                <article class="box init-main-info">
+                        <div class="box-body">
+                            <div class="clfix">
+                                <div class="logo">
+                                    <a ng-href="{{exchange.website}}" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
+                                </div>
+                                <div class="main">
+                                    <h3 ng-bind="exchange.name"></h3>
+                                    <p class="desc">
+                                        <span ng-show="exchange.exchangeObj.isTruncate" ng-bind="exchange.exchangeObj.value | ktNull"></span>
+                                        <span ng-show="!exchange.exchangeObj.isTruncate" ng-bind="exchange.exchange_introduce"></span>
+                                        <a ng-if="exchange.exchangeObj.showToggleBtn" class="ml5 tu" ng-click="exchange.exchangeObj.isTruncate = !exchange.exchangeObj.isTruncate">
+                                            <span ng-show="exchange.exchangeObj.isTruncate">更多</span>
+                                            <span ng-show="!exchange.exchangeObj.isTruncate">收起</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="lines">
+                                <section class="line" ng-show="exchange.main_partner.length">
+                                    <div class="name">主要合作机构：</div>
+                                    <div class="value">
+                                        <ul class="list">
+                                            <li ng-repeat="partner in exchange.main_partner">
+                                                <span ng-bind="partner"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <div class="more-data"><a href="">更多</a></div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+            <!-- 相似产品 -->
+            <div class="similar-product">
+                <div class="release-title">相似产品</div>
+                <div class="carousel">
+                    <div kt-product-carousel similars="similars"></div>
+                    <!-- <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div>
+                                <ul>
+                                    <li class="swiper-slide" ng-repeat="similar in similars">
+                                        <div ng-bind="similar.name"></div>
+                                        <div ng-bind="similar.life">3-6个月</div>
+                                        <div ng-bind="similar.rate"><a href="">6%-8%</a></div>
+                                        <div ng-bind="similar.exchange">恒大金服</div>
+                                    </li>
+                                    <li class="swiper-slide">
+                                        <div>冰泉金服利</div>
+                                        <div>3-6个月</div>
+                                        <div><a href="">6%-8%</a></div>
+                                        <div>恒大金服</div>
+                                    </li>
+                                    <li class="swiper-slide">
+                                        <div>冰泉金服利</div>
+                                        <div>3-6个月</div>
+                                        <div><a href="">6%-8%</a></div>
+                                        <div>恒大金服</div>
+                                    </li>
+                                    <li class="swiper-slide">
+                                        <div>冰泉金服利</div>
+                                        <div>3-6个月</div>
+                                        <div><a href="">6%-8%</a></div>
+                                        <div>恒大金服</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

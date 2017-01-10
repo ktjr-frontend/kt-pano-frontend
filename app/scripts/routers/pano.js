@@ -247,7 +247,45 @@
                         pageTitle: '机构详情页',
                     }
                 },
-
+                'pano.productObligatoryRight': {  //资产路由
+                    // abstract: true,
+                    url: '/product_obligatory_right/:id',
+                    // template: '</ui-view>',
+                    templateUrl: 'views/pano/assets/assets.html',
+                    data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            grade: {
+                                1: ['passed']
+                            }
+                        }],
+                        pageTitle: '产品信息',
+                    },
+                    resolve: ktLazyResolve([
+                        'views/pano/assets/assets.js',
+                        'views/pano/assets/assets.css',
+                        'common/directives/datepicker/directive.js',
+                        'common/directives/datepicker/theme/v4/style.css'
+                        ]),
+                    controller: 'ktAssetsCtrl'
+                },
+                // 'pano.productsDetil.assets': {
+                //     url: '/assets',
+                //     templateUrl: 'views/pano/assets/assets.html',
+                //     resolve: ktLazyResolve([
+                //         'views/pano/assets/assets.js'
+                //     ]),
+                //     controller: 'ktAssetsCtrl'
+                // },
+                'pano.productAssetManage': { //资管路由
+                    url: '/product_asset_manage/:id',
+                    templateUrl: 'views/pano/assets-manage/assets_manage.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/assets-manage/assets_manage.css',
+                        'views/pano/assets-manage/assets_manage.js'
+                    ]),
+                    controller: 'ktAssetManageCtrl'
+                },
                 'pano.settings': {
                     url: '/settings',
                     templateUrl: 'views/pano/account/settings.html',
