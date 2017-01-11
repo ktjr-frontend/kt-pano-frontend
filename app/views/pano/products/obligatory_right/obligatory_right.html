@@ -2,13 +2,13 @@
     <div class="crumb-title">
         <ul>
             <li class="li-style">
-                <a href="">产品信息</a>
+                <a href="" ui-sref="pano.products.obligatoryRight">产品信息</a>
             </li>
             <li class="li-style">
-                <a href=""> 资产类</a>
+                <a href="" ui-sref="pano.products.obligatoryRight"> 资产类</a>
             </li>
             <li class="li-style">
-                <a href="" ng-bind="assetsDatas.form" ui-sref="pano.products.obligatoryRight"></a>
+                <a href="" ng-bind="assetsDatas.form" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></a>
             </li>
             <li class="li-style">
                 <a href="" ng-bind="assetsDatas.name"></a>
@@ -22,16 +22,22 @@
                 <div class="product-data">
                     <div class="product-data-one">
                         <div class="product-data-top">
-                            <div class="product-dt-top">产品期限</div>
-                            <div class="product-dt-down" ng-bind="assetsDatas.lives[0]"></div>
+                            <div class="spacing">
+                                <div class="product-dt-top">产品期限</div>
+                                <div class="product-dt-down" ng-bind="assetsDatas.lives[0]"></div>
+                            </div>
                         </div>
                         <div class="product-data-top">
-                            <div class="product-dt-top">年化收益率</div>
-                            <div class="product-dt-down" ng-bind="assetsDatas.rate"></div>
+                            <div class="spacing">
+                                <div class="product-dt-top">年化收益率</div>
+                                <div class="product-dt-down" ng-bind="assetsDatas.rate"></div>
+                            </div>
                         </div>
                         <div class="product-data-top">
-                            <div class="product-dt-top">募集金额</div>
-                            <div class="product-dt-down" ng-bind="assetsDatas.sum_amount | ktNumberLocate"></div>
+                            <div class="spacing">
+                                <div class="product-dt-top">募集金额</div>
+                                <div class="product-dt-down" ng-bind="assetsDatas.sum_amount | ktNumberLocate"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="product-data-two">
@@ -49,9 +55,7 @@
                                         </thead>
                                         <tbody>
                                             <tr class="table-tr-data">
-                                                <td>
-                                                    <a href="" ng-bind="partition.life"></a>
-                                                </td>
+                                                <td class="first-td" ng-bind="partition.life"></td>
                                                 <td ng-bind="partition.rate"></td>
                                                 <td ng-bind="partition.amount | ktNumberLocate"></td>
                                             </tr>
@@ -68,7 +72,7 @@
                         <ul>
                             <li>
                                 <span>发行平台：</span>
-                                <em><a href="" ng-bind="assetsDatas.form"></a></em>
+                                <em class="text-color" ng-bind="assetsDatas.form" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em>
                             </li>
                             <li>
                                 <span>资产类型：</span>
@@ -105,7 +109,7 @@
                 <div class="chart-title">
                     <div class="raise-status">日募集情况</div>
                     <span class="myspan">日均募集规模：
-                      <em>1,300万元</em>
+                      <em ng-bind="avg_amount | ktNumberLocate"></em>
                   </span>
                     <span class="myspan">最高募集量：
                       <em>900万元</em>
@@ -207,7 +211,7 @@
                                     </ul>
                                 </div>
                             </section>
-                            <div class="more-data"><a href="">更多</a></div>
+                            <div class="more-data"><a href="" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})">更多</a></div>
                         </div>
                     </div>
                 </article>
@@ -244,7 +248,7 @@
                                     </ul>
                                 </div>
                             </section>
-                            <div class="more-data"><a href="">更多</a></div>
+                            <div class="more-data"><a href="" ui-sref="pano.institutions.detail({id:exchange.name,dimension:'exchange'})">更多</a></div>
                         </div>
                     </div>
                 </article>

@@ -1,17 +1,25 @@
 ;
 (function() {
     'use strict';
-    angular.module('kt.pano').controller('ktAssetManageCtrl', function($scope, $location, $stateParams, $rootScope, ktProductsService, ktProductTrendsService, ktDataHelper, ktSweetAlert) {
+    angular.module('kt.pano').controller('ktAssetsCtrl', function($scope, $location, $stateParams, $rootScope, ktProductsService, ktDataHelper, ktProductTrendsService, ktSweetAlert) {
+
         var search = $location.search()
         var params = $scope.params = $.extend({}, search)
 
         ktProductsService.get({ content: $stateParams.id }, function(data) {
-            $scope.productManage = data.products
+            $scope.assetsDatas = data.products
+            $scope.original_products = data.original_products
+
+            //发行平台
             var inst = $scope.inst = data.from_info
+            inst.descObj = ktDataHelper.textEllipsis(inst.form_introduce, '.init-main-info .desc', 0, 14, 4, 6)
 
-            inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 3, 6)
-            $scope.similars = data.similar_products
+            //挂牌场所
+            var exchange = $scope.exchange = data.exchange_info
+            if (!exchange) return
+            exchange.exchangeObj = ktDataHelper.textEllipsis(exchange.exchange_introduce, '.init-main-info .desc', 0, 14, 4, 1)
 
+            //收益率情况
             function groupData(arr) {
                 if (arr.length % 3 !== 0) {
                     arr.push({
@@ -20,11 +28,24 @@
                     groupData(arr)
 
                 } else {
-                    $scope.termRates = arr
+                    $scope.partitions = arr
                 }
             }
-            groupData(data.products.term_rates)
+            groupData(data.products.partitions)
+            // $scope.similars = data.similar_products
+            //相似产品
+            function group(arr) {
+                if (arr.length % 3 !== 0) {
+                    arr.push({
+                        empty: true
+                    })
+                    group(arr)
 
+                } else {
+                    $scope.similars = arr
+                }
+            }
+            group(data.similar_products)
             //日期选择
             params.begin_date = moment(Math.max(moment(data.products.begin_date).toDate(), moment(data.products.last_date).subtract(30, 'days').toDate())).format('YYYY-MM-DD')
             params.end_date = moment(data.products.last_date).format('YYYY-MM-DD')
@@ -39,70 +60,66 @@
                     }
 
                     // 加载图表数据
-                    productRateTrend.updateDataView(opt)
+                    dailyRaiseChart.updateDataView(opt)
                 }
             })
-            productRateTrend.updateDataView()
 
-            // 各期限收益率情况
-            var durationRateChart = $scope.durationRateChart = {
-                chartOptions: {},
-                _params: {},
-                // xAxis: params.dimension,
-                yAxisFormat: 'percent2',
-                yAxis: 'rate',
-                xAxisFormat: null,
-                list: []
-            }
+            /*$scope.datepickerSettings = {
+                // startOfWeek: 'monday',
+                applyBtnClass: 'btn btn-navy-blue btn-xs',
+                // batchMode: 'week-range',
+                singleMonth: false,
+                extraClass: 'date-picker-pano-top',
+                showWeekNumbers: false,
+                autoClose: false,
+                beforeShowDay: function(t) {
+                    var valid = t <= moment(params.end_date).toDate() && t >= moment(params.start_date).toDate() //  当周以后不可选
+                    var _class = '';
+                    var _tooltip = valid ? '' : '不在可选范围内';
+                    return [valid, _class, _tooltip];
+                }
+            }*/
 
-            $scope.durationRateChart.chartOptions = $.extend(true, {}, chartOptions, {
-                legend: {
-                    data: ['各期限收益率']
-                },
-                tooltip: {
-                    axisPointer: {
-                        axis: 'auto',
-                        type: 'line',
-                    },
-                    xAxisFormat: durationRateChart.xAxisFormat,
-                    yAxisFormat: durationRateChart.yAxisFormat, //自定义属性，tooltip标示，决定是否显示百分比数值还是人民币
-                    // reverse: true,
-                },
-                yAxis: {
-                    name: '收益率（%）'
-                },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: true,
-                    data: _.map(data.products.term_rates, 'life')
-                },
-                series: [{
-                    name: '各期限收益率',
-                    itemStyle: {
-                        normal: {
-                            opacity: 0.8,
-                        },
-                        emphasis: {
-                            barBorderWidth: 1,
-                            barBorderColor: 'rgba(0,0,0,.5)'
-                        }
-                    },
-                    type: 'line',
-                    step: 'end',
-                    smooth: false,
-                    data: _.map(data.products.term_rates, 'rate')
-                }]
-            })
+            // 加载图表数据
+            dailyRaiseChart.updateDataView()
 
         })
 
-        // 产品收益率趋势
-        var productRateTrend = $scope.productRateTrend = {
+        //弹出pano酱二维码
+        $scope.alertCode = function() {
+            ktSweetAlert.swal({
+                title: '<p class="alert">' + '更多产品数据，请联系微信客服PANO酱' + '</p>',
+                text: '<div class="img-pano">' + '<img src="images/pano_wxSEC.png">' + '</div>',
+                html: true,
+                showCloseButton: true
+                    // showCancelButton: true
+            })
+        }
+
+        $scope.datepickerSettings = {
+            // startOfWeek: 'monday',
+            applyBtnClass: 'btn btn-navy-blue btn-xs',
+            // batchMode: 'week-range',
+            singleMonth: false,
+            extraClass: 'date-picker-pano-top',
+            showWeekNumbers: false,
+            autoClose: false,
+            beforeShowDay: function(t) {
+                var m = moment()
+                var valid = t <= m.toDate() && t >= moment('2016-03-01').toDate() //  当周以后不可选
+                var _class = '';
+                var _tooltip = valid ? '' : '不在可选范围内';
+                return [valid, _class, _tooltip];
+            }
+        }
+
+        // 日募集情况
+        var dailyRaiseChart = $scope.dailyRaiseChart = {
             chartOptions: {},
             _params: {},
             // xAxis: params.dimension,
-            yAxisFormat: 'percent2',
-            yAxis: 'rate',
+            yAxisFormat: 'rmb',
+            yAxis: 'amount',
             xAxisFormat: null,
             list: []
         }
@@ -156,10 +173,10 @@
             }
         }
 
-        productRateTrend.updateDataView = function(paramObj) {
+        dailyRaiseChart.updateDataView = function(paramObj) {
             var _self = this
             $.extend(_self._params, paramObj || {})
-            _self.echart = echarts.getInstanceByDom($('#productRateTrend')[0])
+            _self.echart = echarts.getInstanceByDom($('#dailyRaiseChart')[0])
 
             if (_self.echart) {
                 _self.echart.hideLoading()
@@ -169,36 +186,36 @@
             ktProductTrendsService.get(ktDataHelper.cutDirtyParams($.extend(true, {}, params, {
                 id: $stateParams.id,
             }, _self._params)), function(data) {
-                _self.data = data.rates
+                _self.data = data.products
+                $scope.avg_amount = data.avg_amount
                 updateView()
             })
 
             function updateView() {
-                var chart = _self.echart = echarts.getInstanceByDom($('#productRateTrend')[0])
+                var chart = _self.echart = echarts.getInstanceByDom($('#dailyRaiseChart')[0])
 
                 _self.chartOptions = $.extend(true, {}, chartOptions, {
                     legend: {
-                        data: ['收益率趋势']
+                        data: ['日募集情况']
                     },
                     tooltip: {
-                        axisPointer: {
-                            axis: 'auto',
-                            type: 'line',
-                        },
                         xAxisFormat: _self.xAxisFormat,
                         yAxisFormat: _self.yAxisFormat, //自定义属性，tooltip标示，决定是否显示百分比数值还是人民币
                         // reverse: true,
                     },
                     yAxis: {
-                        name: '收益率（%）'
+                        name: '募集金额（万元）'
                     },
                     xAxis: {
                         type: 'category',
+                        // name: '期限',
+                        // nameGap: 10,
+                        // nameLocation: 'end',
                         boundaryGap: true,
                         data: _.map(_self.data, 'date')
                     },
                     series: [{
-                        name: '收益率趋势',
+                        name: '日募集情况',
                         itemStyle: {
                             normal: {
                                 opacity: 0.8,
@@ -208,9 +225,10 @@
                                 barBorderColor: 'rgba(0,0,0,.5)'
                             }
                         },
-                        smooth: false,
-                        type: 'line',
-                        data: _.map(_self.data, 'rate')
+                        stack: '日募集情况',
+                        type: 'bar',
+                        barWidth: 30,
+                        data: _.map(_self.data, 'amount')
                     }]
                 })
 
@@ -218,17 +236,6 @@
                 chart && chart.hideLoading()
                     /*eslint-enable*/
             }
-        }
-
-        //弹出pano酱二维码
-        $scope.alertCode = function() {
-            ktSweetAlert.swal({
-                title: '<p class="alert">' + '更多产品数据，请联系微信客服PANO酱' + '</p>',
-                text: '<div class="img-pano">' + '<img src="../../../images/pano_wxSEC.png">' + '</div>',
-                html: true,
-                showCloseButton: true
-                    // showCancelButton: true
-            })
         }
     })
 })();

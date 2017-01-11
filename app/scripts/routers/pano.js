@@ -252,7 +252,7 @@
                     // abstract: true,
                     url: '/product_obligatory_right/:id',
                     // template: '</ui-view>',
-                    templateUrl: 'views/pano/assets/assets.html',
+                    templateUrl: 'views/pano/products/obligatory_right/obligatory_right.html',
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
@@ -263,8 +263,9 @@
                         pageTitle: '产品信息',
                     },
                     resolve: ktLazyResolve([
-                        'views/pano/assets/assets.js',
-                        'views/pano/assets/assets.css',
+                        'views/pano/products/obligatory_right/obligatory_right.css',
+                        'views/pano/products/obligatory_right/obligatory_right.js',
+                        'views/pano/products/assets_manage_common.css',
                         'common/directives/kt-echart3-directive.js',
                         'common/directives/datepicker/directive.js',
                         'common/directives/datepicker/theme/v4/style.css'
@@ -275,10 +276,11 @@
                 // 资管产品详情页
                 'pano.productAssetManage': {
                     url: '/product_asset_manage/:id',
-                    templateUrl: 'views/pano/assets-manage/assets_manage.html',
+                    templateUrl: 'views/pano/products/asset_manage/asset_manage.html',
                     resolve: ktLazyResolve([
-                        'views/pano/assets-manage/assets_manage.css',
-                        'views/pano/assets-manage/assets_manage.js',
+                        'views/pano/products/assets_manage_common.css',
+                        'views/pano/products/asset_manage/asset_manage.css',
+                        'views/pano/products/asset_manage/asset_manage.js',
                         'common/directives/kt-echart3-directive.js',
                         'common/directives/datepicker/directive.js',
                         'common/directives/datepicker/theme/v4/style.css'

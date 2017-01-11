@@ -7,31 +7,6 @@
 @rank-color1: #8b9ebb;
 @rank-color2: #aabdda;
 @rank-color3: #c0d1ea;
-.asset-crumb {
-    .crumb-title {
-        margin-left: 30px;
-        .li-style {
-            height: 35px;
-            line-height: 35px;
-            list-style: none;
-            display: inline-block;
-            a {
-                font-size: 1.2rem;
-                color: #000;
-            }
-            &:not(:last-child):after {
-                content: ">";
-                padding: 0 5px;
-                color: #aeb1b8;
-            }
-            &:last-child {
-                a {
-                    color: #9fa3ac;
-                }
-            }
-        }
-    }
-}
 
 .asset-body {
     em {
@@ -49,13 +24,12 @@
         color: 17px;
         height: 50px;
         line-height: 50px;
-        // font-weight: bold;
     }
     .product-data {
         border-radius: 5px;
         background: #fff;
         overflow: hidden;
-        padding: 10px;
+        padding: 10px 5px;
         .product-data-one,
         .product-data-two,
         .product-data-three {
@@ -66,9 +40,9 @@
 
 .product-data-top {
     float: left;
-    width: 32.5%;
-    &:nth-of-type(2) {
-        margin: 0 1.2%;
+    width: 33.33%;
+    .spacing{
+        padding:0 5px;
     }
     .product-dt-top {
         font-size: 13px;
@@ -93,13 +67,11 @@
     height: 50px;
     line-height: 50px;
     font-size: 14px;
-    // font-weight: bold;
 }
 
 .product-table-all {
     overflow: hidden;
-    padding-left: 30px;
-    // border-bottom: 1px solid #eeeff3;
+    padding-left: 15px;
     .partition {
         &:nth-of-type(3n) {
             .product-table {
@@ -114,9 +86,6 @@
         margin-top: 1.5rem;
         border-bottom: 1px solid #eeeff3;
         border-right: 1px solid #eeeff3;
-        // &:nth-of-type(3n) {
-        //     border-right: none;
-        // }
         table {
             width: 100%;
             table-layout: fixed;
@@ -138,10 +107,12 @@
         }
     }
 }
-
+.product-data-two{
+    padding:0 5px;
+}
 .product-data-three {
     border-bottom: 1px solid #eeeff3;
-    padding: 10px 0 10px 30px;
+    padding: 10px 0 10px 25px;
     ul {
         float: left;
         width: 33%;
@@ -227,7 +198,6 @@
 .raise-status {
     display: inline;
     font-size: 15px;
-    // font-weight: bold;
     margin-right: 1.5rem;
 }
 
@@ -297,7 +267,7 @@
                     color: #fff;
                     font-size: 13px;
                     background: #b1b7c4;
-                    padding: 10px 0px;
+                    padding: 11px 0px;
                     text-align: center;
                     &:first-child {
                         // min-width:230px;
@@ -317,7 +287,7 @@
                     td {
                         color: #666b76;
                         font-size: 13px;
-                        padding: 8px 0;
+                        padding: 11px 0;
                         text-align: center;
                         border-right: 1px solid #eef5fc;
                         &:first-child {
@@ -333,8 +303,8 @@
 }
 
 .more-data {
-    height: 34px;
-    line-height: 34px;
+    height: 40px;
+    line-height: 40px;
     background: #fff;
     border-radius: 0 0 5px 5px;
     text-align: right;
@@ -345,226 +315,5 @@
 .release-title {
     padding: 15px 0;
     font-size: 15px;
-    // font-weight: bold;
 }
 
-.box {
-    padding: 0px;
-    border-radius: 5px;
-    background: white;
-    // margin-bottom: 20px;
-    .box-head {
-        height: 40px;
-        line-height: 40px;
-        background: @color-table-head;
-        border-radius: 5px 5px 0 0;
-    }
-    .box-body {
-        padding: 20px;
-    }
-    .nav-tabs {
-        padding-top: 9px;
-        margin-left: 20px;
-        > li > a {
-            font-size: 1.5rem;
-            padding: 5px 15px;
-        }
-        >li.active a {
-            background: white;
-        }
-    }
-    .filter-box {
-        padding: 0;
-    }
-    .normal-filter {
-        padding: 12px 0;
-        background: @tag-color;
-        .datepicker-container {
-            margin-left: 0;
-        }
-    }
-}
-
-.init-main-info {
-    .logo {
-        float: left;
-        text-align: center;
-        background: @color-3;
-        // margin-top:20px;
-        height: 112px;
-        width: 245px;
-        @media(max-width: 767px) {
-            width: 100%;
-        }
-        img {
-            max-height: 90%;
-            max-width: 80%;
-            top: 50%;
-            position: relative;
-            transform: translateY(-50%);
-        }
-    }
-    .toggle-btn {
-        position: absolute;
-        right: 20px;
-        top: 10px;
-        border-radius: 2px;
-        padding: 0px 7px;
-        cursor: pointer;
-        background: #cddce4;
-        color: white;
-        &.toggle-btn-bottom {
-            top: auto;
-            bottom: 14px;
-        }
-        &:hover,
-        &.expand {
-            background: #4380dd;
-            color: white;
-        }
-        .icon-arrow {
-            transform-origin: 50% 50%;
-        }
-        &.expand {
-            &.toggle-btn-bottom {
-                .icon-arrow {
-                    transform: rotate(-90deg) translateX(1px);
-                }
-            }
-            .icon-arrow {
-                color: white;
-                transform: rotate(90deg) translateX(1px);
-            }
-        }
-    }
-    .main {
-        overflow: hidden;
-        padding-left: 20px;
-        @media(max-width: 767px) {
-            width: 100%;
-            float: left;
-            margin-top: 15px;
-        }
-        h3 {
-            // margin: 3px 0 15px;
-            color: #000;
-            font-size: 15px;
-        }
-        p {
-            line-height: 1.6em;
-            font-size: 13px;
-            .toggle-btn {
-                position: static;
-                display: inline-block;
-                padding: 1px 7px;
-            }
-        }
-    }
-    .lines {
-        padding-top: 20px;
-        .line {
-            position: relative;
-            overflow: hidden;
-            clear: both;
-            padding: 12px 50px 0 170px;
-        }
-        .normal-text {
-            line-height: 2em;
-            word-wrap: break-word;
-            word-break: break-all;
-        }
-        .name {
-            margin-left: -170px;
-            width: 130px;
-            float: left;
-            text-align: right;
-            color: @color-gray;
-        }
-        /*.toggle-btn {
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            border-radius: 2px;
-            padding: 0px 7px;
-            cursor: pointer;
-            background: #cddce4;
-            color: white;
-            &.toggle-btn-bottom {
-                top: auto;
-                bottom: 7px;
-            }
-            &:hover,
-            &.expand {
-                background: #4380dd;
-                color: white;
-            }
-            .icon-arrow {
-                transform-origin: 50% 50%;
-            }
-            &.expand {
-                .icon-arrow {
-                    color: white;
-                    transform: rotate(90deg) translateX(1px);
-                }
-            }
-        }*/
-        .list {
-            list-style-type: none;
-            li {
-                float: left;
-                margin: 0 5px 8px;
-            }
-            a.item {
-                padding: 3px 8px 4px;
-                border-radius: 3px;
-                color: @color-bright;
-                background: @tag-color;
-                display: block;
-                &:hover {
-                    color: white;
-                    background: @tag-hover-color;
-                }
-            }
-        }
-    }
-}
-
-.carousel {
-    height: 170px;
-    border-radius: 5px;
-    background: #fff;
-    padding: 0.5rem 2rem;
-    .swiper-slide {
-        border-right: 1px solid #eceff4;
-        &:nth-of-type(3n) {
-            border-right: none;
-        }
-        .myData {
-            text-align: center;
-            margin-top: 10px;
-            padding: 0.3rem 0;
-        }
-    }
-}
-
-.product-seize {
-    text-align: center;
-    height: 79px;
-    line-height: 60px;
-    .seize {
-        display: inline-block;
-        width: 30%;
-        border-top: 2px solid #e5e7e9;
-    }
-}
-
-.sweet-alert .sa-button-container {
-    border-top: none;
-    margin-top: 10px;
-}
-
-.img-pano {
-    display: inline-block;
-    border: 10px solid #f3f5f8;
-    margin-top: 20px;
-}
