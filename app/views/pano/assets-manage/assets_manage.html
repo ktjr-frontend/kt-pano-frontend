@@ -53,21 +53,26 @@
                     <div class="product-data-two">
                         <div class="return-rate">各期限收益率情况</div>
                         <div class="product-table-all">
-                            <div class="product-table" ng-repeat="manage in productManage.term_rates">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>产品期限</th>
-                                            <th>年化收益率</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="table-tr-data">
-                                            <td><a href="" ng-bind="manage.life"></a></td>
-                                            <td ng-bind="manage.rate"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div ng-repeat="termRate in termRates" class="partition">
+                                <div class="product-table" ng-if="!termRate.empty">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>产品期限</th>
+                                                <th>年化收益率</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-tr-data">
+                                                <td><a href="" ng-bind="termRate.life"></a></td>
+                                                <td ng-bind="termRate.rate"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="product-table product-seize" ng-if="termRate.empty">
+                                    <span class="seize"></span>
+                                </div>
                             </div>
                     </div>
                     <div class="product-data-three">
@@ -100,7 +105,7 @@
                 </div>
                 <div class="product-echarts"></div>
                 <div class="more-data">
-                    <a href="">全部数据</a>
+                    <a href="" ng-click="alertCode()">全部数据</a>
                 </div>
             </div>
             <!-- 发行平台 -->

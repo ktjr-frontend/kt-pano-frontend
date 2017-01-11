@@ -49,7 +49,7 @@
         color: 17px;
         height: 50px;
         line-height: 50px;
-        font-weight: bold;
+        // font-weight: bold;
     }
     .product-data {
         border-radius: 5px;
@@ -93,22 +93,30 @@
     height: 50px;
     line-height: 50px;
     font-size: 14px;
-    font-weight: bold;
+    // font-weight: bold;
 }
 
 .product-table-all {
     overflow: hidden;
+    padding-left: 30px;
     // border-bottom: 1px solid #eeeff3;
+    .partition {
+        &:nth-of-type(3n) {
+            .product-table {
+                border-right: none;
+            }
+        }
+    }
     .product-table {
         width: 33%;
         float: left;
-        padding: 0rem 2rem;
+        padding: 0rem 0rem;
         margin-top: 1.5rem;
         border-bottom: 1px solid #eeeff3;
         border-right: 1px solid #eeeff3;
-        &:nth-of-type(3n) {
-            border-right: 0;
-        }
+        // &:nth-of-type(3n) {
+        //     border-right: none;
+        // }
         table {
             width: 100%;
             table-layout: fixed;
@@ -116,6 +124,7 @@
                 text-align: center;
                 color: #9fa3ac;
                 font-size: 13px;
+                font-weight: 200;
             }
             td {
                 text-align: center;
@@ -132,19 +141,22 @@
 
 .product-data-three {
     border-bottom: 1px solid #eeeff3;
-    padding: 10px 0;
+    padding: 10px 0 10px 30px;
     ul {
         float: left;
         width: 33%;
         li {
             list-style: none;
             padding: 10px 8%;
+            font-size: 13px;
+            span {
+                color: #bbbec4;
+            }
             em {
                 display: inline-block;
                 font-style: normal;
                 line-height: 15px;
-                max-width: 200px;
-                vertical-align: middle;
+                max-width: 250px;
                 display: inline-block;
                 word-wrap: break-word;
                 word-break: break-all;
@@ -154,14 +166,17 @@
 }
 
 .product-data-four {
-    padding: 25px 5.2%;
-    // padding-left:10%;
+    padding: 25px 0;
+    padding-left: 60px;
+    font-size: 13px;
+    color: #bbbec4;
     .product-button {
         display: inline-block;
         height: 25px;
         line-height: 25px;
         width: 5rem;
         color: #fff;
+        font-size: 13px;
         background: #5c667d;
         border-radius: 25px;
         text-align: center;
@@ -211,7 +226,7 @@
 .raise-status {
     display: inline;
     font-size: 15px;
-    font-weight: bold;
+    // font-weight: bold;
     margin-right: 1.5rem;
 }
 
@@ -242,7 +257,7 @@
         .original-title-left {
             // color:#000;
             font-size: 15px;
-            font-weight: bold;
+            // font-weight: bold;
         }
         .original-title-right {
             float: right;
@@ -320,7 +335,7 @@
 .release-title {
     padding: 15px 0;
     font-size: 15px;
-    font-weight: bold;
+    // font-weight: bold;
 }
 
 .box {
@@ -420,13 +435,14 @@
             float: left;
             margin-top: 15px;
         }
-        // h3 {
-        //     margin: 3px 0 15px;
-        //     color: color-1;
-        //     font-size: 1.5rem;
-        // }
+        h3 {
+            // margin: 3px 0 15px;
+            color: #000;
+            font-size: 15px;
+        }
         p {
             line-height: 1.6em;
+            font-size: 13px;
             .toggle-btn {
                 position: static;
                 display: inline-block;
@@ -508,17 +524,35 @@
     border-radius: 5px;
     background: #fff;
     padding: 0.5rem 2rem;
-
-    .swiper-slide{
-        border-right:1px solid #eceff4;
-        &:nth-of-type(3n){
-            border-right:none;
+    .swiper-slide {
+        border-right: 1px solid #eceff4;
+        &:nth-of-type(3n) {
+            border-right: none;
         }
-       .myData{
+        .myData {
             text-align: center;
             margin-top: 10px;
-            padding:0.3rem 0;
+            padding: 0.3rem 0;
         }
     }
 }
 
+.product-seize {
+    text-align: center;
+    height: 79px;
+    line-height: 60px;
+    .seize {
+        display: inline-block;
+        width: 30%;
+        border-top: 2px solid #e5e7e9;
+    }
+}
+.sweet-alert .sa-button-container{
+    border-top: none;
+    margin-top: 10px;
+}
+.img-pano{
+    display: inline-block;
+    border: 10px solid #f3f5f8;
+    margin-top: 20px;
+}
