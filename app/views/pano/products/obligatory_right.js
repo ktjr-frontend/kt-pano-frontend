@@ -2,9 +2,9 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktProductsService) {
+        .controller('ktProductObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
             var shared = $scope.shared
-            var search = $location.search()
+            var search = $scope.search = $location.search()
             var filterOpts = [{
                 value: 'life_days_in',
                 type: 'dropdown'
@@ -17,10 +17,18 @@
             }]
 
             // 跳转产品详情
-            $scope.gotoDetail = function(id) {
-                $state.go('pano.productObligatoryRight', {
-                    id: id
-                })
+            $scope.gotoDetail = function(product) {
+                if (product.detail_exist) {
+                    $state.go('pano.productObligatoryRight', {
+                        id: product.id
+                    })
+                } else {
+                    ktSweetAlert.swal({
+                        title: '提示',
+                        timer: 1500,
+                        text: '该产品暂未录入详情'
+                    })
+                }
             }
 
             shared.tabActive.tab0 = true

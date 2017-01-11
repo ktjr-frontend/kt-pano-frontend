@@ -6,7 +6,7 @@
     'use strict';
     angular.module('kt.pano')
 
-    // 项目
+    // 产品
     .factory('ktProductsService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/products/:content', {
             content: '@content'
@@ -89,42 +89,8 @@
         })
     })
 
-    //资产详情页
-    .factory('ktAessetsProductService', function($resource, ktApiVersion) {
-        return $resource('/api/' + ktApiVersion + '/products/:id', {
-            id: '@id'
-        }, {
-            'get': {
-                mothod: 'GET',
-            }
-        })
-    })
-    .factory('ktAessetsProductTrendService', function($resource, ktApiVersion) {
-        return $resource('/api/' + ktApiVersion + '/product_trends/:id', {
-            id: '@id'
-        }, {
-            'get': {
-                mothod: 'GET'
-            }
-        })
-    })
-    //资管详情页
-    .factory('ktAessetsManageProductService', function($resource, ktApiVersion) {
-        return $resource('/api/' + ktApiVersion + '/products/:id', {
-            id: '@id'
-        }, {
-            'get': {
-                mothod: 'GET',
-            }
-        })
-    })
-    .factory('ktAessetsmanageProductTrendService', function($resource, ktApiVersion) {
-        return $resource('/api/' + ktApiVersion + '/product_trends/:id', {
-            id: '@id'
-        }, {
-            'get': {
-                mothod: 'GET'
-            }
-        })
+    // 产品详情内趋势图
+    .factory('ktProductTrendsService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/product_trends')
     })
 })();

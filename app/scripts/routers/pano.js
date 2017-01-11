@@ -247,7 +247,7 @@
                         pageTitle: '机构详情页',
                     }
                 },
-                'pano.productObligatoryRight': {  //资产路由
+                'pano.productObligatoryRight': { //资产路由
                     // abstract: true,
                     url: '/product_obligatory_right/:id',
                     // template: '</ui-view>',
@@ -264,9 +264,10 @@
                     resolve: ktLazyResolve([
                         'views/pano/assets/assets.js',
                         'views/pano/assets/assets.css',
+                        'common/directives/kt-echart3-directive.js',
                         'common/directives/datepicker/directive.js',
                         'common/directives/datepicker/theme/v4/style.css'
-                        ]),
+                    ]),
                     controller: 'ktAssetsCtrl'
                 },
                 // 'pano.productsDetil.assets': {

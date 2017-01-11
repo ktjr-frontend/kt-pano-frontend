@@ -733,7 +733,7 @@
                     $scope.getFitlerStatus = function() {
                         var validParams = _self.cutDirtyParams(search)
                         var validParamKeys = _.filter(_.keys(validParams), function(v) {
-                            return !_.includes(['page', 'per_page', 'credit_right_or_eq', 'created_or_updated_in'], v)
+                            return !_.includes(['page', 'per_page', 'order', 'sort_by', 'credit_right_or_eq', 'created_or_updated_in'], v)
                         })
 
                         if (_.includes(validParamKeys, 'key_word')) {

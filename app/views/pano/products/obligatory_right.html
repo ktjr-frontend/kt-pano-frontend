@@ -9,7 +9,7 @@
     </div>
     <!-- 只要有搜索 -->
     <div class="chart-table-title fl" ng-if="getFitlerStatus() === SEARCH_STATUS">
-        匹配到共<em ng-bind="::count.find.count"></em>条相关产品，其中
+        匹配到共<em ng-bind="::shared._params.totalItems"></em>条相关产品，其中
         <span ng-repeat="item in count.find.search_results">
             <span ng-bind="::item.value"></span>相关<em ng-bind="::item.search_count" class="is-link" ng-click="searchTabClick(item.name)"></em>条，
         </span>
@@ -20,7 +20,7 @@
     <div class="table-kind bor-xxs">
         <div class="table-head" kt-table-sort>
             <div class="rank-bar fl clfix">
-                <a>默认排序</a>
+                <a ng-class="{'active': !search.sort_by}" class="sort-column" field="">默认排序</a>
                 <a class="sort-column" field="updated_time">按更新时间
                     <i class="icon-pano icon-arrow-up"></i>
                     <i class="icon-pano icon-arrow-up icon-arrow-up-reverse"></i>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="table-body">
-            <div class="tr" ng-repeat="product in products" ng-if="products.length" ng-click="gotoDetail(product.id)">
+            <div class="tr" ng-repeat="product in products" ng-if="products.length" ng-click="gotoDetail(product)">
                 <div class="tr-head tags">
                     <span ng-bind="product.name"></span>
                     <span ng-if="product.created_or_updated_in === '1'" class="tag tag-orange">新增</span>
@@ -55,38 +55,38 @@
                                 <div class="td-caption">
                                     产品期限
                                 </div>
-                                <div class="td-body" ng-bind="product.life | ktNull"></div>
+                                <div class="td-body" ng-bind="::product.life | ktNull"></div>
                             </td>
                             <td>
                                 <div class="td-caption">
                                     年化收益率
                                 </div>
-                                <div class="td-body" ng-bind="product.rate | ktNull"></div>
+                                <div class="td-body" ng-bind="::product.rate | ktNull"></div>
                             </td>
                             <td>
                                 <div class="td-caption">
                                     募集规模
                                 </div>
-                                <div class="td-body" ng-bind="product.sum_amount | ktNumberLocate | ktNull"></div>
+                                <div class="td-body" ng-bind="::product.sum_amount | ktNumberLocate | ktNull"></div>
                             </td>
                             <td>
                                 <div class="td-caption">
                                     产品类型
                                 </div>
-                                <div class="td-body" ng-bind="product.type | ktNull"></div>
+                                <div class="td-body" ng-bind="::product.type | ktNull"></div>
                             </td>
                             <td>
                                 <div class="td-caption">
                                     资产类型
                                 </div>
-                                <div class="td-body" ng-bind="product.asset_type | ktNull"></div>
+                                <div class="td-body" ng-bind="::product.asset_type | ktNull"></div>
                             </td>
                             <td>
                                 <div class="td-caption">
                                     平台
                                 </div>
                                 <div class="td-body">
-                                    <a ng-if="::product.from" ng-bind="product.from | ktNull" ui-sref="pano.institutions.detail({id: product.from, dimension: 'from'})"></a>
+                                    <a ng-click="$event.stopPropagation()" ng-if="::product.from" ng-bind="product.from | ktNull" ui-sref="pano.institutions.detail({id: product.from, dimension: 'from'})"></a>
                                     <span ng-if="!product.from">-</span>
                                 </div>
                             </td>
@@ -95,7 +95,7 @@
                                     挂牌场所
                                 </div>
                                 <div class="td-body">
-                                    <a ng-if="product.exchange !== '不适用'" ng-bind="product.exchange | ktNull" ui-sref="pano.institutions.detail({id: product.exchange, dimension: 'mapped_exchange'})"></a>
+                                    <a ng-click="$event.stopPropagation()" ng-if="product.exchange !== '不适用'" ng-bind="::product.exchange | ktNull" ui-sref="pano.institutions.detail({id: product.exchange, dimension: 'mapped_exchange'})"></a>
                                     <span ng-if="product.exchange === '不适用'">不适用</span>
                                 </div>
                             </td>
@@ -103,7 +103,7 @@
                                 <div class="td-caption">
                                     累计募集条数
                                 </div>
-                                <div class="td-body" ng-bind="product.sum_count | ktNull | ktAppend:'条'"></div>
+                                <div class="td-body" ng-bind="::product.sum_count | ktNull | ktAppend:'条'"></div>
                             </td>
                         </tr>
                     </table>

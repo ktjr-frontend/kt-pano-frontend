@@ -8,7 +8,7 @@
                 $scope.productManage = data.products
                 var inst = $scope.inst = data.from_info
                 if (!inst) return
-                inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 3, 6)
+                inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce || inst.form_introduce, '.init-main-info .desc', 0, 14, 3, 6)
                 $scope.similars = data.similar_products
                 function groupData(arr) {
                     if (arr.length % 3 !== 0) {
@@ -21,8 +21,8 @@
                         $scope.termRates = arr
                     }
                 }
-                console.log(data.products.term_rates)
-                groupData(data.products.term_rates)
+                console.log(data.products.partitions)
+                groupData(data.products.partitions)
 
             })
              //弹出pano酱二维码

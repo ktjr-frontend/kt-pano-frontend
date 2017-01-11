@@ -38,7 +38,7 @@
                         <div class="return-rate">各期限收益率情况</div>
                         <div class="product-table-all">
                             <div ng-repeat="partition in partitions" class="partition">
-                                <div class="product-table"  ng-if="!partition.empty">
+                                <div class="product-table" ng-if="!partition.empty">
                                     <table>
                                         <thead>
                                             <tr>
@@ -114,11 +114,18 @@
                       <em>500万元</em>
                   </span>
                     <div class="chart-date">
-                        <input type="text" class="datepicker ng-pristine ng-untouched ng-valid" ng-model="datepicker" kt-date-picker datepicker-settings="datepickerSettings">
+                        <input type="text" class="datepicker ng-pristine ng-untouched ng-valid" ng-model="datePicker" kt-date-picker datepicker-settings="datepickerSettings">
                         <i class="icon-pano icon-calendar picker-icon"></i>
                     </div>
                 </div>
-                <div class="product-echarts"></div>
+                <div class="product-echarts">
+                    <div class="chart-head clfix">
+                        <div class="chart-head-item">产品最早收录时间：<span ng-bind="assetsDatas.begin_date"></span></div>
+                        <div class="chart-head-item">产品最新发行时间：<span ng-bind="assetsDatas.last_date"></span></div>
+                    </div>
+                    <div id="dailyRaiseChart" kt-echart chart-options="dailyRaiseChart.chartOptions" style="height:400px;">
+                    </div>
+                </div>
             </div>
             <div class="original-product-data">
                 <!-- 原始产品数据 -->

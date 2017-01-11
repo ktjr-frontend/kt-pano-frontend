@@ -14,17 +14,26 @@
             }]
 
             // 跳转产品详情
-            $scope.gotoDetail = function(id) {
-                $state.go('pano.productAssetManage', {
-                    id: id
-                })
+            $scope.gotoDetail = function(product) {
+                if (product.detail_exist) {
+                    $state.go('pano.productAssetManage', {
+                        id: product.id
+                    })
+                } else {
+                    ktSweetAlert.swal({
+                        title: '提示',
+                        timer: 1500,
+                        text: '该产品暂未录入详情'
+                    })
+                }
             }
 
             shared.tabActive.tab1 = true
-            search.created_or_updated_in = search.created_or_updated_in ? search.created_or_updated_in.split(',') : []
+            search.created_or_updated_in = _.isString(search.created_or_updated_in) ? search.created_or_updated_in.split(',') : []
             shared._params.page = shared.params.page
             $.extend(shared.params, search, { credit_right_or_eq: 'am' })
             ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
+            ktDataHelper.intFitlerStatus($scope, search)
 
             if (!shared.filterDatas) {
                 ktProductsService.get({
@@ -42,10 +51,44 @@
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 $scope.products = res.products
                 $scope.count = res.count
+                res.count.find.search_results = [{
+                    name: 'name',
+                    value: '产品名称',
+                    search_count: 192
+                }, {
+                    name: 'name',
+                    value: '产品名称',
+                    search_count: 120
+                }, {
+                    name: 'name',
+                    value: '产品名称',
+                    search_count: 112
+                }, {
+                    name: 'name',
+                    value: '产品名称',
+                    search_count: 12
+                }, {
+                    name: 'name',
+                    value: '产品名称',
+                    search_count: 182
+                }]
                 shared._params.totalItems = res.products_count
                 shared._params.totalPages = _.ceil(res.products_count / shared.params.per_page)
-                // shared.today_added_count = res.today_added_count
+                    // shared.today_added_count = res.today_added_count
                 $scope.$emit('totalItemGot', search)
+                $scope.$watch('shared.params.created_or_updated_in.length', function() {
+                    $state.go($state.current.name, { created_or_updated_in: shared.params.created_or_updated_in.join() })
+                })
             })
+
+            $scope.searchTabClick = function(name) {
+                // 获取产品列表
+                ktProductsService.get($.extend({ key_word_by: name }, ktDataHelper.cutDirtyParams(shared.params)), function(res) {
+                    $scope.products = res.products
+                    shared._params.totalItems = res.products_count
+                    shared._params.totalPages = _.ceil(res.products_count / shared.params.per_page)
+                    $scope.$emit('totalItemGot', search)
+                })
+            }
         })
 })();
