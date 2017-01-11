@@ -247,7 +247,8 @@
                         pageTitle: '机构详情页',
                     }
                 },
-                'pano.productObligatoryRight': { //资产路由
+                // 资产产品详情页
+                'pano.productObligatoryRight': {
                     // abstract: true,
                     url: '/product_obligatory_right/:id',
                     // template: '</ui-view>',
@@ -270,20 +271,17 @@
                     ]),
                     controller: 'ktAssetsCtrl'
                 },
-                // 'pano.productsDetil.assets': {
-                //     url: '/assets',
-                //     templateUrl: 'views/pano/assets/assets.html',
-                //     resolve: ktLazyResolve([
-                //         'views/pano/assets/assets.js'
-                //     ]),
-                //     controller: 'ktAssetsCtrl'
-                // },
-                'pano.productAssetManage': { //资管路由
+
+                // 资管产品详情页
+                'pano.productAssetManage': {
                     url: '/product_asset_manage/:id',
                     templateUrl: 'views/pano/assets-manage/assets_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/assets-manage/assets_manage.css',
-                        'views/pano/assets-manage/assets_manage.js'
+                        'views/pano/assets-manage/assets_manage.js',
+                        'common/directives/kt-echart3-directive.js',
+                        'common/directives/datepicker/directive.js',
+                        'common/directives/datepicker/theme/v4/style.css'
                     ]),
                     controller: 'ktAssetManageCtrl'
                 },

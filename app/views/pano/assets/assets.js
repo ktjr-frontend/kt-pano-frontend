@@ -12,7 +12,6 @@
 
             //发行平台
             var inst = $scope.inst = data.from_info
-            if (!inst) return
             inst.descObj = ktDataHelper.textEllipsis(inst.form_introduce, '.init-main-info .desc', 0, 14, 4, 6)
 
             //挂牌场所
@@ -41,32 +40,33 @@
             $scope.datePicker = params.begin_date + '~' + params.end_date
 
             $scope.$watch('datePicker', function(newValue, oldValue) {
-                    if (newValue !== oldValue) {
-                        var dates = newValue.split('~')
-                        var opt = {
-                            begin_date: dates[0],
-                            end_date: dates[1]
-                        }
+                if (newValue !== oldValue) {
+                    var dates = newValue.split('~')
+                    var opt = {
+                        begin_date: dates[0],
+                        end_date: dates[1]
+                    }
 
-                        // 加载图表数据
-                        dailyRaiseChart.updateDataView(opt)
-                    }
-                })
-                /*$scope.datepickerSettings = {
-                    // startOfWeek: 'monday',
-                    applyBtnClass: 'btn btn-navy-blue btn-xs',
-                    // batchMode: 'week-range',
-                    singleMonth: false,
-                    extraClass: 'date-picker-pano-top',
-                    showWeekNumbers: false,
-                    autoClose: false,
-                    beforeShowDay: function(t) {
-                        var valid = t <= moment(params.end_date).toDate() && t >= moment(params.start_date).toDate() //  当周以后不可选
-                        var _class = '';
-                        var _tooltip = valid ? '' : '不在可选范围内';
-                        return [valid, _class, _tooltip];
-                    }
-                }*/
+                    // 加载图表数据
+                    dailyRaiseChart.updateDataView(opt)
+                }
+            })
+
+            /*$scope.datepickerSettings = {
+                // startOfWeek: 'monday',
+                applyBtnClass: 'btn btn-navy-blue btn-xs',
+                // batchMode: 'week-range',
+                singleMonth: false,
+                extraClass: 'date-picker-pano-top',
+                showWeekNumbers: false,
+                autoClose: false,
+                beforeShowDay: function(t) {
+                    var valid = t <= moment(params.end_date).toDate() && t >= moment(params.start_date).toDate() //  当周以后不可选
+                    var _class = '';
+                    var _tooltip = valid ? '' : '不在可选范围内';
+                    return [valid, _class, _tooltip];
+                }
+            }*/
 
             // 加载图表数据
             dailyRaiseChart.updateDataView()

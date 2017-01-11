@@ -64,7 +64,9 @@
                                         </thead>
                                         <tbody>
                                             <tr class="table-tr-data">
-                                                <td><a href="" ng-bind="termRate.life"></a></td>
+                                                <td>
+                                                    <a href="" ng-bind="termRate.life"></a>
+                                                </td>
                                                 <td ng-bind="termRate.rate"></td>
                                             </tr>
                                         </tbody>
@@ -74,95 +76,95 @@
                                     <span class="seize"></span>
                                 </div>
                             </div>
-                    </div>
-                    <div class="product-data-three">
-                        <div class="manage-profit">各期限收益率图</div>
-                        <div class="manage-chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-data-four">
-                        <span>产品说明书：</span>
-                        <a class="product-button" ng-href="{{productManage.attachment_url}}">下载</a>
-                    </div>
-            <div class="product-chart">
-                <!-- 日募集情况 -->
-                <div class="chart-title">
-                    <div class="raise-status">日募集情况</div>
-                    <span class="myspan">日均募集规模：
-                      <em>1,300万元</em>
-                  </span>
-                    <span class="myspan">最高募集量：
-                      <em>900万元</em>
-                  </span>
-                    <span class="myspan">最低募集量：
-                      <em>500万元</em>
-                  </span>
-                    <div class="chart-date">
-                        <input type="text" class="datepicker ng-pristine ng-untouched ng-valid" ng-model="datepicker" kt-date-picker datepicker-settings="datepickerSettings">
-                        <i class="icon-pano icon-calendar picker-icon"></i>
-                    </div>
-                </div>
-                <div class="product-echarts"></div>
-                <div class="more-data">
-                    <a href="" ng-click="alertCode()">全部数据</a>
-                </div>
-            </div>
-            <!-- 发行平台 -->
-            <div class="release-platform">
-                <div class="release-title">发行平台</div>
-                <article class="box init-main-info">
-                    <div class="box-body">
-                        <div class="clfix">
-                            <div class="logo">
-                                <a ng-href="{{inst.website}}" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
-                            </div>
-                            <div class="main">
-                                <h3 ng-bind="inst.name"></h3>
-                                <p class="desc">
-                                    <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
-                                    <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.from_introduce | ktNull"></span>
-                                    <a ng-if="inst.descObj.showToggleBtn" class="ml5 tu" ng-click="inst.descObj.isTruncate = !inst.descObj.isTruncate">
-                                        <span ng-show="inst.descObj.isTruncate">更多</span>
-                                        <span ng-show="!inst.descObj.isTruncate">收起</span>
-                                    </a>
-                                </p>
+                        </div>
+                        <div class="product-data-three">
+                            <div class="manage-profit">各期限收益率图</div>
+                            <div class="manage-chart">
+                                <div id="durationRateChart" kt-echart chart-options="durationRateChart.chartOptions" style="height:300px;"></div>
                             </div>
                         </div>
-                        <div class="lines">
-                            <section class="line" ng-show="inst.business_model">
-                                <div class="name">业务模式：</div>
-                                <div class="value">
-                                    <ul class="list">
-                                        <li>
-                                            <span ng-bind="inst.business_model"></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </section>
-                            <section class="line" ng-show="inst.asset_types.length">
-                                <div class="name">已发产品资产类型：</div>
-                                <div class="value">
-                                    <ul class="list">
-                                        <li ng-repeat="at in inst.asset_types track by $index">
-                                            <span ng-bind="at"></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </section>
-                            <div class="more-data"><a href="">更多</a></div>
+                    </div>
+                </div>
+                <div class="product-data-four">
+                    <span>产品说明书：</span>
+                    <a class="product-button" ng-href="{{productManage.attachment_url}}">下载</a>
+                </div>
+                <div class="product-chart">
+                    <!-- 日募集情况 -->
+                    <div class="chart-title">
+                        <div class="raise-status">产品收益率趋势</div>
+                        <div class="chart-date">
+                            <input type="text" class="datepicker ng-pristine ng-untouched ng-valid" ng-model="datePicker" kt-date-picker datepicker-settings="datepickerSettings">
+                            <i class="icon-pano icon-calendar picker-icon"></i>
                         </div>
                     </div>
-                </article>
-            </div>
-            <!-- 挂牌场所 -->
-            <!-- 相似产品 -->
-            <div class="similar-product">
-                <div class="release-title">相似产品</div>
-                <div class="carousel">
-                    <div kt-product-carousel similars="similars"></div>
+                    <div class="product-echarts">
+                        <div class="chart-head clfix">
+                            <div class="chart-head-item">产品最早收录时间：<span ng-bind="productManage.begin_date"></span></div>
+                            <div class="chart-head-item">产品最新发行时间：<span ng-bind="productManage.last_date"></span></div>
+                        </div>
+                        <div id="productRateTrend" kt-echart chart-options="productRateTrend.chartOptions" style="height:400px;">
+                        </div>
+                    </div>
+                    <div class="more-data">
+                        <a href="" ng-click="alertCode()">全部数据</a>
+                    </div>
+                </div>
+                <!-- 发行平台 -->
+                <div class="release-platform">
+                    <div class="release-title">发行平台</div>
+                    <article class="box init-main-info">
+                        <div class="box-body">
+                            <div class="clfix">
+                                <div class="logo">
+                                    <a ng-href="{{inst.website}}" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
+                                </div>
+                                <div class="main">
+                                    <h3 ng-bind="inst.name"></h3>
+                                    <p class="desc">
+                                        <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
+                                        <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.from_introduce | ktNull"></span>
+                                        <a ng-if="inst.descObj.showToggleBtn" class="ml5 tu" ng-click="inst.descObj.isTruncate = !inst.descObj.isTruncate">
+                                            <span ng-show="inst.descObj.isTruncate">更多</span>
+                                            <span ng-show="!inst.descObj.isTruncate">收起</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="lines">
+                                <section class="line" ng-show="inst.business_model">
+                                    <div class="name">业务模式：</div>
+                                    <div class="value">
+                                        <ul class="list">
+                                            <li>
+                                                <span ng-bind="inst.business_model"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <section class="line" ng-show="inst.asset_types.length">
+                                    <div class="name">已发产品资产类型：</div>
+                                    <div class="value">
+                                        <ul class="list">
+                                            <li ng-repeat="at in inst.asset_types track by $index">
+                                                <span ng-bind="at"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <div class="more-data"><a href="">更多</a></div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <!-- 挂牌场所 -->
+                <!-- 相似产品 -->
+                <div class="similar-product">
+                    <div class="release-title">相似产品</div>
+                    <div class="carousel">
+                        <div kt-product-carousel similars="similars"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

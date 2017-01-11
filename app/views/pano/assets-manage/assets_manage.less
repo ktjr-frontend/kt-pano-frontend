@@ -8,28 +8,27 @@
 @rank-color2: #aabdda;
 @rank-color3: #c0d1ea;
 .asset-crumb {
-    .crumb-title{
+    .crumb-title {
         margin-left: 30px;
         .li-style {
             height: 35px;
             line-height: 35px;
             list-style: none;
             display: inline-block;
-              a {
+            a {
                 font-size: 1.2rem;
-                color:#000;
+                color: #000;
             }
             &:not(:last-child):after {
                 content: ">";
                 padding: 0 5px;
                 color: #aeb1b8;
             }
-            &:last-child{
-                a{
-                    color:#9fa3ac;
+            &:last-child {
+                a {
+                    color: #9fa3ac;
                 }
             }
-
         }
     }
 }
@@ -64,24 +63,24 @@
     }
 }
 
-.product-data-one{
+.product-data-one {
     border-bottom: 1px solid #eeeff3;
-    >ul{
-        >li{
-            float:left;
-            width:33%;
-            list-style:none;
-            div{
-                padding:1rem 20%;
+    >ul {
+        >li {
+            float: left;
+            width: 33%;
+            list-style: none;
+            div {
+                padding: 1rem 20%;
                 // margin:0 auto;
-                span{
-                    font-size:13px;
-                    width:80px;
+                span {
+                    font-size: 13px;
+                    width: 80px;
                     text-align: right;
                 }
-                em{
-                    font-size:13px;
-                    margin-left:0.5rem;
+                em {
+                    font-size: 13px;
+                    margin-left: 0.5rem;
                     max-width: 150px;
                     // vertical-align: middle;
                     display: inline-block;
@@ -102,7 +101,7 @@
 
 .product-table-all {
     overflow: hidden;
-        .partition {
+    .partition {
         &:nth-of-type(3n) {
             .product-table {
                 border-right: none;
@@ -126,13 +125,12 @@
                 text-align: center;
                 color: #9fa3ac;
                 font-size: 13px;
-                color:#9fa3ac;
+                color: #9fa3ac;
                 font-weight: 200;
             }
             td {
                 text-align: center;
-                font-size:13px;
-
+                font-size: 13px;
             }
             .table-tr-data {
                 td {
@@ -146,20 +144,20 @@
 
 .product-data-three {
     // margin-top:15px;
-    .manage-profit{
-        height:50px;
+    .manage-profit {
+        height: 50px;
         line-height: 50px;
-        font-size:14px;
+        font-size: 14px;
         // font-weight: bold;
     }
 }
 
 .product-data-four {
-    margin-top:15px;
+    margin-top: 15px;
     padding: 20px 0;
-    padding-left:40px;
+    padding-left: 40px;
     background: #fff;
-    border-radius:5px;
+    border-radius: 5px;
     // padding-left:10%;
     .product-button {
         display: inline-block;
@@ -189,7 +187,8 @@
             border: 1px solid #e4e6e8;
             width: 201px;
             height: 26px;
-            padding: 0 30px 0 1em;
+            padding: 0 0 0 10px;
+            font-size: 13px;
             background: #fff;
             margin-left: 13px;
             cursor: pointer;
@@ -235,10 +234,19 @@
 }
 
 .product-echarts {
-    height: 370px;
+    // height: 370px;
     background: #fff;
     border-radius: 5px;
     margin-top: 10px;
+    .chart-head {
+        padding: 20px 15px 0;
+    }
+    .chart-head-item {
+        float: right;
+        margin-left: 45px;
+        font-size: 13px;
+        color: #c5c7cc;
+    }
 }
 
 .more-data {
@@ -436,7 +444,7 @@
     }
 }
 
-  .carousel {
+.carousel {
     height: 170px;
     border-radius: 5px;
     background: #fff;
@@ -453,7 +461,8 @@
         }
     }
 }
-    .product-seize {
+
+.product-seize {
     text-align: center;
     height: 79px;
     line-height: 60px;
@@ -463,11 +472,13 @@
         border-top: 2px solid #e5e7e9;
     }
 }
-.sweet-alert .sa-button-container{
+
+.sweet-alert .sa-button-container {
     border-top: none;
     margin-top: 10px;
 }
-.img-pano{
+
+.img-pano {
     display: inline-block;
     border: 10px solid #f3f5f8;
     margin-top: 20px;
