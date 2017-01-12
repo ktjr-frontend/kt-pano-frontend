@@ -8,7 +8,7 @@
                 <a href="" ui-sref="pano.products.obligatoryRight"> 资产类</a>
             </li>
             <li class="li-style">
-                <a href="" ng-bind="assetsDatas.form" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></a>
+                <a href="" ng-bind="assetsDatas.from" ui-sref="pano.products.obligatoryRight({from_eq: assetsDatas.from})"></a>
             </li>
             <li class="li-style">
                 <a href="" ng-bind="assetsDatas.name"></a>
@@ -111,11 +111,11 @@
                     <span class="myspan">日均募集规模：
                       <em ng-bind="avg_amount | ktNumberLocate"></em>
                   </span>
-                    <span class="myspan">最高募集量：
-                      <em>900万元</em>
+                    <span class="myspan" >最高募集量：
+                      <em ng-bind="max_amount | ktNumberLocate"></em>
                   </span>
                     <span class="myspan">最低募集量：
-                      <em>500万元</em>
+                      <em ng-bind="min_amount | ktNumberLocate"></em>
                   </span>
                     <div class="chart-date">
                         <input type="text" class="datepicker ng-pristine ng-untouched ng-valid" ng-model="datePicker" kt-date-picker datepicker-settings="datepickerSettings">

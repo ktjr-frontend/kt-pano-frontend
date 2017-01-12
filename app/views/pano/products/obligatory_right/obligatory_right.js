@@ -188,6 +188,8 @@
             }, _self._params)), function(data) {
                 _self.data = data.products
                 $scope.avg_amount = data.avg_amount
+                $scope.max_amount = data.max_amount
+                $scope.min_amount = data.min_amount
                 updateView()
             })
 

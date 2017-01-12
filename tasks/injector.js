@@ -78,7 +78,7 @@ var appScripts = [
     'app/scripts/factories/kt-tools-function.js',
     'app/scripts/factories/kt-tools-cache.js',
     'app/scripts/directives/common/kt-logout-directive.js',
-    // 'app/scripts/directives/common/kt-product-carousel-directive.js',
+    'app/scripts/directives/common/kt-product-carousel-directive.js',
     'app/scripts/services/kt-service.js',
     'app/scripts/services/kt-service-account.js',
     'app/scripts/services/kt-service-captcha.js',
