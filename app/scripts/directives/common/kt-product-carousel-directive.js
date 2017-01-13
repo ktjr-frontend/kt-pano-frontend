@@ -42,4 +42,22 @@
                 }
             }
         })
+        .directive('ktSlideCode', function() {
+            /**
+             *滚动到屏幕高度以后显示二维码
+             */
+                return {
+                    restrict: 'A',
+                    link: function(scope, element) {
+                        var newheight = $('.buttons').offset().top + $('.buttons').height()
+                        $(window).on('scroll', function() {
+                            if ($(document).scrollTop() > newheight) {
+                                element.css('display', 'block')
+                            } else {
+                                element.css('display', 'none')
+                            }
+                        })
+                    }
+                }
+        })
 })();

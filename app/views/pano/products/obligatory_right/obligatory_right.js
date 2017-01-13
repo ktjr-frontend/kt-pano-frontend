@@ -12,8 +12,8 @@
 
             //发行平台
             var inst = $scope.inst = data.from_info
-            inst.descObj = ktDataHelper.textEllipsis(inst.form_introduce, '.init-main-info .desc', 0, 14, 4, 6)
-
+            inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
+            debugger
             //挂牌场所
             var exchange = $scope.exchange = data.exchange_info
             if (!exchange) return

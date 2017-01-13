@@ -24,7 +24,7 @@
                         <div class="product-data-top">
                             <div class="spacing">
                                 <div class="product-dt-top">产品期限</div>
-                                <div class="product-dt-down" ng-bind="assetsDatas.lives[0]"></div>
+                                <div class="product-dt-down" ng-bind="assetsDatas.lives"></div>
                             </div>
                         </div>
                         <div class="product-data-top">
@@ -72,7 +72,7 @@
                         <ul>
                             <li>
                                 <span>发行平台：</span>
-                                <em class="text-color" ng-bind="assetsDatas.form" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em>
+                                <em class="text-color" ng-bind="assetsDatas.from" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em>
                             </li>
                             <li>
                                 <span>资产类型：</span>
@@ -86,7 +86,7 @@
                         <ul>
                             <li>
                                 <span>挂牌场所：</span>
-                                <em ng-bind="assetsDatas.credit_party"></em>
+                                <em ng-bind="assetsDatas.exchange"></em>
                             </li>
                             <li>
                                 <span>底层资产：</span>
@@ -182,7 +182,7 @@
                                 <h3 ng-bind="inst.name"></h3>
                                 <p class="desc">
                                     <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
-                                    <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.form_introduce | ktNull"></span>
+                                    <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.from_introduce | ktNull"></span>
                                     <a ng-if="inst.descObj.showToggleBtn" class="ml5 tu" ng-click="inst.descObj.isTruncate = !inst.descObj.isTruncate">
                                         <span ng-show="inst.descObj.isTruncate">更多</span>
                                         <span ng-show="!inst.descObj.isTruncate">收起</span>
