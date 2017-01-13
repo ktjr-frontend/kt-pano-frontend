@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktInsitutionCtrl', function($scope, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktCompassAssetService, ktDataHelper, ktValueFactory) {
+        .controller('ktInsitutionCtrl', function($scope, $timeout, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktProductsService, ktDataHelper, ktValueFactory) {
 
             var defaultParams = {
                 dimension: 'from',
@@ -34,6 +34,18 @@
                 tab1: true,
                 tab2: false
             }
+
+            $scope.$watch('tabActive.tab2', function(newValue) {
+                if (newValue) {
+                    $timeout(function() {
+                        /*eslint-disable*/
+                        weekAmountChart.echart && weekAmountChart.echart.resize()
+                        weekRateChart.echart && weekRateChart.echart.resize()
+                        assetTypePercentChart.echart && assetTypePercentChart.echart.resize()
+                            /*eslint-enable*/
+                    }, 100)
+                }
+            })
 
             // 更多图表视图
             $scope.moreChartView = function() {
@@ -512,19 +524,19 @@
 
             // 产品信息-资产类
             function getBondList() {
-                ktCompassAssetService.get($.extend({
+                ktProductsService.get($.extend({
                     credit_right_or_eq: 'bond'
                 }, assetParams), function(res) {
-                    $scope.products = res.compass_assets
+                    $scope.products = res.products
                 })
             }
 
             // 产品信息-资管类
             function getAmList() {
-                ktCompassAssetService.get($.extend({
+                ktProductsService.get($.extend({
                     credit_right_or_eq: 'am'
                 }, assetParams), function(res) {
-                    $scope.products2 = res.compass_assets
+                    $scope.products2 = res.products
                 })
             }
 

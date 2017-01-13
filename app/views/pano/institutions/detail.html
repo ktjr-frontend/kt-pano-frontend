@@ -84,19 +84,19 @@
                     <article class="box">
                         <div class="box-head">
                             <uib-tabset>
-                                <uib-tab active="tabActive.tab1" ng-show="moduleVisible('chart')">
-                                    <tab-heading>
-                                        图表信息
-                                    </tab-heading>
-                                </uib-tab>
-                                <uib-tab active="tabActive.tab2">
+                                <uib-tab active="tabActive.tab1">
                                     <tab-heading>
                                         产品信息
                                     </tab-heading>
                                 </uib-tab>
+                                <uib-tab active="tabActive.tab2" ng-show="moduleVisible('chart')">
+                                    <tab-heading>
+                                        图表信息
+                                    </tab-heading>
+                                </uib-tab>
                             </uib-tabset>
                         </div>
-                        <div class="box-body" ng-show="tabActive.tab1">
+                        <div class="box-body" ng-show="tabActive.tab2">
                             <div class="filter-box">
                                 <div class="normal-filter clfix">
                                     <div class="fl datepicker-container" oc-lazy-load="['common/directives/datepicker/directive.js', 'common/directives/datepicker/theme/v4/style.css']">
@@ -157,7 +157,7 @@
                                 <a class="btn btn-default btn-xs" ng-click="moreChartView()">更多</a>
                             </div>
                         </div>
-                        <div class="box-body" ng-show="tabActive.tab2">
+                        <div class="box-body" ng-show="tabActive.tab1">
                             <div class="chart-table bor-xxs" ng-show="moduleVisible('bond')">
                                 <div class="chart-table-heading clfix">
                                     <span class="f1_5rem">资产类</span>
@@ -177,19 +177,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="text-right" ng-repeat="product in products" ng-if="products.length">
-                                                <td ng-class="{'text-left': product.name}" ng-bind="::product.name | ktNull"></td>
+                                            <tr class="text-right" ng-repeat="product in products" ng-if="products.length" kt-table-line-select target-element=".js-product-link">
+                                                <td ng-class="{'text-left': product.name}">
+                                                    <a class="js-product-link" ui-sref="pano.productObligatoryRight({id: product.id})" ng-bind="::product.name | ktNull"></a>
+                                                </td>
                                                 <td ng-bind="::getLife(product.life)|ktEclipsis:4" title="{{::getLife(product.life)}}"></td>
                                                 <td ng-bind="::product.rate | ktNumber:2:'percent2'"></td>
                                                 <td ng-bind="::product.sum_amount | ktNumberLocate"></td>
                                                 <td ng-bind="::(product.value_date | ktNull | date:'yyyy-MM-dd')"></td>
                                                 <td ng-bind="::product.asset_type | ktEclipsis:25" title="{{::product.asset_type | ktNull}}"></td>
                                                 <td ng-if="params.dimension === 'from'">
-                                                    <a ng-if="product.exchange !== '不适用'" ui-sref="pano.institutions.detail({id: product.exchange, dimension: 'mapped_exchange'})" ng-bind="::product.exchange" target="_blank"></a>
+                                                    <a ng-click="$event.stopPropagation()" ng-if="product.exchange !== '不适用'" ui-sref="pano.institutions.detail({id: product.exchange, dimension: 'mapped_exchange'})" ng-bind="::product.exchange" target="_blank"></a>
                                                     <span ng-if="product.exchange === '不适用'">不适用</span>
                                                 </td>
                                                 <td ng-if="params.dimension === 'mapped_exchange'">
-                                                    <a ng-if="product.from !== '不适用'" ui-sref="pano.institutions.detail({id: product.from, dimension: 'from'})" ng-bind="::product.from" target="_blank"></a>
+                                                    <a ng-click="$event.stopPropagation()" ng-if="product.from !== '不适用'" ui-sref="pano.institutions.detail({id: product.from, dimension: 'from'})" ng-bind="::product.from" target="_blank"></a>
                                                     <span ng-if="product.from === '不适用'">不适用</span>
                                                 </td>
                                             </tr>
@@ -223,8 +225,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="text-right" ng-repeat="product in products2" ng-if="products2.length">
-                                                <td ng-class="{'text-left': product.name}" ng-bind="::product.name | ktNull"></td>
+                                            <tr class="text-right" ng-repeat="product in products2" ng-if="products2.length" kt-table-line-select target-element=".js-product-link">
+                                                <td ng-class="{'text-left': product.name}">
+                                                    <a ng-click="$event.stopPropagation()" class="js-product-link" ui-sref="pano.productAssetManage({id: product.id})" ng-bind="::product.name | ktNull"></a>
+                                                </td>
                                                 <td ng-bind="::getLife(product.life)|ktEclipsis:4" title="{{::getLife(product.life)}}"></td>
                                                 <td ng-bind="::product.rate | ktNumber:2:'percent2'"></td>
                                                 <td ng-bind="::product.type | ktNull"></td>
