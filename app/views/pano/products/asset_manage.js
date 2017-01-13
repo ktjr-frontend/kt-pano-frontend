@@ -50,8 +50,8 @@
 
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 $scope.products = res.products
-                $scope.count = res.count
-                res.count.find.search_results = [{
+                $scope.summary = res.summary
+                res.summary.find.search_results = [{
                     name: 'name',
                     value: '产品名称',
                     search_count: 192
@@ -77,7 +77,9 @@
                     // shared.today_added_count = res.today_added_count
                 $scope.$emit('totalItemGot', search)
                 $scope.$watch('shared.params.created_or_updated_in.length', function() {
-                    $state.go($state.current.name, { created_or_updated_in: shared.params.created_or_updated_in.join() })
+                    if (_.isArray(shared.params.created_or_updated_in)) {
+                        $state.go($state.current.name, { created_or_updated_in: shared.params.created_or_updated_in.join() })
+                    }
                 })
             })
 
