@@ -32,6 +32,7 @@
                     $state.go(state, $.extend(params, {
                         status_eq: null,
                         life_days_in: null,
+                        key_word: null,
                         rate_in: null,
                         asset_type_eq: null,
                         exchange_eq: null,

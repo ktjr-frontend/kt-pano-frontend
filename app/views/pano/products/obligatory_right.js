@@ -55,33 +55,9 @@
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 $scope.products = res.products
 
-                res.summary.find.search_results = [{
-                    name: 'name',
-                    value: '产品名称',
-                    search_count: 192
-                }, {
-                    name: 'name',
-                    value: '产品名称',
-                    search_count: 120
-                }, {
-                    name: 'name',
-                    value: '产品名称',
-                    search_count: 112
-                }, {
-                    name: 'name',
-                    value: '产品名称',
-                    search_count: 12
-                }, {
-                    name: 'name',
-                    value: '产品名称',
-                    search_count: 182
-                }]
-
                 $scope.summary = res.summary
-                shared._params.totalItems = res.products_count
-                shared._params.totalPages = _.ceil(res.products_count / shared.params.per_page)
-                    // shared.today_added_count = res.today_added_count
-                    // shared.today_added_amount = res.today_added_amount
+                shared._params.totalItems = res.summary.find.count
+                shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
                 $scope.$emit('totalItemGot', search)
 
                 $scope.$watch('shared.params.created_or_updated_in.length', function() {
@@ -93,11 +69,11 @@
 
             $scope.searchTabClick = function(name) {
                 // 获取产品列表
-                ktProductsService.get($.extend({ key_word_by: name }, ktDataHelper.cutDirtyParams(shared.params)), function(res) {
+                ktProductsService.get($.extend({ 'search_fields[]': name }, ktDataHelper.cutDirtyParams(shared.params)), function(res) {
                     $scope.products = res.products
                         // $scope.count = res.count
-                    shared._params.totalItems = res.products_count
-                    shared._params.totalPages = _.ceil(res.products_count / shared.params.per_page)
+                    shared._params.totalItems = res.summary.find.count
+                    shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
                     $scope.$emit('totalItemGot', search)
                 })
             }
