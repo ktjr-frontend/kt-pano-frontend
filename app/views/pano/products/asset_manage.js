@@ -15,7 +15,7 @@
 
             // 跳转产品详情
             $scope.gotoDetail = function(product) {
-                if (product.detail_exist) {
+                if (product.class === 'Product') {
                     $state.go('pano.productAssetManage', {
                         id: product.id
                     })
