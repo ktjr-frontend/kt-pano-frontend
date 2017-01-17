@@ -13,7 +13,7 @@
             //发行平台
             var inst = $scope.inst = data.from_info
             inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
-            debugger
+
             //挂牌场所
             var exchange = $scope.exchange = data.exchange_info
             if (!exchange) return
@@ -32,6 +32,7 @@
                 }
             }
             groupData(data.products.partitions)
+
             // $scope.similars = data.similar_products
             //相似产品
             function group(arr) {
@@ -46,6 +47,7 @@
                 }
             }
             group(data.similar_products)
+
             //日期选择
             params.begin_date = moment(Math.max(moment(data.products.begin_date).toDate(), moment(data.products.last_date).subtract(30, 'days').toDate())).format('YYYY-MM-DD')
             params.end_date = moment(data.products.last_date).format('YYYY-MM-DD')
@@ -206,7 +208,7 @@
                         // reverse: true,
                     },
                     yAxis: {
-                        name: '募集金额（万元）'
+                        name: '募集规模（万元）'
                     },
                     xAxis: {
                         type: 'category',

@@ -32,8 +32,9 @@
             }
 
             shared.tabActive.tab0 = true
-            search.created_or_updated_in = _.isString(search.created_or_updated_in) ? search.created_or_updated_in.split(',') : []
+            search.created_or_updated_in = _.isString(search.created_or_updated_in) ? search.created_or_updated_in.split(',') : (search.created_or_updated_in || [])
             shared._params.page = shared.params.page
+            shared._params.totalItems = 0
             $.extend(shared.params, search, { credit_right_or_eq: 'bond' })
             ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
             ktDataHelper.intFitlerStatus($scope, search)
@@ -58,7 +59,11 @@
                 $scope.summary = res.summary
                 shared._params.totalItems = res.summary.find.count
                 shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
-                $scope.$emit('totalItemGot', search)
+
+                // $scope.$emit('totalItemGot', search)
+                $scope.pageChanged = function() {
+                    $location.search('page', shared.params.page)
+                }
 
                 $scope.$watch('shared.params.created_or_updated_in.length', function() {
                     if (_.isArray(shared.params.created_or_updated_in)) {
@@ -67,8 +72,10 @@
                 })
             })
 
-            $scope.searchTabClick = function(name) {
+            $scope.searchTabActiveIndex = -1
+            $scope.searchTabClick = function(name, index) {
                 // 获取产品列表
+                $scope.searchTabActiveIndex = index
                 ktProductsService.get($.extend({ 'search_fields[]': name }, ktDataHelper.cutDirtyParams(shared.params)), function(res) {
                     $scope.products = res.products
                         // $scope.count = res.count

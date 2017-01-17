@@ -5,7 +5,7 @@
                 <a href="" ui-sref="pano.products.obligatoryRight">产品信息</a>
             </li>
             <li class="li-style">
-                <a href="" ui-sref="pano.products.obligatoryRight"> 资产类</a>
+                <a href="" ui-sref="pano.products.obligatoryRight">资产类</a>
             </li>
             <li class="li-style">
                 <a href="" ng-bind="assetsDatas.from" ui-sref="pano.products.obligatoryRight({from_eq: assetsDatas.from})"></a>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="product-data-top">
                             <div class="spacing">
-                                <div class="product-dt-top">募集金额</div>
+                                <div class="product-dt-top">募集规模</div>
                                 <div class="product-dt-down" ng-bind="assetsDatas.sum_amount | ktNumberLocate"></div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                             <tr>
                                                 <th>产品期限</th>
                                                 <th>年化收益率</th>
-                                                <th>募集金额</th>
+                                                <th>募集规模</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -98,10 +98,10 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="product-data-four">
+                    <!-- <div class="product-data-four">
                         <span>产品说明书：</span>
                         <a class="product-button" ng-href="{{assetsDatas.attachment_url}}" target="_blank">下载</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="product-chart">
@@ -148,7 +148,7 @@
                                 <th>产品名称</th>
                                 <th>产品期限</th>
                                 <th>年化收益率</th>
-                                <th>募集金额</th>
+                                <th>募集规模</th>
                                 <th>起息日</th>
                                 <th>起投金融</th>
                             </tr>
