@@ -30,9 +30,9 @@
 
             shared.tabActive.tab1 = true
             search.created_or_updated_in = _.isString(search.created_or_updated_in) ? search.created_or_updated_in.split(',') : (search.created_or_updated_in || [])
-            shared._params.page = shared.params.page
             shared._params.totalItems = 0
             $.extend(shared.params, search, { credit_right_or_eq: 'am' })
+            shared._params.page = shared.params.page
             ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
             ktDataHelper.intFitlerStatus($scope, search)
 
@@ -54,6 +54,7 @@
                 $scope.summary = res.summary
                 shared._params.totalItems = res.summary.find.count
                 shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
+                shared.params.page = search.page // 修正pagination 初始化page到1导致的问题
 
                 // $scope.$emit('totalItemGot', search)
                 $scope.pageChanged = function() {

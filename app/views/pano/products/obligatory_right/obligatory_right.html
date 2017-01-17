@@ -136,7 +136,7 @@
                 <div class="original-title">
                     <span class="original-title-left">原始产品数据</span>
                     <div class="original-title-right">
-                        <span>累计募集条数:
+                        <span>累计发行条数：
                             <em class="data-num" ng-bind="assetsDatas.sum_count"></em>条
                         </span>
                     </div>
@@ -217,7 +217,7 @@
                 </article>
             </div>
             <!-- 挂牌场所 -->
-            <div class="listing-place">
+            <div class="listing-place" ng-if="assetsDatas.exchange !== '不适用'">
                 <div class="release-title">挂牌场所</div>
                 <article class="box init-main-info">
                     <div class="box-body">
