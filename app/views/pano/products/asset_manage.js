@@ -29,11 +29,11 @@
             }
 
             shared.tabActive.tab1 = true
-            search.created_or_updated_in = _.isString(search.created_or_updated_in) ? search.created_or_updated_in.split(',') : (search.created_or_updated_in || [])
+            shared._params.created_or_updated_in = _.isString(search.created_or_updated_in) ? search.created_or_updated_in.split(',') : (search.created_or_updated_in || [])
             shared._params.totalItems = 0
             $.extend(shared.params, search, { credit_right_or_eq: 'am' })
             shared._params.page = shared.params.page
-            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by'])
+            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by', 'created_or_updated_in'])
             ktDataHelper.intFitlerStatus($scope, search)
 
             if (!shared.filterDatas) {
@@ -54,16 +54,16 @@
                 $scope.summary = res.summary
                 shared._params.totalItems = res.summary.find.count
                 shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
-                shared.params.page = search.page // 修正pagination 初始化page到1导致的问题
+                shared.params.page = search.page || shared.params.page// 修正pagination 初始化page到1导致的问题
 
                 // $scope.$emit('totalItemGot', search)
                 $scope.pageChanged = function() {
                     $location.search('page', shared.params.page)
                 }
 
-                $scope.$watch('shared.params.created_or_updated_in.length', function() {
-                    if (_.isArray(shared.params.created_or_updated_in)) {
-                        $state.go($state.current.name, { created_or_updated_in: shared.params.created_or_updated_in.join() })
+                $scope.$watch('shared._params.created_or_updated_in.length', function() {
+                    if (_.isArray(shared._params.created_or_updated_in)) {
+                        $state.go($state.current.name, { created_or_updated_in: shared._params.created_or_updated_in.sort().join() })
                     }
                 })
             })
