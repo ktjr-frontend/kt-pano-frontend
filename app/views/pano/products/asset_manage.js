@@ -5,6 +5,7 @@
         .controller('ktProductAssetManageCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktProductsService) {
             var shared = $scope.shared
             var search = $location.search()
+            var cacheData
             var filterOpts = [{
                 value: 'rate_in',
                 type: 'dropdown'
@@ -50,6 +51,7 @@
             }
 
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
+                cacheData = res
                 $scope.products = res.products
                 $scope.summary = res.summary
                 shared._params.totalItems = res.summary.find.count
@@ -72,12 +74,23 @@
             $scope.searchTabClick = function(name, index) {
                 // 获取产品列表
                 $scope.searchTabActiveIndex = index
+                $scope.searchResultAllActive = false
                 ktProductsService.get($.extend({ 'search_fields[]': name }, ktDataHelper.cutDirtyParams(shared.params)), function(res) {
                     $scope.products = res.products
                     shared._params.totalItems = res.summary.find.count
                     shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
                     $scope.$emit('totalItemGot', search)
                 })
+            }
+
+            // 点击搜索结果后重置显示所有搜索结果
+            $scope.searchResultAllActive = false
+            $scope.showAllSearchResults = function() {
+                $scope.searchResultAllActive = true
+                $scope.searchTabActiveIndex = -1
+                $scope.products = cacheData.products
+                shared._params.totalItems = cacheData.summary.find.count
+                shared._params.totalPages = _.ceil(cacheData.summary.find.count / shared.params.per_page)
             }
         })
 })();

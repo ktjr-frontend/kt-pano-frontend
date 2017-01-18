@@ -11,16 +11,6 @@
 
             if (inst) inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
             $scope.similars = data.similar_products
-            data.products.partitions = [{
-                life: '1',
-                rate: 5
-            }, {
-                life: '3',
-                rate: 3
-            }, {
-                life: '3',
-                rate: 4
-            }]
 
             //收益率
             function groupData(arr) {

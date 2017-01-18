@@ -170,7 +170,7 @@
                                                 <th>产品期限</th>
                                                 <th>年化收益率</th>
                                                 <th>募集金额</th>
-                                                <th>起息日</th>
+                                                <!-- <th>起息日</th> -->
                                                 <th>资产类型</th>
                                                 <th ng-if="params.dimension === 'mapped_exchange'">平台</th>
                                                 <th ng-if="params.dimension === 'from'">挂牌场所</th>
@@ -179,12 +179,12 @@
                                         <tbody>
                                             <tr class="text-right" ng-repeat="product in products" ng-if="products.length" kt-table-line-select target-element=".js-product-link">
                                                 <td ng-class="{'text-left': product.name}">
-                                                    <a class="js-product-link" ui-sref="pano.productObligatoryRight({id: product.id})" ng-bind="::product.name | ktNull"></a>
+                                                    <a class="js-product-link" ng-click="gotoDetail($event, product)" ng-bind="::product.name | ktNull"></a>
                                                 </td>
                                                 <td ng-bind="::getLife(product.life)|ktEclipsis:4" title="{{::getLife(product.life)}}"></td>
                                                 <td ng-bind="::product.rate | ktNumber:2:'percent2'"></td>
                                                 <td ng-bind="::product.sum_amount | ktNumberLocate"></td>
-                                                <td ng-bind="::(product.value_date | ktNull | date:'yyyy-MM-dd')"></td>
+                                                <!-- <td ng-bind="::(product.value_date | ktNull | date:'yyyy-MM-dd')"></td> -->
                                                 <td ng-bind="::product.asset_type | ktEclipsis:25" title="{{::product.asset_type | ktNull}}"></td>
                                                 <td ng-if="params.dimension === 'from'">
                                                     <a ng-click="$event.stopPropagation()" ng-if="product.exchange !== '不适用'" ui-sref="pano.institutions.detail({id: product.exchange, dimension: 'mapped_exchange'})" ng-bind="::product.exchange" target="_blank"></a>
@@ -196,7 +196,7 @@
                                                 </td>
                                             </tr>
                                             <tr ng-if="!products.length && !isLoading()">
-                                                <td colspan="7" class="text-navy-blue text-center">
+                                                <td colspan="6" class="text-navy-blue text-center">
                                                     <i class="pe-7s-attention f1_5rem fb mr5"></i>
                                                     <span class="f1_5rem">近期未发布新产品</span>
                                                 </td>

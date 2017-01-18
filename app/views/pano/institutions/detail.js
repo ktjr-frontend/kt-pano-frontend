@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktInsitutionCtrl', function($scope, $timeout, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktProductsService, ktDataHelper, ktValueFactory) {
+        .controller('ktInsitutionCtrl', function($scope, $timeout, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktProductsService, ktDataHelper, ktValueFactory, ktSweetAlert) {
 
             var defaultParams = {
                 dimension: 'from',
@@ -33,6 +33,22 @@
             $scope.tabActive = {
                 tab1: true,
                 tab2: false
+            }
+
+            // 跳转产品详情
+            $scope.gotoDetail = function($event, product) {
+                $event.stopPropagation()
+                if (product.class === 'Product') {
+                    $state.go(params.dimension ? 'pano.productObligatoryRight' : 'pano.productAssetManage', {
+                        id: product.id
+                    })
+                } else {
+                    ktSweetAlert.swal({
+                        title: '提示',
+                        timer: 1500,
+                        text: '该产品暂未录入详情'
+                    })
+                }
             }
 
             $scope.$watch('tabActive.tab2', function(newValue) {
@@ -525,6 +541,7 @@
             // 产品信息-资产类
             function getBondList() {
                 ktProductsService.get($.extend({
+                    content: 'institution_products',
                     credit_right_or_eq: 'bond'
                 }, assetParams), function(res) {
                     $scope.products = res.products
@@ -534,6 +551,7 @@
             // 产品信息-资管类
             function getAmList() {
                 ktProductsService.get($.extend({
+                    content: 'institution_products',
                     credit_right_or_eq: 'am'
                 }, assetParams), function(res) {
                     $scope.products2 = res.products
