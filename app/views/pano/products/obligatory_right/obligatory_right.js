@@ -12,12 +12,11 @@
 
             //发行平台
             var inst = $scope.inst = data.from_info
-            inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
+            if (inst) inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
 
             //挂牌场所
             var exchange = $scope.exchange = data.exchange_info
-            if (!exchange) return
-            exchange.exchangeObj = ktDataHelper.textEllipsis(exchange.exchange_introduce, '.init-main-info .desc', 0, 14, 4, 1)
+            if (exchange) exchange.exchangeObj = ktDataHelper.textEllipsis(exchange.exchange_introduce, '.init-main-info .desc', 0, 14, 4, 1)
 
             //收益率情况
             function groupData(arr) {

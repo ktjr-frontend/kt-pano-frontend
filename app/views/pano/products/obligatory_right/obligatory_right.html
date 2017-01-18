@@ -72,29 +72,29 @@
                         <ul>
                             <li>
                                 <span>发行平台：</span>
-                                <em class="text-color" ng-bind="assetsDatas.from" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em>
+                                <em class="text-color" ng-bind="assetsDatas.from | ktNull" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em>
                             </li>
                             <li>
                                 <span>资产类型：</span>
-                                <em ng-bind="assetsDatas.asset_type"></em>
+                                <em ng-bind="assetsDatas.asset_type | ktNull"></em>
                             </li>
                             <li>
                                 <span>增信措施：</span>
-                                <em ng-bind="assetsDatas.credit_measures"></em>
+                                <em ng-bind="assetsDatas.credit_measures | ktNull"></em>
                             </li>
                         </ul>
                         <ul>
                             <li>
                                 <span>挂牌场所：</span>
-                                <em ng-bind="assetsDatas.exchange"></em>
+                                <em ng-bind="assetsDatas.exchange | ktNull"></em>
                             </li>
                             <li>
                                 <span>底层资产：</span>
-                                <em ng-bind="assetsDatas.asset"></em>
+                                <em ng-bind="assetsDatas.asset | ktNull"></em>
                             </li>
                             <li>
                                 <span>产品类型：</span>
-                                <em ng-bind="assetsDatas.product_type"></em>
+                                <em ng-bind="assetsDatas.product_type | ktNull"></em>
                             </li>
                         </ul>
                     </div>
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <!-- 发行平台 -->
-            <div class="release-platform">
+            <div class="release-platform" ng-if="inst">
                 <div class="release-title">发行平台</div>
                 <article class="box init-main-info">
                     <div class="box-body">
@@ -217,7 +217,7 @@
                 </article>
             </div>
             <!-- 挂牌场所 -->
-            <div class="listing-place" ng-if="assetsDatas.exchange !== '不适用'">
+            <div class="listing-place" ng-if="exchange_info && assetsDatas.exchange !== '不适用'">
                 <div class="release-title">挂牌场所</div>
                 <article class="box init-main-info">
                     <div class="box-body">
@@ -254,7 +254,7 @@
                 </article>
             </div>
             <!-- 相似产品 -->
-            <div class="similar-product">
+            <div class="similar-product" ng-if="similars.length">
                 <div class="release-title">相似产品</div>
                 <div class="carousel">
                     <div kt-product-carousel similars="similars"></div>

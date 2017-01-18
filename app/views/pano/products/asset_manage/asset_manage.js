@@ -9,10 +9,22 @@
             $scope.productManage = data.products
             var inst = $scope.inst = data.from_info
 
-            inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
+            if (inst) inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
             $scope.similars = data.similar_products
+            data.products.partitions = [{
+                life: '1',
+                rate: 5
+            }, {
+                life: '3',
+                rate: 3
+            }, {
+                life: '3',
+                rate: 4
+            }]
+
             //收益率
             function groupData(arr) {
+                if (!_.isArray(arr)) return
                 if (arr.length % 3 !== 0) {
                     arr.push({
                         empty: true
@@ -23,7 +35,7 @@
                     $scope.termRates = arr
                 }
             }
-            groupData(data.products.term_rates)
+            groupData(data.products.partitions)
 
             //相似产品
             function group(arr) {
@@ -89,7 +101,7 @@
                 xAxis: {
                     type: 'category',
                     boundaryGap: true,
-                    data: _.map(data.products.term_rates, 'life')
+                    data: _.map(data.products.partitions, 'life')
                 },
                 series: [{
                     name: '各期限收益率',
@@ -105,7 +117,7 @@
                     type: 'line',
                     step: 'end',
                     smooth: false,
-                    data: _.map(data.products.term_rates, 'rate')
+                    data: _.map(data.products.partitions, 'rate')
                 }]
             })
 

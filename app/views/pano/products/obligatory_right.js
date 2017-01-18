@@ -5,6 +5,7 @@
         .controller('ktProductObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
             var shared = $scope.shared
             var search = $scope.search = $location.search()
+            var cacheData
             var filterOpts = [{
                 value: 'life_days_in',
                 type: 'dropdown'
@@ -55,6 +56,7 @@
 
             // 获取产品列表
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
+                cacheData = res
                 $scope.products = res.products
 
                 $scope.summary = res.summary
@@ -74,9 +76,10 @@
                 })
             })
 
+            // 搜索结果点击
             $scope.searchTabActiveIndex = -1
             $scope.searchTabClick = function(name, index) {
-                // 获取产品列表
+                $scope.searchResultAllActive = false
                 $scope.searchTabActiveIndex = index
                 ktProductsService.get($.extend({ 'search_fields[]': name }, ktDataHelper.cutDirtyParams(shared.params)), function(res) {
                     $scope.products = res.products
@@ -85,6 +88,16 @@
                     shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
                         // $scope.$emit('totalItemGot', search)
                 })
+            }
+
+            // 点击搜索结果后重置显示所有搜索结果
+            $scope.searchResultAllActive = false
+            $scope.showAllSearchResults = function() {
+                $scope.searchResultAllActive = true
+                $scope.searchTabActiveIndex = -1
+                $scope.products = cacheData.products
+                shared._params.totalItems = cacheData.summary.find.count
+                shared._params.totalPages = _.ceil(cacheData.summary.find.count / shared.params.per_page)
             }
         })
 })();

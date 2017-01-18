@@ -327,6 +327,7 @@
 
                 // 与listOneLineFilter类似，不过处理的是字符串
                 textEllipsis: function(text, container, subtractL, fontSize, maxLine, spaceCount) {
+                    text = text || ''
                     var optionWidth = $(container).width() - subtractL
                     var letters = text.split('')
                     var textWidth = 0
