@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="table-body">
-            <div class="tr" ng-repeat="product in products" ng-if="products.length" ng-click="gotoDetail(product.id)">
+            <div class="tr" ng-repeat="product in products" ng-if="products.length" ng-click="gotoDetail(product)">
                 <div class="tr-head tags">
                     <span ng-bind="::product.name"></span>
                     <span ng-if="product.created_or_updated_in == '1'" class="tag tag-orange">新增</span>
