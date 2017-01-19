@@ -79,9 +79,9 @@
                     return lifeName
                 },
                 // 获取条件具体名称
-                getConditionName: function(filters) {
+                getConditionName: function(shared) {
                     return function(type) {
-                        var filter = _.find(filters, function(v) {
+                        var filter = _.find(shared.filters, function(v) {
                             return v.value === type
                         }) || {}
 
@@ -327,6 +327,7 @@
 
                 // 与listOneLineFilter类似，不过处理的是字符串
                 textEllipsis: function(text, container, subtractL, fontSize, maxLine, spaceCount) {
+                    text = text || ''
                     var optionWidth = $(container).width() - subtractL
                     var letters = text.split('')
                     var textWidth = 0
@@ -717,6 +718,31 @@
 
                             sf.updateRealCheckedItems()
                         })
+                    }
+                },
+
+                // 处理当前页面筛选状态
+                intFitlerStatus: function($scope, search) {
+
+                    // 当前页面的过滤状态
+                    var NORMAL_STATUS = $scope.NORMAL_STATUS = 0 // 无筛选无搜索状态
+                    var SEARCH_STATUS = $scope.SEARCH_STATUS = 1 // 搜索状态来
+                    var FILTER_STATUS = $scope.FILTER_STATUS = 2 // 筛选状态
+                    var _self = this
+
+                    // 判断当前页面的筛选和搜索状态
+                    $scope.getFitlerStatus = function() {
+                        var validParams = _self.cutDirtyParams(search)
+                        var validParamKeys = _.filter(_.keys(validParams), function(v) {
+                            return !_.includes(['page', 'per_page', 'order', 'sort_by', 'credit_right_or_eq', 'created_or_updated_in'], v)
+                        })
+
+                        if (_.includes(validParamKeys, 'key_word')) {
+                            return SEARCH_STATUS
+                        } else if (validParamKeys.length) {
+                            return FILTER_STATUS
+                        }
+                        return NORMAL_STATUS
                     }
                 }
             }

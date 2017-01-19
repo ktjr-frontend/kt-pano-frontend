@@ -83,13 +83,20 @@
             padding: 20px;
         }
         .nav-tabs {
+            background: none;
             padding-top: 9px;
             margin-left: 20px;
             > li > a {
                 font-size: 1.5rem;
                 padding: 5px 15px;
+                color: white;
+                &:after{
+                    display: none;
+                    width: 4em;
+                }
             }
             >li.active a {
+                color: #666b76;
                 background: white;
             }
         }

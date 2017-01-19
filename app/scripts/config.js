@@ -95,12 +95,12 @@
             $.extend(uibPaginationConfig, {
                 boundaryLinks: true, //首页 尾页
                 directionLinks: true,
-                firstText: '首页',
+                firstText: '«',
                 itemsPerPage: 10,
-                lastText: '尾页',
-                nextText: '下一页',
-                previousText: '上一页',
-                rotate: true
+                lastText: '»',
+                nextText: '›',
+                previousText: '‹',
+                rotate: false
             })
 
             echarts.registerTheme('theme1', ktEchartTheme1) //echarts-3.x

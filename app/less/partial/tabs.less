@@ -3,29 +3,46 @@
 .nav-tabs>li.active>a:focus {
     border: 0;
     // color: white;
-    background: @color-3;
+    // background: @color-3;
     // border-bottom-color: transparent;
 }
 
 .nav-tabs {
     margin-left: 30px;
+    background: white;
     border-bottom: 0;
     & > li {
         margin-right: 10px;
         &.active a {
-            background: @color-3;
+            &:after {
+                opacity: 1;
+            }
+            // background: @color-3;
             // color: white;
         }
         & > a {
-            color: white;
+            color: @color-bright;
             font-size: 1.4rem;
-            padding: 10px 28px;
-            background: @color-table-head;
+            padding: 14px 28px;
+            // background: @color-table-head;
             border: 0;
             transition: background .3s ease;
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                bottom: -3px;
+                z-index: 9;
+                height: 3px;
+                background: @color-navy-blue;
+                width: 3em;
+                opacity: 0;
+                transition: opacity .3s ease-in;
+            }
             &:hover {
-                background: @color-table-head;
-                color: white;
+                background: none;
+                // background: @color-table-head;
+                color: @color-navy-blue;
             }
         }
     }
@@ -44,7 +61,6 @@
 //     background: transparent;
 //     border-color: transparent;
 // }
-
 .tabs-below > .nav-tabs,
 .tabs-right > .nav-tabs,
 .tabs-left > .nav-tabs {
@@ -125,7 +141,6 @@
 .tabs-left > .nav-tabs .active > a:hover,
 .tabs-left > .nav-tabs .active > a:focus {
     border-color: @border-color transparent @border-color @border-color;
-    *border-right-color: #ffffff;
 }
 
 .tabs-right > .nav-tabs {
@@ -135,9 +150,7 @@
 
 .tabs-right > .nav-tabs > li > a {
     margin-left: -1px;
-    -webkit-border-radius: 0 4px 4px 0;
-    -moz-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;
+    // border-radius: 0 4px 4px 0;
 }
 
 .tabs-right > .nav-tabs > li > a:hover,
@@ -149,6 +162,5 @@
 .tabs-right > .nav-tabs .active > a:hover,
 .tabs-right > .nav-tabs .active > a:focus {
     border-color: @border-color @border-color @border-color transparent;
-    *border-left-color: #ffffff;
     z-index: 1;
 }

@@ -140,6 +140,7 @@
                     templateUrl: 'views/pano/products/layout.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/layout.js',
+                        'views/pano/products/layout.css',
                     ]),
                     controller: 'ktProductsLayoutCtrl',
                     data: {
@@ -153,7 +154,7 @@
                     }
                 },
                 'pano.products.obligatoryRight': {
-                    url: '/obligatory_right?status_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
+                    url: '/obligatory_right?key_word&created_or_updated_in&status_eq&credit_manager_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/obligatory_right.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/obligatory_right.js',
@@ -164,7 +165,7 @@
                     }
                 },
                 'pano.products.assetManage': {
-                    url: '/asset_manages?status_eq&rate_in&life_days_in&credit_manager_eq&from_eq&page&per_page&sort_by&order',
+                    url: '/asset_manages?key_word&created_or_updated_in&status_eq&rate_in&life_days_in&credit_manager_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/asset_manage.js',
@@ -246,7 +247,46 @@
                         pageTitle: '机构详情页',
                     }
                 },
+                // 资产产品详情页
+                'pano.productObligatoryRight': {
+                    // abstract: true,
+                    url: '/product_obligatory_right/:id',
+                    // template: '</ui-view>',
+                    templateUrl: 'views/pano/products/obligatory_right/obligatory_right.html',
+                    data: {
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            grade: {
+                                1: ['passed']
+                            }
+                        }],
+                        pageTitle: '产品信息',
+                    },
+                    resolve: ktLazyResolve([
+                        'views/pano/products/obligatory_right/obligatory_right.css',
+                        'views/pano/products/obligatory_right/obligatory_right.js',
+                        'views/pano/products/assets_manage_common.css',
+                        'common/directives/kt-echart3-directive.js',
+                        'common/directives/datepicker/directive.js',
+                        'common/directives/datepicker/theme/v4/style.css'
+                    ]),
+                    controller: 'ktAssetsCtrl'
+                },
 
+                // 资管产品详情页
+                'pano.productAssetManage': {
+                    url: '/product_asset_manage/:id',
+                    templateUrl: 'views/pano/products/asset_manage/asset_manage.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/products/assets_manage_common.css',
+                        'views/pano/products/asset_manage/asset_manage.css',
+                        'views/pano/products/asset_manage/asset_manage.js',
+                        'common/directives/kt-echart3-directive.js',
+                        'common/directives/datepicker/directive.js',
+                        'common/directives/datepicker/theme/v4/style.css'
+                    ]),
+                    controller: 'ktAssetManageCtrl'
+                },
                 'pano.settings': {
                     url: '/settings',
                     templateUrl: 'views/pano/account/settings.html',

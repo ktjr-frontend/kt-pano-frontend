@@ -6,10 +6,10 @@
     'use strict';
     angular.module('kt.pano')
 
-    // 项目
+    // 产品
     .factory('ktProductsService', function($resource, ktApiVersion) {
-        return $resource('/api/' + ktApiVersion + '/products/:productID', {
-            productID: '@productID'
+        return $resource('/api/' + ktApiVersion + '/products/:content', {
+            content: '@content'
         }, {
             'get': {
                 method: 'GET',
@@ -89,4 +89,8 @@
         })
     })
 
+    // 产品详情内趋势图
+    .factory('ktProductTrendsService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/product_trends')
+    })
 })();

@@ -12,6 +12,7 @@ module.exports = {
                     'styles/img/*.*',
                     'images/**/*.*',
                     'download/**/*.*',
+                    'common/libs/echarts.pano.min.js',
                     'common/libs/echarts.min.js',
                     // 'common/libs/qrcode.min.js',
                     'common/libs/html2canvas.min.js',

@@ -92,6 +92,15 @@
         padding-left: 13px;
         height: 28px;
     }
+    .dropdowns-group {
+        margin-right: 50px;
+        float: left;
+        height: 28px;
+        .dropdown {
+            margin-top: -3px;
+            margin-left: 21px;
+        }
+    }
     .checkbox {
         line-height: 16px;
         &.checkbox-sm {
@@ -124,7 +133,7 @@
                 color: @color-navy-blue;
             }
         }
-        .checkboxes{
+        .checkboxes {
             padding-left: 80px;
         }
         .section {
@@ -141,7 +150,7 @@
             float: left;
             text-align: right;
             color: @color-10;
-            &.em{
+            &.em {
                 color: @color-1;
             }
             &.pr1em {
@@ -167,7 +176,7 @@
             line-height: 1.8em;
             margin: 0 10px 10px 0;
             color: white;
-            &.for-tip{
+            &.for-tip {
                 background: none;
                 color: #9fa3ac;
                 padding: 0 5px;
@@ -177,7 +186,7 @@
                 font-weight: bold;
                 margin-left: 10px;
                 vertical-align: -4px;
-                color: rgba(255,255,255,.5);
+                color: rgba(255, 255, 255, .5);
                 &:hover {
                     cursor: pointer;
                     color: white;
@@ -187,7 +196,7 @@
     }
     .filter-list.has-toggle-btn {
         .filter-line {
-            padding: 11px 50px 0 0;
+            padding: 15px 50px 5px 0;
         }
     }
     .filter-items {
@@ -226,17 +235,20 @@
         position: relative;
         user-select: none;
         // line-height: 25px;
+        &.with-bg {
+            background: #fbfbfc;
+        }
         &.no-bd {
             border: 0;
         }
         .toggle-btn {
             position: absolute;
             right: 20px;
-            top: 10px;
+            top: 14px;
             border-radius: 2px;
             padding: 0px 7px;
             cursor: pointer;
-            background: @color-inactive;
+            background: #dbdee5;
             color: white;
             &:hover,
             &.expand {

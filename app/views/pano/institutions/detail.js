@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktInsitutionCtrl', function($scope, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktCompassAssetService, ktDataHelper, ktValueFactory) {
+        .controller('ktInsitutionCtrl', function($scope, $timeout, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktProductsService, ktDataHelper, ktValueFactory, ktSweetAlert) {
 
             var defaultParams = {
                 dimension: 'from',
@@ -34,6 +34,41 @@
                 tab1: true,
                 tab2: false
             }
+
+            // 跳转产品详情
+            $scope.gotoDetail = function($event, product, route) {
+                $event.stopPropagation()
+                if (product.class === 'Product') {
+                    $state.go(route, {
+                        id: product.id
+                    })
+                } else {
+                    ktSweetAlert.swal({
+                        title: '提示',
+                        timer: 1500,
+                        text: '该产品暂未录入详情'
+                    })
+                }
+            }
+
+            $scope.$watch('tabActive.tab2', function(newValue) {
+                if (newValue) {
+                    $timeout(function() {
+                        if (weekAmountChart.echart) {
+                            weekAmountChart.echart.resize()
+                            weekAmountChart.echart.setOption({ legend: { left: 'center' } })
+                        }
+                        if (weekRateChart.echart) {
+                            weekRateChart.echart.resize()
+                            weekRateChart.echart.setOption({ legend: { left: 'center' } })
+                        }
+                        if (assetTypePercentChart.echart) {
+                            assetTypePercentChart.echart.resize()
+                            assetTypePercentChart.echart.setOption({ legend: { left: 'center' } })
+                        }
+                    }, 100)
+                }
+            })
 
             // 更多图表视图
             $scope.moreChartView = function() {
@@ -108,7 +143,7 @@
             var rightGap = 40 // 图表主体距离右边距离
             var leftGap = 65
             var topGap = 50
-            var bottomGap = 80
+            var bottomGap = 10
             var loadingSettings = { // 设置图表异步加载的样式
                 text: '努力加载中...',
                 color: '#3d4351',
@@ -123,6 +158,7 @@
                     show: false,
                 },
                 legend: {
+                    bottom: 30,
                     left: 'center',
                     right: rightGap / 2,
                     textStyle: {
@@ -435,6 +471,7 @@
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
+                            bottom: 10,
                             data: legend,
                         },
                         tooltip: {
@@ -512,19 +549,21 @@
 
             // 产品信息-资产类
             function getBondList() {
-                ktCompassAssetService.get($.extend({
+                ktProductsService.get($.extend({
+                    content: 'institution_products',
                     credit_right_or_eq: 'bond'
                 }, assetParams), function(res) {
-                    $scope.products = res.compass_assets
+                    $scope.products = res.products
                 })
             }
 
             // 产品信息-资管类
             function getAmList() {
-                ktCompassAssetService.get($.extend({
+                ktProductsService.get($.extend({
+                    content: 'institution_products',
                     credit_right_or_eq: 'am'
                 }, assetParams), function(res) {
-                    $scope.products2 = res.compass_assets
+                    $scope.products2 = res.products
                 })
             }
 
@@ -550,8 +589,8 @@
                     weekRateChart.updateDataView()
                     assetTypePercentChart.updateDataView()
                 } else {
-                    $scope.tabActive.tab1 = false
-                    $scope.tabActive.tab2 = true
+                    $scope.tabActive.tab1 = true
+                    $scope.tabActive.tab2 = false
                 }
 
                 if ($scope.moduleVisible('am')) getAmList()

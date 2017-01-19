@@ -1,4 +1,4 @@
-set :domain, '10.132.1.244'
+set :domain, '10.132.1.224'
 set :deploy_to, '/home/deploy/apps/pano-frontend' # dev环境
 set :user, 'deploy'    # Username in the server to SSH to.
 set :port, '22'     # SSH port number.

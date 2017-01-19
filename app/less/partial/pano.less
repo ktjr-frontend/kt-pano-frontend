@@ -1,5 +1,5 @@
 .global-loading-status {
-    position: absolute;
+    position: fixed;
     z-index: 9;
     left: 50%;
     transform: translateX(-50%);
@@ -23,7 +23,7 @@
 #main-view {
     min-height: 100%;
     position: relative;
-    padding-bottom: 180px;
+    padding-bottom: 170px;  //原来是180
     @media(max-width: 767px) {
         padding-bottom: 170px;
     }
