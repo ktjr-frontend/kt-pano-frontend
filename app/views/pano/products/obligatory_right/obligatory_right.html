@@ -69,34 +69,39 @@
                         </div>
                     </div>
                     <div class="product-data-three">
-                        <ul>
-                            <li>
-                                <span>发行平台：</span>
-                                <em class="text-color" ng-bind="assetsDatas.from | ktNull" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em>
-                            </li>
-                            <li>
-                                <span>资产类型：</span>
-                                <em ng-bind="assetsDatas.asset_type | ktNull"></em>
-                            </li>
-                            <li>
-                                <span>增信措施：</span>
-                                <em ng-bind="assetsDatas.credit_measures | ktNull"></em>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>挂牌场所：</span>
-                                <em ng-bind="assetsDatas.exchange | ktNull"></em>
-                            </li>
-                            <li>
-                                <span>底层资产：</span>
-                                <em ng-bind="assetsDatas.asset | ktNull"></em>
-                            </li>
-                            <li>
-                                <span>产品类型：</span>
-                                <em ng-bind="assetsDatas.product_type | ktNull"></em>
-                            </li>
-                        </ul>
+
+                        <div class="inner">
+                            <ul>
+                                <li>
+                                    <span>发行平台：</span>
+                                    <em class="text-color" ng-bind="assetsDatas.from | ktNull" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em>
+                                </li>
+                                <li>
+                                    <span>资产类型：</span>
+                                    <em ng-bind="assetsDatas.asset_type | ktNull"></em>
+                                </li>
+                                <li>
+                                    <span>增信措施：</span>
+                                    <em ng-bind="assetsDatas.credit_measures | ktNull"></em>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="inner">
+                            <ul>
+                                <li>
+                                    <span>挂牌场所：</span>
+                                    <em ng-bind="assetsDatas.exchange | ktNull"></em>
+                                </li>
+                                <li>
+                                    <span>底层资产：</span>
+                                    <em ng-bind="assetsDatas.asset | ktNull"></em>
+                                </li>
+                                <li>
+                                    <span>产品类型：</span>
+                                    <em ng-bind="assetsDatas.product_type | ktNull"></em>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <!-- <div class="product-data-four">
                         <span>产品说明书：</span>

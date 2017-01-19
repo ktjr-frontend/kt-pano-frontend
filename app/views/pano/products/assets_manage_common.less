@@ -53,12 +53,12 @@
         //     width:1px;
         //     height:50px;
         // }
-        .swiper-height {
+        /*.swiper-height {
             cursor: pointer;
             &.swiper-hide{
                 cursor: auto;
             }
-        }
+        }*/
         position: relative;
         &:not(:nth-of-type(3n)):after {
             content: '';
@@ -75,16 +75,20 @@
             padding: 7px 0;
         }
         .first-data {
+            cursor: pointer;
             font-size: 15px;
-            color: #3d4351;
+            color: #4380dd;
+            &:hover{
+                text-decoration: underline;
+            }
         }
         .two-data {
             font-size: 13px;
-            color: #666b76;
+            color: #3d4351;
         }
         .three-data {
-            font-size: 17px;
-            color: #4380dd;
+            font-size: 13px;
+            color: #3d4351;
         }
         .four-data {
             font-size: 13px;

@@ -44,7 +44,8 @@
                 } else {
                     ktSweetAlert.swal({
                         title: '提示',
-                        timer: 1500,
+                        // timer: 1500,
+                        html: true,
                         text: '该产品暂未录入详情'
                     })
                 }

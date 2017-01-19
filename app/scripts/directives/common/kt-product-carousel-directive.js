@@ -14,8 +14,8 @@
                 template: '<div class="swiper-container">' +
                     '<div class="swiper-wrapper">' +
                     '<div class="swiper-slide" ng-repeat="similar in similars">' +
-                    '<div class="swiper-height" ng-if="!similar.empty" ng-click="gotoDetail(similar.id)">' +
-                    '<div class="first-data" ng-bind="similar.name"></div>' +
+                    '<div class="swiper-height" ng-if="!similar.empty">' +
+                    '<div class="first-data" ng-bind="similar.name" ng-click="gotoDetail(similar.id)"></div>' +
                     '<div class="two-data" ng-bind="similar.life"></div>' +
                     '<div class="three-data first-td" ng-bind="similar.rate"></div>' +
                     '<div class="four-data" ng-bind="similar.from_or_exchange"></div>' +

@@ -267,8 +267,8 @@
         //弹出pano酱二维码
         $scope.alertCode = function() {
             ktSweetAlert.swal({
-                title: '<p class="alert">' + '更多产品数据，请联系微信客服PANO酱' + '</p>',
-                text: '<div class="img-pano">' + '<img src="images/pano_wxSEC.png">' + '</div>',
+                title: '<span class="alert">' + '更多产品数据，请联系微信客服PANO酱' + '</span>',
+                text: '<span class="img-pano">' + '<img src="images/pano_wxSEC.png">' + '</span>',
                 html: true,
                 showCloseButton: true
                     // showCancelButton: true

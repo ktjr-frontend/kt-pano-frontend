@@ -125,26 +125,35 @@
 
 .product-data-three {
     // border-bottom: 1px solid #eeeff3;
-    padding: 10px 0 10px 25px;
+    padding: 10px 0 10px;
     &.no-bd {
         border-bottom: 0;
     }
-    ul {
+    .inner {
+        width: 33.33%;
         float: left;
-        width: 33%;
+    }
+    ul {
+        padding: 10px;
         li {
             list-style: none;
-            padding: 10px 8%;
+            // padding: 10px 8%;
             font-size: 13px;
+            display: table-row;
             span {
+                display: table-cell;
                 color: #bbbec4;
+                // min-width: 6em;
+                white-space: nowrap;
+                vertical-align: middle;
+                padding: 10px 5px 10px 20px;
             }
             em {
-                display: inline-block;
+                display: table-cell;
+                vertical-align: middle;
                 font-style: normal;
                 line-height: 15px;
-                max-width: 250px;
-                display: inline-block;
+                // max-width: 250px;
                 word-wrap: break-word;
                 word-break: break-all;
             }
