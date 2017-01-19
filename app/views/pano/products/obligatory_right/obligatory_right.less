@@ -7,7 +7,6 @@
 @rank-color1: #8b9ebb;
 @rank-color2: #aabdda;
 @rank-color3: #c0d1ea;
-
 .asset-body {
     em {
         font-style: normal;
@@ -41,8 +40,8 @@
 .product-data-top {
     float: left;
     width: 33.33%;
-    .spacing{
-        padding:0 5px;
+    .spacing {
+        padding: 0 5px;
     }
     .product-dt-top {
         font-size: 13px;
@@ -75,7 +74,7 @@
     .partition {
         &:nth-of-type(3n) {
             .product-table:after {
-                content:'';
+                content: '';
                 background: #fff;
             }
         }
@@ -83,19 +82,19 @@
     .product-table {
         width: 33%;
         float: left;
-        box-sizeing:border-box;
+        box-sizeing: border-box;
         padding: 0rem 0rem;
         margin-top: 1.5rem;
         border-bottom: 1px solid #eeeff3;
         // border-right: 1px solid #eeeff3;
         position: relative;
-        &:after{
-            content:'';
+        &:after {
+            content: '';
             position: absolute;
-            right:0;
-            bottom:0;
-            height:80px;
-            width:1px;
+            right: 0;
+            bottom: 0;
+            height: 80px;
+            width: 1px;
             background: #eeeff3
         }
         table {
@@ -119,12 +118,17 @@
         }
     }
 }
-.product-data-two{
-    padding:0 5px;
+
+.product-data-two {
+    padding: 0 5px;
 }
+
 .product-data-three {
-    border-bottom: 1px solid #eeeff3;
+    // border-bottom: 1px solid #eeeff3;
     padding: 10px 0 10px 25px;
+    &.no-bd {
+        border-bottom: 0;
+    }
     ul {
         float: left;
         width: 33%;
@@ -227,7 +231,7 @@
     }
 }
 
-.product-echarts {
+/*.product-echarts {
     // height: 370px;
     background: #fff;
     border-radius: 5px;
@@ -239,9 +243,9 @@
         float: right;
         margin-left: 45px;
         font-size: 13px;
-        color: #c5c7cc;
+        color: #9fa3ac;
     }
-}
+}*/
 
 .original-product-data {
     .original-title {
@@ -327,4 +331,3 @@
     padding: 15px 0;
     font-size: 15px;
 }
-
