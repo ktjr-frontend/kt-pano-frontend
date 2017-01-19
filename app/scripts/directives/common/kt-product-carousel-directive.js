@@ -2,18 +2,19 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .directive('ktProductCarousel', function() {
+        .directive('ktProductCarousel', function($state) {
             var mySwiper
             return {
                 restrict: 'A',
                 scope: {
-                    similars: '='
+                    similars: '=',
+                    routeTo: '@'
                 },
                 replace: true,
                 template: '<div class="swiper-container">' +
                     '<div class="swiper-wrapper">' +
                     '<div class="swiper-slide" ng-repeat="similar in similars">' +
-                    '<div class="swiper-height" ng-if="!similar.empty">' +
+                    '<div class="swiper-height" ng-if="!similar.empty" ng-click="gotoDetail(similar.id)">' +
                     '<div class="first-data" ng-bind="similar.name"></div>' +
                     '<div class="two-data" ng-bind="similar.life"></div>' +
                     '<div class="three-data first-td" ng-bind="similar.rate"></div>' +
@@ -27,6 +28,9 @@
                     '</div>',
                 link: function(scope) {
                     /*eslint-disable*/
+                    scope.gotoDetail = function(id) {
+                        $state.go(scope.routeTo, { id: id })
+                    }
 
                     scope.$watch('similars', function() {
                         mySwiper && mySwiper.destroy()
@@ -46,18 +50,18 @@
             /**
              *滚动到屏幕高度以后显示二维码
              */
-                return {
-                    restrict: 'A',
-                    link: function(scope, element) {
-                        var newheight = $('.buttons').offset().top + $('.buttons').height()
-                        $(window).on('scroll', function() {
-                            if ($(document).scrollTop() > newheight) {
-                                element.css('display', 'block')
-                            } else {
-                                element.css('display', 'none')
-                            }
-                        })
-                    }
+            return {
+                restrict: 'A',
+                link: function(scope, element) {
+                    var newheight = $('.buttons').offset().top + $('.buttons').height()
+                    $(window).on('scroll', function() {
+                        if ($(document).scrollTop() > newheight) {
+                            element.css('display', 'block')
+                        } else {
+                            element.css('display', 'none')
+                        }
+                    })
                 }
+            }
         })
 })();

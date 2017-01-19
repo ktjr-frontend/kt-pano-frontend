@@ -33,7 +33,7 @@
             &:last-child {
                 a {
                     color: #9fa3ac;
-                    cursor:default;
+                    cursor: default;
                 }
             }
         }
@@ -53,14 +53,20 @@
         //     width:1px;
         //     height:50px;
         // }
+        .swiper-height {
+            cursor: pointer;
+            &.swiper-hide{
+                cursor: auto;
+            }
+        }
         position: relative;
         &:not(:nth-of-type(3n)):after {
-            content:'';
+            content: '';
             position: absolute;
-            right:0px;
-            top:50px;
-            width:1px;
-            height:70px;
+            right: 0px;
+            top: 50px;
+            width: 1px;
+            height: 70px;
             background: #eceff4;
         }
         div {
@@ -68,21 +74,21 @@
             // margin-top: 10px;
             padding: 7px 0;
         }
-        .first-data{
-            font-size:15px;
-            color:#3d4351;
+        .first-data {
+            font-size: 15px;
+            color: #3d4351;
         }
-        .two-data{
-            font-size:13px;
-            color:#666b76;
+        .two-data {
+            font-size: 13px;
+            color: #666b76;
         }
-        .three-data{
-            font-size:17px;
-            color:#4380dd;
+        .three-data {
+            font-size: 17px;
+            color: #4380dd;
         }
-        .four-data{
-            font-size:13px;
-            color:#3d4351;
+        .four-data {
+            font-size: 13px;
+            color: #3d4351;
         }
     }
     .swiper-button-next,
@@ -96,15 +102,18 @@
     height: 79px;
     line-height: 60px;
 }
-.swiper-hide{
+
+.swiper-hide {
     text-align: center;
     line-height: 150px;
 }
+
 .seize {
-        display: inline-block;
-        width: 25%;
-        border-top: 2px solid #e5e7e9;
-    }
+    display: inline-block;
+    width: 25%;
+    border-top: 2px solid #e5e7e9;
+}
+
 .sweet-alert .sa-button-container {
     border-top: none;
     margin-top: 10px;
@@ -120,10 +129,12 @@
 .first-td {
     color: #4380dd;
 }
-.text-color:hover{
-    color:#4380dd;
-    cursor:pointer;
+
+.text-color:hover {
+    color: #4380dd;
+    cursor: pointer;
 }
+
 //发行平台和挂牌场所
 .box {
     padding: 0px;
@@ -167,7 +178,7 @@
         float: left;
         text-align: center;
         background: @color-3;
-        margin-top:6px;
+        margin-top: 6px;
         height: 112px;
         width: 245px;
         @media(max-width: 767px) {
@@ -230,7 +241,7 @@
         p {
             line-height: 1.6em;
             font-size: 13px;
-            color:#9b9ca4;
+            color: #9b9ca4;
             .toggle-btn {
                 position: static;
                 display: inline-block;
@@ -256,7 +267,7 @@
             width: 130px;
             float: left;
             text-align: right;
-            font-size:13px;
+            font-size: 13px;
             color: @color-gray;
         }
         /*.toggle-btn {
@@ -292,7 +303,7 @@
             li {
                 float: left;
                 margin: 0 5px 8px;
-                font-size:13px;
+                font-size: 13px;
             }
             a.item {
                 padding: 3px 8px 4px;
@@ -308,6 +319,7 @@
         }
     }
 }
+
 .more-data {
     height: 40px;
     line-height: 40px;
