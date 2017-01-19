@@ -3,7 +3,6 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktInsitutionCtrl', function($scope, $timeout, $rootScope, $location, $state, ktInsitutionsService, ktAnalyticsService, ktProductsService, ktDataHelper, ktValueFactory, ktSweetAlert) {
-
             var defaultParams = {
                 dimension: 'from',
                 start_at: moment().day(0).add(+(moment().day() > 0), 'w').subtract(6, 'weeks').add(1, 'days').format('YYYY-MM-DD'),

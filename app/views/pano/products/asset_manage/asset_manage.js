@@ -2,6 +2,13 @@
 (function() {
     'use strict';
     angular.module('kt.pano').controller('ktAssetManageCtrl', function($scope, $location, $timeout, $stateParams, $rootScope, ktProductsService, ktProductTrendsService, ktDataHelper, ktSweetAlert) {
+        $scope.$on('$stateChangeSuccess', function() {
+            // 切换页面成功后回到顶部
+            $timeout(function() {
+                $('body').scrollTop(0)
+            }, 100)
+        })
+
         var search = $location.search()
         var params = $scope.params = $.extend({}, search)
 
