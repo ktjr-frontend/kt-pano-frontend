@@ -1,7 +1,7 @@
 ;
 (function() {
     'use strict';
-    angular.module('kt.pano').controller('ktAssetManageCtrl', function($scope, $location, $stateParams, $rootScope, ktProductsService, ktProductTrendsService, ktDataHelper, ktSweetAlert) {
+    angular.module('kt.pano').controller('ktAssetManageCtrl', function($scope, $location, $timeout, $stateParams, $rootScope, ktProductsService, ktProductTrendsService, ktDataHelper, ktSweetAlert) {
         var search = $location.search()
         var params = $scope.params = $.extend({}, search)
 
@@ -9,7 +9,11 @@
             $scope.productManage = data.products
             var inst = $scope.inst = data.from_info
 
-            if (inst) inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
+            if (inst) {
+                $timeout(function() {
+                    inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
+                }, 100)
+            }
             $scope.similars = data.similar_products
 
             //收益率
@@ -22,7 +26,7 @@
                     groupData(arr)
 
                 } else {
-                    $scope.termRates = arr
+                    $scope.partitions = arr
                 }
             }
             groupData(data.products.partitions)

@@ -24,13 +24,13 @@
                         <div class="product-data-top">
                             <div class="spacing">
                                 <div class="product-dt-top">产品期限</div>
-                                <div class="product-dt-down" ng-bind="assetsDatas.lives"></div>
+                                <div class="product-dt-down" ng-bind="assetsDatas.lives | ktNull"></div>
                             </div>
                         </div>
                         <div class="product-data-top">
                             <div class="spacing">
                                 <div class="product-dt-top">年化收益率</div>
-                                <div class="product-dt-down" ng-bind="assetsDatas.rate"></div>
+                                <div class="product-dt-down" ng-bind="assetsDatas.rate | ktNull"></div>
                             </div>
                         </div>
                         <div class="product-data-top">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-data-two">
+                    <div class="product-data-two" ng-if="partitions.length">
                         <div class="return-rate">各期限收益率情况</div>
                         <div class="product-table-all">
                             <div ng-repeat="partition in partitions" class="partition">
@@ -56,7 +56,7 @@
                                         <tbody>
                                             <tr class="table-tr-data">
                                                 <td class="first-td" ng-bind="partition.life"></td>
-                                                <td ng-bind="partition.rate"></td>
+                                                <td ng-bind="partition.rate | ktNumber:2:'percent2'"></td>
                                                 <td ng-bind="partition.amount | ktNumberLocate"></td>
                                             </tr>
                                         </tbody>
@@ -217,7 +217,7 @@
                 </article>
             </div>
             <!-- 挂牌场所 -->
-            <div class="listing-place" ng-if="exchange_info && assetsDatas.exchange !== '不适用'">
+            <div class="listing-place" ng-if="exchange && assetsDatas.exchange !== '不适用'">
                 <div class="release-title">挂牌场所</div>
                 <article class="box init-main-info">
                     <div class="box-body">

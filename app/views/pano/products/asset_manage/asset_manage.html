@@ -25,36 +25,36 @@
                             <li>
                                 <div>
                                     <span>发行平台:</span>
-                                    <em class="text-color" ng-bind="productManage.from" ui-sref="pano.products.assetManage({from_eq:assetsDatas.from})"> </em>
+                                    <em class="text-color" ng-bind="productManage.from | ktNull" ui-sref="pano.products.assetManage({from_eq:assetsDatas.from})"> </em>
                                 </div>
                                 <div>
                                     <span>产品期限:</span>
-                                    <em ng-bind="productManage.lives"></em>
+                                    <em ng-bind="productManage.lives | ktNull"></em>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <span>管理机构:</span>
-                                    <em ng-bind="productManage.manage_institution"></em>
+                                    <em ng-bind="productManage.manage_institution | ktNull"></em>
                                 </div>
                                 <div>
                                     <span>年化收益率:</span>
-                                    <em ng-bind="productManage.rate"></em>
+                                    <em ng-bind="productManage.rate | ktNull"></em>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <span>管理人类型:</span>
-                                    <em ng-bind="productManage.manager_type"></em>
+                                    <em ng-bind="productManage.manager_type | ktNull"></em>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="product-data-two">
+                    <div class="product-data-two" ng-if="partitions.length">
                         <div class="return-rate">各期限收益率情况</div>
                         <div class="product-table-all">
-                            <div ng-repeat="termRate in termRates" class="partition">
-                                <div class="product-table" ng-if="!termRate.empty">
+                            <div ng-repeat="partition in partitions" class="partition">
+                                <div class="product-table" ng-if="!partition.empty">
                                     <table>
                                         <thead>
                                             <tr>
@@ -64,13 +64,13 @@
                                         </thead>
                                         <tbody>
                                             <tr class="table-tr-data">
-                                                <td class="first-td" ng-bind="termRate.life"></td>
-                                                <td ng-bind="termRate.rate | ktNumber:2:'percent2'"></td>
+                                                <td class="first-td" ng-bind="partition.life"></td>
+                                                <td ng-bind="partition.rate | ktNumber:2:'percent2'"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="product-table product-seize" ng-if="termRate.empty">
+                                <div class="product-table product-seize" ng-if="partition.empty">
                                     <span class="seize"></span>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                 </div>
             </div>
             <!-- 发行平台 -->
-            <div class="release-platform">
+            <div class="release-platform" ng-if="inst">
                 <div class="release-title">发行平台</div>
                 <article class="box init-main-info">
                     <div class="box-body">
@@ -136,7 +136,7 @@
                                 <div class="value">
                                     <ul class="list">
                                         <li>
-                                            <span ng-bind="inst.business_model"></span>
+                                            <span ng-bind="inst.business_model | ktNull"></span>
                                         </li>
                                     </ul>
                                 </div>

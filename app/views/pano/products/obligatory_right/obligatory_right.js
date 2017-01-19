@@ -1,7 +1,7 @@
 ;
 (function() {
     'use strict';
-    angular.module('kt.pano').controller('ktAssetsCtrl', function($scope, $location, $stateParams, $rootScope, ktProductsService, ktDataHelper, ktProductTrendsService, ktSweetAlert) {
+    angular.module('kt.pano').controller('ktAssetsCtrl', function($scope, $location, $timeout, $stateParams, $rootScope, ktProductsService, ktDataHelper, ktProductTrendsService, ktSweetAlert) {
 
         var search = $location.search()
         var params = $scope.params = $.extend({}, search)
@@ -12,11 +12,19 @@
 
             //发行平台
             var inst = $scope.inst = data.from_info
-            if (inst) inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
+            if (inst) {
+                $timeout(function() {
+                    inst.descObj = ktDataHelper.textEllipsis(inst.from_introduce, '.init-main-info .desc', 0, 14, 4, 6)
+                }, 100)
+            }
 
             //挂牌场所
             var exchange = $scope.exchange = data.exchange_info
-            if (exchange) exchange.exchangeObj = ktDataHelper.textEllipsis(exchange.exchange_introduce, '.init-main-info .desc', 0, 14, 4, 1)
+            if (exchange) {
+                $timeout(function() {
+                    exchange.exchangeObj = ktDataHelper.textEllipsis(exchange.exchange_introduce, '.init-main-info .desc', 0, 14, 4, 1)
+                }, 100)
+            }
 
             //收益率情况
             function groupData(arr) {

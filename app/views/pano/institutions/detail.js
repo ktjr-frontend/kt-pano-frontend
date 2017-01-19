@@ -54,11 +54,18 @@
             $scope.$watch('tabActive.tab2', function(newValue) {
                 if (newValue) {
                     $timeout(function() {
-                        /*eslint-disable*/
-                        weekAmountChart.echart && weekAmountChart.echart.resize()
-                        weekRateChart.echart && weekRateChart.echart.resize()
-                        assetTypePercentChart.echart && assetTypePercentChart.echart.resize()
-                            /*eslint-enable*/
+                        if (weekAmountChart.echart) {
+                            weekAmountChart.echart.resize()
+                            weekAmountChart.echart.setOption({ legend: { left: 'center' } })
+                        }
+                        if (weekRateChart.echart) {
+                            weekRateChart.echart.resize()
+                            weekRateChart.echart.setOption({ legend: { left: 'center' } })
+                        }
+                        if (assetTypePercentChart.echart) {
+                            assetTypePercentChart.echart.resize()
+                            assetTypePercentChart.echart.setOption({ legend: { left: 'center' } })
+                        }
                     }, 100)
                 }
             })
@@ -136,7 +143,7 @@
             var rightGap = 40 // 图表主体距离右边距离
             var leftGap = 65
             var topGap = 50
-            var bottomGap = 80
+            var bottomGap = 10
             var loadingSettings = { // 设置图表异步加载的样式
                 text: '努力加载中...',
                 color: '#3d4351',
@@ -151,6 +158,7 @@
                     show: false,
                 },
                 legend: {
+                    bottom: 30,
                     left: 'center',
                     right: rightGap / 2,
                     textStyle: {
@@ -463,6 +471,7 @@
 
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                         legend: {
+                            bottom: 10,
                             data: legend,
                         },
                         tooltip: {
