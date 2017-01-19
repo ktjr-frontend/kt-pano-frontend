@@ -29,7 +29,7 @@
                     $scope.partitions = arr
                 }
             }
-            groupData(data.products.partitions)
+            groupData(data.products.partitions || [])
 
             //相似产品
             function group(arr) {

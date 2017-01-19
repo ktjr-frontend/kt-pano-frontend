@@ -176,7 +176,7 @@
                     <div class="box-body">
                         <div class="clfix">
                             <div class="logo">
-                                <a ng-href="{{inst.website}}" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
+                                <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
                                 <h3 ng-bind="inst.name"></h3>
@@ -196,7 +196,7 @@
                                 <div class="value">
                                     <ul class="list">
                                         <li>
-                                            <span ng-bind="inst.business_model"></span>
+                                            <span ng-bind="inst.business_model | ktNull"></span>
                                         </li>
                                     </ul>
                                 </div>
@@ -223,7 +223,7 @@
                     <div class="box-body">
                         <div class="clfix">
                             <div class="logo">
-                                <a ng-href="{{exchange.website}}" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
+                                <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
                                 <h3 ng-bind="exchange.name"></h3>
@@ -248,7 +248,7 @@
                                     </ul>
                                 </div>
                             </section>
-                            <div class="more-data"><a href="" ui-sref="pano.institutions.detail({id:exchange.name,dimension:'exchange'})">更多</a></div>
+                            <div class="more-data"><a href="" ui-sref="pano.institutions.detail({id:exchange.name,dimension:'mapped_exchange'})">更多</a></div>
                         </div>
                     </div>
                 </article>

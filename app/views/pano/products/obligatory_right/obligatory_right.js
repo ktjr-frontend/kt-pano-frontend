@@ -38,7 +38,7 @@
                     $scope.partitions = arr
                 }
             }
-            groupData(data.products.partitions)
+            groupData(data.products.partitions || [])
 
             // $scope.similars = data.similar_products
             //相似产品

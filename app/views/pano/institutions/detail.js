@@ -36,10 +36,10 @@
             }
 
             // 跳转产品详情
-            $scope.gotoDetail = function($event, product) {
+            $scope.gotoDetail = function($event, product, route) {
                 $event.stopPropagation()
                 if (product.class === 'Product') {
-                    $state.go(params.dimension ? 'pano.productObligatoryRight' : 'pano.productAssetManage', {
+                    $state.go(route, {
                         id: product.id
                     })
                 } else {
@@ -589,8 +589,8 @@
                     weekRateChart.updateDataView()
                     assetTypePercentChart.updateDataView()
                 } else {
-                    $scope.tabActive.tab1 = false
-                    $scope.tabActive.tab2 = true
+                    $scope.tabActive.tab1 = true
+                    $scope.tabActive.tab2 = false
                 }
 
                 if ($scope.moduleVisible('am')) getAmList()
