@@ -160,11 +160,11 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="original_product in original_products">
-                                <td ng-bind="original_product.name"></td>
-                                <td ng-bind="original_product.life"></td>
-                                <td ng-bind="original_product.rate"></td>
+                                <td ng-bind="original_product.name | ktNull"></td>
+                                <td ng-bind="original_product.life | ktNull"></td>
+                                <td ng-bind="original_product.rate | ktNull"></td>
                                 <td ng-bind="original_product.amount | ktNumberLocate"></td>
-                                <td ng-bind="original_product.value_date"></td>
+                                <td ng-bind="original_product.value_date | ktNull"></td>
                                 <td ng-bind="original_product.begin_amount | ktNumberLocate"></td>
                             </tr>
                         </tbody>

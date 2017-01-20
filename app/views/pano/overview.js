@@ -143,6 +143,12 @@
                         return v[1]
                     })
 
+                    var sizeFunction = function(x) {
+                        var y = Math.min(Math.sqrt(x / 5e8) + 0.1, 2)
+                        y = Math.max(0.2, y)
+                        return y * 30
+                    }
+
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                             // color: _self.color,
                             onclick: function(e) {
@@ -250,6 +256,9 @@
                                         }
                                     },
                                     type: 'effectScatter',
+                                    symbolSize: function(val) {
+                                        return sizeFunction(val[1])
+                                    },
                                     rippleEffect: {
                                         period: 8,
                                         scale: 1.5,
