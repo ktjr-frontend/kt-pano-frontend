@@ -429,6 +429,7 @@
                                 color: '#666b76',
                                 fontSize: 10
                             },
+                            position: 'right',
                             axisLabel: {
                                 formatter: function(value) {
                                     var yAxisFormat = durationAmountChart.yAxisFormat2
