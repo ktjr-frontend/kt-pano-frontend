@@ -104,7 +104,7 @@
         //弹出pano酱二维码
         $scope.alertCode = function() {
             ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
-                title: '<span class="alert">' + '更多产品数据，请联系微信客服PANO酱' + '</span>',
+                title: '<span class="alert">' + '请联系PANO微信小助手' + '</span>',
                 text: '<span class="img-pano">' + '<img src="images/pano_wxSEC.png">' + '</span>',
                 html: true
                 // showCloseButton: true
