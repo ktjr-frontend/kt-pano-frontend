@@ -14,18 +14,18 @@
             <span ng-bind="::item.value"></span>相关<em ng-bind="::item.search_count" class="is-link" ng-click="searchTabClick(item.name, $index)" ng-class="{active: searchTabActiveIndex === $index}"></em>条<i ng-if="$index < summary.find.search_results.length - 1">，</i>
         </span>
     </div>
-    <div ng-if="getFitlerStatus() === NORMAL_STATUS" class="fr text-placeholder">*原始产品新增<em ng-bind="summary.bond.origin_product_increasement || 0"></em>条，更新<em ng-bind="summary.bond.origin_product_updated || 0"></em>条<i tooltip-append-to-body="true" tooltip-placement="left" uib-tooltip="原始产品指互金平台发行的产品。" class="icon-pano icon-info f1_2rem ml5"></i></div>
+    <div ng-if="getFitlerStatus() === NORMAL_STATUS" class="fr text-placeholder">*原始产品新增<em ng-bind="summary.bond.origin_product_increasement || 0"></em>条，更新<em ng-bind="summary.bond.origin_product_updated || 0"></em>条<i tooltip-append-to-body="true" tooltip-placement="left" tooltip-class="origin-product-tooltip" uib-tooltip="原始产品指互金平台发行的产品。" class="icon-pano icon-info f1_2rem ml5"></i></div>
 </div>
 <div class="table-body">
     <div class="table-kind bor-xxs">
         <div class="table-head" kt-table-sort>
             <div class="rank-bar fl clfix">
-                <a ng-class="{'active': !search.sort_by}" class="sort-column" field="">默认排序</a>
-                <a class="sort-column" field="updated_at">按更新时间
+                <a ng-class="{'active': !search.sort_by}" class="sort-column" field="" title="点击按新增、更新、非新增和非更新排序">默认排序</a>
+                <a class="sort-column" field="updated_at" title="{{updatedAtSortTitle()}}">按更新时间
                     <i class="icon-pano icon-arrow-up"></i>
                     <i class="icon-pano icon-arrow-up icon-arrow-up-reverse"></i>
                 </a>
-                <a class="sort-column" field="rate">按年化收益率
+                <a class="sort-column" field="rate" title="{{rateSortTitle()}}">按年化收益率
                     <i class="icon-pano icon-arrow-up"></i>
                     <i class="icon-pano icon-arrow-up icon-arrow-up-reverse"></i>
                 </a>

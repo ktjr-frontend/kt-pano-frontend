@@ -21,3 +21,19 @@
 .tooltip.left .tooltip-arrow {
     border-left-color: @color-1;
 }
+
+.tooltip {
+    &.origin-product-tooltip {
+        transform: translateY(-2.1em) translateX(2em);
+        &.left {
+            .tooltip-arrow {
+                border-left-color: transparent;
+                border-top-color: #3d4351;
+                top: auto;
+                right: 10px;
+                bottom: -9px;
+                border-width: 5px;
+            }
+        }
+    }
+}

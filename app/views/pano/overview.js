@@ -143,12 +143,12 @@
                         return v[1]
                     })
 
+                    // 气泡大小
                     var sizeFunction = function(x) {
-                        var y = Math.min(Math.sqrt(x / 5e8) + 0.1, 2)
-                        y = Math.max(0.2, y)
-                        return y * 30
+                        var y = Math.min(Math.sqrt(x / 5e8) + 0.1, 2.5)
+                        y = Math.max(0.25, y)
+                        return y * 25
                     }
-
                     _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
                             // color: _self.color,
                             onclick: function(e) {
@@ -186,10 +186,10 @@
                                     max: _.max(yAxisArr),
                                     precision: 1,
                                     inRange: {
-                                        symbolSize: [10, 50]
+                                        symbolSize: [5, 50]
                                     },
                                     outOfRange: {
-                                        symbolSize: [10, 50],
+                                        symbolSize: [5, 50],
                                         color: ['rgba(0,0,0,.2)']
                                     }
                                 }

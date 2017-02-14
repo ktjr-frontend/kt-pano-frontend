@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktMarketLayoutCtrl', function($scope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
+        .controller('ktMarketLayoutCtrl', function($scope, $rootScope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
             $scope.shared = {
                 tab_show: true
             }
@@ -15,6 +15,11 @@
             var search = $location.search()
 
             var params = $scope.shared.params = $.extend({}, defaultParams, search)
+            $scope.dimensionOnToggle = function(open) {
+                if (open) {
+                    $rootScope.bdTrack(['市场数据页', '下拉', '细分维度'])
+                }
+            }
 
             $scope.shared.dimensions = []
                 // $scope.showMoreFilters = false
@@ -29,6 +34,9 @@
                 extraClass: 'date-picker-pano-top',
                 showWeekNumbers: false,
                 autoClose: false,
+                onDatepickerOpened: function() {
+                    $rootScope.bdTrack(['市场数据页', '下拉', '时间范围'])
+                },
                 beforeShowDay: function(t) {
                     var m = moment()
                     var valid = t <= (m.day() ? m.day(0).add(1, 'w').toDate() : m.toDate()) && t >= moment('2016-03-01').toDate() //  当周以后不可选
@@ -39,6 +47,9 @@
                 showShortcuts: true,
                 customShortcuts: [{
                         name: '最近4周',
+                        onClick: function() {
+                            $rootScope.bdTrack(['市场数据页', '最近4周', '时间范围'])
+                        },
                         dates: function() {
                             var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
                             var start = moment(end).subtract(4, 'w').add(1, 'd').toDate();
@@ -46,6 +57,9 @@
                         }
                     }, {
                         name: '最近6周',
+                        onClick: function() {
+                            $rootScope.bdTrack(['市场数据页', '最近6周', '时间范围'])
+                        },
                         dates: function() {
                             var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
                             var start = moment(end).subtract(6, 'w').add(1, 'd').toDate();
@@ -53,6 +67,9 @@
                         }
                     }, {
                         name: '最近8周',
+                        onClick: function() {
+                            $rootScope.bdTrack(['市场数据页', '最近8周', '时间范围'])
+                        },
                         dates: function() {
                             var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
                             var start = moment(end).subtract(8, 'w').add(1, 'd').toDate();

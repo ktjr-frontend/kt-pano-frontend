@@ -28,7 +28,7 @@
     }
 
     angular.module('kt.pano')
-        .factory('ktDataHelper', function($window, $state, notify) {
+        .factory('ktDataHelper', function($window, $rootScope, $state, notify) {
             return {
                 /**
                  * [filterInit 筛选组件的初始化]
@@ -618,6 +618,7 @@
                             // 全部删除
                             sf.clearChecked = function() {
                                 sf.checkedItems = []
+                                $rootScope.bdTrack(['市场数据页', '全部清除', sf.name])
                                 _.each(sf.options, function(o) {
                                     _.each(o, function(v) {
                                         v.checked = false
@@ -650,6 +651,7 @@
                             // 应用所选项并更新url
                             sf.applyAndUpdateUrl = function() {
                                 if (sf.applyCheckedItems()) {
+                                    $rootScope.bdTrack(['市场数据页', '确定筛选', sf.name])
                                     sf.updateUrl()
                                 }
                             }
@@ -657,6 +659,7 @@
                             // dropdown组件打开时 更新一下状态
                             sf.onToggle = function(open) {
                                 if (open) {
+                                    $rootScope.bdTrack(['市场数据页', '下拉筛选', sf.name])
                                     $scope.$apply(function() {
                                         sf.updateOptionsCheckedStats()
                                     })
@@ -668,6 +671,7 @@
                                 $event.stopPropagation()
                                 sf.isOpen = !sf.isOpen
                                 if (sf.isOpen) {
+                                    $rootScope.bdTrack(['市场数据页', '选择', '展示项', sf.name])
                                     sf.updateOptionsCheckedStats()
                                 }
                             }

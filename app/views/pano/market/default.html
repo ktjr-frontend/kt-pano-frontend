@@ -44,7 +44,7 @@
             <div class="fr" ng-repeat="filter in ::weekRateChart._filters">
                 <div class="name ib" ng-bind="filter.name"></div>
                 <div class="dropdowns ib vm clfix">
-                    <div class="dropdown" dropdown>
+                    <div class="dropdown" dropdown on-toggle="filter.onToggle(open)">
                         <div dropdown-toggle class="dropdown-toggle cp">
                             <span ng-bind="weekRateChart._getParamName($index)"></span>
                             <div class="arrow">
@@ -54,7 +54,7 @@
                         <div class="dropdown-menu animated fadeIn">
                             <ul>
                                 <li ng-repeat="o in ::filter.options" ng-class="{active: o.value == weekRateChart._params.life}">
-                                    <a ng-click="weekRateChart.updateDataView({life: o.value}, true)" title="{{::o.name}}" ng-bind="::o.name"></a>
+                                    <a ng-click="weekRateChart.updateDataView({life: o.value}, true);bdTrack(['市场数据页', o.name, '资产收益率趋势图'])" title="{{::o.name}}" ng-bind="::o.name"></a>
                                 </li>
                             </ul>
                         </div>

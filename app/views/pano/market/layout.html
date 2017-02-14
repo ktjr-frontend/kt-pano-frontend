@@ -20,7 +20,7 @@
                         <div class="fl">
                             <div class="name fl">细分维度：</div>
                             <div class="dropdowns clfix">
-                                <div class="dropdown" dropdown>
+                                <div class="dropdown" dropdown on-toggle="dimensionOnToggle(open)">
                                     <!-- is-open="shared.dimensions.isOpen" ng-mouseenter="shared.dimensions.isOpen = true" ng-mouseleave="shared.dimensions.isOpen = false" -->
                                     <div dropdown-toggle class="dropdown-toggle cp">
                                         <span ng-bind="getDimensionName()"></span>
@@ -31,7 +31,7 @@
                                     <div class="dropdown-menu animated fadeIn">
                                         <ul>
                                             <li ng-repeat="d in shared.dimensions" ng-class="{active: d.value == shared.params.dimension}">
-                                                <a ng-click="goTo('dimension', d.value)" title="{{::d.name}}" ng-bind="::d.name"></a>
+                                                <a ng-click="bdTrack(['市场数据页', d.name, '细分维度']);goTo('dimension', d.value);" title="{{::d.name}}" ng-bind="::d.name"></a>
                                             </li>
                                         </ul>
                                     </div>

@@ -8,7 +8,7 @@
     angular
         .module('kt.pano')
         // 登录通用控制函数
-        .factory('ktLoginCommon', function($rootScope, $window, $state, $location, ktLoginService, ktSweetAlert, ktUrlGet, CacheFactory) {
+        .factory('ktLoginCommon', function($rootScope, $window, $templateRequest, $state, $location, ktLoginService, ktSweetAlert, ktUrlGet, CacheFactory) {
             return function(scope, successCallback, errorCallback) {
                 scope.pendingRequests = true
 
@@ -43,14 +43,22 @@
                         error = '您的浏览器不支持localStorage,如果您使用的是iOS浏览器，可能是您使用“无痕浏览模式”导致的，请不要使用无痕浏览模式！'
                     }
 
-                    ktSweetAlert.swal({
-                        title: '登录失败',
-                        text: error,
-                        type: 'error',
-                    });
-                    /*eslint-disable*/
-                    errorCallback && errorCallback(res)
-                        /*eslint-enable*/
+                    // 错误模板
+                    $templateRequest('views/tooltips/login_error.html').then(function(tpl) {
+                        var errorText = _.template(tpl)
+                        ktSweetAlert.swal({
+                            title: '',
+                            text: errorText({
+                                title: '登录失败',
+                                text: error
+                            }),
+                            html: true,
+                            // type: 'error',
+                            customClass: 'login-error'
+                        })
+
+                        errorCallback && errorCallback(res) // eslint-disable-line
+                    })
 
                 })
             }

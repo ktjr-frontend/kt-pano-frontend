@@ -57,23 +57,23 @@
 }
 
 .btn-gray {
-    color: white;
-    background: darken(@color-gray, 10%);
-    border-color: darken(@color-gray, 10%);
+    color: @color-1;
+    background: @color-3;
+    border-color: @border-color3;
     &:hover {
-        background: @color-gray;
-        border-color: @color-gray;
-        color: white;
+        background: darken(@color-3, 5%);
+        border-color: darken(@border-color3, 5%);
+        color: @color-1;
     }
     &[disabled],
     &.disabled {
-        background: lighten(@color-gray, 10%);
-        border-color: lighten(@color-gray, 10%);
+        background: lighten(@color-3, 5%);
+        border-color: lighten(@color-3, 5%);
         cursor: not-allowed;
         color: #999;
         &:hover {
-            background: lighten(@color-gray, 10%);
-            border-color: lighten(@color-gray, 10%);
+            background: lighten(@color-3, 5%);
+            border-color: lighten(@color-3, 5%);
             cursor: not-allowed;
             color: #999;
         }
@@ -650,24 +650,24 @@ button[disabled] {
 /*-------toggle btns -------*/
 
 .tg-btn {
-    &.tg-btn-green{
-        input{
-            &:checked + label{
-               background: @color-green;
+    &.tg-btn-green {
+        input {
+            &:checked + label {
+                background: @color-green;
             }
         }
     }
-    &.tg-btn-blue{
-        input{
-            &:checked + label{
-               background: @color-blue;
+    &.tg-btn-blue {
+        input {
+            &:checked + label {
+                background: @color-blue;
             }
         }
     }
-    &.tg-btn-orange{
-        input{
-            &:checked + label{
-               background: @color-orange;
+    &.tg-btn-orange {
+        input {
+            &:checked + label {
+                background: @color-orange;
             }
         }
     }
@@ -705,4 +705,6 @@ button[disabled] {
         }
     }
 }
+
+
 /*-------toggle btns -------*/

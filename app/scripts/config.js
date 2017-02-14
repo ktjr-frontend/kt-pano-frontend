@@ -113,6 +113,10 @@
                 window.history.back()
             }
 
+            $rootScope.bdTrack = function(track) {
+                window._hmt && window._hmt.push(['_trackEvent'].concat(track)) // eslint-disable-line
+            }
+
             // 判断是否需要权限验证
             function judgeUserPermit(user) {
                 if (!user || !user.grade) {

@@ -3,20 +3,20 @@
     &.confirm {
         // .btn-blue-func();
         box-shadow: none!important;
-        background: @color-navy-blue!important;
+        background: @color-dark!important;
         &:hover,
         &:active {
-            background: darken(@color-navy-blue, 6%)!important;
+            background: darken(@color-dark, 6%)!important;
         }
     }
     color: white;
     border: none;
     box-shadow: none;
-    font-size: 1.8rem;
+    font-size: 15px;
     text-align: center;
-    font-weight: 500;
+    // font-weight: 500;
     border-radius: 3px;
-    padding: 5px 50px;
+    padding: 5px 20px;
     margin: 20px 5px;
     cursor: pointer;
 }
@@ -26,7 +26,7 @@
     transform: translateY(-50%);
 }
 .sweet-alert .sa-button-container {
-    margin-top: 30px;
+    margin-top: 20px;
     border-top: 1px solid @border-color;
     margin-bottom: -20px;
 }
@@ -45,15 +45,16 @@
 }
 
 .sweet-alert button.cancel {
-    background-color: @color-dark2;
+    background-color: @color-3;
+    color: @color-1;
 }
 
 .sweet-alert button.cancel:hover {
-    background-color: lighten(@color-dark2, 6%);
+    background-color: darken(@color-3, 6%);
 }
 
 .sweet-alert button.cancel:active {
-    background-color: lighten(@color-dark2, 10%);
+    background-color: darken(@color-3, 10%);
 }
 
 .sweet-alert p {

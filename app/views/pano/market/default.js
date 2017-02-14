@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktMarketCtrl', function($scope, $q, $state, $timeout, $location, ktDataHelper, ktAnalyticsService, ktEchartTheme1) {
+        .controller('ktMarketCtrl', function($scope, $rootScope, $q, $state, $timeout, $location, ktDataHelper, ktAnalyticsService, ktEchartTheme1) {
             // shared.tabActive.tab1 = true
             var shared = $scope.shared
             var params = shared.params
@@ -159,8 +159,8 @@
                     minWidth: _.floor(minWidth / 3),
                     start: 0,
                     end: 100
-                    // start: start,
-                    // end: end
+                        // start: start,
+                        // end: end
                 }
             }
 
@@ -543,6 +543,11 @@
                 yAxis: 'rate',
                 _filters: [{
                     name: '期限：',
+                    onToggle: function(open) { // 期限筛选下拉菜单
+                        if (open) {
+                            $rootScope.bdTrack(['市场数据页', '下拉', '资产收益率趋势图'])
+                        }
+                    },
                     options: [{
                         name: '1M',
                         value: 1

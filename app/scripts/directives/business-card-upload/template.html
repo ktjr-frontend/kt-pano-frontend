@@ -35,8 +35,8 @@
         </div>
     </div>
     <div class="modal-footer" ng-show="uploadType === 'dialog'">
-        <button class="btn btn-navy-blue btn-navy-gradient" ng-if="user.status === 'rejected'" ng-click="closeDialog({$event:$event, isConfirm: true})" ng-disabled="bsnsCardForm.$invalid || pendingRequests">确定</button>
-        <button class="btn btn-navy-blue btn-navy-gradient" ng-if="user.status === 'passed'" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">确定</button>
-        <button class="btn btn-dark" ng-click="closeDialog({$event:$event})">取消</button>
+        <button class="btn btn-dark btn-navy-gradient" ng-if="user.status === 'rejected'" ng-click="closeDialog({$event:$event, isConfirm: true})" ng-disabled="bsnsCardForm.$invalid || pendingRequests">确定</button>
+        <button class="btn btn-dark btn-navy-gradient" ng-if="user.status === 'passed'" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">确定</button>
+        <button class="btn btn-gray" ng-click="closeDialog({$event:$event})">取消</button>
     </div>
 </form>

@@ -17,6 +17,28 @@
                 type: 'dropdown'
             }]
 
+            // 按更新时间排序标题
+            $scope.updatedAtSortTitle = function() {
+                if (search.sort_by === 'updated_at') {
+                    if (search.order === 'asc') {
+                        return '点击按更新时间由旧到新排序'
+                    }
+                    return '点击取消按更新时间排序'
+                }
+                return '点击按更新时间由新到旧排序'
+            }
+
+            // 按年华收益率排序标题
+            $scope.rateSortTitle = function() {
+                if (search.sort_by === 'rate') {
+                    if (search.order === 'asc') {
+                        return '点击按年化收益率由大到小排序'
+                    }
+                    return '点击取消按年化收'
+                }
+                return '点击按年化收益率由小到大排序'
+            }
+
             // 跳转产品详情
             $scope.gotoDetail = function(product) {
                 if (product.class === 'Product') {
