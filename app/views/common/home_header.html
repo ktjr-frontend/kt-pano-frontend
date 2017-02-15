@@ -1,15 +1,15 @@
 <div class="container">
-    <div id="logo">
-        <a ng-click="goHome()">
+    <div id="logo" ng-click="bdTrack(['LandingPage页', '点击', 'logo']);goHome()">
+        <a>
             <img src="{{logoHorizonal}}" alt="开通金融PANO" height="18">
         </a>
     </div>
     <nav role="navigation">
         <!-- <kt-minimaliza-menu></kt-minimaliza-menu> -->
         <div class="home-header-navbar-left">
-            <a ui-sref="pano.overview">总览</a>
-            <a ui-sref="pano.market.default">市场数据</a>
-            <a ui-sref="pano.products.obligatoryRight">产品信息</a>
+            <a ng-click="bdTrack(['LandingPage页', '点击', '总览'])" ui-sref="pano.overview">总览</a>
+            <a ng-click="bdTrack(['LandingPage页', '点击', '市场数据'])" ui-sref="pano.market.default">市场数据</a>
+            <a ng-click="bdTrack(['LandingPage页', '点击', '产品信息'])" ui-sref="pano.products.obligatoryRight">产品信息</a>
         </div>
         <div class="navbar-right">
             <ul class="nav navbar-nav header-nav no-borders mr15" ng-if="user && user.status">
@@ -30,11 +30,11 @@
             </ul>
             <ul class="nav navbar-nav header-nav no-borders" ng-if="!user.status">
                 <li ui-sref-active="active" class="first">
-                    <a title="登录" class="login menu " ui-sref="account.login">
+                    <a title="登录" class="login menu" ng-click="bdTrack(['LandingPage页', '点击', '登录'])" ui-sref="account.login">
                         登录
                     </a>
                 </li>
-                <li ui-sref-active="active"><a title="注册" class="register menu" ui-sref="account.register">注册</a></li>
+                <li ui-sref-active="active"><a title="注册" class="register menu" ng-click="bdTrack(['LandingPage页', '点击', '注册'])" ui-sref="account.register">注册</a></li>
             </ul>
         </div>
     </nav>

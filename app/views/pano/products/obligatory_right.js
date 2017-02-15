@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductObligatoryRightCtrl', function($scope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
+        .controller('ktProductObligatoryRightCtrl', function($scope, $rootScope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
             var shared = $scope.shared
             var search = $scope.search = $location.search()
             var cacheData
@@ -21,11 +21,11 @@
             $scope.updatedAtSortTitle = function() {
                 if (search.sort_by === 'updated_at') {
                     if (search.order === 'asc') {
-                        return '点击按更新时间由旧到新排序'
+                        return '点击按更新时间由新到旧排序'
                     }
                     return '点击取消按更新时间排序'
                 }
-                return '点击按更新时间由新到旧排序'
+                return '点击按更新时间由旧到新排序'
             }
 
             // 按年华收益率排序标题
@@ -34,7 +34,7 @@
                     if (search.order === 'asc') {
                         return '点击按年化收益率由大到小排序'
                     }
-                    return '点击取消按年化收'
+                    return '点击取消按年化收益率排序'
                 }
                 return '点击按年化收益率由小到大排序'
             }
@@ -93,6 +93,7 @@
 
                 $scope.$watch('shared._params.created_or_updated_in.length', function() {
                     if (_.isArray(shared._params.created_or_updated_in)) {
+                        // $rootScope.bdTrack(['产品信息页', shared._params.created_or_updated_in.sort().join(), '看新增更新'])
                         $state.go($state.current.name, { created_or_updated_in: shared._params.created_or_updated_in.sort().join() })
                     }
                 })

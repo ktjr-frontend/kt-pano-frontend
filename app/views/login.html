@@ -54,7 +54,7 @@
                 </div>
                 <div class="form-group mt10 mb0">
                     <div class="col-md-12 mt10 mb20">
-                        <button class="btn btn-navy-blue btn-block btn-lg" ng-disabled="loginForm.$invalid || pendingRequests">立即登录</button>
+                        <button class="btn btn-navy-blue btn-block btn-lg" ng-disabled="loginForm.$invalid || pendingRequests" ng-click="bdTrack(['登录页', '点击', '立即登录']);">立即登录</button>
                     </div>
                     <div class="col-xs-6 text-left">
                         <div class="checkbox remember-me checkbox-primary">
@@ -64,10 +64,10 @@
                         </div>
                     </div>
                     <div class="col-xs-6 text-right">
-                        <a title="忘记密码" class="no-notely" ng-click="resetPassword()">忘记密码？</a>
+                        <a title="忘记密码" class="no-notely" ng-click="bdTrack(['登录页', '点击', '忘记密码']);resetPassword()">忘记密码？</a>
                     </div>
                     <div class="col-md-12 mt20 cbs">
-                        还没有账号？现在 <a title="点击注册" class="tu" ui-sref="account.register">注册</a>
+                        还没有账号？现在 <a title="点击注册" class="tu" ng-click="bdTrack(['登录页', '点击', '注册']);" ui-sref="account.register">注册</a>
                     </div>
                 </div>
             </form>

@@ -88,6 +88,12 @@
                 extraClass: 'date-picker-pano-top',
                 showWeekNumbers: false,
                 autoClose: false,
+                onDatepickerOpened: function() {
+                    $rootScope.bdTrack(['机构详情页', '下拉', '时间范围'])
+                },
+                onDatepickerApply: function() {
+                    $rootScope.bdTrack(['机构详情页', '确定', '时间范围'])
+                },
                 beforeShowDay: function(t) {
                     var m = moment()
                     var valid = t <= (m.day() ? m.day(0).add(1, 'w').toDate() : m.toDate()) && t >= moment('2016-03-01').toDate() //  当周以后不可选
@@ -98,6 +104,9 @@
                 showShortcuts: true,
                 customShortcuts: [{
                     name: '最近4周',
+                    onClick: function() {
+                        $rootScope.bdTrack(['机构详情页', '最近4周', '时间范围'])
+                    },
                     dates: function() {
                         var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
                         var start = moment(end).subtract(4, 'w').add(1, 'd').toDate();
@@ -105,6 +114,9 @@
                     }
                 }, {
                     name: '最近6周',
+                    onClick: function() {
+                        $rootScope.bdTrack(['机构详情页', '最近6周', '时间范围'])
+                    },
                     dates: function() {
                         var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
                         var start = moment(end).subtract(6, 'w').add(1, 'd').toDate();
@@ -112,6 +124,9 @@
                     }
                 }, {
                     name: '最近8周',
+                    onClick: function() {
+                        $rootScope.bdTrack(['机构详情页', '最近8周', '时间范围'])
+                    },
                     dates: function() {
                         var end = moment().day(0).add(+(moment().day() > 0), 'w').toDate();
                         var start = moment(end).subtract(8, 'w').add(1, 'd').toDate();
@@ -308,6 +323,9 @@
                 yAxis: 'rate',
                 _filters: [{
                     name: '期限：',
+                    onToggle: function (open) {
+                        open && $rootScope.bdTrack(['机构详情页', '下拉', '资产产品收益率趋势期限']) // eslint-disable-line
+                    },
                     options: [{
                         name: '1M',
                         value: 1

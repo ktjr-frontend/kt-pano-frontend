@@ -71,7 +71,7 @@
                                     <div class="value">
                                         <ul class="list">
                                             <li ng-repeat="pt in inst.parters track by $index">
-                                                <a class="item" ui-sref="pano.institutions.detail({id: pt, dimension: partnerType()})" ng-bind="pt" target="_blank"></a>
+                                                <a class="item" ui-sref="pano.institutions.detail({id: pt, dimension: partnerType()})" ng-click="bdTrack(['机构详情页', pt, '合作机构'])" ng-bind="pt" target="_blank"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -84,12 +84,12 @@
                     <article class="box">
                         <div class="box-head">
                             <uib-tabset>
-                                <uib-tab active="tabActive.tab1">
+                                <uib-tab ng-click="bdTrack(['机构详情页', '切换', '产品信息'])" active="tabActive.tab1">
                                     <tab-heading>
                                         产品信息
                                     </tab-heading>
                                 </uib-tab>
-                                <uib-tab active="tabActive.tab2" ng-show="moduleVisible('chart')">
+                                <uib-tab ng-click="bdTrack(['机构详情页', '切换', '图表信息'])" active="tabActive.tab2" ng-show="moduleVisible('chart')">
                                     <tab-heading>
                                         图表信息
                                     </tab-heading>
@@ -121,7 +121,7 @@
                                     <div class="fr" ng-repeat="filter in ::weekRateChart._filters">
                                         <div class="name ib" ng-bind="filter.name"></div>
                                         <div class="dropdowns ib vm clfix">
-                                            <div class="dropdown" dropdown>
+                                            <div class="dropdown" dropdown on-toggle="filter.onToggle(open)">
                                                 <div dropdown-toggle class="dropdown-toggle cp">
                                                     <span ng-bind="weekRateChart._getParamName($index)"></span>
                                                     <div class="arrow">
@@ -131,7 +131,7 @@
                                                 <div class="dropdown-menu animated fadeIn">
                                                     <ul>
                                                         <li ng-repeat="o in ::filter.options" ng-class="{active: o.value == weekRateChart._params.life}">
-                                                            <a ng-click="weekRateChart.updateDataView({life: o.value}, true)" title="{{::o.name}}" ng-bind="::o.name"></a>
+                                                            <a ng-click="weekRateChart.updateDataView({life: o.value}, true);bdTrack(['机构详情页', o.name, '资产产品收益率趋势期限'])" title="{{::o.name}}" ng-bind="::o.name"></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                             <div class="bottom-buttons text-right" ng-if="moreHidden()">
-                                <a class="btn btn-default btn-xs" ng-click="moreChartView()">更多</a>
+                                <a class="btn btn-default btn-xs" ng-click="bdTrack(['机构详情页', '发行资产类型占比', '更多']);moreChartView()">更多</a>
                             </div>
                         </div>
                         <div class="box-body" ng-show="tabActive.tab1">
@@ -179,7 +179,7 @@
                                         <tbody>
                                             <tr class="text-right" ng-repeat="product in products" ng-if="products.length" kt-table-line-select target-element=".js-product-link">
                                                 <td ng-class="{'text-left': product.name}">
-                                                    <a class="js-product-link" ng-click="gotoDetail($event, product, 'pano.productObligatoryRight')" ng-bind="::product.name | ktNull"></a>
+                                                    <a class="js-product-link" ng-click="bdTrack(['机构详情页', product.name, '产品信息列表']);gotoDetail($event, product, 'pano.productObligatoryRight')" ng-bind="::product.name | ktNull"></a>
                                                 </td>
                                                 <td ng-bind="::getLife(product.life)|ktEclipsis:10" title="{{::getLife(product.life)}}"></td>
                                                 <td ng-bind="::product.rate"></td>
@@ -205,7 +205,7 @@
                                     </table>
                                 </div>
                                 <div class="bottom-buttons text-right mb20 mt10" ng-if="moreHidden()">
-                                    <a class="btn btn-default btn-xs" ng-click="moreTableView('obligatoryRight')">更多</a>
+                                    <a class="btn btn-default btn-xs" ng-click="bdTrack(['机构详情页', '资产类产品信息', '更多']);moreTableView('obligatoryRight')">更多</a>
                                 </div>
                             </div>
                             <div class="chart-table bor-xxs" ng-show="moduleVisible('am')">
@@ -227,7 +227,7 @@
                                         <tbody>
                                             <tr class="text-right" ng-repeat="product in products2" ng-if="products2.length" kt-table-line-select target-element=".js-product-link">
                                                 <td ng-class="{'text-left': product.name}">
-                                                    <a ng-click="gotoDetail($event, product, 'pano.productAssetManage')" class="js-product-link" ng-bind="::product.name | ktNull"></a>
+                                                    <a ng-click="bdTrack(['机构详情页', product.name, '产品信息列表']);gotoDetail($event, product, 'pano.productAssetManage')" class="js-product-link" ng-bind="::product.name | ktNull"></a>
                                                 </td>
                                                 <td ng-bind="::getLife(product.life)|ktEclipsis:10" title="{{::getLife(product.life)}}"></td>
                                                 <td ng-bind="::product.rate | ktNumber:2:'percent2'"></td>
@@ -245,7 +245,7 @@
                                     </table>
                                 </div>
                                 <div class="bottom-buttons text-right mb20 mt10" ng-if="moreHidden()">
-                                    <a class="btn btn-default btn-xs" ng-click="moreTableView('assetManage')">更多</a>
+                                    <a class="btn btn-default btn-xs" ng-click="bdTrack(['机构详情页', '资管类产品信息', '更多']);moreTableView('assetManage')">更多</a>
                                 </div>
                             </div>
                         </div>
@@ -292,7 +292,7 @@
                             <h3>重要新闻</h3>
                             <ul class="list list-with-subhead">
                                 <li ng-repeat="n in inst.notices" class="ellip">
-                                    <a title="{{::n.name}}" ng-href="{{::n.url}}" ng-bind="::n.name" class="ellip" target="_blank"></a>
+                                    <a title="{{::n.name}}" ng-click="bdTrack(['机构详情页', n.name, '重要新闻']" ng-href="{{::n.url}}" ng-bind="::n.name" class="ellip" target="_blank"></a>
                                     <div class="clfix subhead">
                                         <span class="fl" ng-bind="::n.happened_at | date:'yyyy-MM-dd'"></span>
                                         <span class="fr" ng-bind="::n.from"></span>

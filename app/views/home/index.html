@@ -8,10 +8,10 @@
             <h1 class="center-block title animated" delay="0.3">主流平台全面覆盖<span class="blank f1_5rem"></span>市场信息实时获取<span class="blank f1_5rem"></span>融资项目免费对接</h1>
             <div class="buttons animated" delay="0.4">
                 <!-- <a ui-sref="account.login" class="login btn">登 录<i class="fa fa-angle-right ml10"></i></a> -->
-                <a ng-class="{'active_bg':default_bg}" ng-init="default_bg=true" ng-click="default_bg=true" class="register btn ">网页端</a>
-                <a class="btn" ng-class="{'active_bg':!default_bg}" ng-click="default_bg=false">微信端</a>
+                <a ng-class="{'active_bg':default_bg}" ng-init="default_bg=true" ng-click="bdTrack(['LandingPage页','点击','网页端']);default_bg=true" class="register btn ">网页端</a>
+                <a class="btn" ng-class="{'active_bg':!default_bg}" ng-click="bdTrack(['LandingPage页','点击','微信端']);default_bg=false">微信端</a>
                 <div class="wx-code-left" ng-hide="default_bg">
-                    <i class="img1 icon-pano icon-small_code"></i>
+                    <i class="img1 icon-pano icon-small_code" ng-mouseenter="bdTrack(['LandingPage页','查看','微信端二维码'])"></i>
                     <div class="wx-code-right">
                         <span class=right-arrow></span>
                         <div class="pano-code-hide">
@@ -102,7 +102,6 @@
             </div>
         </section>
     </div>
-
     <div ng-if="!default_bg">
         <section class="section section-2" kt-animate-panel child="animated" delay="0" effect="fadeInUp" out-effect="fadeOutUp">
             <div class="container clfix">
@@ -168,7 +167,6 @@
                 <span class="left-arrow"></span>
             </div>
             <div class="fixed-big-code">
-                
                 <div class="code_show">
                     <img src="../../images/foot_wxcode.jpg">
                     <div>PANO微信移动端</div>

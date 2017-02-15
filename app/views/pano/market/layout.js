@@ -165,6 +165,7 @@
             $scope.tabSelect = function(state) {
                 if ($state.current.name !== state) {
                     $state.go(state)
+                    $rootScope.bdTrack(['市场数据页', '页面切换', state === 'pano.market.default' ? '资产类' : '资管类'])
                 }
             }
 

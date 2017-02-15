@@ -121,6 +121,7 @@
                     eventAction: newValue ? '打开' : '关闭',
                     eventLabel: '市场数据 发行量趋势图',
                 })
+                newValue && $rootScope.bdTrack(['市场数据页', '打开', '资产产品发行量趋势图', '观察窗']) // eslint-disable-line
             })
 
             $scope.$watch('weekRateChart.chartOptions.filterVisible', function(newValue) {
@@ -132,6 +133,7 @@
                     eventAction: newValue ? '打开' : '关闭',
                     eventLabel: '市场数据 收益率趋势图',
                 })
+                newValue && $rootScope.bdTrack(['市场数据页', '打开', '资产产品收益率趋势图', '观察窗']) // eslint-disable-line
             })
 
             // 自定义缩放组件的位置初始化，百分比

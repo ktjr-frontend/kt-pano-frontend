@@ -17,8 +17,14 @@
                         // 'common/directives/kt-captchaimg-directive.js',
                         'common/factories/kt-captcha.js'
                     ]),
-                    controller: ['$scope', function ($scope) {
+                    controller: ['$scope', '$rootScope', '$state', function($scope, $rootScope, $state) {
                         $scope.footerContainer = true
+                        $scope.footerGoHome = function() {
+                            $rootScope.bdTrack([$state.name === 'account.register' ? '注册页' : '登录页', '点击', '开通官网'])
+                        }
+                        $scope.footerContactUs = function() {
+                            $rootScope.bdTrack([$state.name === 'account.register' ? '注册页' : '登录页', '点击', '联系我们'])
+                        }
                     }],
                     data: {
                         pageTitle: 'Common',

@@ -69,7 +69,6 @@
                         </div>
                     </div>
                     <div class="product-data-three">
-
                         <div class="inner">
                             <ul>
                                 <li>
@@ -103,10 +102,10 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- <div class="product-data-four">
+                    <div class="product-data-four" ng-if="assetsDatas.attachment_url">
                         <span>产品说明书：</span>
                         <a class="product-button" ng-href="{{assetsDatas.attachment_url}}" target="_blank">下载</a>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="product-chart">
@@ -116,7 +115,7 @@
                     <span class="myspan">日均募集规模：
                       <em ng-bind="avg_amount | ktNumberLocate"></em>
                   </span>
-                    <span class="myspan" >最高募集量：
+                    <span class="myspan">最高募集量：
                       <em ng-bind="max_amount | ktNumberLocate"></em>
                   </span>
                     <span class="myspan">最低募集量：

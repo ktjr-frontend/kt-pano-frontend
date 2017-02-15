@@ -34,6 +34,9 @@
                         postBrowserInfo: false,
                         initButtonText: '<i class="icon-pano icon-pen"></i>意见反馈',
                         html2canvasURL: ktS('common/libs/html2canvas.min.js'),
+                        onShow: function() {
+                            $rootScope.bdTrack(['总览页', '点击', '意见反馈'])
+                        },
                         tpl: {
                             description: tpl.filter('#feedback-welcome')[0].outerHTML,
                             highlighter: tpl.filter('#feedback-highlighter')[0].outerHTML,

@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductsLayoutCtrl', function($scope, $window, $timeout, $state, $location, ktSweetAlert, ktDataHelper) {
+        .controller('ktProductsLayoutCtrl', function($scope, $rootScope, $window, $timeout, $state, $location, ktSweetAlert, ktDataHelper) {
             // var perPageCount = ktDataHelper.getPerPage()
             var perPageCount = 10
             var search = $location.search()
@@ -44,6 +44,7 @@
                         page: 1,
                         order: null
                     }))
+                    $rootScope.bdTrack(['产品信息页', '切换', state === 'pano.products.obligatoryRight' ? '资产类' : '资管类'])
                 }
             }
 
@@ -68,6 +69,7 @@
             // 搜索框
             $scope.goToByEnterKey = function(event, key, value) {
                 if (event.keyCode !== 13) return
+                $rootScope.bdTrack(['产品信息页', '确认', '搜索', '回车'])
                 $scope.goTo(key, value)
             }
 
@@ -80,31 +82,31 @@
             // })
 
             $scope.getStatusName = function(status) {
-                if (status === '可购买') {
-                    return '在售'
+                    if (status === '可购买') {
+                        return '在售'
+                    }
+                    return status || '-'
                 }
-                return status || '-'
-            }
-/*
-            // 当前页面的过滤状态
-            var NORMAL_STATUS = $scope.NORMAL_STATUS = 0 // 无筛选无搜索状态
-            var SEARCH_STATUS = $scope.SEARCH_STATUS = 1 // 搜索状态来
-            var FILTER_STATUS = $scope.FILTER_STATUS = 2 // 筛选状态
+                /*
+                            // 当前页面的过滤状态
+                            var NORMAL_STATUS = $scope.NORMAL_STATUS = 0 // 无筛选无搜索状态
+                            var SEARCH_STATUS = $scope.SEARCH_STATUS = 1 // 搜索状态来
+                            var FILTER_STATUS = $scope.FILTER_STATUS = 2 // 筛选状态
 
-            // 判断当前页面的筛选和搜索状态
-            $scope.getFitlerStatus = function() {
-                var validParams = ktDataHelper.cutDirtyParams(search)
-                var validParamKeys = _.filter(_.keys(validParams), function(v) {
-                    return !_.includes(['page', 'per_page', 'credit_right_or_eq', 'created_or_updated_in'], v)
-                })
+                            // 判断当前页面的筛选和搜索状态
+                            $scope.getFitlerStatus = function() {
+                                var validParams = ktDataHelper.cutDirtyParams(search)
+                                var validParamKeys = _.filter(_.keys(validParams), function(v) {
+                                    return !_.includes(['page', 'per_page', 'credit_right_or_eq', 'created_or_updated_in'], v)
+                                })
 
-                if (_.includes(validParamKeys, 'key_word')) {
-                    return SEARCH_STATUS
-                } else if (validParamKeys.length) {
-                    return FILTER_STATUS
-                }
-                return NORMAL_STATUS
-            }*/
+                                if (_.includes(validParamKeys, 'key_word')) {
+                                    return SEARCH_STATUS
+                                } else if (validParamKeys.length) {
+                                    return FILTER_STATUS
+                                }
+                                return NORMAL_STATUS
+                            }*/
 
             $scope.getLife = ktDataHelper.getLife
 

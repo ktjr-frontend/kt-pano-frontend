@@ -6,6 +6,7 @@
 
             $rootScope.goHome = function() {
                 $state.go('home.index')
+                $rootScope.bdTrack(['注册页', '点击', 'logo'])
             }
 
             $scope.QRCodeVisible = false

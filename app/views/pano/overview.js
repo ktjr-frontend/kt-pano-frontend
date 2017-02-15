@@ -279,6 +279,7 @@
                 rateAmountChart.updateDataView({
                     chart: newValue === 'last7days' ? 'summary' : 'history' // to be defined
                 }, true)
+                $rootScope.bdTrack(['总览页', newValue === 'last7days' ? '近七日' : '历史平均周', '各平台发行量收益率统计'])
             })
 
             // 期限利率图 @deprecated 用下面组合图替代
@@ -618,22 +619,26 @@
             $scope.nextFromPage = function() {
                 if ($scope.from_page < $scope.max_from_page) {
                     $scope.from_page += 1
+                    $rootScope.bdTrack(['总览页', '翻页', '平台近7日发行量'])
                 }
             }
             $scope.preFromPage = function() {
                 if ($scope.from_page > 0) {
                     $scope.from_page -= 1
+                    $rootScope.bdTrack(['总览页', '翻页', '平台近7日发行量'])
                 }
             }
 
             $scope.nextExchangePage = function() {
                 if ($scope.exchange_page < $scope.max_exchange_page) {
                     $scope.exchange_page += 1
+                    $rootScope.bdTrack(['总览页', '翻页', '交易所近7日发行量'])
                 }
             }
             $scope.preExchangePage = function() {
                 if ($scope.exchange_page > 0) {
                     $scope.exchange_page -= 1
+                    $rootScope.bdTrack(['总览页', '翻页', '交易所近7日发行量'])
                 }
             }
 

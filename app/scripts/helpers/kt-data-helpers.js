@@ -476,6 +476,11 @@
                         })
 
                         if (v.type === 'dropdown') {
+                            v.onToggle = function(opened) {
+                                if (opened) {
+                                    $rootScope.bdTrack(['产品信息页', '下拉', v.name])
+                                }
+                            }
                             v.options.isOpen = false
                         }
 
@@ -491,6 +496,9 @@
                             var target = $($event.target)
                             target = target.hasClass('icon-arrow') ? target.parent() : target
                             target.toggleClass('expand', !v.collapsed)
+                            if (!v.collapsed) {
+                                $rootScope.bdTrack(['产品信息页', '展开', v.name])
+                            }
                         }
 
                         // 用于过滤的函数
