@@ -8,7 +8,7 @@
                 <a href="" ui-sref="pano.products.assetManage">资管类</a>
             </li>
             <li class="li-style">
-                <a href="" ng-bind="productManage.from" ui-sref="pano.products.assetManage({from_eq:assetsDatas.from})"></a>
+                <a href="" ng-bind="productManage.from" ui-sref="pano.products.assetManage({from_eq:productManage.from})"></a>
             </li>
             <li class="li-style">
                 <a href="" ng-bind="productManage.name"></a>
@@ -25,7 +25,7 @@
                             <li>
                                 <div>
                                     <span>发行平台:</span>
-                                    <em class="text-color" ng-bind="productManage.from | ktNull" ui-sref="pano.products.assetManage({from_eq:assetsDatas.from})"> </em>
+                                    <em class="text-color" ng-bind="productManage.from | ktNull" ui-sref="pano.products.assetManage({from_eq:productManage.from})"> </em>
                                 </div>
                                 <div>
                                     <span>产品期限:</span>
