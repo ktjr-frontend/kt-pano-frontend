@@ -23,7 +23,7 @@
 
             $scope.submitForm = function() {
                 ktLoginCommon($scope, function() {
-                    $rootScope.show2016Report = true
+                    // $rootScope.show2016Report = true
                         /*ktSweetAlert.swal({
                             title: '提示',
                             text: '《2016互金理财市场年度报告》新鲜出炉，<br/>快到右上角【报告】模块下载吧！',

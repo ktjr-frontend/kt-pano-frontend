@@ -8,14 +8,14 @@
             $scope.updateDateTo = '获取中...'
             $scope.getLife = ktDataHelper.getLife
 
-            $scope.dynamicPopover = {
+            /*$scope.dynamicPopover = {
                 templateUrl: 'views/tooltips/popover.html',
                 title: '提示'
             }
 
             $scope.popoverConfirm = function() {
                 $rootScope.show2016Report = false
-            }
+            }*/
 
             $scope.goTo = function($event, url) {
                 $event.stopPropagation()
