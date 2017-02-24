@@ -31,6 +31,8 @@
                         specialClass: 'account-page'
                     }
                 },
+
+                // 上传名片
                 'account.perfect': {
                     url: '/perfect',
                     templateUrl: 'views/perfect.html',
@@ -38,6 +40,8 @@
                         'common/directives/kt-qrcode-directive.js',
                         'scripts/directives/business-card-upload/style.css',
                         'scripts/directives/business-card-upload/directive.js',
+                        'scripts/directives/register-flow/style.css',
+                        'scripts/directives/register-flow/directive.js',
                         'views/perfect.js',
                     ], {
                         getUser: function($q, $window, ktUserService) {
@@ -57,7 +61,40 @@
                     }),
                     controller: 'ktPerfectCtrl',
                     data: {
-                        pageTitle: '账户设置',
+                        pageTitle: '上传名片',
+                        specialClass: 'account-page register-page'
+                    }
+                },
+
+                // 偏好设置
+                'account.prefer': {
+                    url: '/prefer',
+                    templateUrl: 'views/prefer.html',
+                    resolve: ktLazyResolve([
+                        'scripts/directives/register-flow/style.css',
+                        'scripts/directives/register-flow/directive.js',
+                        'scripts/directives/prefer-setting/style.css',
+                        'scripts/directives/prefer-setting/directive.js',
+                        'views/prefer.js',
+                    ]/*, {
+                        userInfo: function($q, $window, ktUserInfoService) {
+                            'ngInject';
+                            var deferred = $q.defer()
+                            if ($window.localStorage.token) {
+                                ktUserInfoService.get(function(data) {
+                                    deferred.resolve(data)
+                                }, function() {
+                                    deferred.resolve(null)
+                                })
+                            } else {
+                                deferred.resolve(null)
+                            }
+                            return deferred.promise
+                        }
+                    }*/),
+                    controller: 'ktPreferCtrl',
+                    data: {
+                        pageTitle: '偏好设置',
                         specialClass: 'account-page register-page'
                     }
                 },
@@ -74,7 +111,11 @@
                 'account.register': {
                     url: '/register',
                     templateUrl: 'views/register.html',
-                    resolve: ktLazyResolve(['views/register.js']),
+                    resolve: ktLazyResolve([
+                        'scripts/directives/register-flow/style.css',
+                        'scripts/directives/register-flow/directive.js',
+                        'views/register.js'
+                    ]),
                     controller: 'ktRegisterCtrl',
                     data: {
                         pageTitle: '入会',

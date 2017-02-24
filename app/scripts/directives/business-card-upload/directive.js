@@ -68,7 +68,7 @@
                     }
                     getUserCard()
 
-                    $scope.$on('$stateChangeSuccess', function () {
+                    $rootScope.$on('$stateChangeSuccess', function () {
                         $timeout.cancel(getUserCardPromise)
                         userCardDisabled = true
                     })

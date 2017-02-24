@@ -2,32 +2,28 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, ktSession, ktSweetAlert, getUser) {
+        .controller('ktPreferCtrl', function($scope, $rootScope, $state, ktSession, ktSweetAlert) {
 
             $rootScope.goHome = function() {
                 ktSession.clear()
                 $state.go('home.index')
             }
 
-            // CacheFactory.clearAll()
-            $scope.user = $rootScope.user = getUser
-
             // 提交表单
             $scope.submitForm = function() {
-                // CacheFactory.clearAll()
-                $state.go('account.prefer')
+                $state.go($rootScope.defaultRoute || 'pano.overview')
             }
 
             $scope.skip = function() {
                 ktSweetAlert.swal({
                     title: '',
-                    text: '上传名片才能完成认证哦',
-                    confirmButtonText: '残忍拒绝',
+                    text: '设置了业务偏好，才可以获得更多个性化服务哦',
+                    confirmButtonText: '不需要',
                     showCancelButton: true,
-                    cancelButtonText: '马上去传',
+                    cancelButtonText: '马上设置',
                 }, function(isConfirm) {
                     if (isConfirm) {
-                        $state.go('account.prefer')
+                        $state.go($rootScope.defaultRoute || 'pano.overview')
                     }
                 })
             }

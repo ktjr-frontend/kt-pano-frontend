@@ -8,6 +8,7 @@
                     if (!$rootScope.user || !$rootScope.user.status) return true
 
                     var grade = $rootScope.user.grade // 0免费，1付费
+                    // var group = $rootScope.user.group // premium: 高级用户 certified: 认证用户 normal: 非认证用户
                     var role = $rootScope.user.status
                     var permitValues = gradePermits[grade]
                     var isOk = _.includes(permitValues, role)

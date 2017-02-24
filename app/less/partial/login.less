@@ -3,9 +3,6 @@ body.blank {
 }
 
 body.account-page {
-    // background: url(/images/login-bg.jpg) no-repeat;
-    // background-size: cover;
-    // background-attachment: fixed;
     background-color: @color-3;
     height: 100%;
     #header {
@@ -114,10 +111,43 @@ body.account-page {
         margin: 0;
         // background: rgba(255, 255, 255, .8);
         border-radius: 10px;
+        .top-buttons {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            button {
+                background: #5c667d;
+                border: 0;
+                -webkit-appearance: none;
+                color: white;
+                border-radius: 20px;
+                padding: 0 10px 1px;
+                outline: none;
+                &:active {
+                    background: darken(#5c667d, 5%);
+                }
+            }
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            .icon-info {
+                vertical-align: text-top;
+                margin-left: 10px;
+                color: #b6b9bf;
+            }
+        }
+        p {
+            margin-bottom: 0;
+        }
+        .title ~ small {
+            color: #b6b9bf;
+            display: block;
+        }
         .panel-body {
             background: white;
             border-radius: 3px;
-            padding: 40px 50px;
+            padding: 30px 40px;
             @media(max-width: 768px) {
                 padding: 30px 15px;
             }
@@ -151,49 +181,6 @@ body.account-page {
 .register-container {
     max-width: 490px;
     margin: 50px auto;
-    /*.qrcode-bs-card {
-        width: 170px;
-        margin: 0 auto;
-        &.preview {
-            width: 100%;
-            .buttons {
-                width: 170px;
-                margin: 20px auto 0;
-            }
-            .qrcode {
-                padding: 10px;
-                border: 1px solid @border-color;
-            }
-        }
-        .qrcode {
-            width: 100%;
-            img {
-                width: 100%;
-            }
-        }
-        .buttons {
-            position: relative;
-            margin-top: 20px;
-            width: 100%;
-            &.upload:before {
-                content: '或';
-                position: absolute;
-                left: -2em;
-                top: .5em;
-            }
-            .btn-file {
-                width: 100%;
-                color: #6a717d;
-                -webkit-font-smoothing: antialiased;
-                background: #f3f5f8;
-            }
-        }
-        h5 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #afb1b6;
-        }
-    }*/
     .input-tip {
         position: relative;
     }
@@ -243,47 +230,47 @@ body.account-page {
             margin-left: 10px;
         }
     }
-    .checkbox-label {
-        float: left;
-        color: @placeholder-color;
-        // color: white;
-        font-size: 1.3rem;
-        position: relative;
-        [type=checkbox] {
-            display: none;
-            &:checked ~ label {
-                border-color: @color-orange;
-                // outline: 1px solid @color-orange;
-                &:before {
-                    content: '\e013';
-                    position: absolute;
-                    top: 9px;
-                    left: 4px;
-                    font-size: 1rem;
-                    color: @color-orange;
-                    display: inline-block;
-                    font-family: 'Glyphicons Halflings';
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 1;
-                    -webkit-font-smoothing: antialiased;
-                    -moz-osx-font-smoothing: grayscale;
-                }
-            }
-        }
-        label {
-            font-weight: normal;
-            cursor: pointer;
-            padding: 5px 20px;
-            border: 2px solid @border-color;
-            margin-right: 5px;
-            font-size: 1_3rem;
-            &:hover {
-                border-color: @color-orange;
-                // outline: 1px solid @color-orange;
-            }
-        }
-    }
+    // .checkbox-label {
+    //     float: left;
+    //     color: @placeholder-color;
+    //     // color: white;
+    //     font-size: 1.3rem;
+    //     position: relative;
+    //     [type=checkbox] {
+    //         display: none;
+    //         &:checked ~ label {
+    //             border-color: @color-orange;
+    //             // outline: 1px solid @color-orange;
+    //             &:before {
+    //                 content: '\e013';
+    //                 position: absolute;
+    //                 top: 9px;
+    //                 left: 4px;
+    //                 font-size: 1rem;
+    //                 color: @color-orange;
+    //                 display: inline-block;
+    //                 font-family: 'Glyphicons Halflings';
+    //                 font-style: normal;
+    //                 font-weight: 400;
+    //                 line-height: 1;
+    //                 -webkit-font-smoothing: antialiased;
+    //                 -moz-osx-font-smoothing: grayscale;
+    //             }
+    //         }
+    //     }
+    //     label {
+    //         font-weight: normal;
+    //         cursor: pointer;
+    //         padding: 5px 20px;
+    //         border: 2px solid @border-color;
+    //         margin-right: 5px;
+    //         font-size: 1_3rem;
+    //         &:hover {
+    //             border-color: @color-orange;
+    //             // outline: 1px solid @color-orange;
+    //         }
+    //     }
+    // }
     .btns {
         .btn-get-captcha {
             border: 1px solid @border-color;

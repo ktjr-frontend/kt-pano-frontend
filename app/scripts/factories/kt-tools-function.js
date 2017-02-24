@@ -25,9 +25,7 @@
                         $window.localStorage.token = res.token
                         var url = $rootScope.wantJumpUrl || ktUrlGet('/pano/overview', $.extend({ jump: true }, $location.search()))
                         $location.url(url)
-                            /*eslint-disable*/
-                        successCallback && successCallback(res)
-                            /*eslint-enable*/
+                        successCallback && successCallback(res) // eslint-disable-line
                     }
 
                     /*else {

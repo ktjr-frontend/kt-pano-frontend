@@ -6,7 +6,7 @@
     'use strict';
     angular.module('kt.pano')
 
-    // user service
+    // 用户基本信息
     .factory('ktUserService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/sessions', {}, {
             'get': {
@@ -14,6 +14,25 @@
                 // apiMock: true,
                 // cache: ktAjaxCache
             }
+        })
+    })
+
+    // 用户业务详细信息
+    .factory('ktUserInfoService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/person/info')
+    })
+
+    // 偏好资产
+    .factory('ktAssetTypeService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/asset_types/:id', {
+            id: '@id'
+        })
+    })
+
+    // 业务偏好
+    .factory('ktBusinessTypeService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/business_types/:id', {
+            id: '@id'
         })
     })
 

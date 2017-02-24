@@ -2,11 +2,18 @@
     <div class="row">
         <div class="col-md-12">
             <div class="clfix">
-                <h3 class="title">上传名片</h3>
-                <div class="sub-title">请上传与注册手机号一致的名片信息<br>如名片信息分布在正反两面，请将正反两张名片摆在一起拍照</div>
+                <kt-register-flow step="2"></kt-register-flow>
+                <!-- <h3 class="title">上传名片</h3>
+                <div class="sub-title">请上传与注册手机号一致的名片信息<br>如名片信息分布在正反两面，请将正反两张名片摆在一起拍照</div> -->
             </div>
             <div class="hpanel">
                 <div class="panel-body">
+                    <div class="top-buttons">
+                        <button ng-click="skip()">跳过</button>
+                    </div>
+                    <h3 class="title">名片认证<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="完成认证，获得更多用户权限" class="icon-pano icon-info f1_2rem ml5"></i></h3>
+                    <p>*请上传与注册手机号一致的名片信息</p>
+                    <small class="mb10">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small>
                     <div kt-business-card kt-submit="submitForm()" kt-user="user" upload-type="normal"></div>
                     <!-- <div ng-include="'views/_upload_business_card_form.html'"></div> -->
                     <!--<form id="perfectForm" novalidate name="perfectForm" class="form-horizontal" kt-accessible-form>

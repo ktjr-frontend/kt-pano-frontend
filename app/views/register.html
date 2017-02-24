@@ -2,22 +2,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="clfix">
-                <h3 class="title fl">注册 PANO</h3>
+                <kt-register-flow step="1"></kt-register-flow>
             </div>
             <div class="hpanel">
                 <div class="panel-body">
+                    <h3 class="title">填写注册信息</h3>
                     <form id="registerForm" novalidate autocomplete="off" autofill="off" name="registerForm" class="form-horizontal" kt-accessible-form>
                         <div>
-                            <div class="form-group" ng-class="{'has-error':registerForm.inviter_code.$invalid && registerForm.inviter_code.$dirty}">
-                                <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 ctl">*</span>邀请码</label> -->
+                            <!-- <div class="form-group" ng-class="{'has-error':registerForm.inviter_code.$invalid && registerForm.inviter_code.$dirty}">
                                 <div class="col-md-12">
-                                    <!-- <input autofocus kt-validate-on-blur ng-minlength="6" ng-maxlength="6" placeholder="邀请码（不区分大小写）（选填）" type="text" required="required" ng-model="registerUser.inviter_code" id="" class="form-control" name="inviter_code"> -->
                                     <input autofocus placeholder="邀请码（不区分大小写）（选填）" type="text" ng-model="registerUser.inviter_code" id="" class="form-control" name="inviter_code">
-                                    <!-- <div class="mt5 text-warning fl" ng-messages="registerForm.inviter_code.$dirty && registerForm.inviter_code.$error">
-                                        <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请填写邀请码</div>
-                                        <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>请输入6位邀请码</div>
-                                        <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>请输入6位邀请码</div>
-                                    </div> -->
                                     <div class="text-warning input-tip mt5 fr">
                                         <span ng-mouseenter="QRCodeVisible = true" ng-mouseleave="QRCodeVisible = false">如何获取邀请码？</span>
                                         <div class="qtcode" ng-show="QRCodeVisible">
@@ -28,7 +22,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group" ng-class="{'has-error':registerForm.name.$invalid && registerForm.name.$dirty}">
                                 <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>姓名</label> -->
                                 <div class="col-md-12">
@@ -40,24 +34,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" ng-class="{'has-error':registerForm.company.$invalid && registerForm.company.$dirty}">
-                                <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司全称</label> -->
+                            <!--<div class="form-group" ng-class="{'has-error':registerForm.company.$invalid && registerForm.company.$dirty}">
+                                <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司全称</label> ~~>
                                 <div class="col-md-12">
                                     <input ng-maxlength="50" ng-minlength="2" placeholder="您的公司全称" kt-validate-on-blur type="text" required ng-model="registerUser.company" id="" class="form-control" name="company">
                                     <div class="mt5 text-warning" ng-messages="registerForm.company.$dirty && registerForm.company.$error">
                                         <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入公司全称</div>
                                         <div ng-message="minlength"><i class="fa fa-frown-o fb mr5"></i>不能小于2个字符</div>
                                         <div ng-message="maxlength"><i class="fa fa-frown-o fb mr5"></i>不能大于50个字符</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--<div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$dirty}">
-                                <!~~ <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label> ~~>
-                                <div class="col-md-12">
-                                    <input placeholder="您的工作邮箱" kt-validate-on-blur type="email" required ng-model="user.email" id="" class="form-control" name="email">
-                                    <div class="mt5 text-warning" ng-messages="registerForm.email.$dirty && registerForm.email.$error">
-                                        <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入您的工作邮箱</div>
-                                        <div ng-message="email"><i class="fa fa-frown-o fb mr5"></i>邮箱格式不正确</div>
                                     </div>
                                 </div>
                             </div>-->
@@ -71,6 +55,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$dirty}">
+                                <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label> -->
+                                <div class="col-md-12">
+                                    <input placeholder="填写邮箱将能定期获取最新市场数据周报(选填)" kt-validate-on-blur type="email" ng-model="user.email" id="" class="form-control" name="email">
+                                    <div class="mt5 text-warning" ng-messages="registerForm.email.$dirty && registerForm.email.$error">
+                                        <!-- <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入您的工作邮箱</div> -->
+                                        <div ng-message="email"><i class="fa fa-frown-o fb mr5"></i>邮箱格式不正确</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group" ng-class="{'has-error':registerForm.img_captcha.$invalid && registerForm.img_captcha.$dirty}">
                                 <div class="col-md-12">
                                     <input style="width: 228px;" placeholder="输入图形验证码" kt-validate-on-blur type="text" required="required" ng-pattern="/^[A-Za-z0-9]{4}$/" ng-model="registerUser.img_captcha" id="img_captcha" class="form-control fl" name="img_captcha">
@@ -165,7 +160,7 @@
                         <div class="form-group">
                             <div class="col-md-12 clfix">
                                 <div kt-loading-status height="32" width="32" ignores="/api/v1/shadows"></div>
-                                <button class="btn btn-navy-blue btn-block btn-lg" ng-click="bdTrack(['注册页', '点击', '注册']);submitForm('captcha')" ng-disabled="registerForm.$invalid || pendingRequests">注 册</button>
+                                <button class="btn btn-navy-blue btn-block btn-lg" ng-click="bdTrack(['注册页', '点击', '下一步']);submitForm('captcha')" ng-disabled="registerForm.$invalid || pendingRequests">下一步</button>
                             </div>
                             <div class="col-md-12 text-center mt20">
                                 已有账号，直接 <a title="直接登录" class="tu" role="button" ng-click="bdTrack(['注册页', '点击', '登录'])" ui-sref="account.login">登录</a>

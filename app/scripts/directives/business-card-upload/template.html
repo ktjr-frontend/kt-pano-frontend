@@ -31,7 +31,7 @@
     <div class="form-group mt40" ng-show="uploadType === 'normal'">
         <div class="col-md-12 clfix">
             <div kt-loading-status height="32" width="32" ignores="/api/v1/shadows,/api/v1/cards[get|delete]"></div>
-            <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">提交</button>
+            <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">下一步</button>
         </div>
     </div>
     <div class="modal-footer" ng-show="uploadType === 'dialog'">
