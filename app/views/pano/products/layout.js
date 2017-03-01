@@ -2,7 +2,8 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductsLayoutCtrl', function($scope, $rootScope, $window, $timeout, $state, $location, ktSweetAlert, ktDataHelper) {
+        .controller('ktProductsLayoutCtrl', function($scope, $rootScope, $window, $timeout,
+            $state, $location, ktSweetAlert, ktDataHelper, ktUpgradeMember) {
             // var perPageCount = ktDataHelper.getPerPage()
             var perPageCount = 10
             var search = $location.search()
@@ -71,6 +72,11 @@
                 if (event.keyCode !== 13) return
                 $rootScope.bdTrack(['产品信息页', '确认', '搜索', '回车'])
                 $scope.goTo(key, value)
+            }
+
+            // 升级会员
+            $scope.upgrade = function() {
+                ktUpgradeMember()
             }
 
             // $scope.$on('totalItemGot', function(event, data) { //totalItem 不满足初始page的会自动跳转到第一页

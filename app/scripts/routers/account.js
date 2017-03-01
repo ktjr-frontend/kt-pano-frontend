@@ -62,7 +62,15 @@
                     controller: 'ktPerfectCtrl',
                     data: {
                         pageTitle: '上传名片',
-                        specialClass: 'account-page register-page'
+                        specialClass: 'account-page register-page',
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
                     }
                 },
 
@@ -95,7 +103,15 @@
                     controller: 'ktPreferCtrl',
                     data: {
                         pageTitle: '偏好设置',
-                        specialClass: 'account-page register-page'
+                        specialClass: 'account-page register-page',
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
                     }
                 },
                 'account.login': {
@@ -105,11 +121,20 @@
                     controller: 'ktLoginCtrl',
                     data: {
                         pageTitle: '登录',
-                        specialClass: 'account-page login-page'
+                        specialClass: 'account-page login-page',
+                        skipAuth: true,
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
                     }
                 },
                 'account.register': {
-                    url: '/register',
+                    url: '/register?_u',
                     templateUrl: 'views/register.html',
                     resolve: ktLazyResolve([
                         'scripts/directives/register-flow/style.css',
@@ -119,7 +144,16 @@
                     controller: 'ktRegisterCtrl',
                     data: {
                         pageTitle: '入会',
-                        specialClass: 'account-page register-page'
+                        specialClass: 'account-page register-page',
+                        skipAuth: true,
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
                     }
                 },
                 /*'account.confirm': {

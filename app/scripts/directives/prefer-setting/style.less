@@ -1,3 +1,22 @@
+.modal-dialog {
+    #preferForm {
+        .form-group {
+            &>label {
+                position: relative;
+                &:after {
+                    content: '';
+                    height: 0;
+                    position: absolute;
+                    border-bottom: 1px solid #f3f5f8;
+                    left: 15px;
+                    right: 15px;
+                    bottom: -10px;
+                }
+            }
+        }
+    }
+}
+
 #preferForm {
     label {
         font-size: 15px;
@@ -6,6 +25,9 @@
             color: #8d919a;
             margin-left: 10px;
         }
+    }
+    .btn-add {
+        display: none;
     }
     .checkbox-label {
         float: left;
@@ -44,6 +66,7 @@
             background: #606b83;
             color: white;
             font-size: 12px;
+            display: inline-block;
             &:hover {
                 background: lighten(#606b83, 5%);
             }

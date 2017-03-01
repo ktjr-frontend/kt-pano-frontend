@@ -10,21 +10,19 @@
             scope: {
                 ktSubmit: '&',
                 close: '&dialogClose',
-                uploadType: '@'
-                    // userInfo: '=ktUserInfo'
+                uploadType: '@',
+                userInfo: '=?ktUserInfo'
             },
             templateUrl: 'scripts/directives/prefer-setting/template.html',
             link: function($scope) {
                 var ktSubmit = $scope.ktSubmit
                 var close = $scope.close
                 $scope.user = {}
-                $scope.userInfo = {}
+                    // $scope.userInfo = $scope.userInfo || {}
                 $scope.hasAssetType = '' // 辅助用于校验
                 $scope.hasBusinessType = '' // 辅助用于校验
 
-                // 获取用户详细信息
-                ktUserInfoService.get(function(data) {
-                    $.extend($scope.userInfo, data)
+                function initView(data) {
                     $scope.user.asset_types = _.map(data.asset_types.selected, 'id')
                     $scope.user.business_types = _.map(data.business_types.selected, 'id')
                         // 监听用于重新验证
@@ -40,13 +38,27 @@
                         $scope.preferForm.businessType.$setDirty()
                         $scope.preferForm.businessType.$validate()
                     })
-                })
+                }
+
+                if (!$scope.userInfo) {
+                    $scope.userInfo = {}
+
+                    // 获取用户详细信息
+                    ktUserInfoService.get(function(data) {
+                        $.extend($scope.userInfo, data)
+                        initView(data)
+                    })
+                } else {
+                    initView($scope.userInfo)
+                }
 
                 // 是否有自定义偏好资产标签
                 $scope.assetTypesHasCustomTag = function() {
-                    return $scope.userInfo.asset_types && _.some($scope.userInfo.asset_types.all, {
-                        customized: true
-                    })
+                    return $scope.userInfo &&
+                        $scope.userInfo.asset_types &&
+                        _.some($scope.userInfo.asset_types.all, {
+                            customized: true
+                        })
                 }
 
                 // 自定义偏好资产标签
@@ -55,7 +67,7 @@
                         size: 'md',
                         backdrop: 'static',
                         // animation: false,
-                        templateUrl: 'scripts/directives/prefer-setting/add-tag-modal.html',
+                        templateUrl: 'views/modals/upgrade_member.html',
                         controller: function($scope, $uibModalInstance, ktAssetTypeService) { // eslint-disable-line
                             $scope.tag = {
                                 name: ''
@@ -104,9 +116,11 @@
 
                 // 是否有自定义业务偏好标签
                 $scope.businessTypesHasCustomTag = function() {
-                    return $scope.userInfo.business_types && _.some($scope.userInfo.business_types.all, {
-                        customized: true
-                    })
+                    return $scope.userInfo &&
+                        $scope.userInfo.business_types &&
+                        _.some($scope.userInfo.business_types.all, {
+                            customized: true
+                        })
                 }
 
                 // 自定义业务偏好标签

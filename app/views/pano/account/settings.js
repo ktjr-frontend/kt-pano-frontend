@@ -2,7 +2,9 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktSettingsCtrl', function($rootScope, $timeout, $scope, $state, $location, $uibModal, $window, ktSweetAlert, ktAccountService, ktCardsService) {
+        .controller('ktSettingsCtrl', function($rootScope, $timeout, $sce, $scope, $state,
+            $location, $uibModal, $window, ktSweetAlert, ktAccountService, ktCardsService,
+            ktUserInfoService, ktEnv, ktUpgradeMember) {
 
             // $scope.settingUser = $.extend(true, {}, $rootScope.user)
 
@@ -41,9 +43,21 @@
             // CacheFactory.clearAll()
             // var user = $rootScope.user
 
+            // 用户角色提示
+            $scope.memberGradeTip = $sce.trustAsHtml('未认证：注册成功但未进行名片认证，只可访问总览页。<br>已认证：注册成功且已完成名片认证，可访问市场数据和部分产品信息，不可进行检索等高级操作。<br>高级用户：除了可享受开通PANO全域的数据权限及数据检索，还可享受每月1次数据定制服务等。')
+
+            // 升级会员
+            $scope.upgrade = function() {
+                ktUpgradeMember()
+            }
+
             // 根据用户角色判断是否显示
-            $scope.visibleJudgement = function(permitsList) {
-                return _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
+            $scope.visibleJudgement = function(permitsList, group) {
+                var trafficStatus = _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
+                if (!group) {
+                    return trafficStatus
+                }
+                return _.includes(group, $rootScope.user ? $rootScope.user.group : '') && trafficStatus
             }
 
             // 更新用户资料
@@ -153,6 +167,16 @@
                 })
             }
 
+            var infoData
+                // 获取用户信息
+            ktUserInfoService.get(function(data) {
+                infoData = data
+                $rootScope.user.asset_types = _.map(data.asset_types.selected, 'name').join('，')
+                $rootScope.user.business_types = _.map(data.business_types.selected, 'name').join('，')
+            })
+
+            // 邀请链接
+            $scope.inviteUrl = ktEnv().host + '/pano/register?_u=' + $rootScope.user.id
             $scope.autoCopyDisabled = $window.isSafari() || $window.isSogou()
 
             $scope.copyTooltip = '按' + ($window.isWindows() ? 'Ctrl' : '⌘') + '-C复制!'
@@ -163,6 +187,7 @@
                 }, 1000)
             }
 
+            // 发送验证码
             $scope.sendInviteCode = function() {
                 ktAccountService.get({
                     content: 'inviter_code'
@@ -170,6 +195,37 @@
                     ktSweetAlert.success('发送成功，请注意查看您的手机。')
                 }, function(res) {
                     ktSweetAlert.error(res.error || '抱歉，系统繁忙。')
+                })
+            }
+
+            // 编辑业务偏好
+            $scope.updateAssetTypes = function() {
+                var updateAssetTypesModal = $uibModal.open({
+                    size: 'md',
+                    templateUrl: 'views/modals/prefer.html',
+                    controller: function($scope, $uibModalInstance) { // eslint-disable-line
+                        $scope.userInfo = infoData
+
+                        // 提交表单
+                        $scope.submitForm = function(data) {
+                            $rootScope.user.asset_types = _.chain($scope.userInfo.asset_types.all).filter(function(v) {
+                                return _.includes(data.asset_types, v.id)
+                            }).map('name').join('，').value()
+                            $rootScope.user.business_types = _.chain($scope.userInfo.business_types.all).filter(function(v) {
+                                return _.includes(data.business_types, v.id)
+                            }).map('name').join('，').value()
+                            $uibModalInstance.close()
+                        }
+
+                        $scope.close = function($event) {
+                            $event.preventDefault()
+                            $uibModalInstance.dismiss('cancel')
+                        }
+                    }
+                })
+
+                updateAssetTypesModal.result.then(function() {
+                    ktSweetAlert.success('业务偏好修改成功！')
                 })
             }
         })

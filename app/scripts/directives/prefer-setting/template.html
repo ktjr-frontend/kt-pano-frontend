@@ -3,6 +3,7 @@
     <div class="form-group" ng-class="{'has-error':preferForm.businessType.$invalid && preferForm.businessType.$dirty}">
         <label class="text-primary-dark text-left fn col-md-12 mt10">业务偏好<small>最多选择2个</small></label>
         <div class="col-md-12 mt15">
+            <div ng-show="!userInfo.business_types.all.length">加载中...</div>
             <div class="checkbox-label" ng-repeat="business_type in userInfo.business_types.all" ng-class="{'custom-tag': business_type.customized}">
                 <input id="{{'business_type_' + business_type.id}}" type="checkbox" checklist-model="user.business_types" checklist-value="business_type.id">
                 <label for="{{'business_type_' + business_type.id}}">
@@ -24,6 +25,7 @@
     <div class="form-group" ng-class="{'has-error':preferForm.assetType.$invalid && preferForm.assetType.$dirty}">
         <label class="text-primary-dark text-left fn col-md-12 mt10">偏好资产<small>最多选择3个</small></label>
         <div class="col-md-12 mt15">
+            <div ng-show="!userInfo.asset_types.all.length">加载中...</div>
             <div class="checkbox-label" ng-repeat="asset_type in userInfo.asset_types.all" ng-class="{'custom-tag': asset_type.customized}">
                 <input id="{{'asset_type_' + asset_type.id}}" type="checkbox" checklist-model="user.asset_types" checklist-value="asset_type.id">
                 <label for="{{'asset_type_' + asset_type.id}}">
@@ -47,9 +49,8 @@
             <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm()" ng-disabled="preferForm.$invalid || pendingRequests">完成</button>
         </div>
     </div>
-    <div class="modal-footer" ng-show="uploadType === 'dialog'">
-        <button class="btn btn-dark btn-navy-gradient" ng-if="user.status === 'rejected'" ng-click="closeDialog({$event:$event, isConfirm: true})" ng-disabled="preferForm.$invalid || pendingRequests">确定</button>
-        <button class="btn btn-dark btn-navy-gradient" ng-if="user.status === 'passed'" ng-click="submitForm()" ng-disabled="preferForm.$invalid || pendingRequests">确定</button>
+    <div class="modal-footer mt30" ng-show="uploadType === 'dialog'">
+        <button class="btn btn-dark btn-navy-gradient" ng-click="submitForm()" ng-disabled="preferForm.$invalid || pendingRequests">确定</button>
         <button class="btn btn-gray" ng-click="closeDialog({$event:$event})">取消</button>
     </div>
 </form>

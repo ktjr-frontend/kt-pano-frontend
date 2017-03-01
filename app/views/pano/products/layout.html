@@ -14,6 +14,17 @@
         </uib-tabset>
         <div class="panel-body b-t-none">
             <div class="filter-box bor-xxs">
+                <!-- 遮罩层 -->
+                <div class="mark" ng-if="user.group === 'certified'">
+                    <div class="inner">
+                        <i class="icon-pano icon-find"></i>
+                        <div class="inner-con">
+                            <p class="inner-tip">升级为高级帐号之后开启筛选功能</p>
+                            <a class="btn">升级</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- filter层 -->
                 <div class="filter-list has-toggle-btn">
                     <div class="filter-line clfix no-bd with-bg">
                         <div class="dropdowns-group clfix" ng-repeat="(index,filter) in shared.filters" ng-if="filter.type === 'dropdown'">

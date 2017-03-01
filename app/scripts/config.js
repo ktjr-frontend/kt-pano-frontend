@@ -6,7 +6,8 @@
 (function() {
     'use strict';
 
-    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider, $resourceProvider, $analyticsProvider, ktRouterProvider) {
+    function configApp($ocLazyLoadProvider, $compileProvider, $locationProvider, $httpProvider,
+        $resourceProvider, $analyticsProvider, ktRouterProvider) {
 
         // 开发环境开启调试模式，使用ng-inpector调试
         $compileProvider.debugInfoEnabled(true);
@@ -79,7 +80,10 @@
     angular
         .module('kt.pano')
         .config(configApp)
-        .run(function($rootScope, $state, $window, $location, $timeout, $http, ktLogService, ktPermits, ktHomeResource, uibPaginationConfig, ktUserService, ktS, ktSweetAlert, CacheFactory, ktEchartTheme1) {
+        .run(function($rootScope, $state, $window, $location,
+            $timeout, $http, ktLogService, ktPermits, ktHomeResource,
+            uibPaginationConfig, ktUserService, ktS, ktSweetAlert, CacheFactory,
+            ktEchartTheme1, ktRedirectState) {
 
             // ajax 请求的缓存策略
             /*eslint-disable*/
@@ -113,48 +117,12 @@
                 window.history.back()
             }
 
+            // 百度事件跟踪
             $rootScope.bdTrack = function(track) {
                 window._hmt && window._hmt.push(['_trackEvent'].concat(track)) // eslint-disable-line
             }
 
-            // 判断是否需要权限验证
-            function judgeUserPermit(user) {
-                if (!user || !user.grade) {
-                    return true
-                } else if (user.grade === '1' && user.status !== 'passed') {
-                    return true
-                } else if (user.grade === '0') {
-                    return true
-                }
-                return false
-            }
-
-            function permitInterceptor(event, toState, toParams, user) {
-                // 权限控制，无法控制刷新页面的行为
-                if (toState.data.permits && !toParams.jump) {
-                    if (!ktPermits(toState.data.permits)) {
-                        event.preventDefault()
-                        return
-                    }
-                    // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
-                } else if (toParams.jump && !toParams.forceJump) {
-                    if (user.status === 'initialized') {
-                        $state.go('account.perfect')
-                    } else if (user.status === 'rejected') {
-                        $state.go('pano.settings', { forceJump: true })
-                    } else if (user.status === 'pended' && toState.name !== 'pano.settings') {
-                        // if (user.grade === '1') {
-                        $state.go($rootScope.defaultRoute, { forceJump: true })
-                            // } else {
-                            //     $state.go('pano.settings', { forceJump: true }, { location: 'replace' })
-                            // }
-                    } else { // 默认跳转的state，可以移除跳转的标识jump，否则会在路由上存在jump
-                        $state.go(toState.name, { forceJump: true })
-                    }
-                }
-            }
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
-
                 // 通过url传播token 实现单点登录
                 if (toParams._t) {
                     $window.localStorage.token = decodeURIComponent(toParams._t)
@@ -162,34 +130,43 @@
 
                 if (!toState.resolve) { toState.resolve = {} }
 
-                // 路由权限拦截
-                if (toState.name.indexOf('pano.') > -1 && judgeUserPermit($rootScope.user)) {
-
-                    if (!$rootScope.user || !$rootScope.user.grade) {
-
-                        toState.resolve.user = [ // 注意这样会导致每个state都会reload，当前页面路由的改变会刷新页面 所以上面判断
-                            '$q',
-                            function($q) {
-                                var deferred = $q.defer();
-                                ktUserService.get(function(res) {
-                                    $rootScope.defaultRoute = 'pano.overview'
-                                    var user = $rootScope.user = res.account
-                                    permitInterceptor(event, toState, toParams, user)
-                                    deferred.resolve(user)
-                                }, function() {
-                                    deferred.resolve(null)
-                                })
-                                return deferred.promise
-                            }
-                        ]
+                if ($rootScope.user && $rootScope.user.group) {
+                    delete toState.resolve.user
+                    if (!ktPermits(toState)) {
+                        event.preventDefault()
+                        $state.go(ktRedirectState())
                     } else {
-                        delete toState.resolve.user
-                        $rootScope.defaultRoute = 'pano.overview'
-                        permitInterceptor(event, toState, toParams, $rootScope.user)
+                        $rootScope.wantGo = null
                     }
-                } else {
-                    toParams.jump = null
-                    toParams.forceJump = false
+                } else if (!toState.data.skipAuth) { // 略过权限校验
+                    toState.resolve.user = [
+                        '$q',
+                        function($q) {
+                            var deferred = $q.defer();
+                            ktUserService.get(function(res) {
+                                $rootScope.defaultRoute = 'pano.overview'
+                                res.account.group = 'certified'
+                                res.account.status = 'passed'
+                                $rootScope.user = res.account
+                                if (!ktPermits(toState)) {
+                                    // 决定路由何处
+                                    event.preventDefault()
+                                    $state.go(ktRedirectState())
+                                } else {
+                                    $rootScope.wantGo = null
+                                }
+                                deferred.resolve(res.account)
+                            }, function() {
+                                $rootScope.wantGo = {
+                                    toState: toState,
+                                    toParams: toParams
+                                }
+                                deferred.resolve(null)
+                            })
+                            return deferred.promise
+                        }
+                    ]
+                } else if (toState.data.skipAuth) {
                     delete toState.resolve.user
                 }
 
@@ -203,9 +180,6 @@
                     toParams.apimock = search.apimock
                 }
 
-                if (toState.name.indexOf('pano') > -1) {
-                    $rootScope.wantJumpUrl = $state.href(toState.name, toParams)
-                }
             })
 
             $rootScope.$on('$stateChangeError', function() {
@@ -243,13 +217,23 @@
             })
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-
-                toParams.forceJump = false
-                toParams.jump = null
-
-                // 存储非错误和登录注册框的url 供redirect或者返回用
-                if (toState.name.indexOf('pano') > -1) {
-                    $rootScope.wantJumpUrl = ''
+                // 非认证用户弹出提示
+                if ($rootScope.user && _.includes(toState.data.halfPermit, $rootScope.user.group)) {
+                    ktSweetAlert.swal({
+                        title: '',
+                        text: '请您先通过名片认证，才能获得更多权限',
+                        confirmButtonText: '去认证',
+                        showCancelButton: true,
+                        cancelButtonText: '取消',
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            $state.go('account.perfect')
+                        } else if (fromState.name) {
+                            $state.go(fromState.name, fromParams)
+                        } else {
+                            $state.go($rootScope.defaultRoute)
+                        }
+                    })
                 }
 
                 // 存储状态

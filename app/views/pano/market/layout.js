@@ -2,7 +2,8 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktMarketLayoutCtrl', function($scope, $rootScope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
+        .controller('ktMarketLayoutCtrl', function($scope, $rootScope, $state, $location,
+            ktSweetAlert, ktDataHelper, ktAnalyticsService, ktUpgradeMember) {
             $scope.shared = {
                 tab_show: true
             }
@@ -167,6 +168,11 @@
                     $state.go(state)
                     $rootScope.bdTrack(['市场数据页', '页面切换', state === 'pano.market.default' ? '资产类' : '资管类'])
                 }
+            }
+
+            // 升级会员
+            $scope.upgrade = function() {
+                ktUpgradeMember()
             }
 
             // 资产管理类数据

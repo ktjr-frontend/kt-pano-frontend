@@ -11,6 +11,7 @@
 
             $scope.QRCodeVisible = false
             $scope.registerUser = {
+                inviter_id: $state.params._u || '',
                 agreement: 1
             }
 
@@ -31,13 +32,13 @@
                             CacheFactory.clearAll()
                             $window.localStorage.token = res.token
                             $state.go('account.perfect')
-                            /*ktSweetAlert.swal({
-                                title: '注册成功！',
-                                text: '',
-                                type: 'success',
-                            }, function() {
-                                $state.go('account.perfect')
-                            })*/
+                                /*ktSweetAlert.swal({
+                                    title: '注册成功！',
+                                    text: '',
+                                    type: 'success',
+                                }, function() {
+                                    $state.go('account.perfect')
+                                })*/
                         }
                     })
 
