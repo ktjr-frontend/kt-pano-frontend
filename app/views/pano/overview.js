@@ -95,7 +95,7 @@
                 }
             }
 
-            // 气泡图-近七日和周平均
+            // 各平台发行量-收益率统计图
             var rateAmountChart = $scope.rateAmountChart = {
                 chartOptions: {},
                 yAxis: 'amount',
@@ -362,7 +362,7 @@
                 }
             }*/
 
-            // 期限发行量图-收益率
+            // 不同期限产品发行量-收益率统计图
             var durationAmountChart = $scope.durationAmountChart = {
                 chartOptions: {},
                 yAxis: 'amount',
@@ -510,7 +510,7 @@
                 }
             }
 
-            // 资产类型周统计占比图
+            // 不同资产类型产品发行量-收益率统计图
             var platformAssetTypeChart = $scope.platformAssetTypeChart = {
                 chartOptions: {},
                 yAxis: 'amount',

@@ -29,8 +29,8 @@
                             var wantGo = $rootScope.wantGo
                             $rootScope.defaultRoute = 'pano.overview'
                             var defaultState = $state.get($rootScope.defaultRoute)
-                            data.account.group = 'certified'
-                            data.account.status = 'pended'
+                            // data.account.group = 'certified'
+                            // data.account.status = 'pended'
                             $rootScope.user = data.account
 
                             if (wantGo && ktPermits(wantGo.toState, true)) {
@@ -126,7 +126,7 @@
                     backdrop: 'static',
                     // animation: false,
                     templateUrl: 'views/modals/upgrade_member.html',
-                    controller: function($scope, $rootScope, $uibModalInstance, $timeout, $window, ktEnv, ktRegisterService, ktSweetAlert) {
+                    controller: function($scope, $rootScope, $uibModalInstance, $timeout, $window, ktEnv, ktAccountService, ktSweetAlert) {
                         $scope.title = '升级到高级会员'
                         $scope.inviteUrl = ktEnv().host + '/pano/register?_u=' + $rootScope.user.id
                         $scope.user = {
@@ -144,7 +144,7 @@
 
                         // 提交微信号
                         $scope.submitForm = function() {
-                            ktRegisterService.save({
+                            ktAccountService.save({
                                 content: 'get_premium_by_wx',
                                 wx: $scope.user.wx
                             }, function() {

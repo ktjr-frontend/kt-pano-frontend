@@ -49,7 +49,7 @@
                             <a ng-click="upgrade()" class="ml10 f1_2rem hover-underline" ng-if="user.group === 'certified'">
                                升级到高级会员<i class="icon-pano icon-arrow-bold" style="display: inline-block;vertical-align: -1px;transform: scale(0.8)"></i>
                             </a>
-                            <span class="ml10 f1_2rem" ng-if="user.group === 'premium'">
+                            <span class="ml10 f1_2rem" ng-if="user.group === 'premium' && user.premium_duration">
                                 剩余期限<em ng-bind="{{user.premium_duration}}"></em>天
                             </span>
                             <!-- 会员文字提示 -->
@@ -166,7 +166,7 @@
                 <div class="f1_3rem" style="color:#666b76;">
                     邀请好友，获得高级权限，每成功邀请一个注册用户并认证通过，双方均可免费获得30天高级权限。高级权限期限可累计。
                 </div>
-                <div class="f1_5rem mt10">您已成功邀请好友<em class="text-warning-light ml2 mr2 f1_8rem" ng-bind="user.invitee_count"></em>人</div>
+                <div class="f1_5rem mt10">您已成功邀请好友<em class="text-warning-light ml2 mr2 f1_8rem" ng-bind="user.invitee_account_count"></em>人</div>
                 <pre ng-bind="inviteUrl" id="inviteUrl" class="mt10"></pre>
                 <a ng-show="autoCopyDisabled" class="btn btn-xs btn-dark" uib-tooltip="{{copyTooltip}}" tooltip-trigger="none" tooltip-placement="top" ngclipboard data-clipboard-target="#inviteUrl">复制链接</a>
                 <a ng-show="!autoCopyDisabled" class="btn btn-xs btn-dark" uib-tooltip="复制成功！" tooltip-trigger="none" tooltip-is-open="tooltipIsOpen" tooltip-placement="top" ngclipboard ngclipboard-success="copySuccess()" data-clipboard-target="#inviteUrl">复制链接</a>
