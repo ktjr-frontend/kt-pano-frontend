@@ -20,7 +20,7 @@
                     var ktSubmit = $scope.ktSubmit
                     var close = $scope.close
                     $scope.upload = function(file) {
-                        if (!file) return
+                        if (!file || !file.length) return
                         $scope.pendingUpload = true
 
                         ktBusinessCardUpload({
@@ -40,7 +40,8 @@
                     }
 
                     // 重新上传
-                    $scope.deleteCardUrl = function() {
+                    $scope.deleteCardUrl = function(event) {
+                        event.stopPropagation()
                         $scope.user.card_url = null
                         ktCardsService.delete()
                     }

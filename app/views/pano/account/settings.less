@@ -25,14 +25,26 @@
     i {
         font-style: normal;
     }
+    .invite-url-container {
+        padding-right: 50px;
+        position: relative;
+        .btn {
+            top: 50%;
+            transform: translateY(-50%);
+            right: -25px;
+            position: absolute;
+        }
+    }
     .alert-container {
         width: 1024px;
         margin: 0 auto;
         padding: 20px 80px;
         overflow: hidden;
+        position: relative;
     }
     .alert {
         // margin: 20px 50px -10px;
+        box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
         overflow: hidden;
         padding: 0px 30px;
         position: absolute;
@@ -41,7 +53,7 @@
         right: 0;
         border: 0;
         background: rgba(255, 255, 255, .9);
-        font-size: 1.5rem;
+        font-size: 14px;
         color: @color-1;
         .alert-body {
             padding-top: 6px;
@@ -49,7 +61,7 @@
             line-height: 1.7em;
         }
         .alert-footer {
-            padding: 20px 0;
+            padding: 30px 0 0;
             line-height: 30px;
         }
         em {
@@ -62,6 +74,18 @@
             color: #dddee1;
             font-size: 65px;
             margin-right: 15px;
+        }
+        .alert-close {
+            // color: @color-red;
+            position: absolute;
+            top: 10px;
+            right: 45px;
+            transform: rotate(45deg);
+            cursor: pointer;
+            font-size: 16px;
+            &:hover {
+                color: @color-red;
+            }
         }
     }
     .hpanel {
@@ -105,11 +129,14 @@
         }
         .key {
             color: @color-bright;
+            float: left;
         }
         .value {
             color: @color-1;
             position: relative;
             padding-left: 30px;
+            overflow: hidden;
+            display: block;
             .business-card-big {
                 position: absolute;
                 max-width: 500px;
@@ -140,7 +167,7 @@
             vertical-align: top;
         }
         .content {
-            padding-left: 96px;
+            // padding-left: 96px;
             font-size: 1.3rem;
             color: lighten(@color-bright, 30%);
             // margin-top: 10px;

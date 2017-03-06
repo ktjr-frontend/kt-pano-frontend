@@ -1,7 +1,7 @@
 <form id="preferForm" novalidate name="preferForm" class="form-horizontal" kt-accessible-form>
     <!-- 业务偏好选择 -->
     <div class="form-group" ng-class="{'has-error':preferForm.businessType.$invalid && preferForm.businessType.$dirty}">
-        <label class="text-primary-dark text-left fn col-md-12 mt10">业务偏好<small>最多选择2个</small></label>
+        <label class="text-primary-dark text-left fn col-md-12 mt10">业务角色<small>最多选择2个</small></label>
         <div class="col-md-12 mt15">
             <div ng-show="!userInfo.business_types.all.length">加载中...</div>
             <div class="checkbox-label" ng-repeat="business_type in userInfo.business_types.all" ng-class="{'custom-tag': business_type.customized}">
@@ -14,9 +14,9 @@
             <a class="btn btn-add fl" ng-show="!businessTypesHasCustomTag()" ng-click="customBusinessType()">
                 <i class="icon-pano icon-plus"></i>
             </a>
-            <input type="hidden" name="businessType" ng-model="hasBusinessType" required kt-checklist-length="2">
+            <input type="hidden" name="businessType" ng-model="hasBusinessType" kt-checklist-length="2">
             <div class="mt5 text-warning cbs" ng-messages="preferForm.businessType.$dirty && preferForm.businessType.$error">
-                <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的偏好资产</div>
+                <!-- <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的业务偏好</div> -->
                 <div ng-message="ktChecklistLength"><i class="fa fa-frown-o fb mr5"></i>偏好资产不能超过2个</div>
             </div>
         </div>
@@ -36,9 +36,9 @@
             <a class="btn btn-add fl" ng-show="!assetTypesHasCustomTag()" ng-click="customAssetType()">
                 <i class="icon-pano icon-plus"></i>
             </a>
-            <input type="hidden" name="assetType" ng-model="hasAssetType" required kt-checklist-length="3">
+            <input type="hidden" name="assetType" ng-model="hasAssetType" kt-checklist-length="3">
             <div class="mt5 text-warning cbs" ng-messages="preferForm.assetType.$dirty && preferForm.assetType.$error">
-                <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的偏好资产</div>
+                <!-- <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请选择您关注的偏好资产</div> -->
                 <div ng-message="ktChecklistLength"><i class="fa fa-frown-o fb mr5"></i>偏好资产不能超过3个</div>
             </div>
         </div>
@@ -46,7 +46,7 @@
     <div class="form-group mt40" ng-show="uploadType === 'normal'">
         <div class="col-md-12 clfix">
             <div kt-loading-status height="32" width="32" ignores="/api/v1/shadows"></div>
-            <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm()" ng-disabled="preferForm.$invalid || pendingRequests">完成</button>
+            <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm()" ng-disabled="preferForm.$invalid || pendingRequests || (!hasAssetType && !hasBusinessType)">完成</button>
         </div>
     </div>
     <div class="modal-footer mt30" ng-show="uploadType === 'dialog'">

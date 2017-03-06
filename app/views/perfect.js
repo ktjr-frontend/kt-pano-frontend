@@ -22,11 +22,11 @@
                 ktSweetAlert.swal({
                     title: '',
                     text: '上传名片才能完成认证哦',
-                    confirmButtonText: '残忍拒绝',
+                    confirmButtonText: '马上去传',
                     showCancelButton: true,
-                    cancelButtonText: '马上去传',
+                    cancelButtonText: '残忍拒绝',
                 }, function(isConfirm) {
-                    if (isConfirm) {
+                    if (!isConfirm) {
                         $state.go('account.prefer')
                     }
                 })

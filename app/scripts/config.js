@@ -145,7 +145,7 @@
                             var deferred = $q.defer();
                             ktUserService.get(function(res) {
                                 $rootScope.defaultRoute = 'pano.overview'
-                                // res.account.group = 'certified'
+                                // res.account.group = 'normal'
                                 // res.account.status = 'passed'
                                 $rootScope.user = res.account
                                 if (!ktPermits(toState)) {

@@ -42,9 +42,10 @@
 
             // CacheFactory.clearAll()
             // var user = $rootScope.user
+            $scope.alertVisible = true
 
             // 用户角色提示
-            $scope.memberGradeTip = $sce.trustAsHtml('未认证：注册成功但未进行名片认证，只可访问总览页。<br>已认证：注册成功且已完成名片认证，可访问市场数据和部分产品信息，不可进行检索等高级操作。<br>高级用户：除了可享受开通PANO全域的数据权限及数据检索，还可享受每月1次数据定制服务等。')
+            $scope.memberGradeTip = $sce.trustAsHtml('非认证：注册成功但未进行名片认证，只可访问总览页。<br>已认证：注册成功且已完成名片认证，可访问市场数据和部分产品信息，不可进行检索等高级操作。<br>高级用户：除了可享受开通PANO全域的数据权限及数据检索，还可享受每月1次数据定制服务等。')
 
             // 升级会员
             $scope.upgrade = function() {
@@ -176,7 +177,7 @@
             })
 
             // 邀请链接
-            $scope.inviteUrl = ktEnv().host + '/pano/register?_u=' + $rootScope.user.id
+            $scope.inviteUrl = ktEnv().host + '/account/register?_u=' + $rootScope.user.id
             $scope.autoCopyDisabled = $window.isSafari() || $window.isSogou()
 
             $scope.copyTooltip = '按' + ($window.isWindows() ? 'Ctrl' : '⌘') + '-C复制!'

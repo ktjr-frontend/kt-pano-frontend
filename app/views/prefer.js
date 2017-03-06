@@ -11,6 +11,10 @@
 
             // 提交表单
             $scope.submitForm = function() {
+                ktSweetAlert.swal({
+                    title: '',
+                    text: '恭喜您注册成功！'
+                })
                 $state.go($rootScope.defaultRoute || 'pano.overview')
             }
 
@@ -18,11 +22,15 @@
                 ktSweetAlert.swal({
                     title: '',
                     text: '设置了业务偏好，才可以获得更多个性化服务哦',
-                    confirmButtonText: '不需要',
+                    confirmButtonText: '马上设置',
                     showCancelButton: true,
-                    cancelButtonText: '马上设置',
+                    cancelButtonText: '不需要',
                 }, function(isConfirm) {
-                    if (isConfirm) {
+                    if (!isConfirm) {
+                        ktSweetAlert.swal({
+                            title: '',
+                            text: '恭喜您注册成功！'
+                        })
                         $state.go($rootScope.defaultRoute || 'pano.overview')
                     }
                 })

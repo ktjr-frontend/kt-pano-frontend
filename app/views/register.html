@@ -58,7 +58,7 @@
                             <div class="form-group" ng-class="{'has-error':registerForm.email.$invalid && registerForm.email.$dirty}">
                                 <!-- <label class="text-primary-dark control-label col-md-3"><span class="ml5 f1_4rem ctl">*</span>公司邮箱</label> -->
                                 <div class="col-md-12">
-                                    <input placeholder="填写邮箱将能定期获取最新市场数据周报(选填)" kt-validate-on-blur type="email" ng-model="user.email" id="" class="form-control" name="email">
+                                    <input placeholder="请输入邮箱（选填）可获取数据周报" kt-validate-on-blur type="email" ng-model="registerUser.email" id="" class="form-control" name="email">
                                     <div class="mt5 text-warning" ng-messages="registerForm.email.$dirty && registerForm.email.$error">
                                         <!-- <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请输入您的工作邮箱</div> -->
                                         <div ng-message="email"><i class="fa fa-frown-o fb mr5"></i>邮箱格式不正确</div>

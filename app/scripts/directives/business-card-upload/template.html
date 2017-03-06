@@ -8,7 +8,7 @@
                     <div class="buttons upload">
                         <div class="btn btn-file" ng-class="{disabled: pendingUpload}">
                             <span>本地上传</span>
-                            <input ngf-validate="{size: {max: '2MB'}" ngf-select="upload($files, $event)" ng-disabled="pendingUpload" accept="image/*" ngf-accept="'image/*'" ngf-pattern="'.jpg,.jpeg,.png,.bmp,.gif'" ngf-multiple="false" type="file" name="file" ng-model="file">
+                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="upload($files, $event)" ng-disabled="pendingUpload" accept="image/*" ngf-accept="'image/*'" ngf-pattern="'.jpg,.jpeg,.png,.bmp,.gif'" ngf-multiple="false" type="file" name="file" ng-model="file">
                         </div>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                 <div class="qrcode-body">
                     <img ng-src="{{user.card_url}}" alt="您的名片" class="qrcode">
                     <div class="buttons delete">
-                        <button class="btn btn-file" ng-click="deleteCardUrl()">重新上传</button>
+                        <button class="btn btn-file" ng-click="deleteCardUrl($event)">重新上传</button>
                     </div>
                 </div>
             </div>

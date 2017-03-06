@@ -67,11 +67,13 @@
                         size: 'md',
                         backdrop: 'static',
                         // animation: false,
-                        templateUrl: 'views/modals/upgrade_member.html',
+                        templateUrl: 'scripts/directives/prefer-setting/add-tag-modal.html',
                         controller: function($scope, $uibModalInstance, ktAssetTypeService) { // eslint-disable-line
                             $scope.tag = {
                                 name: ''
                             }
+
+                            $scope.title = '自定义标签'
 
                             $scope.submitForm = function() {
                                 $scope.pendingRequests = true
@@ -135,6 +137,8 @@
                                 name: ''
                             }
 
+                            $scope.title = '自定义标签'
+
                             $scope.submitForm = function() {
                                 $scope.pendingRequests = true
                                 ktBusinessTypeService.save($scope.tag, function(data) {
@@ -189,6 +193,14 @@
                     })
 
                     $q.all(ap.$promise, bp.$promise).then(function() {
+                        var assetTypesArr = $scope.user.asset_types
+                        $scope.userInfo.asset_types.selected = _.filter($scope.userInfo.asset_types.all, function(v) {
+                            return _.includes(assetTypesArr, v.id)
+                        })
+                        var businessTypesArr = $scope.user.business_types
+                        $scope.userInfo.business_types.selected = _.filter($scope.userInfo.business_types.all, function(v) {
+                            return _.includes(businessTypesArr, v.id)
+                        })
                         ktSubmit && ktSubmit({ data: $scope.user }) // eslint-disable-line
                     }).catch(function(res) {
                         ktSweetAlert.error(res.error || '保存失败！')

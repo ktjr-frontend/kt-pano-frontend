@@ -11,7 +11,7 @@
 
             $scope.QRCodeVisible = false
             $scope.registerUser = {
-                inviter_id: $state.params._u || '',
+                inviter_account_id: $state.params._u || '',
                 agreement: 1
             }
 
