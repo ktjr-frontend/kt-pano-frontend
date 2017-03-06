@@ -27,7 +27,7 @@
                     cancelButtonText: '残忍拒绝',
                 }, function(isConfirm) {
                     if (!isConfirm) {
-                        $state.go('account.prefer')
+                        $state.go('account.prefer', { certifyApplication: $state.params.certifyApplication })
                     }
                 })
             }

@@ -6,18 +6,18 @@
         <div class="modal-body ov-h">
             <div class="form-group">
                 <label class="text-primary-dark control-label">方式一：邀请好友注册</label>
-                <p>每成功邀请一个注册用户并认证通过，您和好友均可免费获得30天高级会员。高级会员期限可累计。</p>
+                <p>每成功邀请一位金融相关的用户注册并通过认证，您和好友均可免费获得30天高级用户权限。多邀可累计。</p>
                 <pre id="inviteUrl" ng-bind="inviteUrl"></pre>
                 <div class="text-center">
                     <!-- 不支持复制 safari & sogou -->
                     <a ng-show="autoCopyDisabled" class="btn btn-sm btn-dark" uib-tooltip="{{copyTooltip}}" tooltip-trigger="none" tooltip-placement="top" ngclipboard data-clipboard-target="#inviteUrl">复制邀请链接</a>
                     <!-- 支持复制 -->
-                    <a ng-show="!autoCopyDisabled" class="btn btn-sm btn-dark" uib-tooltip="复制成功！" tooltip-trigger="none" tooltip-is-open="tooltipIsOpen" tooltip-placement="top" ngclipboard ngclipboard-success="copySuccess()" data-clipboard-target="#inviteUrl">复制邀请链接</a>
+                    <a ng-show="!autoCopyDisabled" class="btn btn-sm btn-dark" uib-tooltip="已复制到剪切板！" tooltip-trigger="none" tooltip-is-open="tooltipIsOpen" tooltip-placement="top" ngclipboard ngclipboard-success="copySuccess()" data-clipboard-target="#inviteUrl">复制邀请链接</a>
                 </div>
             </div>
             <div class="form-group" ng-class="{'has-error':upgradeMemberForm.wx.$invalid && upgradeMemberForm.wx.$dirty}">
-                <label class="text-primary-dark control-label">方式二：协助反馈产品建议</label>
-                <p>留取微信号，工作人员免费为您开通高级权限，希望您能在使用后为我们提出宝贵建议。</p>
+                <label class="text-primary-dark control-label">方式二：参与开通PANO用户体验计划（每月限量10人）</label>
+                <p>参与开通PANO用户体验计划，即可免费获得30天高级用户权限。留下您的微信号，PANO小助手会主动与您联系。</p>
                 <div ng-show="wxInputVisible">
                     <input placeholder="输入您的微信号" style="width:365px;" kt-validate-on-blur type="wx" required ng-model="user.wx" class="form-control fl" name="wx">
                     <button class="btn btn-dark btn-sm fl ml5">确定</button>

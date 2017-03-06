@@ -128,7 +128,7 @@
                     templateUrl: 'views/modals/upgrade_member.html',
                     controller: function($scope, $rootScope, $uibModalInstance, $timeout, $window, ktEnv, ktAccountService, ktSweetAlert) {
                         $scope.title = '升级到高级会员'
-                        $scope.inviteUrl = ktEnv().host + '/pano/register?_u=' + $rootScope.user.id
+                        $scope.inviteUrl = ktEnv().host + '/account/register?_u=' + $rootScope.user.id
                         $scope.user = {
                             wx: $rootScope.user.wx
                         }

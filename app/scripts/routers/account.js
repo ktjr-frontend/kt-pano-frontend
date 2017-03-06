@@ -34,7 +34,7 @@
 
                 // 上传名片
                 'account.perfect': {
-                    url: '/perfect',
+                    url: '/perfect?certifyApplication',
                     templateUrl: 'views/perfect.html',
                     resolve: ktLazyResolve([
                         'common/directives/kt-qrcode-directive.js',
@@ -76,7 +76,7 @@
 
                 // 偏好设置
                 'account.prefer': {
-                    url: '/prefer',
+                    url: '/prefer?certifyApplication',
                     templateUrl: 'views/prefer.html',
                     resolve: ktLazyResolve([
                         'scripts/directives/register-flow/style.css',

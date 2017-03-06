@@ -181,6 +181,7 @@
             $scope.autoCopyDisabled = $window.isSafari() || $window.isSogou()
 
             $scope.copyTooltip = '按' + ($window.isWindows() ? 'Ctrl' : '⌘') + '-C复制!'
+            $scope.tooltipIsOpen = false
             $scope.copySuccess = function() {
                 $scope.tooltipIsOpen = true
                 $timeout(function() {
