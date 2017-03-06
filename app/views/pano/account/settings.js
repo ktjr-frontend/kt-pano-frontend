@@ -42,7 +42,12 @@
 
             // CacheFactory.clearAll()
             // var user = $rootScope.user
-            $scope.alertVisible = true
+            // 避免由于轮询获取用户card_url导致的非认证用户有名片的问题
+            if ($rootScope.user.group === 'normal') {
+                $rootScope.user.card_url = null
+            }
+
+            $scope.alertVisible = true // 审核状态提示栏
 
             // 用户角色提示
             $scope.memberGradeTip = $sce.trustAsHtml('非认证：注册成功但未进行名片认证，只可访问总览页。<br>已认证：注册成功且已完成名片认证，可访问市场数据和部分产品信息，不可进行检索等高级操作。<br>高级用户：除了可享受开通PANO全域的数据权限及数据检索，还可享受每月1次数据定制服务等。')

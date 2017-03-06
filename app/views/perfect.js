@@ -27,6 +27,8 @@
                     cancelButtonText: '残忍拒绝',
                 }, function(isConfirm) {
                     if (!isConfirm) {
+                        $rootScope.user.card_url = null
+                        debugger
                         $state.go('account.prefer', { certifyApplication: $state.params.certifyApplication })
                     }
                 })

@@ -55,7 +55,7 @@
                             ktCardsService.get(function(data) {
                                 if (data.user && data.user.card_url) {
                                     var img = new Image()
-                                    img.onload = function () {
+                                    img.onload = function() {
                                         $scope.user.card_url = data.user.card_url
                                         img = null
                                     }
@@ -69,7 +69,7 @@
                     }
                     getUserCard()
 
-                    $rootScope.$on('$stateChangeSuccess', function () {
+                    $rootScope.$on('$stateChangeSuccess', function() {
                         $timeout.cancel(getUserCardPromise)
                         userCardDisabled = true
                     })
@@ -93,16 +93,10 @@
                                 content: 'confirm'
                             }, function(data) {
                                 $scope.pendingRequests = false
-                                // ktSweetAlert.swal({
-                                //     title: '提交成功！',
-                                //     text: '',
-                                //     type: 'success',
-                                // }, function() {
-                                    userCardDisabled = true
-                                    $timeout.cancel(getUserCardPromise)
-                                    $.extend($scope.user, data.account)
-                                    ktSubmit()
-                                // })
+                                userCardDisabled = true
+                                $timeout.cancel(getUserCardPromise)
+                                $.extend($scope.user, data.account)
+                                ktSubmit()
                             },
                             function(res) {
                                 $scope.pendingRequests = false

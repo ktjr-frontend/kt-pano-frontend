@@ -172,7 +172,16 @@
 
             // 升级会员
             $scope.upgrade = function() {
-                ktUpgradeMember()
+                if ($rootScope.user.status === 'pended') {
+                    ktSweetAlert.swal({
+                        title: '',
+                        html: true,
+                        confirmButtonText: '我知道了',
+                        text: '您的帐号正在审核中，待审核通过后方可进行升级操作。<br/> 审核结果会在1个工作日内以邮件的形式通知，请您耐心等待。'
+                    })
+                } else {
+                    ktUpgradeMember()
+                }
             }
 
             // 资产管理类数据
