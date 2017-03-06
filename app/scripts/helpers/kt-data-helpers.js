@@ -7,7 +7,7 @@
     // 针对资产类型，单独配色
     var dimensionSpecialColor = {
         asset_type: [
-            '#6691d8', '#5cbae1', '#68d5b2', '#929fed', '#bf99ec', '#eace81', '#f4956f'
+            '#6691d8', '#5cbae1', '#68d5b2', '#929fed', '#bf99ec', '#eace81', '#f4956f', '#e97384'
         ]
     }
 
