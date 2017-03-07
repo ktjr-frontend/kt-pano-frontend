@@ -9,13 +9,15 @@
                 $state.go('home.index')
             }
 
+            $scope.isCertifyApplication = $state.params.certifyApplication == 1 // eslint-disable-line
+
             // CacheFactory.clearAll()
             $scope.user = $rootScope.user = getUser
 
             // 提交表单
             $scope.submitForm = function() {
                 // CacheFactory.clearAll()
-                $state.go('account.prefer')
+                $state.go('account.prefer', { certifyApplication: $state.params.certifyApplication })
             }
 
             $scope.skip = function() {
@@ -28,7 +30,6 @@
                 }, function(isConfirm) {
                     if (!isConfirm) {
                         $rootScope.user.card_url = null
-                        debugger
                         $state.go('account.prefer', { certifyApplication: $state.params.certifyApplication })
                     }
                 })

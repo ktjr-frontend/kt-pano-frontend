@@ -8,7 +8,7 @@
             </div>
             <div class="hpanel">
                 <div class="panel-body">
-                    <div class="top-buttons">
+                    <div class="top-buttons" ng-if="!isCertifyApplication">
                         <button ng-click="skip()">跳过</button>
                     </div>
                     <h3 class="title">名片认证<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="完成认证，获得更多用户权限" class="icon-pano icon-info f1_2rem ml5"></i></h3>

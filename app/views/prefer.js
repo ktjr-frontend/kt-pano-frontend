@@ -4,7 +4,7 @@
     angular.module('kt.pano')
         .controller('ktPreferCtrl', function($scope, $rootScope, $state, ktSession, ktSweetAlert) {
 
-            var isCertifyApplication = $state.params.certifyApplication == 1 // eslint-disable-line
+            $scope.isCertifyApplication = $state.params.certifyApplication == 1 // eslint-disable-line
             $rootScope.goHome = function() {
                 ktSession.clear()
                 $state.go('home.index')
@@ -14,7 +14,7 @@
             $scope.submitForm = function() {
                 ktSweetAlert.swal({
                     title: '',
-                    text: isCertifyApplication ? '认证信息已提交！' : '恭喜您注册成功！'
+                    text: isCertifyApplication ? '成功完成认证申请，审核结果将在1个工作日内通知您' : '恭喜您注册成功！'
                 })
                 $state.go($rootScope.defaultRoute || 'pano.overview')
             }
@@ -30,7 +30,7 @@
                     if (!isConfirm) {
                         ktSweetAlert.swal({
                             title: '',
-                            text: isCertifyApplication ? '认证信息已提交！' : '恭喜您注册成功！'
+                            text: isCertifyApplication ? '成功完成认证申请，审核结果将在1个工作日内通知您' : '恭喜您注册成功！'
                         })
                         $state.go($rootScope.defaultRoute || 'pano.overview')
                     }

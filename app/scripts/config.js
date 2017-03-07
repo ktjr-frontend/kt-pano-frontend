@@ -145,8 +145,8 @@
                             var deferred = $q.defer();
                             ktUserService.get(function(res) {
                                 $rootScope.defaultRoute = 'pano.overview'
-                                // res.account.group = 'normal'
-                                // res.account.status = 'passed'
+                                    // res.account.group = 'normal'
+                                    // res.account.status = 'passed'
                                 $rootScope.user = res.account
                                 if (!ktPermits(toState)) {
                                     // 决定路由何处
@@ -227,8 +227,8 @@
                         cancelButtonText: '取消',
                     }, function(isConfirm) {
                         if (isConfirm) {
-                            $state.go('account.perfect')
-                        } else if (fromState.name) {
+                            $state.go('account.perfect', { certifyApplication: 1 })
+                        } else if (fromState.name && fromState.name !== toState.name) {
                             $state.go(fromState.name, fromParams)
                         } else {
                             $state.go($rootScope.defaultRoute)

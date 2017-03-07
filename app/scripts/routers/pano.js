@@ -200,7 +200,7 @@
                     url: '/institutions',
                     template: '<ui-view/>',
                     data: {
-                        halfPermit: ['normal'],
+                        // halfPermit: ['normal'],
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {

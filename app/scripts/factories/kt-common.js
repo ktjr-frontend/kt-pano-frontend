@@ -29,8 +29,8 @@
                             var wantGo = $rootScope.wantGo
                             $rootScope.defaultRoute = 'pano.overview'
                             var defaultState = $state.get($rootScope.defaultRoute)
-                            // data.account.group = 'certified'
-                            // data.account.status = 'pended'
+                                // data.account.group = 'certified'
+                                // data.account.status = 'pended'
                             $rootScope.user = data.account
 
                             if (wantGo && ktPermits(wantGo.toState, true)) {
@@ -148,10 +148,14 @@
                                 content: 'get_premium_by_wx',
                                 wx: $scope.user.wx
                             }, function() {
-                                ktSweetAlert.success('已提交，稍后工作人员会与您联系')
+                                ktSweetAlert.swal({ title: '', text: '已提交，稍后工作人员会与您联系' })
                                 $uibModalInstance.close()
                             }, function(res) {
-                                ktSweetAlert.error(res.error || '提交失败！')
+                                $uibModalInstance.close()
+                                ktSweetAlert.swal({
+                                    title: '',
+                                    text: res.error || '您的申请正在审核中，勿重复提交'
+                                })
                             })
                         }
 
