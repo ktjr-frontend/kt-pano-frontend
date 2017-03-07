@@ -13,11 +13,13 @@
                     </div>
                 </div>
             </div>
+            <small ng-show="!user.card_url" class="mt10 text-center">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small>
             <div class="qrcode-bs-card preview text-center" ng-show="user.card_url">
                 <h5>已上传的名片：</h5>
                 <div class="qrcode-body">
                     <img ng-src="{{user.card_url}}" alt="您的名片" class="qrcode">
                     <div class="buttons delete">
+                        <!-- <small class="mb10">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small> -->
                         <button class="btn btn-file" ng-click="deleteCardUrl($event)">重新上传</button>
                     </div>
                 </div>
