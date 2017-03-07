@@ -193,6 +193,7 @@
                     })
 
                     $q.all(ap.$promise, bp.$promise).then(function() {
+                        $scope.pendingRequests = false
                         var assetTypesArr = $scope.user.asset_types
                         $scope.userInfo.asset_types.selected = _.filter($scope.userInfo.asset_types.all, function(v) {
                             return _.includes(assetTypesArr, v.id)
@@ -203,6 +204,7 @@
                         })
                         ktSubmit && ktSubmit({ data: $scope.user }) // eslint-disable-line
                     }).catch(function(res) {
+                        $scope.pendingRequests = false
                         ktSweetAlert.error(res.error || '保存失败！')
                     })
 

@@ -14,7 +14,7 @@
             $scope.submitForm = function() {
                 ktSweetAlert.swal({
                     title: '',
-                    text: isCertifyApplication ? '成功完成认证申请，审核结果将在1个工作日内通知您' : '恭喜您注册成功！'
+                    text: $scope.isCertifyApplication ? '成功完成认证申请，审核结果将在1个工作日内通知您' : '恭喜您注册成功！'
                 })
                 $state.go($rootScope.defaultRoute || 'pano.overview')
             }
@@ -30,7 +30,7 @@
                     if (!isConfirm) {
                         ktSweetAlert.swal({
                             title: '',
-                            text: isCertifyApplication ? '成功完成认证申请，审核结果将在1个工作日内通知您' : '恭喜您注册成功！'
+                            text: $scope.isCertifyApplication ? '成功完成认证申请，审核结果将在1个工作日内通知您' : '恭喜您注册成功！'
                         })
                         $state.go($rootScope.defaultRoute || 'pano.overview')
                     }
