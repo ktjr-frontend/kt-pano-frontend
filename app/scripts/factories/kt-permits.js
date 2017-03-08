@@ -13,7 +13,7 @@
                         rejected: {
                             title: '很抱歉，您暂无权限查看该页面。',
                             html: true,
-                            text: '您的认证信息审核未通过，请根据提示内容修改后重新提交审核。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>'
+                            text: '您的认证信息审核未通过，请根据提示内容修改后重新提交审核。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/pano_jiang.png" alt="PANO微信小秘书二维码" width="120" /></div>'
                         },
                         pended: {
                             title: '很抱歉，您暂无权限查看该页面。',
@@ -25,7 +25,7 @@
                     function showAlert() {
                         var alertObj = statusAlertMap[status] || {
                             title: '',
-                            text: '很抱歉，您暂无权限查看该页面。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/weixin.jpg" alt="PANO微信小秘书二维码" width="120" /></div>',
+                            text: '很抱歉，您暂无权限查看该页面。<br/>如有问题，可扫描下方二维码联系PANO微信小秘书：<div class="text-center mt10"><img src="/images/pano_jiang.png" alt="PANO微信小秘书二维码" width="120" /></div>',
                             html: true
                         }
                         ktSweetAlert.swal(alertObj)

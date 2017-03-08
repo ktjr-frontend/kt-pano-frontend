@@ -185,13 +185,14 @@
                 // $state.go('error.404', toParams);
                 ktSweetAlert.swal({
                     title: '提示',
-                    text: '抱歉您查看的网页出错了，请刷新重试。',
+                    text: '抱歉您查看的网页出错了，请手动刷新重试。',
                     confirmButtonText: '刷新页面',
                     showCancelButton: true,
                     cancelButtonText: '返回首页',
                 }, function(isConfirm) {
                     if (isConfirm) {
-                        $state.go($state.current.name, {}, { reload: true })
+                        $window.location.reload()
+                            // $state.go($state.current.name, {}, { reload: true })
                     } else {
                         $state.go('home.index')
                     }
