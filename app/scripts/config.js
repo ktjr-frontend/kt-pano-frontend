@@ -129,7 +129,6 @@
                 }
 
                 if (!toState.resolve) { toState.resolve = {} }
-                console.log('user' + $rootScope.user)
                 if ($rootScope.user && $rootScope.user.group) {
                     delete toState.resolve.user
                     if (!ktPermits(toState)) {
@@ -240,7 +239,9 @@
                                 $state.go('account.perfect', { certifyApplication: 1 })
                                 ktSweetAlert._self.close()
                             })
-                        } else if (fromState.name && fromState.name !== toState.name) {
+                        } else if (fromState.name &&
+                            fromState.name !== toState.name &&
+                            _.includes(['pano.settings', 'pano.overview', 'home.index', 'pano.institutions.detail'], fromState.name)) {
                             $state.go(fromState.name, fromParams)
                         } else {
                             $state.go($rootScope.defaultRoute)
