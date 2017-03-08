@@ -10,7 +10,7 @@
                  *  微贷平台
                  */
                 'pano': {
-                    url: '/pano?apimock&jump&_t', //父view的设置，通过ui-sref的跳转会将参数带到子view
+                    url: '/pano?apimock&_t', //父view的设置，通过ui-sref的跳转会将参数带到子view
                     abstract: true,
                     templateUrl: 'views/common/pano.html',
                     data: {
@@ -19,40 +19,7 @@
                         // permit: ['login'],
                         specialClass: 'pano-page'
                     },
-                    params: {
-                        jump: null, //从index 页面自动跳转到pano.overview 不走校验 走跳转
-                        forceJump: false // 强制跳入开关，避免当前pano resolve内的跳转造成死循环
-                    },
-                    resolve: ktLazyResolve(['views/common/pano.js']
-                        //     , {
-
-                        //     user: function($q, $rootScope, $state, ktUserService) {
-                        //         'ngInject';
-                        //         var deferred = $q.defer()
-
-                        //         ktUserService.get(function(res) {
-                        //             $rootScope.defaultRoute = 'pano.overview'
-                        //             var user = $rootScope.user = res.account
-
-                        //             // 强制跳转标记，避免从pano.** -> pano.** 跳转的死循环
-                        //             if (!$rootScope.forceJumpState) {
-                        //                 if (user.status === 'initialized') {
-                        //                     $state.go('account.perfect')
-                        //                 } else if (user.status === 'rejected') {
-                        //                     $state.go('pano.settings', { forceJump: true })
-                        //                 } else if (user.status === 'pended') {
-                        //                     $state.go($rootScope.defaultRoute, { forceJump: true })
-                        //                 }
-                        //             }
-
-                        //             deferred.resolve(user)
-                        //         }, function() {
-                        //             deferred.resolve(null)
-                        //         })
-                        //         return deferred.promise
-                        //     }
-                        // }
-                    ),
+                    resolve: ktLazyResolve(['views/common/pano.js']),
                     controller: 'ktPanoCtrl'
                 },
 
@@ -69,9 +36,10 @@
                     data: {
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            grade: {
-                                0: ['passed', 'pended'],
-                                1: ['passed', 'pended']
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
                             }
                         }],
                         // breadcrumb: true,
@@ -80,7 +48,7 @@
                     }
                 },
 
-                // 产品信息
+                // 市场数据
                 'pano.market': {
                     abstract: true,
                     url: '/market',
@@ -90,10 +58,13 @@
                     ]),
                     controller: 'ktMarketLayoutCtrl',
                     data: {
+                        halfPermit: ['normal'], // 用于正常路由，但是非认证用户弹出提示框
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            grade: {
-                                1: ['passed']
+                            group: {
+                                premium: ['passed', 'pended'],
+                                certified: ['passed', 'pended'],
+                                normal: ['passed', 'pended']
                             }
                         }],
                         pageTitle: '市场数据',
@@ -144,10 +115,13 @@
                     ]),
                     controller: 'ktProductsLayoutCtrl',
                     data: {
+                        halfPermit: ['normal'],
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            grade: {
-                                1: ['passed']
+                            group: {
+                                premium: ['passed', 'pended'],
+                                certified: ['passed', 'pended'],
+                                normal: ['passed', 'pended']
                             }
                         }],
                         pageTitle: '产品信息',
@@ -185,10 +159,12 @@
                     ]),
                     controller: 'ktOrderLayoutCtrl',
                     data: {
+                        halfPermit: ['normal'],
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            grade: {
-                                1: ['passed']
+                            group: {
+                                premium: ['passed', 'pended'],
+                                certified: ['passed', 'pended']
                             }
                         }],
                         pageTitle: '可预约产品',
@@ -224,11 +200,13 @@
                     url: '/institutions',
                     template: '<ui-view/>',
                     data: {
+                        // halfPermit: ['normal'],
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            grade: {
-                                0: ['passed', 'pended'],
-                                1: ['passed', 'pended']
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
                             }
                         }],
                         pageTitle: '机构',
@@ -254,10 +232,12 @@
                     // template: '</ui-view>',
                     templateUrl: 'views/pano/products/obligatory_right/obligatory_right.html',
                     data: {
+                        halfPermit: ['normal'],
                         permits: [{
                             name: 'role', // 角色维度的权限
-                            grade: {
-                                1: ['passed']
+                            group: {
+                                premium: ['passed', 'pended'],
+                                certified: ['passed', 'pended']
                             }
                         }],
                         pageTitle: '产品信息',
@@ -285,7 +265,17 @@
                         'common/directives/datepicker/directive.js',
                         'common/directives/datepicker/theme/v4/style.css'
                     ]),
-                    controller: 'ktAssetManageCtrl'
+                    controller: 'ktAssetManageCtrl',
+                    data: {
+                        halfPermit: ['normal'],
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended'],
+                                certified: ['passed', 'pended']
+                            }
+                        }]
+                    }
                 },
                 'pano.settings': {
                     url: '/settings',
@@ -296,12 +286,22 @@
                         'common/directives/kt-qrcode-directive.js',
                         'scripts/directives/business-card-upload/style.css',
                         'scripts/directives/business-card-upload/directive.js',
+                        'scripts/directives/prefer-setting/style.css',
+                        'scripts/directives/prefer-setting/directive.js',
                         'views/pano/account/settings.js'
                     ]),
                     controller: 'ktSettingsCtrl',
                     data: {
                         pageTitle: '账户设置',
-                        specialClass: 'simple-page'
+                        specialClass: 'simple-page',
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
                     }
                 },
 

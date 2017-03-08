@@ -413,16 +413,21 @@
                     var optionWidth = $('.filter-box').width() - 25 * 2 - 157 + 66 //一行的长度，减去相关间距
                     var firstLineMaxIndex = filter.options.length;
                     var sumWidth = 0 //条件所占总长度
+                    var assitDiv = (function() {
+                        return $('#filter-assit').length ? $('#filter-assit') : $('<div id="filter-assit"/>').appendTo('.filter-box')
+                    })();
 
                     _.every(filter.options, function(v, i) { //用every替代each 可以break
-                        sumWidth += (function() {
+                        /*sumWidth += (function() { //deprecated 数字英文0.52不太准确
                             if (!v.name) return 0
                             return _.reduce(v.name.split(''), function(initial, n) {
-                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.52)
+                                return initial + 1 * (n.charCodeAt(0) > 128 ? 1 : 0.52) // 0.52数字英文粗略宽度
                             }, 0)
+                        }()) * 13 + 5 * 2 + 15 * 2*/
 
-                        }()) * 13 + 5 * 2 + 15 * 2
-
+                        // 13 font-size; 5 padding; 15 margin
+                        assitDiv.text(v.name)
+                        sumWidth += assitDiv.width() + 5 * 2 + 15 * 2
                         if (sumWidth > optionWidth) {
                             firstLineMaxIndex = i - 1 //超出一行的长度，获取索引位置
                             return false
@@ -462,9 +467,7 @@
                                 return o[0] === '不适用'
                             })
 
-                            /*eslint-disable*/
-                            buShiYong && v.options.push(buShiYong)
-                                /*eslint-enable*/
+                            buShiYong && v.options.push(buShiYong) // eslint-disable-line
                         }
 
                         v.options = _.map(v.options, function(o) {

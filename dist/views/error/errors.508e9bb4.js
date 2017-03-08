@@ -1,1 +1,0 @@
-!function(){"use strict";angular.module("kt.pano").controller("ktErrorsCtrl",["$scope","$state","$location","ktUrlGet",function(a,b,c,d){a.goHome=function(){c.url(d("/",$.extend({jump:"true"},c.search())))}}])}();

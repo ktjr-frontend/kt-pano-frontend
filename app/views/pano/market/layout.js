@@ -2,7 +2,8 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktMarketLayoutCtrl', function($scope, $rootScope, $state, $location, ktSweetAlert, ktDataHelper, ktAnalyticsService) {
+        .controller('ktMarketLayoutCtrl', function($scope, $rootScope, $state, $location,
+            ktSweetAlert, ktDataHelper, ktAnalyticsService, ktUpgradeMember) {
             $scope.shared = {
                 tab_show: true
             }
@@ -166,6 +167,20 @@
                 if ($state.current.name !== state) {
                     $state.go(state)
                     $rootScope.bdTrack(['市场数据页', '页面切换', state === 'pano.market.default' ? '资产类' : '资管类'])
+                }
+            }
+
+            // 升级会员
+            $scope.upgrade = function() {
+                if ($rootScope.user.status === 'pended') {
+                    ktSweetAlert.swal({
+                        title: '',
+                        html: true,
+                        confirmButtonText: '我知道了',
+                        text: '您的帐号正在审核中，待审核通过后方可进行升级操作。<br/> 审核结果会在1个工作日内以邮件的形式通知，请您耐心等待。'
+                    })
+                } else {
+                    ktUpgradeMember()
                 }
             }
 

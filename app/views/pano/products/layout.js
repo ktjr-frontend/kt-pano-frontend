@@ -2,7 +2,8 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktProductsLayoutCtrl', function($scope, $rootScope, $window, $timeout, $state, $location, ktSweetAlert, ktDataHelper) {
+        .controller('ktProductsLayoutCtrl', function($scope, $rootScope, $window, $timeout,
+            $state, $location, ktSweetAlert, ktDataHelper, ktUpgradeMember) {
             // var perPageCount = ktDataHelper.getPerPage()
             var perPageCount = 10
             var search = $location.search()
@@ -71,6 +72,20 @@
                 if (event.keyCode !== 13) return
                 $rootScope.bdTrack(['产品信息页', '确认', '搜索', '回车'])
                 $scope.goTo(key, value)
+            }
+
+            // 升级会员
+            $scope.upgrade = function() {
+                if ($rootScope.user.status === 'pended') {
+                    ktSweetAlert.swal({
+                        title: '',
+                        html: true,
+                        confirmButtonText: '我知道了',
+                        text: '您的帐号正在审核中，待审核通过后方可进行升级操作。<br/> 审核结果会在1个工作日内以邮件的形式通知，请您耐心等待。'
+                    })
+                } else {
+                    ktUpgradeMember()
+                }
             }
 
             // $scope.$on('totalItemGot', function(event, data) { //totalItem 不满足初始page的会自动跳转到第一页

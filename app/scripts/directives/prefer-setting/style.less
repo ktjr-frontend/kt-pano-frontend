@@ -1,0 +1,88 @@
+.modal-dialog {
+    #preferForm {
+        .form-group {
+            &>label {
+                position: relative;
+                &:after {
+                    content: '';
+                    height: 0;
+                    position: absolute;
+                    border-bottom: 1px solid #f3f5f8;
+                    left: 15px;
+                    right: 15px;
+                    bottom: -10px;
+                }
+            }
+        }
+    }
+}
+
+#preferForm {
+    label {
+        font-size: 15px;
+        small {
+            font-size: 12px;
+            color: #8d919a;
+            margin-left: 10px;
+        }
+    }
+    .btn-add {
+        display: none;
+    }
+    .checkbox-label {
+        float: left;
+        color: #8d919a;
+        // color: white;
+        font-size: 13px;
+        position: relative;
+        [type=checkbox] {
+            display: none;
+            &:checked ~ label {
+                // border-color: @color-orange;
+                // outline: 1px solid @color-orange;
+                color: white;
+                background: #2c80e4;
+            }
+        }
+        label {
+            font-weight: normal;
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 3px;
+            background: #f3f5f8;
+            // border: 2px solid @border-color;
+            margin-right: 5px;
+            font-size: 13px;
+            &:hover {
+                color: #3d4351;
+            }
+        }
+        & + .btn-add {
+            padding: 5px 9px;
+            background: #606b83;
+            color: white;
+            font-size: 12px;
+            display: inline-block;
+            &:hover {
+                background: lighten(#606b83, 5%);
+            }
+            &:active {
+                background: darken(#606b83, 5%);
+            }
+        }
+        .icon-add {
+            display: none;
+        }
+        &.custom-tag {
+            .icon-add {
+                margin-right: -10px;
+                transform: rotate(45deg);
+                display: inline-block;
+                vertical-align: -1px;
+                &:hover {
+                    color: #ff7019;
+                }
+            }
+        }
+    }
+}

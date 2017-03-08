@@ -40,9 +40,7 @@
         return {
             request: function(req) {
                 var $location = $injector.get('$location')
-                // var $rootScope = $injector.get('$rootScope')
                 var ktS = $injector.get('ktS')
-                // var ktUri = $injector.get('ktUri')
                 var search = $location.search()
 
                 //apimock 替换为get方式
@@ -82,13 +80,9 @@
 
             responseError: function(res) {
                 var $state = $injector.get('$state') //拦截器内需要使用$inject方式手动注入，否则报错$inject:cdep
-                var $rootScope = $injector.get('$rootScope')
                 var $location = $injector.get('$location')
                 var ktSweetAlert = $injector.get('ktSweetAlert')
-                var $window = $injector.get('$window')
-                var CacheFactory = $injector.get('CacheFactory')
-                var ipCookie = $injector.get('ipCookie')
-                    // var $sce = $injector.get('$sce')
+                var ktSession = $injector.get('ktSession')
 
                 if (res.status === 419 || res.status === 401) {
                     var search = $location.search()
@@ -102,18 +96,8 @@
                         return $q.reject(res.data)
                     }
 
-                    // 如果是登录状态
-                    // if (res.config.url !== '/api/v1/sessions' && res.config.method !== 'GET') {
-                    //     $rootScope.error401 = {
-                    //         asRole: true // 无权限的用户角色 展示无权限内容  @deprecated
-                    //     }
-                    // } else {
-                        $rootScope.user = null
-                        delete $window.localStorage.token
-                        ipCookie.remove('token')
-                        CacheFactory.clearAll()
-                        $state.go('account.login')
-                    // }
+                    ktSession.clear()
+                    $state.go('account.login')
 
                 } else if (res.status === 403) {
                     ktSweetAlert.swal({

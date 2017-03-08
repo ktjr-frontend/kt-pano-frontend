@@ -1,0 +1,31 @@
+.register-flow {
+    text-align: center;
+    padding-bottom: 20px;
+    ul {
+        list-style-type: none;
+        display: inline-block;
+    }
+    li {
+        font-size: 13px;
+        color: #8d919a;
+        float: left;
+        width: 160px;
+        position: relative;
+        .icon-pano {
+            &:first-child {
+                vertical-align: -4px;
+                margin-right: 10px;
+                font-size: 20px;
+            }
+            &.icon-arrow-bold {
+                color: #d5dadf;
+                position: absolute;
+                right: -5px;
+                top: 4px;
+            }
+        }
+        &.active {
+            color: #4380dd;
+        }
+    }
+}

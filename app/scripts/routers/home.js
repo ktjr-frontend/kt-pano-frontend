@@ -12,8 +12,16 @@
                     templateUrl: 'views/common/home.html',
                     data: {
                         pageTitle: '开通金融',
-                        specialClass: 'landing-page'
-
+                        specialClass: 'landing-page',
+                        permits: [{
+                            name: 'role',
+                            skipAuth: true,
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
                     },
                     resolve: ktLazyResolve([
                         'views/common/home.js',
@@ -23,17 +31,11 @@
                             'ngInject';
                             var deferred = $q.defer()
 
-                            if ($window.localStorage.token) {
+                            if ($window.localStorage.token && (!$rootScope.user || !$rootScope.user.group)) {
                                 ktUserService.get({
                                     notRequired: true
                                 }, function(res) {
                                     $rootScope.user = res.account
-                                    // $state.go('pano.overview', { jump: 'true' }, { location: 'replace' })
-
-                                    // if (!ktRoleResolve(res.account.role)) {
-                                    //     return
-                                    // }
-
                                     deferred.resolve(res.account)
                                 }, function() {
                                     deferred.resolve(null)
