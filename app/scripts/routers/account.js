@@ -43,7 +43,8 @@
                         'scripts/directives/register-flow/style.css',
                         'scripts/directives/register-flow/directive.js',
                         'views/perfect.js',
-                    ], {
+                    ]),
+                    /*, {
                         getUser: function($q, $window, ktUserService) {
                             'ngInject';
                             var deferred = $q.defer()
@@ -58,7 +59,7 @@
                             }
                             return deferred.promise
                         }
-                    }),
+                    }),*/
                     controller: 'ktPerfectCtrl',
                     data: {
                         pageTitle: '上传名片',
@@ -79,27 +80,29 @@
                     url: '/prefer?certifyApplication',
                     templateUrl: 'views/prefer.html',
                     resolve: ktLazyResolve([
-                        'scripts/directives/register-flow/style.css',
-                        'scripts/directives/register-flow/directive.js',
-                        'scripts/directives/prefer-setting/style.css',
-                        'scripts/directives/prefer-setting/directive.js',
-                        'views/prefer.js',
-                    ]/*, {
-                        userInfo: function($q, $window, ktUserInfoService) {
-                            'ngInject';
-                            var deferred = $q.defer()
-                            if ($window.localStorage.token) {
-                                ktUserInfoService.get(function(data) {
-                                    deferred.resolve(data)
-                                }, function() {
-                                    deferred.resolve(null)
-                                })
-                            } else {
-                                deferred.resolve(null)
-                            }
-                            return deferred.promise
-                        }
-                    }*/),
+                            'scripts/directives/register-flow/style.css',
+                            'scripts/directives/register-flow/directive.js',
+                            'scripts/directives/prefer-setting/style.css',
+                            'scripts/directives/prefer-setting/directive.js',
+                            'views/prefer.js',
+                        ]
+                        /*, {
+                                                userInfo: function($q, $window, ktUserInfoService) {
+                                                    'ngInject';
+                                                    var deferred = $q.defer()
+                                                    if ($window.localStorage.token) {
+                                                        ktUserInfoService.get(function(data) {
+                                                            deferred.resolve(data)
+                                                        }, function() {
+                                                            deferred.resolve(null)
+                                                        })
+                                                    } else {
+                                                        deferred.resolve(null)
+                                                    }
+                                                    return deferred.promise
+                                                }
+                                            }*/
+                    ),
                     controller: 'ktPreferCtrl',
                     data: {
                         pageTitle: '偏好设置',

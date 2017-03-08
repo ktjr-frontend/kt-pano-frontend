@@ -129,6 +129,7 @@
                 }
 
                 if (!toState.resolve) { toState.resolve = {} }
+                console.log('user' + $rootScope.user)
                 if ($rootScope.user && $rootScope.user.group) {
                     delete toState.resolve.user
                     if (!ktPermits(toState)) {
@@ -236,8 +237,8 @@
                                 $templateRequest('scripts/directives/register-flow/template.html'),
                                 $templateRequest('scripts/directives/business-card-upload/template.html')
                             ]).then(function() {
-                                ktSweetAlert._self.close()
                                 $state.go('account.perfect', { certifyApplication: 1 })
+                                ktSweetAlert._self.close()
                             })
                         } else if (fromState.name && fromState.name !== toState.name) {
                             $state.go(fromState.name, fromParams)

@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, ktSession, ktSweetAlert, getUser) {
+        .controller('ktPerfectCtrl', function($scope, $rootScope, $state, ktSession, ktSweetAlert) {
 
             $rootScope.goHome = function() {
                 ktSession.clear()
@@ -12,7 +12,7 @@
             $scope.isCertifyApplication = $state.params.certifyApplication == 1 // eslint-disable-line
 
             // CacheFactory.clearAll()
-            $scope.user = $rootScope.user = getUser
+            $scope.user = $rootScope.user
 
             // 提交表单
             $scope.submitForm = function() {
