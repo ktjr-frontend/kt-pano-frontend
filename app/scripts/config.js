@@ -209,7 +209,8 @@
                     cancelButtonText: '返回首页',
                 }, function(isConfirm) {
                     if (isConfirm) {
-                        $state.go($state.current.name, {}, { reload: true })
+                        $window.location.reload()
+                        // $state.go($state.current.name, {}, { reload: true })
                     } else {
                         $state.go('home.index')
                     }
