@@ -13,9 +13,9 @@
                     data: {
                         pageTitle: '开通金融',
                         specialClass: 'landing-page',
+                        skipAuth: true,
                         permits: [{
                             name: 'role',
-                            skipAuth: true,
                             group: {
                                 premium: ['passed', 'pended', 'rejected'],
                                 certified: ['passed', 'pended', 'rejected'],
@@ -30,7 +30,6 @@
                         getUser: function($q, $window, $rootScope, $state, ktUserService) {
                             'ngInject';
                             var deferred = $q.defer()
-
                             if ($window.localStorage.token && (!$rootScope.user || !$rootScope.user.group)) {
                                 ktUserService.get({
                                     notRequired: true

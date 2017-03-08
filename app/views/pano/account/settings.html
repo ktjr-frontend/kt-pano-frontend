@@ -1,13 +1,23 @@
 <div class="simple-container cbs container" kt-full-page-destroy>
     <div class="alert alert-warning alert-dismissible" role="alert" ng-show="alertVisible" ng-if="visibleJudgement(['rejected', 'pended'])">
-        <div class="alert-container">
+        <div class="alert-container clfix">
             <i class="icon-pano icon-find" ng-if="user.status === 'pended'"></i>
             <i class="icon-pano icon-meng" ng-if="user.status === 'rejected'"></i>
             <div class="alert-body" ng-if="user.status === 'rejected'">
                 很抱歉，您所提交的信息因 <em class="f1_6rem" ng-bind="user.reason"></em> 未能通过认证审核。<em class="f1_6rem" ng-bind="user.solution"></em>，感谢您对开通PANO的关注！
             </div>
             <div class="alert-body" ng-if="user.status === 'pended'">
-                您在 <em ng-bind="user.pended_at | date:'yyyy-MM-dd HH:mm:ss'"></em> 提交的信息正在审核中，审核结果会在1个工作日内以邮件的形式通知，请您耐心等待，如有问题可联系本页右下方的<em>PANO微信小秘书</em>。
+                您在 <em ng-bind="user.pended_at | date:'yyyy-MM-dd HH:mm:ss'"></em> 提交的信息正在审核中，审核结果会在1个工作日内以邮件的形式通知，请您耐心等待，如有问题可联系<em>PANO微信小秘书</em>，微信号：kaitongpano或扫描
+                <div class="wx-code">
+                    <i class="img1 icon-pano icon-small_code"></i>
+                    <div class="wx-code-right">
+                        <span class=right-arrow></span>
+                        <div class="pano-code-hide">
+                            <img src="../../../images/pano_jiang.png">
+                            <div class="pano-text">PANO微信移动端</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="alert-footer clfix" ng-if="user.status === 'rejected'">
                 <div class="fl f1_3rem navy-color">请在下方进行修改重新提交</div>

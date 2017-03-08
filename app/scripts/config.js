@@ -80,7 +80,7 @@
     angular
         .module('kt.pano')
         .config(configApp)
-        .run(function($rootScope, $state, $window, $location,
+        .run(function($rootScope, $state, $window, $location, $templateRequest, $q,
             $timeout, $http, ktLogService, ktPermits, ktHomeResource,
             uibPaginationConfig, ktUserService, ktS, ktSweetAlert, CacheFactory,
             ktEchartTheme1, ktRedirectState) {
@@ -129,7 +129,6 @@
                 }
 
                 if (!toState.resolve) { toState.resolve = {} }
-
                 if ($rootScope.user && $rootScope.user.group) {
                     delete toState.resolve.user
                     if (!ktPermits(toState)) {
@@ -141,7 +140,7 @@
                 } else if (!toState.data.skipAuth) { // 略过权限校验
                     toState.resolve.user = [
                         '$q',
-                        function($q) {
+                        function($q) { // eslint-disable-line
                             var deferred = $q.defer();
                             ktUserService.get(function(res) {
                                 $rootScope.defaultRoute = 'pano.overview'
@@ -224,10 +223,22 @@
                         text: '请您先通过名片认证，才能获得更多权限',
                         confirmButtonText: '去认证',
                         showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
                         cancelButtonText: '取消',
                     }, function(isConfirm) {
                         if (isConfirm) {
-                            $state.go('account.perfect', { certifyApplication: 1 })
+                            $q.all([
+                                $templateRequest('views/common/simple.html'),
+                                $templateRequest('views/common/footer.html'),
+                                $templateRequest('views/common/simple_header.html'),
+                                $templateRequest('views/perfect.html'),
+                                $templateRequest('scripts/directives/register-flow/template.html'),
+                                $templateRequest('scripts/directives/business-card-upload/template.html')
+                            ]).then(function() {
+                                ktSweetAlert._self.close()
+                                $state.go('account.perfect', { certifyApplication: 1 })
+                            })
                         } else if (fromState.name && fromState.name !== toState.name) {
                             $state.go(fromState.name, fromParams)
                         } else {

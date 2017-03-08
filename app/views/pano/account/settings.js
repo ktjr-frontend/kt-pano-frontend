@@ -50,7 +50,7 @@
             $scope.alertVisible = true // 审核状态提示栏
 
             // 用户角色提示
-            $scope.memberGradeTip = $sce.trustAsHtml('非认证：注册成功但未进行名片认证，只可访问总览页。<br>已认证：注册成功且已完成名片认证，可访问市场数据和部分产品信息，不可进行检索等高级操作。<br>高级用户：除了可享受开通PANO全域的数据权限及数据检索，还可享受每月1次数据定制服务等。')
+            $scope.memberGradeTip = $sce.trustAsHtml('非认证：注册成功但未进行名片认证，只可访问总览页。<br>已认证：注册成功且已完成名片认证，可访问市场数据和部分产品信息，不可进行检索等高级操作。<br>高级用户：可享受PANO的最高级权限，使用网站的全部功能以及全域的数据检索等。')
 
             // 升级会员
             $scope.upgrade = function() {
@@ -117,7 +117,7 @@
             $scope.updateUserStatus = function() {
                 ktSweetAlert.swal({
                     title: '您确定重新提交审核吗？',
-                    text: '提交审核后，审核结果会在1个工作日内以邮件的形式通知您。',
+                    text: '提交审核后，审核结果会在1个工作日内以邮件或短信的形式通知您。',
                     showCancelButton: true,
                     showLoaderOnConfirm: true,
                 }, function(isConfirm) {

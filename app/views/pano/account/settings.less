@@ -39,13 +39,13 @@
         width: 1024px;
         margin: 0 auto;
         padding: 20px 80px;
-        overflow: hidden;
+        // overflow: hidden;
         position: relative;
     }
     .alert {
         // margin: 20px 50px -10px;
         box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
-        overflow: hidden;
+        // overflow: hidden;
         padding: 0px 30px;
         position: absolute;
         z-index: 99;
@@ -55,6 +55,58 @@
         background: rgba(255, 255, 255, .9);
         font-size: 14px;
         color: @color-1;
+        .wx-code {
+            display: inline-block;
+            padding: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            cursor: pointer;
+            vertical-align: middle;
+            position: relative;
+            &:hover .wx-code-right {
+                display: block;
+            }
+            .img1 {
+                color: black;
+                margin-right: 0;
+                font-size: 1em;
+            }
+        }
+        .wx-code-right {
+            position: absolute;
+            right: -11px;
+            top: 0;
+            display: none;
+            .right-arrow {
+                position: absolute;
+                top: 6px;
+                left: -11px;
+                display: inline-block;
+                border: 5px solid transparent;
+                border-left-color: rgba(0, 0, 0, 0.12);
+                border-left-color: rgba(0, 0, 0, 0.12);
+                width: 0;
+                height: 0;
+            }
+            .pano-code-hide {
+                // width: 115px;
+                font-size: 12px;
+                position: absolute;
+                border-radius: 3px;
+                top: -50px;
+                display: inline-block;
+                padding: 10px 10px 5px 10px;
+                text-align: center;
+                background: rgba(0, 0, 0, 0.12);
+                .pano-text {
+                    margin-top: 5px;
+                }
+                img {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+        }
         .alert-body {
             padding-top: 6px;
             // padding: 20px 0;
