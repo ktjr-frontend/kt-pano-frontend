@@ -5,6 +5,8 @@
         .controller('ktProductObligatoryRightCtrl', function($scope, $rootScope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
             var shared = $scope.shared
             var search = $scope.search = $location.search()
+            $scope.shared.placeholderText = '输入关键字，如产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施'
+            // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施' })
             var cacheData
             var filterOpts = [{
                 value: 'life_days_in',

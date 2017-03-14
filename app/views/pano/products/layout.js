@@ -7,9 +7,12 @@
             // var perPageCount = ktDataHelper.getPerPage()
             var perPageCount = 10
             var search = $location.search()
-            $scope.shared = {}
+            $scope.shared = { placeholderText: '' }
             $scope.shared.today_added_count = 0
-
+                // $scope.$on('placeholder', function(event, data) {
+                //     debugger
+                //     $scope.placeholderText = data.place
+                // })
             var params = $scope.shared.params = $.extend({
                 page: 1,
                 per_page: perPageCount

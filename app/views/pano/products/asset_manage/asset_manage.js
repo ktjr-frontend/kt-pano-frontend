@@ -82,7 +82,6 @@
                 xAxisFormat: null,
                 list: []
             }
-
             $scope.durationRateChart.chartOptions = $.extend(true, {}, chartOptions, {
                 legend: {
                     data: ['各期限收益率']
@@ -251,6 +250,9 @@
                                 barBorderWidth: 1,
                                 barBorderColor: 'rgba(0,0,0,.5)'
                             }
+                        },
+                        markLine: {
+                            data: ktDataHelper.getMarkLineCoords(_.map(_self.data, 'rate'))
                         },
                         smooth: false,
                         type: 'line',
