@@ -743,7 +743,6 @@
                     var initOptions = initChartOptions()
                     var legend = _.map(data.data, 'name')
                     getSelectedLegend(legend)
-
                     _self.chartOptions = $.extend(true, {}, initOptions, {
                             legend: {
                                 data: _.map(data.data, 'name'),
