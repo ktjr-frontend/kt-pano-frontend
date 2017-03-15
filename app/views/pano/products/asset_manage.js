@@ -5,7 +5,7 @@
         .controller('ktProductAssetManageCtrl', function($scope, $rootScope, $state, $location, ktSweetAlert, ktDataHelper, ktProductsService) {
             var shared = $scope.shared
             var search = $location.search()
-            $scope.shared.placeholderText = '输入关键字，如产品名称、平台名称、管理人类型或管理机构'
+            $scope.shared.placeholderText = '请输入产品名称、平台名称、管理人类型或管理机构'
             // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、管理人类型或管理机构' })
             var cacheData
             var filterOpts = [{

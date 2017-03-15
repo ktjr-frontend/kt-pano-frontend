@@ -47,6 +47,7 @@
                     <span ng-bind="product.name"></span>
                     <span ng-if="product.created_or_updated_in == '1'" class="tag tag-orange">新增</span>
                     <span ng-if="product.created_or_updated_in == '2'" class="tag tag-green">更新</span>
+                    <span class="update_time" ng-bind="'更新时间:'+updateTime"></span>
                 </div>
                 <div class="tr-body">
                     <table>
