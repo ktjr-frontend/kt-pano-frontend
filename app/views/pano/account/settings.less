@@ -144,6 +144,12 @@
     .hpanel {
         padding: 0 50px;
         margin: 0;
+        .panel-head{
+            background: white;
+            padding:20px 30px;
+            border-radius: 5px;
+            margin:20px 0;
+        }
         .panel-body {
             background: white;
             border-radius: 5px;
@@ -243,7 +249,7 @@
     }
     .simple-title {
         font-size: 15px;
-        margin-left: 55px;
+        // margin-left: 55px;
         margin-top: 25px;
         font-weight: normal;
         color: white;
@@ -292,5 +298,33 @@
         .simple-title {
             margin: 10px 0 5px 10px;
         }
+    }
+}
+.details{
+    color:#54c5cb;
+    cursor: pointer;
+}
+.shezhi-title{
+    font-size:13px;
+    color:#666b76;
+    position: relative;
+    &:before{
+        content: '';
+        height:5px;
+        width:5px;
+        border-radius: 50%;
+        background: #54c5cb;
+        position: absolute;
+        left:-10px;
+        top:5px;
+    }
+}
+.qr_code{
+    span{
+        font-size:13px;
+        color:#b7b7b7;
+    }
+    i{
+        color:#54c5cb;
     }
 }

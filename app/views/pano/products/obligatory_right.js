@@ -5,6 +5,7 @@
         .controller('ktProductObligatoryRightCtrl', function($scope, $rootScope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
             var shared = $scope.shared
             var search = $scope.search = $location.search()
+            var informationArr = ['产品名称', '平台', '挂牌场所', '资产类型', '底层资产', '产品类型', '增信措施', '原始产品']
             $scope.shared.placeholderText = '请输产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施'
                 // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施' })
             var cacheData
@@ -83,7 +84,14 @@
                 cacheData = res
                 $scope.updateTime = res.latest_uptime
                 $scope.products = res.products
-
+                res.summary.find.search_results.sort(function(a, b) {
+                    if (_.indexOf(informationArr, a.value) > _.indexOf(informationArr, b.value)) {
+                        return 1
+                    } else if (_.indexOf(informationArr, a.value) < _.indexOf(informationArr, b.value)) {
+                        return -1
+                    }
+                    return 0
+                })
                 $scope.summary = res.summary
                 shared._params.totalItems = res.summary.find.count
                 shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)

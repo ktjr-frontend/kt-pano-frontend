@@ -59,28 +59,36 @@
 
             // 根据用户角色判断是否显示
             $scope.visibleJudgement = function(permitsList, group) {
-                var trafficStatus = _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
-                if (!group) {
-                    return trafficStatus
+                    var trafficStatus = _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
+                    if (!group) {
+                        return trafficStatus
+                    }
+                    return _.includes(group, $rootScope.user ? $rootScope.user.group : '') && trafficStatus
                 }
-                return _.includes(group, $rootScope.user ? $rootScope.user.group : '') && trafficStatus
+                //详情信息
+            $scope.details = function() {
+                var detailsModal = $uibModal.open({
+                    templateUrl: 'views/modals/details_info.html',
+                    controller: 'ktDetailsCtrl',
+                    size: 'md'
+                })
+                detailsModal.result.then(function() {})
             }
 
             // 更新用户资料
             $scope.updateProfile = function() {
-                var updateProfileModal = $uibModal.open({
-                    size: 'md',
-                    templateUrl: 'views/modals/update_profile.html',
-                    controller: 'ktUpdateProfileCtrl'
-                })
+                    var updateProfileModal = $uibModal.open({
+                        size: 'md',
+                        templateUrl: 'views/modals/update_profile.html',
+                        controller: 'ktUpdateProfileCtrl'
+                    })
 
-                updateProfileModal.result.then(function(u) {
-                    ktSweetAlert.success('信息修改成功')
-                    $.extend($rootScope.user, u)
-                })
-            }
-
-            // 重新上传名片
+                    updateProfileModal.result.then(function(u) {
+                        ktSweetAlert.success('信息修改成功')
+                        $.extend($rootScope.user, u)
+                    })
+                }
+                // 重新上传名片
             $scope.updateBusinessCard = function() {
                 if ($rootScope.user.status === 'passed') {
                     ktSweetAlert.swal({
@@ -464,6 +472,16 @@
             $scope.cancel = function($event) {
                 $event.preventDefault()
                 $uibModalInstance.dismiss('cancel')
+            }
+        })
+        //详细用户信息
+        .controller('ktDetailsCtrl', function($rootScope, $scope, $uibModalInstance, ktDetailsService) {
+            ktDetailsService.get(function(data) {
+                debugger
+                console.log(data)
+            })
+            $scope.ok = function() {
+                $uibModalInstance.dismiss()
             }
         })
 })();

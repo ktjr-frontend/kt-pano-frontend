@@ -127,6 +127,14 @@
                         pageTitle: '产品信息',
                     }
                 },
+                //说明页
+                'pano.explain': {
+                    url: '/explain',
+                    templateUrl: 'views/pano/account/explain.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/account/explain.css'
+                        ])
+                },
                 'pano.products.obligatoryRight': {
                     url: '/obligatory_right?key_word&created_or_updated_in&status_eq&credit_manager_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/obligatory_right.html',
