@@ -210,7 +210,7 @@
                 }, function(isConfirm) {
                     if (isConfirm) {
                         $window.location.reload()
-                        // $state.go($state.current.name, {}, { reload: true })
+                            // $state.go($state.current.name, {}, { reload: true })
                     } else {
                         $state.go('home.index')
                     }
@@ -219,7 +219,7 @@
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
                 // 非认证用户弹出提示
-                if ($rootScope.user && _.includes(toState.data.halfPermit, $rootScope.user.group)) {
+                if ($rootScope.user && toState.data.normalLimit && $rootScope.user.group === 'normal') {
                     ktSweetAlert.swal({
                         title: '',
                         text: '请您先通过名片认证，才能获得更多权限',
@@ -239,6 +239,32 @@
                                 $templateRequest('scripts/directives/business-card-upload/template.html')
                             ]).then(function() {
                                 $state.go('account.perfect', { certifyApplication: 1 })
+                                ktSweetAlert._self.close()
+                            })
+                        } else if (fromState.name &&
+                            fromState.name !== toState.name &&
+                            _.includes(['pano.settings', 'pano.overview', 'home.index', 'pano.institutions.detail'], fromState.name)) {
+                            $state.go(fromState.name, fromParams)
+                        } else {
+                            $state.go($rootScope.defaultRoute)
+                        }
+                    })
+                } else if ($rootScope.user && $rootScope.user.status === 'rejected' && toState.data.rejectedLimit) {
+                    // 审核不通过弹出提示
+                    ktSweetAlert.swal({
+                        title: '',
+                        text: '您的认证审核未通过，暂时无法使用该功能，请重新提交审核。',
+                        confirmButtonText: '前往',
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        cancelButtonText: '取消',
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            $q.all([
+                                $templateRequest('views/pano/account/settings.html')
+                            ]).then(function() {
+                                $state.go('pano.settings')
                                 ktSweetAlert._self.close()
                             })
                         } else if (fromState.name &&

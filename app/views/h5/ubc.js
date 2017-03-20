@@ -15,7 +15,9 @@
         }
 
         var tm = location.href.match(/t=(.*)/)
+        var s = location.href.match(/s=(\d)/)
         var token = tm ? tm[1] : ''
+        var side = s ? s[1] : ''
         var bsnsCard = ''
         var container = d.querySelector('.container')
         var previewImg = d.querySelector('.business-card-preview img')
@@ -30,17 +32,27 @@
             ev.preventDefault()
             var oData = new FormData(form)
             oData.append('token', token)
-            xhr.open('POST', '/api/v1/cards', true)
-                // xhr.setRequestHeader('Authorization', token)
+
+            if (side === '1') { // 背面
+                xhr.open('POST', '/api/v1/back_cards', true)
+            } else {
+                xhr.open('POST', '/api/v1/cards', true)
+            }
+
+            // xhr.setRequestHeader('Authorization', token)
             xhr.onload = function(oev) {
                 var data = JSON.parse(oev.currentTarget.responseText)
                 if (xhr.status === 201) {
                     bsnsCard = data.card_url
                     previewImg.src = bsnsCard
                     container.classList.remove('preview')
+                    doneBtn.classList.remove('pending')
                     container.classList.add('done')
                     this.disabled = false
                 } else {
+                    doneBtn.disabled = false
+                    doneBtn.innerHTML = '完成'
+                    doneBtn.classList.remove('pending')
                     alert(data.error || '抱歉服务器繁忙，稍后重试！')
                 }
             }
