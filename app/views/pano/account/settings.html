@@ -55,9 +55,9 @@
             </a>
             <a ng-click="upgrade()" class="ml10 f1_2rem hover-underline" ng-if="user.group === 'certified' && user.status === 'passed'">
                升级到高级会员
-               <i class="icon-pano icon-explain ml5"  ui-sref="pano.explain"></i>
                <!-- <i class="icon-pano icon-arrow-bold" style="display: inline-block;vertical-align: -1px;transform: scale(0.8)"></i> -->
             </a>
+            <i class="icon-pano icon-explain ml5"  ui-sref="pano.explain"></i>
             <span class="ml10 f1_2rem" ng-if="user.group === 'premium' && user.premium_duration">
                 剩余期限<em ng-bind="{{user.premium_duration}}"></em>天
             </span>

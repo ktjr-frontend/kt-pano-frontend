@@ -353,16 +353,13 @@
 .details_table {
     padding: 10px 20px;
     .table_w {
-        max-height: 333px;
-        border-radius: 5px 5px 5px 5px;
+        max-height: 195px;
+        overflow-y: auto;
     }
     table {
         table-layout: fixed;
         width: 100%;
     }
-    // .raduis{
-    //     border-radius: 5px 5px 0 0;
-    // }
     th,
     td {
         font-size: 13px;
@@ -399,15 +396,16 @@
 
 .two_code {
     display: none;
-    width: 122px;
-    height: 122px;
     position: absolute;
     top: -50px;
-    left: 210px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.12);
+    left: 200px;
 }
-
-// .qrCode:hover .two_code{
-//         display: block;
-// }
+.twoCode{
+    padding:10px;
+    background: rgba(119, 119, 119, 0.2);
+}
+.icon-explain{
+    font-size: 16px;
+    color:#bfc4cf;
+    cursor:pointer;
+}
