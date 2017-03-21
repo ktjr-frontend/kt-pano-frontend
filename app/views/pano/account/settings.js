@@ -43,6 +43,15 @@
             // CacheFactory.clearAll()
             // var user = $rootScope.user
             // 避免由于轮询获取用户card_url导致的非认证用户有名片的问题
+            $scope.qrcode = {}
+            $scope.qrcode.settings = {
+                text: ktEnv().wxHost + '/#!/invitation?_u' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name),
+                width: 112,
+                height: 112,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            }
             if ($rootScope.user.group === 'normal') {
                 $rootScope.user.card_url = null
             }
@@ -181,7 +190,8 @@
             }
 
             var infoData
-                // 获取用户信息
+
+            // 获取用户信息
             ktUserInfoService.get(function(data) {
                 infoData = data
                 $rootScope.user.asset_types = _.map(data.asset_types.selected, 'name').join('，')
@@ -479,9 +489,12 @@
         //详细用户信息
         .controller('ktDetailsCtrl', function($rootScope, $scope, $uibModalInstance, ktDetailsService) {
             ktDetailsService.get(function(data) {
-                debugger
-                console.log(data)
+                $scope.detailsArr = data.res.slice(0, 5)
+                $scope.alldetails = data.res
             })
+            $scope.getMore = function() {
+                $scope.detailsArr = $scope.alldetails
+            }
             $scope.ok = function() {
                 $uibModalInstance.dismiss()
             }

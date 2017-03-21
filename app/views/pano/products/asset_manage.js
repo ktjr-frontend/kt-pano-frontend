@@ -5,6 +5,7 @@
         .controller('ktProductAssetManageCtrl', function($scope, $rootScope, $state, $location, ktSweetAlert, ktDataHelper, ktProductsService) {
             var shared = $scope.shared
             var search = $location.search()
+            var informationArr = ['标准名', '平台', '管理人类型', '管理机构']
             $scope.shared.placeholderText = '请输入产品名称、平台名称、管理人类型或管理机构'
             // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、管理人类型或管理机构' })
             var cacheData
@@ -77,7 +78,11 @@
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 cacheData = res
                 $scope.products = res.products
-                res.summary.find.search_results.sort(function(a, b) {
+                 if (res.summary.find.search_results) {
+                    res.summary.find.search_results = _.filter(res.summary.find.search_results, function(n) {
+                        return n.search_count !== 0
+                    })
+                     res.summary.find.search_results.sort(function(a, b) {
                     if (_.indexOf(informationArr, a.value) > _.indexOf(informationArr, b.value)) {
                         return 1
                     } else if (_.indexOf(informationArr, a.value) < _.indexOf(informationArr, b.value)) {
@@ -85,6 +90,7 @@
                     }
                     return 0
                 })
+                }
                 $scope.summary = res.summary
                 shared._params.totalItems = res.summary.find.count
                 shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)

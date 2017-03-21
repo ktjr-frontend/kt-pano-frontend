@@ -286,6 +286,7 @@
                 setTimeout(function() { //定时器为了等待state 切换完成（url地址），
                     ktLogService.get()
                 }, 500)
+                window.scrollTo(0, 0)
             })
 
             // ng-include 加载完后延迟显示footer, 避免闪烁
