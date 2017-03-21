@@ -144,11 +144,11 @@
     .hpanel {
         padding: 0 50px;
         margin: 0;
-        .panel-head{
+        .panel-head {
             background: white;
-            padding:20px 30px;
+            padding: 20px 30px;
             border-radius: 5px;
-            margin:20px 0;
+            margin: 20px 0;
         }
         .panel-body {
             background: white;
@@ -196,24 +196,6 @@
             padding-left: 30px;
             // overflow: hidden;
             display: inline-block;
-            .business-card-big {
-                position: absolute;
-                max-width: 500px;
-                max-height: 500px;
-                background: white;
-                position: absolute;
-                border: 1px solid @border-color;
-                top: 50%;
-                z-index: 99;
-                left: 100%;
-                transform: translateY(-50%) translateX(20px);
-                padding: 5px;
-            }
-            .business-card {
-                max-height: 170px;
-                max-width: 300px;
-                border-radius: 3px;
-            }
             &>.action {
                 position: absolute;
                 top: 50%;
@@ -299,32 +281,66 @@
             margin: 10px 0 5px 10px;
         }
     }
+    .front-card,
+    .back-card {
+        float: left;
+        position: relative;
+        h4 {
+            font-size: 13px;
+            color: #9fa3ac;
+            margin: 0 0 15px;
+        }
+    }
+    .front-card {
+        margin-right: 32px;
+    }
+    .business-card-big {
+        position: absolute;
+        max-width: 500px;
+        max-height: 500px;
+        background: white;
+        position: absolute;
+        border: 1px solid @border-color;
+        top: 50%;
+        z-index: 99;
+        left: 100%;
+        transform: translateY(-50%) translateX(20px);
+        padding: 5px;
+    }
+    .business-card {
+        max-height: 170px;
+        max-width: 300px;
+        border-radius: 3px;
+    }
 }
-.details{
-    color:#54c5cb;
+
+.details {
+    color: #54c5cb;
     cursor: pointer;
 }
-.shezhi-title{
-    font-size:13px;
-    color:#666b76;
+
+.shezhi-title {
+    font-size: 13px;
+    color: #666b76;
     position: relative;
-    &:before{
+    &:before {
         content: '';
-        height:5px;
-        width:5px;
+        height: 5px;
+        width: 5px;
         border-radius: 50%;
         background: #54c5cb;
         position: absolute;
-        left:-10px;
-        top:5px;
+        left: -10px;
+        top: 5px;
     }
 }
-.qr_code{
-    span{
-        font-size:13px;
-        color:#b7b7b7;
+
+.qr_code {
+    span {
+        font-size: 13px;
+        color: #b7b7b7;
     }
-    i{
-        color:#54c5cb;
+    i {
+        color: #54c5cb;
     }
 }

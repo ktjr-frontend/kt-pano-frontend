@@ -180,12 +180,21 @@
                     <div class="title">
                         <span class="key">名<i class="blank"></i><i class="blank"></i>片</span>
                         <div class="value">
-                            <img ng-show="user.card_url" ng-mouseenter="bigPitcureVisble = true" ng-mouseleave="bigPitcureVisble = false" class="business-card" ng-src="{{user.card_url}}" alt="用户的名片">
-                            <img ng-show="bigPitcureVisble" class="business-card-big" ng-src="{{user.card_url}}" alt="用户的名片">
+                            <div class="front-card" ng-show="user.card_url">
+                                <h4>正面</h4>
+                                <img ng-mouseenter="cardBigShow = true" ng-mouseleave="cardBigShow = false" class="business-card" ng-src="{{user.card_url}}" alt="用户的名片">
+                                <img ng-show="cardBigShow" class="business-card-big" ng-src="{{user.card_url}}" alt="用户的名片">
+                            </div>
+                            <div class="back-card" ng-show="user.card_back_url">
+                                <h4>反面</h4>
+                                <img ng-mouseenter="cardBackBigShow = true" ng-mouseleave="cardBackBigShow = false" class="business-card" ng-src="{{user.card_back_url}}" alt="用户的名片">
+                                <img ng-show="cardBackBigShow" class="business-card-big" ng-src="{{user.card_back_url}}" alt="用户的名片">
+                            </div>
                         </div>
                     </div>
                     <div class="action" ng-if="visibleJudgement(['rejected', 'pended', 'passed'], ['premium', 'certified'])">
-                        <a ng-click="updateBusinessCard()" class="btn btn-dark btn-xs f1_2rem">重新上传</a>
+                        <i ng-click="updateBusinessCard()" class="icon-pano icon-fill_in f1_6rem mr5"></i>
+                        <!-- <a ng-click="updateBusinessCard()" class="btn btn-dark btn-xs f1_2rem">重新上传</a> -->
                     </div>
                 </div>
                 <!-- <div class="action">
