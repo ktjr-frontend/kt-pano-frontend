@@ -3,10 +3,10 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktMarketCtrl', function($scope, $rootScope, $q, $state, $timeout, $location, ktDataHelper, ktAnalyticsService, ktEchartTheme1) {
-            // shared.tabActive.tab1 = true
             var shared = $scope.shared
             var params = shared.params
-            $scope.tab_show = true
+            shared.tabActive.tab0 = true
+            shared.filter_show = true
             var search = $location.search()
             $.extend(params, search)
             ktDataHelper.pruneDirtyParams(params, search, ['from', 'mapped_exchange', 'asset_type'])
