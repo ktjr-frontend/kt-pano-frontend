@@ -99,7 +99,13 @@
                     </div>
                     <div class="qr_code">
                         <span>手机扫描二维码，分享给好友:</span>
-                        <i class="icon-pano icon-small_code"></i>
+                        <i class="icon-pano icon-small_code qrCode">
+                           <div class="two_code">
+                            <span class="code_sharp"></span>
+                            <div class="twoCode" ng-isolate-scope" kt-qr-code qrcode="qrcode"></div>
+                        </div>
+                        </i>
+                        <!-- <div class="qrcode ng-isolate-scope" kt-qr-code="" qrcode="qrcode"></div> -->
                     </div>
                 </div>
             </div>

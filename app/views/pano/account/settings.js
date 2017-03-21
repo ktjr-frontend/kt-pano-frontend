@@ -43,6 +43,16 @@
             // CacheFactory.clearAll()
             // var user = $rootScope.user
             // 避免由于轮询获取用户card_url导致的非认证用户有名片的问题
+              $scope.qrcode = {}
+                    $scope.qrcode.settings = {
+                        text: location.origin + '/views/h5/ubc.html?r=' + Math.random().toString(16).slice(2, 8) + '&t=' + $scope.user.id,
+                        // text: location.origin + '/views/h5/ubc.html?_t=30fe7def0f5da26975187574285259ef1b96020b',
+                        width: 112,
+                        height: 112,
+                        colorDark: '#000000',
+                        colorLight: '#ffffff',
+                        correctLevel: QRCode.CorrectLevel.H
+                    }
             if ($rootScope.user.group === 'normal') {
                 $rootScope.user.card_url = null
             }
@@ -477,9 +487,13 @@
         //详细用户信息
         .controller('ktDetailsCtrl', function($rootScope, $scope, $uibModalInstance, ktDetailsService) {
             ktDetailsService.get(function(data) {
-                debugger
-                console.log(data)
+                $scope.detailsArr = data.res.slice(0, 5)
+                $scope.alldetails = data.res
             })
+            $scope.getMore = function() {
+                debugger
+                $scope.detailsArr = $scope.alldetails
+            }
             $scope.ok = function() {
                 $uibModalInstance.dismiss()
             }
