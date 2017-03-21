@@ -78,6 +78,7 @@
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 cacheData = res
                 $scope.products = res.products
+                $scope.updateTime = res.latest_uptime
                  if (res.summary.find.search_results) {
                     res.summary.find.search_results = _.filter(res.summary.find.search_results, function(n) {
                         return n.search_count !== 0

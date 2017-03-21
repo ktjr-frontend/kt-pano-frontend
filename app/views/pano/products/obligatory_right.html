@@ -9,9 +9,9 @@
     </div>
     <!-- 只要有搜索 -->
     <div class="chart-table-title fl" ng-if="getFitlerStatus() === SEARCH_STATUS">
-        匹配到共<em ng-bind="summary.find.count || 0" class="is-link" ng-class="{active: searchResultAllActive}" ng-click="showAllSearchResults()"></em>条相关产品
+        匹配到共<em ng-bind="summary.find.count || 0" class="is-link" ng-class="{active: searchResultAllActive}" ng-click="showAllSearchResults()"></em>条相关产品<i ng-if="summary.find.search_results.length > '0'">，</i>
         <span ng-repeat="item in summary.find.search_results">
-            <span ng-if="item.search_count">，其中
+            <span ng-if="item.search_count">其中
                 <span  ng-bind="::item.value"></span>相关<em ng-bind="::item.search_count" class="is-link" ng-click="searchTabClick(item.name, $index)" ng-class="{active: searchTabActiveIndex === $index}"></em>条<i ng-if="$index < summary.find.search_results.length - 1">，</i>
             </span>
         </span>
