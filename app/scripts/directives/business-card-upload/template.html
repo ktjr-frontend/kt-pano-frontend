@@ -25,6 +25,9 @@
             <small ng-show="!user.card_url && !cardUrlUploadShow" class="mt10 text-center mb10">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small>
             <div class="qrcode-bs-card preview text-center" ng-show="user.card_url">
                 <!-- <h5>已上传的名片：</h5> -->
+                <span class="note">
+                    <i class="blank"></i>正面<i class="blank"></i>
+                </span>
                 <div class="qrcode-body">
                     <img ng-src="{{user.card_url}}" alt="您的名片" class="qrcode">
                     <div class="delete">
@@ -64,6 +67,9 @@
             <small ng-show="!user.card_back_url && !cardBackUrlUploadShow" class="mt10 text-center">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small>
             <div class="qrcode-bs-card preview text-center" ng-show="user.card_back_url">
                 <!-- <h5>已上传的名片：</h5> -->
+                <span class="note">
+                   反面<br/>（可选）
+                </span>
                 <div class="qrcode-body">
                     <img ng-src="{{user.card_back_url}}" alt="您的名片" class="qrcode">
                     <div class="delete">
