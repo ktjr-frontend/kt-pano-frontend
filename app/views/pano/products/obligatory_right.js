@@ -5,7 +5,7 @@
         .controller('ktProductObligatoryRightCtrl', function($scope, $rootScope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
             var shared = $scope.shared
             var search = $scope.search = $location.search()
-            var informationArr = ['产品名称', '平台', '挂牌场所', '资产类型', '底层资产', '产品类型', '增信措施', '原始产品']
+            var informationArr = ['name', 'from', 'exchange', 'asset_type', 'original_asset', 'type', 'trust_party']
             $scope.shared.placeholderText = '请输产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施'
                 // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施' })
             var cacheData
@@ -89,9 +89,9 @@
                         return n.search_count !== 0
                     })
                     res.summary.find.search_results.sort(function(a, b) {
-                        if (_.indexOf(informationArr, a.value) > _.indexOf(informationArr, b.value)) {
+                        if (_.indexOf(informationArr, a.name) > _.indexOf(informationArr, b.name)) {
                             return 1
-                        } else if (_.indexOf(informationArr, a.value) < _.indexOf(informationArr, b.value)) {
+                        } else if (_.indexOf(informationArr, a.name) < _.indexOf(informationArr, b.name)) {
                             return -1
                         }
                         return 0
