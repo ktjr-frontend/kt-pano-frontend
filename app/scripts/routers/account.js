@@ -11,7 +11,7 @@
                  */
                 'account': {
                     abstract: true,
-                    url: '/account?apimock',
+                    url: '/account?apimock&_t',
                     templateUrl: 'views/common/simple.html',
                     resolve: ktLazyResolve([
                         // 'common/directives/kt-captchaimg-directive.js',

@@ -31,7 +31,7 @@
                     cancelButtonText: '残忍拒绝',
                 }, function(isConfirm) {
                     if (!isConfirm) {
-                        $rootScope.user.card_url = null
+                        // $rootScope.user.card_url = null
                         $rootScope.bdTrack(['上传名片页', '点击', '残忍拒绝'])
                         $state.go('account.prefer', { certifyApplication: $state.params.certifyApplication })
                     } else {
