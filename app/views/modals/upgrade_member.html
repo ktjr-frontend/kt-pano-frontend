@@ -7,7 +7,7 @@
             <div class="form-group">
                 <label class="text-primary-dark control-label">方式一：邀请好友注册</label>
                 <p>每成功邀请一位金融相关的用户注册并通过认证，您和好友均可免费获得30天高级用户权限。多邀可累计。</p>
-                <pre id="inviteUrl" ng-bind="inviteUrl"></pre>
+                <pre id="inviteUrl">邀请您注册开通PANO-专业精准的互金市场全景数据：<br>{{inviteUrl}}</pre>
                 <div class="text-center">
                     <!-- 不支持复制 safari & sogou -->
                     <a ng-show="autoCopyDisabled" class="btn btn-sm btn-dark" uib-tooltip="{{copyTooltip}}" tooltip-trigger="none" tooltip-placement="top" ngclipboard data-clipboard-target="#inviteUrl">复制邀请链接</a>

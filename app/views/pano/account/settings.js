@@ -45,7 +45,7 @@
             // 避免由于轮询获取用户card_url导致的非认证用户有名片的问题
             $scope.qrcode = {}
             $scope.qrcode.settings = {
-                text: ktEnv().wxHost + '/#!/invitation?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&fromQR',
+                text: ktEnv().wxHost + '/#!/invitation?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&inviteFromWebQR',
                 width: 112,
                 height: 112,
                 colorDark: '#000000',
@@ -199,7 +199,7 @@
             })
 
             // 邀请链接
-            $scope.inviteUrl = ktEnv().wxHost + '/#!/shared_register?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&fromURL'
+            $scope.inviteUrl = ktEnv().wxHost + '/#!/shared_register?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&inviteFromWebURL'
             $scope.autoCopyDisabled = $window.isSafari() || $window.isSogou()
 
             $scope.copyTooltip = '按' + ($window.isWindows() ? 'Ctrl' : '⌘') + '-C复制!'
