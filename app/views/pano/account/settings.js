@@ -45,7 +45,7 @@
             // 避免由于轮询获取用户card_url导致的非认证用户有名片的问题
             $scope.qrcode = {}
             $scope.qrcode.settings = {
-                text: ktEnv().wxHost + '/#!/invitation?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name),
+                text: ktEnv().wxHost + '/#!/invitation?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&fromQR',
                 width: 112,
                 height: 112,
                 colorDark: '#000000',
@@ -199,7 +199,7 @@
             })
 
             // 邀请链接
-            $scope.inviteUrl = ktEnv().wxHost + '/#!/shared_register?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name)
+            $scope.inviteUrl = ktEnv().wxHost + '/#!/shared_register?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&fromURL'
             $scope.autoCopyDisabled = $window.isSafari() || $window.isSogou()
 
             $scope.copyTooltip = '按' + ($window.isWindows() ? 'Ctrl' : '⌘') + '-C复制!'
@@ -489,12 +489,8 @@
         //详细用户信息
         .controller('ktDetailsCtrl', function($rootScope, $scope, $uibModalInstance, ktDetailsService) {
             ktDetailsService.get(function(data) {
-                $scope.detailsArr = data.res.slice(0, 5)
-                $scope.alldetails = data.res
+                $scope.detailsArr = data.res
             })
-            $scope.getMore = function() {
-                $scope.detailsArr = $scope.alldetails
-            }
             $scope.ok = function() {
                 $uibModalInstance.dismiss()
             }

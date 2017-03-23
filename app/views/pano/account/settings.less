@@ -353,8 +353,8 @@
 .details_table {
     padding: 10px 20px;
     .table_w {
-        max-height: 195px;
-        overflow-y: auto;
+        max-height: 200px;
+        overflow-y: scroll;
     }
     table {
         table-layout: fixed;
@@ -366,19 +366,17 @@
         font-weight: normal;
         text-align: center;
         color: #8d919a;
+        padding: 6px 13px;
+        border: 1px solid #f3f5f8;
+        &.details_color {
+        color: #6795e2;
+    }
     }
     th {
         background: #f3f5f8;
         padding: 8px 13px;
         border: 1px solid #f3f5f8;
         // border-radius: 5px;
-    }
-    td {
-        padding: 6px 13px;
-        border: 1px solid #f3f5f8;
-        &.details_color {
-            color: #6795e2;
-        }
     }
     .getMore {
         text-align: right;
