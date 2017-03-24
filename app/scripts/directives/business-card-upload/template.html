@@ -32,7 +32,7 @@
                     <img ng-src="{{user.card_url}}" alt="您的名片" class="qrcode">
                     <div class="delete">
                         <!-- <small class="mb10">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small> -->
-                        <button class="btn btn-file" ng-click="deleteCardUrl($event)">重新上传</button>
+                        <button class="btn btn-file" ng-click="deleteCardUrl($event)">删除</button>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     <img ng-src="{{user.card_back_url}}" alt="您的名片" class="qrcode">
                     <div class="delete">
                         <!-- <small class="mb10">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small> -->
-                        <button class="btn btn-file" ng-click="deleteCardBackUrl($event)">重新上传</button>
+                        <button class="btn btn-file" ng-click="deleteCardBackUrl($event)">删除</button>
                     </div>
                 </div>
             </div>
@@ -91,8 +91,8 @@
         </div>
     </div>
     <div class="modal-footer mt10" ng-show="uploadType === 'dialog'">
-        <button class="btn btn-dark btn-navy-gradient" ng-if="user.status === 'rejected'" ng-click="closeDialog({$event:$event, isConfirm: true})" ng-disabled="bsnsCardForm.$invalid || pendingRequests">确定</button>
-        <button class="btn btn-dark btn-navy-gradient" ng-if="user.status === 'passed' || user.status === 'pended'" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">确定</button>
-        <button class="btn btn-gray" ng-click="closeDialog({$event:$event})">取消</button>
+        <!-- <button class="btn btn-dark btn-navy-gradient" ng-if="user.status === 'rejected'" ng-click="closeDialog({$event:$event, isConfirm: true})" ng-disabled="bsnsCardForm.$invalid || pendingRequests">关闭</button> -->
+        <button class="btn btn-dark btn-navy-gradient" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">关闭</button>
+        <!-- <button class="btn btn-gray" ng-click="closeDialog({$event:$event})">取消</button> -->
     </div>
 </form>

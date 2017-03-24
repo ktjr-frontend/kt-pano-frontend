@@ -66,17 +66,35 @@
                     // 重新上传正面
                     $scope.deleteCardUrl = function(event) {
                         event.stopPropagation()
-                        $scope.user.card_url = null
-                        ktCardsService.delete()
-                        $rootScope.bdTrack([pageName, '正面', '重新上传'])
+                        ktCardsService.delete(function() {
+                            $scope.user.card_url = null
+                            $scope.cardUrlUploadShow = false
+                            $scope.user.status = 'rejected'
+                            $scope.user.reason = '未上传名片正面信息'
+                            $scope.user.solution = '请在下方上传名片信息'
+                            $rootScope.bdTrack([pageName, '正面', '重新上传'])
+                        }, function() {
+                            ktSweetAlert.swal({
+                                title: '',
+                                text: '名片删除失败！'
+                            })
+                        })
                     }
 
                     // 重新上传背面
                     $scope.deleteCardBackUrl = function(event) {
                         event.stopPropagation()
-                        $scope.user.card_back_url = null
-                        ktBackCardsService.delete()
-                        $rootScope.bdTrack([pageName, '背面', '重新上传'])
+                        ktBackCardsService.delete(function() {
+                            $scope.user.card_back_url = null
+                            $scope.cardBackUrlUploadShow = false
+                            $scope.user.status = 'pended'
+                            $rootScope.bdTrack([pageName, '背面', '重新上传'])
+                        }, function() {
+                            ktSweetAlert.swal({
+                                title: '',
+                                text: '名片删除失败！'
+                            })
+                        })
                     }
 
                     // 轮询获取用户名片,包含前面和背面
