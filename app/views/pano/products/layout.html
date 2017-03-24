@@ -15,7 +15,7 @@
         <div class="panel-body b-t-none">
             <div class="filter-box bor-xxs">
                 <!-- 遮罩层 -->
-                <div class="mark mark-search" ng-if="user.group === 'certified'">
+                <div class="mark mark-search" ng-if="user.group === 'certified' && user.status !== 'rejected'">
                     <div class="inner">
                         <i class="icon-pano icon-find"></i>
                         <div class="inner-con">
@@ -76,7 +76,7 @@
             </div>
             <div class="search-bar">
                 <div class="input-group">
-                    <input type="text" class="form-control" ng-model='shared.params.key_word' ng-keyup="goToByEnterKey($event, 'key_word', shared.params.key_word)" placeholder="输入关键字，如产品名称或底层资产">
+                    <input type="text" class="form-control" ng-model='shared.params.key_word' ng-keyup="goToByEnterKey($event, 'key_word', shared.params.key_word)" placeholder="{{shared.placeholderText}}">
                     <span class="input-group-addon" ng-click="bdTrack(['产品信息页', '确认', '搜索', '点击']);goTo('key_word', shared.params.key_word)">
                         <i class="icon-pano icon-search2"></i>
                     </span>

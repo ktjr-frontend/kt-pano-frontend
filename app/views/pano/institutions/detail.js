@@ -323,7 +323,7 @@
                 yAxis: 'rate',
                 _filters: [{
                     name: '期限：',
-                    onToggle: function (open) {
+                    onToggle: function(open) {
                         open && $rootScope.bdTrack(['机构详情页', '下拉', '资产产品收益率趋势期限']) // eslint-disable-line
                     },
                     options: [{
@@ -554,7 +554,9 @@
 
             $scope.moreTableView = function(type) {
                 var data = {}
-                amendSpecialParams(data)
+                if ($rootScope.user.status !== 'rejected') {
+                    amendSpecialParams(data)
+                }
                 var url = $state.href('pano.products.' + type, data)
                 window.open(url, '_blank')
             }

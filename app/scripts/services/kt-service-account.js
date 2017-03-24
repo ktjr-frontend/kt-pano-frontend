@@ -73,4 +73,9 @@
         })
     })
 
+    // 详情信息
+    .factory('ktDetailsService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/person/invitees')
+    })
+
 })();

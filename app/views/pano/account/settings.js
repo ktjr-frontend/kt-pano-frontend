@@ -43,6 +43,15 @@
             // CacheFactory.clearAll()
             // var user = $rootScope.user
             // 避免由于轮询获取用户card_url导致的非认证用户有名片的问题
+            $scope.qrcode = {}
+            $scope.qrcode.settings = {
+                text: ktEnv().wxHost + '/#!/invitation?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&inviteFromWebQR',
+                width: 100,
+                height: 100,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            }
             if ($rootScope.user.group === 'normal') {
                 $rootScope.user.card_url = null
             }
@@ -54,33 +63,42 @@
 
             // 升级会员
             $scope.upgrade = function() {
+                $rootScope.bdTrack(['个人信息页', '点击', '升级到高级会员', '账号信息'])
                 ktUpgradeMember()
             }
 
             // 根据用户角色判断是否显示
             $scope.visibleJudgement = function(permitsList, group) {
-                var trafficStatus = _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
-                if (!group) {
-                    return trafficStatus
+                    var trafficStatus = _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
+                    if (!group) {
+                        return trafficStatus
+                    }
+                    return _.includes(group, $rootScope.user ? $rootScope.user.group : '') && trafficStatus
                 }
-                return _.includes(group, $rootScope.user ? $rootScope.user.group : '') && trafficStatus
+                //详情信息
+            $scope.details = function() {
+                var detailsModal = $uibModal.open({
+                    templateUrl: 'views/modals/details_info.html',
+                    controller: 'ktDetailsCtrl',
+                    size: 'md'
+                })
+                detailsModal.result.then(function() {})
             }
 
             // 更新用户资料
             $scope.updateProfile = function() {
-                var updateProfileModal = $uibModal.open({
-                    size: 'md',
-                    templateUrl: 'views/modals/update_profile.html',
-                    controller: 'ktUpdateProfileCtrl'
-                })
+                    var updateProfileModal = $uibModal.open({
+                        size: 'md',
+                        templateUrl: 'views/modals/update_profile.html',
+                        controller: 'ktUpdateProfileCtrl'
+                    })
 
-                updateProfileModal.result.then(function(u) {
-                    ktSweetAlert.success('信息修改成功')
-                    $.extend($rootScope.user, u)
-                })
-            }
-
-            // 重新上传名片
+                    updateProfileModal.result.then(function(u) {
+                        ktSweetAlert.success('信息修改成功')
+                        $.extend($rootScope.user, u)
+                    })
+                }
+                // 重新上传名片
             $scope.updateBusinessCard = function() {
                 if ($rootScope.user.status === 'passed') {
                     ktSweetAlert.swal({
@@ -93,22 +111,20 @@
                             openDialog()
                         }
                     })
-                } else if ($rootScope.user.status === 'rejected') {
+                } else {
                     openDialog()
                 }
 
                 function openDialog() {
-                    ktCardsService.delete(function() {
-                        var updateBusinessCardModal = $uibModal.open({
-                            size: 'md',
-                            templateUrl: 'views/modals/update_business_card.html',
-                            controller: 'ktUpdateBusinessCardCtrl'
-                        })
+                    var updateBusinessCardModal = $uibModal.open({
+                        size: 'md',
+                        templateUrl: 'views/modals/update_business_card.html',
+                        controller: 'ktUpdateBusinessCardCtrl'
+                    })
 
-                        updateBusinessCardModal.result.then(function(u) {
-                            // ktSweetAlert.success('信息修改成功')
-                            $.extend($rootScope.user, u)
-                        })
+                    updateBusinessCardModal.result.then(function(u) {
+                        // ktSweetAlert.success('信息修改成功')
+                        $.extend($rootScope.user, u)
                     })
                 }
             }
@@ -174,7 +190,8 @@
             }
 
             var infoData
-                // 获取用户信息
+
+            // 获取用户信息
             ktUserInfoService.get(function(data) {
                 infoData = data
                 $rootScope.user.asset_types = _.map(data.asset_types.selected, 'name').join('，')
@@ -182,7 +199,7 @@
             })
 
             // 邀请链接
-            $scope.inviteUrl = ktEnv().host + '/account/register?_u=' + $rootScope.user.id
+            $scope.inviteUrl = ktEnv().wxHost + '/#!/shared_register?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&inviteFromWebURL'
             $scope.autoCopyDisabled = $window.isSafari() || $window.isSogou()
 
             $scope.copyTooltip = '按' + ($window.isWindows() ? 'Ctrl' : '⌘') + '-C复制!'
@@ -207,6 +224,7 @@
 
             // 编辑业务偏好
             $scope.updateAssetTypes = function() {
+                $rootScope.bdTrack(['个人信息页', '编辑', '业务偏好'])
                 var updateAssetTypesModal = $uibModal.open({
                     size: 'md',
                     templateUrl: 'views/modals/prefer.html',
@@ -300,7 +318,8 @@
         .controller('ktUpdateBusinessCardCtrl', function($rootScope, $scope, $uibModalInstance, ktSweetAlert) {
             $scope.title = '上传名片'
             $scope.user = $.extend(true, {}, $rootScope.user)
-            $scope.user.card_url = null // 默认展示二维码
+            $scope.user.card_url = $rootScope.user.card_url // 默认展示二维码
+            $scope.user.card_back_url = $rootScope.user.card_back_url // 默认展示二维码
             $scope.user.content = 'update_business_card'
 
             $scope.submitForm = function() {
@@ -314,6 +333,7 @@
                 if (isConfirm) {
                     ktSweetAlert.success('信息修改成功')
                     $rootScope.user.card_url = $scope.user.card_url
+                    $rootScope.user.card_back_url = $scope.user.card_back_url
                     $rootScope.user.status = $scope.user.status
                 }
                 $uibModalInstance.dismiss('cancel')
@@ -464,6 +484,15 @@
             $scope.cancel = function($event) {
                 $event.preventDefault()
                 $uibModalInstance.dismiss('cancel')
+            }
+        })
+        //详细用户信息
+        .controller('ktDetailsCtrl', function($rootScope, $scope, $uibModalInstance, ktDetailsService) {
+            ktDetailsService.get(function(data) {
+                $scope.detailsArr = data.res
+            })
+            $scope.ok = function() {
+                $uibModalInstance.dismiss()
             }
         })
 })();

@@ -5,6 +5,9 @@
         .controller('ktProductObligatoryRightCtrl', function($scope, $rootScope, $state, $location, ktDataHelper, ktProductsService, ktSweetAlert) {
             var shared = $scope.shared
             var search = $scope.search = $location.search()
+            var informationArr = ['name', 'from', 'exchange', 'asset_type', 'original_asset', 'type', 'trust_party']
+            $scope.shared.placeholderText = '请输入产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施'
+                // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施' })
             var cacheData
             var filterOpts = [{
                 value: 'life_days_in',
@@ -79,8 +82,21 @@
             // 获取产品列表
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 cacheData = res
+                $scope.updateTime = res.latest_uptime
                 $scope.products = res.products
-
+                if (res.summary.find.search_results) {
+                    res.summary.find.search_results = _.filter(res.summary.find.search_results, function(n) {
+                        return n.search_count !== 0
+                    })
+                    res.summary.find.search_results.sort(function(a, b) {
+                        if (_.indexOf(informationArr, a.name) > _.indexOf(informationArr, b.name)) {
+                            return 1
+                        } else if (_.indexOf(informationArr, a.name) < _.indexOf(informationArr, b.name)) {
+                            return -1
+                        }
+                        return 0
+                    })
+                }
                 $scope.summary = res.summary
                 shared._params.totalItems = res.summary.find.count
                 shared._params.totalPages = _.ceil(res.summary.find.count / shared.params.per_page)
