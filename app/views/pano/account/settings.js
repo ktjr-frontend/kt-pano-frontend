@@ -46,8 +46,8 @@
             $scope.qrcode = {}
             $scope.qrcode.settings = {
                 text: ktEnv().wxHost + '/#!/invitation?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&inviteFromWebQR',
-                width: 112,
-                height: 112,
+                width: 100,
+                height: 100,
                 colorDark: '#000000',
                 colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.H
