@@ -388,7 +388,15 @@ table {
             color: @color-1;
             margin-bottom: 15px;
             font-size: 15px;
+            position:relative;
             // font-weight: bold;
+            .update_time{
+                position:absolute;
+                right:0;
+                top:0;
+                color:#9b9ca4;
+                font-size:13px;
+            }
         }
         &:last-of-type {
             border-radius: 0 0 5px 5px;
@@ -462,7 +470,6 @@ table {
         }
     }
 }
-
 
 /*.dashboard-table {
     background-color: white;

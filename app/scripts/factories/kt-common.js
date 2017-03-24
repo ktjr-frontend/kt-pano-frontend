@@ -128,7 +128,7 @@
                     templateUrl: 'views/modals/upgrade_member.html',
                     controller: function($scope, $rootScope, $uibModalInstance, $timeout, $window, ktEnv, ktAccountService, ktSweetAlert) {
                         $scope.title = '升级到高级会员'
-                        $scope.inviteUrl = ktEnv().host + '/account/register?_u=' + $rootScope.user.id
+                        $scope.inviteUrl = ktEnv().wxHost + '/#!/shared_register?_u=' + $rootScope.user.id + '&_n=' + encodeURIComponent($rootScope.user.name) + '&inviteFromWebPopUp'
                         $scope.user = {
                             wx: $rootScope.user.wx
                         }
@@ -176,9 +176,19 @@
                 'pano.ktjr.com': 'http://pano.ktjr.com',
             }
 
+            var hostWxMap = {
+                'localhost': 'http://dev-enquiry.pano.ktjr.com',
+                'dev-pano.ktjr.com': 'http://dev-enquiry.pano.ktjr.com',
+                'stage-pano.ktjr.com': 'http://stage-enquiry.pano.ktjr.com',
+                'pano.ktjr.com': 'http://pano-enquiry.ktjr.com',
+            }
+
             return function() {
                 var hostname = location.hostname
-                return { host: hostMap[hostname] || 'http://pano.ktjr.com' }
+                return {
+                    host: hostMap[hostname] || 'http://pano.ktjr.com',
+                    wxHost: hostWxMap[hostname] || 'http://pano-enquiry.ktjr.com'
+                }
             }
 
         })

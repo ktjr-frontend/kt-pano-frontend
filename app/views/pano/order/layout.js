@@ -121,8 +121,8 @@
                                 text: '<i class="icon-pano icon-phone mr5 f1_2rem"></i><a class="mr20">010-84551488</a><i class="icon-pano icon-message mr5 f1_2rem"></i><a href="mailto:HelloPano@ktjr.com">HelloPano@ktjr.com</a>',
                                 html: true
                             })
-                        }, function() {
-                            ktSweetAlert.error('抱歉！服务器繁忙。')
+                        }, function(res) {
+                            ktSweetAlert.error(res.error || '抱歉！服务器繁忙。')
                         })
                     }
                 })

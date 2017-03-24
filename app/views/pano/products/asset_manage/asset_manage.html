@@ -18,10 +18,13 @@
     <div class="asset-body">
         <div class="asset-content">
             <div class="asset-content-top">
-                <div class="product-name" ng-bind="productManage.name"></div>
+                <div class="asset-update">
+                    <div class="product-name fl" ng-bind="productManage.name"></div>
+                    <div class="product-time fr" ng-bind="'更新时间:'+productManage.latest_uptime"></div>
+                </div>
                 <div class="product-data">
                     <div class="product-data-one" ng-class="{'no-border': !partitions.length}">
-                        <ul>
+                  <!--       <ul>
                             <li>
                                 <div>
                                     <span>发行平台:</span>
@@ -48,7 +51,27 @@
                                     <em ng-bind="productManage.manager_type | ktNull"></em>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
+                        <table class="asset_table">
+                            <tbody>
+                                <tr>
+                                    <th>发行平台：</th>
+                                    <td>
+                                        <em class="text-color" ng-bind="productManage.from | ktNull" ui-sref="pano.products.assetManage({from_eq:productManage.from})"></em>
+                                    </td>
+                                    <th>产品期限：</th>
+                                    <td ng-bind="productManage.lives | ktNull"></td>
+                                    <th>管理机构：</th>
+                                    <td ng-bind="productManage.manage_institution | ktNull"></td>
+                                </tr>
+                                <tr>
+                                    <th>年化收益率：</th>
+                                    <td ng-bind="productManage.rate | ktNull"></td>
+                                    <th>管理人类型：</th>
+                                    <td ng-bind="productManage.manager_type | ktNull"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="product-data-two" ng-if="partitions.length">
                         <div class="return-rate">各期限收益率情况</div>

@@ -18,7 +18,10 @@
     <div class="asset-body">
         <div class="asset-content">
             <div class="asset-content-top">
-                <div class="product-name" ng-bind="assetsDatas.name"></div>
+                <div class="asset-update">
+                    <div class="product-name fl" ng-bind="assetsDatas.name"></div>
+                    <div class="product-time fr" ng-bind="'更新时间:'+updateTime"></div>
+                </div>
                 <div class="product-data">
                     <div class="product-data-one">
                         <div class="product-data-top">
@@ -29,7 +32,9 @@
                         </div>
                         <div class="product-data-top">
                             <div class="spacing">
-                                <div class="product-dt-top">年化收益率</div>
+                                <div class="product-dt-top">年化收益率
+                                    <i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="年化收益率是对该产品所有原始产品按发行量加权统计后得到的综合年化收益率。" class="icon-pano icon-info f1_2rem"></i>
+                                </div>
                                 <div class="product-dt-down" ng-bind="assetsDatas.rate | ktNull"></div>
                             </div>
                         </div>

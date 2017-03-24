@@ -144,6 +144,12 @@
     .hpanel {
         padding: 0 50px;
         margin: 0;
+        .panel-head {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
         .panel-body {
             background: white;
             border-radius: 5px;
@@ -190,24 +196,6 @@
             padding-left: 30px;
             // overflow: hidden;
             display: inline-block;
-            .business-card-big {
-                position: absolute;
-                max-width: 500px;
-                max-height: 500px;
-                background: white;
-                position: absolute;
-                border: 1px solid @border-color;
-                top: 50%;
-                z-index: 99;
-                left: 100%;
-                transform: translateY(-50%) translateX(20px);
-                padding: 5px;
-            }
-            .business-card {
-                max-height: 170px;
-                max-width: 300px;
-                border-radius: 3px;
-            }
             &>.action {
                 position: absolute;
                 top: 50%;
@@ -243,7 +231,7 @@
     }
     .simple-title {
         font-size: 15px;
-        margin-left: 55px;
+        // margin-left: 55px;
         margin-top: 25px;
         font-weight: normal;
         color: white;
@@ -293,4 +281,132 @@
             margin: 10px 0 5px 10px;
         }
     }
+    .front-card,
+    .back-card {
+        float: left;
+        position: relative;
+        h4 {
+            font-size: 13px;
+            color: #9fa3ac;
+            margin: 0 0 15px;
+        }
+    }
+    .front-card {
+        margin-right: 32px;
+    }
+    .business-card-big {
+        position: absolute;
+        max-width: 500px;
+        max-height: 500px;
+        background: white;
+        position: absolute;
+        border: 1px solid @border-color;
+        top: 50%;
+        z-index: 99;
+        left: 100%;
+        transform: translateY(-50%) translateX(20px);
+        padding: 5px;
+    }
+    .business-card {
+        max-height: 170px;
+        max-width: 300px;
+        border-radius: 3px;
+    }
+}
+
+.details {
+    color: #54c5cb;
+    cursor: pointer;
+}
+
+.shezhi-title {
+    font-size: 13px;
+    color: #666b76;
+    position: relative;
+    &:before {
+        content: '';
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+        background: #54c5cb;
+        position: absolute;
+        left: -10px;
+        top: 5px;
+    }
+}
+
+.qr_code {
+    position: relative;
+    span {
+        font-size: 13px;
+        color: #b7b7b7;
+    }
+    i {
+        color: #54c5cb;
+        cursor: pointer;
+        &:hover .two_code {
+            display: block;
+        }
+    }
+}
+
+.details_table {
+    padding: 10px 20px;
+    .table_w {
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    th,
+    td {
+        font-size: 12px;
+        font-weight: normal;
+        text-align: center;
+        color: #8d919a;
+        padding: 6px 13px;
+        border: 1px solid #f3f5f8;
+        &.details_color {
+        color: #6795e2;
+    }
+    }
+    th {
+        background: #f3f5f8;
+        padding: 8px 13px;
+        border: 1px solid #f3f5f8;
+        // border-radius: 5px;
+    }
+    .getMore {
+        text-align: right;
+        font-size: 13px;
+        margin-top: 10px;
+        color: #9fa2a9;
+        cursor: pointer;
+    }
+    button {
+        background: #f3f5f8;
+        color: #000;
+    }
+}
+
+// td .details_color {
+//     color: #6795e2;
+// }
+
+.two_code {
+    display: none;
+    position: absolute;
+    top: -50px;
+    left: 200px;
+}
+.twoCode{
+    padding:10px;
+    background: rgba(119, 119, 119, 0.2);
+}
+.icon-explain{
+    font-size: 16px;
+    color:#bfc4cf;
+    cursor:pointer;
 }

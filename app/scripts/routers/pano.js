@@ -16,7 +16,6 @@
                     data: {
                         breadcrumb: false,
                         pageTitle: '微贷平台',
-                        // permit: ['login'],
                         specialClass: 'pano-page'
                     },
                     resolve: ktLazyResolve(['views/common/pano.js']),
@@ -58,13 +57,14 @@
                     ]),
                     controller: 'ktMarketLayoutCtrl',
                     data: {
-                        halfPermit: ['normal'], // 用于正常路由，但是非认证用户弹出提示框
+                        rejectedLimit: true, // 拒绝用户限制
+                        normalLimit: true, // 用于正常路由，但是非认证用户弹出提示框
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
-                                premium: ['passed', 'pended'],
-                                certified: ['passed', 'pended'],
-                                normal: ['passed', 'pended']
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
                             }
                         }],
                         pageTitle: '市场数据',
@@ -115,17 +115,26 @@
                     ]),
                     controller: 'ktProductsLayoutCtrl',
                     data: {
-                        halfPermit: ['normal'],
+                        rejectedLimit: true,
+                        normalLimit: true,
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
-                                premium: ['passed', 'pended'],
-                                certified: ['passed', 'pended'],
-                                normal: ['passed', 'pended']
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
                             }
                         }],
                         pageTitle: '产品信息',
                     }
+                },
+                //说明页
+                'pano.explain': {
+                    url: '/explain',
+                    templateUrl: 'views/pano/account/explain.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/account/explain.css'
+                        ])
                 },
                 'pano.products.obligatoryRight': {
                     url: '/obligatory_right?key_word&created_or_updated_in&status_eq&credit_manager_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
@@ -159,12 +168,13 @@
                     ]),
                     controller: 'ktOrderLayoutCtrl',
                     data: {
-                        halfPermit: ['normal'],
+                        rejectedLimit: true,
+                        normalLimit: true,
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
-                                premium: ['passed', 'pended'],
-                                certified: ['passed', 'pended']
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected']
                             }
                         }],
                         pageTitle: '可预约产品',
@@ -200,7 +210,7 @@
                     url: '/institutions',
                     template: '<ui-view/>',
                     data: {
-                        // halfPermit: ['normal'],
+                        // normalLimit: true,
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
@@ -227,17 +237,15 @@
                 },
                 // 资产产品详情页
                 'pano.productObligatoryRight': {
-                    // abstract: true,
                     url: '/product_obligatory_right/:id',
-                    // template: '</ui-view>',
                     templateUrl: 'views/pano/products/obligatory_right/obligatory_right.html',
                     data: {
-                        halfPermit: ['normal'],
+                        rejectedLimit: true,
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
-                                premium: ['passed', 'pended'],
-                                certified: ['passed', 'pended']
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected']
                             }
                         }],
                         pageTitle: '产品信息',
@@ -267,12 +275,12 @@
                     ]),
                     controller: 'ktAssetManageCtrl',
                     data: {
-                        halfPermit: ['normal'],
+                        rejectedLimit: true,
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
-                                premium: ['passed', 'pended'],
-                                certified: ['passed', 'pended']
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected']
                             }
                         }]
                     }

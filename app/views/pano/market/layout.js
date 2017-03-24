@@ -5,7 +5,11 @@
         .controller('ktMarketLayoutCtrl', function($scope, $rootScope, $state, $location,
             ktSweetAlert, ktDataHelper, ktAnalyticsService, ktUpgradeMember) {
             $scope.shared = {
-                tab_show: true
+                filter_show: true,
+                tabActive: {
+                    tab0: false,
+                    tab1: false
+                }
             }
 
             var defaultParams = {

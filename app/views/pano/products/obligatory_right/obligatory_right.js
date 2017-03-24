@@ -15,6 +15,7 @@
 
         ktProductsService.get({ content: $stateParams.id }, function(data) {
             $scope.assetsDatas = data.products
+            $scope.updateTime = data.products.latest_uptime
             $scope.original_products = data.original_products
 
             //发行平台

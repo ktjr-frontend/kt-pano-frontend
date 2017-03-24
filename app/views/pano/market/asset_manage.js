@@ -3,8 +3,8 @@
     'use strict';
     angular.module('kt.pano')
         .controller('ktOrderAssetManageCtrl', function($scope, $state, $location, ktDataHelper, ktAnalyticsService) {
-            // $scope.shared.tabActive.tab1 = true
-            $scope.tab_show = false
+            $scope.shared.tabActive.tab1 = true
+            $scope.shared.filter_show = false
             $scope.assetManger = {}
             ktAnalyticsService.get({
                     content: 'rate_trend'

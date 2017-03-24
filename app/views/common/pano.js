@@ -7,7 +7,6 @@
             $rootScope.goHome = function() {
                 $state.go('home.index')
             }
-
             $scope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState) {
 
                 window.requestAnimationFrame(function() {
