@@ -6,7 +6,7 @@
             var shared = $scope.shared
             var search = $scope.search = $location.search()
             var informationArr = ['name', 'from', 'exchange', 'asset_type', 'original_asset', 'type', 'trust_party']
-            $scope.shared.placeholderText = '请输产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施'
+            $scope.shared.placeholderText = '请输入产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施'
                 // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施' })
             var cacheData
             var filterOpts = [{

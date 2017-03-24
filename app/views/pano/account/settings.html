@@ -57,7 +57,9 @@
                升级到高级会员
                <!-- <i class="icon-pano icon-arrow-bold" style="display: inline-block;vertical-align: -1px;transform: scale(0.8)"></i> -->
             </a>
-            <i class="icon-pano icon-explain ml5"  ui-sref="pano.explain"></i>
+            <a ui-sref="pano.explain" target="_blank">
+                <i class="icon-pano icon-explain ml5"></i>
+            </a>
             <span class="ml10 f1_2rem" ng-if="user.group === 'premium' && user.premium_duration">
                 剩余期限<em ng-bind="{{user.premium_duration}}"></em>天
             </span>
