@@ -222,7 +222,7 @@
                 if ($rootScope.user && toState.data.normalLimit && $rootScope.user.group === 'normal') {
                     ktSweetAlert.swal({
                         title: '',
-                        text: '请您先通过名片认证，才能获得更多权限',
+                        text: '请您进行名片认证，以使用该功能',
                         confirmButtonText: '去认证',
                         showCancelButton: true,
                         closeOnConfirm: false,

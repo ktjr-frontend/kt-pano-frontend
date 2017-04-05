@@ -142,7 +142,7 @@
                                 <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <h3 ng-bind="inst.name"></h3>
+                                <h3 ng-bind="inst.name" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})"></h3>
                                 <p class="desc">
                                     <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
                                     <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.from_introduce | ktNull"></span>
