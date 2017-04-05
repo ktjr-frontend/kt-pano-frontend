@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $rootScope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1) {
+        .controller('ktOverviewCtrl', function($scope, $rootScope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1, ktSweetAlert) {
 
             $scope.updateDate = '获取中...'
             $scope.updateDateTo = '获取中...'
@@ -281,7 +281,16 @@
                 }, true)
                 $rootScope.bdTrack(['总览页', newValue === 'last7days' ? '近七日' : '历史平均周', '各平台发行量收益率统计'])
             })
-
+            //弹出了解更多二维码
+            $scope.alertMore = function() {
+                ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
+                title: '<h4 class="title-more">了解更多' + '</h4>' + '<p class="alert-moreCode">' + '如果想了解更多该系统相关信息' + '</p>' + '<p class="alert">' + '欢迎您微信扫描下方二维码与我们联系：)' + '</p>',
+                text: '<span class="moreCode-pano">' + '<img src="images/moreCode.png">' + '</span>',
+                html: true
+                // showCloseButton: true
+                    // showCancelButton: true
+            })
+            }
             // 期限利率图 @deprecated 用下面组合图替代
             /*var durationRateChart = $scope.durationRateChart = {
                 chartOptions: {},
