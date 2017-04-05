@@ -8,7 +8,7 @@
             var informationArr = ['name', 'from', 'exchange', 'asset_type', 'original_asset', 'type', 'trust_party']
             $scope.shared.placeholderText = '请输入产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施'
                 // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、挂牌场所、资产类型、底层资产、产品类型或增信措施' })
-            var cacheData
+            // var cacheData
             var filterOpts = [{
                 value: 'life_days_in',
                 type: 'dropdown'
@@ -81,7 +81,7 @@
 
             // 获取产品列表
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
-                cacheData = res
+                // cacheData = res
                 $scope.updateTime = res.latest_uptime
                 $scope.products = res.products
                 if (res.summary.find.search_results) {
@@ -115,7 +115,7 @@
                 })
             })
 
-            // 搜索结果点击
+            /*// 搜索结果点击
             $scope.searchTabActiveIndex = -1
             $scope.searchTabClick = function(name, index) {
                 $scope.searchResultAllActive = false
@@ -137,6 +137,6 @@
                 $scope.products = cacheData.products
                 shared._params.totalItems = cacheData.summary.find.count
                 shared._params.totalPages = _.ceil(cacheData.summary.find.count / shared.params.per_page)
-            }
+            }*/
         })
 })();

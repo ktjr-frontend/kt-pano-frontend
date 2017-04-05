@@ -84,14 +84,17 @@
                             <tr>
                                 <th>资产类型：</th>
                                 <td ng-bind="assetsDatas.asset_type | ktNull"></td>
+                                <th>产品类型：</th>
+                                <td ng-bind="assetsDatas.product_type | ktNull"></td>
+
+                            </tr>
+                            <tr>
                                 <th>底层资产：</th>
-                                <td ng-bind="assetsDatas.asset | ktNull"></td>
+                                <td colspan="3" ng-bind="assetsDatas.asset | ktNull"></td>
                             </tr>
                             <tr>
                                 <th>增信措施：</th>
-                                <td ng-bind="assetsDatas.credit_measures | ktNull"></td>
-                                <th>产品类型：</th>
-                                <td ng-bind="assetsDatas.product_type | ktNull"></td>
+                                <td colspan="3" ng-bind="assetsDatas.credit_measures | ktNull"></td>
                             </tr>
                         </table>
                         <!-- <div class="inner">
