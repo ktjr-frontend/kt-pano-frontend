@@ -258,7 +258,9 @@
                                 <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <h3 ng-bind="exchange.name" ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})"></h3>
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})">
+                                   <h3 ng-bind="exchange.name" ></h3>
+                                </a>
                                 <p class="desc">
                                     <span ng-show="exchange.exchangeObj.isTruncate" ng-bind="exchange.exchangeObj.value | ktNull"></span>
                                     <span ng-show="!exchange.exchangeObj.isTruncate" ng-bind="exchange.exchange_introduce"></span>

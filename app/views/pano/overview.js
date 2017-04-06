@@ -285,7 +285,7 @@
             $scope.alertMore = function() {
                 ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
                 title: '<h4 class="title-more">了解更多' + '</h4>' + '<p class="alert-moreCode">' + '如果想了解更多该系统相关信息' + '</p>' + '<p class="alert">' + '欢迎您微信扫描下方二维码与我们联系：)' + '</p>',
-                text: '<span class="moreCode-pano">' + '<img src="images/moreCode.png">' + '</span>',
+                text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
                 html: true
                 // showCloseButton: true
                     // showCancelButton: true
