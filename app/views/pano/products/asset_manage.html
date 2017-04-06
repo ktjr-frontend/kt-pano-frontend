@@ -13,7 +13,7 @@
         <span ng-if="summary.find.search_results.length > '0'">，其中</span>
         <span ng-repeat="item in summary.find.search_results">
             <span ng-show="item.search_count">
-                <span ng-bind="::item.value"></span>相关<a ui-sref="pano.products.assetManage({'search_fields[]': item.name})" ng-bind="::item.search_count" class="em is-link" ng-class="{active: searchTabActiveIndex === $index}"></a>条<i ng-if="$index < summary.find.search_results.length - 1">，</i>
+                <span ng-bind="::item.value"></span>相关<a ui-sref="pano.products.assetManage({'search_fields[]': item.name})" target="_blank" ng-bind="::item.search_count" class="em is-link" ng-class="{active: searchTabActiveIndex === $index}"></a>条<i ng-if="$index < summary.find.search_results.length - 1">，</i>
             </span>
         </span>
     </div>

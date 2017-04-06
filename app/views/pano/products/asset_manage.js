@@ -59,7 +59,7 @@
             shared._params.totalItems = 0
             $.extend(shared.params, search, { credit_right_or_eq: 'am' })
             shared._params.page = shared.params.page
-            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by', 'created_or_updated_in'])
+            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by', 'created_or_updated_in', 'search_fields[]'])
             ktDataHelper.intFitlerStatus($scope, search)
 
             if (!shared.filterDatas) {
