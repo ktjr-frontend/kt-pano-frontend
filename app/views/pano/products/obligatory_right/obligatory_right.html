@@ -211,7 +211,9 @@
                                 <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <h3 ng-bind="inst.name" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})"></h3>
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})">
+                                     <h3 ng-bind="inst.name"></h3>
+                                </a>
                                 <p class="desc">
                                     <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
                                     <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.from_introduce | ktNull"></span>
@@ -255,10 +257,10 @@
                     <div class="box-body">
                         <div class="clfix">
                             <div class="logo">
-                                <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
+                                <a ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})">
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})">
                                    <h3 ng-bind="exchange.name" ></h3>
                                 </a>
                                 <p class="desc">
