@@ -33,7 +33,7 @@
                         <div class="product-data-top">
                             <div class="spacing">
                                 <div class="product-dt-top">年化收益率
-                                    <i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="年化收益率是对该产品所有原始产品发行利率的汇总。" class="icon-pano icon-info f1_2rem"></i>
+                                    <i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="年化收益率为该产品所对应原始产品发行利率的最低值~最高值。" class="icon-pano icon-info f1_2rem"></i>
                                 </div>
                                 <div class="product-dt-down" ng-bind="assetsDatas.rate | ktNull"></div>
                             </div>
@@ -79,19 +79,22 @@
                                 <th>发行平台：</th>
                                 <td><em class="text-color" ng-bind="assetsDatas.from | ktNull" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em></td>
                                 <th>挂牌场所：</th>
-                                <td ng-bind="assetsDatas.exchange | ktNull"></td>
+                                <td class="text-color" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})" ng-bind="assetsDatas.exchange | ktNull"></td>
                             </tr>
                             <tr>
                                 <th>资产类型：</th>
                                 <td ng-bind="assetsDatas.asset_type | ktNull"></td>
+                                <th>产品类型：</th>
+                                <td ng-bind="assetsDatas.product_type | ktNull"></td>
+
+                            </tr>
+                            <tr>
                                 <th>底层资产：</th>
-                                <td ng-bind="assetsDatas.asset | ktNull"></td>
+                                <td colspan="3" ng-bind="assetsDatas.asset | ktNull"></td>
                             </tr>
                             <tr>
                                 <th>增信措施：</th>
-                                <td ng-bind="assetsDatas.credit_measures | ktNull"></td>
-                                <th>产品类型：</th>
-                                <td ng-bind="assetsDatas.product_type | ktNull"></td>
+                                <td colspan="3" ng-bind="assetsDatas.credit_measures | ktNull"></td>
                             </tr>
                         </table>
                         <!-- <div class="inner">
@@ -208,7 +211,9 @@
                                 <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <h3 ng-bind="inst.name"></h3>
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})">
+                                     <h3 ng-bind="inst.name"></h3>
+                                </a>
                                 <p class="desc">
                                     <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
                                     <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.from_introduce | ktNull"></span>
@@ -252,10 +257,12 @@
                     <div class="box-body">
                         <div class="clfix">
                             <div class="logo">
-                                <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
+                                <a ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <h3 ng-bind="exchange.name"></h3>
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})">
+                                   <h3 ng-bind="exchange.name" ></h3>
+                                </a>
                                 <p class="desc">
                                     <span ng-show="exchange.exchangeObj.isTruncate" ng-bind="exchange.exchangeObj.value | ktNull"></span>
                                     <span ng-show="!exchange.exchangeObj.isTruncate" ng-bind="exchange.exchange_introduce"></span>

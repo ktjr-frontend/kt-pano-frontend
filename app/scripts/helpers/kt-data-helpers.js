@@ -11,6 +11,9 @@
         ]
     }
 
+    //  资产类型顺序指定
+    var assetTypesOrder = ['企业借款类', '小微金融类', '供应链类', '金融工具类', '房地产类', '政信类', '票据类', '其它']
+
     // 多音字指定
     var spellSpecialMap = {
         '乐视金融': 'LSJR',
@@ -47,24 +50,37 @@
                 },
                 filterUpdate: function(filters, params) { // 更新条件选中状态
                     _.each(filters || [], function(v) {
+                        var activeIndex = 0
                         if (params[v.value]) {
-                            _.each(v.options, function(o) {
-                                /*eslint-disable*/
-                                o.active = o.value == params[v.value]
-                                    /*eslint-enable*/
-                            })
-                        } else { //默认是全部处于选中状态
                             _.each(v.options, function(o, i) {
-                                /*eslint-disable*/
-                                o.active = i === 0
-                                    /*eslint-enable*/
+                                if (o.value === params[v.value]) {
+                                    o.active = true
+                                    activeIndex = i
+                                } else {
+                                    o.active = false
+                                }
+                                // o.active = o.value == params[v.value] // eslint-disable-line
                             })
+
+                        } else { //默认是“全部”处于选中状态
+                            _.each(v.options, function(o, i) {
+                                o.active = i === 0 // eslint-disable-line
+                            })
+                        }
+
+                        if (activeIndex > v.filterFn.firstLineMaxIndex) {
+                            v.collapsed = false
+                        } else {
+                            v.collapsed = true
                         }
                     })
                 },
+
+                // 维度的特殊颜色定义
                 getDimentionSpecialColor: function(d) {
                     return dimensionSpecialColor[d] || []
                 },
+
                 //windows pc 用户根据屏幕高度设置每页条数
                 getPerPage: function() {
                     if (!$window.isWindows() || $window.detectmob()) return 20
@@ -73,6 +89,21 @@
                     var lines = (minH / 40) | 0
                     return lines || 10
                 },
+
+                // 资产类型固定排序
+                assetTypesOrderByPreset: function(arr, byKey) {
+                    if (byKey) {
+                        return _.sortBy(arr, function(v) {
+                            return _.indexOf(assetTypesOrder, v[byKey])
+                        })
+                    }
+
+                    return _.sortBy(arr, function(v) {
+                        return _.indexOf(assetTypesOrder, v)
+                    })
+
+                },
+
                 // 获取产品期限
                 getLife: function(life) {
                     var lifeName = (!_.isNaN(+life) && !_.isNil(life) && life !== '') ? life + '天' : (life || '活期')
@@ -247,11 +278,12 @@
                             return (v2 / (xAxisSumArr[i2] || 1)) * 100 || null
                         })
                     })
-
+                    chart.data = this.assetTypesOrderByPreset(chart.data, 'name')
                     return chart
                 },
                 //替换null为'',否则echarts显示有问题,横坐标第一个值会没
                 chartDataPrune: function(chart) {
+                    // 不适用移动到最后
                     var buShiYong = _.find(chart.data, function(v) {
                         return v.name === '不适用'
                     })
@@ -261,6 +293,18 @@
                             return v.name === '不适用'
                         })
                         chart.data.push(buShiYong)
+                    }
+
+                    // 其他移动到最后
+                    var qita = _.find(chart.data, function(v) {
+                        return v.name === '其它'
+                    })
+
+                    if (qita) { //主要用于挂牌场所，
+                        _.remove(chart.data, function(v) {
+                            return v.name === '其它'
+                        })
+                        chart.data.push(qita)
                     }
 
                     chart.data = _.map(chart.data, function(v) {
@@ -411,7 +455,7 @@
                 //控制每个filter列表的长度
                 _optionsLengthLimit: function(filter) {
                     var optionWidth = $('.filter-box').width() - 25 * 2 - 157 + 66 //一行的长度，减去相关间距
-                    var firstLineMaxIndex = filter.options.length;
+                    var firstLineMaxIndex = filter.options.length; // 第一行最后的元素索引位置
                     var sumWidth = 0 //条件所占总长度
                     var assitDiv = (function() {
                         return $('#filter-assit').length ? $('#filter-assit') : $('<div id="filter-assit"/>').appendTo('.filter-box')
@@ -441,6 +485,8 @@
                         }
                         return index <= firstLineMaxIndex
                     }
+
+                    filterFn.firstLineMaxIndex = firstLineMaxIndex
 
                     if (firstLineMaxIndex === filter.options.length) filterFn.hidden = true //如果能放下，隐藏
 
@@ -477,6 +523,11 @@
                                 value: o[1]
                             }
                         })
+
+                        // 资产类型要排序
+                        if (v.value === 'asset_type_eq') {
+                            v.options = _self.assetTypesOrderByPreset(v.options, 'name')
+                        }
 
                         if (v.type === 'dropdown') {
                             v.onToggle = function(opened) {
@@ -699,11 +750,11 @@
                                     name: o[0],
                                     value: o[1],
                                     checked: false,
-                                    spell: o[0] === '不适用' ? '不适用' : pinyin.getFirstCharSpell(o[0]),
+                                    spell: _.includes(['其它', '不适用'], o[0]) ? o[0] : pinyin.getFirstCharSpell(o[0]),
                                     // recommended: false,
                                 }
                             }).groupBy(function(o) {
-                                if (o.name === '不适用') return '其他'
+                                if (_.includes(['其它', '不适用'], o.name)) return '其它'
                                 var match = _.find(groupByArr, function(g) {
                                     return g.indexOf(o.spell.slice(0, 1)) > -1
                                 })

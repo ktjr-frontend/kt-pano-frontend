@@ -104,6 +104,14 @@
                         pageTitle: '产品信息-资管类',
                     }
                 },
+                //说明页
+                'pano.explain': {
+                    url: '/explain',
+                    templateUrl: 'views/pano/account/explain.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/account/explain.css'
+                    ])
+                },
                 // 产品信息
                 'pano.products': {
                     abstract: true,
@@ -128,16 +136,8 @@
                         pageTitle: '产品信息',
                     }
                 },
-                //说明页
-                'pano.explain': {
-                    url: '/explain',
-                    templateUrl: 'views/pano/account/explain.html',
-                    resolve: ktLazyResolve([
-                        'views/pano/account/explain.css'
-                        ])
-                },
                 'pano.products.obligatoryRight': {
-                    url: '/obligatory_right?key_word&created_or_updated_in&status_eq&credit_manager_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
+                    url: '/obligatory_right?search_fields[]&key_word&created_or_updated_in&status_eq&credit_manager_eq&life_days_in&rate_in&asset_type_eq&exchange_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/obligatory_right.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/obligatory_right.js',
@@ -148,7 +148,7 @@
                     }
                 },
                 'pano.products.assetManage': {
-                    url: '/asset_manages?key_word&created_or_updated_in&status_eq&rate_in&life_days_in&credit_manager_eq&from_eq&page&per_page&sort_by&order',
+                    url: '/asset_manages?search_fields[]&key_word&created_or_updated_in&status_eq&rate_in&life_days_in&credit_manager_eq&from_eq&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/products/asset_manage.html',
                     resolve: ktLazyResolve([
                         'views/pano/products/asset_manage.js',
@@ -241,11 +241,13 @@
                     templateUrl: 'views/pano/products/obligatory_right/obligatory_right.html',
                     data: {
                         rejectedLimit: true,
+                        normalLimit: true,
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
                                 premium: ['passed', 'pended', 'rejected'],
-                                certified: ['passed', 'pended', 'rejected']
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected'],
                             }
                         }],
                         pageTitle: '产品信息',
@@ -276,11 +278,13 @@
                     controller: 'ktAssetManageCtrl',
                     data: {
                         rejectedLimit: true,
+                        normalLimit: true,
                         permits: [{
                             name: 'role', // 角色维度的权限
                             group: {
                                 premium: ['passed', 'pended', 'rejected'],
-                                certified: ['passed', 'pended', 'rejected']
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected'],
                             }
                         }]
                     }

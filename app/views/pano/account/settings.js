@@ -69,13 +69,14 @@
 
             // 根据用户角色判断是否显示
             $scope.visibleJudgement = function(permitsList, group) {
-                    var trafficStatus = _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
-                    if (!group) {
-                        return trafficStatus
-                    }
-                    return _.includes(group, $rootScope.user ? $rootScope.user.group : '') && trafficStatus
+                var trafficStatus = _.includes(permitsList || [], $rootScope.user ? $rootScope.user.status : '')
+                if (!group) {
+                    return trafficStatus
                 }
-                //详情信息
+                return _.includes(group, $rootScope.user ? $rootScope.user.group : '') && trafficStatus
+            }
+
+            //详情信息
             $scope.details = function() {
                 var detailsModal = $uibModal.open({
                     templateUrl: 'views/modals/details_info.html',
@@ -87,24 +88,26 @@
 
             // 更新用户资料
             $scope.updateProfile = function() {
-                    var updateProfileModal = $uibModal.open({
-                        size: 'md',
-                        templateUrl: 'views/modals/update_profile.html',
-                        controller: 'ktUpdateProfileCtrl'
-                    })
+                var updateProfileModal = $uibModal.open({
+                    size: 'md',
+                    templateUrl: 'views/modals/update_profile.html',
+                    controller: 'ktUpdateProfileCtrl'
+                })
 
-                    updateProfileModal.result.then(function(u) {
-                        ktSweetAlert.success('信息修改成功')
-                        $.extend($rootScope.user, u)
-                    })
-                }
-                // 重新上传名片
+                updateProfileModal.result.then(function(u) {
+                    ktSweetAlert.success('信息修改成功')
+                    $.extend($rootScope.user, u)
+                })
+            }
+
+            // 重新上传名片
             $scope.updateBusinessCard = function() {
                 if ($rootScope.user.status === 'passed') {
                     ktSweetAlert.swal({
                         title: '',
                         text: '上传名片后需重新审核，审核通过后才有权查看所有页面，确定上传？',
                         type: 'warning',
+                        html: false,
                         showCancelButton: true
                     }, function(isConfirm) {
                         if (isConfirm) {
@@ -118,6 +121,7 @@
                 function openDialog() {
                     var updateBusinessCardModal = $uibModal.open({
                         size: 'md',
+                        backdrop: 'static',
                         templateUrl: 'views/modals/update_business_card.html',
                         controller: 'ktUpdateBusinessCardCtrl'
                     })
