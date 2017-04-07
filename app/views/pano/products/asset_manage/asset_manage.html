@@ -24,7 +24,7 @@
                 </div>
                 <div class="product-data">
                     <div class="product-data-one" ng-class="{'no-border': !partitions.length}">
-                  <!--       <ul>
+                        <!--       <ul>
                             <li>
                                 <div>
                                     <span>发行平台:</span>
@@ -57,7 +57,9 @@
                                 <tr>
                                     <th>发行平台：</th>
                                     <td>
-                                        <em class="text-color" ng-bind="productManage.from | ktNull" ui-sref="pano.products.assetManage({from_eq:productManage.from})"></em>
+                                        <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})">
+                                            <em class="text-color" ng-bind="productManage.from | ktNull"></em>
+                                        </a>
                                     </td>
                                     <th>管理机构：</th>
                                     <td ng-bind="productManage.manage_institution | ktNull"></td>
