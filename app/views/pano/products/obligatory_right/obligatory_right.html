@@ -84,14 +84,17 @@
                             <tr>
                                 <th>资产类型：</th>
                                 <td ng-bind="assetsDatas.asset_type | ktNull"></td>
+                                <th>产品类型：</th>
+                                <td ng-bind="assetsDatas.product_type | ktNull"></td>
+
+                            </tr>
+                            <tr>
                                 <th>底层资产：</th>
-                                <td ng-bind="assetsDatas.asset | ktNull"></td>
+                                <td colspan="3" ng-bind="assetsDatas.asset | ktNull"></td>
                             </tr>
                             <tr>
                                 <th>增信措施：</th>
-                                <td ng-bind="assetsDatas.credit_measures | ktNull"></td>
-                                <th>产品类型：</th>
-                                <td ng-bind="assetsDatas.product_type | ktNull"></td>
+                                <td colspan="3" ng-bind="assetsDatas.credit_measures | ktNull"></td>
                             </tr>
                         </table>
                         <!-- <div class="inner">
@@ -179,7 +182,7 @@
                                 <th>年化收益率</th>
                                 <th>募集规模</th>
                                 <th>起息日</th>
-                                <th>起投金融</th>
+                                <th>起投金额</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -208,7 +211,9 @@
                                 <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})" target="_blank"><img ng-src="{{inst.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <h3 ng-bind="inst.name"></h3>
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})">
+                                     <h3 ng-bind="inst.name"></h3>
+                                </a>
                                 <p class="desc">
                                     <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
                                     <span ng-show="!inst.descObj.isTruncate" ng-bind="inst.from_introduce | ktNull"></span>
@@ -252,10 +257,12 @@
                     <div class="box-body">
                         <div class="clfix">
                             <div class="logo">
-                                <a ui-sref="pano.institutions.detail({id:inst.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
+                                <a ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})" target="_blank"><img ng-src="{{exchange.img_url}}" alt="机构logo"></a>
                             </div>
                             <div class="main">
-                                <h3 ng-bind="exchange.name"></h3>
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})">
+                                   <h3 ng-bind="exchange.name" ></h3>
+                                </a>
                                 <p class="desc">
                                     <span ng-show="exchange.exchangeObj.isTruncate" ng-bind="exchange.exchangeObj.value | ktNull"></span>
                                     <span ng-show="!exchange.exchangeObj.isTruncate" ng-bind="exchange.exchange_introduce"></span>

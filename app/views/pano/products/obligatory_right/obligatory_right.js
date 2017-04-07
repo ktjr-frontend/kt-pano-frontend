@@ -17,7 +17,7 @@
             $scope.assetsDatas = data.products
             $scope.updateTime = data.products.latest_uptime
             $scope.original_products = data.original_products
-
+            $scope.listing = data.exchange_info
             //发行平台
             var inst = $scope.inst = data.from_info
             if (inst) {
@@ -105,7 +105,7 @@
         //弹出pano酱二维码
         $scope.alertCode = function() {
             ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
-                title: '<span class="alert">' + '请联系PANO微信小助手' + '</span>',
+                title: '<h3 class="title-code">全部数据' + '</h3>' + '<span class="alert">' + '如想获得更多数据，请联系PANO微信小助手' + '</span>',
                 text: '<span class="img-pano">' + '<img src="images/pano_wxSEC.png">' + '</span>',
                 html: true
                 // showCloseButton: true

@@ -46,7 +46,7 @@
                         <!-- 给设计师调色用 上线注释掉 -->
                         <!-- <input type="text" ng-model="tmplColor" style="width:500px;" id=""> -->
                         <div class="chart-table-heading clfix">
-                            <div class="chart-table-title fl">不同资产类型产品发行量-收益率统计图（单位：周）<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="展示理财市场不同资产类型的发行量占比随时间（以自然周为单位）的变化及趋势。鼠标悬浮状态框中将显示占比、具体的发行量及加权收益率。" class="icon-pano icon-info f1_2rem ml5"></i></div>
+                            <div class="chart-table-title fl">不同资产类型产品发行量-收益率统计图（单位：周）<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip-template="'myTooltipTemplate.html'" class="icon-pano icon-info f1_2rem ml5"></i></div>
                             <!-- <div class="update-time fr">
                                 时间范围：<span ng-bind="platformAssetTypeChart.updateDate"></span>
                             </div> -->
@@ -268,11 +268,35 @@
                         <p class="footer-notes f1_2rem lh1_8em text-placeholder">*总览数据覆盖互联网金融平台的活期产品、票据产品以及定期或固收产品，不包括P2P产品、私募基金产品和转让产品。
                             <br>展示产品分为资产类和资管类。资产类是产品成立时即对应具体投资标的或指向特定融资人的产品。资管类是由特定管理人主动管理，产品发行无明确限额的灵活期限产品。
                             <br/> 本页面参与图形计算和展示的为资产类。
+                            <br/><br/>
+                            *资产类型的定义和说明(各平台资产类型分类以互联网平台发行该产品说明书中披露的信息为依据进行区分)<br/>
+                            房地产类——募集资金投向房地产项目或最终融资人为房地产企业的产品<br/>
+                            供应链类——募集资金用于受让应收账款、融资租赁资产或保理再融资等业务的产品。<br/>
+                            金融工具类—募集资金用于购买或受让各类金融工具及其组合的产品。<br/>
+                            票据类———募集资金用于以银行承兑凭证为投资标的或抵质押物的产品。<br/>
+                            小微金融类—募集资金用于受让消费金融机构或小贷机构的个人借款项目的产品。<br/>
+                            政信类———募集资金投向政府投资项目或最终融资人为政府融资平台公司的产品。<br/>
+                            企业借款类—募集资金投向非房地产及非政府平台公司之外企业或委托贷款项目的产品。<br/>
                         </p>
                     </div>
                 </div>
                 <!--************** 右边栏 ***************-->
                 <aside class="col-sm-3 aside-info">
+                    <section>
+                        <div class="ad-bg">
+                            <img src="../../images/ad_text.png">
+                            <p><span>全流程管理金融产品生命周期</span></p>
+                            <p>
+                                <span class="s-width fl">多维度信息展示查询</span>
+                                <span class="fr">自动化智能提醒</span>
+                            </p>
+                            <p>
+                                <span class="s-width fl">灵活权限管理与审批流程</span>
+                                <span class="fr">合规要求规范</span>
+                            </p>
+                            <p class="more-p"><a ng-click="alertMore()">了解更多></a></p>
+                        </div>
+                    </section>
                     <h3 ng-show="reports.length">报告</h3>
                     <section class="box" ng-show="reports.length">
                         <div class="box-body">
@@ -349,3 +373,17 @@
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="myTooltipTemplate.html">
+    <div>
+        <div>展示理财市场不同资产类型的发行量占比随时间（以自然周为单位）的变化及趋势。鼠标悬浮状态框中将显示占比、具体的发行量及加权收益率。</div>
+        <p>资产类型说明：</p>
+        <p>(各平台资产类型分类以互联网平台发行该产品说明书中披露的信息为依据进行区分)</p>
+        <p>房地产类—募集资金投向房地产项目或最终融资人为房地产企业的产品。</p>
+        <p>供应链类—募集资金用于受让应收账款、融资租赁资产或保理再融资等业务的产品。</p>
+        <p>金融工具类—募集资金用于购买或受让各类金融工具及其组合的产品。</p>
+        <p>票据类—募集资金用于以银行承兑凭证为投资标的或抵质押物的产品。</p>
+        <p>小微金融类—募集资金用于受让消费金融机构或小贷机构的个人借款项目的产品。</p>
+        <p>政信类—募集资金投向政府投资项目或最终融资人为政府融资平台公司的产品。</p>
+        <p>企业借款类—募集资金投向非房地产及非政府平台公司之外企业或委托贷款项目的产品。</p>
+    </div>
+</script>

@@ -35,6 +35,7 @@
             $scope.tabSelect = function(state) {
                 if ($state.current.name !== state) {
                     $state.go(state, $.extend(params, {
+                        'search_fields[]': null,
                         status_eq: null,
                         life_days_in: null,
                         key_word: null,
@@ -56,6 +57,9 @@
                 var p = {}
                 p[key] = value
                 p.page = 1
+
+                // 清除搜索结果参数
+                p['search_fields[]'] = null
                 $state.go($state.current.name, p)
             }
 

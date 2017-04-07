@@ -8,7 +8,7 @@
             var informationArr = ['name', 'from', 'credit_manager', 'manage_org']
             $scope.shared.placeholderText = '请输入产品名称、平台名称、管理人类型或管理机构'
             // $scope.$emit('placeholder', { place: '输入关键字，如产品名称、平台名称、管理人类型或管理机构' })
-            var cacheData
+            // var cacheData
             var filterOpts = [{
                 value: 'rate_in',
                 type: 'dropdown'
@@ -59,7 +59,7 @@
             shared._params.totalItems = 0
             $.extend(shared.params, search, { credit_right_or_eq: 'am' })
             shared._params.page = shared.params.page
-            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by', 'created_or_updated_in'])
+            ktDataHelper.pruneDirtyParams(shared.params, search, ['order', 'sort_by', 'created_or_updated_in', 'search_fields[]'])
             ktDataHelper.intFitlerStatus($scope, search)
 
             if (!shared.filterDatas) {
@@ -76,7 +76,7 @@
             }
 
             ktProductsService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
-                cacheData = res
+                // cacheData = res
                 $scope.products = res.products
                 $scope.updateTime = res.latest_uptime
                  if (res.summary.find.search_results) {
@@ -110,11 +110,12 @@
                 })
             })
 
-            $scope.searchTabActiveIndex = -1
+            /*$scope.searchTabActiveIndex = -1
             $scope.searchTabClick = function(name, index) {
                 // 获取产品列表
                 $scope.searchTabActiveIndex = index
                 $scope.searchResultAllActive = false
+                $scope
                 ktProductsService.get($.extend({ 'search_fields[]': name }, ktDataHelper.cutDirtyParams(shared.params)), function(res) {
                     $scope.products = res.products
                     shared._params.totalItems = res.summary.find.count
@@ -131,6 +132,6 @@
                 $scope.products = cacheData.products
                 shared._params.totalItems = cacheData.summary.find.count
                 shared._params.totalPages = _.ceil(cacheData.summary.find.count / shared.params.per_page)
-            }
+            }*/
         })
 })();
