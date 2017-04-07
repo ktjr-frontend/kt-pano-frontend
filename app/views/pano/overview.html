@@ -46,7 +46,8 @@
                         <!-- 给设计师调色用 上线注释掉 -->
                         <!-- <input type="text" ng-model="tmplColor" style="width:500px;" id=""> -->
                         <div class="chart-table-heading clfix">
-                            <div class="chart-table-title fl">不同资产类型产品发行量-收益率统计图（单位：周）<i tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip-template="'myTooltipTemplate.html'" class="icon-pano icon-info f1_2rem ml5"></i></div>
+                            <div class="chart-table-title fl">不同资产类型产品发行量-收益率统计图（单位：周）<i
+                            tooltip-class="tooltip_product" tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip-template="'myTooltipTemplate.html'" class="icon-pano icon-info f1_2rem ml5"></i></div>
                             <!-- <div class="update-time fr">
                                 时间范围：<span ng-bind="platformAssetTypeChart.updateDate"></span>
                             </div> -->
@@ -294,7 +295,7 @@
                             </p>
                             <p class="more-p">
                             <em width="font-size:12px">为地方交易所和股权交易中心量身定制</em>
-                            <a ng-click="alertMore()">详情></a></p>
+                            <a ng-click="alertMore()">详情<i class="fa fa-angle-right"></i></a></p>
                         </div>
                     </section>
                     <h3 ng-show="reports.length">报告</h3>
