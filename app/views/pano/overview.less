@@ -300,25 +300,28 @@
         }
     }
 }
-.tooltip-inner{
+.tooltip_product .tooltip-inner{
     max-width:500px;
+    p{
+        margin-bottom: 2px;
+    }
 }
+
 .ad-bg{
     padding:20px;
     background: url(../../images/advert_bg.png) no-repeat;
-    height:250px;
     margin-top:45px;
     border-radius: 5px;
     background-size: cover;
     img{
-        height:82px;
-        width:255px;
+        // height:82px;
+        width:100%;
         margin-bottom:20px;
     }
     p{
         font-size:13px;
         color:#e4e4e5;
-        overflow: hidden;
+        margin-bottom: 5px;
         span{
             padding-left:10px;
             position: relative;
@@ -335,6 +338,7 @@
         }
     }
     .more-p{
+        margin-top:10px;
         padding:6px 0;
         em{
             font-style: normal;
@@ -344,14 +348,20 @@
             background:#b8a578;
             color:#fff;
             margin-left:2px;
-            padding:1px 3px;
-            border-radius: 5px;
+            padding:0px 3px;
+            border-radius: 3px;
+            font-size:12px;
             display: inline-block;
+        }
+        .fa-angle-right{
+            font-size:12px;
+            margin-left:2px;
         }
     }
 }
 .title-more{
     border-bottom: 1px solid #f3f5f8;
+    margin-top:-15px;
     padding-bottom:15px;
     font-size:17px;
     color:#3d4351;
@@ -367,6 +377,7 @@
     }
 }
 .more-table{
+    margin-bottom: 10px;
     padding:5px 0px 5px 20px;
     table{
         table-layout:fixed;

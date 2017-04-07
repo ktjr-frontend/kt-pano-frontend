@@ -79,7 +79,7 @@
                                 <th>发行平台：</th>
                                 <td><em class="text-color" ng-bind="assetsDatas.from | ktNull" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em></td>
                                 <th>挂牌场所：</th>
-                                <td ng-bind="assetsDatas.exchange | ktNull"></td>
+                                <td class="text-color" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})" ng-bind="assetsDatas.exchange | ktNull"></td>
                             </tr>
                             <tr>
                                 <th>资产类型：</th>
