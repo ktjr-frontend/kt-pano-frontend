@@ -107,6 +107,7 @@
                         title: '',
                         text: '上传名片后需重新审核，审核通过后才有权查看所有页面，确定上传？',
                         type: 'warning',
+                        html: false,
                         showCancelButton: true
                     }, function(isConfirm) {
                         if (isConfirm) {
