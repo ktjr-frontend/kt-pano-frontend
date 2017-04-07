@@ -78,13 +78,13 @@
                             <tr>
                                 <th>发行平台：</th>
                                 <td>
-                                <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})" >
-                                    <em class="text-color" ng-bind="assetsDatas.from | ktNull"></em>
-                                </a>
+                                    <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})">
+                                        <em class="text-color" ng-bind="assetsDatas.from | ktNull"></em>
+                                    </a>
                                 </td>
                                 <th>挂牌场所：</th>
-                                <td class="text-color">
-                                    <a target="_blank" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})"  ng-bind="assetsDatas.exchange | ktNull" ></a>
+                                <td>
+                                    <a class="text-color" target="_blank" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})" ng-bind="assetsDatas.exchange | ktNull" ng-if="assetsDatas.exchange!='不适用'"></a><span class="not-use" ng-if="assetsDatas.exchange=='不适用'" ng-bind="assetsDatas.exchange | ktNull"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -92,7 +92,6 @@
                                 <td ng-bind="assetsDatas.asset_type | ktNull"></td>
                                 <th>产品类型：</th>
                                 <td ng-bind="assetsDatas.product_type | ktNull"></td>
-
                             </tr>
                             <tr>
                                 <th>底层资产：</th>
@@ -218,7 +217,7 @@
                             </div>
                             <div class="main">
                                 <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})">
-                                     <h3 ng-bind="inst.name"></h3>
+                                    <h3 ng-bind="inst.name"></h3>
                                 </a>
                                 <p class="desc">
                                     <span ng-show="inst.descObj.isTruncate" ng-bind="inst.descObj.value | ktNull"></span>
@@ -267,7 +266,7 @@
                             </div>
                             <div class="main">
                                 <a target="_blank" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})">
-                                   <h3 ng-bind="exchange.name" ></h3>
+                                    <h3 ng-bind="exchange.name"></h3>
                                 </a>
                                 <p class="desc">
                                     <span ng-show="exchange.exchangeObj.isTruncate" ng-bind="exchange.exchangeObj.value | ktNull"></span>
