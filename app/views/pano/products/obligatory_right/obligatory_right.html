@@ -77,9 +77,15 @@
                         <table>
                             <tr>
                                 <th>发行平台：</th>
-                                <td><em class="text-color" ng-bind="assetsDatas.from | ktNull" ui-sref="pano.products.obligatoryRight({from_eq:assetsDatas.from})"></em></td>
+                                <td>
+                                <a target="_blank" ui-sref="pano.institutions.detail({id:inst.name,dimension:'from'})" >
+                                    <em class="text-color" ng-bind="assetsDatas.from | ktNull"></em>
+                                </a>
+                                </td>
                                 <th>挂牌场所：</th>
-                                <td class="text-color" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})" ng-bind="assetsDatas.exchange | ktNull"></td>
+                                <td class="text-color">
+                                    <a target="_blank" ui-sref="pano.institutions.detail({id:listing.name,dimension:'mapped_exchange'})"  ng-bind="assetsDatas.exchange | ktNull" ></a>
+                                </td>
                             </tr>
                             <tr>
                                 <th>资产类型：</th>
