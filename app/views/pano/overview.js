@@ -284,7 +284,7 @@
             //弹出了解更多二维码
             $scope.alertMore = function() {
                 ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
-                title: '<h4 class="title-more">了解更多' + '</h4>' + '<p class="alert-moreCode">' + '如果想了解更多该系统相关信息' + '</p>' + '<p class="alert">' + '欢迎您微信扫描下方二维码与我们联系：)' + '</p>',
+                title: '<h4 class="title-more">详情' + '</h4>' + '<div class="more-table"><table><tbody><tr><td><span>多种产品全支持</span></td><td><span>产品发行自动化</span></td><td><span>合规发行支持 </span></td></tr>' + '<tr><td><span>产品信息多维展示 </span></td><td><span>事件智能提醒</span></td><td><span>权限/审批灵活可配 </span></td></tr></tbody></table></div>' + '<p class="alert-moreCode">' + '如果想了解更多信息，欢迎与我们联系：)' + '</p>',
                 text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
                 html: true
                 // showCloseButton: true
