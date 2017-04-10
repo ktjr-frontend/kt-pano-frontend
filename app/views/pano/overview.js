@@ -281,16 +281,20 @@
                 }, true)
                 $rootScope.bdTrack(['总览页', newValue === 'last7days' ? '近七日' : '历史平均周', '各平台发行量收益率统计'])
             })
+
             //弹出了解更多二维码
             $scope.alertMore = function() {
                 ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
-                title: '<h4 class="title-more">详情' + '</h4>' + '<div class="more-table"><table><tbody><tr><td><span>多种产品全支持</span></td><td><span>产品发行自动化</span></td><td><span>合规发行支持 </span></td></tr>' + '<tr><td><span>产品信息多维展示 </span></td><td><span>事件智能提醒</span></td><td><span>权限/审批灵活可配 </span></td></tr></tbody></table></div>' + '<p class="alert-moreCode">' + '如果想了解更多信息，欢迎与我们联系：)' + '</p>',
-                text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
-                html: true
-                // showCloseButton: true
-                    // showCancelButton: true
-            })
+                    title: '<h4 class="title-more">详情' + '</h4>' + '<div class="more-table"><table><tbody><tr><td><span>多种产品全支持</span></td><td><span>产品发行自动化</span></td><td><span>合规发行支持 </span></td></tr>' + '<tr><td><span>产品信息多维展示 </span></td><td><span>事件智能提醒</span></td><td><span>权限/审批灵活可配 </span></td></tr></tbody></table></div>' + '<p class="alert-moreCode">' + '如果想了解更多信息，欢迎与我们联系：)' + '</p>',
+                    text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
+                    html: true
+                        // showCloseButton: true
+                        // showCancelButton: true
+                })
+
+                $rootScope.bdTrack(['总览页', '点击', '广告位'])
             }
+
             // 期限利率图 @deprecated 用下面组合图替代
             /*var durationRateChart = $scope.durationRateChart = {
                 chartOptions: {},
