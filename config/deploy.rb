@@ -15,8 +15,8 @@ if ENV['stage'].nil?
   exit
 end
 
-set :common_repository, 'git@gitlab.ktjr.com:10022/Kaitong/kt-frontend-common.git'
-set :repository, 'git@gitlab.ktjr.com:10022/Kaitong/kt-pano-frontend.git'
+set :common_repository, 'ssh://git@gitlab.ktjr.com/Kaitong/kt-frontend-common.git'
+set :repository, 'ssh://git@gitlab.ktjr.com/Kaitong/kt-pano-frontend.git'
 # set :repository, 'git@github.kaitongamc.com:Kaitong/kt-pano-frontend.git'
 # set :branch, 'master'
 
