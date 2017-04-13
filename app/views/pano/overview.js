@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $rootScope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1, ktSweetAlert) {
+        .controller('ktOverviewCtrl', function($scope, $rootScope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1, ktSweetAlert, ktLogService) {
 
             $scope.updateDate = '获取中...'
             $scope.updateDateTo = '获取中...'
@@ -284,96 +284,102 @@
 
             //弹出了解更多二维码
             $scope.alertMore = function() {
-                ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
-                    title: '<h4 class="title-more">详情' + '</h4>' + '<div class="more-table"><table><tbody><tr><td><span>多种产品全支持</span></td><td><span>产品发行自动化</span></td><td><span>合规发行支持 </span></td></tr>' + '<tr><td><span>产品信息多维展示 </span></td><td><span>事件智能提醒</span></td><td><span>权限/审批灵活可配 </span></td></tr></tbody></table></div>' + '<p class="alert-moreCode">' + '如果想了解更多信息，欢迎与我们联系：)' + '</p>',
-                    text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
-                    html: true
-                        // showCloseButton: true
-                        // showCancelButton: true
-                })
-
-                $rootScope.bdTrack(['总览页', '点击', '广告位'])
-            }
-
-            // 期限利率图 @deprecated 用下面组合图替代
-            /*var durationRateChart = $scope.durationRateChart = {
-                chartOptions: {},
-                yAxis: 'rate',
-                yAxisFormat: 'percent2',
-                xAxis: '_id',
-                color: ['#6596e0', '#ffa500'],
-                xAxisFormat: null,
-                list: []
-            }
-            durationRateChart.updateDataView = function() {
-                var _self = this
-
-                ktAnalyticsService.get({
-                    content: 'overview',
-                    chart: 'rate',
-                }, function(data) {
-                    _self.data = ktDataHelper.chartDataPrune(data.stat)
-                    updateView()
-                })
-
-                function updateView() {
-                    var data = _self.data
-                    var legend = _.map(data.data, 'name')
-                    var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', legend)
-                        // var color = _self.color
-
-                    _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
-                        legend: {
-                            data: legend
-                        },
-                        tooltip: {
-                            axisPointer: {
-                                axis: 'auto',
-                                type: 'line',
-                            },
-                            // color: color,
-                            xAxisFormat: _self.xAxisFormat,
-                            titlePrefix: '产品期限：',
-                            yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
-                        },
-                        yAxis: {
-                            name: '收益率（%）',
-                            interval: 1,
-                            max: ktDataHelper.getAxisMax(data.data),
-                            min: 0
-                        },
-                        xAxis: {
-                            type: 'category',
-                            boundaryGap: true,
-                            name: '期限',
-                            nameLocation: 'end',
-                            nameGap: 10,
-                            data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
-                        },
-
-                        series: _.map(data.data, function(v) {
-                            return {
-                                name: v.name,
-                                type: 'line',
-                                // color: '#ffa500',
-                                // lineStyle: {
-                                //     normal: { color: color[i] },
-                                // },
-                                // itemStyle: {
-                                //     normal: { color: color[i] },
-                                // },
-                                markLine: {
-                                    data: ktDataHelper.getMarkLineCoords(v.data)
-                                },
-                                // symbol: 'path://M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0',
-                                smooth: false,
-                                data: v.data
-
-                            }
-                        })
+                    ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
+                        title: '<h4 class="title-more">详情' + '</h4>' + '<div class="more-table"><table><tbody><tr><td><span>多种产品全支持</span></td><td><span>产品发行自动化</span></td><td><span>合规发行支持 </span></td></tr>' + '<tr><td><span>产品信息多维展示 </span></td><td><span>事件智能提醒</span></td><td><span>权限/审批灵活可配 </span></td></tr></tbody></table></div>' + '<p class="alert-moreCode">' + '如果想了解更多信息，欢迎与我们联系：)' + '</p>',
+                        text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
+                        html: true
+                            // showCloseButton: true
+                            // showCancelButton: true
                     })
+
+                    $rootScope.bdTrack(['总览页', '点击', '广告位'])
                 }
-            }*/
+                //记录买点
+            $scope.bdRecord = function(name) {
+                    ktLogService.get({
+                        anchor: 'action=总览页-下载-' + name
+                    })
+                    bdTrack(['总览页', '下载', name])
+                }
+                // 期限利率图 @deprecated 用下面组合图替代
+                /*var durationRateChart = $scope.durationRateChart = {
+                    chartOptions: {},
+                    yAxis: 'rate',
+                    yAxisFormat: 'percent2',
+                    xAxis: '_id',
+                    color: ['#6596e0', '#ffa500'],
+                    xAxisFormat: null,
+                    list: []
+                }
+                durationRateChart.updateDataView = function() {
+                    var _self = this
+
+                    ktAnalyticsService.get({
+                        content: 'overview',
+                        chart: 'rate',
+                    }, function(data) {
+                        _self.data = ktDataHelper.chartDataPrune(data.stat)
+                        updateView()
+                    })
+
+                    function updateView() {
+                        var data = _self.data
+                        var legend = _.map(data.data, 'name')
+                        var caculateOptions = ktDataHelper.chartOptions('#durationRateChart', legend)
+                            // var color = _self.color
+
+                        _self.chartOptions = $.extend(true, {}, chartOptions, caculateOptions, {
+                            legend: {
+                                data: legend
+                            },
+                            tooltip: {
+                                axisPointer: {
+                                    axis: 'auto',
+                                    type: 'line',
+                                },
+                                // color: color,
+                                xAxisFormat: _self.xAxisFormat,
+                                titlePrefix: '产品期限：',
+                                yAxisFormat: _self.yAxisFormat //自定义属性，tooltip标示，决定是否显示百分比数值
+                            },
+                            yAxis: {
+                                name: '收益率（%）',
+                                interval: 1,
+                                max: ktDataHelper.getAxisMax(data.data),
+                                min: 0
+                            },
+                            xAxis: {
+                                type: 'category',
+                                boundaryGap: true,
+                                name: '期限',
+                                nameLocation: 'end',
+                                nameGap: 10,
+                                data: ktDataHelper.chartAxisFormat(data.xAxis, 'MY')
+                            },
+
+                            series: _.map(data.data, function(v) {
+                                return {
+                                    name: v.name,
+                                    type: 'line',
+                                    // color: '#ffa500',
+                                    // lineStyle: {
+                                    //     normal: { color: color[i] },
+                                    // },
+                                    // itemStyle: {
+                                    //     normal: { color: color[i] },
+                                    // },
+                                    markLine: {
+                                        data: ktDataHelper.getMarkLineCoords(v.data)
+                                    },
+                                    // symbol: 'path://M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0',
+                                    smooth: false,
+                                    data: v.data
+
+                                }
+                            })
+                        })
+                    }
+                }*/
 
             // 不同期限产品发行量-收益率统计图
             var durationAmountChart = $scope.durationAmountChart = {

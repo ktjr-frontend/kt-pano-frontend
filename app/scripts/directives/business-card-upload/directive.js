@@ -13,7 +13,8 @@
                     ktSubmit: '&',
                     close: '&dialogClose',
                     uploadType: '@',
-                    user: '=ktUser'
+                    user: '=ktUser',
+                    findData: '='
                 },
                 templateUrl: 'scripts/directives/business-card-upload/template.html',
                 link: function($scope) {
