@@ -57,7 +57,7 @@
                     <div class="buttons upload">
                         <div class="btn btn-file" ng-class="{disabled: pendingUpload}">
                             <span>本地上传</span>
-                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="upload($files, $event)" ng-disabled="pendingUpload" accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern="'.jpg,.jpeg,.png,.bmp,.gif'" ngf-multiple="false" type="file" name="file" ng-model="file">
+                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="upload($files, $event)" ng-disabled="pendingUpload" accept="image/png,image/jpg,image/jpeg,image/gif,image/bmp" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern=".jpg,.jpeg,.png,.bmp,.gif" ngf-multiple="false" type="file" name="file" ng-model="file">
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,8 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" required ng-model="user.card_url" class="form-control" name="card_url">
+            <input ng-if="!user.findForm" type="hidden" required ng-model="user.card_url" class="form-control" name="card_url">
+            <input ng-if="user.findForm" type="hidden" ng-model="user.card_url" class="form-control" name="card_url">
             <div class="mt5 text-warning" ng-messages="bsnsCardForm.card_url.$dirty && bsnsCardForm.card_url.$error">
                 <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请上传名片</div>
             </div>
@@ -99,7 +100,7 @@
                     <div class="buttons upload">
                         <div class="btn btn-file" ng-class="{disabled: pendingUploadBack}">
                             <span>本地上传</span>
-                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="uploadBack($files, $event)" ng-disabled="pendingUploadBack" accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern="'.jpg,.jpeg,.png,.bmp,.gif'" ngf-multiple="false" type="file" name="backfile" ng-model="backfile">
+                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="uploadBack($files, $event)" ng-disabled="pendingUploadBack" accept="image/png,image/jpg,image/jpeg,image/gif,image/bmp" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern=".jpg,.jpeg,.png,.bmp,.gif" ngf-multiple="false" type="file" name="backfile" ng-model="backfile">
                         </div>
                     </div>
                 </div>

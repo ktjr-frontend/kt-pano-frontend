@@ -17,6 +17,17 @@
                 $rootScope.show2016Report = false
             }*/
 
+            $scope.findPopover = {
+                templateUrl: 'views/tooltips/find_popover.html',
+                title: '提示'
+            }
+
+            $scope.showFindPopover = $rootScope.showFindPopover
+            $scope.findPopoverConfirm = function() {
+                $scope.showFindPopover = false
+
+            }
+
             $scope.goTo = function($event, url) {
                 $event.stopPropagation()
                 window.open(url, '_blank')
