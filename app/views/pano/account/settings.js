@@ -5,6 +5,7 @@
         .controller('ktSettingsCtrl', function($rootScope, $timeout, $sce, $scope, $state,
             $location, $uibModal, $window, ktSweetAlert, ktAccountService, ktCardsService,
             ktUserInfoService, ktEnv, ktUpgradeMember) {
+            //默认显示提示框
 
             // $scope.settingUser = $.extend(true, {}, $rootScope.user)
 
