@@ -294,7 +294,7 @@
                     templateUrl: 'views/pano/account/settings.html',
                     resolve: ktLazyResolve([
                         'views/pano/account/settings.css',
-                        // 'common/factories/kt-captcha.js',
+                        'common/factories/kt-captcha.js',
                         'common/directives/kt-qrcode-directive.js',
                         'scripts/directives/business-card-upload/style.css',
                         'scripts/directives/business-card-upload/directive.js',

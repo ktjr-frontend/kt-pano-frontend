@@ -5,28 +5,26 @@
             <h5>请认真填写以下信息，您的信息越精确，越容易找到想找的人：</h5>
         </div>
         <div class="form-group clfix">
-            <span class="col-md-3">
-                    <em>*</em>
-                    想要找的人：
-                </span>
+        <span class="col-md-3 want-do1">
+                想要找的人：
+        </span>
             <div class="text_bg col-md-9">
                 <textarea placeholder="举例：能够对接小微金融类资产的互金平台相关负责人" maxlength="500" ng-model="findData.search_whom" required="required" name="findwho"></textarea>
                 <br/>
-                <div class="text_num"><span class="num_color">{{0+findData.search_whom.length}}</span>/&nbsp;500</div>
+                <div class="text_num">{{0+findData.search_whom.length}}/500</div>
             </div>
         </div>
         <div ng-messages="bsnsCardForm.findwho.$dirty && bsnsCardForm.findwho.$error" class="text-warning">
             <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请填写找人信息。</div>
         </div>
         <div class="form-group clfix">
-            <span class="col-md-3">
-                    <em>*</em>
-                    找人需求：
-                </span>
+           <span class="col-md-3 want-do2">
+                找人需求：
+            </span>
             <div class="text_bg col-md-9">
                 <textarea placeholder="举例：XX公司XX项目寻求资金合作，总需求量X元，寻找对小微资产感兴趣的互金平台合作。" maxlength="500" ng-model="findData.search_target" required="required" name="findneed"></textarea>
                 <br/>
-                <div class="text_num"><span class="num_color">{{0+findData.search_target.length}}</span>/&nbsp;500</div>
+                <div class="text_num">{{0+findData.search_target.length}}/500</div>
             </div>
         </div>
         <div ng-messages="bsnsCardForm.findneed.$dirty && bsnsCardForm.findneed.$error" class="text-warning">
@@ -89,8 +87,11 @@
             <div class="upload-face" ng-show="!user.card_back_url && !cardBackUrlUploadShow" ng-click="cardBackUrlUploadShow = true">
                 <div class="inner">
                 </div>
-                <span class="note">
+                <span class="note" ng-if="!user.findForm">
                    反面<br/>（可选）
+                </span>
+                <span class="note" ng-if="user.findForm">
+                   <i class="blank"></i>反面<i class="blank"></i>
                 </span>
             </div>
             <div class="qrcode-bs-card text-center" ng-show="!user.card_back_url && cardBackUrlUploadShow">
@@ -108,8 +109,11 @@
             <small ng-show="!user.card_back_url && !cardBackUrlUploadShow" class="mt10 text-center">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small>
             <div class="qrcode-bs-card preview text-center" ng-show="user.card_back_url" ng-class="{'can-edit':user.cardBackCanEdit}">
                 <!-- <h5>已上传的名片：</h5> -->
-                <span class="note">
+                 <span class="note" ng-if="!user.findForm">
                    反面<br/>（可选）
+                </span>
+                <span class="note" ng-if="user.findForm">
+                   <i class="blank"></i>反面<i class="blank"></i>
                 </span>
                 <div class="qrcode-body">
                     <img ng-src="{{user.card_back_url}}" alt="您的名片" class="qrcode">

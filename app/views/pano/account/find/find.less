@@ -67,10 +67,25 @@
         width: 105px;
         text-align: right;
         padding: 5px;
+        position: relative;
+        &.want-do1:before{
+            content:'*';
+            color:red;
+            position:absolute;
+            top:8px;
+            // transform:translateY(-50%);
+            left:0px;
+        }
+        &.want-do2:before{
+            content:'*';
+            color:red;
+            position:absolute;
+            top:8px;
+            // transform:translateY(-50%);
+            left:15px;
+        }
     }
-    em {
-        color: red;
-    }
+
     .find_sub {
         text-align: center;
         padding: 20px 0;
