@@ -294,7 +294,7 @@
                     templateUrl: 'views/pano/account/settings.html',
                     resolve: ktLazyResolve([
                         'views/pano/account/settings.css',
-                        'common/factories/kt-captcha.js',
+                        // 'common/factories/kt-captcha.js',
                         'common/directives/kt-qrcode-directive.js',
                         'scripts/directives/business-card-upload/style.css',
                         'scripts/directives/business-card-upload/directive.js',
@@ -316,7 +316,50 @@
                         }]
                     }
                 },
-
+                'pano.find': {
+                    url: '/find',
+                    templateUrl: 'views/pano/account/find/find.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/account/find/find.css',
+                        'views/pano/account/find/find.js',
+                        'common/directives/kt-qrcode-directive.js',
+                        'scripts/directives/business-card-upload/directive.js'
+                    ]),
+                    controller: 'ktFindCtrl',
+                    data: {
+                        pageTitle: '找人',
+                        specialClass: 'simple-page',
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
+                    }
+                },
+                'pano.findRecord': {
+                    url: '/findRecord',
+                    templateUrl: 'views/pano/account/find/findRecord.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/account/find/findRecord.css',
+                        'views/pano/account/find/findRecord.js'
+                    ]),
+                    controller: 'ktFindRecordCtrl',
+                    data: {
+                        pageTitle: '找人',
+                        specialClass: 'simple-page',
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
+                    }
+                }
             }
         })
 })();

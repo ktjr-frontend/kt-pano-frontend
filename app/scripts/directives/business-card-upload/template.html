@@ -1,6 +1,47 @@
-<form id="bsnsCardForm" novalidate name="bsnsCardForm" class="form-horizontal">
+<form id="bsnsCardForm" novalidate name="bsnsCardForm" class="form-horizontal" ng-class="{'find_form': user.findForm}">
+    <!--找人填写信息-->
+    <div ng-if="user.findForm">
+        <div>
+            <h5>请认真填写以下信息，您的信息越精确，越容易找到想找的人：</h5>
+        </div>
+        <div class="form-group clfix">
+            <span class="col-md-3">
+                    <em>*</em>
+                    想要找的人：
+                </span>
+            <div class="text_bg col-md-9">
+                <textarea placeholder="举例：能够对接小微金融类资产的互金平台相关负责人" maxlength="500" ng-model="findData.search_whom" required="required" name="findwho"></textarea>
+                <br/>
+                <div class="text_num"><span class="num_color">{{0+findData.search_whom.length}}</span>/&nbsp;500</div>
+            </div>
+        </div>
+        <div ng-messages="bsnsCardForm.findwho.$dirty && bsnsCardForm.findwho.$error" class="text-warning">
+            <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请填写找人信息。</div>
+        </div>
+        <div class="form-group clfix">
+            <span class="col-md-3">
+                    <em>*</em>
+                    找人需求：
+                </span>
+            <div class="text_bg col-md-9">
+                <textarea placeholder="举例：XX公司XX项目寻求资金合作，总需求量X元，寻找对小微资产感兴趣的互金平台合作。" maxlength="500" ng-model="findData.search_target" required="required" name="findneed"></textarea>
+                <br/>
+                <div class="text_num"><span class="num_color">{{0+findData.search_target.length}}</span>/&nbsp;500</div>
+            </div>
+        </div>
+        <div ng-messages="bsnsCardForm.findneed.$dirty && bsnsCardForm.findneed.$error" class="text-warning">
+            <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请填写找人需求。</div>
+        </div>
+        <div class="form-group clfix">
+            <span class="col-md-3">微信号：</span>
+            <div class="text_bg col-md-9">
+                <input type="" name="" placeholder="我们将优先通过微信与您联系：）" ng-model="findData.wx">
+            </div>
+        </div>
+    </div>
     <!-- 正面上传名片 -->
-    <div class="form-group border-bottom" ng-class="{'has-error':bsnsCardForm.card_url.$invalid && bsnsCardForm.card_url.$dirty}">
+    <div class="form-group border-bottom clfix" ng-if="!user.findForm || user.cardFrontVisible" ng-class="{'has-error':bsnsCardForm.card_url.$invalid && bsnsCardForm.card_url.$dirty}">
+        <span class="col-md-3" ng-if="user.findForm">名片：</span>
         <div>
             <div class="upload-face" ng-show="!user.card_url && !cardUrlUploadShow" ng-click="cardUrlUploadShow = true">
                 <div class="inner">
@@ -10,20 +51,19 @@
                 </span>
             </div>
             <div class="qrcode-bs-card text-center" ng-show="!user.card_url && cardUrlUploadShow">
-
                 <div class="qrcode-body">
                     <div class="qrcode" kt-qr-code qrcode="qrcode"></div>
                     <h5>手机扫描上传</h5>
                     <div class="buttons upload">
                         <div class="btn btn-file" ng-class="{disabled: pendingUpload}">
                             <span>本地上传</span>
-                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="upload($files, $event)" ng-disabled="pendingUpload" accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern="'.jpg,.jpeg,.png,.bmp,.gif'" ngf-multiple="false" type="file" name="file" ng-model="file">
+                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="upload($files, $event)" ng-disabled="pendingUpload" accept="image/png,image/jpg,image/jpeg,image/gif,image/bmp" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern=".jpg,.jpeg,.png,.bmp,.gif" ngf-multiple="false" type="file" name="file" ng-model="file">
                         </div>
                     </div>
                 </div>
             </div>
             <small ng-show="!user.card_url && !cardUrlUploadShow" class="mt10 text-center mb10">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small>
-            <div class="qrcode-bs-card preview text-center" ng-show="user.card_url">
+            <div class="qrcode-bs-card preview text-center" ng-show="user.card_url" ng-class="{'can-edit':user.cardFrontCanEdit}">
                 <!-- <h5>已上传的名片：</h5> -->
                 <span class="note">
                     <i class="blank"></i>正面<i class="blank"></i>
@@ -32,18 +72,19 @@
                     <img ng-src="{{user.card_url}}" alt="您的名片" class="qrcode">
                     <div class="delete">
                         <!-- <small class="mb10">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small> -->
-                        <button class="btn btn-file" ng-click="deleteCardUrl($event)">删除</button>
+                        <button ng-disabled="card_url" class="btn btn-file" ng-click="deleteCardUrl($event)">删除</button>
                     </div>
                 </div>
             </div>
-            <input type="hidden" required ng-model="user.card_url" class="form-control" name="card_url">
+            <input ng-if="!user.findForm" type="hidden" required ng-model="user.card_url" class="form-control" name="card_url">
+            <input ng-if="user.findForm" type="hidden" ng-model="user.card_url" class="form-control" name="card_url">
             <div class="mt5 text-warning" ng-messages="bsnsCardForm.card_url.$dirty && bsnsCardForm.card_url.$error">
                 <div ng-message="required"><i class="fa fa-frown-o fb mr5"></i>请上传名片</div>
             </div>
         </div>
     </div>
     <!-- 背面上传名片 -->
-    <div class="form-group" ng-class="{'has-error':bsnsCardForm.card_back_url.$invalid && bsnsCardForm.card_back_url.$dirty}">
+    <div class="form-group" ng-if="!user.findForm || user.cardBackVisible" ng-class="{'has-error':bsnsCardForm.card_back_url.$invalid && bsnsCardForm.card_back_url.$dirty}">
         <div style="padding-top: 15px;">
             <div class="upload-face" ng-show="!user.card_back_url && !cardBackUrlUploadShow" ng-click="cardBackUrlUploadShow = true">
                 <div class="inner">
@@ -59,13 +100,13 @@
                     <div class="buttons upload">
                         <div class="btn btn-file" ng-class="{disabled: pendingUploadBack}">
                             <span>本地上传</span>
-                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="uploadBack($files, $event)" ng-disabled="pendingUploadBack" accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern="'.jpg,.jpeg,.png,.bmp,.gif'" ngf-multiple="false" type="file" name="backfile" ng-model="backfile">
+                            <input ng-click="$event.stopPropagation()" ngf-validate="{size: {max: '2MB'}" ngf-select="uploadBack($files, $event)" ng-disabled="pendingUploadBack" accept="image/png,image/jpg,image/jpeg,image/gif,image/bmp" ngf-accept="'image/png,image/jpg,image/jpeg,image/gif,image/bmp'" ngf-pattern=".jpg,.jpeg,.png,.bmp,.gif" ngf-multiple="false" type="file" name="backfile" ng-model="backfile">
                         </div>
                     </div>
                 </div>
             </div>
             <small ng-show="!user.card_back_url && !cardBackUrlUploadShow" class="mt10 text-center">&nbsp;&nbsp;支持JPG和PNG格式，大小不超过5M</small>
-            <div class="qrcode-bs-card preview text-center" ng-show="user.card_back_url">
+            <div class="qrcode-bs-card preview text-center" ng-show="user.card_back_url" ng-class="{'can-edit':user.cardBackCanEdit}">
                 <!-- <h5>已上传的名片：</h5> -->
                 <span class="note">
                    反面<br/>（可选）
@@ -87,7 +128,10 @@
     <div class="form-group mt40" ng-show="uploadType === 'normal'">
         <div class="col-md-12 clfix">
             <div kt-loading-status height="32" width="32" ignores="/api/v1/shadows,/api/v1/cards[get|delete]"></div>
-            <button class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">下一步</button>
+            <button ng-show="!user.findForm" class="btn btn-block btn-lg btn-navy-blue" ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">下一步</button>
+            <div class="find_sub" ng-show="user.findForm">
+                <button  ng-click="submitForm()" ng-disabled="bsnsCardForm.$invalid || pendingRequests">提交</button>
+            </div>
         </div>
     </div>
     <div class="modal-footer mt10" ng-show="uploadType === 'dialog'">

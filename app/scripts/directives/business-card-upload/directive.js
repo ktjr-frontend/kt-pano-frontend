@@ -13,7 +13,8 @@
                     ktSubmit: '&',
                     close: '&dialogClose',
                     uploadType: '@',
-                    user: '=ktUser'
+                    user: '=ktUser',
+                    findData: '='
                 },
                 templateUrl: 'scripts/directives/business-card-upload/template.html',
                 link: function($scope) {
@@ -32,6 +33,9 @@
                         }).then(function(res) {
                             $scope.pendingUpload = false
                             $scope.user.card_url = res.data.user.card_url
+                            $scope.user.status = 'pended'
+                            if ($scope.user.group === 'normal') $scope.user.group = 'certified'
+                            $scope.user.pended_at = new Date()
                         }, function(res) {
                             ktSweetAlert.swal({
                                 title: '失败',
@@ -53,6 +57,9 @@
                         }).then(function(res) {
                             $scope.pendingUploadBack = false
                             $scope.user.card_back_url = res.data.user.card_back_url
+                            $scope.user.status = 'pended'
+                            if ($scope.user.group === 'normal') $scope.user.group = 'certified'
+                            $scope.user.pended_at = new Date()
                         }, function(res) {
                             ktSweetAlert.swal({
                                 title: '失败',
@@ -88,6 +95,7 @@
                             $scope.user.card_back_url = null
                             $scope.cardBackUrlUploadShow = false
                             $scope.user.status = 'pended'
+                            $scope.user.pended_at = new Date()
                             $rootScope.bdTrack([pageName, '背面', '重新上传'])
                         }, function() {
                             ktSweetAlert.swal({
@@ -161,24 +169,28 @@
 
                     // 提交表单
                     $scope.submitForm = function() {
-                        $scope.pendingRequests = true
-                        ktCardsService.update({
-                            content: 'confirm'
-                        }, function(data) {
-                            $scope.pendingRequests = false
-                            userCardDisabled = true
-                            $timeout.cancel(getUserCardPromise)
-                            $.extend($scope.user, data.account)
-                            ktSubmit()
-                        }, function(res) {
-                            $scope.pendingRequests = false
-                            ktSweetAlert.swal({
-                                title: '提交失败',
-                                text: $.isArray(res.error) ? res.error.join('<br/>') : (res.error || '抱歉，您的信息没有提交成功，请再次尝试！'),
-                                type: 'error',
-                            })
-                        })
+                        // $scope.pendingRequests = true
+                        // ktCardsService.update({
+                        //     // content: 'confirm'
+                        // }, function(data) {
+                        //     $scope.pendingRequests = false
+                        //     userCardDisabled = true
+                        //     $timeout.cancel(getUserCardPromise)
+                        //     $.extend($scope.user, data.account)
+                        //     ktSubmit()
+                        // }, function(res) {
+                        //     $scope.pendingRequests = false
+                        //     ktSweetAlert.swal({
+                        //         title: '提交失败',
+                        //         text: $.isArray(res.error) ? res.error.join('<br/>') : (res.error || '抱歉，您的信息没有提交成功，请再次尝试！'),
+                        //         type: 'error',
+                        //     })
+                        // })
 
+                        userCardDisabled = true
+                        $timeout.cancel(getUserCardPromise)
+                        // $.extend($scope.user, data.account)
+                        ktSubmit()
                         return false;
                     }
 

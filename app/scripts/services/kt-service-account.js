@@ -77,5 +77,8 @@
     .factory('ktDetailsService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/person/invitees')
     })
-
+    // 找人提交
+    .factory('ktFindService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/peoplesearch')
+    })
 })();
