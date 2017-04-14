@@ -23,6 +23,7 @@
 
             $scope.submitForm = function() {
                 ktLoginCommon($scope, function() {
+                    $rootScope.showFindPopover = true
                     // $rootScope.show2016Report = true
                         /*ktSweetAlert.swal({
                             title: '提示',

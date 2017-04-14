@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("kt.pano").controller("ktFindRecordCtrl",["$scope","$rootScope","ktFindService",function(a,b,c){c.get({page:1,per_page:50},function(b){console.log(b),a.recordDatas=b.res})}])}();

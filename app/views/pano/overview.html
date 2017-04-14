@@ -298,13 +298,20 @@
                             <a ng-click="alertMore()">详情<i class="fa fa-angle-right"></i></a></p>
                         </div>
                     </section>
+                    <section class="find-box">
+                        <div class="myfindPhoto" uib-popover-template="findPopover.templateUrl" popover-placement="left" popover-is-open="showFindPopover" popover-trigger="none" popover-title="{{findPopover.title}}">
+                            <a ui-sref="pano.find">
+                                <img src="../../images/overviewFind.png">
+                            </a>
+                        </div>
+                    </section>
                     <h3 ng-show="reports.length">报告</h3>
                     <section class="box" ng-show="reports.length">
                         <div class="box-body">
                             <ul class="list list-with-btns">
                                 <li ng-repeat="r in reports" class="ellip" uib-popover-template="dynamicPopover.templateUrl" popover-placement="left" popover-is-open="$index === 0 && show2016Report === true" popover-title="{{dynamicPopover.title}}" popover-trigger="none">
-                                    <a title="{{::r.name}}" ng-href="{{::r.url}}" ng-click="bdTrack(['总览页', '下载', r.name])" ng-bind="::r.name" target="_blank"></a>
-                                    <a class="btn btn-default btn-xs" ng-href="{{::r.url}}" ng-click="bdTrack(['总览页', '下载', r.name])" target="_blank">下载</a>
+                                    <a title="{{::r.name}}" ng-href="{{::r.url}}" ng-click="bdRecord(r.name)" ng-bind="::r.name" target="_blank"></a>
+                                    <a class="btn btn-default btn-xs" ng-href="{{::r.url}}" ng-click="bdRecord(r.name)" target="_blank">下载</a>
                                 </li>
                             </ul>
                         </div>
