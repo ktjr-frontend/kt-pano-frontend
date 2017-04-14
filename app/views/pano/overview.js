@@ -16,14 +16,14 @@
             $scope.popoverConfirm = function() {
                 $rootScope.show2016Report = false
             }*/
-            $scope.showFindPopover = true
             $scope.findPopover = {
                 templateUrl: 'views/tooltips/find_popover.html',
                 title: '提示'
             }
-
+            $scope.showFindPopover = $rootScope.showFindPopover
             $scope.findPopoverConfirm = function() {
                 $scope.showFindPopover = false
+                $rootScope.showFindPopover = false
 
             }
 
