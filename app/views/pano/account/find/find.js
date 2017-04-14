@@ -20,8 +20,7 @@
 
         //提交按钮
         $scope.submitForm = function() {
-            ktFindService.save($scope.findData, function(data) {
-                console.log(data)
+            ktFindService.save($scope.findData, function() {
                 ktSweetAlert.swal({
                     title: '提交成功',
                     text: 'PANO微信小助手将在1个工作日内与您沟通，如需联系请添加PANO酱微信：kaitongpano',

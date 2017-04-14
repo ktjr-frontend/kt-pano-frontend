@@ -13,7 +13,7 @@
 
             // CacheFactory.clearAll()
             $scope.user = $rootScope.user
-
+            $scope.user.findForm = false
             // 提交表单
             $scope.submitForm = function() {
                 // CacheFactory.clearAll()

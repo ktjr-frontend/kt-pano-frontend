@@ -325,6 +325,7 @@
             $scope.user.card_url = $rootScope.user.card_url // 默认展示二维码
             $scope.user.card_back_url = $rootScope.user.card_back_url // 默认展示二维码
             $scope.user.content = 'update_business_card'
+            $scope.user.findForm = false
 
             $scope.submitForm = function() {
                 // ktSweetAlert.success('信息修改成功')
