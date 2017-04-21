@@ -42,6 +42,17 @@
                 return '点击按年化收益率由小到大排序'
             }
 
+            // 按募集规模排序标题
+            $scope.amountSortTitle = function() {
+                if (search.sort_by === 'sum_amount') {
+                    if (search.order === 'asc') {
+                        return '点击按募集规模由大到小排序'
+                    }
+                    return '点击取消按募集规模排序'
+                }
+                return '点击按募集规模由小到大排序'
+            }
+
             // 跳转产品详情
             $scope.gotoDetail = function(product) {
                 if (product.class === 'Product') {

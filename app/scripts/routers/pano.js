@@ -222,8 +222,48 @@
                         pageTitle: '机构',
                     }
                 },
+
+                // 机构信息默认页
+                'pano.institutions.dashboard': {
+                    url: '/dashboard',
+                    templateUrl: 'views/pano/institutions/dashboard.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/institutions/dashboard.js',
+                        'views/pano/institutions/dashboard.css',
+                    ]),
+                    controller: 'ktInsitutionDashboardCtrl',
+                    data: {
+                        pageTitle: '机构信息',
+                    }
+                },
+                // 机构信息列表页
+                'pano.institutions.table': {
+                    url: '/table',
+                    abstract: true,
+                    templateUrl: 'views/pano/institutions/layout.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/institutions/layout.js',
+                        // 'views/pano/institutions/layout.css',
+                    ]),
+                    controller: 'ktInstitutionsLayoutCtrl',
+                    data: {
+                        pageTitle: '机构信息列表',
+                    }
+                },
+                'pano.institutions.table.list': {
+                    url: '/list',
+                    templateUrl: 'views/pano/institutions/list.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/institutions/list.js',
+                        // 'views/pano/institutions/list.css',
+                    ]),
+                    controller: 'ktInsitutionListCtrl',
+                    data: {
+                        pageTitle: '机构信息列表',
+                    }
+                },
                 'pano.institutions.detail': {
-                    url: '/:id?dimension',
+                    url: '/detail/:id?dimension',
                     templateUrl: 'views/pano/institutions/detail.html',
                     resolve: ktLazyResolve([
                         'common/directives/kt-echart3-directive.js',
