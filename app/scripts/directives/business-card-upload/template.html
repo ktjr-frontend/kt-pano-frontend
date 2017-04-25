@@ -41,8 +41,8 @@
     <div class="form-group border-bottom clfix" ng-if="!user.findForm || user.cardFrontVisible" ng-class="{'has-error':bsnsCardForm.card_url.$invalid && bsnsCardForm.card_url.$dirty}">
         <span class="col-md-3" ng-if="user.findForm">名片：</span>
         <div>
-            <div class="upload-face" ng-show="!user.card_url && !cardUrlUploadShow" ng-click="cardUrlUploadShow = true">
-                <div class="inner">
+            <div class="upload-face" ng-show="!user.card_url && !cardUrlUploadShow">
+                <div class="inner" ng-click="cardUrlUploadShow = true">
                 </div>
                 <span class="note">
                     <i class="blank"></i>正面<i class="blank"></i>
@@ -84,8 +84,8 @@
     <!-- 背面上传名片 -->
     <div class="form-group" ng-if="!user.findForm || user.cardBackVisible" ng-class="{'has-error':bsnsCardForm.card_back_url.$invalid && bsnsCardForm.card_back_url.$dirty}">
         <div style="padding-top: 15px;">
-            <div class="upload-face" ng-show="!user.card_back_url && !cardBackUrlUploadShow" ng-click="cardBackUrlUploadShow = true">
-                <div class="inner">
+            <div class="upload-face" ng-show="!user.card_back_url && !cardBackUrlUploadShow">
+                <div class="inner" ng-click="cardBackUrlUploadShow = true">
                 </div>
                 <span class="note" ng-if="!user.findForm">
                    反面<br/>（可选）

@@ -52,7 +52,7 @@
                                     <a ng-click="goTo(filter.value, condition.value)" ng-bind="condition.name"></a>
                                 </li>
                             </ul>
-                            <div ng-if="!filter.filterFn.hidden" class="toggle-btn" ng-click="filter.toggleView($event)">
+                            <div ng-if="!filter.filterFn.hidden" ng-class="{expand: !filter.collapsed}" class="toggle-btn" ng-click="filter.toggleView($event)">
                                 <i class="fa fa-angle-right f1_8rem icon-arrow"></i>
                             </div>
                         </div>

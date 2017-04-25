@@ -1,0 +1,42 @@
+.institutions-list {
+    .table-kind {
+        .table-head {
+            margin: 0;
+            height: auto;
+            line-height: auto;
+            border-bottom: 0;
+            .tr {
+                padding: 0 10px;
+            }
+        }
+        .sort-column {
+            &.sort-desc,
+            &.sort-asc {
+                background: none;
+            }
+        }
+        .tr-body {
+            .td-caption {
+                margin: 0;
+            }
+            .td-body {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .inst-logo {
+        max-width: 140px;
+        max-height: 40px;
+        & + figcaption {
+            padding: 10px 0;
+        }
+    }
+    .co-inst-link {
+        display: inline-block;
+        cursor: pointer;
+        margin: 0 5px 8px 5px;
+        &:hover {
+            color: #4380dd;
+        }
+    }
+}

@@ -31,6 +31,7 @@
                         $scope.pendingRequests = false
 
                         if (res.token) {
+                            $rootScope.showFindPopover = true
                             CacheFactory.clearAll()
                             $window.localStorage.token = res.token
                             $state.go('account.perfect')

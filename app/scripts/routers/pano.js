@@ -243,7 +243,7 @@
                     templateUrl: 'views/pano/institutions/layout.html',
                     resolve: ktLazyResolve([
                         'views/pano/institutions/layout.js',
-                        // 'views/pano/institutions/layout.css',
+                        'views/pano/institutions/layout.css',
                     ]),
                     controller: 'ktInstitutionsLayoutCtrl',
                     data: {
@@ -251,11 +251,11 @@
                     }
                 },
                 'pano.institutions.table.list': {
-                    url: '/list',
+                    url: '/list?search_fields[]&key_word&institution_type&page&per_page&sort_by&order',
                     templateUrl: 'views/pano/institutions/list.html',
                     resolve: ktLazyResolve([
                         'views/pano/institutions/list.js',
-                        // 'views/pano/institutions/list.css',
+                        'views/pano/institutions/list.css',
                     ]),
                     controller: 'ktInsitutionListCtrl',
                     data: {
@@ -380,7 +380,7 @@
                     }
                 },
                 'pano.findRecord': {
-                    url: '/findRecord',
+                    url: '/findRecord?page&per_page',
                     templateUrl: 'views/pano/account/find/findRecord.html',
                     resolve: ktLazyResolve([
                         'views/pano/account/find/findRecord.css',

@@ -44,7 +44,7 @@
             // 搜索框
             $scope.goToByEnterKey = function(event, key, value) {
                 if (event.keyCode !== 13) return
-                $rootScope.bdTrack(['产品信息页', '确认', '搜索', '回车'])
+                $rootScope.bdTrack(['机构库', '确认', '搜索', '回车'])
                 $scope.goTo(key, value)
             }
 

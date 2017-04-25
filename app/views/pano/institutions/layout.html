@@ -1,4 +1,4 @@
-<div child="hpanel" class='products'>
+<div child="hpanel" class='institutions'>
     <div class="hpanel hpanel pr has-tabs">
         <div class="panel-body b-t-none">
             <div class="filter-box bor-xxs">
@@ -14,7 +14,7 @@
                 </div> -->
                 <!-- filter层 -->
                 <div class="filter-list has-toggle-btn">
-                    <div class="filter-line clfix no-bd with-bg">
+                    <!-- <div class="filter-line clfix no-bd with-bg">
                         <div class="dropdowns-group clfix" ng-repeat="(index,filter) in shared.filters" ng-if="filter.type === 'dropdown'">
                             <div class="name" ng-bind="::(filter.name + '：')"></div>
                             <div class="dropdown fl" dropdown on-toggle="filter.onToggle(open)">
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="filter-line clfix" ng-repeat="filter in shared.filters" ng-if="filter.type === 'list'">
                         <div class="name" ng-bind="::(filter.name + '：')"></div>
                         <div class="options">
@@ -40,7 +40,7 @@
                                     <a ng-click="goTo(filter.value, condition.value)" ng-bind="condition.name"></a>
                                 </li>
                             </ul>
-                            <div ng-if="!filter.filterFn.hidden" class="toggle-btn" ng-click="filter.toggleView($event)">
+                            <div ng-if="!filter.filterFn.hidden" class="toggle-btn"  ng-class="{expand: !filter.collapsed}" ng-click="filter.toggleView($event)">
                                 <i class="fa fa-angle-right f1_8rem icon-arrow"></i>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
             <div class="search-bar">
                 <div class="input-group">
                     <input type="text" class="form-control" ng-model='shared.params.key_word' ng-keyup="goToByEnterKey($event, 'key_word', shared.params.key_word)" placeholder="{{shared.placeholderText}}">
-                    <span class="input-group-addon" ng-click="bdTrack(['产品信息页', '确认', '搜索', '点击']);goTo('key_word', shared.params.key_word)">
+                    <span class="input-group-addon" ng-click="bdTrack(['机构库', '确认', '搜索', '点击']);goTo('key_word', shared.params.key_word)">
                         <i class="icon-pano icon-search2"></i>
                     </span>
                 </div>

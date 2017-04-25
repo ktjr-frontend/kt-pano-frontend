@@ -30,6 +30,18 @@
         })
     })
 
+    // 机构库
+    .factory('ktInsitutionRepositoriesService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/inst_repositories/:instID', {
+            instID: '@instID'
+        }, {
+            'get': {
+                method: 'GET',
+                cache: false
+            }
+        })
+    })
+
     // 资产
     .factory('ktAssetService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/fame_assets/:content', {

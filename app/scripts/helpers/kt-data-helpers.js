@@ -788,7 +788,7 @@
                 },
 
                 // 处理当前页面筛选状态
-                intFitlerStatus: function($scope, search) {
+                intFitlerStatus: function($scope, search, ignoreParams) {
 
                     // 当前页面的过滤状态
                     var NORMAL_STATUS = $scope.NORMAL_STATUS = 0 // 无筛选无搜索状态
@@ -800,7 +800,7 @@
                     $scope.getFitlerStatus = function() {
                         var validParams = _self.cutDirtyParams(search)
                         var validParamKeys = _.filter(_.keys(validParams), function(v) {
-                            return !_.includes(['page', 'per_page', 'order', 'sort_by', 'credit_right_or_eq', 'created_or_updated_in'], v)
+                            return !_.includes(ignoreParams || ['page', 'per_page', 'order', 'sort_by', 'credit_right_or_eq', 'created_or_updated_in'], v)
                         })
 
                         if (_.includes(validParamKeys, 'key_word')) {
