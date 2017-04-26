@@ -123,4 +123,16 @@
     .factory('ktProductTrendsService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/product_trends')
     })
+    // 总览页 or 机构信息页
+    .factory('ktInstitutionalInfoService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/products/overview')
+    })
+    // 总览页最新机构信息
+    .factory('ktNewProductService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/products/latest_products_info')
+    })
+    // 各产品收益率表
+    .factory('ktProductRateService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/quotes/list')
+    })
 })();

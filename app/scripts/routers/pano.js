@@ -29,7 +29,8 @@
                     resolve: ktLazyResolve([
                         'views/pano/overview.css',
                         'views/pano/overview.js',
-                        'common/directives/kt-echart3-directive.js'
+                        'common/directives/kt-echart3-directive.js',
+                        'common/libs/html2canvas.min.js'
                     ]),
                     controller: 'ktOverviewCtrl',
                     data: {
