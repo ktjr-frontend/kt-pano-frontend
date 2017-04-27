@@ -91,12 +91,12 @@
                         </div>
                     </div>
                     <!-- 最新产品信息 -->
-                    <div ng-if="topAmounts.length && topPercents.length" class="chart-table new_product">
+                    <div ng-if="topAmounts.length || topPercents.length || ams.length" class="chart-table new_product">
                         <div class="np_title">
                             <span class="np_title_one">最新产品信息</span>
                             <span class="np_title_two">更新时间：{{upDate}}</span>
                         </div>
-                        <div class="new_product_body">
+                        <div class="new_product_body" ng-if="topAmounts.length || topPercents.length">
                             <div class="product_name">
                                 <span>资产类</span>
                             </div>
@@ -175,48 +175,49 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                     <!-- 资管类 -->
-                    <div ng-if="ams.length" class="chart-table new_product">
-                        <div class="new_product_body">
-                            <div class="product_name">
-                                <span>资管类</span>
-                            </div>
-                            <div class="product_top">
-                                <span class="product_top_one">本日新增募集规模</span>
-                                <span class="product_top_two">TOP5</span>
-                                <div class="product_top_more">
-                                    <a target="_blank" ui-sref="pano.products.assetManage({created_or_updated_in:1,sort_by:'rate',order:'asc'})" ng-click="bdTrack(['总览页','资管类-本日新增募集规模','查看更多'])">查看更多</a>
+                        <div ng-if="ams.length" class="chart-table new_product">
+                            <div class="new_product_body">
+                                <div class="product_name">
+                                    <span>资管类</span>
                                 </div>
-                            </div>
-                            <div class="new_product_table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="first_th"></th>
-                                            <th>产品名称</th>
-                                            <th>产品期限</th>
-                                            <th>年化收益率</th>
-                                            <th>平台</th>
-                                            <th>管理人类型</th>
-                                            <th>管理机构</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ui-sref="pano.products.assetManage" ng-repeat="am in ams">
-                                            <td class="first_td" ng-bind="$index+1"></td>
-                                            <td ng-bind="am.name"></td>
-                                            <td ng-bind="am.life"></td>
-                                            <td ng-bind="am.rate"></td>
-                                            <td>
-                                                <a ui-sref="pano.institutions.dashboard"  ng-bind="am.from"></a>
-                                            </td>
-                                            <td ng-bind="am.credit_manager">
-                                            </td>
-                                            <td ng-bind="am.manage_org"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="product_top">
+                                    <span class="product_top_one">本日新增募集规模</span>
+                                    <span class="product_top_two">TOP5</span>
+                                    <div class="product_top_more">
+                                        <a target="_blank" ui-sref="pano.products.assetManage({created_or_updated_in:1,sort_by:'rate',order:'asc'})" ng-click="bdTrack(['总览页','资管类-本日新增募集规模','查看更多'])">查看更多</a>
+                                    </div>
+                                </div>
+                                <div class="new_product_table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="first_th"></th>
+                                                <th>产品名称</th>
+                                                <th>产品期限</th>
+                                                <th>年化收益率</th>
+                                                <th>平台</th>
+                                                <th>管理人类型</th>
+                                                <th>管理机构</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ui-sref="pano.products.assetManage" ng-repeat="am in ams">
+                                                <td class="first_td" ng-bind="$index+1"></td>
+                                                <td ng-bind="am.name"></td>
+                                                <td ng-bind="am.life"></td>
+                                                <td ng-bind="am.rate"></td>
+                                                <td>
+                                                    <a ui-sref="pano.institutions.dashboard"  ng-bind="am.from"></a>
+                                                </td>
+                                                <td ng-bind="am.credit_manager">
+                                                </td>
+                                                <td ng-bind="am.manage_org"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
