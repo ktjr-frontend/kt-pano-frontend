@@ -125,11 +125,11 @@
                                             <tr ng-repeat="topAmount in topAmounts" ui-sref="pano.products.obligatoryRight">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="topAmount.name"></td>
-                                                <td ng-bind="topAmount.term + '个月'"></td>
+                                                <td ng-bind="topAmount.life"></td>
                                                 <td ng-bind="topAmount.rate"></td>
                                                 <td ng-bind="topAmount.sum_amount | ktNumberLocate"></td>
                                                 <td>
-                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topAmount.platform"></a>
+                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topAmount.from"></a>
                                                 </td>
                                                 <td ng-bind="topAmount.asset_type"></td>
                                             </tr>
@@ -162,11 +162,11 @@
                                             <tr ng-repeat="topPercent in topPercents" ui-sref="pano.products.obligatoryRight">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="topPercent.name"></td>
-                                                <td ng-bind="topPercent.term + '个月'"></td>
+                                                <td ng-bind="topPercent.life"></td>
                                                 <td ng-bind="topPercent.rate"></td>
                                                 <td ng-bind="topPercent.sum_amount | ktNumberLocate"></td>
                                                 <td>
-                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topPercent.platform"></a>
+                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topPercent.from"></a>
                                                 </td>
                                                 <td ng-bind="topPercent.asset_type"></td>
                                             </tr>
