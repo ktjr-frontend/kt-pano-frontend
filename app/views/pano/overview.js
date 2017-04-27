@@ -7,8 +7,8 @@
             $scope.updateDate = '获取中...'
             $scope.updateDateTo = '获取中...'
             $scope.getLife = ktDataHelper.getLife
-            $scope.updateTime = '更新时间:'
-            $scope.timeRange = '时间范围:'
+            $scope.updateTime = '更新时间：'
+            $scope.timeRange = '时间范围：'
                 /*$scope.dynamicPopover = {
                     templateUrl: 'views/tooltips/popover.html',
                     title: '提示'
@@ -135,6 +135,7 @@
                     if (data.crawled_at) {
                         $scope.updateDate = moment(data.crawled_at).subtract(6, 'd').format('YYYY-MM-DD') + ' ~ ' + moment(data.crawled_at).format('YYYY-MM-DD')
                         $scope.updateDateTo = moment(data.crawled_at).format('YYYY-MM-DD')
+                        console.log($scope.updateDateTo)
                     }
                     updateView()
                 })
@@ -687,7 +688,7 @@
             ktInstitutionalInfoService.get({}, function(data) {
                     $scope.amounts = data.platform
                     if (data.platform.all_amount.length > 0) {
-                        $scope.all_amounts = data.platform.all_amount.slice(0, 5)
+                        $scope.all_amounts = data.platform.business_borrowings.slice(0, 5)
                     }
                 })
                 //总览页 最新产品信息
@@ -705,7 +706,8 @@
             ktProductRateService.get({ type: 'bond' }, function(data) {
                 $scope.rateDatas = data.res
                 $scope.rateThTitles = _.map(data.res.list[0].set, 'group')
-                $scope.obRateTime = data.res.begin_date + '~' + data.res.end_date
+                $scope.obRateTime = data.res.begin_date + '至' + data.res.end_date
+                console.log($scope.obRateTime)
                 var drp = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
                 var Cwidth = $('#obRateTable').width()
                     // var Cheight = $('#obRateTable').height()
@@ -718,8 +720,8 @@
                 })
             })
             ktProductRateService.get({ type: 'am' }, function(data) {
-                console.log(data)
                 $scope.assetDatas = data.res
+                $scope.asserRateTime = data.res.begin_date + '至' + data.res.end_date
                 $scope.assetThTitles = _.map(data.res.list[0].set, 'group')
                 var drp = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
                 html2canvas($('#assetRateTable')[0], {
