@@ -48,7 +48,7 @@
                    产品信息
                 </a>
             </li>
-            <li class="hdropdown" ng-class="{active:$state.includes('pano.institutions.*')}">
+            <li class="hdropdown" ng-class="{active:$state.includes('pano.institutions.table.list') || $state.includes('pano.institutions.table') || $state.includes('pano.institutions.dashboard')} ">
                 <a ui-sref="pano.institutions.dashboard">
                    机构信息
                 </a>

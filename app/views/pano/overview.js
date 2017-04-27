@@ -686,16 +686,20 @@
                 //右边栏金融平台，企业借款，小微金融类
             ktInstitutionalInfoService.get({}, function(data) {
                     $scope.amounts = data.platform
+                    if (data.platform.all_amount.length > 0) {
+                        $scope.all_amounts = data.platform.all_amount.slice(0, 5)
+                    }
                 })
                 //总览页 最新产品信息
             ktNewProductService.get({ bond_or_am: 'bond' }, function(data) {
-                debugger
                 $scope.upDate = data.res.updated_at
                 $scope.topAmounts = data.res.top_amount_res
                 $scope.topPercents = data.res.top_percent_res
             })
             ktNewProductService.get({ bond_or_am: 'am' }, function(data) {
-                    $scope.ams = data.res.am_res.slice(0, 5)
+                    if (data.res.am_res.length > 0) {
+                        $scope.ams = data.res.am_res.slice(0, 5)
+                    }
                 })
                 //各产品收益率表
             ktProductRateService.get({ type: 'bond' }, function(data) {
@@ -704,13 +708,13 @@
                 $scope.obRateTime = data.res.begin_date + '~' + data.res.end_date
                 var drp = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
                 var Cwidth = $('#obRateTable').width()
-                // var Cheight = $('#obRateTable').height()
+                    // var Cheight = $('#obRateTable').height()
                 html2canvas($('#obRateTable')[0], {
                     onrendered: function(canvas) {
                         $('#obRateTable').append(canvas)
                     },
                     width: Cwidth * drp
-                    // height: Cheight * drp
+                        // height: Cheight * drp
                 })
             })
             ktProductRateService.get({ type: 'am' }, function(data) {
@@ -723,7 +727,7 @@
                         $('#assetRateTable').append(canvas)
                     },
                     width: $('#assetRateTable').width() * drp
-                    // height: $('#assetRateTable').height() * drp
+                        // height: $('#assetRateTable').height() * drp
                 })
             })
             ktAnalyticsService.get({

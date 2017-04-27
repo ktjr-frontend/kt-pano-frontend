@@ -5,7 +5,7 @@
     </div>
     <!-- 只有筛选 -->
     <div class="chart-table-title fl" ng-if="getFitlerStatus() === FILTER_STATUS">
-        <div ng-if="shared.params.institution_type === '0'">机构总共<em ng-bind="summary.platform.count || 0"></em>个，近7日总发行量<em ng-bind="(summary.platform.sum_amount /10000) | ktNumber:0"></em>万</div>
+        <div ng-if="shared.params.institution_type === '0'">机构总共<em ng-bind="summary.platform.count || 0"></em>个，近7日总发行量<em ng-bind="(summary.platform.sum_amount /10000) | ktNumber:0"></em>万元</div>
         <div ng-if="shared.params.institution_type === '1'">机构总共<em ng-bind="summary.institution.count || 0"></em>个</div>
     </div>
     <!-- 只要有搜索 -->
