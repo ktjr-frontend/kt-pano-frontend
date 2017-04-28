@@ -1,6 +1,7 @@
 require 'mina/bundler'
 # require 'mina/rails'
 require 'mina/git'
+
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
@@ -15,7 +16,7 @@ if ENV['stage'].nil?
   exit
 end
 
-set :modify_time, ENV['t']
+set :modify_time, ENV['t'] || Time.now.strftime('%Y%m%d%H%M.%S')
 set :common_repository, 'ssh://git@gitlab.ktjr.com/Kaitong/kt-frontend-common.git'
 set :repository, 'ssh://git@gitlab.ktjr.com/Kaitong/kt-pano-frontend.git'
 # set :repository, 'git@github.kaitongamc.com:Kaitong/kt-pano-frontend.git'
