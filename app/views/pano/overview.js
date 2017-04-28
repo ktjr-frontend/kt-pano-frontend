@@ -741,7 +741,7 @@
                         context.scale(2, 2)
                     }
                     html2canvas(obRateTable[0], {
-                        canvas: canvas,
+                        // canvas: canvas,
                         onrendered: function(cav) {
                             obRateTable.append(cav)
                         }

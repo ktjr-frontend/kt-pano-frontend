@@ -195,7 +195,9 @@
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="small_finance.name"></td>
+                                <td>
+                                    <a ng-bind="small_finance.name" target="_blank" ui-sref="pano.institutions.detail({id: small_finance.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="small_finance.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
@@ -264,7 +266,9 @@
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="supply_chain.name"></td>
+                                <td>
+                                    <a ng-bind="supply_chain.name" target="_blank" ui-sref="pano.institutions.detail({id: supply_chain.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="supply_chain.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
