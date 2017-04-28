@@ -295,7 +295,7 @@
 
             //弹出了解更多二维码
             $scope.alertMore = function() {
-                    bdTrack(['总览页', '交易所产品发行登记管理核心系统', '详情'])
+                    $rootScope.bdTrack(['总览页', '交易所产品发行登记管理核心系统', '详情'])
                     ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
                         title: '<h4 class="title-more">详情' + '</h4>' + '<div class="more-table"><table><tbody><tr><td><span>多种产品全支持</span></td><td><span>产品发行自动化</span></td><td><span>合规发行支持 </span></td></tr>' + '<tr><td><span>产品信息多维展示 </span></td><td><span>事件智能提醒</span></td><td><span>权限/审批灵活可配 </span></td></tr></tbody></table></div>' + '<p class="alert-moreCode">' + '如果想了解更多信息，欢迎与我们联系：)' + '</p>',
                         text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
@@ -303,8 +303,6 @@
                             // showCloseButton: true
                             // showCancelButton: true
                     })
-
-                    $rootScope.bdTrack(['总览页', '点击', '广告位'])
                 }
                 //记录买点
             $scope.bdRecord = function(name) {
@@ -693,11 +691,12 @@
                 })
                 //总览页 最新产品信息
             ktNewProductService.get({ bond_or_am: 'bond' }, function(data) {
-                $scope.upDate = data.res.updated_at
+
                 $scope.topAmounts = data.res.top_amount_res
                 $scope.topPercents = data.res.top_percent_res
             })
             ktNewProductService.get({ bond_or_am: 'am' }, function(data) {
+                 $scope.upDate = data.res.updated_at
                     if (data.res.am_res.length > 0) {
                         $scope.ams = data.res.am_res.slice(0, 5)
                     }
@@ -707,7 +706,6 @@
                 $scope.rateDatas = data.res
                 $scope.rateThTitles = _.map(data.res.list[0].set, 'group')
                 $scope.obRateTime = data.res.begin_date + '至' + data.res.end_date
-                console.log($scope.obRateTime)
                 var drp = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
                 var Cwidth = $('#obRateTable').width()
                     // var Cheight = $('#obRateTable').height()
@@ -716,7 +714,6 @@
                         $('#obRateTable').append(canvas)
                     },
                     width: Cwidth * drp
-                        // height: Cheight * drp
                 })
             })
             ktProductRateService.get({ type: 'am' }, function(data) {
