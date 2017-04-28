@@ -282,6 +282,36 @@ table {
         margin: 0 10px;
         user-select: none;
     }
+    .sort-column {
+        &.sort-desc {
+            background: #fbfbfc;
+            .icon-arrow-up-reverse {
+                color: #54c5cb;
+            }
+        }
+        &.sort-asc {
+            background: #fbfbfc;
+            .icon-arrow-up {
+                color: #54c5cb;
+                &.icon-arrow-up-reverse {
+                    color: #dbdee5;
+                }
+            }
+        }
+        .icon-arrow-up {
+            margin-right: -6px;
+            vertical-align: 2px;
+            color: #dbdee5;
+            display: inline-block;
+            transform: scale(0.7);
+            font-size: 12px;
+            &.icon-arrow-up-reverse {
+                transform: rotate(180deg) scale(0.7);
+                // margin-right: -5px;
+                vertical-align: -2px;
+            }
+        }
+    }
     .rank-bar {
         border-right: 1px solid @color-3;
         // padding-right: 10px;
@@ -299,33 +329,6 @@ table {
             }
             &.active {
                 background: #fbfbfc;
-            }
-            &.sort-desc {
-                background: #fbfbfc;
-                .icon-arrow-up-reverse {
-                    color: #54c5cb;
-                }
-            }
-            &.sort-asc {
-                background: #fbfbfc;
-                .icon-arrow-up {
-                    color: #54c5cb;
-                    &.icon-arrow-up-reverse{
-                        color: #dbdee5;
-                    }
-                }
-            }
-            .icon-arrow-up {
-                margin-right: -6px;
-                vertical-align: 2px;
-                color: #dbdee5;
-                display: inline-block;
-                transform: scale(0.7);
-                &.icon-arrow-up-reverse {
-                    transform: rotate(180deg) scale(0.7);
-                    // margin-right: -5px;
-                    vertical-align: -2px;
-                }
             }
         }
     }
@@ -366,8 +369,8 @@ table {
         padding: 20px 10px;
         text-align: left;
         position: relative;
-        &.is-link{
-            &:hover{
+        &.is-link {
+            &:hover {
                 cursor: pointer;
             }
         }
@@ -388,14 +391,14 @@ table {
             color: @color-1;
             margin-bottom: 15px;
             font-size: 15px;
-            position:relative;
+            position: relative;
             // font-weight: bold;
-            .update_time{
-                position:absolute;
-                right:15px;
-                top:0;
-                color:#9b9ca4;
-                font-size:13px;
+            .update_time {
+                position: absolute;
+                right: 15px;
+                top: 0;
+                color: #9b9ca4;
+                font-size: 13px;
             }
         }
         &:last-of-type {
@@ -470,6 +473,7 @@ table {
         }
     }
 }
+
 
 /*.dashboard-table {
     background-color: white;

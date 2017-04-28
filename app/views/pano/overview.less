@@ -73,7 +73,10 @@
         padding: 0px;
         border-radius: 5px;
         background: white;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        &:last-child {
+            margin-top: 20px;
+        }
         &.contact-weixin {
             background: url(/images/phone_bg.png) no-repeat;
             background-size: cover;
@@ -98,7 +101,7 @@
                     font-size: 1.2rem;
                     line-height: 1.8em;
                     color: white;
-                    margin-top:15px;
+                    margin-top: 15px;
                     border-bottom: 1px solid rgba(255, 255, 255, .8);
                     padding-bottom: 10px;
                 }
@@ -126,7 +129,7 @@
         margin: 3px 0 15px;
     }
     .popover-inner {
-        h3.popover-title{
+        h3.popover-title {
             margin: 0;
             background: #5c667d;
             color: white;
@@ -156,9 +159,19 @@
             }
         }
         >h3 {
-            margin: 0 0 5px;
+            margin: 0;
             height: 40px;
             line-height: 40px;
+            position: relative;
+            .get_more {
+                position: absolute;
+                right: 0;
+                top: 1px;
+                font-size: 13px;
+                a {
+                    color: #9da0a8;
+                }
+            }
         }
         .rank-list {
             list-style-type: none;
@@ -300,120 +313,322 @@
         }
     }
 }
-.tooltip_product .tooltip-inner{
-    max-width:500px;
-    p{
+
+.tooltip_product .tooltip-inner {
+    max-width: 500px;
+    p {
         margin-bottom: 2px;
     }
 }
 
-.ad-bg{
-    padding:20px;
+.ad-bg {
+    padding: 20px;
     background: url(../../images/advert_bg.png) no-repeat;
-    margin-top:45px;
+    margin-top: 45px;
     border-radius: 5px;
     background-size: cover;
-    img{
+    img {
         // height:82px;
-        width:100%;
-        margin-bottom:20px;
+        width: 100%;
+        margin-bottom: 20px;
     }
-    p{
-        font-size:13px;
-        color:#e4e4e5;
+    p {
+        font-size: 13px;
+        color: #e4e4e5;
         margin-bottom: 5px;
-        span{
-            padding-left:10px;
+        span {
+            padding-left: 10px;
             position: relative;
-            &:before{
+            &:before {
                 content: '';
-                width:5px;
-                height:5px;
+                width: 5px;
+                height: 5px;
                 border-radius: 50%;
-                background:#9da0a8;
+                background: #9da0a8;
                 position: absolute;
-                left:0px;
-                top:7px;
+                left: 0px;
+                top: 7px;
             }
         }
     }
-    .more-p{
-        margin-top:10px;
-        padding:6px 0;
-        em{
+    .more-p {
+        margin-top: 10px;
+        padding: 6px 0;
+        em {
             font-style: normal;
-            font-size:12px;
+            font-size: 12px;
         }
-        a{
-            background:#b8a578;
-            color:#fff;
-            margin-left:2px;
-            padding:0px 3px;
+        a {
+            background: #b8a578;
+            color: #fff;
+            margin-left: 2px;
+            padding: 0px 3px;
             border-radius: 3px;
-            font-size:12px;
+            font-size: 12px;
             display: inline-block;
         }
-        .fa-angle-right{
-            font-size:12px;
-            margin-left:2px;
+        .fa-angle-right {
+            font-size: 12px;
+            margin-left: 2px;
         }
     }
 }
-.find-box{
-    margin-top:20px;
+
+.find-box {
+    margin-top: 20px;
+    margin-bottom:10px;
 }
-.myfindPhoto{
+
+.myfindPhoto {
     background: #5c8bbb;
-   padding:20px 5px 0 25px;
+    padding: 20px 5px 0 25px;
     border-radius: 5px;
-    img{
-        width:100%;
+    img {
+        width: 100%;
         // height:150px;
     }
 }
-.title-more{
+
+.title-more {
     border-bottom: 1px solid #f3f5f8;
-    margin-top:-15px;
-    padding-bottom:15px;
-    font-size:17px;
-    color:#3d4351;
+    margin-top: -15px;
+    padding-bottom: 15px;
+    font-size: 17px;
+    color: #3d4351;
 }
-.alert-moreCode{
-    color:#8d919a;
-    margin-top:10px;
+
+.alert-moreCode {
+    color: #8d919a;
+    margin-top: 10px;
 }
-.moreCode-pano{
-    img{
-        width:100px;
-        height:100px;
+
+.moreCode-pano {
+    img {
+        width: 100px;
+        height: 100px;
     }
 }
-.more-table{
+
+.more-table {
     margin-bottom: 10px;
-    padding:5px 0px 5px 20px;
-    table{
-        table-layout:fixed;
-        width:100%;
-        td{
-            font-size:13px;
+    padding: 5px 0px 5px 20px;
+    table {
+        table-layout: fixed;
+        width: 100%;
+        td {
+            font-size: 13px;
             text-align: left;
-            padding:5px 5px;
+            padding: 5px 5px;
             position: relative;
-            color:#3d4351;
-            &:before{
+            color: #3d4351;
+            &:before {
                 content: '';
-                height:4px;
-                width:4px;
-                background:#e7e7e9;
+                height: 4px;
+                width: 4px;
+                background: #e7e7e9;
                 border-radius: 50%;
-                position:absolute;
-                left:-5px;
-                top:12px;
+                position: absolute;
+                left: -5px;
+                top: 12px;
             }
         }
     }
 }
-.sweet-alert .sa-button-container{
-    border-top:1px solid #fff;
-    margin-top:10px;
+
+.sweet-alert .sa-button-container {
+    border-top: 1px solid #fff;
+    margin-top: 10px;
+}
+
+//最新产品信息
+.no_data {
+    text-align: center;
+}
+
+.new_product {
+    .np_title {
+        height: 40px;
+        line-height: 40px;
+        .np_title_one {
+            font-size: 13px;
+            color: #3d4351;
+        }
+        .np_title_two {
+            font-size: 13px;
+            color: #afb7d0;
+            margin-left: 10px;
+        }
+    }
+    .new_product_body {
+        background: #fff;
+        border-radius: 5px 5px 0 0;
+        .product_name {
+            padding-left: 20px;
+            height: 40px;
+            line-height: 40px;
+            color: #3d4351;
+            font-size: 15px;
+        }
+        .product_top {
+            height: 40px;
+            line-height: 40px;
+            background: #fbfbfc;
+            font-size: 13px;
+            padding: 0 20px;
+            position: relative;
+            .product_top_two {
+                background: #54c5cb;
+                padding: 0px 2px;
+                color: #fff;
+                font-size: 12px;
+                border-radius: 3px;
+                margin-left: 10px;
+            }
+            .product_top_more {
+                position: absolute;
+                right: 20px;
+                top: 2px;
+                a {
+                    color: #9b9ca4;
+                    &:hover{
+                        color:#54c5cb;
+                    }
+                }
+            }
+        }
+    }
+    .new_product_table {
+        table {
+            width: 100%;
+            // table-layout: fixed;
+        }
+        thead {
+            th {
+                color: #666b76;
+                text-align: center;
+                height: 40px;
+                line-height: 40px;
+                font-weight: 500;
+                &.first_th {
+                    width: 50px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                cursor: pointer;
+                &:hover {
+                    td {
+                        background: #fbfbfc;
+                    }
+                }
+                border-top: 1px solid #f3f5f8;
+                &:last-child {
+                    border-bottom: 1px solid #f3f5f8;
+                }
+                td {
+                    text-align: center;
+                    height: 40px;
+                    line-height: 40px;
+                    border-right: 1px solid #f3f5f8;
+                    &.first_td {
+                        color: #54c5cb;
+                    }
+                    &:last-child {
+                        border-right: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//资产收益率
+.ob_rate {
+    .ob_rate_title {
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        .ob_rate_one {
+            font-size: 13px;
+            color: #3d4351;
+        }
+        .ob_rate_two {
+            font-size: 13px;
+            color: #afb7d0;
+            margin-left: 10px;
+        }
+        .ob_rate_down {
+            position: absolute;
+            right: 0;
+            top: 2px;
+            span {
+                color: #3d4351;
+                cursor: pointer;
+                i {
+                    vertical-align: -1px;
+                    margin-left: 5px;
+                    color: #3d4351;
+                }
+                &:hover {
+                    color: #4380dd;
+                    i {
+                        color: #4380dd;
+                        // cursor:pointer;
+                    }
+                }
+            }
+        }
+    }
+    .ob_rate_table {
+        overflow-x: auto;
+        table {
+            width: 100%;
+            // table-layout: fixed;
+            background: #fff;
+        }
+        thead {
+            th {
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 13px;
+                font-weight: 500;
+                background: #76829a;
+                color: #fff;
+                &:first-child {
+                    border-radius: 5px 0 0 0;
+                }
+                &:last-child {
+                    border-radius: 0 5px 0 0;
+                }
+            }
+        }
+        tbody {
+            tr {
+                border-bottom: 1px solid #f3f5f8;
+                &:hover{
+                    background: #fbfbfc;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+                td {
+                    border-right: 1px solid #f3f5f8;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    font-size: 12px;
+                    // line-height:2.5rem;
+                    // padding:3px 5px;
+                    &:last-child {
+                        border-right: none;
+                    }
+                }
+            }
+        }
+        canvas {
+            display: none;
+        }
+    }
 }

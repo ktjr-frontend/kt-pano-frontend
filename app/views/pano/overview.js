@@ -2,20 +2,21 @@
 (function() {
     'use strict';
     angular.module('kt.pano')
-        .controller('ktOverviewCtrl', function($scope, $rootScope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1, ktSweetAlert, ktLogService) {
+        .controller('ktOverviewCtrl', function($scope, $rootScope, $q, $state, $templateRequest, $window, $stateParams, ktDataHelper, ktAnalyticsService, ktValueFactory, ktEchartTheme1, ktSweetAlert, ktLogService, ktInstitutionalInfoService, ktNewProductService, ktProductRateService) {
 
             $scope.updateDate = '获取中...'
             $scope.updateDateTo = '获取中...'
             $scope.getLife = ktDataHelper.getLife
+            $scope.updateTime = '更新时间：'
+            $scope.timeRange = '时间范围：'
+                /*$scope.dynamicPopover = {
+                    templateUrl: 'views/tooltips/popover.html',
+                    title: '提示'
+                }
 
-            /*$scope.dynamicPopover = {
-                templateUrl: 'views/tooltips/popover.html',
-                title: '提示'
-            }
-
-            $scope.popoverConfirm = function() {
-                $rootScope.show2016Report = false
-            }*/
+                $scope.popoverConfirm = function() {
+                    $rootScope.show2016Report = false
+                }*/
             $scope.findPopover = {
                 templateUrl: 'views/tooltips/find_popover.html',
                 title: '提示'
@@ -131,7 +132,6 @@
                     chart: 'summary',
                 }, options || {}), function(data) {
                     _self.data = ktDataHelper.sortByChars(data.stat)
-
                     if (data.crawled_at) {
                         $scope.updateDate = moment(data.crawled_at).subtract(6, 'd').format('YYYY-MM-DD') + ' ~ ' + moment(data.crawled_at).format('YYYY-MM-DD')
                         $scope.updateDateTo = moment(data.crawled_at).format('YYYY-MM-DD')
@@ -294,6 +294,7 @@
 
             //弹出了解更多二维码
             $scope.alertMore = function() {
+                    $rootScope.bdTrack(['总览页', '交易所产品发行登记管理核心系统', '详情'])
                     ktSweetAlert.swal({ // 不要在html模式下使用h2和p标签，回导致sweetalert的bug
                         title: '<h4 class="title-more">详情' + '</h4>' + '<div class="more-table"><table><tbody><tr><td><span>多种产品全支持</span></td><td><span>产品发行自动化</span></td><td><span>合规发行支持 </span></td></tr>' + '<tr><td><span>产品信息多维展示 </span></td><td><span>事件智能提醒</span></td><td><span>权限/审批灵活可配 </span></td></tr></tbody></table></div>' + '<p class="alert-moreCode">' + '如果想了解更多信息，欢迎与我们联系：)' + '</p>',
                         text: '<span class="moreCode-pano">' + '<img src="../../images/moreCode.png">' + '</span>',
@@ -301,8 +302,6 @@
                             // showCloseButton: true
                             // showCancelButton: true
                     })
-
-                    $rootScope.bdTrack(['总览页', '点击', '广告位'])
                 }
                 //记录买点
             $scope.bdRecord = function(name) {
@@ -683,6 +682,100 @@
                 return index >= $scope.exchange_page * pageSize && index < $scope.exchange_page * pageSize + pageSize
             }
 
+            //右边栏金融平台，企业借款，小微金融类
+            ktInstitutionalInfoService.get({}, function(data) {
+                $scope.amounts = data.platform
+                if (data.platform.all_amount.length > 0) {
+                    $scope.all_amounts = data.platform.business_borrowings.slice(0, 5)
+                }
+            })
+
+            $scope.topAmounts = []
+            $scope.topPercents = []
+            $scope.ams = []
+
+            //总览页 最新产品信息
+            ktNewProductService.get({ bond_or_am: 'bond' }, function(data) {
+                $scope.upDateBond = data.res.updated_at
+                $scope.topAmounts = data.res.top_amount_res
+                $scope.topPercents = data.res.top_percent_res
+            })
+
+            ktNewProductService.get({ bond_or_am: 'am' }, function(data) {
+                $scope.upDateAm = data.res.updated_at
+                if (data.res.am_res.length > 0) {
+                    $scope.ams = data.res.am_res.slice(0, 5)
+                }
+            })
+
+            $scope.newProductUpdateTime = function() {
+                console.log($scope.topAmounts, $scope.topPercents, $scope.ams)
+                if ($scope.topAmounts.length || $scope.topPercents.length) {
+                    if ($scope.ams.length) {
+                        if (+new Date($scope.upDateBond) > +new Date($scope.upDateAm)) {
+                            return $scope.upDateBond
+                        }
+                        return $scope.upDateAm
+                    }
+                    return $scope.upDateBond
+                }
+                return $scope.upDateAm || '-'
+            }
+
+            //各产品收益率表
+            ktProductRateService.get({ type: 'bond' }, function(data) {
+                $scope.rateDatas = data.res
+                $scope.rateThTitles = _.map(data.res.list[0].set, 'group')
+                $scope.obRateTime = data.res.begin_date + '至' + data.res.end_date
+                var dpr = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
+                setTimeout(function() {
+                    var obRateTable = $('#obRateTable')
+                    var w = obRateTable.width()
+                    var h = obRateTable.height()
+                    var canvas = document.createElement('canvas')
+                    canvas.width = w * dpr
+                    canvas.height = h * dpr
+                    canvas.style.width = w + 'px'
+                    canvas.style.height = h + 'px'
+                    var context = canvas.getContext('2d')
+                    if (dpr > 1) {
+                        context.scale(2, 2)
+                    }
+                    html2canvas(obRateTable[0], {
+                        // canvas: canvas,
+                        onrendered: function(cav) {
+                            obRateTable.append(cav)
+                        }
+                    })
+                }, 1000)
+            })
+            ktProductRateService.get({ type: 'am' }, function(data) {
+                $scope.assetDatas = data.res
+                $scope.asserRateTime = data.res.begin_date + '至' + data.res.end_date
+                $scope.assetThTitles = _.map(data.res.list[0].set, 'group')
+                var dpr = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
+
+                setTimeout(function() {
+                    var assetRateTable = $('#assetRateTable')
+                    var w = assetRateTable.width()
+                    var h = assetRateTable.height()
+                    var canvas = document.createElement('canvas')
+                    canvas.width = w * dpr
+                    canvas.height = h * dpr
+                    canvas.style.width = w + 'px'
+                    canvas.style.height = h + 'px'
+                    var context = canvas.getContext('2d')
+                    if (dpr > 1) {
+                        context.scale(2, 2)
+                    }
+                    html2canvas(assetRateTable[0], {
+                        // canvas: canvas,
+                        onrendered: function(cav) {
+                            assetRateTable.append(cav)
+                        }
+                    })
+                }, 1000)
+            })
             ktAnalyticsService.get({
                 content: 'hodgepodge',
             }, function(data) {

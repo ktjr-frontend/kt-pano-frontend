@@ -1,6 +1,7 @@
 require 'mina/bundler'
 # require 'mina/rails'
 require 'mina/git'
+
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
@@ -15,6 +16,7 @@ if ENV['stage'].nil?
   exit
 end
 
+set :modify_time, ENV['t'] || Time.now.strftime('%Y%m%d%H%M.%S')
 set :common_repository, 'ssh://git@gitlab.ktjr.com/Kaitong/kt-frontend-common.git'
 set :repository, 'ssh://git@gitlab.ktjr.com/Kaitong/kt-pano-frontend.git'
 # set :repository, 'git@github.kaitongamc.com:Kaitong/kt-pano-frontend.git'
@@ -92,11 +94,19 @@ task :deploy => :environment do
     # invoke :'deploy:link_shared_uploads'
     # invoke :'rails:db_migrate'
     # invoke :'rails:assets_precompile'
+    invoke :'change_modify_time:touch'
     invoke :'deploy:cleanup'
 
     to :launch do
       # queue "grunt server"
     end
+  end
+end
+
+# 同步部署文件修改时间
+namespace :change_modify_time do
+  task :touch => :environment do
+    queue %{find #{deploy_to}/current/dist -name '*' | xargs touch -t #{modify_time}}
   end
 end
 

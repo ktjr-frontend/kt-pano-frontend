@@ -30,6 +30,18 @@
         })
     })
 
+    // 机构库
+    .factory('ktInsitutionRepositoriesService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/inst_repositories/:instID', {
+            instID: '@instID'
+        }, {
+            'get': {
+                method: 'GET',
+                cache: false
+            }
+        })
+    })
+
     // 资产
     .factory('ktAssetService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/fame_assets/:content', {
@@ -110,5 +122,17 @@
     // 产品详情内趋势图
     .factory('ktProductTrendsService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/product_trends')
+    })
+    // 总览页 or 机构信息页
+    .factory('ktInstitutionalInfoService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/institutions/overview')
+    })
+    // 总览页最新机构信息
+    .factory('ktNewProductService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/institutions/latest_products_info')
+    })
+    // 各产品收益率表
+    .factory('ktProductRateService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/quotes/list')
     })
 })();

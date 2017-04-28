@@ -297,15 +297,17 @@
             background: #fff;
             table {
                 width: 100%;
-                table-layout: fixed;
+                // table-layout: fixed;
                 thead {
                     th {
                         color: #fff;
                         font-size: 13px;
                         background: #b1b7c4;
-                        padding: 11px 0px;
+                        padding: 11px 10px;
                         text-align: center;
+                        white-space: nowrap;
                         &:first-child {
+                            // text-align: left;
                             // min-width:230px;
                         }
                     }
@@ -323,13 +325,15 @@
                         td {
                             color: #666b76;
                             font-size: 13px;
-                            padding: 11px 0;
+                            padding: 11px 10px;
                             text-align: center;
                             border-right: 1px solid #eef5fc;
+                            white-space: nowrap;
                             &:first-child {
+                                text-align: left;
                                 text-overflow: ellipsis;
-                                white-space: nowrap;
                                 overflow: hidden;
+                                max-width: 500px;
                             }
                         }
                     }
