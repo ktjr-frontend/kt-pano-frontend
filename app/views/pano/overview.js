@@ -135,7 +135,6 @@
                     if (data.crawled_at) {
                         $scope.updateDate = moment(data.crawled_at).subtract(6, 'd').format('YYYY-MM-DD') + ' ~ ' + moment(data.crawled_at).format('YYYY-MM-DD')
                         $scope.updateDateTo = moment(data.crawled_at).format('YYYY-MM-DD')
-                        console.log($scope.updateDateTo)
                     }
                     updateView()
                 })
@@ -710,16 +709,17 @@
             })
 
             $scope.newProductUpdateTime = function() {
+                console.log($scope.topAmounts, $scope.topPercents, $scope.ams)
                 if ($scope.topAmounts.length || $scope.topPercents.length) {
                     if ($scope.ams.length) {
                         if (+new Date($scope.upDateBond) > +new Date($scope.upDateAm)) {
                             return $scope.upDateBond
                         }
-                        return $scope.updateAm
+                        return $scope.upDateAm
                     }
                     return $scope.upDateBond
                 }
-                return $scope.upDateAm
+                return $scope.upDateAm || '-'
             }
 
             //各产品收益率表
@@ -727,28 +727,54 @@
                 $scope.rateDatas = data.res
                 $scope.rateThTitles = _.map(data.res.list[0].set, 'group')
                 $scope.obRateTime = data.res.begin_date + '至' + data.res.end_date
-                var drp = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
-                var Cwidth = $('#obRateTable').width()
-                    // var Cheight = $('#obRateTable').height()
-                html2canvas($('#obRateTable')[0], {
-                    onrendered: function(canvas) {
-                        $('#obRateTable').append(canvas)
-                    },
-                    width: Cwidth * drp
-                })
+                var dpr = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
+                setTimeout(function() {
+                    var obRateTable = $('#obRateTable')
+                    var w = obRateTable.width()
+                    var h = obRateTable.height()
+                    var canvas = document.createElement('canvas')
+                    canvas.width = w * dpr
+                    canvas.height = h * dpr
+                    canvas.style.width = w + 'px'
+                    canvas.style.height = h + 'px'
+                    var context = canvas.getContext('2d')
+                    if (dpr > 1) {
+                        context.scale(2, 2)
+                    }
+                    html2canvas(obRateTable[0], {
+                        // canvas: canvas,
+                        onrendered: function(cav) {
+                            obRateTable.append(cav)
+                        }
+                    })
+                }, 1000)
             })
             ktProductRateService.get({ type: 'am' }, function(data) {
                 $scope.assetDatas = data.res
                 $scope.asserRateTime = data.res.begin_date + '至' + data.res.end_date
                 $scope.assetThTitles = _.map(data.res.list[0].set, 'group')
-                var drp = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
-                html2canvas($('#assetRateTable')[0], {
-                    onrendered: function(canvas) {
-                        $('#assetRateTable').append(canvas)
-                    },
-                    width: $('#assetRateTable').width() * drp
-                        // height: $('#assetRateTable').height() * drp
-                })
+                var dpr = window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || window.msDevicePixelRatio
+
+                setTimeout(function() {
+                    var assetRateTable = $('#assetRateTable')
+                    var w = assetRateTable.width()
+                    var h = assetRateTable.height()
+                    var canvas = document.createElement('canvas')
+                    canvas.width = w * dpr
+                    canvas.height = h * dpr
+                    canvas.style.width = w + 'px'
+                    canvas.style.height = h + 'px'
+                    var context = canvas.getContext('2d')
+                    if (dpr > 1) {
+                        context.scale(2, 2)
+                    }
+                    html2canvas(assetRateTable[0], {
+                        // canvas: canvas,
+                        onrendered: function(cav) {
+                            assetRateTable.append(cav)
+                        }
+                    })
+                }, 1000)
             })
             ktAnalyticsService.get({
                 content: 'hodgepodge',

@@ -159,7 +159,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="topPercent in topPercents" ui-sref="pano.productAssetManage({id; topPercent.id})">
+                                            <tr ng-repeat="topPercent in topPercents" ui-sref="pano.productAssetManage({id: topPercent.id})">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="topPercent.name"></td>
                                                 <td ng-bind="topPercent.life"></td>
@@ -182,10 +182,10 @@
                                     <span>资管类</span>
                                 </div>
                                 <div class="product_top">
-                                    <span class="product_top_one">本日新增募集规模</span>
+                                    <span class="product_top_one">本日新增收益率</span>
                                     <span class="product_top_two">TOP5</span>
                                     <div class="product_top_more">
-                                        <a target="_blank" ui-sref="pano.products.assetManage({created_or_updated_in:1,sort_by:'rate',order:'asc'})" ng-click="bdTrack(['总览页','资管类-本日新增募集规模','查看更多'])">查看更多</a>
+                                        <a target="_blank" ui-sref="pano.products.assetManage({created_or_updated_in:1,sort_by:'rate',order:'asc'})" ng-click="bdTrack(['总览页','资管类-本日新增收益率','查看更多'])">查看更多</a>
                                     </div>
                                 </div>
                                 <div class="new_product_table">
@@ -202,7 +202,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="am in ams" ui-sref="pano.productAssetManage({id; am.id})">
+                                            <tr ng-repeat="am in ams" ui-sref="pano.productAssetManage({id: am.id})">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="am.name"></td>
                                                 <td ng-bind="am.life"></td>
