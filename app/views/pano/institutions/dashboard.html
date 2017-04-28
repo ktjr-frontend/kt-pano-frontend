@@ -101,7 +101,9 @@
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="rate.name"></td>
+                                <td>
+                                    <a ng-bind="rate.name" target="_blank" ui-sref="pano.institutions.detail({id: rate.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="rate.rate | ktFilterRate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
