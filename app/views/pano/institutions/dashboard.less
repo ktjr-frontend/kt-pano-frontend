@@ -3,7 +3,7 @@
     .dashboard_header {
         height: 360px;
         background: url(/images/dashboardBanner.png) no-repeat;
-        background-size: cover;
+        background-size: 100% 360px;
         position: relative;
     }
     .dashboard_content {
@@ -80,16 +80,19 @@
             position: absolute;
             right: 10px;
             top: 0;
-            a {
-                color: #54c5cb;
-                // &:hover {
-                //     text-decoration: underline;
-                // }
-            }
             i {
                 font-size: 16px;
-                color: #54c5cb;
-                margin-left: 5px;
+                color: #9b9ca4;
+                margin-left: 2px;
+            }
+            a {
+                color: #9b9ca4;
+                &:hover {
+                    color: #54c5cb;
+                    i {
+                        color: #54c5cb;
+                    }
+                }
             }
         }
     }
