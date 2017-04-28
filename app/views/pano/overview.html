@@ -94,7 +94,7 @@
                     <div ng-if="topAmounts.length || topPercents.length || ams.length" class="chart-table new_product">
                         <div class="np_title">
                             <span class="np_title_one">最新产品信息</span>
-                            <span class="np_title_two">更新时间：{{upDate}}</span>
+                            <span class="np_title_two">更新时间：{{newProductUpdateTime()}}</span>
                         </div>
                         <div class="new_product_body" ng-if="topAmounts.length || topPercents.length">
                             <div class="product_name">
@@ -122,14 +122,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="topAmount in topAmounts" ui-sref="pano.products.obligatoryRight">
+                                            <tr ng-repeat="topAmount in topAmounts" ui-sref="pano.productObligatoryRight({id: topAmount.id})">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="topAmount.name"></td>
                                                 <td ng-bind="topAmount.life"></td>
                                                 <td ng-bind="topAmount.rate"></td>
                                                 <td ng-bind="topAmount.sum_amount | ktNumberLocate"></td>
                                                 <td>
-                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topAmount.from"></a>
+                                                    <a ng-click="$event.stopPropagation()" ui-sref="pano.institutions.detail({id: topAmount.from})" ng-bind="topAmount.from"></a>
                                                 </td>
                                                 <td ng-bind="topAmount.asset_type"></td>
                                             </tr>
@@ -159,14 +159,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="topPercent in topPercents" ui-sref="pano.products.obligatoryRight">
+                                            <tr ng-repeat="topPercent in topPercents" ui-sref="pano.productAssetManage({id; topPercent.id})">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="topPercent.name"></td>
                                                 <td ng-bind="topPercent.life"></td>
                                                 <td ng-bind="topPercent.rate"></td>
                                                 <td ng-bind="topPercent.sum_amount | ktNumberLocate"></td>
                                                 <td>
-                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topPercent.from"></a>
+                                                    <a ng-click="$event.stopPropagation()" ui-sref="pano.institutions.detail({id: topPercent.from})" ng-bind="topPercent.from"></a>
                                                 </td>
                                                 <td ng-bind="topPercent.asset_type"></td>
                                             </tr>
@@ -175,8 +175,7 @@
                                 </div>
                             </div>
                         </div>
-
-                    <!-- 资管类 -->
+                        <!-- 资管类 -->
                         <div ng-if="ams.length" class="chart-table new_product">
                             <div class="new_product_body">
                                 <div class="product_name">
@@ -203,13 +202,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ui-sref="pano.products.assetManage" ng-repeat="am in ams">
+                                            <tr ng-repeat="am in ams" ui-sref="pano.productAssetManage({id; am.id})">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="am.name"></td>
                                                 <td ng-bind="am.life"></td>
                                                 <td ng-bind="am.rate"></td>
                                                 <td>
-                                                    <a ui-sref="pano.institutions.dashboard"  ng-bind="am.from"></a>
+                                                    <a ng-click="$event.stopPropagation()" ui-sref="pano.institutions.detail(am.from)" ng-bind="am.from"></a>
                                                 </td>
                                                 <td ng-bind="am.credit_manager">
                                                 </td>
@@ -559,7 +558,7 @@
                             <ul class="rank-list">
                                 <li ng-repeat="amount in amounts.all_rate" class="ellip">
                                     <i class="index rank-{{$index+1}}" ng-class="{'rank-double-digit':$index >=9}" ng-bind="$index+1"></i>
-                                    <a title="{{::amount.name}}" ng-bind="::amount.name" class="content" target="_blank"></a>
+                                    <a title="{{::amount.name}}" ui-sref="pano.institutions.detail({id: amount.name, dimension: 'from'})"  ng-bind="::amount.name" class="content" target="_blank"></a>
                                     <span class="amount" ng-bind="::amount.rate | ktFilterRate"></span>
                                 </li>
                             </ul>
@@ -575,7 +574,7 @@
                             <ul class="rank-list">
                                 <li ng-repeat="amount in all_amounts" class="ellip">
                                     <i class="index rank-{{$index+1}}" ng-class="{'rank-double-digit':$index >=9}" ng-bind="$index+1"></i>
-                                    <a title="{{::amount.name}}" ng-bind="::amount.name" class="content" target="_blank"></a>
+                                    <a title="{{::amount.name}}" ui-sref="pano.institutions.detail({id: amount.name, dimension: 'from'})" ng-bind="::amount.name" class="content" target="_blank"></a>
                                     <span class="amount" ng-bind="::amount.amount| ktNumberLocate"></span>
                                 </li>
                             </ul>
@@ -591,7 +590,7 @@
                             <ul class="rank-list">
                                 <li ng-repeat="amount in amounts.small_finance" class="ellip">
                                     <i class="index rank-{{$index+1}}" ng-class="{'rank-double-digit':$index >=9}" ng-bind="$index+1"></i>
-                                    <a title="{{::amount.name}}" ng-bind="::amount.name" class="content" target="_blank"></a>
+                                    <a title="{{::amount.name}}" ui-sref="pano.institutions.detail({id: amount.name, dimension: 'from'})" ng-bind="::amount.name" class="content" target="_blank"></a>
                                     <span class="amount" ng-bind="::amount.amount| ktNumberLocate"></span>
                                 </li>
                             </ul>

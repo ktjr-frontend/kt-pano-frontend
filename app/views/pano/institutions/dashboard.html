@@ -51,7 +51,9 @@
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="amount.name"></td>
+                                <td>
+                                    <a ng-bind="amount.name" target="_blank" ui-sref="pano.institutions.detail({id: amount.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="amount.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
@@ -146,7 +148,9 @@
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="business.name"></td>
+                                <td>
+                                     <a ng-bind="business.name" target="_blank" ui-sref="pano.institutions.detail({id: business.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="business.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
@@ -308,7 +312,9 @@ PANO收录的互联网金融平台近7天金融工具类资产产品发行量Top
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="tool.name"></td>
+                                <td>
+                                    <a ng-bind="tool.name" target="_blank" ui-sref="pano.institutions.detail({id: tool.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="tool.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
@@ -354,7 +360,9 @@ PANO收录的互联网金融平台近7天房地产类资产产品发行量Top排
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="realty.name"></td>
+                                <td>
+                                    <a ng-bind="realty.name" target="_blank" ui-sref="pano.institutions.detail({id: realty.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="realty.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
@@ -399,7 +407,9 @@ PANO收录的互联网金融平台近7天房地产类资产产品发行量Top排
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="credit.name"></td>
+                                <td>
+                                    <a ng-bind="credit.name" target="_blank" ui-sref="pano.institutions.detail({id: credit.name, dimension: 'from'})"></a>
+                                </td>
                                 <td ng-bind="credit.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
@@ -449,7 +459,9 @@ PANO收录的互联网金融平台近7天房地产类资产产品发行量Top排
                                         <span>-</span>
                                     </div>
                                 </td>
-                                <td ng-bind="all_amount.name"></td>
+                                <td>
+                                    <a ng-bind="all_amount.name" target="_blank" ui-sref="pano.institutions.detail({id: all_amount.name, dimension: 'mapped_exchange'})"></a>
+                                </td>
                                 <td ng-bind="all_amount.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>

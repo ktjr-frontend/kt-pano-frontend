@@ -680,28 +680,49 @@
                 return index >= $scope.from_page * pageSize && index < $scope.from_page * pageSize + pageSize
             }
             $scope.exchangeAmountsFilter = function(value, index) {
-                    return index >= $scope.exchange_page * pageSize && index < $scope.exchange_page * pageSize + pageSize
-                }
-                //右边栏金融平台，企业借款，小微金融类
-            ktInstitutionalInfoService.get({}, function(data) {
-                    $scope.amounts = data.platform
-                    if (data.platform.all_amount.length > 0) {
-                        $scope.all_amounts = data.platform.business_borrowings.slice(0, 5)
-                    }
-                })
-                //总览页 最新产品信息
-            ktNewProductService.get({ bond_or_am: 'bond' }, function(data) {
+                return index >= $scope.exchange_page * pageSize && index < $scope.exchange_page * pageSize + pageSize
+            }
 
+            //右边栏金融平台，企业借款，小微金融类
+            ktInstitutionalInfoService.get({}, function(data) {
+                $scope.amounts = data.platform
+                if (data.platform.all_amount.length > 0) {
+                    $scope.all_amounts = data.platform.business_borrowings.slice(0, 5)
+                }
+            })
+
+            $scope.topAmounts = []
+            $scope.topPercents = []
+            $scope.ams = []
+
+            //总览页 最新产品信息
+            ktNewProductService.get({ bond_or_am: 'bond' }, function(data) {
+                $scope.upDateBond = data.res.updated_at
                 $scope.topAmounts = data.res.top_amount_res
                 $scope.topPercents = data.res.top_percent_res
             })
+
             ktNewProductService.get({ bond_or_am: 'am' }, function(data) {
-                 $scope.upDate = data.res.updated_at
-                    if (data.res.am_res.length > 0) {
-                        $scope.ams = data.res.am_res.slice(0, 5)
+                $scope.upDateAm = data.res.updated_at
+                if (data.res.am_res.length > 0) {
+                    $scope.ams = data.res.am_res.slice(0, 5)
+                }
+            })
+
+            $scope.newProductUpdateTime = function() {
+                if ($scope.topAmounts.length || $scope.topPercents.length) {
+                    if ($scope.ams.length) {
+                        if (+new Date($scope.upDateBond) > +new Date($scope.upDateAm)) {
+                            return $scope.upDateBond
+                        }
+                        return $scope.updateAm
                     }
-                })
-                //各产品收益率表
+                    return $scope.upDateBond
+                }
+                return $scope.upDateAm
+            }
+
+            //各产品收益率表
             ktProductRateService.get({ type: 'bond' }, function(data) {
                 $scope.rateDatas = data.res
                 $scope.rateThTitles = _.map(data.res.list[0].set, 'group')

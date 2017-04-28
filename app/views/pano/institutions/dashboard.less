@@ -1,156 +1,182 @@
-.dashboard{
+.dashboard {
     background: #f3f5f8;
-    .dashboard_header{
-        height:360px;
+    .dashboard_header {
+        height: 360px;
         background: url(/images/dashboardBanner.png) no-repeat;
-        background-size:cover;
+        background-size: cover;
         position: relative;
-        .dashboard_content{
-            position: absolute;
-            left:50%;
-            transform:translate(-50%,-50%);
-            top:50%;
-            color:#fff;
-            text-align: center;
-            h3{
-                font-size:30px;
-                margin:10px 0;
-                display: inline-block;
-                padding:10px 0;
-                border-bottom: 1px solid #fff;
+    }
+    .dashboard_content {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        color: #fff;
+        text-align: center;
+        h3 {
+            font-size: 30px;
+            margin: 10px 0;
+            display: inline-block;
+            padding: 10px 0;
+            border-bottom: 1px solid #fff;
+        }
+        p {
+            font-size: 18px;
+            line-height: 2rem;
+            padding: 10px 0;
+        }
+        .go_library {
+            display: inline-block;
+            width: 140px;
+            height: 40px;
+            line-height: 38px;
+            border: 1px solid #fff;
+            border-radius: 40px;
+            &:hover {
+                background: #4380dd;
+                border-color: #4380dd;
             }
-            p{
-                font-size:18px;
-                line-height: 2rem;
-                padding:10px 0;
+            a {
+                color: #fff;
             }
-            .go_library{
-                 display: inline-block;
-                    width:140px;
-                    height:40px;
-                    line-height: 40px;
-                    border:1px solid #fff;
-                    border-radius: 40px;
-                a{
-                    color:#fff;
-                }
-                i{
-                    color:#4380dd;
-                    font-size:15px;
-                    margin-left:5px;
-                    vertical-align:middle;
-                }
+            i {
+                color: white;
+                font-size: 15px;
+                margin-left: 5px;
+                vertical-align: -1px;
             }
         }
     }
-    .dashboard_body{
-        padding:0 3rem 2rem 3rem;
-        .all_amount_title{
-            background: #fbfbfc;
-            position: relative;
-            height:40px;
+    .dashboard_body {
+        padding: 0 3rem 2rem 3rem;
+        h3 {
+            font-size: 15px;
+            height: 40px;
             line-height: 40px;
-            padding:0 10px;
-            border-radius:5px 5px 0 0;
-            .all_top{
-                background: #54c5cb;
-                padding:0px 3px;
-                color:#fff;
-                margin:0 3px;
-                border-radius: 2px;
-            }
-            .look_more{
-                position: absolute;
-                right:10px;
-                top:0;
-                a{
-                    color:#54c5cb;
-                }
-                i{
-                    font-size:16px;
-                    color:#54c5cb;
-                    margin-left: 5px;
-                }
-            }
-        }
-        h3{
-            font-size:15px;
-            height:40px;
-            line-height: 40px;
-            margin:0;
+            margin: 0;
         }
         //table公共部分
-        .all_amount_table{
-            background: #fff;
-            table{
-                width:100%;
-                tbody{
-                    tr{
-                        border-bottom:1px solid #f3f5f8;
-                        &:last-child{
-                            border-bottom: none;
-                        }
-                        &:hover{
-                            td{
-                                background: #f5f9fd;
-                            }
-                            .first_td{
-                                background: #fbfbfc;
-                            }
-                        }
-                    }
-                    td{
-                        height: 40px;
-                        line-height: 40px;
-                        border-right:1px solid #f3f5f8;
-                        text-align: center;
-                        &.first_td{
-                            background: #fbfbfc;
-                            .goup,.unchanged{
-                                color:#f98b8b;
-                            }
-                            .godown{
-                                color:#54c5cb;
-                            }
-                        }
-                        a{
-                            color:#8d919a;
-                        }
-                        &:last-child{
-                            border-bottom:none;
-                        }
-                    }
+    }
+    .all_amount_title {
+        background: #fbfbfc;
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+        border-radius: 5px 5px 0 0;
+        .icon-info {
+            color: #bec0c6;
+        }
+        .all_top {
+            background: #54c5cb;
+            padding: 0px 3px;
+            color: #fff;
+            margin: 0 3px;
+            border-radius: 2px;
+            font-size: 12px;
+        }
+        .look_more {
+            font-size: 12px;
+            position: absolute;
+            right: 10px;
+            top: 0;
+            a {
+                color: #54c5cb;
+                &:hover {
+                    text-decoration: underline;
                 }
+            }
+            i {
+                font-size: 16px;
+                color: #54c5cb;
+                margin-left: 5px;
             }
         }
     }
-    .dashboard_body_one{
+    .all_amount_table {
+        background: #fff;
+        table {
+            width: 100%;
+        }
+        tbody {
+            tr {
+                border-bottom: 1px solid #f3f5f8;
+                &:last-child {
+                    border-bottom: none;
+                }
+                &:hover {
+                    td {
+                        background: #f5f9fd;
+                    }
+                    .first_td {
+                        background: #fbfbfc;
+                    }
+                }
+            }
+            td {
+                height: 40px;
+                line-height: 40px;
+                border-right: 1px solid #f3f5f8;
+                text-align: center;
+                font-size: 12px;
+                &.first_td {
+                    background: #fbfbfc;
+                    .goup,
+                    .unchanged {
+                        color: #f98b8b;
+                    }
+                    .godown {
+                        color: #54c5cb;
+                    }
+                }
+                a {
+                    color: #8d919a;
+                    &:hover {
+                        color: #4380dd;
+                    }
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+        .icon-lookup {
+            vertical-align: -1px;
+            margin-right: 3px;
+        }
+    }
+    .dashboard_body_one {
         overflow: hidden;
-        .amount_table_left,.amount_table_right{
-            width:49%;
+        .amount_table_left,
+        .amount_table_right {
+            width: 49%;
             // background: #fff;
         }
     }
-    .dashboard_body_two{
+    .dashboard_body_two {
         overflow: hidden;
-        margin:20px 0;
-        .enterprise_type_one,.enterprise_type_two,.enterprise_type_three{
-            width:32%;
+        margin: 20px 0;
+        .enterprise_type_one,
+        .enterprise_type_two,
+        .enterprise_type_three {
+            width: 32%;
         }
-        .enterprise_type_two{
-            margin:0 2%;
+        .enterprise_type_two {
+            margin: 0 2%;
         }
     }
-    .dashboard_body_three{
+    .dashboard_body_three {
         overflow: hidden;
-        .enterprise_type_one,.enterprise_type_two,.enterprise_type_three{
-            width:32%;
+        .enterprise_type_one,
+        .enterprise_type_two,
+        .enterprise_type_three {
+            width: 32%;
         }
-        .enterprise_type_two{
-            margin:0 2%;
+        .enterprise_type_two {
+            margin: 0 2%;
         }
     }
-    .dashboard_place{
+    .dashboard_place {
         // margin-bottom:20px;
     }
 }
