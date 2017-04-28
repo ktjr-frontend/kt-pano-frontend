@@ -91,12 +91,12 @@
                         </div>
                     </div>
                     <!-- 最新产品信息 -->
-                    <div ng-if="topAmounts.length && topPercents.length" class="chart-table new_product">
+                    <div ng-if="topAmounts.length || topPercents.length || ams.length" class="chart-table new_product">
                         <div class="np_title">
                             <span class="np_title_one">最新产品信息</span>
                             <span class="np_title_two">更新时间：{{upDate}}</span>
                         </div>
-                        <div class="new_product_body">
+                        <div class="new_product_body" ng-if="topAmounts.length || topPercents.length">
                             <div class="product_name">
                                 <span>资产类</span>
                             </div>
@@ -105,7 +105,7 @@
                                     <span class="product_top_one">本日新增募集规模</span>
                                     <span class="product_top_two">TOP5</span>
                                     <div class="product_top_more">
-                                        <a target="_blank" ui-sref="pano.products.obligatoryRight({created_or_updated_in:1})" ng-click="bdTrack(['总览页','资产类-本日新增募集规模','查看更多'])">查看更多</a>
+                                        <a target="_blank" ui-sref="pano.products.obligatoryRight({created_or_updated_in:1,sort_by:'sum_amount',order:'desc'})" ng-click="bdTrack(['总览页','资产类-本日新增募集规模','查看更多'])">查看更多</a>
                                     </div>
                                 </div>
                                 <div class="new_product_table">
@@ -125,11 +125,11 @@
                                             <tr ng-repeat="topAmount in topAmounts" ui-sref="pano.products.obligatoryRight">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="topAmount.name"></td>
-                                                <td ng-bind="topAmount.term + '个月'"></td>
+                                                <td ng-bind="topAmount.life"></td>
                                                 <td ng-bind="topAmount.rate"></td>
                                                 <td ng-bind="topAmount.sum_amount | ktNumberLocate"></td>
                                                 <td>
-                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topAmount.platform"></a>
+                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topAmount.from"></a>
                                                 </td>
                                                 <td ng-bind="topAmount.asset_type"></td>
                                             </tr>
@@ -142,7 +142,7 @@
                                     <span class="product_top_one">本日新增收益率</span>
                                     <span class="product_top_two">TOP5</span>
                                     <div class="product_top_more">
-                                        <a target="_blank" ui-sref="pano.products.obligatoryRight({created_or_updated_in:1})" ng-click="bdTrack(['总览页','资产类-本日新增收益率','查看更多'])">查看更多</a>
+                                        <a target="_blank" ui-sref="pano.products.obligatoryRight({created_or_updated_in:1,sort_by:'rate',order:'asc'})" ng-click="bdTrack(['总览页','资产类-本日新增收益率','查看更多'])">查看更多</a>
                                     </div>
                                 </div>
                                 <div class="new_product_table">
@@ -162,11 +162,11 @@
                                             <tr ng-repeat="topPercent in topPercents" ui-sref="pano.products.obligatoryRight">
                                                 <td class="first_td" ng-bind="$index+1"></td>
                                                 <td ng-bind="topPercent.name"></td>
-                                                <td ng-bind="topPercent.term + '个月'"></td>
+                                                <td ng-bind="topPercent.life"></td>
                                                 <td ng-bind="topPercent.rate"></td>
                                                 <td ng-bind="topPercent.sum_amount | ktNumberLocate"></td>
                                                 <td>
-                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topPercent.platform"></a>
+                                                    <a ui-sref="pano.institutions.dashboard" ng-bind="topPercent.from"></a>
                                                 </td>
                                                 <td ng-bind="topPercent.asset_type"></td>
                                             </tr>
@@ -175,47 +175,49 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                     <!-- 资管类 -->
-                    <div ng-if="ams.length" class="chart-table new_product">
-                        <div class="new_product_body">
-                            <div class="product_name">
-                                <span>资管类</span>
-                            </div>
-                            <div class="product_top">
-                                <span class="product_top_one">本日新增募集规模</span>
-                                <span class="product_top_two">TOP5</span>
-                                <div class="product_top_more">
-                                    <a target="_blank" ui-sref="pano.products.assetManages({created_or_updated_in:1})" ng-click="bdTrack(['总览页','资管类-本日新增募集规模','查看更多'])">查看更多</a>
+                        <div ng-if="ams.length" class="chart-table new_product">
+                            <div class="new_product_body">
+                                <div class="product_name">
+                                    <span>资管类</span>
                                 </div>
-                            </div>
-                            <div class="new_product_table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="first_th"></th>
-                                            <th>产品名称</th>
-                                            <th>产品期限</th>
-                                            <th>年化收益率</th>
-                                            <th>募集金额</th>
-                                            <th>平台</th>
-                                            <th>资产类型</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ui-sref="pano.products.obligatoryRight" ng-repeat="am in ams">
-                                            <td class="first_td" ng-bind="$index+1"></td>
-                                            <td ng-bind="am.name"></td>
-                                            <td ng-bind="am.term + '个月'"></td>
-                                            <td ng-bind="am.rate"></td>
-                                            <td ng-bind="am.sum_amount | ktNumberLocate"></td>
-                                            <td>
-                                                <a ui-sref="pano.institutions.dashboard" ng-bind="am.platform"></a>
-                                            </td>
-                                            <td ng-bind="am.asset_type"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="product_top">
+                                    <span class="product_top_one">本日新增募集规模</span>
+                                    <span class="product_top_two">TOP5</span>
+                                    <div class="product_top_more">
+                                        <a target="_blank" ui-sref="pano.products.assetManage({created_or_updated_in:1,sort_by:'rate',order:'asc'})" ng-click="bdTrack(['总览页','资管类-本日新增募集规模','查看更多'])">查看更多</a>
+                                    </div>
+                                </div>
+                                <div class="new_product_table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="first_th"></th>
+                                                <th>产品名称</th>
+                                                <th>产品期限</th>
+                                                <th>年化收益率</th>
+                                                <th>平台</th>
+                                                <th>管理人类型</th>
+                                                <th>管理机构</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ui-sref="pano.products.assetManage" ng-repeat="am in ams">
+                                                <td class="first_td" ng-bind="$index+1"></td>
+                                                <td ng-bind="am.name"></td>
+                                                <td ng-bind="am.life"></td>
+                                                <td ng-bind="am.rate"></td>
+                                                <td>
+                                                    <a ui-sref="pano.institutions.dashboard"  ng-bind="am.from"></a>
+                                                </td>
+                                                <td ng-bind="am.credit_manager">
+                                                </td>
+                                                <td ng-bind="am.manage_org"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -259,7 +261,7 @@
                             <span class="ob_rate_one">资管类期限-收益率表</span>
                             <span class="ob_rate_two">时间范围：{{assetDatas.begin_date}}~{{assetDatas.end_date}}</span>
                             <div class="ob_rate_down">
-                                <span kt-canvas-to-image image-title="'资管类期限-收益率表'" canvas-parent="#assetRateTable" update-time="{{obRateTime}}" date-type="{{timeRange}}" ng-click="bdTrack(['总览页','资管类期限-收益率表','下载图片'])">下载图片
+                                <span kt-canvas-to-image image-title="'资管类期限-收益率表'" canvas-parent="#assetRateTable" update-time="{{asserRateTime}}" date-type="{{timeRange}}" ng-click="bdTrack(['总览页','资管类期限-收益率表','下载图片'])">下载图片
                                     <i class="icon-pano icon-download"></i>
                                 </span>
                             </div>
@@ -549,7 +551,7 @@
                     </section>
                     <h3>互联网金融平台近7日收益率
                         <div class="get_more">
-                            <a target="_blank" ui-sref="pano.institutions.dashboard" ng-click="bdTrack(['总览页', '互联网金融平台收益率近7日排行榜', '更多'])">更多</a>
+                            <a target="_blank" ui-sref="pano.institutions.dashboard" ng-click="bdTrack(['总览页', '互联网金融平台近7日收益率', '更多'])">更多</a>
                         </div>
                     </h3>
                     <section class="box">
@@ -565,7 +567,7 @@
                     </section>
                     <h3>企业借款类近7日发行量
                         <div class="get_more">
-                            <a target="_blank" ui-sref="pano.institutions.dashboard" ng-click="bdTrack(['总览页', '企业借款类发行量近7日排行榜', '更多'])">更多</a>
+                            <a target="_blank" ui-sref="pano.institutions.dashboard" ng-click="bdTrack(['总览页', '企业借款类近7日发行量', '更多'])">更多</a>
                         </div>
                     </h3>
                     <section class="box">
@@ -581,7 +583,7 @@
                     </section>
                     <h3>小微金融类近7日发行量
                         <div class="get_more">
-                            <a target="_blank" ui-sref="pano.institutions.dashboard" ng-click="bdTrack(['总览页', '小微金融类发行量近7日排行榜', '更多'])">更多</a>
+                            <a target="_blank" ui-sref="pano.institutions.dashboard" ng-click="bdTrack(['总览页', '小微金融类近7日发行量', '更多'])">更多</a>
                         </div>
                     </h3>
                     <section class="box">
