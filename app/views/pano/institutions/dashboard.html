@@ -318,7 +318,7 @@ PANO收录的互联网金融平台近7天金融工具类资产产品发行量Top
                                 <td ng-bind="tool.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
-                                    <a target="_blank" ui-sref="pano.products.obligatoryRight({from_eq: tool.name})" ng-click="bdTrack(['机构信息','小微金融类近7日发行量','产品条数'])">查看产品</a>
+                                    <a target="_blank" ui-sref="pano.products.obligatoryRight({from_eq: tool.name})" ng-click="bdTrack(['机构信息','金融工具类近7日发行量','产品条数'])">查看产品</a>
                                 </td>
                             </tr>
                             <tr ng-if="!amounts.finance_tools.length">
@@ -366,7 +366,7 @@ PANO收录的互联网金融平台近7天房地产类资产产品发行量Top排
                                 <td ng-bind="realty.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
-                                    <a target="_blank" ui-sref="pano.products.obligatoryRight({from_eq: realty.name})" ng-click="bdTrack(['机构信息','企业借款类近7日发行量','产品条数'])">查看产品</a>
+                                    <a target="_blank" ui-sref="pano.products.obligatoryRight({from_eq: realty.name})" ng-click="bdTrack(['机构信息','房地产类近7日发行量','产品条数'])">查看产品</a>
                                 </td>
                             </tr>
                             <tr ng-if="!amounts.realty.length">
@@ -413,7 +413,7 @@ PANO收录的互联网金融平台近7天房地产类资产产品发行量Top排
                                 <td ng-bind="credit.amount | ktNumberLocate"></td>
                                 <td>
                                     <i class="icon-pano icon-lookup"></i>
-                                    <a target="_blank" ui-sref="pano.products.obligatoryRight({from_eq: credit.name})" ng-click="bdTrack(['机构信息','供应链类近7日发行量','产品条数'])">查看产品</a>
+                                    <a target="_blank" ui-sref="pano.products.obligatoryRight({from_eq: credit.name})" ng-click="bdTrack(['机构信息','政信类近7日发行量','产品条数'])">查看产品</a>
                                 </td>
                             </tr>
                             <tr ng-if="!amounts.gov_credit.length">
