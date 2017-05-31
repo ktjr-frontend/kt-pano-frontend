@@ -122,6 +122,12 @@
                 window._hmt && window._hmt.push(['_trackEvent'].concat(track)) // eslint-disable-line
             }
 
+            function resetWantGo(toState) {
+                if (!_.includes(['account.perfect', 'account.prefer'], toState.name)) {
+                    $rootScope.wantGo = null
+                }
+            }
+
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
                 // 通过url传播token 实现单点登录
                 if (toParams._t) {
@@ -135,7 +141,7 @@
                         event.preventDefault()
                         $state.go(ktRedirectState())
                     } else {
-                        $rootScope.wantGo = null
+                        resetWantGo(toState)
                     }
                 } else if (!toState.data.skipAuth) { // 略过权限校验
                     toState.resolve.user = [
@@ -152,7 +158,7 @@
                                     event.preventDefault()
                                     $state.go(ktRedirectState())
                                 } else {
-                                    $rootScope.wantGo = null
+                                    resetWantGo(toState)
                                 }
                                 deferred.resolve(res.account)
                             }, function() {
