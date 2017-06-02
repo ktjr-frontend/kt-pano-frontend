@@ -709,7 +709,6 @@
             })
 
             $scope.newProductUpdateTime = function() {
-                console.log($scope.topAmounts, $scope.topPercents, $scope.ams)
                 if ($scope.topAmounts.length || $scope.topPercents.length) {
                     if ($scope.ams.length) {
                         if (+new Date($scope.upDateBond) > +new Date($scope.upDateAm)) {

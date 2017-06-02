@@ -135,4 +135,18 @@
     .factory('ktProductRateService', function($resource, ktApiVersion) {
         return $resource('/api/' + ktApiVersion + '/quotes/list')
     })
+    //小微资产筛选列表
+    .factory('ktSmallAssetsSettingService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/micro_finances/settings')
+    })
+    //小微资产筛选table
+    .factory('ktSmallAssetsTableService', function($resource, ktApiVersion) {
+        return $resource('/api/' + ktApiVersion + '/micro_finances')
+    })
+    // .factory('ktSmallAssetsSettingService', function($resource, ktApiVersion) {
+    //     return $resource('/api/' + ktApiVersion + '/micro_finances/settings')
+    // })
+    // .factory('ktSmallAssetsTableService', function($resource, ktApiVersion) {
+    //     return $resource('/api/' + ktApiVersion + '/micro_finances')
+    // })
 })();

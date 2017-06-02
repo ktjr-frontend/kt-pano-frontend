@@ -1,1 +1,0 @@
-!function(){"use strict";angular.module("kt.pano").controller("ktInsitutionDashboardCtrl",["$scope","ktInstitutionalInfoService",function(a,b){b.get({},function(b){console.log(b),a.amounts=b.platform,a.spv=b.spv})}])}();

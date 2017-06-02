@@ -400,6 +400,51 @@
                             }
                         }]
                     }
+                },
+                //小微资产专栏
+                'pano.smallAssetsLists': {
+                    abstract: true,
+                    url: '/small_assets_lists',
+                    template: '<ui-view/>',
+                    data: {
+                        pageTitle: '小微资产专栏',
+                        specialClass: 'simple-page',
+                        rejectedLimit: true,
+                        permits: [{
+                            name: 'role', // 角色维度的权限
+                            group: {
+                                premium: ['passed', 'pended', 'rejected'],
+                                certified: ['passed', 'pended', 'rejected'],
+                                normal: ['passed', 'pended', 'rejected']
+                            }
+                        }]
+                    }
+                },
+
+                'pano.smallAssetsLists.table': {
+                    abstract: true,
+                    url: '/table',
+                    templateUrl: 'views/pano/small_assets_lists/layout.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/small_assets_lists/layout.css',
+                        'views/pano/small_assets_lists/layout.js'
+                    ]),
+                    controller: 'ktAssetsTableCtrl',
+                    data: {
+                        pageTitle: '小微资产专栏'
+                    }
+                },
+                'pano.smallAssetsLists.table.list': {
+                    url: '/list?search_fields[]&key_word&finance_type_eq&page&per_page&sort_by&order',
+                    templateUrl: 'views/pano/small_assets_lists/list.html',
+                    resolve: ktLazyResolve([
+                        'views/pano/small_assets_lists/list.css',
+                        'views/pano/small_assets_lists/list.js'
+                    ]),
+                    controller: 'ktAssetsTableListCtlr',
+                    data: {
+                        pageTitle: '小微资产'
+                    }
                 }
             }
         })
