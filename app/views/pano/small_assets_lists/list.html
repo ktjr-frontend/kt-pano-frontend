@@ -2,19 +2,19 @@
     <!-- 无搜索，无筛选 -->
     <div class="chart-table-title fl" ng-if="getFitlerStatus() === NORMAL_STATUS">
         总共<em ng-bind="summary.all_related.count || 0"></em>
-        <span ng-if="summary.house_mortgage_related.count">个，其中房抵类
+        <span ng-if="summary.house_mortgage_related.count">个，房抵类
             <em  ng-bind="summary.house_mortgage_related.count || 0">
         </em>
         </span>
-        <span ng-if="summary.car_mortgage_related.count">个，车抵
+        <span ng-if="summary.car_mortgage_related.count">个，车抵类
            <em ng-bind="summary.car_mortgage_related.count || 0">
         </em>
         </span>
-        <span ng-if="summary.cash_mortgage_related.count">个,现金贷
+        <span ng-if="summary.cash_mortgage_related.count">个,现金贷类
            <em ng-bind="summary.cash_mortgage_related.count || 0">
         </em>
         </span>
-        <span ng-if="summary.consume_mortgage_related.count">个，消费贷
+        <span ng-if="summary.consume_mortgage_related.count">个，消费贷类
            <em ng-bind="summary.consume_mortgage_related.count || 0">
         </em>
         </span>
