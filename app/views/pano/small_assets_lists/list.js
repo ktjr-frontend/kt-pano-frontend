@@ -5,7 +5,7 @@
         .controller('ktAssetsTableListCtlr', function($scope, $rootScope, $state, $location, ktSweetAlert, ktDataHelper, ktSmallAssetsTableService, ktSmallAssetsSettingService) {
             var shared = $scope.shared
             var search = $location.search()
-            var informationArr = ['name', 'co_institution']
+            var informationArr = ['institution', 'finance_type_str', 'desc', 'project_file_str']
             $scope.shared.placeholderText = '输入关键字，如机构名称、资金类型、详细介绍或资料名称'
 
             // 跳转机构详情
@@ -31,36 +31,36 @@
                 window.open(url, '_blank')
             }
 
-            // 按收益率排序标题
+            // 按价格范围标题
             $scope.rateSortTitle = function() {
                 if (search.sort_by === 'rate') {
                     if (search.order === 'asc') {
-                        return '点击价格范围由大到小排序'
+                        return '按价格范围起始值由小到大排序'
                     }
-                    return '点击取消价格范围排序'
+                    return '按价格范围起始值由大到小排序'
                 }
-                return '点击价格范围由小到大排序'
+                return '取消按价格范围起始值排序'
             }
 
             // 按发行量排序标题
             $scope.amountSortTitle = function() {
                 if (search.sort_by === 'amount') {
                     if (search.order === 'asc') {
-                        return '点击预计规模由大到小排序'
+                        return '按预计规模起始值由大到小排序'
                     }
-                    return '点击取消预计规模排序'
+                    return '按预计规模起始值由小到大排序'
                 }
-                return '点击预计规模由小到大排序'
+                return '取消按预计规模起始值排序'
             }
             //按更新时间排序
             $scope.dateSortTitle = function() {
                 if (search.sort_by === 'updated_at') {
                     if (search.order === 'asc') {
-                        return '点击更新时间由大到小排序'
+                        return '按更新时间由旧到新排序'
                     }
-                    return '点击取消更新时间排序'
+                    return '按更新时间由新到旧排序'
                 }
-                return '点击更新时间由小到大排序'
+                return '取消按更新时间由新到旧排序'
             }
 
 
@@ -93,11 +93,12 @@
             ktSmallAssetsTableService.get(ktDataHelper.cutDirtyParams(shared.params), function(res) {
                 // cacheData = res
                 $scope.institutions = res.result.micro_finaces
-                if (res.result.micro_finaces) {
-                    res.result.micro_finaces = _.filter(res.result.micro_finaces, function(n) {
+                var searchResults = res.result.summary.find.search_results
+                if (searchResults) {
+                    res.result.summary.find.search_results = _.filter(searchResults, function(n) {
                         return n.search_count !== 0
                     })
-                    res.result.micro_finaces.sort(function(a, b) {
+                    res.result.summary.find.search_results.sort(function(a, b) {
                         if (_.indexOf(informationArr, a.name) > _.indexOf(informationArr, b.name)) {
                             return 1
                         } else if (_.indexOf(informationArr, a.name) < _.indexOf(informationArr, b.name)) {
