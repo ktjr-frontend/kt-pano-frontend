@@ -1,1 +1,0 @@
-!function(){"use strict";angular.module("kt.common").directive("ktSafariImageMaxHeight",function(){return{restrict:"A",link:function(a,b){/constructor/i.test(window.HTMLElement)&&b.css({"max-height":"100%"})}}})}();

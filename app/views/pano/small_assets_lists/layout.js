@@ -43,11 +43,9 @@
 
             //跳转到对接页
             $scope.goWx = function() {
-                $scope.defalut_state = true
-                $timeout(function() {
                     var url = ktEnv().wxHost + '#!/project_info/add?_f=pc_xiaowei&_t=' + encodeURIComponent($window.localStorage.token)
                     $window.open(url)
-                }, 10)}
+            }
 
             // 搜索框
             $scope.goToByEnterKey = function(event, key, value) {
