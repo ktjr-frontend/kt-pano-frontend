@@ -35,11 +35,11 @@
             $scope.rateSortTitle = function() {
                 if (search.sort_by === 'rate') {
                     if (search.order === 'asc') {
-                        return '按价格范围起始值由小到大排序'
+                        return '按价格范围起始值由大到小排序'
                     }
-                    return '按价格范围起始值由大到小排序'
+                    return '取消按价格范围起始值排序'
                 }
-                return '取消按价格范围起始值排序'
+                return '按价格范围起始值由小到大排序'
             }
 
             // 按发行量排序标题
@@ -48,19 +48,19 @@
                     if (search.order === 'asc') {
                         return '按预计规模起始值由大到小排序'
                     }
-                    return '按预计规模起始值由小到大排序'
+                    return '取消按预计规模起始值排序'
                 }
-                return '取消按预计规模起始值排序'
+                return '按预计规模起始值由小到大排序'
             }
             //按更新时间排序
             $scope.dateSortTitle = function() {
                 if (search.sort_by === 'updated_at') {
                     if (search.order === 'asc') {
-                        return '按更新时间由旧到新排序'
+                        return '按更新时间由新到旧排序'
                     }
-                    return '按更新时间由新到旧排序'
+                    return '取消按更新时间由新到旧排序'
                 }
-                return '取消按更新时间由新到旧排序'
+                return '按更新时间由旧到新排序'
             }
 
 
