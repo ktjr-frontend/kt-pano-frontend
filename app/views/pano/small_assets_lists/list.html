@@ -169,7 +169,7 @@
                             </td>
                             <td>
                                 <div class="td-body" ng-if="institution.project_files.length" ng-repeat="project in institution.project_files">
-                                    <a class="file_pdf" ng-click="$event.stopPropagation()" href="{{project.url}}" ng-bind="::project.name" target="_blank"></a>
+                                    <a ng-click="$event.stopPropagation()" href="{{project.url}}" ng-bind="::project.name" target="_blank"></a>
                                 </div>
                                 <div ng-if="!institution.project_files.length">-</div>
                             </td>
@@ -177,7 +177,7 @@
                                 <div class="td-body" ng-bind="::institution.updated_at"></div>
                             </td>
                             <td>
-                                <div class="td-body use_mess" style="text-align:center">
+                                <div class="td-body use_mess">
                                     <i class="icon-pano icon-man">
                                         <div class="use_code">
                                             <h5>如您对该项目有意向或获取更多资料，请联系PANO微信小秘书：</h5>
