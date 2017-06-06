@@ -130,7 +130,7 @@
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
                 // 通过url传播token 实现单点登录
-                if (toParams._t) {
+                if (toParams._t && toParams._t !== 'undefined') {
                     $window.localStorage.token = decodeURIComponent(toParams._t)
                 }
 
