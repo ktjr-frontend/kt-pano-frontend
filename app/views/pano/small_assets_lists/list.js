@@ -6,7 +6,7 @@
             var shared = $scope.shared
             var search = $location.search()
             var informationArr = ['institution', 'finance_type_str', 'desc', 'project_file_str']
-            $scope.shared.placeholderText = '输入关键字，如机构名称、资金类型、详细介绍或资料名称'
+            $scope.shared.placeholderText = '输入关键字，如机构名称、资产类型、详细介绍或资料名称'
 
             // 跳转机构详情
             $scope.gotoDetail = function(inst) {
