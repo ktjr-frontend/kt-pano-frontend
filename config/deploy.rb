@@ -24,10 +24,10 @@ set :repository, 'ssh://git@gitlab.ktjr.com/Kaitong/kt-pano-frontend.git'
 
 load File.expand_path("../deploy/#{ENV['stage']}.rb", __FILE__)
 
-if ENV['stage'] =~ /development/ && !ENV['br'].nil?
+if ENV['stage'] =~ /development|stage/ && !ENV['br'].nil?
   set :branch, ENV['br']
 end
-if ENV['stage'] =~ /development/ && !ENV['cmbr'].nil?
+if ENV['stage'] =~ /development|stage/ && !ENV['cmbr'].nil?
   set :common_branch, ENV['cmbr']
 end
 # For system-wide RVM install.
